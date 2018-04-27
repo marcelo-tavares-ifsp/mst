@@ -12,18 +12,10 @@ require("menu")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
-os.execute("xinput disable 13")
--- os.execute("DISPLAY=:0 xinput reattach 11 'xeph_mouse_keyb pointer'")
--- os.execute("xinput reattach 6 'xeph_mouse_keyb keyboard'")
-
--- os.execute("Xephyr -ac -br -screen 1920x1080 :1 -keybd 'evdev,,device=/dev/input/event11' &")
--- os.execute("rm -rf /tmp/.X*; sleep 1")
 os.execute("Xephyr -softCursor -ac -br -mouse 'evdev,5,device=/dev/input/by-path/pci-0000:00:12.0-usb-0:2:1.0-event-mouse' -keybd 'evdev,,device=/dev/input/by-path/pci-0000:00:12.0-usb-0:1:1.0-event-kbd' -screen 1920x1080 :1 &")
 os.execute("Xephyr -softCursor -ac -br -mouse 'evdev,5,device=/dev/input/by-path/pci-0000:00:13.0-usb-0:4:1.0-event-mouse' -keybd 'evdev,,device=/dev/input/by-path/pci-0000:00:12.0-usb-0:4:1.0-event-kbd' -screen 1920x1080 :2 &")
-os.execute("DISPLAY=:1 xclock &")
-os.execute("DISPLAY=:2 xclock &")
-
-
+os.execute("unclutter &")
+os.execute("sleep 5; sudo /root/src/mst/mst 2 &")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
