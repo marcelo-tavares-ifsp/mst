@@ -1,0 +1,37 @@
+# sudoers file.
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# See the sudoers man page for the details on how to write a sudoers file.
+#
+
+# Host alias specification
+
+# User alias specification
+User_Alias	WHEEL_USERS = %wheel
+User_Alias	XGRP_USERS = %xgrp
+
+# Cmnd alias specification
+
+# Defaults specification
+
+# If env_reset is disabled, sudo will NOT reset the environment
+# to only contain the fixed list of variables.
+# See sudoers(5) for details.
+#Defaults:WHEEL_USERS	!env_reset
+
+# Preserve DISPLAY and XAUTHORITY environment variables
+# for "xgrp" group members.
+Defaults:XGRP_USERS	env_keep += "DISPLAY XAUTHORITY"
+
+# User privilege specification
+#root	ALL=(ALL) ALL
+multiseat ALL=(ALL) NOPASSWD: /bin/bash, /bin/su, /root/src/mst/mst, /usr/sbin/lightdm, /usr/bin/dm-tool
+#multiseat ALL=(ALL) NOPASSWD:  
+#/bin/umount, /root/src/mst/mst, /usr/sbin/lightdm
+
+vasya	ALL=(ALL) ALL
+#multiseat	ALL=(ALL) ALL
+
+# Automatically updates by rpm:
+#includedir /etc/sudoers.d
