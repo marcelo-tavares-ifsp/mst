@@ -20,7 +20,7 @@ void DisplayManager::start() {
 
 void DisplayManager::add_seat(int seat_number) {
     string lightdm_cmd = "/usr/bin/dm-tool add-local-x-seat " + seat_number;
-    system(lightdm_cmd);
+    system(lightdm_cmd.c_str());
 }
 
 void DisplayManager::add_seats(int count) {

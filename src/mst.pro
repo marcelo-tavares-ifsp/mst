@@ -27,14 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     display-manager.cpp \
-    monitor.cpp \
-    xorg-config.cpp
+    xorg-config.cpp \
+    xorg-monitor.cpp
 
 HEADERS += \
         mainwindow.h \
     display-manager.h \
-    monitor.h \
-    xorg-config.h
+    xorg-config.h \
+    xorg-monitor.h
 
 FORMS += \
         mainwindow.ui
