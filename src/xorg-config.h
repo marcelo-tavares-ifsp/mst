@@ -31,7 +31,7 @@ public:
      */
     const vector<XorgMonitor>& get_monitors() const;
 
-    friend ostream& operator << (ostream& os, const XorgConfig config);
+    friend ostream& operator << (ostream& os, const XorgConfig& config);
 };
 
 #endif // XORGCONFIG_H

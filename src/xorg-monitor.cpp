@@ -34,8 +34,18 @@ void XorgMonitor::set_interface_name(string interface_name)
 
 ostream& operator << (ostream& os, const XorgMonitor& device)
 {
-    os << "#<xorg-monitor " << device.identifier << " "
-       << device.interface_name << " "
-       << device.width << "x" << device.height << ">";
+    os << "#<xorg-monitor " << device.get_identifier() << " "
+       << device.get_interface_name() << " "
+       << device.get_width() << "x" << device.get_height() << ">";
     return os;
+}
+
+const unsigned int XorgMonitor::get_height() const
+{
+    return height;
+}
+
+const unsigned int XorgMonitor::get_width() const
+{
+    return width;
 }
