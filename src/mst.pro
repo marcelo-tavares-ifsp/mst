@@ -26,15 +26,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    display-manager.cpp \
-    xorg-config.cpp \
-    xorg-monitor.cpp
+    lightdm/display-manager.cpp \
+    xorg/xorg-config.cpp \
+    xorg/xorg-monitor.cpp \
+    awesome/awesome-config.cpp \
+    awesome/awesome-device.cpp
 
 HEADERS += \
         mainwindow.h \
-    display-manager.h \
-    xorg-config.h \
-    xorg-monitor.h
+    lightdm/display-manager.h \
+    xorg/xorg-config.h \
+    xorg/xorg-monitor.h \
+    awesome/awesome-config.h \
+    awesome/awesome-device.h
 
 FORMS += \
         mainwindow.ui

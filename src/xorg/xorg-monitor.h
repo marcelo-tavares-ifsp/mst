@@ -15,7 +15,7 @@ private:
 
 public:
     XorgMonitor(string identifier);
-    void set_dimensions(int height, int width);
+    void set_dimensions(int width, int height);
     void set_interface_name(string interface_name);
     const string& get_identifier() const;
     const string& get_interface_name() const;

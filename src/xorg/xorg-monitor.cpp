@@ -21,7 +21,7 @@ const string& XorgMonitor::get_interface_name() const
     return interface_name;
 }
 
-void XorgMonitor::set_dimensions(int height, int width)
+void XorgMonitor::set_dimensions(int width, int height)
 {
     this->height = height;
     this->width  = width;
