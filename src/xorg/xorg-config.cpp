@@ -27,12 +27,12 @@ const vector<XorgMonitor>& XorgConfig::get_monitors() const
 
 static const string _section(const string& name)
 {
-    return "Section: \"" + name + "\"\n";
+    return "Section \"" + name + "\"\n";
 }
 
 static const string _sub_section(const string& name)
 {
-    return "    SubSection: \"" + name + "\"\n";
+    return "    SubSection \"" + name + "\"\n";
 }
 
 static const string _end_section(const string& name)
