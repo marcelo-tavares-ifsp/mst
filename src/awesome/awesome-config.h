@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include <awesome-device.h>
+#include <awesome/awesome-device.h>
 
 using namespace std;
 

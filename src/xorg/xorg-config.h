@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include <xorg-monitor.h>
+#include <xorg/xorg-monitor.h>
 
 using namespace std;
 

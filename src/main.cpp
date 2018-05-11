@@ -1,11 +1,12 @@
 #include "mainwindow.h"
-#include "xorg-config.h"
-#include "xorg-monitor.h"
-#include "awesome-config.h"
-#include "awesome-device.h"
+#include "xorg/xorg-config.h"
+#include "xorg/xorg-monitor.h"
+#include "awesome/awesome-config.h"
+#include "awesome/awesome-device.h"
 
 #include <QApplication>
 #include <iostream>
+#include <QFile>
 
 using namespace std;
 
@@ -47,3 +48,5 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
+
