@@ -3,6 +3,7 @@
 #include "xorg/xorg-monitor.h"
 #include "awesome/awesome-config.h"
 #include "awesome/awesome-device.h"
+#include <fstream>
 
 #include <QApplication>
 #include <iostream>
@@ -46,7 +47,11 @@ int main(int argc, char *argv[])
     cout << *config_2 << endl;
     cout << config_2->get_rules();
 
+    ofstream file;
+    file.open("xorg.conf");
+    file << *config_1;
+    file.close();
+
     return a.exec();
 }
-
 
