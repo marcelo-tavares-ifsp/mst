@@ -8,8 +8,12 @@
 #include <QApplication>
 #include <iostream>
 #include <QFile>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
+
+void write_config(XorgConfig &config, string prev_data, string file);
 
 int main(int argc, char *argv[])
 {
@@ -21,10 +25,10 @@ int main(int argc, char *argv[])
     XorgMonitor *monitor_2 = new XorgMonitor("monitor1");
     XorgConfig *config_1 = new XorgConfig();
 
-    monitor_1->set_dimensions(1600, 1080);
+    monitor_1->set_dimensions(1920, 1080);
     monitor_1->set_interface_name("Monitor-DVI-1");
 
-    monitor_2->set_dimensions(1600, 1080);
+    monitor_2->set_dimensions(1920, 1080);
     monitor_2->set_interface_name("Monitor-VGA-1");
 
     config_1->add_monitor(*monitor_1);
@@ -35,10 +39,10 @@ int main(int argc, char *argv[])
     cout << "/////////////////////////////////////////////////////////////////////////////\n\n";
 
     AwesomeDevice *device_1 = new AwesomeDevice(1);
-    device_1->set_dimensions(1600, 1080);
+    device_1->set_dimensions(1920, 1080);
 
     AwesomeDevice *device_2 = new AwesomeDevice(2);
-    device_2->set_dimensions(1600, 1080);
+    device_2->set_dimensions(1920, 1080);
 
     AwesomeConfig *config_2 = new AwesomeConfig();
     config_2->add_devices(*device_1);
@@ -47,11 +51,5 @@ int main(int argc, char *argv[])
     cout << *config_2 << endl;
     cout << config_2->get_rules();
 
-    ofstream file;
-    file.open("xorg.conf");
-    file << *config_1;
-    file.close();
-
     return a.exec();
 }
-
