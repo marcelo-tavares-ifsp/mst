@@ -51,5 +51,10 @@ int main(int argc, char *argv[])
     cout << *config_2 << endl;
     cout << config_2->get_rules();
 
+    ofstream file;
+    file.open("xorg.conf");
+    file << *config_1;
+    file.close();
+
     return a.exec();
 }
