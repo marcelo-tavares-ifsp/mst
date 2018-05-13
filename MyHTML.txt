@@ -3,4 +3,6 @@
 </head>
 <body>
 </body>
+<footer>
+</footer>
 </html>
