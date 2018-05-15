@@ -14,11 +14,6 @@ local menubar = require("menubar")
 
 -- $MST_AUTOSTART$
 
--- os.execute("Xephyr -softCursor -ac -br -mouse 'evdev,5,device=/dev/input/by-path/pci-0000:00:12.0-usb-0:2:1.0-event-mouse' -keybd 'evdev,,device=/dev/input/by-path/pci-0000:00:12.0-usb-0:1:1.0-event-kbd' -screen 1920x1080 :1 &")
--- os.execute("Xephyr -softCursor -ac -br -mouse 'evdev,5,device=/dev/input/by-path/pci-0000:00:13.0-usb-0:4:1.0-event-mouse' -keybd 'evdev,,device=/dev/input/by-path/pci-0000:00:12.0-usb-0:4:1.0-event-kbd' -screen 1920x1080 :2 &")
---os.execute("unclutter &")
--- os.execute("sleep 5; sudo /root/src/mst/mst 2 &")
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -217,8 +212,6 @@ root.keys(globalkeys)
 
 -- {{{ Rules
 
--- $MST_AWFUL_RULES$
-
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -229,10 +222,9 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "Xephyr", name = "Xephyr on :1.0 (ctrl+shift grabs mouse and keyboard)" },
-      properties = { floating = true, fullscreen = true, screen = 1 } },
-    { rule = { class = "Xephyr", name = "Xephyr on :2.0 (ctrl+shift grabs mouse and keyboard)" },
-      properties = { floating = true, fullscreen = true, screen = 2 } },
+					 
+-- $MST_AWFUL_RULES$
+					 
 }
 -- }}}
 
