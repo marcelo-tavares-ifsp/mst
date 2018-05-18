@@ -6,6 +6,7 @@
 
 #include <fstream>
 
+
 const unsigned int MONITORS = 2;
 
 class Controller

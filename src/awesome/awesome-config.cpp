@@ -7,7 +7,7 @@
 
 using namespace std;
 
-AwesomeConfig::AwesomeConfig()
+AwesomeConfig::AwesomeConfig(unsigned int monitors) : monitors(monitors)
 {
 
 }
@@ -20,6 +20,10 @@ void AwesomeConfig::add_devices(AwesomeDevice pair_devices)
 const vector<AwesomeDevice>& AwesomeConfig::get_devices() const
 {
     return devices;
+}
+
+unsigned int AwesomeConfig::get_monitors() const {
+    return monitors;
 }
 
 static void _print_xephyr(ostream& os, const AwesomeConfig& config)
@@ -42,7 +46,8 @@ static void _print_unclutter(ostream& os, const AwesomeConfig& config)
 
 static void _print_script(ostream& os, const AwesomeConfig& config)
 {
-    os << string("os.execute(\"sleep 5; sudo /root/src/mst/mst 2 &\")") << endl;
+    os << string("os.execute(\"sleep 5; sudo /root/src/mst/mst ")
+       << config.get_monitors() << " &\")" << endl;
 }
 
 string AwesomeConfig::get_rules()
@@ -51,10 +56,10 @@ string AwesomeConfig::get_rules()
     for (auto const& pair_devices : devices)
     {
         rules += string("{ rule = { class = \"Xephyr\", name = \"Xephyr on :");
-        rules += pair_devices.get_identifier();
+        rules += to_string(pair_devices.get_identifier());
         rules += string(".0 (ctrl+shift grabs mouse and keyboard)\" },\n ");
         rules += string("properties = { floating = true, fullscreen = true, screen = ");
-        rules += pair_devices.get_identifier();
+        rules += to_string(pair_devices.get_identifier());
         rules += string("} },\n");
     }
     return rules;

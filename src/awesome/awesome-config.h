@@ -14,9 +14,10 @@ class AwesomeConfig
      * @brief devices -- a list of known input devices pairs.
      */
     vector<AwesomeDevice> devices;
+    unsigned int monitors;
 
 public:
-    AwesomeConfig();
+    AwesomeConfig(unsigned int monitors);
 
     /**
      * @brief add_devices -- add a new pair of devices to the config.
@@ -24,6 +25,7 @@ public:
      */
     void add_devices(AwesomeDevice pair_devices);
     string get_rules();
+    unsigned int get_monitors() const;
 
     /**
      * @brief get_devices -- get devices registered in the config.

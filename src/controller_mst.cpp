@@ -18,7 +18,7 @@ void Controller::make_mst()
 
 void Controller::enable_mst()
 {
-
+make_mst();
 }
 
 void Controller::disable_mst()
@@ -42,7 +42,7 @@ void Controller::create_xorg()
 
 void Controller::create_rclua()
 {
-    awesome_conf = new AwesomeConfig();
+    awesome_conf = new AwesomeConfig(MONITORS);
 
     for(int i = 0; i < MONITORS; i++)
     {
@@ -56,9 +56,9 @@ string Controller::create_bashrc()
 {
     string bash;
     bash += string("if [ -z \"$DISPLAY\" ] && [ $(tty) = /dev/tty");
-    bash += 6;
+    bash += to_string(6);
     bash += string(" ]; then\n");
-    bash += string("startx\n");
+    bash += string("    startx\n");
     bash += string("fi\n");
     return bash;
 }
@@ -82,9 +82,9 @@ string Controller::create_xmst()
 void Controller::write_rc_lua()
 {
     fstream rclua_pattern;
-    rclua_pattern.open("D:\\Programming\\Git\\mst\\src\\mst_files\\rc.lua.pattern", ios::in);
+    rclua_pattern.open("/root/src/mst/src/mst_files/rc.lua.pattern", ios::in);
     fstream rclua;
-    rclua.open("D:\\Programming\\Git\\mst\\src\\test_files\\home\\multiseat\\config\\awesome\\rc.lua", ios::out);
+    rclua.open("/root/src/mst/src/test_files/home/multiseat/config/awesome/rc.lua", ios::out);
 
     string str;
 
@@ -110,7 +110,7 @@ void Controller::write_rc_lua()
 void Controller::write_xorg()
 {
     fstream xorg;
-    xorg.open("D:\\Programming\\Git\\mst\\src\\test_files\\etc\\X11\\xorg.conf", ios::out);
+    xorg.open("/root/src/mst/src/test_files/etc/X11/xorg.conf", ios::out);
     xorg << *xorg_conf;
     xorg.close();
 }
@@ -118,7 +118,8 @@ void Controller::write_xorg()
 void Controller::write_bashrc()
 {
     fstream bashrc;
-    bashrc.open("D:\\Programming\\Git\\mst\\src\\test_files\\home\\multiseat\\bash.rc", ios::out);
+    // bashrc.open("D:\\Programming\\Git\\mst\\src\\test_files\\home\\multiseat\\bash.rc", ios::out);
+    bashrc.open("/root/src/mst/src/test_files/home/multiseat/bash.rc", ios::out);
     bashrc << create_bashrc();
     bashrc.close();
 }
@@ -126,12 +127,12 @@ void Controller::write_bashrc()
 void Controller::write_xinitrc()
 {
     fstream xinitrc;
-    xinitrc.open("D:\\Programming\\Git\\mst\\src\\test_files\\home\\multiseat\\xinitrc", ios::out);
+    xinitrc.open("/root/src/mst/src/test_files/home/multiseat/xinitrc", ios::out);
     xinitrc << create_xinitrc();
     xinitrc.close();
 
     fstream xmst;
-    xmst.open("D:\\Programming\\Git\\mst\\src\\test_files\\home\\multiseat\\xmst", ios::out);
+    xmst.open("/root/src/mst/src/test_files/home/multiseat/xmst", ios::out);
     xmst << create_xmst();
     xmst.close();
 }

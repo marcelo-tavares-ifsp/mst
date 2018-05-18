@@ -25,8 +25,8 @@ int main(int argc, char *argv[])
 
     Controller *controller = new Controller();
 
-    controller->make_mst();
-    // controller->enable_mst();
+    // controller->make_mst();
+    controller->enable_mst();
     // controller->disable_mst();
 
     return a.exec();
