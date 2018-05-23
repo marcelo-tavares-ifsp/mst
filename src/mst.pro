@@ -31,7 +31,8 @@ SOURCES += \
     xorg/xorg-monitor.cpp \
     awesome/awesome-config.cpp \
     awesome/awesome-device.cpp \
-    controller_mst.cpp
+    controller_mst.cpp \
+    settings-mst.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +41,8 @@ HEADERS += \
     xorg/xorg-monitor.h \
     awesome/awesome-config.h \
     awesome/awesome-device.h \
-    controller_mst.h
+    controller_mst.h \
+    settings-mst.h
 
 FORMS += \
         mainwindow.ui

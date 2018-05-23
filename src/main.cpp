@@ -4,6 +4,7 @@
 #include "awesome/awesome-config.h"
 #include "awesome/awesome-device.h"
 #include "controller_mst.h"
+#include "settings-mst.h"
 
 #include <QApplication>
 #include <iostream>
@@ -11,11 +12,9 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <regex>
 
 using namespace std;
-
-void write_rc_lua(AwesomeConfig *config);
-void write_xorg(XorgConfig *config);
 
 int main(int argc, char *argv[])
 {
@@ -25,9 +24,17 @@ int main(int argc, char *argv[])
 
     Controller *controller = new Controller();
 
-    // controller->make_mst();
     controller->enable_mst();
     // controller->disable_mst();
+
+    for (Xrandr_monitor mon : Settings_mst::parse_xrandr())
+    {
+        cout << mon.interface << endl;
+        for (auto res : mon.resolutions)
+        {
+            cout << res << endl;;
+        }
+    }
 
     return a.exec();
 }

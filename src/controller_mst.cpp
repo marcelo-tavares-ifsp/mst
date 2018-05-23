@@ -19,6 +19,7 @@ void Controller::make_mst()
 void Controller::enable_mst()
 {
 make_mst();
+printf("Multiseat enabled.\n");
 }
 
 void Controller::disable_mst()
