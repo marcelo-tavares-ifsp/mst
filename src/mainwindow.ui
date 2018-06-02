@@ -42,7 +42,7 @@
      </font>
     </property>
     <property name="text">
-     <string>ПРИВЕТСВИЕ!!!</string>
+     <string>ПРИВЕТСТВИЕ!!!</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -61,45 +61,6 @@
      <string>Далее</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="cb_1">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>70</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CheckBox</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="cb_2">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>100</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CheckBox</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="cb_3">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>130</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CheckBox</string>
-    </property>
-   </widget>
    <widget class="QComboBox" name="cb_resolution">
     <property name="geometry">
      <rect>
@@ -110,6 +71,19 @@
      </rect>
     </property>
    </widget>
+   <widget class="QListWidget" name="lw_inter">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>221</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::MultiSelection</enum>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -117,7 +91,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>21</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>
