@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lw_inter->hide();
 }
 
-bool Contains(vector<string> xm, string s)
+bool contains(vector<string> xm, string s)
 {
     for(int i = 0; i < xm.size(); i++)
     {
@@ -30,9 +30,19 @@ bool Contains(vector<string> xm, string s)
     return false;
 }
 
+
+
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+static void add_resolutions_to_cb(vector<string> resol, QComboBox *cb)
+{
+    for(string s : resol)
+    {
+        cb->addItem(QString::fromStdString(s));
+    }
 }
 
 void get_resolution(QComboBox *cb_resol, QListWidget *lw_inter)
@@ -40,33 +50,18 @@ void get_resolution(QComboBox *cb_resol, QListWidget *lw_inter)
     vector<Xrandr_monitor> xm = Settings_mst::parse_xrandr();
     int xm_size = xm.size();
     vector<string> resol;
-    bool flag = true;
+    vector<string>::iterator it;
 
-
-    if(xm_size == 1)
+    if(xm_size > 1)
     {
-        for(int i = 0; i < xm_size; i++)
+        for (int idx = 1; idx < xm_size; idx++)
         {
-
-            int xm_resolv_size = xm[i].resolutions.size();
-            for(int n = 0; n < xm_resolv_size; n++)
-            {
-
-                flag = true;
-                for(int j = 0; j < xm_size - 1; j++)
-                {
-                    if(!(Contains(xm[j + 1].resolutions, xm[i].resolutions[n])))
-                    {
-                        flag = false;
-                    }
-                }
-
-                if(flag && !(Contains(resol, xm[i].resolutions[n])))
-                {
-                    resol.push_back(xm[i].resolutions[n]);
-                }
-            }
-            lw_inter->addItem(QString::fromStdString(xm[i].interface));
+            sort(resol.begin(), resol.end());
+            sort(xm[idx].resolutions.begin(), xm[idx].resolutions.end());
+            it = set_intersection(resol.begin(), resol.end(),
+                                  xm[idx].resolutions.begin(), xm[idx].resolutions.end(),
+                                  resol.begin());
+            resol.resize(it-resol.begin());
         }
     }
     else
@@ -75,13 +70,7 @@ void get_resolution(QComboBox *cb_resol, QListWidget *lw_inter)
         resol = xm[0].resolutions;
     }
 
-
-
-    for(int i = 0; i < resol.size(); i++)
-    {
-        cb_resol->addItem(QString::fromStdString(resol[i]));
-    }
-
+    add_resolutions_to_cb(resol, cb_resol);
 }
 
 void MainWindow::on_btn_next_1_clicked()
