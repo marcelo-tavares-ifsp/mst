@@ -26,8 +26,6 @@ public:
     static vector<string> run_ls_devices();
     static void parse_ls_devices(vector<string> *mice, vector<string> *keybds);
     static void loop_answer(vector<string> data);
-private:
-    static void trim(char *s);
 };
 
 #endif // SETTINGSMST_H

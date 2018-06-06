@@ -7,7 +7,7 @@ Settings_mst::Settings_mst()
 
 }
 
-void Settings_mst::trim(char *s)
+static void trim(char *s)
 {
      int i=0,j;
      while((s[i]==' ')||(s[i]=='\t'))
@@ -129,8 +129,8 @@ vector<string> Settings_mst::run_ls_devices()
 void Settings_mst::parse_ls_devices(vector<string> *mice, vector<string> *keybds)
 {
     vector<string> data = run_ls_devices();
-    regex r1("^(.*)-event-kbd\n$");
-    regex r2("^(.*)-event-mouse\n$");
+    regex r1("^(.*-event-kbd)\n$");
+    regex r2("^(.*-event-mouse)\n$");
     smatch sm;
 
     for (string line : data)
@@ -138,14 +138,16 @@ void Settings_mst::parse_ls_devices(vector<string> *mice, vector<string> *keybds
         if (line.length() == 0)
             continue;
 
+
+
         if(regex_match(line, sm, r1))
         {
-            keybds->push_back(sm[0]);
+            keybds->push_back(sm[1]);
         }
 
         if(regex_match(line, sm, r2))
         {
-            mice->push_back(sm[0]);
+            mice->push_back(sm[1]);
         }
     }
 }
