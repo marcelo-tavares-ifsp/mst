@@ -18,14 +18,14 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-//    QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
-//    Controller *controller = new Controller();
+    Controller *controller = new Controller(2);
 
-//    controller->enable_mst();
-//    controller->disable_mst();
+    controller->enable_mst();
+    controller->disable_mst();
 
 //    for (Xrandr_monitor mon : Settings_mst::parse_xrandr())
 //    {
@@ -36,30 +36,32 @@ int main(int argc, char *argv[])
 //        }
 //    }
 
-//    return a.exec();
-
-
-
     vector<string> list_mice;
     vector<string> list_keybs;
 
     Settings_mst::parse_ls_devices(&list_mice, &list_keybs);
-    for (auto device : list_mice)
-    {
-        cout << device;
-    }
 
-    for (auto device : list_keybs)
-    {
-        cout << device;
-    }
+    return a.exec();
 
 
-    while (1)
-    {
-        Settings_mst::loop_answer(list_mice);
-        Settings_mst::loop_answer(list_keybs);
-    }
+
+
+//    for (auto device : list_mice)
+//    {
+//        cout << device;
+//    }
+
+//    for (auto device : list_keybs)
+//    {
+//        cout << device;
+//    }
+
+
+//    while (1)
+//    {
+//        Settings_mst::loop_answer(list_mice);
+//        Settings_mst::loop_answer(list_keybs);
+//    }
 
     cout << "the end!" << endl;
 

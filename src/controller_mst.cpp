@@ -1,14 +1,17 @@
 #include "controller_mst.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
-Controller::Controller()
+Controller::Controller(int count_of_monitors)
 {
-
+    this->count_of_monitors = count_of_monitors;
 }
 
 void Controller::make_mst()
 {
-    create_rclua();
-    create_xorg();
+    vector<string> interfaces = {"Monitor-DVI-1", "Monitor-VGA-1"};
+    create_rclua(1920, 1080);
+    create_xorg(interfaces, 1920, 1080);
 
     write_rc_lua();
     write_xorg();
@@ -18,8 +21,8 @@ void Controller::make_mst()
 
 void Controller::enable_mst()
 {
-make_mst();
-printf("Multiseat enabled.\n");
+    make_mst();
+    printf("Multiseat enabled.\n");
 }
 
 void Controller::disable_mst()
@@ -27,28 +30,27 @@ void Controller::disable_mst()
 
 }
 
-void Controller::create_xorg()
+void Controller::create_xorg(vector<string> interfaces, int width, int height)
 {
-    string interfaces[] = {"Monitor-DVI-1", "Monitor-VGA-1"};
     xorg_conf = new XorgConfig();
 
-    for(int i = 0; i < MONITORS; i++)
+    for(int i = 0; i < count_of_monitors; i++)
     {
         XorgMonitor *monitor = new XorgMonitor("monitor" + i);
-        monitor->set_dimensions(1920, 1080);
+        monitor->set_dimensions(width, height);
         monitor->set_interface_name(interfaces[i]);
         xorg_conf->add_monitor(*monitor);
     }
 }
 
-void Controller::create_rclua()
+void Controller::create_rclua(int width, int height)
 {
-    awesome_conf = new AwesomeConfig(MONITORS);
+    awesome_conf = new AwesomeConfig(count_of_monitors);
 
-    for(int i = 0; i < MONITORS; i++)
+    for(int i = 0; i < count_of_monitors; i++)
     {
         AwesomeDevice *device = new AwesomeDevice(i);
-        device->set_dimensions(1920, 1080);
+        device->set_dimensions(width, height);
         awesome_conf->add_devices(*device);
     }
 }
@@ -119,7 +121,6 @@ void Controller::write_xorg()
 void Controller::write_bashrc()
 {
     fstream bashrc;
-    // bashrc.open("D:\\Programming\\Git\\mst\\src\\test_files\\home\\multiseat\\bash.rc", ios::out);
     bashrc.open("/root/src/mst/src/test_files/home/multiseat/bash.rc", ios::out);
     bashrc << create_bashrc();
     bashrc.close();

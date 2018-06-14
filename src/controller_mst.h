@@ -6,23 +6,25 @@
 
 #include <fstream>
 
-
-const unsigned int MONITORS = 2;
-
+/**
+ * @brief The Controller class -- a class to control the multi-seat
+ *      configuration.
+ */
 class Controller
 {
 public:
-    Controller();
+    Controller(int count_of_monitors);
     void enable_mst();
     void disable_mst();
 
 private:
+    int count_of_monitors;
     AwesomeConfig *awesome_conf;
     XorgConfig *xorg_conf;
     void make_mst();
 
-    void create_rclua();
-    void create_xorg();
+    void create_rclua(int width, int height);
+    void create_xorg(vector<string> interfaces, int width, int height);
     string create_bashrc();
     string create_xmst();
     string create_xinitrc();

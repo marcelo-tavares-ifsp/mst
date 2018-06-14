@@ -64,24 +64,63 @@
    <widget class="QComboBox" name="cb_resolution">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>70</y>
       <width>221</width>
       <height>22</height>
      </rect>
     </property>
    </widget>
-   <widget class="QListWidget" name="lw_inter">
+   <widget class="QListWidget" name="lw_interface">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>100</y>
+      <x>10</x>
+      <y>120</y>
       <width>221</width>
       <height>61</height>
      </rect>
     </property>
     <property name="selectionMode">
      <enum>QAbstractItemView::MultiSelection</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_resolution">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>161</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Выберите разрешение:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_interface">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>161</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Выберите интерфейсы:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_next_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>381</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Далее</string>
     </property>
    </widget>
   </widget>

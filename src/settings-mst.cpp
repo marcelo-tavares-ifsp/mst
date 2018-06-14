@@ -57,6 +57,11 @@ vector<string> Settings_mst::run_xrandr()
     }
 }
 
+/**
+ * @brief Settings_mst::parse_xrandr -- create a list of available
+ *      monitors with supported resolutions.
+ * @return a list of monitors.
+ */
 vector<Xrandr_monitor> Settings_mst::parse_xrandr()
 {
     vector<string> data = run_xrandr();
@@ -100,8 +105,11 @@ vector<Xrandr_monitor> Settings_mst::parse_xrandr()
     return result;
 }
 
-
-
+/**
+ * @brief Settings_mst::run_ls_devices -- get a list of input
+ *      devices.
+ * @return a list of devices.
+ */
 vector<string> Settings_mst::run_ls_devices()
 {
     static const char *COMMAND = "ls /dev/input/by-path/";
@@ -126,6 +134,12 @@ vector<string> Settings_mst::run_ls_devices()
     }
 }
 
+/**
+ * @brief Settings_mst::parse_ls_devices -- divide a list of devices
+ *          by categories.
+ * @param mice -- Output list of mice.
+ * @param keybds -- Output list of keyboards.
+ */
 void Settings_mst::parse_ls_devices(vector<string> *mice, vector<string> *keybds)
 {
     vector<string> data = run_ls_devices();
@@ -137,8 +151,6 @@ void Settings_mst::parse_ls_devices(vector<string> *mice, vector<string> *keybds
     {
         if (line.length() == 0)
             continue;
-
-
 
         if(regex_match(line, sm, r1))
         {
@@ -168,6 +180,10 @@ static FILE* open_input_dev(string name) {
     return file;
 }
 
+/**
+ * @brief Settings_mst::loop_answer -- assign input devices to seats.
+ * @param data -- a list of devices.
+ */
 void Settings_mst::loop_answer(vector<string> data)
 {
     for (auto line : data)
