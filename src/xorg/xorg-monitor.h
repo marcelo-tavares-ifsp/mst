@@ -2,8 +2,12 @@
 #define MONITOR_H
 
 #include <string>
+#include <iostream>
+#include <string>
 
 using namespace std;
+
+
 
 class XorgMonitor
 {

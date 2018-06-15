@@ -1,11 +1,6 @@
 #include "awesome-config.h"
-#include "awesome-device.h"
 
-#include <vector>
-#include <string>
-#include <iostream>
 
-using namespace std;
 
 AwesomeConfig::AwesomeConfig(unsigned int monitors) : monitors(monitors)
 {

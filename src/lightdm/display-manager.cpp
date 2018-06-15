@@ -1,8 +1,6 @@
 #include "display-manager.h"
 
-#include <stdlib.h>
 
-using namespace std;
 
 DisplayManager::DisplayManager(string config_path) : config_path(config_path) {
 

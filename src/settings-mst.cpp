@@ -7,32 +7,6 @@ Settings_mst::Settings_mst()
 
 }
 
-static void trim(char *s)
-{
-     int i=0,j;
-     while((s[i]==' ')||(s[i]=='\t'))
-     {
-          i++;
-     }
-     if(i>0)
-     {
-          for(j=0; j < strlen(s); j++)
-          {
-              s[j]=s[j+i];
-          }
-          s[j]='\0';
-     }
-     i=strlen(s)-1;
-     while((s[i]==' ')||(s[i]=='\t'))
-     {
-          i--;
-     }
-     if(i < (strlen(s)-1))
-     {
-          s[i+1]='\0';
-     }
-}
-
 vector<string> Settings_mst::run_xrandr()
 {
     static const char *COMMAND = "xrandr";

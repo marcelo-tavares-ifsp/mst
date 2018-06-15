@@ -1,14 +1,17 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-04-28T11:15:51
+# Project created by QtCreator 2018-06-15T13:12:07
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += testlib
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       -= gui
 
-TARGET = mst
+TARGET = tst_utils
+CONFIG   += console
+CONFIG   -= app_bundle
+
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -24,30 +27,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    lightdm/display-manager.cpp \
-    xorg/xorg-config.cpp \
-    xorg/xorg-monitor.cpp \
-    awesome/awesome-config.cpp \
-    awesome/awesome-device.cpp \
-    controller_mst.cpp \
-    settings-mst.cpp \
-    utils.cpp \
-    interface_settings.cpp
+    ../src/utils.cpp \
+    tst_utils.cpp
 
 HEADERS += \
-        mainwindow.h \
-    lightdm/display-manager.h \
-    xorg/xorg-config.h \
-    xorg/xorg-monitor.h \
-    awesome/awesome-config.h \
-    awesome/awesome-device.h \
-    controller_mst.h \
-    settings-mst.h \
-    utils.h \
-    interface_settings.h
+    ../src/utils.h
 
-FORMS += \
-        mainwindow.ui \
-    interface_settings.ui
+DEFINES += SRCDIR=\\\"$$PWD/\\\"

@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <vector>
 
+#include "interface_settings.h"
+
 using namespace std;
 
 namespace Ui {
@@ -15,6 +17,7 @@ struct Desktop
     string mouse;
     string interface;
     string keyboard;
+    Resolution resolution;
 };
 
 struct Resolution
@@ -28,13 +31,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    Resolution global_resolution;
-    Desktop *global_desktops;
+    vector<Desktop> global_desktops;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
 
     void on_btn_next_2_clicked();
 

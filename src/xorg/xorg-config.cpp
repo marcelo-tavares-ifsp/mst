@@ -1,11 +1,6 @@
-#include <iostream>
-#include <functional>
-#include <numeric>
-
 #include "xorg-config.h"
-#include "xorg-monitor.h"
 
-using namespace std;
+
 
 XorgConfig::XorgConfig()
 {

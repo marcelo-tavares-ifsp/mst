@@ -1,10 +1,14 @@
 #ifndef CONTROLLER_MST_H
 #define CONTROLLER_MST_H
 
+#include <fstream>
+
 #include "xorg/xorg-config.h"
 #include "awesome/awesome-config.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
-#include <fstream>
+
 
 /**
  * @brief The Controller class -- a class to control the multi-seat

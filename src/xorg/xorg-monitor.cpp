@@ -1,12 +1,8 @@
-#include <iostream>
-#include <string>
-
 #include "xorg-monitor.h"
 
-using namespace std;
 
-XorgMonitor::XorgMonitor(string identifier)
-    : identifier(identifier)
+
+XorgMonitor::XorgMonitor(string identifier) : identifier(identifier)
 {
 
 }

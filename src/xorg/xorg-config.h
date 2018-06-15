@@ -3,10 +3,15 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
+#include <functional>
+#include <numeric>
 
-#include <xorg/xorg-monitor.h>
+#include "xorg-monitor.h"
 
 using namespace std;
+
+
 
 class XorgConfig
 {

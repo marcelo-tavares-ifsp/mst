@@ -3,10 +3,13 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
-#include <awesome/awesome-device.h>
+#include "awesome-device.h"
 
 using namespace std;
+
+
 
 class AwesomeConfig
 {

@@ -1,12 +1,8 @@
 #include "awesome-device.h"
 
-#include <string>
-#include <iostream>
 
-using namespace std;
 
-AwesomeDevice::AwesomeDevice(unsigned int identifier)
-    : identifier(identifier)
+AwesomeDevice::AwesomeDevice(unsigned int identifier) : identifier(identifier)
 {
     mouse = set_mouse();
     keyboard = set_keyboard();

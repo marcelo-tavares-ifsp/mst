@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "controller_mst.h"
 #include "settings-mst.h"
+#include "utils.h"
+#include "interface_settings.h"
 
 #include <QString>
 // #include <boost/algorithm/string.hpp>
@@ -22,18 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lbl_interface->hide();
 }
 
-bool contains(vector<string> xm, string s)
-{
-    for(int i = 0; i < xm.size(); i++)
-    {
-        if(xm[i] == s)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
 
 
 MainWindow::~MainWindow()
@@ -51,7 +41,8 @@ static void add_resolutions_to_cb(vector<string> resol, QComboBox *cb)
 
 void get_resolution(QComboBox *cb_resolution, QListWidget *lw_interface)
 {
-    lw_interface->addItem(QString::fromStdString("test_3"));
+    lw_interface->addItem(QString::fromStdString("test_3")); // test
+
     vector<Xrandr_monitor> xm = Settings_mst::parse_xrandr();
     int xm_size = xm.size();
     vector<string> resol;
@@ -77,48 +68,51 @@ void get_resolution(QComboBox *cb_resolution, QListWidget *lw_interface)
 
     add_resolutions_to_cb(resol, cb_resolution);
 
-    lw_interface->addItem(QString::fromStdString("test_1"));
-    lw_interface->addItem(QString::fromStdString("test_5"));
+    lw_interface->addItem(QString::fromStdString("test_1")); // test
+    lw_interface->addItem(QString::fromStdString("test_5")); // test
 }
 
 void MainWindow::on_btn_next_1_clicked()
 {
-    ui->lbl_hello->hide();
-    ui->btn_next_1->hide();
+//    get_resolution(ui->cb_resolution, ui->lw_interface);
 
-    ui->lw_interface->show();
-    ui->btn_next_2->show();
-    ui->cb_resolution->show();
-    ui->lbl_resolution->show();
-    ui->lbl_interface->show();
+//    ui->lbl_hello->hide();
+//    ui->btn_next_1->hide();
 
-    get_resolution(ui->cb_resolution, ui->lw_interface);
+    interface_settings is;
+    is.show();
+    this->hide();
+
+//    ui->lw_interface->show();
+//    ui->btn_next_2->show();
+//    ui->cb_resolution->show();
+//    ui->lbl_resolution->show();
+//    ui->lbl_interface->show();
 }
 
 void MainWindow::on_btn_next_2_clicked()
 {
-    // QString tmpS = ui->cb_resolution->currentText();
-    // string tmp = tmpS.toUtf8().constData;// split('x');
-    // vector<string> strs;
-    // boost::split(strs,tmp,boost::is_any_of("\t"));
+     QString tmpS = ui->cb_resolution->currentText();
+     string tmp = tmpS.toUtf8().constData();
+     vector<string> strs = split(tmp, 'x');
 
-    // global_resolution.width = atoi(tmp[0]);
-    // global_resolution.heigth = atoi(tmp[1]);
+//     global_desktops.re
+//     global_desktops.resolution.width = atoi(strs[0].c_str());
+//     global_desktops.resolution.heigth = atoi(strs[1].c_str());
 
-//    QList<QListWidgetItem *> selected_items = ui->lw_interface->selectedItems();
-//    global_desktops = new Desktop[ui->lw_interface->count()];
-//    int i = 0;
-//    for (auto item : selected_items)
-//    {
-//        global_desktops[i] = Desktop();
-//        global_desktops[i].interface = item->text().toUtf8().constData();
-//        i++;
-//    }
+    QList<QListWidgetItem *> selected_items = ui->lw_interface->selectedItems();
+    int i = 0;
+    for (auto item : selected_items)
+    {
+        Desktop desktop;
+        desktop.interface = item->text().toUtf8().constData();
+        global_desktops.push_back(desktop);
+    }
 
-//    for (int i = 0; i < global_desktops)
-//    {
-//        cout << item->interface << endl;
-//    }
+    for (int i = 0; i < global_desktops.size(); i++)
+    {
+        cout << global_desktops[i].interface << endl;
+    }
 
     ui->btn_next_2->hide();
     ui->cb_resolution->hide();
@@ -131,5 +125,7 @@ void MainWindow::on_btn_next_2_clicked()
 
 void MainWindow::on_btn_next_3_clicked()
 {
+
+
     cout << "The End!" << endl;
 }

@@ -1,6 +1,6 @@
 #include "controller_mst.h"
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+
+
 
 Controller::Controller(int count_of_monitors)
 {

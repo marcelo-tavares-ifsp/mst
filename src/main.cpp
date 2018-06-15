@@ -1,11 +1,3 @@
-#include "mainwindow.h"
-#include "xorg/xorg-config.h"
-#include "xorg/xorg-monitor.h"
-#include "awesome/awesome-config.h"
-#include "awesome/awesome-device.h"
-#include "controller_mst.h"
-#include "settings-mst.h"
-
 #include <QApplication>
 #include <iostream>
 #include <fstream>
@@ -14,7 +6,17 @@
 #include <stdlib.h>
 #include <regex>
 
+#include "mainwindow.h"
+#include "xorg/xorg-config.h"
+#include "xorg/xorg-monitor.h"
+#include "awesome/awesome-config.h"
+#include "awesome/awesome-device.h"
+#include "controller_mst.h"
+#include "settings-mst.h"
+
 using namespace std;
+
+
 
 int main(int argc, char *argv[])
 {

@@ -2,12 +2,12 @@
 #define SETTINGSMST_H
 
 #include <iostream>
-#include <fstream>
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
-#include <regex>
 #include <vector>
+
+#include "utils.h"
 
 using namespace std;
 
