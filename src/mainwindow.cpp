@@ -3,28 +3,23 @@
 #include "controller_mst.h"
 #include "settings-mst.h"
 #include "utils.h"
-#include "interface_settings.h"
 
 #include <QString>
-// #include <boost/algorithm/string.hpp>
 
 using namespace std;
+
+int Seat::width;
+int Seat::heigth;
+
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    ui->btn_next_3->hide();
-    ui->btn_next_2->hide();
-    ui->cb_resolution->hide();
-    ui->lw_interface->hide();
-    ui->lbl_resolution->hide();
-    ui->lbl_interface->hide();
+    ui->stackedWidget->setCurrentIndex(0);
 }
-
-
 
 MainWindow::~MainWindow()
 {
@@ -41,6 +36,11 @@ static void add_resolutions_to_cb(vector<string> resol, QComboBox *cb)
 
 void get_resolution(QComboBox *cb_resolution, QListWidget *lw_interface)
 {
+    if (cb_resolution->count() != 0 || lw_interface->count() != 0)
+    {
+        return;
+    }
+
     lw_interface->addItem(QString::fromStdString("test_3")); // test
 
     vector<Xrandr_monitor> xm = Settings_mst::parse_xrandr();
@@ -74,53 +74,59 @@ void get_resolution(QComboBox *cb_resolution, QListWidget *lw_interface)
 
 void MainWindow::on_btn_next_1_clicked()
 {
-//    get_resolution(ui->cb_resolution, ui->lw_interface);
+    get_resolution(ui->cb_resolution, ui->lw_interface);
 
-//    ui->lbl_hello->hide();
-//    ui->btn_next_1->hide();
-
-    interface_settings is;
-    is.show();
-    this->hide();
-
-//    ui->lw_interface->show();
-//    ui->btn_next_2->show();
-//    ui->cb_resolution->show();
-//    ui->lbl_resolution->show();
-//    ui->lbl_interface->show();
+    ui->stackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::on_btn_next_2_clicked()
 {
-     QString tmpS = ui->cb_resolution->currentText();
-     string tmp = tmpS.toUtf8().constData();
-     vector<string> strs = split(tmp, 'x');
+    //save_resolution(ui);
+    QString Qtmp = ui->cb_resolution->currentText();
+    string tmp = Qtmp.toUtf8().constData();
+    vector<string> strs = split(tmp, 'x');
 
-//     global_desktops.re
-//     global_desktops.resolution.width = atoi(strs[0].c_str());
-//     global_desktops.resolution.heigth = atoi(strs[1].c_str());
+    Seat::width = atoi(strs[0].c_str());
+    Seat::heigth = atoi(strs[1].c_str());
 
-    QList<QListWidgetItem *> selected_items = ui->lw_interface->selectedItems();
-    int i = 0;
-    for (auto item : selected_items)
+
+
+
+    if (global_seats.size() == 0 || check_size != ui->lw_interface->selectedItems().count())
     {
-        Desktop desktop;
-        desktop.interface = item->text().toUtf8().constData();
-        global_desktops.push_back(desktop);
+        global_seats.clear();
+        for (auto item : ui->lw_interface->selectedItems())
+        {
+            Seat seat;
+            seat.interface = item->text().toUtf8().constData();
+            global_seats.push_back(seat);
+        }
+        check_size = global_seats.size();
     }
 
-    for (int i = 0; i < global_desktops.size(); i++)
+    ////////////////////////////////////////////////////////////
+
+    for (auto widget : widgets)
     {
-        cout << global_desktops[i].interface << endl;
+        ui->gridLayout->removeWidget(widget);
     }
 
-    ui->btn_next_2->hide();
-    ui->cb_resolution->hide();
-    ui->lw_interface->hide();
-    ui->lbl_resolution->hide();
-    ui->lbl_interface->hide();
+    widgets.clear();
 
-    ui->btn_next_3->show();
+    int sz = global_seats.size();
+    for (int idx = 0; idx < sz; ++idx) {
+        QPushButton *Qpb = new QPushButton("btn" + idx, this);
+        Qpb->setText(QString::fromStdString(global_seats[idx].interface));
+        widgets.push_back(Qpb);
+        cout << idx << endl;
+    }
+
+    for (auto widget : widgets)
+    {
+        ui->gridLayout->addWidget(widget);
+    }
+
+    ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::on_btn_next_3_clicked()
@@ -128,4 +134,26 @@ void MainWindow::on_btn_next_3_clicked()
 
 
     cout << "The End!" << endl;
+}
+
+void MainWindow::on_btn_back_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_btn_back_1_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+////////static functions///////////////////////////////////////////////////
+
+static void save_resolution(Ui::MainWindow *ui)
+{
+    QString Qtmp = ui->cb_resolution->currentText();
+    string tmp = Qtmp.toUtf8().constData();
+    vector<string> strs = split(tmp, 'x');
+
+    Seat::width = atoi(strs[0].c_str());
+    Seat::heigth = atoi(strs[1].c_str());
 }

@@ -33,8 +33,7 @@ SOURCES += \
     awesome/awesome-device.cpp \
     controller_mst.cpp \
     settings-mst.cpp \
-    utils.cpp \
-    interface_settings.cpp
+    utils.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,9 +44,7 @@ HEADERS += \
     awesome/awesome-device.h \
     controller_mst.h \
     settings-mst.h \
-    utils.h \
-    interface_settings.h
+    utils.h
 
 FORMS += \
-        mainwindow.ui \
-    interface_settings.ui
+        mainwindow.ui
