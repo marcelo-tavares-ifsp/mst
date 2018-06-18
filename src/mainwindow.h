@@ -1,8 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <vector>
+#include "ui_mainwindow.h"
+#include "controller_mst.h"
+#include "settings-mst.h"
+#include "utils.h"
+
+#include <QString>
+#include <set>
+#include <algorithm>
 
 using namespace std;
 
@@ -26,7 +32,6 @@ class MainWindow : public QMainWindow
 
 public:
     vector<QWidget *> widgets;
-    int check_size;
     vector<Seat> global_seats;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -43,10 +48,18 @@ private slots:
 
     void on_btn_back_1_clicked();
 
+    void on_interface_clicked();
+
 private:
     Ui::MainWindow *ui;
 
-    //void save_resolution(Ui::MainWindow *ui);
+    void clear_layout();
+    void fill_layout();
+    void fill_global_seats();
+    void get_resolution();
+    void save_resolution();
+    bool is_layout_changed(vector<Seat> seats,
+                                  QList<QListWidgetItem*> list);
 };
 
 #endif // MAINWINDOW_H

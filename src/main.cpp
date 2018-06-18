@@ -38,11 +38,6 @@ int main(int argc, char *argv[])
 //        }
 //    }
 
-    vector<string> list_mice;
-    vector<string> list_keybs;
-
-    Settings_mst::parse_ls_devices(&list_mice, &list_keybs);
-
     return a.exec();
 
 

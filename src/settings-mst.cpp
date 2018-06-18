@@ -50,7 +50,6 @@ vector<Xrandr_monitor> Settings_mst::parse_xrandr()
     {
         if (line.length() == 0)
             continue;
-
         switch (state)
         {
         case 0:
@@ -168,7 +167,7 @@ void Settings_mst::loop_answer(vector<string> data)
 
         while (fgets(buf, BUF_SZ, file) != NULL)
         {
-            cout << buf;
+            cout << buf << "CHO" << endl;
         }
         pclose(file);
     }

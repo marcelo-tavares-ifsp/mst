@@ -1,15 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "controller_mst.h"
-#include "settings-mst.h"
-#include "utils.h"
-
-#include <QString>
 
 using namespace std;
 
 int Seat::width;
 int Seat::heigth;
+vector<string> list_mice;
+vector<string> list_keybs;
 
 
 
@@ -26,105 +23,29 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-static void add_resolutions_to_cb(vector<string> resol, QComboBox *cb)
-{
-    for(string s : resol)
-    {
-        cb->addItem(QString::fromStdString(s));
-    }
-}
-
-void get_resolution(QComboBox *cb_resolution, QListWidget *lw_interface)
-{
-    if (cb_resolution->count() != 0 || lw_interface->count() != 0)
-    {
-        return;
-    }
-
-    lw_interface->addItem(QString::fromStdString("test_3")); // test
-
-    vector<Xrandr_monitor> xm = Settings_mst::parse_xrandr();
-    int xm_size = xm.size();
-    vector<string> resol;
-    vector<string>::iterator it;
-
-    if(xm_size > 1)
-    {
-        for (int idx = 1; idx < xm_size; idx++)
-        {
-            sort(resol.begin(), resol.end());
-            sort(xm[idx].resolutions.begin(), xm[idx].resolutions.end());
-            it = set_intersection(resol.begin(), resol.end(),
-                                  xm[idx].resolutions.begin(), xm[idx].resolutions.end(),
-                                  resol.begin());
-            resol.resize(it-resol.begin());
-        }
-    }
-    else
-    {
-        lw_interface->addItem(QString::fromStdString(xm[0].interface));
-        resol = xm[0].resolutions;
-    }
-
-    add_resolutions_to_cb(resol, cb_resolution);
-
-    lw_interface->addItem(QString::fromStdString("test_1")); // test
-    lw_interface->addItem(QString::fromStdString("test_5")); // test
-}
-
 void MainWindow::on_btn_next_1_clicked()
 {
-    get_resolution(ui->cb_resolution, ui->lw_interface);
+    get_resolution();
 
     ui->stackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::on_btn_next_2_clicked()
 {
-    //save_resolution(ui);
-    QString Qtmp = ui->cb_resolution->currentText();
-    string tmp = Qtmp.toUtf8().constData();
-    vector<string> strs = split(tmp, 'x');
+    save_resolution();
 
-    Seat::width = atoi(strs[0].c_str());
-    Seat::heigth = atoi(strs[1].c_str());
-
-
-
-
-    if (global_seats.size() == 0 || check_size != ui->lw_interface->selectedItems().count())
+    if (is_layout_changed(global_seats, ui->lw_interface->selectedItems()))
     {
         global_seats.clear();
-        for (auto item : ui->lw_interface->selectedItems())
-        {
-            Seat seat;
-            seat.interface = item->text().toUtf8().constData();
-            global_seats.push_back(seat);
-        }
-        check_size = global_seats.size();
+        fill_global_seats();
+
+        clear_layout();
+        widgets.clear();
+
+        fill_layout();
     }
 
-    ////////////////////////////////////////////////////////////
-
-    for (auto widget : widgets)
-    {
-        ui->gridLayout->removeWidget(widget);
-    }
-
-    widgets.clear();
-
-    int sz = global_seats.size();
-    for (int idx = 0; idx < sz; ++idx) {
-        QPushButton *Qpb = new QPushButton("btn" + idx, this);
-        Qpb->setText(QString::fromStdString(global_seats[idx].interface));
-        widgets.push_back(Qpb);
-        cout << idx << endl;
-    }
-
-    for (auto widget : widgets)
-    {
-        ui->gridLayout->addWidget(widget);
-    }
+    Settings_mst::parse_ls_devices(&list_mice, &list_keybs);
 
     ui->stackedWidget->setCurrentIndex(2);
 }
@@ -146,9 +67,35 @@ void MainWindow::on_btn_back_1_clicked()
     ui->stackedWidget->setCurrentIndex(0);
 }
 
+
+void MainWindow::on_interface_clicked()
+{
+    QPushButton *button = (QPushButton *) sender();
+
+
+
+
+
+    for (auto seat : global_seats)
+    {
+        if (seat.interface == button->text().toUtf8().constData())
+        {
+//            seat.keyboard = keyboard;
+//            seat.mouse = mouse;
+            break;
+        }
+    }
+
+    cout << button->text().toUtf8().constData() << endl;
+}
+
+
+
 ////////static functions///////////////////////////////////////////////////
 
-static void save_resolution(Ui::MainWindow *ui)
+
+
+void MainWindow::save_resolution()
 {
     QString Qtmp = ui->cb_resolution->currentText();
     string tmp = Qtmp.toUtf8().constData();
@@ -156,4 +103,118 @@ static void save_resolution(Ui::MainWindow *ui)
 
     Seat::width = atoi(strs[0].c_str());
     Seat::heigth = atoi(strs[1].c_str());
+}
+
+void MainWindow::fill_layout()
+{
+    int sz = global_seats.size();
+    for (int idx = 0; idx < sz; ++idx)
+    {
+        QPushButton *Qpb = new QPushButton("btn" + idx, this);
+        Qpb->setText(QString::fromStdString(global_seats[idx].interface));
+        connect(Qpb, SIGNAL(clicked()), this, SLOT(on_interface_clicked()));
+        widgets.push_back(Qpb);
+        ui->gridLayout->addWidget(Qpb);
+    }
+}
+
+/**
+ * @brief is_layout_changed -- predicate that checks if new list of seats
+ *      differs from the previous setup.
+ * @param seats -- old list of seats.
+ * @param list -- new list of seats.
+ * @return the result of comparison.
+ */
+bool MainWindow::is_layout_changed(vector<Seat> seats,
+                              QList<QListWidgetItem*> list)
+{
+    bool result = true;
+    if (! seats.empty())
+    {
+        vector<string> a;
+        vector<string> b;
+        vector<string> c;
+
+        for (QListWidgetItem* elem : list)
+        {
+            a.push_back(elem->text().toUtf8().constData());
+        }
+        for (Seat s : seats)
+        {
+            b.push_back(s.interface);
+        }
+
+        set_symmetric_difference(a.begin(), a.end(),
+                                 b.begin(), b.end(), back_inserter(c));
+        result = c.size() > 0;
+    }
+
+    return result;
+}
+
+void MainWindow::fill_global_seats()
+{
+    for (auto item : ui->lw_interface->selectedItems())
+    {
+        Seat seat;
+        seat.interface = item->text().toUtf8().constData();
+        global_seats.push_back(seat);
+    }
+}
+
+void MainWindow::clear_layout()
+{
+    for (auto widget : widgets)
+    {
+        ui->gridLayout->removeWidget(widget);
+        delete widget;
+    }
+}
+
+static void add_resolutions_to_cb(vector<string> resol, QComboBox *cb)
+{
+    for(string s : resol)
+    {
+        cb->addItem(QString::fromStdString(s));
+    }
+}
+
+void MainWindow::get_resolution()
+{
+    if (ui->cb_resolution->count() != 0 || ui->lw_interface->count() != 0)
+    {
+        return;
+    }
+
+    ui->lw_interface->addItem(QString::fromStdString("test_3")); // test
+
+    vector<Xrandr_monitor> xm = Settings_mst::parse_xrandr();
+    int xm_size = xm.size();
+    vector<string> resol;
+    vector<string>::iterator it;
+
+    resol = xm[0].resolutions;
+    ui->lw_interface->addItem(QString::fromStdString(xm[0].interface));
+
+    if(xm_size > 1)
+    {
+        cout << "1" << endl;
+        for (int idx = 1; idx < xm_size; idx++)
+        {
+            cout << "2" << endl;
+            sort(resol.begin(), resol.end());
+            sort(xm[idx].resolutions.begin(), xm[idx].resolutions.end());
+            it = set_intersection(resol.begin(), resol.end(),
+                                  xm[idx].resolutions.begin(), xm[idx].resolutions.end(),
+                                  resol.begin());
+            resol.resize(it-resol.begin());
+
+            ui->lw_interface->addItem(QString::fromStdString(xm[idx].interface));
+        }
+    }
+
+    add_resolutions_to_cb(resol, ui->cb_resolution);
+
+    ui->lw_interface->addItem(QString::fromStdString("test_1")); // test
+    ui->lw_interface->addItem(QString::fromStdString("test_5")); // test
 }
