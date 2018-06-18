@@ -74,7 +74,10 @@ vector<Xrandr_monitor> Settings_mst::parse_xrandr()
             break;
         }
     }
-    result.push_back(monitor);
+
+    if (monitor.interface != "")
+        result.push_back(monitor);
+
     return result;
 }
 
