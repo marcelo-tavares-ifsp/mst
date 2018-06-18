@@ -16,7 +16,7 @@ vector<string> Settings_mst::run_xrandr()
 
     if ((file = popen(COMMAND, "r")) != NULL)
     {
-        vector<string> result(10);
+        vector<string> result;
         while (fgets(buf, BUF_SZ, file) != NULL)
         {
             trim(buf);
