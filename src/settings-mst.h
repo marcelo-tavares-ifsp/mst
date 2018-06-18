@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
+#include <QByteArray>
 
 #include "utils.h"
 
@@ -25,7 +26,7 @@ public:
     static vector<Xrandr_monitor> parse_xrandr();
     static vector<string> run_ls_devices();
     static void parse_ls_devices(vector<string> *mice, vector<string> *keybds);
-    static void loop_answer(vector<string> data);
+    static bool loop_answer(string device);
 };
 
 #endif // SETTINGSMST_H

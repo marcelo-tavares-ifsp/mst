@@ -71,8 +71,20 @@ void MainWindow::on_btn_back_1_clicked()
 void MainWindow::on_interface_clicked()
 {
     QPushButton *button = (QPushButton *) sender();
+    string keyboard;
+    string mouse;
 
-
+    while (1)
+    {
+        for (auto device : list_mice)
+        {
+            Settings_mst::loop_answer(device);
+        }
+        for (auto device : list_keybs)
+        {
+            Settings_mst::loop_answer(device);
+        }
+    }
 
 
 
@@ -80,8 +92,8 @@ void MainWindow::on_interface_clicked()
     {
         if (seat.interface == button->text().toUtf8().constData())
         {
-//            seat.keyboard = keyboard;
-//            seat.mouse = mouse;
+            seat.keyboard = keyboard;
+            seat.mouse = mouse;
             break;
         }
     }
@@ -198,10 +210,8 @@ void MainWindow::get_resolution()
 
     if(xm_size > 1)
     {
-        cout << "1" << endl;
         for (int idx = 1; idx < xm_size; idx++)
         {
-            cout << "2" << endl;
             sort(resol.begin(), resol.end());
             sort(xm[idx].resolutions.begin(), xm[idx].resolutions.end());
             it = set_intersection(resol.begin(), resol.end(),

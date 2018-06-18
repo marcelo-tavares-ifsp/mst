@@ -160,18 +160,22 @@ static FILE* open_input_dev(string name) {
  * @brief Settings_mst::loop_answer -- assign input devices to seats.
  * @param data -- a list of devices.
  */
-void Settings_mst::loop_answer(vector<string> data)
+bool Settings_mst::loop_answer(string device)
 {
-    for (auto line : data)
-    {
-        const int BUF_SZ = 10;
-        char buf[BUF_SZ];
-        FILE* file = open_input_dev(line);
+//    const int BUF_SZ = 10;
+//    char buf[BUF_SZ];
+    FILE* file = open_input_dev(device);
 
-        while (fgets(buf, BUF_SZ, file) != NULL)
-        {
-            cout << buf << "CHO" << endl;
-        }
-        pclose(file);
-    }
+//    while (fgets(buf, BUF_SZ, file) != NULL)
+//    {
+//        cout << buf << endl;
+//    }
+
+
+
+    // https://stackoverflow.com/questions/11451618/how-do-you-read-the-mouse-button-state-from-dev-input-mice
+
+    pclose(file);
+
+    return true;
 }
