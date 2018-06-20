@@ -191,6 +191,22 @@ static void add_resolutions_to_cb(vector<string> resol, QComboBox *cb)
     }
 }
 
+/**
+ * @brief _set_intersection -- Get intersection of two vectors, return the
+ *          resulting vector.
+ * @param v1 -- The first input vector.
+ * @param v2 -- The seconds input vector.
+ * @param r  -- The resulting vector.
+ * @return -- A vector iterator.
+ */
+vector<string>::iterator _set_intersection(vector<string> v1,
+                                           vector<string> v2,
+                                           vector<string> r)
+{
+    return set_intersection(v1.begin(), v1.end(), v2.begin(), v2.end(),
+                            r.begin());
+}
+
 void MainWindow::get_resolution()
 {
     if (ui->cb_resolution->count() != 0 || ui->lw_interface->count() != 0)
@@ -214,9 +230,7 @@ void MainWindow::get_resolution()
         {
             sort(resol.begin(), resol.end());
             sort(xm[idx].resolutions.begin(), xm[idx].resolutions.end());
-            it = set_intersection(resol.begin(), resol.end(),
-                                  xm[idx].resolutions.begin(), xm[idx].resolutions.end(),
-                                  resol.begin());
+            it = _set_intersection(resol, xm[idx].resolutions, resol);
             resol.resize(it-resol.begin());
 
             ui->lw_interface->addItem(QString::fromStdString(xm[idx].interface));
