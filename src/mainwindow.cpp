@@ -68,24 +68,27 @@ void MainWindow::on_btn_back_1_clicked()
 }
 
 
+
 void MainWindow::on_interface_clicked()
 {
     QPushButton *button = (QPushButton *) sender();
     string keyboard;
     string mouse;
 
-    while (1)
-    {
-        for (auto device : list_mice)
-        {
-            Settings_mst::loop_answer(device);
-        }
-        for (auto device : list_keybs)
-        {
-            Settings_mst::loop_answer(device);
-        }
-    }
+//    while (1)
+//    {
+//        for (auto mouse : list_mice)
+//        {
+//            Settings_mst::loop_answer_mouse(mouse);
+//        }
+//        for (auto device : list_keybs)
+//        {
+//            Settings_mst::loop_answer(device);
+//        }
+//    }
 
+
+    mouse = Settings_mst::loop_answer_mouse_2(list_mice);
 
 
     for (auto seat : global_seats)
@@ -98,6 +101,7 @@ void MainWindow::on_interface_clicked()
         }
     }
 
+    cout << mouse << endl;
     cout << button->text().toUtf8().constData() << endl;
 }
 
@@ -231,8 +235,7 @@ void MainWindow::get_resolution()
             sort(resol.begin(), resol.end());
             sort(xm[idx].resolutions.begin(), xm[idx].resolutions.end());
             it = _set_intersection(resol, xm[idx].resolutions, resol);
-            resol.resize(it-resol.begin());
-
+            resol.resize(it->size());
             ui->lw_interface->addItem(QString::fromStdString(xm[idx].interface));
         }
     }
