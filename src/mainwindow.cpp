@@ -1,5 +1,8 @@
+#include <QThreadPool>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "input-device-listener.h"
 
 using namespace std;
 
@@ -67,8 +70,6 @@ void MainWindow::on_btn_back_1_clicked()
     ui->stackedWidget->setCurrentIndex(0);
 }
 
-
-
 void MainWindow::on_interface_clicked()
 {
     QPushButton *button = (QPushButton *) sender();
@@ -86,9 +87,11 @@ void MainWindow::on_interface_clicked()
 //            Settings_mst::loop_answer(device);
 //        }
 //    }
+    Input_device_listener listener(list_mice, Input_device_listener::MOUSE);
+    QObject::connect(&listener, SIGNAL(device_found(string, Input_device_listener::DEVICE_TYPE)),
+                     this, SLOT(set_seat_device(string, Input_device_listener::DEVICE_TYPE)));
 
-
-    mouse = Settings_mst::loop_answer_mouse_2(list_mice);
+    QThreadPool::globalInstance()->start(&listener);
 
 
     for (auto seat : global_seats)
@@ -103,6 +106,13 @@ void MainWindow::on_interface_clicked()
 
     cout << mouse << endl;
     cout << button->text().toUtf8().constData() << endl;
+}
+
+void MainWindow::set_seat_device(string device,
+                                 Input_device_listener::DEVICE_TYPE type)
+{
+    cout << device << endl;
+    cout << type << endl;
 }
 
 
@@ -224,6 +234,11 @@ void MainWindow::get_resolution()
     int xm_size = xm.size();
     vector<string> resol;
     vector<string>::iterator it;
+
+    if (xm_size == 0)
+    {
+        throw "Could not get Xrandr output.";
+    }
 
     resol = xm[0].resolutions;
     ui->lw_interface->addItem(QString::fromStdString(xm[0].interface));

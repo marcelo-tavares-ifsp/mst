@@ -4,10 +4,11 @@
 #include "ui_mainwindow.h"
 #include "controller_mst.h"
 #include "settings-mst.h"
+#include "input-device-listener.h"
 #include "utils.h"
 
 #include <QString>
-#include <set>
+#include <QObject>
 #include <algorithm>
 
 using namespace std;
@@ -49,6 +50,8 @@ private slots:
     void on_btn_back_1_clicked();
 
     void on_interface_clicked();
+
+    void set_seat_device(string device, Input_device_listener::DEVICE_TYPE type);
 
 private:
     Ui::MainWindow *ui;

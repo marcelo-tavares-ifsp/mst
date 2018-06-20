@@ -37,7 +37,8 @@ SOURCES += \
     awesome/awesome-device.cpp \
     controller_mst.cpp \
     settings-mst.cpp \
-    utils.cpp
+    utils.cpp \
+    input-device-listener.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,7 +49,8 @@ HEADERS += \
     awesome/awesome-device.h \
     controller_mst.h \
     settings-mst.h \
-    utils.h
+    utils.h \
+    input-device-listener.h
 
 FORMS += \
         mainwindow.ui

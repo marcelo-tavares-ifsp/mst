@@ -39,8 +39,8 @@ vector<Xrandr_monitor> Settings_mst::parse_xrandr()
 {
     vector<string> data = run_xrandr();
     vector<Xrandr_monitor> result;
-    regex r1("^(.*) connected(.*)\n");
-    regex r2("^([0-9]+x[0-9]+).*\n");
+    regex r1("^(.*) connected(.*)");
+    regex r2("^([0-9]+x[0-9]+).*");
     int state = 0;
     Xrandr_monitor monitor;
     smatch sm;
@@ -154,58 +154,4 @@ static FILE* open_input_dev(string name) {
     return file;
 }
 
-string Settings_mst::loop_answer_mouse_2(vector<string> list_mice)
-{
-    while (1)
-    {
-        for (auto mouse : list_mice)
-        {
-            if (Settings_mst::loop_answer_mouse(mouse) == true)
-            {
-                return mouse;
-            }
-        }
-    }
-}
 
-bool Settings_mst::loop_answer_mouse(string mouse)
-{
-//    const int BUF_SZ = 10;
-//    char buf[BUF_SZ];
-//    FILE* file = open_input_dev(device);
-
-//    while (fgets(buf, BUF_SZ, file) != NULL)
-//    {
-//        cout << buf << endl;
-//    }
-
-
-
-    int fd, bytes, left;
-    unsigned char data[3];
-
-    const char *pDevice = mouse.c_str();
-
-    fd = open(pDevice, O_RDWR);
-    if (fd == -1)
-    {
-        throw (string)"ERROR Opening %s\n" + pDevice;
-    }
-
-    bytes = read(fd, data, sizeof(data));
-    if (bytes > 0)
-    {
-        left = data[0] & 0x1;
-    }
-    if (left > 0)
-    {
-        return true;
-    }
-
-
-    // https://stackoverflow.com/questions/11451618/how-do-you-read-the-mouse-button-state-from-dev-input-mice
-
-//    pclose(file);
-
-    return false;
-}
