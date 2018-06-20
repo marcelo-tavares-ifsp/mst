@@ -94,7 +94,7 @@ vector<string> Settings_mst::run_ls_devices()
 
     if ((file = popen(COMMAND, "r")) != NULL)
     {
-        vector<string> result(20);
+        vector<string> result;
         while (fgets(buf, BUF_SZ, file) != NULL)
         {
             result.push_back(trim(buf));
