@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "utils.h"
 
 using namespace std;
@@ -22,28 +24,35 @@ bool contains(vector<string> xm, string s)
     return false;
 }
 
-void trim(char *s)
-{
-     int i=0,j;
-     while((s[i]==' ')||(s[i]=='\t'))
-     {
-          i++;
-     }
-     if(i>0)
-     {
-          for(j=0; j < strlen(s); j++)
-          {
-              s[j]=s[j+i];
-          }
-          s[j]='\0';
-     }
-     i=strlen(s)-1;
-     while((s[i]==' ')||(s[i]=='\t'))
-     {
-          i--;
-     }
-     if(i < (strlen(s)-1))
-     {
-          s[i+1]='\0';
-     }
+/**
+ * @brief ltrim -- trim a string from the beginning.  The input
+ *                  string is modified.
+ * @param s -- an input string.
+ */
+static inline void ltrim_x(string &s) {
+    s.erase(s.begin(), find_if(s.begin(), s.end(), [](int ch) {
+        return ! isspace(ch);
+    }));
+}
+
+/**
+ * @brief rtrim -- trim a string from the end.  The input string is modified.
+ * @param s -- an input string.
+ */
+static inline void rtrim_x(string &s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
+        return ! isspace(ch);
+    }).base(), s.end());
+}
+
+/**
+ * @brief trim -- trim an input C string STR on both sides.
+ * @param str -- an input string.
+ * @return a new C++ string.
+ */
+string trim(char* str) {
+    string result(str);
+    ltrim_x(result);
+    rtrim_x(result);
+    return result;
 }

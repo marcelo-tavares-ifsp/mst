@@ -13,6 +13,6 @@ using namespace std;
 
 extern vector<string> split(string input, char separator);
 extern bool contains(vector<string> xm, string s);
-extern void trim(char *s);
+extern string trim(char *s);
 
 #endif // UTIL_H

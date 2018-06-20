@@ -19,8 +19,7 @@ vector<string> Settings_mst::run_xrandr()
         vector<string> result;
         while (fgets(buf, BUF_SZ, file) != NULL)
         {
-            trim(buf);
-            result.push_back(buf);
+            result.push_back(trim(buf));
         }
         pclose(file);
         return result;
@@ -98,8 +97,7 @@ vector<string> Settings_mst::run_ls_devices()
         vector<string> result(20);
         while (fgets(buf, BUF_SZ, file) != NULL)
         {
-            trim(buf);
-            result.push_back(buf);
+            result.push_back(trim(buf));
         }
         pclose(file);
         return result;
