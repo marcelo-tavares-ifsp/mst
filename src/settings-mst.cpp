@@ -117,8 +117,8 @@ vector<string> Settings_mst::run_ls_devices()
 void Settings_mst::parse_ls_devices(vector<string> *mice, vector<string> *keybds)
 {
     vector<string> data = run_ls_devices();
-    regex r1("^(.*-event-kbd)\n$");
-    regex r2("^(.*-event-mouse)\n$");
+    regex r1("^(.*-event-kbd)$");
+    regex r2("^(.*-event-mouse)$");
     smatch sm;
 
     for (string line : data)

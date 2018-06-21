@@ -2,11 +2,11 @@
 
 Input_device_listener::Input_device_listener(vector<string> devices,
                                              DEVICE_TYPE type)
-    : devices(devices),
-      type(type),
-      QObject(parent)
+    //: devices(devices),
+    //  type(type)
 {
-    // https://forum.qt.io/topic/64760/gui-won-t-show-after-i-initialize-a-class-qobject/6
+    this->devices = devices;
+    this->type = type;
 }
 
 void Input_device_listener::run()
@@ -45,10 +45,7 @@ static bool _loop_answer_keybd(string keybd)
 //    }
 
 //    std::transform(input.begin(), input.end(), input.begin(), ::tolower);
-//    if (input == "this")
-//    {
-//        return true;
-//    }
+
 
     return false;
 }

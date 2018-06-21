@@ -8,8 +8,7 @@ using namespace std;
 
 int Seat::width;
 int Seat::heigth;
-vector<string> list_mice;
-vector<string> list_keybs;
+
 
 
 
@@ -94,18 +93,18 @@ void MainWindow::on_interface_clicked()
     QThreadPool::globalInstance()->start(&listener);
 
 
-    for (auto seat : global_seats)
-    {
-        if (seat.interface == button->text().toUtf8().constData())
-        {
-            seat.keyboard = keyboard;
-            seat.mouse = mouse;
-            break;
-        }
-    }
+//    for (auto seat : global_seats)
+//    {
+//        if (seat.interface == button->text().toUtf8().constData())
+//        {
+//            seat.keyboard = keyboard;
+//            seat.mouse = mouse;
+//            break;
+//        }
+//    }
 
-    cout << mouse << endl;
-    cout << button->text().toUtf8().constData() << endl;
+//    cout << mouse << endl;
+//    cout << button->text().toUtf8().constData() << endl;
 }
 
 void MainWindow::set_seat_device(string device,

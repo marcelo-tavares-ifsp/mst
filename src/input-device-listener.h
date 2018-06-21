@@ -23,7 +23,9 @@ public:
         MOUSE
     };
 
-    // explicit Input_device_listener(QObject *parent = 0);
+    vector<string> devices;
+    DEVICE_TYPE type;
+
     Input_device_listener(vector<string> devices, DEVICE_TYPE type);
 
     void run();
@@ -32,8 +34,7 @@ signals:
     void device_found(string name, DEVICE_TYPE type);
 
 private:
-    vector<string> devices;
-    DEVICE_TYPE type;
+
 
     string check_keyboards();
     string check_mice();

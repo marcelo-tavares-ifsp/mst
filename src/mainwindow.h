@@ -34,6 +34,8 @@ class MainWindow : public QMainWindow
 public:
     vector<QWidget *> widgets;
     vector<Seat> global_seats;
+    vector<string> list_mice;
+    vector<string> list_keybs;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
