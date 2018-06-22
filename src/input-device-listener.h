@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <QObject>
+#include <iostream>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ public:
         MOUSE
     };
 
-    vector<string> devices;
+    vector<string> *devices;
     DEVICE_TYPE type;
 
     Input_device_listener(vector<string> devices, DEVICE_TYPE type);

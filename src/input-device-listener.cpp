@@ -1,12 +1,15 @@
 #include "input-device-listener.h"
 
+using namespace std;
+
+
+
 Input_device_listener::Input_device_listener(vector<string> devices,
                                              DEVICE_TYPE type)
-    //: devices(devices),
-    //  type(type)
+    : //devices(devices),
+      type(type)
 {
-    this->devices = devices;
-    this->type = type;
+    this->devices = new vector<string>(devices);
 }
 
 void Input_device_listener::run()
@@ -55,7 +58,7 @@ string Input_device_listener::check_keyboards()
     while (1)
     {
         usleep(10);
-        for (auto keybd : devices)
+        for (auto keybd : *devices)
         {
             if (_loop_answer_keybd(keybd))
             {
@@ -79,12 +82,13 @@ static bool _loop_answer_mouse(string mouse)
 //        return true;
 //    }
 //    }
+    static const string FULLPATH = "/dev/input/by-path/";
 
 
-
-    int fd, bytes, left;
+    int fd, bytes, left = 0;
     unsigned char data[3];
 
+    mouse = FULLPATH + mouse;
     const char *pDevice = mouse.c_str();
 
     fd = open(pDevice, O_RDWR);
@@ -97,6 +101,7 @@ static bool _loop_answer_mouse(string mouse)
     if (bytes > 0)
     {
         left = data[0] & 0x1;
+        cout << "cho" << endl;
     }
     if (left > 0)
     {
@@ -113,7 +118,7 @@ string Input_device_listener::check_mice()
     while (1)
     {
         usleep(10);
-        for (auto mouse : devices)
+        for (auto mouse : *devices)
         {
             if (_loop_answer_mouse(mouse))
             {

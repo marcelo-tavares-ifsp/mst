@@ -86,11 +86,11 @@ void MainWindow::on_interface_clicked()
 //            Settings_mst::loop_answer(device);
 //        }
 //    }
-    Input_device_listener listener(list_mice, Input_device_listener::MOUSE);
-    QObject::connect(&listener, SIGNAL(device_found(string, Input_device_listener::DEVICE_TYPE)),
+    Input_device_listener *listener = new Input_device_listener(list_mice, Input_device_listener::MOUSE);
+    QObject::connect(listener, SIGNAL(device_found(string, Input_device_listener::DEVICE_TYPE)),
                      this, SLOT(set_seat_device(string, Input_device_listener::DEVICE_TYPE)));
 
-    QThreadPool::globalInstance()->start(&listener);
+    QThreadPool::globalInstance()->start(listener);
 
 
 //    for (auto seat : global_seats)
