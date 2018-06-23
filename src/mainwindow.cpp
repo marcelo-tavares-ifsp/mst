@@ -6,9 +6,13 @@
 
 using namespace std;
 
+//#define CodecWinToUni(str) CodecWinToUni->toUnicode(str)
+//#define CodecUtfToUni(str) CodecUtfToUni->toUnicode(str)
+//#define CodecLatinFromUni(str) codecLatin->fromUnicode(str)
+
 int Seat::width;
 int Seat::heigth;
-
+QPushButton *button;
 
 
 
@@ -71,47 +75,46 @@ void MainWindow::on_btn_back_1_clicked()
 
 void MainWindow::on_interface_clicked()
 {
-    QPushButton *button = (QPushButton *) sender();
-    string keyboard;
-    string mouse;
-
-//    while (1)
-//    {
-//        for (auto mouse : list_mice)
-//        {
-//            Settings_mst::loop_answer_mouse(mouse);
-//        }
-//        for (auto device : list_keybs)
-//        {
-//            Settings_mst::loop_answer(device);
-//        }
-//    }
-    Input_device_listener *listener = new Input_device_listener(list_mice, Input_device_listener::MOUSE);
-    QObject::connect(listener, SIGNAL(device_found(string, Input_device_listener::DEVICE_TYPE)),
-                     this, SLOT(set_seat_device(string, Input_device_listener::DEVICE_TYPE)));
-
-    QThreadPool::globalInstance()->start(listener);
+    button = (QPushButton *) sender();
 
 
-//    for (auto seat : global_seats)
-//    {
-//        if (seat.interface == button->text().toUtf8().constData())
-//        {
-//            seat.keyboard = keyboard;
-//            seat.mouse = mouse;
-//            break;
-//        }
-//    }
+    Input_device_listener *mouse_listener = new Input_device_listener(list_mice, Input_device_listener::MOUSE);
+    connect(mouse_listener, SIGNAL(device_found(QString, int)),
+            this, SLOT(set_seat_device(QString, int)));
+    QThreadPool::globalInstance()->start(mouse_listener);
 
-//    cout << mouse << endl;
-//    cout << button->text().toUtf8().constData() << endl;
+    Input_device_listener *keybd_listener = new Input_device_listener(list_keybs, Input_device_listener::KEYBOARD);
+    connect(keybd_listener, SIGNAL(device_found(QString, int)),
+            this, SLOT(set_seat_device(QString, int)));
+    QThreadPool::globalInstance()->start(keybd_listener);
+
+
+    Seat_calibration_dialog scd;
+    scd.setModal(true);
+    scd.exec();
 }
 
-void MainWindow::set_seat_device(string device,
-                                 Input_device_listener::DEVICE_TYPE type)
+void MainWindow::set_seat_device(QString device, int type)
 {
-    cout << device << endl;
-    cout << type << endl;
+    string d = device.toUtf8().constData();
+    Input_device_listener::DEVICE_TYPE dt = static_cast<Input_device_listener::DEVICE_TYPE>(type);
+    cout << "Device assigned: " << d << " (" << dt << ")" << endl;
+
+    for (auto seat : global_seats)
+    {
+        if (seat.interface == button->text().toUtf8().constData())
+        {
+            if (type == 0)
+            {
+                seat.keyboard = d;
+            }
+            else
+            {
+                seat.mouse = d;
+            }
+            break;
+        }
+    }
 }
 
 
@@ -137,6 +140,7 @@ void MainWindow::fill_layout()
     {
         QPushButton *Qpb = new QPushButton("btn" + idx, this);
         Qpb->setText(QString::fromStdString(global_seats[idx].interface));
+        Qpb->setFocusPolicy(Qt::NoFocus);
         connect(Qpb, SIGNAL(clicked()), this, SLOT(on_interface_clicked()));
         widgets.push_back(Qpb);
         ui->gridLayout->addWidget(Qpb);

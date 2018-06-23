@@ -206,6 +206,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
       <property name="text">
        <string>Далее</string>
       </property>
@@ -237,7 +240,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>17</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

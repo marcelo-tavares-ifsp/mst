@@ -1,3 +1,6 @@
+#include <linux/input.h>
+#include <iostream>
+
 #include "input-device-listener.h"
 
 using namespace std;
@@ -6,8 +9,7 @@ using namespace std;
 
 Input_device_listener::Input_device_listener(vector<string> devices,
                                              DEVICE_TYPE type)
-    : //devices(devices),
-      type(type)
+    : type(type)
 {
     this->devices = new vector<string>(devices);
 }
@@ -18,21 +20,34 @@ void Input_device_listener::run()
     switch (type)
     {
     case DEVICE_TYPE::KEYBOARD:
-        result = check_keyboards();
+        result = check_keybd();
         break;
     case DEVICE_TYPE::MOUSE:
         result = check_mice();
         break;
     }
-    emit device_found(result, type);
+    emit device_found(QString::fromStdString(result), type);
+}
+
+static bool is_btn_pressed(struct input_event &e)
+{
+    cout << "e.type: " << e.type << "; e.code: " << e.code
+         << "; e.value: " << e.value << endl;
+    return (e.type == EV_MSC) && (e.code == 4);
 }
 
 static bool _loop_answer_keybd(string keybd)
 {
-    int fd, bytes;
+    struct input_event ie;
+    int bytes;
+    int fd;
+
     string input = "";
     char *data;
 
+
+
+    keybd = FULLPATH + keybd;
     const char *pDevice = keybd.c_str();
 
     fd = open(pDevice, O_RDWR);
@@ -40,6 +55,18 @@ static bool _loop_answer_keybd(string keybd)
     {
         throw (string)"ERROR Opening %s\n" + pDevice;
     }
+
+    bytes = read(fd, (void *) &ie, sizeof(ie));
+    if ((bytes > 0) && is_btn_pressed(ie))
+    {
+        char name[256] = "Unknown";
+        ioctl (fd, EVIOCGNAME (sizeof (name)), name);
+        cout << "Keybd: " << name << endl;
+        return true;
+    }
+
+    close(fd);
+    return false;
 
 //    bytes = read(fd, data, sizeof(data));
 //    if (data)
@@ -53,7 +80,7 @@ static bool _loop_answer_keybd(string keybd)
     return false;
 }
 
-string Input_device_listener::check_keyboards()
+string Input_device_listener::check_keybd()
 {
     while (1)
     {
@@ -68,25 +95,25 @@ string Input_device_listener::check_keyboards()
     }
 }
 
+/**
+ * @brief is_lmb_pressed -- Check if the left mouse button is pressed.
+ * @param e -- An input event.
+ * @return true or false.
+ */
+//static bool is_mouse_btn_pressed(struct input_event &e)
+//{
+//    cout << "e.type: " << e.type << "; e.code: " << e.code
+//         << "; e.value: " << e.value << endl;
+//    // XXX: The code should describe mouse button press, but it's always
+//    //      equals to 4 for some reason.
+//    return (e.type == EV_MSC) && (e.code == 4);
+//}
+
 static bool _loop_answer_mouse(string mouse)
 {
-//    const int BUF
-//    _SZ = 10;
-//    char buf[BUF_SZ];
-//    FILE* file = open_input_dev(device);
-
-//    while (fgets(buf, BUF_SZ, file) != NULL)
-//    {
-//        cout << buf << endl;    if (left > 0)
-//    {
-//        return true;
-//    }
-//    }
-    static const string FULLPATH = "/dev/input/by-path/";
-
-
-    int fd, bytes, left = 0;
-    unsigned char data[3];
+    struct input_event ie;
+    int bytes;
+    int fd;
 
     mouse = FULLPATH + mouse;
     const char *pDevice = mouse.c_str();
@@ -97,22 +124,24 @@ static bool _loop_answer_mouse(string mouse)
         throw (string)"ERROR Opening %s\n" + pDevice;
     }
 
-    bytes = read(fd, data, sizeof(data));
-    if (bytes > 0)
+    bytes = read(fd, (void *) &ie, sizeof(ie));
+    if ((bytes > 0) && is_btn_pressed(ie))
     {
-        left = data[0] & 0x1;
-        cout << "cho" << endl;
-    }
-    if (left > 0)
-    {
+        char name[256] = "Unknown";
+        ioctl (fd, EVIOCGNAME (sizeof (name)), name);
+        cout << "Mouse: " << name << endl;
         return true;
     }
 
-//    pclose(file);
-
+    close(fd);
     return false;
 }
 
+/**
+ * @brief Input_device_listener::check_mice -- loop through the list of mice
+ *    and get the one which buttons pressed.
+ * @return An active mouse device name.
+ */
 string Input_device_listener::check_mice()
 {
     while (1)

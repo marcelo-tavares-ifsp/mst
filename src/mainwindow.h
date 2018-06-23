@@ -6,9 +6,12 @@
 #include "settings-mst.h"
 #include "input-device-listener.h"
 #include "utils.h"
+#include "seat_calibration_dialog.h"
 
 #include <QString>
 #include <QObject>
+#include <QDialog>
+#include <QMessageBox>
 #include <algorithm>
 
 using namespace std;
@@ -53,7 +56,7 @@ private slots:
 
     void on_interface_clicked();
 
-    void set_seat_device(string device, Input_device_listener::DEVICE_TYPE type);
+    void set_seat_device(QString, int);
 
 private:
     Ui::MainWindow *ui;

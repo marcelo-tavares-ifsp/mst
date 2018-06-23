@@ -2,6 +2,7 @@
 #define INPUTDEVICELISTENER_H
 
 #include <QRunnable>
+#include <QString>
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -14,9 +15,12 @@
 
 using namespace std;
 
+static const string FULLPATH = "/dev/input/by-path/";
+
 class Input_device_listener: public QObject, public QRunnable
 {
     Q_OBJECT
+
 
 public:
     enum DEVICE_TYPE {
@@ -32,13 +36,13 @@ public:
     void run();
 
 signals:
-    void device_found(string name, DEVICE_TYPE type);
+    void device_found(QString, int);
 
 private:
 
-
-    string check_keyboards();
+    string check_keybd();
     string check_mice();
 };
+//Q_DECLARE_METATYPE(Input_device_listener)
 
 #endif // INPUTDEVICELISTENER_H

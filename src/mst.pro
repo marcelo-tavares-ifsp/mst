@@ -38,7 +38,8 @@ SOURCES += \
     controller_mst.cpp \
     settings-mst.cpp \
     utils.cpp \
-    input-device-listener.cpp
+    input-device-listener.cpp \
+    seat_calibration_dialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,7 +51,9 @@ HEADERS += \
     controller_mst.h \
     settings-mst.h \
     utils.h \
-    input-device-listener.h
+    input-device-listener.h \
+    seat_calibration_dialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    seat_calibration_dialog.ui
