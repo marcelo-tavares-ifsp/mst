@@ -42,11 +42,6 @@ static bool _loop_answer_keybd(string keybd)
     int bytes;
     int fd;
 
-    string input = "";
-    char *data;
-
-
-
     keybd = FULLPATH + keybd;
     const char *pDevice = keybd.c_str();
 
@@ -66,17 +61,6 @@ static bool _loop_answer_keybd(string keybd)
     }
 
     close(fd);
-    return false;
-
-//    bytes = read(fd, data, sizeof(data));
-//    if (data)
-//    {
-//        input = bytes;
-//    }
-
-//    std::transform(input.begin(), input.end(), input.begin(), ::tolower);
-
-
     return false;
 }
 

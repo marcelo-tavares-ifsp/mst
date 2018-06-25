@@ -61,6 +61,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
+    bool check_fill_seats(vector<Seat> seats);
     void clear_layout();
     void fill_layout();
     void fill_global_seats();

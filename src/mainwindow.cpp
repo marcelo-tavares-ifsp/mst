@@ -6,13 +6,11 @@
 
 using namespace std;
 
-//#define CodecWinToUni(str) CodecWinToUni->toUnicode(str)
-//#define CodecUtfToUni(str) CodecUtfToUni->toUnicode(str)
-//#define CodecLatinFromUni(str) codecLatin->fromUnicode(str)
-
 int Seat::width;
 int Seat::heigth;
 QPushButton *button;
+Input_device_listener *mouse_listener;
+Input_device_listener *keybd_listener;
 
 
 
@@ -52,15 +50,27 @@ void MainWindow::on_btn_next_2_clicked()
     }
 
     Settings_mst::parse_ls_devices(&list_mice, &list_keybs);
+    mouse_listener = new Input_device_listener(list_mice, Input_device_listener::MOUSE);
+    connect(mouse_listener, SIGNAL(device_found(QString, int)),
+                this, SLOT(set_seat_device(QString, int)));
+
+    keybd_listener = new Input_device_listener(list_keybs, Input_device_listener::KEYBOARD);
+    connect(keybd_listener, SIGNAL(device_found(QString, int)),
+                this, SLOT(set_seat_device(QString, int)));
 
     ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::on_btn_next_3_clicked()
 {
-
-
-    cout << "The End!" << endl;
+    if (check_fill_seats(global_seats))
+    {
+        cout << "The End!" << endl;
+    }
+    else
+    {
+       QMessageBox::information(this, "Необходимо заполнить!", "У каждого монитора должна быть мышь и клавиатура!", QMessageBox::Ok);
+    }
 }
 
 void MainWindow::on_btn_back_2_clicked()
@@ -78,14 +88,9 @@ void MainWindow::on_interface_clicked()
     button = (QPushButton *) sender();
 
 
-    Input_device_listener *mouse_listener = new Input_device_listener(list_mice, Input_device_listener::MOUSE);
-    connect(mouse_listener, SIGNAL(device_found(QString, int)),
-            this, SLOT(set_seat_device(QString, int)));
     QThreadPool::globalInstance()->start(mouse_listener);
 
-    Input_device_listener *keybd_listener = new Input_device_listener(list_keybs, Input_device_listener::KEYBOARD);
-    connect(keybd_listener, SIGNAL(device_found(QString, int)),
-            this, SLOT(set_seat_device(QString, int)));
+
     QThreadPool::globalInstance()->start(keybd_listener);
 
 
@@ -112,6 +117,15 @@ void MainWindow::set_seat_device(QString device, int type)
             {
                 seat.mouse = d;
             }
+
+
+            /////////////////test/////////////////
+
+            cout << "Seat interface: " << seat.interface << endl;
+            cout << "Seat keyboard: " << seat.keyboard << endl;
+            cout << "Seat mouse: " << seat.mouse << endl;
+
+            /////////////////test/////////////////
             break;
         }
     }
@@ -122,6 +136,18 @@ void MainWindow::set_seat_device(QString device, int type)
 ////////static functions///////////////////////////////////////////////////
 
 
+
+bool MainWindow::check_fill_seats(vector<Seat> seats)
+{
+    for (auto seat : seats)
+    {
+        if (seat.keyboard == "" || seat.mouse == "")
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 void MainWindow::save_resolution()
 {
