@@ -105,25 +105,25 @@ void MainWindow::set_seat_device(QString device, int type)
     Input_device_listener::DEVICE_TYPE dt = static_cast<Input_device_listener::DEVICE_TYPE>(type);
     cout << "Device assigned: " << d << " (" << dt << ")" << endl;
 
-    for (auto seat : global_seats)
+    for (int i = 0; global_seats.size(); i++)
     {
-        if (seat.interface == button->text().toUtf8().constData())
+        if (global_seats[i].interface == button->text().toUtf8().constData())
         {
             if (type == 0)
             {
-                seat.keyboard = d;
+                global_seats[i].keyboard = d;
             }
             else
             {
-                seat.mouse = d;
+                global_seats[i].mouse = d;
             }
 
 
             /////////////////test/////////////////
 
-            cout << "Seat interface: " << seat.interface << endl;
-            cout << "Seat keyboard: " << seat.keyboard << endl;
-            cout << "Seat mouse: " << seat.mouse << endl;
+            cout << "Seat interface: " << global_seats[i].interface << endl;
+            cout << "Seat keyboard: " << global_seats[i].keyboard << endl;
+            cout << "Seat mouse: " << global_seats[i].mouse << endl;
 
             /////////////////test/////////////////
             break;
