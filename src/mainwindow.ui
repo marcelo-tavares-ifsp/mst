@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_hello">
      <widget class="QLabel" name="lbl_hello">
@@ -64,6 +64,24 @@
       <property name="geometry">
        <rect>
         <x>10</x>
+        <y>130</y>
+        <width>380</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Начать установку!</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_next_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
         <y>190</y>
         <width>380</width>
         <height>50</height>
@@ -75,7 +93,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Начать установку</string>
+       <string>Вернуть всё как было!</string>
       </property>
      </widget>
     </widget>
@@ -240,7 +258,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

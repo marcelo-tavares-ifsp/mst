@@ -39,13 +39,5 @@ int main(int argc, char *argv[])
 
     return a.exec();
 
-
-//    while (1)
-//    {
-//        Settings_mst::loop_answer(list_mice);
-//        Settings_mst::loop_answer(list_keybs);
-//    }
-
-    cout << "the end!" << endl;
-
+    cout << "Main The end!" << endl;
 }

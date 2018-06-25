@@ -5,6 +5,8 @@
 #include "input-device-listener.h"
 
 using namespace std;
+static bool create_backup();
+static bool apply_backup();
 
 int Seat::width;
 int Seat::heigth;
@@ -27,8 +29,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::on_btn_next_4_clicked()
+{
+    apply_backup();
+}
+
 void MainWindow::on_btn_next_1_clicked()
 {
+    create_backup();
     get_resolution();
 
     ui->stackedWidget->setCurrentIndex(1);
@@ -50,26 +58,28 @@ void MainWindow::on_btn_next_2_clicked()
     }
 
     Settings_mst::parse_ls_devices(&list_mice, &list_keybs);
-    mouse_listener = new Input_device_listener(list_mice, Input_device_listener::MOUSE);
-    connect(mouse_listener, SIGNAL(device_found(QString, int)),
-                this, SLOT(set_seat_device(QString, int)));
-
-    keybd_listener = new Input_device_listener(list_keybs, Input_device_listener::KEYBOARD);
-    connect(keybd_listener, SIGNAL(device_found(QString, int)),
-                this, SLOT(set_seat_device(QString, int)));
 
     ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::on_btn_next_3_clicked()
 {
-    if (check_fill_seats(global_seats))
+    if (check_collision_seats())
     {
-        cout << "The End!" << endl;
+        if (check_fill_seats())
+        {
+            cout << "The End!" << endl;                                                              // test
+        }
+        else
+        {
+           QMessageBox::information(this, "Необходимо заполнить!",
+              "У каждого монитора должна быть мышь и клавиатура!", QMessageBox::Ok);
+        }
     }
     else
     {
-       QMessageBox::information(this, "Необходимо заполнить!", "У каждого монитора должна быть мышь и клавиатура!", QMessageBox::Ok);
+        QMessageBox::information(this, "Коллизия!",
+           "У каждого монитора должна быть уникальная мышь и клавиатура!", QMessageBox::Ok);
     }
 }
 
@@ -87,10 +97,15 @@ void MainWindow::on_interface_clicked()
 {
     button = (QPushButton *) sender();
 
+    mouse_listener = new Input_device_listener(list_mice, Input_device_listener::MOUSE);
+    connect(mouse_listener, SIGNAL(device_found(QString, int)),
+                this, SLOT(set_seat_device(QString, int)));
+
+    keybd_listener = new Input_device_listener(list_keybs, Input_device_listener::KEYBOARD);
+    connect(keybd_listener, SIGNAL(device_found(QString, int)),
+                this, SLOT(set_seat_device(QString, int)));
 
     QThreadPool::globalInstance()->start(mouse_listener);
-
-
     QThreadPool::globalInstance()->start(keybd_listener);
 
 
@@ -103,7 +118,7 @@ void MainWindow::set_seat_device(QString device, int type)
 {
     string d = device.toUtf8().constData();
     Input_device_listener::DEVICE_TYPE dt = static_cast<Input_device_listener::DEVICE_TYPE>(type);
-    cout << "Device assigned: " << d << " (" << dt << ")" << endl;
+    cout << "Device assigned: " << d << " (" << dt << ")" << endl;                                      // test
 
     for (int i = 0; global_seats.size(); i++)
     {
@@ -137,9 +152,29 @@ void MainWindow::set_seat_device(QString device, int type)
 
 
 
-bool MainWindow::check_fill_seats(vector<Seat> seats)
+bool MainWindow::check_collision_seats()
 {
-    for (auto seat : seats)
+    int count_seats = global_seats.size();
+    if (count_seats > 1)
+    {
+        for (int i = 0; i < count_seats; i++)
+        {
+            for (int j = 1; j < count_seats; j++)
+            {
+                if ((global_seats[i].keyboard == global_seats[j].keyboard) || (global_seats[i].mouse == global_seats[j].mouse))
+                {
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
+bool MainWindow::check_fill_seats()
+{
+    for (auto seat : global_seats)
     {
         if (seat.keyboard == "" || seat.mouse == "")
         {
@@ -288,4 +323,20 @@ void MainWindow::get_resolution()
 
     ui->lw_interface->addItem(QString::fromStdString("test_1")); // test
     ui->lw_interface->addItem(QString::fromStdString("test_5")); // test
+}
+
+static bool create_backup()
+{
+    system("/home/student/src/mst/src/mst_files/mk_backup.sh");
+    // system("cp /etc/X11/xorg.conf /home/student/.config/mst1.0/xorg.conf");
+    // system("cp /lib/systemd/system/getty@.service /home/student/.config/mst1.0/getty@.service");
+    // system("systemctl set-default multi-user.target"); // вкл mst
+    return true;
+}
+
+static bool apply_backup()
+{
+    system("/home/student/src/mst/src/mst_files/apl_backup.sh");
+    // system("systemctl set-default graphical.target"); // выкл mst
+    return true;
 }

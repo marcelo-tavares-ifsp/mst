@@ -58,10 +58,13 @@ private slots:
 
     void set_seat_device(QString, int);
 
+    void on_btn_next_4_clicked();
+
 private:
     Ui::MainWindow *ui;
 
-    bool check_fill_seats(vector<Seat> seats);
+    bool check_collision_seats();
+    bool check_fill_seats();
     void clear_layout();
     void fill_layout();
     void fill_global_seats();
