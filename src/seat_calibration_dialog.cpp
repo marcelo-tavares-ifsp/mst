@@ -1,6 +1,7 @@
 #include "seat_calibration_dialog.h"
 
 
+
 Seat_calibration_dialog::Seat_calibration_dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Seat_calibration_dialog)

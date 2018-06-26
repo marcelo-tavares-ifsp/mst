@@ -2,21 +2,9 @@
 
 
 
-XorgConfig::XorgConfig()
+XorgConfig::XorgConfig(vector<Seat> seats) : seats(seats)
 {
-
 }
-
-void XorgConfig::add_monitor(XorgMonitor device)
-{
-    monitors.push_back(device);
-}
-
-const vector<XorgMonitor>& XorgConfig::get_monitors() const
-{
-    return monitors;
-}
-
 
 /* Config elements' constructors. */
 
@@ -55,11 +43,11 @@ static const string _sub_elem(const string& name)
 
 static void _print_monitors(ostream& os, const XorgConfig& config)
 {
-    for (auto const& monitor : config.get_monitors())
+    for (int idx = 0; idx < config.seats.size(); idx++)
     {
         os << _section("Monitor")
            << _elem("Identifier") << string("\"")
-           << monitor.get_identifier() << string("\"\n")
+           << idx << string("\"\n")
            << _end_section("Monitor");
     }
 }
@@ -69,11 +57,11 @@ static void _print_device(ostream& os, const XorgConfig& config)
     os << _section("Device")
        << _elem("Identifier") << string("\"card0\"\n");
 
-    for (auto const& monitor : config.get_monitors())
+    for (int idx = 0; idx < config.seats.size(); idx++)
     {
         os << _elem("Option")
-           << string("\"") << monitor.get_interface_name() << string("\"")
-           << string("\"") << monitor.get_identifier()     << string("\"\n");
+           << string("\"") << config.seats[idx].interface << string("\"")
+           << string("\"") << idx    << string("\"\n");
     }
 
     os << _end_section("Device");
@@ -81,17 +69,7 @@ static void _print_device(ostream& os, const XorgConfig& config)
 
 static void _print_screen(ostream& os, const XorgConfig& config)
 {
-    vector<XorgMonitor> m = config.get_monitors();
-    uint16_t total_width = accumulate(m.begin(), m.end(),
-                                      0,
-                                      [](uint16_t sz, XorgMonitor& m) {
-       return sz + m.get_width();
-    });
-
-    uint16_t min_height = accumulate(m.begin(), m.end(), m[0].get_height(),
-                                     [](uint16_t min, XorgMonitor& m) {
-        return min > m.get_height() ? m.get_height() : min;
-    });
+    int total_width = config.seats.size() * config.seats[0].width;
 
     static const int depth = 24;
     os << _section("Screen")
@@ -101,15 +79,14 @@ static void _print_screen(ostream& os, const XorgConfig& config)
        << _elem("DefaultDepth") << depth          << endl
        << _sub_section("Display")
        << _sub_elem("Depth")    << depth          << endl
-       << _sub_elem("Virtual")  << total_width << " " << min_height << endl
+       << _sub_elem("Virtual")  << total_width << " " << config.seats[0].height << endl
        << _end_sub_section("Display")
        << _end_section("Screen");
 }
 
 static void _print_layout(ostream& os, const XorgConfig& config)
 {
-    int size = config.get_monitors().size();
-    for (int idx = 0; idx < size; idx++)
+    for (int idx = 0; idx < config.seats.size(); idx++)
     {
         os << _section("ServerLayout")
            << _elem("Identifier") << string("\"seat")       << idx    << "\"\n"

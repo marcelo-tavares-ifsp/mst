@@ -1,15 +1,12 @@
-#include <QThreadPool>
-
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "input-device-listener.h"
 
-using namespace std;
+
+
 static bool create_backup();
 static bool apply_backup();
 
 int Seat::width;
-int Seat::heigth;
+int Seat::height;
 QPushButton *button;
 Input_device_listener *mouse_listener;
 Input_device_listener *keybd_listener;
@@ -68,6 +65,8 @@ void MainWindow::on_btn_next_3_clicked()
     {
         if (check_fill_seats())
         {
+            Controller con(global_seats);
+            con.enable_mst();
             cout << "The End!" << endl;                                                              // test
         }
         else
@@ -191,7 +190,7 @@ void MainWindow::save_resolution()
     vector<string> strs = split(tmp, 'x');
 
     Seat::width = atoi(strs[0].c_str());
-    Seat::heigth = atoi(strs[1].c_str());
+    Seat::height = atoi(strs[1].c_str());
 }
 
 void MainWindow::fill_layout()
@@ -328,8 +327,6 @@ void MainWindow::get_resolution()
 static bool create_backup()
 {
     system("/home/student/src/mst/src/mst_files/mk_backup.sh");
-    // system("cp /etc/X11/xorg.conf /home/student/.config/mst1.0/xorg.conf");
-    // system("cp /lib/systemd/system/getty@.service /home/student/.config/mst1.0/getty@.service");
     // system("systemctl set-default multi-user.target"); // вкл mst
     return true;
 }

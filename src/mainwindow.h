@@ -7,7 +7,12 @@
 #include "input-device-listener.h"
 #include "utils.h"
 #include "seat_calibration_dialog.h"
+#include "controller_mst.h"
+#include "seat.h"
+#include "ui_mainwindow.h"
+#include "input-device-listener.h"
 
+#include <QThreadPool>
 #include <QString>
 #include <QObject>
 #include <QDialog>
@@ -16,19 +21,11 @@
 
 using namespace std;
 
+
+
 namespace Ui {
 class MainWindow;
 }
-
-class Seat
-{
-public:
-    string mouse;
-    string interface;
-    string keyboard;
-    static int width;
-    static int heigth;
-};
 
 class MainWindow : public QMainWindow
 {

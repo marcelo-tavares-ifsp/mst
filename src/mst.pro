@@ -32,27 +32,25 @@ SOURCES += \
         mainwindow.cpp \
     lightdm/display-manager.cpp \
     xorg/xorg-config.cpp \
-    xorg/xorg-monitor.cpp \
     awesome/awesome-config.cpp \
-    awesome/awesome-device.cpp \
     controller_mst.cpp \
     settings-mst.cpp \
     utils.cpp \
     input-device-listener.cpp \
-    seat_calibration_dialog.cpp
+    seat_calibration_dialog.cpp \
+    seat.cpp
 
 HEADERS += \
         mainwindow.h \
     lightdm/display-manager.h \
     xorg/xorg-config.h \
-    xorg/xorg-monitor.h \
     awesome/awesome-config.h \
-    awesome/awesome-device.h \
     controller_mst.h \
     settings-mst.h \
     utils.h \
     input-device-listener.h \
-    seat_calibration_dialog.h
+    seat_calibration_dialog.h \
+    seat.h
 
 FORMS += \
         mainwindow.ui \

@@ -14,6 +14,8 @@
 
 using namespace std;
 
+
+
 struct Xrandr_monitor
 {
     string interface;

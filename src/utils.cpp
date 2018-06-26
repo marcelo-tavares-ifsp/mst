@@ -1,8 +1,6 @@
-#include <algorithm>
-
 #include "utils.h"
 
-using namespace std;
+
 
 vector<string> split(string input, char separator) {
     int p = input.find(separator);

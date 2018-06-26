@@ -5,15 +5,18 @@
 #include <QString>
 #include <algorithm>
 #include <string>
+#include <linux/input.h>
+#include <iostream>
 #include <vector>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <QObject>
-#include <iostream>
 
 using namespace std;
+
+
 
 static const string FULLPATH = "/dev/input/by-path/";
 

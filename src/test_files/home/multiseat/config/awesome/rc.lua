@@ -12,10 +12,9 @@ require("menu")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
-os.execute("Xephyr -softCursor -ac -br -mouse '/dev/input/by-path/pci-0000:00:12.0-usb-0:2:1.0-event-mouse' -keybd 'evdev,,device=/dev/input/by-path/pci-0000:00:12.0-usb-0:1:1.0-event-kbd' -screen 1920x1080 :0 &")
-os.execute("Xephyr -softCursor -ac -br -mouse '/dev/input/by-path/pci-0000:00:12.0-usb-0:2:1.0-event-mouse' -keybd 'evdev,,device=/dev/input/by-path/pci-0000:00:12.0-usb-0:1:1.0-event-kbd' -screen 1920x1080 :1 &")
+os.execute("Xephyr -softCursor -ac -br -mouse 'pci-0000:00:14.0-usb-0:9:1.0-event-mouse' -keybd 'pci-0000:00:14.0-usb-0:10:1.0-event-kbd' -screen 1600x900 :0 &")
 os.execute("unclutter &")
-os.execute("sleep 5; sudo /root/src/mst/mst 2 &")
+os.execute("sleep 5; sudo /root/src/mst/mst 1 &")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -228,8 +227,6 @@ awful.rules.rules = {
 					 
 { rule = { class = "Xephyr", name = "Xephyr on :0.0 (ctrl+shift grabs mouse and keyboard)" },
  properties = { floating = true, fullscreen = true, screen = 0} },
-{ rule = { class = "Xephyr", name = "Xephyr on :1.0 (ctrl+shift grabs mouse and keyboard)" },
- properties = { floating = true, fullscreen = true, screen = 1} },
 					 
 }
 -- }}}

@@ -2,11 +2,15 @@
 #define CONTROLLER_MST_H
 
 #include <fstream>
+#include <vector>
 
 #include "xorg/xorg-config.h"
 #include "awesome/awesome-config.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "seat.h"
+
+using namespace std;
 
 
 
@@ -17,18 +21,16 @@
 class Controller
 {
 public:
-    Controller(int count_of_monitors);
+    Controller(vector<Seat> seats);
     void enable_mst();
     void disable_mst();
 
 private:
-    int count_of_monitors;
+    vector<Seat> seats;
     AwesomeConfig *awesome_conf;
     XorgConfig *xorg_conf;
     void make_mst();
 
-    void create_rclua(int width, int height);
-    void create_xorg(vector<string> interfaces, int width, int height);
     string create_bashrc();
     string create_xmst();
     string create_xinitrc();

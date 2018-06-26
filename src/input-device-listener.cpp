@@ -1,9 +1,4 @@
-#include <linux/input.h>
-#include <iostream>
-
 #include "input-device-listener.h"
-
-using namespace std;
 
 
 

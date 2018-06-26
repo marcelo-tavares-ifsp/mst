@@ -5,6 +5,8 @@
 
 #include <QDialog>
 
+
+
 namespace Ui {
 class Seat_calibration_dialog;
 }

@@ -1,11 +1,8 @@
 #include "settings-mst.h"
 
-using namespace std;
 
-Settings_mst::Settings_mst()
-{
 
-}
+Settings_mst::Settings_mst() {}
 
 vector<string> Settings_mst::run_xrandr()
 {
