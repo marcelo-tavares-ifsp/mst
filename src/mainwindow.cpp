@@ -125,16 +125,14 @@ void MainWindow::set_seat_device(QString device, int type)
 {
     string d = device.toUtf8().constData();
 
-    Input_device_listener::DEVICE_TYPE dt
-            = static_cast<Input_device_listener::DEVICE_TYPE>(type);
-    cout << "Device assigned: " << d << " (" << dt << ")" << endl;                                      // test
+    cout << "Device assigned: " << d << " (" << type << ")" << endl;                                      // test
 
-
+    string device_interface = button->text().toUtf8().constData();
     for (int i = 0; global_seats.size(); i++)
     {
-        if (global_seats[i].interface == button->text().toUtf8().constData())
+        if (global_seats[i].interface == device_interface)
         {
-            if (type == 0)
+            if (type == Input_device_listener::DEVICE_TYPE::KEYBOARD)
             {
                 global_seats[i].keyboard = d;
             }
