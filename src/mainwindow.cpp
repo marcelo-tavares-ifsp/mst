@@ -50,11 +50,13 @@ void MainWindow::on_btn_next_2_clicked()
     }
 
     Settings_mst::parse_ls_devices(&list_mice, &list_keybs);
-    mouse_listener = new Input_device_listener(list_mice, Input_device_listener::MOUSE);
+    mouse_listener = new Input_device_listener(
+                list_mice, Input_device_listener::MOUSE);
     connect(mouse_listener, SIGNAL(device_found(QString, int)),
                 this, SLOT(set_seat_device(QString, int)));
 
-    keybd_listener = new Input_device_listener(list_keybs, Input_device_listener::KEYBOARD);
+    keybd_listener = new Input_device_listener(
+                list_keybs, Input_device_listener::KEYBOARD);
     connect(keybd_listener, SIGNAL(device_found(QString, int)),
                 this, SLOT(set_seat_device(QString, int)));
 
@@ -69,7 +71,10 @@ void MainWindow::on_btn_next_3_clicked()
     }
     else
     {
-       QMessageBox::information(this, "Необходимо заполнить!", "У каждого монитора должна быть мышь и клавиатура!", QMessageBox::Ok);
+       QMessageBox::information(
+                   this, "Необходимо заполнить!",
+                   "У каждого монитора должна быть мышь и клавиатура!",
+                   QMessageBox::Ok);
     }
 }
 
@@ -102,7 +107,8 @@ void MainWindow::on_interface_clicked()
 void MainWindow::set_seat_device(QString device, int type)
 {
     string d = device.toUtf8().constData();
-    Input_device_listener::DEVICE_TYPE dt = static_cast<Input_device_listener::DEVICE_TYPE>(type);
+    Input_device_listener::DEVICE_TYPE dt
+            = static_cast<Input_device_listener::DEVICE_TYPE>(type);
     cout << "Device assigned: " << d << " (" << dt << ")" << endl;
 
     for (auto seat : global_seats)
