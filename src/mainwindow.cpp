@@ -27,6 +27,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/**
+ * @brief MainWindow::on_btn_next_1_clicked -- the handler of the button
+ *      that appears on the main window first.
+ */
 void MainWindow::on_btn_next_1_clicked()
 {
     get_resolution();
@@ -155,14 +159,25 @@ bool MainWindow::check_fill_seats(vector<Seat> seats)
     return true;
 }
 
+/**
+ * @brief _parse_resolution -- parse resolution in "WIDTHxHEIGTH" format.
+ * @param resolution -- resolution string.
+ * @return vector with the 1st element set to display width and the 2nd
+ *      set to the heigth.
+ */
+static vector<int> _parse_resolution(QString resolution)
+{
+    vector<string> strs = split(resolution.toUtf8().constData(), 'x');
+    return {  atoi(strs[0].c_str()), atoi(strs[1].c_str()) };
+}
+
 void MainWindow::save_resolution()
 {
-    QString Qtmp = ui->cb_resolution->currentText();
-    string tmp = Qtmp.toUtf8().constData();
-    vector<string> strs = split(tmp, 'x');
+    vector<int> resolution
+            = _parse_resolution(ui->cb_resolution->currentText());
 
-    Seat::width = atoi(strs[0].c_str());
-    Seat::heigth = atoi(strs[1].c_str());
+    Seat::width = resolution[0];
+    Seat::heigth = resolution[1];
 }
 
 void MainWindow::fill_layout()
@@ -260,6 +275,7 @@ void MainWindow::get_resolution()
 {
     if (ui->cb_resolution->count() != 0 || ui->lw_interface->count() != 0)
     {
+        // Information is already filled in.
         return;
     }
 
