@@ -2,12 +2,12 @@
 #define MAINWINDOW_H
 
 #include "ui_mainwindow.h"
-#include "controller_mst.h"
+#include "controller.h"
 #include "settings-mst.h"
 #include "input-device-listener.h"
 #include "utils.h"
 #include "seat_calibration_dialog.h"
-#include "controller_mst.h"
+#include "controller.h"
 #include "seat.h"
 #include "ui_mainwindow.h"
 #include "input-device-listener.h"

@@ -1,5 +1,5 @@
-#ifndef CONTROLLER_MST_H
-#define CONTROLLER_MST_H
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
 
 #include <fstream>
 #include <vector>
@@ -41,4 +41,4 @@ private:
     void write_xinitrc();
 };
 
-#endif // CONTROLLER_MST_H
+#endif // CONTROLLER_H
