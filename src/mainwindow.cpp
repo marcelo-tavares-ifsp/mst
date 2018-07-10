@@ -351,7 +351,8 @@ void MainWindow::get_resolution()
 
 static bool create_backup()
 {
-    system("/home/student/src/mst/src/mst_files/mk_backup.sh");
+
+    system("/home/student/src/mst/src/mst_files/mk_backup.sh multiseat");
     // system("systemctl set-default multi-user.target"); // вкл mst
     return true;
 }

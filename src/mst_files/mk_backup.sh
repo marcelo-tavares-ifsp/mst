@@ -1,17 +1,59 @@
 #!/bin/bash
 
-CONFDIR="/home/student/.config/mst1.0"
-XORG="/etc/X11/xorg.conf"
-GETTY="/lib/systemd/system/getty@.service"
+# Make backup directory.  Return the full directory name.
+#
+# Syntax:
+#   make_backup_dir backup_root_dir
+make_backup_dir()
+{
+    local backup_root_dir="$1"
+    local backup_dir="$backup_root_dir/$(date -Iseconds)/"
+    if [ ! -d "$backup_dir" ]; then
+	mkdir -p "$backup_dir"
+    fi
 
-if [ ! -d "$CONFDIR" ]; then
-    mkdir $CONFDIR
-fi
+    echo "$backup_dir"
+}
 
-if [ -f "$XORG" ]; then
-    cp $XORG /home/student/.config/mst1.0/xorg.conf
-fi
+# Copy file if it exists.
+#
+# Syntax:
+#   copy_if_exists source destination
+copy_if_exists()
+{
+    local src="$1"
+    local dst="$2"
+    if [ -f "$src" ]; then
+	cp "$src" "$dst"
+    fi
+}
 
-if [ -f "$GETTY" ]; then
-    cp $GETTY /home/student/.config/mst1.0/getty@.service
-fi
+### Entry point.
+
+main()
+{
+    local mst_user="$1"
+    if [ -z "$mst_user" ]; then
+	echo "Usage: $0 mst_user"
+	exit 1
+    fi
+
+    local backup_root_dir="/home/$mst_user/.local/share/mst/backup"
+
+    # Configuration files
+    local xorg_config="/etc/X11/xorg.conf"
+    local getty_config="/lib/systemd/system/getty@.service"
+    local awesome_config="/home/$mst_user/.config/awesome/rc.lua"
+
+    local backup_dir=$(make_backup_dir "$backup_root_dir")
+
+    copy_if_exists "$xorg_config" "$backup_dir"
+    copy_if_exists "$getty_config" "$backup_dir"
+    copy_if_exists "$awesome_config" "$backup_dir"
+
+    exit 0
+}
+
+main $*
+
+### mk_backup.sh ends here.
