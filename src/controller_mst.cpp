@@ -1,7 +1,7 @@
 #include "controller_mst.h"
 #include "dsv.h"
 
-static const string MST_CONFIG_FILE = "/etc/mst";
+#include "config.h"
 
 Controller::Controller(vector<Seat> seats) : seats(seats)
 {
@@ -55,8 +55,7 @@ string Controller::create_xmst()
 
 void Controller::write_rc_lua()
 {
-    DSV config(MST_CONFIG_FILE);
-    string user = config.get("user");
+    const string user = Config::get_instance()->get_mst_user();
     string out_file = "/home/" + user + "/.config/awesome/rc.lua";
     fstream rclua_pattern;
     fstream rclua;

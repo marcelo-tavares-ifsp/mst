@@ -1,6 +1,5 @@
 #include "mainwindow.h"
-
-
+#include "config.h"
 
 static bool create_backup();
 static bool apply_backup();
@@ -351,8 +350,10 @@ void MainWindow::get_resolution()
 
 static bool create_backup()
 {
-
-    system("/home/student/src/mst/src/mst_files/mk_backup.sh multiseat");
+    const string user = Config::get_instance()->get_mst_user();
+    const string cmd
+            = "/home/student/src/mst/src/mst_files/mk_backup.sh " + user;
+    system(cmd.c_str());
     // system("systemctl set-default multi-user.target"); // вкл mst
     return true;
 }
