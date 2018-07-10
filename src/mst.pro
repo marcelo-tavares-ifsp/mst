@@ -38,7 +38,8 @@ SOURCES += \
     utils.cpp \
     input-device-listener.cpp \
     seat_calibration_dialog.cpp \
-    seat.cpp
+    seat.cpp \
+    dsv.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,7 +51,8 @@ HEADERS += \
     utils.h \
     input-device-listener.h \
     seat_calibration_dialog.h \
-    seat.h
+    seat.h \
+    dsv.h
 
 FORMS += \
         mainwindow.ui \

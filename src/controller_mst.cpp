@@ -1,6 +1,7 @@
 #include "controller_mst.h"
+#include "dsv.h"
 
-
+static const string MST_CONFIG_FILE = "/etc/mst";
 
 Controller::Controller(vector<Seat> seats) : seats(seats)
 {
@@ -54,14 +55,19 @@ string Controller::create_xmst()
 
 void Controller::write_rc_lua()
 {
-    awesome_conf = new AwesomeConfig(seats);
-
+    DSV config(MST_CONFIG_FILE);
+    string user = config.get("user");
+    string out_file = "/home/" + user + "/.config/awesome/rc.lua";
     fstream rclua_pattern;
-    rclua_pattern.open("/root/mst/src/mst_files/rc.lua.pattern", ios::in);
     fstream rclua;
-    rclua.open("/root/mst/src/test_files/home/multiseat/config/awesome/rc.lua", ios::out);
+
+    awesome_conf = new AwesomeConfig(seats);
+    rclua_pattern.open("/usr/share/mst/rc.lua.pattern", ios::in);
+    rclua.open(out_file, ios::out);
 
     string str;
+
+    cout << "[debug] writing '" + out_file + "' ..." << endl;
 
     while(getline(rclua_pattern, str))
     {
@@ -80,6 +86,7 @@ void Controller::write_rc_lua()
     }
     rclua.close();
     rclua_pattern.close();
+    cout << "[debug] writing '" + out_file + "' ... done" << endl;
 }
 
 void Controller::write_xorg()
