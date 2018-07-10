@@ -65,6 +65,10 @@ void MainWindow::on_btn_next_2_clicked()
     ui->stackedWidget->setCurrentIndex(2);
 }
 
+/**
+ * @brief MainWindow::on_btn_next_3_clicked -- the "next" button on the panel
+ *      where input devices are assigned to the seats.
+ */
 void MainWindow::on_btn_next_3_clicked()
 {
     if (check_collision_seats())
