@@ -19,6 +19,7 @@ public:
 
 private Q_SLOTS:
     void split_test();
+    void replace_all_test();
 };
 
 Utils::Utils()
@@ -32,6 +33,15 @@ void Utils::split_test()
     string errmsg = "'split' fails to split: '" + result[0] + "x" + result[1] + "'";
     QVERIFY2((result[0] == "2") && (result[1] == "4"),
             errmsg.c_str());
+}
+
+void Utils::replace_all_test()
+{
+    string input = "abc{{d}}";
+    string result = replace_all(input, "{{d}}", "e");
+    string errmsg = "'replace_all' fails to replace a string: "
+            + input + " -> " + result;
+    QVERIFY2((result == "abce"), errmsg.c_str());
 }
 
 QTEST_APPLESS_MAIN(Utils)

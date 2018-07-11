@@ -54,3 +54,24 @@ string trim(char* str) {
     rtrim_x(result);
     return result;
 }
+
+/**
+ * @brief replace_all -- replace all occurences of a template TPL in a string
+ *      INPUT with value VAL.
+ * @param input -- an input string.
+ * @param tpl -- a template to be replaced.
+ * @param val -- a value to place instead of the template.
+ * @return a string with inserted values.
+ */
+string replace_all(string input, const string& tpl, const string& val)
+{
+    string::size_type pos = 0;
+    cout << "replace_all: " << input << endl;
+    while ((pos = input.find(tpl, pos)) != string::npos)
+    {
+        cout << pos << endl;
+        input.replace(pos, tpl.size(), val);
+        ++pos;
+    }
+    return input;
+}
