@@ -1,3 +1,5 @@
+#include <string>
+
 #include "controller.h"
 #include "dsv.h"
 
@@ -43,20 +45,18 @@ void Controller::make_rc_lua()
 
     cout << "[debug] writing '" + out_file + "' ..." << endl;
 
+    stringstream awesome_autostart;
+    awesome_autostart << *awesome_conf;
+
     while(getline(rclua_pattern, str))
     {
-        if(str == "-- $MST_AUTOSTART$")
-        {
-            rclua << *awesome_conf;
-        }
-        else if(str == "-- $MST_AWFUL_RULES$")
-        {
-            rclua << awesome_conf->get_rules();
-        }
-        else
-        {
-            rclua << str << endl;
-        }
+
+        str = replace_all(str, "{{mst_autostart}}",
+                          awesome_autostart.str());
+        str = replace_all(str, "{{mst_awful_rules}}",
+                          awesome_conf->get_rules());
+
+        rclua << str << endl;
     }
     rclua.close();
     rclua_pattern.close();
