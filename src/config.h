@@ -12,12 +12,17 @@ public:
 
     static Config* get_instance();
     const string get_mst_user() const;
+    const string get_output_dir() const;
+    const string get_awesome_config() const;
 
 private:
     Config();
     static Config* instance;
     DSV* mst_conf = NULL;
     string mst_user;
+    string output_dir;
+    // configuration files
+    string awesome_config;
 
 };
 

@@ -17,6 +17,11 @@ Config* Config::get_instance()
         instance = new Config();
         instance->mst_conf = new DSV(MST_CONFIG_FILE);
         instance->mst_user = instance->mst_conf->get("user");
+        instance->output_dir
+                = "/home/" + instance->mst_user + "/.local/share/mst/output";
+
+        instance->awesome_config
+                = "/home/" + instance->mst_user + "/.config/awesome/rc.lua";
     }
 
     return instance;
@@ -25,4 +30,14 @@ Config* Config::get_instance()
 const string Config::get_mst_user() const
 {
     return mst_user;
+}
+
+const string Config::get_output_dir() const
+{
+    return output_dir;
+}
+
+const string Config::get_awesome_config() const
+{
+    return awesome_config;
 }

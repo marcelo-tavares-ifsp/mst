@@ -55,8 +55,7 @@ string Controller::create_xmst()
 
 void Controller::write_rc_lua()
 {
-    const string user = Config::get_instance()->get_mst_user();
-    string out_file = "/home/" + user + "/.config/awesome/rc.lua";
+    string out_file = Config::get_instance()->get_output_dir() + "/rc.lua";
     fstream rclua_pattern;
     fstream rclua;
 
@@ -90,31 +89,35 @@ void Controller::write_rc_lua()
 
 void Controller::write_xorg()
 {
+    string out_file = Config::get_instance()->get_output_dir() + "/xorg.conf";
     xorg_conf = new XorgConfig(seats);
 
     fstream xorg;
-    xorg.open("/root/mst/src/test_files/etc/X11/xorg.conf", ios::out);
+    xorg.open(out_file, ios::out);
     xorg << *xorg_conf;
     xorg.close();
 }
 
 void Controller::write_bashrc()
 {
+    string out_file = Config::get_instance()->get_output_dir() + "/bash.rc";
     fstream bashrc;
-    bashrc.open("/root/mst/src/test_files/home/multiseat/bash.rc", ios::out);
+    bashrc.open(out_file, ios::out);
     bashrc << create_bashrc();
     bashrc.close();
 }
 
 void Controller::write_xinitrc()
 {
+    string out_file = Config::get_instance()->get_output_dir() + "/xinitrc";
     fstream xinitrc;
-    xinitrc.open("/root/mst/src/test_files/home/multiseat/xinitrc", ios::out);
+    xinitrc.open(out_file, ios::out);
     xinitrc << create_xinitrc();
     xinitrc.close();
 
+    out_file = Config::get_instance()->get_output_dir() + "/xmst";
     fstream xmst;
-    xmst.open("/root/mst/src/test_files/home/multiseat/xmst", ios::out);
+    xmst.open(out_file, ios::out);
     xmst << create_xmst();
     xmst.close();
 }
