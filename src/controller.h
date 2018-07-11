@@ -39,6 +39,8 @@ private:
     void make_xorg();
     void make_bashrc();
     void make_xinitrc();
+
+    void install_files();
 };
 
 #endif // CONTROLLER_H

@@ -21,11 +21,33 @@ void Controller::make_mst()
 void Controller::enable_mst()
 {
     make_mst();
+    // install_files()
     printf("Multiseat enabled.\n");
 }
 
 void Controller::disable_mst()
 {
+
+}
+
+static void cp(const string& src, const string& dst)
+{
+    string cmd = "cp " + src + " " + dst;
+    cout << "[debug] executing: " << cmd << endl;
+    system(cmd.c_str());
+}
+
+void Controller::install_files()
+{
+    Config* config = Config::get_instance();
+    const string output_dir = config->get_output_dir();
+    const string mst_user   = config->get_mst_user();
+    const string mst_user_home = "/home/" + mst_user + "/";
+    cp(output_dir + "/rc.lua", mst_user_home + ".config/awesome/");
+    cp(output_dir + "/xorg.conf", "/etc/X11/xorg.conf");
+    cp(output_dir + "/.bashrc", mst_user_home);
+    cp(output_dir + "/xinitrc", mst_user_home);
+    cp(output_dir + "/xmst", mst_user_home);
 
 }
 
