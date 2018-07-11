@@ -17,6 +17,7 @@ Config* Config::get_instance()
         instance = new Config();
         instance->mst_conf = new DSV(MST_CONFIG_FILE);
         instance->mst_user = instance->mst_conf->get("user");
+        instance->usr_share_dir = "/usr/share/mst";
         instance->output_dir
                 = "/home/" + instance->mst_user + "/.local/share/mst/output";
 
@@ -35,6 +36,11 @@ const string Config::get_mst_user() const
 const string Config::get_output_dir() const
 {
     return output_dir;
+}
+
+const string Config::get_usr_share_dir() const
+{
+    return usr_share_dir;
 }
 
 const string Config::get_awesome_config() const
