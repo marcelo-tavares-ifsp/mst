@@ -66,10 +66,8 @@ string trim(char* str) {
 string replace_all(string input, const string& tpl, const string& val)
 {
     string::size_type pos = 0;
-    cout << "replace_all: " << input << endl;
     while ((pos = input.find(tpl, pos)) != string::npos)
     {
-        cout << pos << endl;
         input.replace(pos, tpl.size(), val);
         ++pos;
     }
