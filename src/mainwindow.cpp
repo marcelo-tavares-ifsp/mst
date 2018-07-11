@@ -75,6 +75,7 @@ void MainWindow::on_btn_next_3_clicked()
         if (check_fill_seats())
         {
             Controller con(global_seats);
+            create_backup();
             con.enable_mst();
             cout << "The End!" << endl;                                                              // test
         }
@@ -351,8 +352,8 @@ void MainWindow::get_resolution()
 static bool create_backup()
 {
     const string user = Config::get_instance()->get_mst_user();
-    const string cmd
-            = "/home/student/src/mst/src/mst_files/mk_backup.sh " + user;
+    const string usr_dir = Config::get_instance()->get_usr_share_dir();
+    const string cmd = usr_dir + "/mk_backup.sh " + user;
     system(cmd.c_str());
     // system("systemctl set-default multi-user.target"); // вкл mst
     return true;
