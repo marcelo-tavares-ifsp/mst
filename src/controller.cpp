@@ -2,6 +2,7 @@
 #include "dsv.h"
 
 #include "config.h"
+#include "utils.h"
 
 Controller::Controller(vector<Seat> seats) : seats(seats)
 {
@@ -9,10 +10,10 @@ Controller::Controller(vector<Seat> seats) : seats(seats)
 
 void Controller::make_mst()
 {
-    write_rc_lua();
-    write_xorg();
-    write_bashrc();
-    write_xinitrc();
+    make_rc_lua();
+    make_xorg();
+    make_bashrc();
+    make_xinitrc();
 }
 
 void Controller::enable_mst()
@@ -26,34 +27,9 @@ void Controller::disable_mst()
 
 }
 
-string Controller::create_bashrc()
-{
-    string bash;
-    bash += string("if [ -z \"$DISPLAY\" ] && [ $(tty) = /dev/tty");
-    bash += to_string(6);
-    bash += string(" ]; then\n");
-    bash += string("    startx\n");
-    bash += string("fi\n");
-    return bash;
-}
-
-string Controller::create_xinitrc()
-{
-    string xinit;
-    xinit += string("[ -f ~/.xmst ] && source ~/.xmst\n");
-    return xinit;
-}
-
-string Controller::create_xmst()
-{
-    string xmst;
-    xmst += string("exec awesome\n");
-    return xmst;
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 
-void Controller::write_rc_lua()
+void Controller::make_rc_lua()
 {
     string out_file = Config::get_instance()->get_output_dir() + "/rc.lua";
     fstream rclua_pattern;
@@ -87,7 +63,7 @@ void Controller::write_rc_lua()
     cout << "[debug] writing '" + out_file + "' ... done" << endl;
 }
 
-void Controller::write_xorg()
+void Controller::make_xorg()
 {
     string out_file = Config::get_instance()->get_output_dir() + "/xorg.conf";
     xorg_conf = new XorgConfig(seats);
@@ -98,26 +74,40 @@ void Controller::write_xorg()
     xorg.close();
 }
 
-void Controller::write_bashrc()
+void Controller::make_bashrc()
 {
-    string out_file = Config::get_instance()->get_output_dir() + "/bash.rc";
-    fstream bashrc;
-    bashrc.open(out_file, ios::out);
-    bashrc << create_bashrc();
+    string out_file = Config::get_instance()->get_output_dir() + "/.bashrc";
+    string in_file
+            = Config::get_instance()->get_usr_share_dir() + "/bashrc.template";
+    ofstream bashrc(out_file);
+    ifstream bashrc_template(in_file);
+
+    for (string line; getline(bashrc_template, line); )
+    {
+        string tmp = replace_all(line, "{{tty}}", "6");
+        bashrc << tmp << endl;
+    }
+
     bashrc.close();
+    bashrc_template.close();
 }
 
-void Controller::write_xinitrc()
+void Controller::make_xinitrc()
 {
     string out_file = Config::get_instance()->get_output_dir() + "/xinitrc";
-    fstream xinitrc;
-    xinitrc.open(out_file, ios::out);
-    xinitrc << create_xinitrc();
+    string in_file
+            = Config::get_instance()->get_usr_share_dir() + "/xinitrc.template";
+    ofstream xinitrc(out_file, ios::binary);
+    ifstream xinitrc_template(in_file, ios::binary);
+    xinitrc << xinitrc_template.rdbuf();
     xinitrc.close();
+    xinitrc_template.close();
 
     out_file = Config::get_instance()->get_output_dir() + "/xmst";
-    fstream xmst;
-    xmst.open(out_file, ios::out);
-    xmst << create_xmst();
+    in_file  = Config::get_instance()->get_usr_share_dir() + "/xmst.template";
+    ofstream xmst(out_file);
+    ifstream xmst_template(in_file);
+    xmst << xmst_template.rdbuf();
     xmst.close();
+    xmst_template.close();
 }

@@ -35,10 +35,10 @@ private:
     string create_xmst();
     string create_xinitrc();
 
-    void write_rc_lua();
-    void write_xorg();
-    void write_bashrc();
-    void write_xinitrc();
+    void make_rc_lua();
+    void make_xorg();
+    void make_bashrc();
+    void make_xinitrc();
 };
 
 #endif // CONTROLLER_H
