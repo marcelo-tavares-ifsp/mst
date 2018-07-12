@@ -176,6 +176,8 @@ bool MainWindow::check_collision_seats()
         {
             for (int j = 1; j < count_seats; j++)
             {
+                if (i == j)
+                    continue;
                 if ((global_seats[i].keyboard == global_seats[j].keyboard) || (global_seats[i].mouse == global_seats[j].mouse))
                 {
                     return false;
