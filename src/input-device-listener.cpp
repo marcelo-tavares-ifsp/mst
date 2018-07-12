@@ -11,7 +11,8 @@ Input_device_listener::Input_device_listener(vector<string> devices,
 
 void Input_device_listener::run()
 {
-    string result;
+    string* result;
+    is_running = true;
     switch (type)
     {
     case DEVICE_TYPE::KEYBOARD:
@@ -21,7 +22,15 @@ void Input_device_listener::run()
         result = check_mice();
         break;
     }
-    emit device_found(QString::fromStdString(result), type);
+    if (result)
+        emit device_found(QString::fromStdString(*result), type);
+}
+
+void Input_device_listener::cancel()
+{
+    cout << "[debug] Input_device_listener::cancel: Stopping the thread..."
+         << endl;
+    is_running = false;
 }
 
 static bool is_btn_pressed(struct input_event &e)
@@ -59,19 +68,25 @@ static bool _loop_answer_keybd(string keybd)
     return false;
 }
 
-string Input_device_listener::check_keybd()
+/**
+ * @brief Input_device_listener::check_keybd -- loop through the list of
+ *    keyboards and get the one which buttons pressed.
+ * @return An active keyboard device name or NULL if the thread was stopped.
+ */
+string* Input_device_listener::check_keybd()
 {
-    while (1)
+    while (is_running)
     {
         usleep(100);
         for (auto keybd : *devices)
         {
             if (_loop_answer_keybd(keybd))
             {
-                return keybd;
+                return &keybd;
             }
         }
     }
+    return NULL;
 }
 
 /**
@@ -111,7 +126,7 @@ static bool _loop_answer_mouse(string mouse)
     struct input_event ie;
     ssize_t bytes;
     int fd;
-    cout << "_loop_answer_mouse: " + mouse << endl;
+    // cout << "_loop_answer_mouse: " + mouse << endl;
     mouse = FULLPATH + mouse;
     const char *pDevice = mouse.c_str();
 
@@ -138,20 +153,21 @@ static bool _loop_answer_mouse(string mouse)
 /**
  * @brief Input_device_listener::check_mice -- loop through the list of mice
  *    and get the one which buttons pressed.
- * @return An active mouse device name.
+ * @return An active mouse device name or NULL if the thread was stopped.
  */
-string Input_device_listener::check_mice()
+string* Input_device_listener::check_mice()
 {
-    while (1)
+    while (is_running)
     {
         usleep(10);
-        cout << "check_mice: Loop..." << endl;
+        // cout << "check_mice: Loop..." << endl;
         for (auto mouse : *devices)
         {
             if (_loop_answer_mouse(mouse))
             {
-                return mouse;
+                return &mouse;
             }
         }
     }
+    return NULL;
 }

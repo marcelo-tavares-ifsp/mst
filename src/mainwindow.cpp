@@ -119,8 +119,11 @@ void MainWindow::on_interface_clicked()
     QThreadPool::globalInstance()->start(mouse_listener);
     QThreadPool::globalInstance()->start(keybd_listener);
 
-
     Seat_calibration_dialog scd;
+
+    connect(&scd, SIGNAL(cancel()), mouse_listener, SLOT(cancel()));
+    connect(&scd, SIGNAL(cancel()), keybd_listener, SLOT(cancel()));
+
     scd.setModal(true);
     scd.exec();
 }

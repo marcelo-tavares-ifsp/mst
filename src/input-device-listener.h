@@ -24,7 +24,6 @@ class Input_device_listener: public QObject, public QRunnable
 {
     Q_OBJECT
 
-
 public:
     enum DEVICE_TYPE {
         KEYBOARD,
@@ -41,10 +40,13 @@ public:
 signals:
     void device_found(QString, int);
 
-private:
+public slots:
+    void cancel();
 
-    string check_keybd();
-    string check_mice();
+private:
+    bool is_running;
+    string* check_keybd();
+    string* check_mice();
 };
 //Q_DECLARE_METATYPE(Input_device_listener)
 
