@@ -9,10 +9,24 @@ Input_device_listener::Input_device_listener(vector<string> devices,
     this->devices = new vector<string>(devices);
 }
 
+static void _debug_print_devices(int type, vector<string>* devices)
+{
+    if (type == Input_device_listener::DEVICE_TYPE::KEYBOARD)
+        cout << "[debug] keyboards: " << endl;
+    else
+        cout << "[debug] mice: " << endl;
+
+    for (auto d : *devices)
+    {
+        cout << "[debug]     " + d << endl;
+    }
+}
+
 void Input_device_listener::run()
 {
     string* result = NULL;
     is_running = true;
+    _debug_print_devices(type, devices);
     switch (type)
     {
     case DEVICE_TYPE::KEYBOARD:
@@ -34,10 +48,28 @@ void Input_device_listener::cancel()
     is_running = false;
 }
 
+/**
+ * @brief _try_read -- try to read data from a mouse in a loop.
+ * @param fd -- mouse file descriptor.
+ * @param ie -- input event.
+ * @return -1 if there's no data to read, amount of data read otherwise.
+ */
+static ssize_t _try_read(int fd, struct input_event* ie) {
+    static uint32_t MAX_COUNT = 100;
+    ssize_t bytes = -1;
+    for (int count = 0; count < MAX_COUNT; ++count) {
+        bytes = read(fd, (void *) ie, sizeof(struct input_event));
+        if (bytes > 0)
+            break;
+        usleep(100);
+    }
+    return bytes;
+}
+
 static bool is_btn_pressed(struct input_event &e)
 {
-    cout << "e.type: " << e.type << "; e.code: " << e.code
-         << "; e.value: " << e.value << endl;
+    //cout << "e.type: " << e.type << "; e.code: " << e.code
+    //     << "; e.value: " << e.value << endl;
     return (e.type == EV_MSC) && (e.code == 4);
 }
 
@@ -50,13 +82,13 @@ static bool _loop_answer_keybd(string keybd)
     keybd = FULLPATH + keybd;
     const char *pDevice = keybd.c_str();
 
-    fd = open(pDevice, O_RDWR);
+    fd = open(pDevice, O_RDWR  | O_NONBLOCK);
     if (fd == -1)
     {
         throw (string)"ERROR Opening %s\n" + pDevice;
     }
 
-    bytes = read(fd, (void *) &ie, sizeof(ie));
+    bytes = _try_read(fd, &ie);
     if ((bytes > 0) && is_btn_pressed(ie))
     {
         char name[256] = "Unknown";
@@ -97,29 +129,11 @@ string* Input_device_listener::check_keybd()
  */
 static bool is_mouse_btn_pressed(struct input_event &e)
 {
-    cout << "e.type: " << e.type << "; e.code: " << e.code
-         << "; e.value: " << e.value << endl;
+    //cout << "e.type: " << e.type << "; e.code: " << e.code
+    //     << "; e.value: " << e.value << endl;
     // XXX: The code should describe mouse button press, but it's always
     //      equals to 4 for some reason.
     return (e.type == EV_MSC) && (e.code == 4);
-}
-
-/**
- * @brief _try_read -- try to read data from a mouse in a loop.
- * @param fd -- mouse file descriptor.
- * @param ie -- input event.
- * @return -1 if there's no data to read, amount of data read otherwise.
- */
-static ssize_t _try_read(int fd, struct input_event* ie) {
-    static uint32_t MAX_COUNT = 100;
-    ssize_t bytes = -1;
-    for (int count = 0; count < MAX_COUNT; ++count) {
-        bytes = read(fd, (void *) ie, sizeof(struct input_event));
-        if (bytes > 0)
-            break;
-        usleep(100);
-    }
-    return bytes;
 }
 
 static bool _loop_answer_mouse(string mouse)
