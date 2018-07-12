@@ -169,6 +169,11 @@ void MainWindow::set_seat_device(QString device, int type)
 
 bool MainWindow::check_collision_seats()
 {
+    auto is_equal = [this](int i, int j) -> bool {
+        return (global_seats[i].keyboard == global_seats[j].keyboard)
+                || (global_seats[i].mouse == global_seats[j].mouse);
+    };
+
     int count_seats = global_seats.size();
     if (count_seats > 1)
     {
@@ -178,7 +183,7 @@ bool MainWindow::check_collision_seats()
             {
                 if (i == j)
                     continue;
-                if ((global_seats[i].keyboard == global_seats[j].keyboard) || (global_seats[i].mouse == global_seats[j].mouse))
+                if (is_equal(i, j))
                 {
                     return false;
                 }
