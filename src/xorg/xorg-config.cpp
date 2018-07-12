@@ -61,7 +61,7 @@ static void _print_device(ostream& os, const XorgConfig& config)
     {
         os << _elem("Option")
            << string("\"") << config.seats[idx].interface << string("\"")
-           << string("\"") << idx    << string("\"\n");
+           << string(" \"") << idx    << string("\"\n");
     }
 
     os << _end_section("Device");
