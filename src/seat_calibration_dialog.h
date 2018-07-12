@@ -19,10 +19,15 @@ public:
     explicit Seat_calibration_dialog(QWidget *parent = 0);
     ~Seat_calibration_dialog();
 
+signals:
+    void cancel();
+
 private slots:
     void on_lineEdit_textChanged(const QString &arg1);
 
     void on_buttonBox_2_clicked(QAbstractButton *button);
+
+    void on_buttonBox_clicked(QAbstractButton *button);
 
 private:
     Ui::Seat_calibration_dialog *ui;

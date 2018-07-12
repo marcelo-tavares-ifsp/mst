@@ -1,6 +1,8 @@
 #include "seat_calibration_dialog.h"
 
+#include <iostream>
 
+using namespace std;
 
 Seat_calibration_dialog::Seat_calibration_dialog(QWidget *parent) :
     QDialog(parent),
@@ -21,5 +23,12 @@ void Seat_calibration_dialog::on_lineEdit_textChanged(const QString &arg1)
 
 void Seat_calibration_dialog::on_buttonBox_2_clicked(QAbstractButton *button)
 {
+    cout << "click!" << endl;
+    emit cancel();
     this->close();
+}
+
+void Seat_calibration_dialog::on_buttonBox_clicked(QAbstractButton *button)
+{
+
 }
