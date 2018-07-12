@@ -47,7 +47,7 @@ static void _print_monitors(ostream& os, const XorgConfig& config)
     {
         os << _section("Monitor")
            << _elem("Identifier") << string("\"")
-           << idx << string("\"\n")
+           << "monitor" << idx << string("\"\n")
            << _end_section("Monitor");
     }
 }
@@ -60,8 +60,8 @@ static void _print_device(ostream& os, const XorgConfig& config)
     for (int idx = 0; idx < config.seats.size(); idx++)
     {
         os << _elem("Option")
-           << string("\"") << config.seats[idx].interface << string("\"")
-           << string(" \"") << idx    << string("\"\n");
+           << string("\"Monitor-") << config.seats[idx].interface << string("\"")
+           << string(" \"monitor") << idx    << string("\"\n");
     }
 
     os << _end_section("Device");
