@@ -11,7 +11,7 @@ Input_device_listener::Input_device_listener(vector<string> devices,
 
 void Input_device_listener::run()
 {
-    string* result;
+    string* result = NULL;
     is_running = true;
     switch (type)
     {
@@ -22,6 +22,7 @@ void Input_device_listener::run()
         result = check_mice();
         break;
     }
+
     if (result)
         emit device_found(QString::fromStdString(*result), type);
 }
@@ -82,7 +83,7 @@ string* Input_device_listener::check_keybd()
         {
             if (_loop_answer_keybd(keybd))
             {
-                return &keybd;
+                return new string(keybd);
             }
         }
     }
@@ -165,7 +166,7 @@ string* Input_device_listener::check_mice()
         {
             if (_loop_answer_mouse(mouse))
             {
-                return &mouse;
+                return new string(mouse);
             }
         }
     }
