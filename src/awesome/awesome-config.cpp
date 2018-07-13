@@ -12,9 +12,10 @@ static void _print_xephyr(ostream& os, const AwesomeConfig& config)
     {
         string mouse_dev = "/dev/input/by-path/" + config.seats[idx].mouse;
         string keybd_dev = "/dev/input/by-path/" + config.seats[idx].keyboard;
-        os << string("os.execute(\"Xephyr -softCursor -ac -br -mouse \'")
-           << mouse_dev << string("\' -keybd \'")
-           << keybd_dev << string("\' -screen ")
+        os << string("os.execute(\"Xephyr -softCursor -ac -br ")
+           << " -mouse \'evdev,5,device=" << mouse_dev << "\'"
+           << " -keybd \'evdev,,device="  << keybd_dev << "\'"
+           << " -screen "
            << config.seats[idx].width      << string("x")
            << config.seats[idx].height     << string(" :")
            << idx + 1                      << string(" &\")")   << endl;
