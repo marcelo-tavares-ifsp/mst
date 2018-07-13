@@ -10,7 +10,10 @@ QPushButton *button;
 Input_device_listener *mouse_listener;
 Input_device_listener *keybd_listener;
 
-
+static bool _is_mst_running()
+{
+    return (system("pgrep -c Xephyr") == 0);
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -18,6 +21,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
+
+    if (_is_mst_running())
+    {
+        QPushButton *btn = new QPushButton("stop_mst", this);
+        btn->setText(QString::fromStdString("Остановить MST"));
+        connect(btn, SIGNAL(clicked()), this, SLOT(on_stop_mst_clicked()));
+        widgets.push_back(btn);
+        ui->gridLayout_1->addWidget(btn);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -30,6 +42,10 @@ void MainWindow::on_btn_next_4_clicked()
     apply_backup();
 }
 
+void MainWindow::on_stop_mst_clicked()
+{
+    system("pkill Xephyr");
+}
 
 /**
  * @brief MainWindow::on_btn_next_1_clicked -- the handler of the button

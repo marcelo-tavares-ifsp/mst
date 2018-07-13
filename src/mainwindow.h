@@ -57,6 +57,8 @@ private slots:
 
     void on_btn_next_4_clicked();
 
+    void on_stop_mst_clicked();
+
 private:
     Ui::MainWindow *ui;
 
