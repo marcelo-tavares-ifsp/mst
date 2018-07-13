@@ -17,7 +17,7 @@ static void _print_xephyr(ostream& os, const AwesomeConfig& config)
            << keybd_dev << string("\' -screen ")
            << config.seats[idx].width      << string("x")
            << config.seats[idx].height     << string(" :")
-           << idx                          << string(" &\")")   << endl;
+           << idx + 1                      << string(" &\")")   << endl;
     }
 }
 
