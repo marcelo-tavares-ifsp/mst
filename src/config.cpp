@@ -23,6 +23,7 @@ Config* Config::get_instance()
 
         instance->awesome_config
                 = "/home/" + instance->mst_user + "/.config/awesome/rc.lua";
+        instance->sudoers_config = "/etc/sudoers.d/mst";
     }
 
     return instance;
@@ -46,4 +47,9 @@ const string Config::get_usr_share_dir() const
 const string Config::get_awesome_config() const
 {
     return awesome_config;
+}
+
+const string Config::get_sudoers_config() const
+{
+    return sudoers_config;
 }

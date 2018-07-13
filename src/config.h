@@ -15,6 +15,7 @@ public:
     const string get_usr_share_dir() const;
     const string get_output_dir() const;
     const string get_awesome_config() const;
+    const string get_sudoers_config() const;
 
 private:
     Config();
@@ -25,6 +26,7 @@ private:
     string output_dir;
     // configuration files
     string awesome_config;
+    string sudoers_config;
 
 };
 

@@ -39,6 +39,7 @@ private:
     void make_xorg();
     void make_bashrc();
     void make_xinitrc();
+    void make_sudoers();
 
     void install_files();
 };

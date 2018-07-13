@@ -16,6 +16,7 @@ void Controller::make_mst()
     make_xorg();
     make_bashrc();
     make_xinitrc();
+    make_sudoers();
 }
 
 void Controller::enable_mst()
@@ -132,4 +133,23 @@ void Controller::make_xinitrc()
     xmst << xmst_template.rdbuf();
     xmst.close();
     xmst_template.close();
+}
+
+void Controller::make_sudoers()
+{
+    const string user = Config::get_instance()->get_mst_user();
+    const string out_file = Config::get_instance()->get_output_dir()
+            + "/sudoers";
+    const string in_file = Config::get_instance()->get_usr_share_dir()
+            + "/sudoers.template";
+    ofstream out(out_file);
+    ifstream in(in_file);
+    string line;
+    getline(in, line);
+    string result = replace_all(replace_all(line, "{{user}}", user),
+                                "{{mst}}",
+                                "/root/src/mst/mst");
+    out << result << endl;
+    out.close();
+    in.close();
 }
