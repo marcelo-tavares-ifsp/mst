@@ -22,7 +22,7 @@ void Controller::make_mst()
 void Controller::enable_mst()
 {
     make_mst();
-    // install_files()
+    install_files();
     printf("Multiseat enabled.\n");
 }
 
@@ -50,15 +50,15 @@ void Controller::install_files()
     install("rc.lua",    mst_user_home + "/.config/awesome/");
     install("xorg.conf", "/etc/X11/xorg.conf");
     install(".bashrc",   mst_user_home);
-    install("xinitrc",   mst_user_home);
-    install("xmst",      mst_user_home);
+    install(".xinitrc",   mst_user_home);
+    install(".xmst",      mst_user_home);
     if (is_pam_mkhomedir_used())
     {
         string skel = "/etc/skel";
         install("rc.lua",    skel + "/.config/awesome/");
         install(".bashrc",   skel);
-        install("xinitrc",   skel);
-        install("xmst",      skel);
+        install(".xinitrc",   skel);
+        install(".xmst",      skel);
     }
     install("sudoers",   Config::get_instance()->get_sudoers_config());
 
@@ -119,7 +119,7 @@ void Controller::make_bashrc()
 
     for (string line; getline(bashrc_template, line); )
     {
-        string tmp = replace_all(line, "{{tty}}", "6");
+        string tmp = replace_all(line, "{{tty}}", "1");
         bashrc << tmp << endl;
     }
 
@@ -129,7 +129,7 @@ void Controller::make_bashrc()
 
 void Controller::make_xinitrc()
 {
-    string out_file = Config::get_instance()->get_output_dir() + "/xinitrc";
+    string out_file = Config::get_instance()->get_output_dir() + "/.xinitrc";
     string in_file
             = Config::get_instance()->get_usr_share_dir() + "/xinitrc.template";
     ofstream xinitrc(out_file, ios::binary);
@@ -138,7 +138,7 @@ void Controller::make_xinitrc()
     xinitrc.close();
     xinitrc_template.close();
 
-    out_file = Config::get_instance()->get_output_dir() + "/xmst";
+    out_file = Config::get_instance()->get_output_dir() + "/.xmst";
     in_file  = Config::get_instance()->get_usr_share_dir() + "/xmst.template";
     ofstream xmst(out_file);
     ifstream xmst_template(in_file);
@@ -160,7 +160,7 @@ void Controller::make_sudoers()
     getline(in, line);
     string result = replace_all(replace_all(line, "{{user}}", user),
                                 "{{mst}}",
-                                "/root/src/mst/mst");
+                                "/root/src/mst/scripts/mst-start-dm");
     out << result << endl;
     out.close();
     in.close();
