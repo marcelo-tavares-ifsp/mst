@@ -38,7 +38,7 @@ main()
 	exit 1
     fi
 
-    local backup_root_dir="/home/$mst_user/.local/share/mst/backup"
+    local backup_root_dir="/var/lib/mst/backup"
 
     # Configuration files
     local xorg_config="/etc/X11/xorg.conf"
