@@ -44,13 +44,15 @@ void Controller::install_files()
     const string output_dir = config->get_output_dir();
     const string mst_user   = config->get_mst_user();
     const string mst_user_home = "/home/" + mst_user + "/";
-    cp(output_dir + "/rc.lua", mst_user_home + ".config/awesome/");
-    cp(output_dir + "/xorg.conf", "/etc/X11/xorg.conf");
-    cp(output_dir + "/.bashrc", mst_user_home);
-    cp(output_dir + "/xinitrc", mst_user_home);
-    cp(output_dir + "/xmst", mst_user_home);
-    cp(output_dir + "/sudoers",
-       Config::get_instance()->get_sudoers_config());
+    auto install = [output_dir](const string& src, const string& dst) -> void {
+      cp(output_dir + "/" + src, dst);
+    };
+    install("rc.lua",    mst_user_home + "/.config/awesome/");
+    install("xorg.conf", "/etc/X11/xorg.conf");
+    install(".bashrc",   mst_user_home);
+    install("xinitrc",   mst_user_home);
+    install("xmst",      mst_user_home);
+    install("sudoers",   Config::get_instance()->get_sudoers_config());
 
 }
 
