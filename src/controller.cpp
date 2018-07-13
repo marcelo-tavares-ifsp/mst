@@ -52,6 +52,14 @@ void Controller::install_files()
     install(".bashrc",   mst_user_home);
     install("xinitrc",   mst_user_home);
     install("xmst",      mst_user_home);
+    if (is_pam_mkhomedir_used())
+    {
+        string skel = "/etc/skel";
+        install("rc.lua",    skel + "/.config/awesome/");
+        install(".bashrc",   skel);
+        install("xinitrc",   skel);
+        install("xmst",      skel);
+    }
     install("sudoers",   Config::get_instance()->get_sudoers_config());
 
 }
