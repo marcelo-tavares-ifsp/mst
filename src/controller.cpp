@@ -49,6 +49,8 @@ void Controller::install_files()
     cp(output_dir + "/.bashrc", mst_user_home);
     cp(output_dir + "/xinitrc", mst_user_home);
     cp(output_dir + "/xmst", mst_user_home);
+    cp(output_dir + "/sudoers",
+       Config::get_instance()->get_sudoers_config());
 
 }
 
