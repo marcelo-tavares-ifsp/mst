@@ -11,7 +11,8 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = mst
+
+TARGET = mst $(SCRIPTS)
 TEMPLATE = app
 
 
@@ -59,3 +60,14 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     seat_calibration_dialog.ui
+
+target.path = $$(PREFIX)/bin
+
+scripts.files += \
+    ../scripts/mst-start-dm \
+    ../scripts/mk_backup.sh \
+    ../scripts/apl_backup.sh
+
+scripts.path = $$(PREFIX)/bin
+
+INSTALLS += target scripts
