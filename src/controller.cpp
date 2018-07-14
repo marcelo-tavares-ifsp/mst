@@ -35,7 +35,11 @@ static void cp(const string& src, const string& dst)
 {
     string cmd = "cp " + src + " " + dst;
     cout << "[debug] executing: " << cmd << endl;
-    system(cmd.c_str());
+    if (system(cmd.c_str()))
+    {
+        throw "Could not execute command: "
+            + src + " -> " + dst;
+    }
 }
 
 void Controller::install_files()
