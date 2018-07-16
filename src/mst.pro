@@ -70,4 +70,13 @@ scripts.files += \
 
 scripts.path = $$(PREFIX)/bin
 
-INSTALLS += target scripts
+templates.files += \
+    ../templates/bashrc.template    \
+    ../templates/rc.lua.template    \
+    ../templates/sudoers.template   \
+    ../templates/xinitrc.template   \
+    ../templates/xmst.template
+
+templates.path = $$(PREIFX)/var/lib/mst
+
+INSTALLS += target scripts templates
