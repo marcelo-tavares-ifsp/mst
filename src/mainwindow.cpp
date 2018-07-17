@@ -381,13 +381,11 @@ static bool create_backup()
     const string usr_dir = Config::get_instance()->get_usr_share_dir();
     const string cmd = usr_dir + "/mk_backup.sh " + user;
     system(cmd.c_str());
-    // system("systemctl set-default multi-user.target"); // вкл mst
     return true;
 }
 
 static bool apply_backup()
 {
     system("/home/student/src/mst/src/mst_files/apl_backup.sh");
-    // system("systemctl set-default graphical.target"); // выкл mst
     return true;
 }

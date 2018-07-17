@@ -23,12 +23,13 @@ void Controller::enable_mst()
 {
     make_mst();
     install_files();
+    system("systemctl set-default multi-user.target");
     printf("Multiseat enabled.\n");
 }
 
 void Controller::disable_mst()
 {
-
+    system("systemctl set-default graphical.target");
 }
 
 static void cp(const string& src, const string& dst)
