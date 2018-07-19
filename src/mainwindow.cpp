@@ -345,8 +345,6 @@ void MainWindow::get_resolution()
         return;
     }
 
-    ui->lw_interface->addItem(QString::fromStdString("test_3")); // test
-
     vector<Xrandr_monitor> xm = Settings_mst::parse_xrandr();
     int xm_size = xm.size();
     vector<string> resol;
@@ -373,9 +371,6 @@ void MainWindow::get_resolution()
     }
 
     add_resolutions_to_cb(resol, ui->cb_resolution);
-
-    ui->lw_interface->addItem(QString::fromStdString("test_1")); // test
-    ui->lw_interface->addItem(QString::fromStdString("test_5")); // test
 }
 
 static bool create_backup()
