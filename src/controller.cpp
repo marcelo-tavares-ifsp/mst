@@ -19,15 +19,21 @@ void Controller::make_mst()
     make_sudoers();
 }
 
+void Controller::generate_files()
+{
+    string out = Config::get_instance()->get_output_dir();
+    make_mst();
+    cout << "[debug] files generated: " + out << endl;;
+}
+
 void Controller::enable_mst()
 {
-    make_mst();
     install_files();
     if (system("systemctl set-default multi-user.target"))
     {
         throw "Could not enable MST in systemd.";
     }
-    printf("Multiseat enabled.\n");
+    printf("[debug] multiseat enabled.\n");
 }
 
 void Controller::disable_mst()

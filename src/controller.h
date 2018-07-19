@@ -7,7 +7,6 @@
 #include "xorg/xorg-config.h"
 #include "awesome/awesome-config.h"
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include "seat.h"
 
 using namespace std;
@@ -22,6 +21,7 @@ class Controller
 {
 public:
     Controller(vector<Seat> seats);
+    void generate_files();
     void enable_mst();
     void disable_mst();
 

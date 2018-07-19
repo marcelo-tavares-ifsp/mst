@@ -9,7 +9,6 @@
 #include "seat_calibration_dialog.h"
 #include "controller.h"
 #include "seat.h"
-#include "ui_mainwindow.h"
 #include "input-device-listener.h"
 
 #include <QThreadPool>
@@ -39,7 +38,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-private slots:
+public Q_SLOTS:
 
     void on_btn_next_2_clicked();
 
@@ -58,6 +57,8 @@ private slots:
     void on_btn_next_4_clicked();
 
     void on_stop_mst_clicked();
+
+    void on_install_button_clicked();
 
 private:
     Ui::MainWindow *ui;

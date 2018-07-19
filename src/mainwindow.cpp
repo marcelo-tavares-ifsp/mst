@@ -1,8 +1,11 @@
+#include "ui_mainwindow.h"
 #include "mainwindow.h"
 #include "config.h"
 
 static bool create_backup();
 static bool apply_backup();
+
+static Controller *con;
 
 int Seat::width;
 int Seat::height;
@@ -93,10 +96,10 @@ void MainWindow::on_btn_next_3_clicked()
     {
         if (check_fill_seats())
         {
-            Controller con(global_seats);
-            create_backup();
-            con.enable_mst();
-            cout << "The End!" << endl;                                                              // test
+            con = new Controller(global_seats);
+            con->generate_files();
+            ui->stackedWidget->setCurrentIndex(3);
+            cout << "[debug] going to the 3rd panel..." << endl;
         }
         else
         {
@@ -392,4 +395,11 @@ static bool apply_backup()
         throw "Could not restore a backup copy.";
     }
     return true;
+}
+
+void MainWindow::on_install_button_clicked()
+{
+    create_backup();
+    con->enable_mst();
+    cout << "[debug] multiseat enabled." << endl;
 }
