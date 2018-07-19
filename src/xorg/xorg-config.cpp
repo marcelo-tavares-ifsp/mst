@@ -47,8 +47,14 @@ static void _print_monitors(ostream& os, const XorgConfig& config)
     {
         os << _section("Monitor")
            << _elem("Identifier") << string("\"")
-           << "monitor" << idx << string("\"\n")
-           << _end_section("Monitor");
+           << "monitor" << idx << string("\"\n");
+        if (idx < (config.seats.size() - 1))
+        {
+            os << _elem("Option") << "\"LeftOf\"\t"
+               << "\"monitor" << idx + 1 << "\"\n";
+        }
+
+        os << _end_section("Monitor");
     }
 }
 
