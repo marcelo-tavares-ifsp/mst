@@ -23,13 +23,19 @@ void Controller::enable_mst()
 {
     make_mst();
     install_files();
-    system("systemctl set-default multi-user.target");
+    if (system("systemctl set-default multi-user.target"))
+    {
+        throw "Could not enable MST in systemd.";
+    }
     printf("Multiseat enabled.\n");
 }
 
 void Controller::disable_mst()
 {
-    system("systemctl set-default graphical.target");
+    if (system("systemctl set-default graphical.target"))
+    {
+        throw "Could not disable MST in systemd.";
+    }
 }
 
 static void cp(const string& src, const string& dst)

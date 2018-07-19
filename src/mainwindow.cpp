@@ -44,7 +44,10 @@ void MainWindow::on_btn_next_4_clicked()
 
 void MainWindow::on_stop_mst_clicked()
 {
-    system("pkill Xephyr");
+    if (system("pkill Xephyr"))
+    {
+        throw "Could not stop MST ('pkill Xephyr' failed.)";
+    }
 }
 
 /**
@@ -380,12 +383,18 @@ static bool create_backup()
     const string user = Config::get_instance()->get_mst_user();
     const string usr_dir = Config::get_instance()->get_usr_share_dir();
     const string cmd = usr_dir + "/mk_backup.sh " + user;
-    system(cmd.c_str());
+    if (system(cmd.c_str()))
+    {
+        throw "Could not create a backup: " + cmd;
+    }
     return true;
 }
 
 static bool apply_backup()
 {
-    system("/home/student/src/mst/src/mst_files/apl_backup.sh");
+    if (system("/home/student/src/mst/src/mst_files/apl_backup.sh"))
+    {
+        throw "Could not restore a backup copy.";
+    }
     return true;
 }
