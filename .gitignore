@@ -3,3 +3,4 @@
 build-*
 src/mst.pro.user.*
 tests/tests.pro.user
+Makefile
