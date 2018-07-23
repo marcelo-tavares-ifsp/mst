@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
-SUBDIRS = src
+SUBDIRS = mst
 
 scripts.files += \
     scripts/mst-start-dm \
@@ -21,10 +21,10 @@ INSTALLS += scripts templates
 
 # We need 'rpmtools' package in AltLinux to do that.
 rpm.commands += \
-    su - multiseat -c rpmdev-setuptree; \
-    cp mst.spec ~multiseat/RPM/SPECS; \
-    cp mst*.tar.gz ~multiseat/RPM/SOURCES/; \
-    chown multiseat: ~multiseat/RPM/; \
+    su - multiseat -c rpmdev-setuptree;		\
+    cp mst.spec ~multiseat/RPM/SPECS;		\
+    cp mst*.tar.gz ~multiseat/RPM/SOURCES/;	\
+    chown multiseat: ~multiseat/RPM/;		\
     su - multiseat -c "rpmbuild -ba mst.spec"
 
 rpm.depends = dist
