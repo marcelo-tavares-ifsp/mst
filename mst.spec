@@ -24,9 +24,14 @@ make -j4
 
 %install
 mkdir -p $RPM_BUILD_ROOT/usr/local/bin
-install mst/mst $RPM_BUILD_ROOT/usr/local/bin/software
+mkdir -p $RPM_BUILD_ROOT/var/lib/mst
+install mst/mst $RPM_BUILD_ROOT/usr/local/bin/mst
+install templates/* $RPM_BUILD_ROOT/var/lib/mst
+install scripts/*   $RPM_BUILD_ROOT/usr/local/bin/
 
 %files
+/usr/local/bin/*
+/var/lib/mst/*
 
 %post
 

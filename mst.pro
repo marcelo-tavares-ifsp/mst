@@ -19,6 +19,16 @@ templates.path = $$(PREIFX)/var/lib/mst
 
 INSTALLS += scripts templates
 
+DISTFILES += \
+    scripts/mst-start-dm \
+    scripts/mk_backup.sh \
+    scripts/apl_backup.sh \
+    templates/bashrc.template    \
+    templates/rc.lua.template    \
+    templates/sudoers.template   \
+    templates/xinitrc.template   \
+    templates/xmst.template
+
 # We need 'rpmtools' package in AltLinux to do that.
 rpm.commands += \
     su - multiseat -c rpmdev-setuptree;		\
