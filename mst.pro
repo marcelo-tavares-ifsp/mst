@@ -17,7 +17,12 @@ templates.files += \
 
 templates.path = $$(PREIFX)/var/lib/mst
 
-INSTALLS += scripts templates
+etc.files += \
+    etc/mst
+
+etc.path = /etc/
+
+INSTALLS += scripts templates etc
 
 DISTFILES += \
     scripts/mst-start-dm \
@@ -27,7 +32,8 @@ DISTFILES += \
     templates/rc.lua.template    \
     templates/sudoers.template   \
     templates/xinitrc.template   \
-    templates/xmst.template
+    templates/xmst.template      \
+    etc/mst
 
 # We need 'rpmtools' package in AltLinux to do that.
 rpm.commands += \
