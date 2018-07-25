@@ -2,7 +2,7 @@
 #include "mainwindow.h"
 #include "config.h"
 
-static bool create_backup();
+static void create_backup();
 static bool apply_backup();
 
 static Controller *con;
@@ -60,7 +60,6 @@ void MainWindow::on_stop_mst_clicked()
 
 void MainWindow::on_btn_next_1_clicked()
 {
-    create_backup();
     get_resolution();
 
     ui->stackedWidget->setCurrentIndex(1);
@@ -376,7 +375,7 @@ void MainWindow::get_resolution()
     add_resolutions_to_cb(resol, ui->cb_resolution);
 }
 
-static bool create_backup()
+static void create_backup()
 {
     const string user = Config::get_instance()->get_mst_user();
     const string usr_dir = Config::get_instance()->get_usr_share_dir();
@@ -385,7 +384,6 @@ static bool create_backup()
     {
         throw "Could not create a backup: " + cmd;
     }
-    return true;
 }
 
 static bool apply_backup()
@@ -399,7 +397,13 @@ static bool apply_backup()
 
 void MainWindow::on_install_button_clicked()
 {
-    create_backup();
+    try
+    {
+        create_backup();
+    } catch (string msg)
+    {
+        cout << msg << endl;
+    }
     con->enable_mst();
     cout << "[debug] multiseat enabled." << endl;
 }
