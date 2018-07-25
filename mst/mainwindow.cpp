@@ -379,7 +379,7 @@ static void create_backup()
 {
     const string user = Config::get_instance()->get_mst_user();
     const string usr_dir = Config::get_instance()->get_usr_share_dir();
-    const string cmd = usr_dir + "/mk_backup.sh " + user;
+    const string cmd = "/usr/local/bin/mk_backup.sh " + user;
     if (system(cmd.c_str()))
     {
         throw "Could not create a backup: " + cmd;
