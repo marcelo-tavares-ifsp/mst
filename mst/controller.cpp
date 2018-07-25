@@ -64,7 +64,15 @@ void Controller::install_files()
     auto install = [output_dir](const string& src, const string& dst) -> void {
       cp(output_dir + "/" + src, dst);
     };
-    install("rc.lua",    mst_user_home + "/.config/awesome/");
+    string cmd = "mkdir -p " + mst_user_home + ".config/awesome/";
+    if (system(cmd.c_str()))
+    {
+        cout << "Controller::install_files: "
+             << "Could not create a directory: "
+             << cmd << endl;
+        throw "Could not create a directory: " + cmd;
+    }
+    install("rc.lua",    mst_user_home + ".config/awesome/");
     install("xorg.conf", "/etc/X11/xorg.conf");
     install(".bashrc",   mst_user_home);
     install(".xinitrc",   mst_user_home);
@@ -72,6 +80,14 @@ void Controller::install_files()
     if (is_pam_mkhomedir_used())
     {
         string skel = "/etc/skel";
+        cmd = "mkdir -p " + skel + "/.config/awesome/";
+        if (system(cmd.c_str()))
+        {
+            cout << "Controller::install_files: "
+                 << "Could not create a directory: "
+                 << cmd << endl;
+            throw "Could not create a directory: " + cmd;
+        }
         install("rc.lua",    skel + "/.config/awesome/");
         install(".bashrc",   skel);
         install(".xinitrc",   skel);
