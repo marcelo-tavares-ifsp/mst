@@ -13,7 +13,8 @@ templates.files += \
     templates/rc.lua.template    \
     templates/sudoers.template   \
     templates/xinitrc.template   \
-    templates/xmst.template
+    templates/xmst.template      \
+    templates/lightdm-mst.conf.template
 
 templates.path = $$(PREIFX)/var/lib/mst
 
@@ -33,6 +34,7 @@ DISTFILES += \
     templates/sudoers.template   \
     templates/xinitrc.template   \
     templates/xmst.template      \
+    templates/lightdm-mst.conf.template \
     etc/mst
 
 # We need 'rpmtools' package in AltLinux to do that.

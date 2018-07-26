@@ -17,6 +17,7 @@ void Controller::make_mst()
     make_bashrc();
     make_xinitrc();
     make_sudoers();
+    make_lightdm_conf();
 }
 
 void Controller::generate_files()
@@ -77,6 +78,7 @@ void Controller::install_files()
     install(".bashrc",   mst_user_home);
     install(".xinitrc",   mst_user_home);
     install(".xmst",      mst_user_home);
+    install("lightdm-mst.conf", "/etc/lightdm/");
     if (is_pam_mkhomedir_used())
     {
         string skel = "/etc/skel";
@@ -195,6 +197,25 @@ void Controller::make_sudoers()
                                 "{{mst}}",
                                 "/usr/local/bin/mst-start-dm");
     out << result << endl;
+    out.close();
+    in.close();
+}
+
+/**
+ * @brief Controller::make_lightdm_conf -- Generate a LightDM configuration
+ *          file.
+ *
+ * TODO: Use actual number of seats.
+ */
+void Controller::make_lightdm_conf()
+{
+    const string out_file = Config::get_instance()->get_output_dir()
+            + "/lightdm-mst.conf";
+    const string in_file = Config::get_instance()->get_output_dir()
+            + "/lightdm-mst.conf.template";
+    ofstream out(out_file);
+    ifstream in(in_file);
+    out << in.rdbuf();
     out.close();
     in.close();
 }

@@ -40,6 +40,7 @@ private:
     void make_bashrc();
     void make_xinitrc();
     void make_sudoers();
+    void make_lightdm_conf();
 
     void install_files();
 };
