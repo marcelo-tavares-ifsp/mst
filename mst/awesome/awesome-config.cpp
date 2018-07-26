@@ -29,7 +29,11 @@ static void _print_unclutter(ostream& os, const AwesomeConfig& config)
 
 static void _print_script(ostream& os, const AwesomeConfig& config)
 {
-    os << "os.execute(\"sleep 5; "
+    // TODO: 10s waiting seems to be enough for our cases, but this code
+    //       likely will lead to some problems in the future.
+    //       The better solution might be to wait for Xephyr to start in some
+    //       kind of loop.
+    os << "os.execute(\"sleep 10; "
        << "sudo /usr/local/bin/mst-start-dm "
        << config.seats.size() << " &\")" << endl;
 }
