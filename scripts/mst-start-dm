@@ -19,7 +19,7 @@ start_lightdm() {
 main() {
     local seat_count="$1"
     local idx
-    start_lightdm "/root/src/mst/etc/lightdm-mst.conf"
+    start_lightdm "/etc/lightdm/lightdm-mst.conf"
 
     xset -dpms
     xset s off
