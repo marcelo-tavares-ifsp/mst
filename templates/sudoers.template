@@ -1,1 +1,1 @@
-{{user}} ALL=(ALL) NOPASSWD: /bin/bash, /bin/su, {{mst}}, /usr/sbin/lightdm, /usr/bin/dm-tool
+{{user}} ALL=(ALL) NOPASSWD: /bin/bash, /bin/su, {{mst}}, /usr/sbin/lightdm, /usr/bin/dm-tool, /usr/bin/Xephyr
