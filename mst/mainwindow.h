@@ -17,6 +17,8 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <algorithm>
+#include <QListWidgetItem>
+#include <QMainWindow>
 
 using namespace std;
 
@@ -57,7 +59,7 @@ public Q_SLOTS:
     void on_btn_next_4_clicked();
 
     void on_stop_mst_clicked();
-
+    
     void on_install_button_clicked();
 
 private:
