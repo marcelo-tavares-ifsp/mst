@@ -37,6 +37,7 @@ install etc/mst     $RPM_BUILD_ROOT/etc
 /etc/mst
 
 %post
+useradd -G wheel -m multiseat
 
 
 
