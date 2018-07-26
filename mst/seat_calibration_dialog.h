@@ -1,11 +1,10 @@
 #ifndef SEAT_CALIBRATION_DIALOG_H
 #define SEAT_CALIBRATION_DIALOG_H
 
-#include "ui_seat_calibration_dialog.h"
-
 #include <QDialog>
+#include <QAbstractButton>
 
-
+#include "ui_seat_calibration_dialog.h"
 
 namespace Ui {
 class Seat_calibration_dialog;
