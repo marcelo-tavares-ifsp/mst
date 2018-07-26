@@ -193,7 +193,7 @@ void Controller::make_sudoers()
     getline(in, line);
     string result = replace_all(replace_all(line, "{{user}}", user),
                                 "{{mst}}",
-                                "/root/src/mst/scripts/mst-start-dm");
+                                "/usr/local/bin/mst-start-dm");
     out << result << endl;
     out.close();
     in.close();

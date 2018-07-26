@@ -30,7 +30,7 @@ static void _print_unclutter(ostream& os, const AwesomeConfig& config)
 static void _print_script(ostream& os, const AwesomeConfig& config)
 {
     os << "os.execute(\"sleep 5; "
-       << "sudo /root/src/mst/scripts/mst-start-dm "
+       << "sudo /usr/local/bin/mst-start-dm "
        << config.seats.size() << " &\")" << endl;
 }
 
