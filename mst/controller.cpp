@@ -211,7 +211,7 @@ void Controller::make_lightdm_conf()
 {
     const string out_file = Config::get_instance()->get_output_dir()
             + "/lightdm-mst.conf";
-    const string in_file = Config::get_instance()->get_output_dir()
+    const string in_file = Config::get_instance()->get_usr_share_dir()
             + "/lightdm-mst.conf.template";
     ofstream out(out_file);
     ifstream in(in_file);
