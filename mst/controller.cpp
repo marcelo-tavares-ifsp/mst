@@ -18,6 +18,7 @@ void Controller::make_mst()
     make_xinitrc();
     make_sudoers();
     make_lightdm_conf();
+    make_getty_service();
 }
 
 void Controller::generate_files()
@@ -79,6 +80,7 @@ void Controller::install_files()
     install(".xinitrc",   mst_user_home);
     install(".xmst",      mst_user_home);
     install("lightdm-mst.conf", "/etc/lightdm/");
+    install("getty@.service",   "/lib/systemd/system/getty@.service");
     if (is_pam_mkhomedir_used())
     {
         string skel = "/etc/skel";
@@ -218,4 +220,22 @@ void Controller::make_lightdm_conf()
     out << in.rdbuf();
     out.close();
     in.close();
+}
+
+void Controller::make_getty_service()
+{
+    const string in_file = Config::get_instance()->get_usr_share_dir()
+            + "/getty@.service.template";
+    const string out_file = Config::get_instance()->get_output_dir()
+            + "/getty@.service";
+    const string user = Config::get_instance()->get_mst_user();
+    ifstream in(in_file);
+    ofstream out(out_file);
+    for (string line; getline(in, line); )
+    {
+        string tmp = replace_all(line, "{{user}}", user);
+        out << tmp << endl;
+    }
+    in.close();
+    out.close();
 }

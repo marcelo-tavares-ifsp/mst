@@ -41,6 +41,7 @@ private:
     void make_xinitrc();
     void make_sudoers();
     void make_lightdm_conf();
+    void make_getty_service();
 
     void install_files();
 };
