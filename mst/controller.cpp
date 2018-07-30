@@ -2,7 +2,6 @@
 
 #include "controller.h"
 #include "dsv.h"
-
 #include "config.h"
 #include "utils.h"
 
@@ -43,6 +42,15 @@ void Controller::disable_mst()
     if (system("systemctl set-default graphical.target"))
     {
         throw "Could not disable MST in systemd.";
+    }
+
+    string cmd = "rm '" + Config::get_instance()->get_sudoers_config() + "'";
+
+    if (system(cmd.c_str()))
+    {
+        string message = "Could not delete "
+                + Config::get_instance()->get_sudoers_config() + ".";
+        throw message;
     }
 }
 

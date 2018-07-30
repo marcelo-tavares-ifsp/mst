@@ -8,6 +8,7 @@
 #include "awesome/awesome-config.h"
 #include "mainwindow.h"
 #include "seat.h"
+#include "config.h"
 
 using namespace std;
 
