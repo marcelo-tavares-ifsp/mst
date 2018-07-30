@@ -36,29 +36,41 @@ vector<Xrandr_monitor> Settings_mst::parse_xrandr()
 {
     vector<string> data = run_xrandr();
     vector<Xrandr_monitor> result;
-    regex r1("^(.*) connected(.*)");
+    regex r1("^(.*) connected.*");
     regex r2("^([0-9]+x[0-9]+).*");
     int state = 0;
     Xrandr_monitor monitor;
     smatch sm;
 
-    for (string line : data)
+    for (uint32_t idx = 0; idx < data.size();)
     {
-        if (line.length() == 0)
+        cout << "[debug] Settings_mst::parse_xrandr: line: " << data[idx]
+                << endl;
+        if (data[idx].length() == 0)
+        {
+            idx++;
             continue;
+        }
         switch (state)
         {
         case 0:
-            if (regex_match(line, sm, r1))
+            if (regex_match(data[idx], sm, r1))
             {
                 monitor.interface = sm[1];
                 state = 1;
+
+                cout << "[debug] Settings_mst::parse_xrandr: "
+                        << "[state 0] -> [state 1]" << endl;
+                cout << "[debug] Settings_mst::parse_xrandr: " << sm[1] << endl;
             }
+            idx++;
             break;
         case 1:
-            if (regex_match(line, sm, r2))
+            if (regex_match(data[idx], sm, r2))
             {
                 monitor.resolutions.push_back(sm[1]);
+                idx++;
+                cout << "[debug] Settings_mst::parse_xrandr: " << sm[1] << endl;
             }
             else
             {
@@ -66,6 +78,8 @@ vector<Xrandr_monitor> Settings_mst::parse_xrandr()
                 monitor.interface = "";
                 monitor.resolutions.clear();
                 state = 0;
+                cout << "[debug] Settings_mst::parse_xrandr: "
+                     << "[state 1] -> [state 0]" << endl;
             }
             break;
         }
