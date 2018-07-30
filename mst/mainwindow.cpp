@@ -1,6 +1,7 @@
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
 #include "config.h"
+#include "reboot_dialog.h"
 
 static void create_backup();
 static bool apply_backup();
@@ -43,6 +44,12 @@ MainWindow::~MainWindow()
 void MainWindow::on_btn_next_4_clicked()
 {
     apply_backup();
+    con->disable_mst();
+
+    Reboot_Dialog rebootDialog;
+
+    rebootDialog.setModal(true);
+    rebootDialog.exec();
 }
 
 void MainWindow::on_stop_mst_clicked()
@@ -147,6 +154,26 @@ void MainWindow::on_interface_clicked()
 
     scd.setModal(true);
     scd.exec();
+}
+
+void MainWindow::on_install_button_clicked()
+{
+    try
+    {
+        create_backup();
+    }
+    catch (string msg)
+    {
+        cout << msg << endl;
+    }
+    con->enable_mst();
+    cout << "[debug] multiseat enabled." << endl;
+
+    ui->install_button->setEnabled(false);
+    Reboot_Dialog rebootDialog;
+
+    rebootDialog.setModal(true);
+    rebootDialog.exec();
 }
 
 void MainWindow::set_seat_device(QString device, int type)
@@ -395,15 +422,9 @@ static bool apply_backup()
     return true;
 }
 
-void MainWindow::on_install_button_clicked()
+
+
+void MainWindow::on_pushButton_clicked()
 {
-    try
-    {
-        create_backup();
-    } catch (string msg)
-    {
-        cout << msg << endl;
-    }
-    con->enable_mst();
-    cout << "[debug] multiseat enabled." << endl;
+    this->close();
 }

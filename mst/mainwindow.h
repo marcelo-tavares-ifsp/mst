@@ -62,6 +62,9 @@ public Q_SLOTS:
     
     void on_install_button_clicked();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

@@ -41,7 +41,8 @@ SOURCES += \
     seat.cpp \
     dsv.cpp \
     config.cpp \
-    controller.cpp
+    controller.cpp \
+    reboot_dialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -55,11 +56,13 @@ HEADERS += \
     seat.h \
     dsv.h \
     config.h \
-    controller.h
+    controller.h \
+    reboot_dialog.h
 
 FORMS += \
         mainwindow.ui \
-    seat_calibration_dialog.ui
+    seat_calibration_dialog.ui \
+    reboot_dialog.ui
 
 target.path = $$(PREFIX)/bin
 
