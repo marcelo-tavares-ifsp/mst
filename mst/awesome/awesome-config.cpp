@@ -41,7 +41,7 @@ static void _print_script(ostream& os, const AwesomeConfig& config)
 string AwesomeConfig::get_rules()
 {
     string rules;
-    for (int idx = 0; idx < seats.size(); idx++)
+    for (int idx = 1; idx <= seats.size(); idx++)
     {
         rules += string("{ rule = { class = \"Xephyr\", name = \"Xephyr on :");
         rules += to_string(idx);
