@@ -42,10 +42,10 @@ DISTFILES += \
 # We need 'rpmtools' package in AltLinux to do that.
 rpm.commands += \
     su - multiseat -c rpmdev-setuptree;		\
-    cp mst.spec ~multiseat/RPM/SPECS;		\
-    cp mst*.tar.gz ~multiseat/RPM/SOURCES/;	\
-    chown multiseat: ~multiseat/RPM/;		\
-    su - multiseat -c \'rpmbuild -ba ~/RPM/SPECS/mst.spec\'
+    cp mst.spec ~multiseat/rpmbuild/SPECS;		\
+    cp mst*.tar.gz ~multiseat/rpmbuild/SOURCES/;	\
+    chown multiseat: ~multiseat/rpmbuild/;		\
+    su - multiseat -c \'rpmbuild -ba ~/rpmbuild/SPECS/mst.spec\'
 
 rpm.depends = dist
 
