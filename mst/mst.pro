@@ -11,10 +11,16 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+version.commands += \
+    echo \'const string VERSION = \"$$system("git rev-parse HEAD")\";\' \
+        > version.h
+
+mst.depends += version
 
 TARGET = mst
 TEMPLATE = app
 
+QMAKE_EXTRA_TARGETS += version
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -57,7 +63,8 @@ HEADERS += \
     dsv.h \
     config.h \
     controller.h \
-    reboot_dialog.h
+    reboot_dialog.h \
+    version.h
 
 FORMS += \
         mainwindow.ui \

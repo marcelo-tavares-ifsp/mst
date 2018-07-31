@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "config.h"
 #include "reboot_dialog.h"
+#include "version.h"
 
 static void create_backup();
 static bool apply_backup();
@@ -34,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
         widgets.push_back(btn);
         ui->gridLayout_1->addWidget(btn);
     }
+
+    ui->lbl_version->setText(QString::fromStdString(VERSION));
 }
 
 MainWindow::~MainWindow()

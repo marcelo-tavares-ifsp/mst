@@ -19,6 +19,7 @@ Multi-Seat Tool.
 %setup -q -n %{name}%{version} -a0
 
 %build
+cd mst
 qmake-qt5
 make -j4
 

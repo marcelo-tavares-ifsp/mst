@@ -1,3 +1,7 @@
+MST_PROJECT_NAME = mst
+MST_VERSION      = 1.0.0
+MST_DIST_NAME    = $$MST_PROJECT_NAME$$MST_VERSION
+
 TEMPLATE = subdirs
 SUBDIRS = mst
 
@@ -39,14 +43,31 @@ DISTFILES += \
     templates/getty@.service.template \
     etc/mst
 
-# We need 'rpmtools' package in AltLinux to do that.
+#version.commands += \
+#    echo \"Building $$system("git rev-parse HEAD") ...\"; \
+#    cd mst && make version
+
+# We need 'rpmtools' and 'rpmdevtools' package in AltLinux to do that.
 rpm.commands += \
     su - multiseat -c rpmdev-setuptree;		\
+    ln -s ~multiseat/RPM ~multiseat/rpmbuild;          \
     cp mst.spec ~multiseat/rpmbuild/SPECS;		\
-    cp mst*.tar.gz ~multiseat/rpmbuild/SOURCES/;	\
+    cp $$MST_DIST_NAME\\.tar.gz ~multiseat/rpmbuild/SOURCES/;	\
     chown multiseat: ~multiseat/rpmbuild/;		\
     su - multiseat -c \'rpmbuild -ba ~/rpmbuild/SPECS/mst.spec\'
 
-rpm.depends = dist
+rpm.depends += version dist
 
-QMAKE_EXTRA_TARGETS += rpm
+dist.commands += cd mst && make -j4 dist;
+dist.commands += \
+    cd ..;                      \
+    mkdir $$MST_DIST_NAME;    \
+    cd $$MST_DIST_NAME;      \
+    tar -xzf ../mst/$$MST_DIST_NAME\\.tar.gz;   \
+    mv $$MST_DIST_NAME mst;                     \
+    cp -r ../templates ../scripts ../etc .;     \
+    cd ..;                                      \
+    tar -czpf $$MST_DIST_NAME\\.tar.gz $$MST_DIST_NAME; \
+    rm -rf $$MST_DIST_NAME
+
+QMAKE_EXTRA_TARGETS += rpm version dist
