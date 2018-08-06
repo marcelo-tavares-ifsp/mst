@@ -15,10 +15,10 @@ version.commands += \
     echo \'const string VERSION = \"$$system("git rev-parse HEAD")\";\' \
         > version.h
 
-mst.depends += version
-
 TARGET = mst
 TEMPLATE = app
+
+PRE_TARGETDEPS += version
 
 QMAKE_EXTRA_TARGETS += version
 
