@@ -1,8 +1,13 @@
+#include <QDebug>
+#include <QLoggingCategory>
+
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
 #include "config.h"
 #include "reboot_dialog.h"
 #include "version.h"
+
+Q_LOGGING_CATEGORY(main_window_category, "mst.main_window")
 
 static void create_backup();
 static bool apply_backup();
@@ -29,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     if (_is_mst_running())
     {
+        qDebug(main_window_category) << "MST is running";
         QPushButton *btn = new QPushButton("stop_mst", this);
         btn->setText(QString::fromStdString("Остановить MST"));
         connect(btn, SIGNAL(clicked()), this, SLOT(on_stop_mst_clicked()));
@@ -59,7 +65,8 @@ void MainWindow::on_stop_mst_clicked()
 {
     if (system("pkill Xephyr"))
     {
-        throw "Could not stop MST ('pkill Xephyr' failed.)";
+        qCritical(main_window_category)
+                << "Could not stop MST ('pkill Xephyr' failed.)";
     }
 }
 
@@ -81,6 +88,7 @@ void MainWindow::on_btn_next_2_clicked()
 
     if (is_layout_changed(global_seats, ui->lw_interface->selectedItems()))
     {
+        qDebug(main_window_category) << "Layout changed";
         global_seats.clear();
         fill_global_seats();
 
@@ -108,7 +116,8 @@ void MainWindow::on_btn_next_3_clicked()
             con = new Controller(global_seats);
             con->generate_files();
             ui->stackedWidget->setCurrentIndex(3);
-            cout << "[debug] going to the 3rd panel..." << endl;
+            qDebug(main_window_category)
+                    << "going to the 3rd panel...";
         }
         else
         {
@@ -183,7 +192,8 @@ void MainWindow::set_seat_device(QString device, int type)
 {
     string d = device.toUtf8().constData();
 
-    cout << "Device assigned: " << d << " (" << type << ")" << endl;                                      // test
+    qDebug(main_window_category)
+            << "Device assigned: " << d.c_str() << " (" << type << ")";
 
     string device_interface = button->text().toUtf8().constData();
     for (int i = 0; global_seats.size(); i++)
@@ -412,6 +422,9 @@ static void create_backup()
     const string cmd = "/usr/local/bin/mk_backup.sh " + user;
     if (system(cmd.c_str()))
     {
+        qCritical(main_window_category)
+                << "Could not create a backup: "
+                << cmd.c_str();
         throw "Could not create a backup: " + cmd;
     }
 }
@@ -420,6 +433,7 @@ static bool apply_backup()
 {
     if (system("/home/student/src/mst/src/mst_files/apl_backup.sh"))
     {
+        qCritical(main_window_category) << "Could not restore a backup copy.";
         throw "Could not restore a backup copy.";
     }
     return true;

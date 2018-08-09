@@ -1,9 +1,12 @@
 #include <string>
+#include <QLoggingCategory>
 
 #include "controller.h"
 #include "dsv.h"
 #include "config.h"
 #include "utils.h"
+
+Q_LOGGING_CATEGORY(controller_category, "mst.controller")
 
 Controller::Controller(vector<Seat> seats) : seats(seats)
 {
@@ -32,15 +35,17 @@ void Controller::enable_mst()
     install_files();
     if (system("systemctl set-default multi-user.target"))
     {
+        qCritical(controller_category) << "Could not enable MST in systemd.";
         throw "Could not enable MST in systemd.";
     }
-    printf("[debug] multiseat enabled.\n");
+    qInfo(controller_category) << "multiseat enabled.";
 }
 
 void Controller::disable_mst()
 {
     if (system("systemctl set-default graphical.target"))
     {
+        qCritical(controller_category) << "Could not disable MST in systemd.";
         throw "Could not disable MST in systemd.";
     }
 
@@ -50,6 +55,7 @@ void Controller::disable_mst()
     {
         string message = "Could not delete "
                 + Config::get_instance()->get_sudoers_config() + ".";
+        qCritical(controller_category) << message.c_str();
         throw message;
     }
 }
@@ -57,9 +63,12 @@ void Controller::disable_mst()
 static void cp(const string& src, const string& dst)
 {
     string cmd = "cp " + src + " " + dst;
-    cout << "[debug] executing: " << cmd << endl;
+    qDebug(controller_category) << "executing: " << cmd.c_str();
     if (system(cmd.c_str()))
     {
+        qCritical(controller_category)
+                << "Could not execute command: "
+                << src.c_str() << " -> " << dst.c_str();
         throw "Could not execute command: "
             + src + " -> " + dst;
     }
@@ -77,9 +86,8 @@ void Controller::install_files()
     string cmd = "mkdir -p " + mst_user_home + ".config/awesome/";
     if (system(cmd.c_str()))
     {
-        cout << "Controller::install_files: "
-             << "Could not create a directory: "
-             << cmd << endl;
+        qCritical(controller_category)
+             << "Could not create a directory: " << cmd.c_str();
         throw "Could not create a directory: " + cmd;
     }
     install("rc.lua",    mst_user_home + ".config/awesome/");
@@ -95,9 +103,8 @@ void Controller::install_files()
         cmd = "mkdir -p " + skel + "/.config/awesome/";
         if (system(cmd.c_str()))
         {
-            cout << "Controller::install_files: "
-                 << "Could not create a directory: "
-                 << cmd << endl;
+            qCritical(controller_category)
+                    << "Could not create a directory: " << cmd.c_str();
             throw "Could not create a directory: " + cmd;
         }
         install("rc.lua",    skel + "/.config/awesome/");
@@ -123,7 +130,8 @@ void Controller::make_rc_lua()
 
     string str;
 
-    cout << "[debug] writing '" + out_file + "' ..." << endl;
+        qDebug(controller_category)
+                << "writing '" << out_file.c_str() << "' ...";
 
     stringstream awesome_autostart;
     awesome_autostart << *awesome_conf;
@@ -140,7 +148,8 @@ void Controller::make_rc_lua()
     }
     rclua.close();
     rclua_pattern.close();
-    cout << "[debug] writing '" + out_file + "' ... done" << endl;
+    qDebug(controller_category)
+            << "writing '" << out_file.c_str() << "' ... done";
 }
 
 void Controller::make_xorg()

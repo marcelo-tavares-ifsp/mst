@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <vector>
+#include <QLoggingCategory>
 
 #include "xorg/xorg-config.h"
 #include "awesome/awesome-config.h"
@@ -10,9 +11,9 @@
 #include "seat.h"
 #include "config.h"
 
+Q_DECLARE_LOGGING_CATEGORY(controller_category)
+
 using namespace std;
-
-
 
 /**
  * @brief The Controller class -- a class to control the multi-seat

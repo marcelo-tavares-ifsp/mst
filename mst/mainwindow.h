@@ -19,10 +19,11 @@
 #include <algorithm>
 #include <QListWidgetItem>
 #include <QMainWindow>
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(main_window_category)
 
 using namespace std;
-
-
 
 namespace Ui {
 class MainWindow;
