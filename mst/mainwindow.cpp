@@ -63,11 +63,7 @@ void MainWindow::on_btn_next_4_clicked()
 
 void MainWindow::on_stop_mst_clicked()
 {
-    if (system("pkill Xephyr"))
-    {
-        qCritical(main_window_category)
-                << "Could not stop MST ('pkill Xephyr' failed.)";
-    }
+    con->stop_mst();
 }
 
 /**

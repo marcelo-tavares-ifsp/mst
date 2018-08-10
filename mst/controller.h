@@ -26,6 +26,7 @@ public:
     void generate_files();
     void enable_mst();
     void disable_mst();
+    void stop_mst();
 
 private:
     vector<Seat> seats;

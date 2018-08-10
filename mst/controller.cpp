@@ -23,6 +23,20 @@ void Controller::make_mst()
     make_getty_service();
 }
 
+/**
+ * @brief Controller::stop_mst -- Stop multiseat if it is running.
+ * @throws an error message if stopping is failed.
+ */
+void Controller::stop_mst()
+{
+    if (system("pkill Xephyr"))
+    {
+        const string msg = "Could not stop MST ('pkill Xephyr' failed.)";
+        qCritical(controller_category) << msg.c_str();
+        throw msg;
+    }
+}
+
 void Controller::generate_files()
 {
     string out = Config::get_instance()->get_output_dir();
