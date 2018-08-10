@@ -1,6 +1,8 @@
+#include <QLoggingCategory>
+
 #include "input-device-listener.h"
 
-
+Q_LOGGING_CATEGORY(input_device_listener_category, "mst.idl")
 
 Input_device_listener::Input_device_listener(vector<string> devices,
                                              DEVICE_TYPE type)
@@ -12,13 +14,13 @@ Input_device_listener::Input_device_listener(vector<string> devices,
 static void _debug_print_devices(int type, vector<string>* devices)
 {
     if (type == Input_device_listener::DEVICE_TYPE::KEYBOARD)
-        cout << "[debug] keyboards: " << endl;
+        qDebug(input_device_listener_category()) << "keyboards: ";
     else
-        cout << "[debug] mice: " << endl;
+        qDebug(input_device_listener_category()) << "mice: ";
 
     for (auto d : *devices)
     {
-        cout << "[debug]     " + d << endl;
+        qDebug(input_device_listener_category()) << "     " << d.c_str();
     }
 }
 
@@ -43,8 +45,7 @@ void Input_device_listener::run()
 
 void Input_device_listener::cancel()
 {
-    cout << "[debug] Input_device_listener::cancel: Stopping the thread..."
-         << endl;
+    qDebug(input_device_listener_category()) << "Stopping the thread...";
     is_running = false;
 }
 
@@ -85,6 +86,8 @@ static bool _loop_answer_keybd(string keybd)
     fd = open(pDevice, O_RDWR  | O_NONBLOCK);
     if (fd == -1)
     {
+        qCritical(input_device_listener_category())
+                << "Could not open device: " << pDevice;
         throw (string)"ERROR Opening %s\n" + pDevice;
     }
 
@@ -148,6 +151,8 @@ static bool _loop_answer_mouse(string mouse)
     fd = open(pDevice, O_RDWR | O_NONBLOCK);
     if (fd == -1)
     {
+        qCritical(input_device_listener_category())
+                << "Could not open device: " << pDevice;
         throw (string)"ERROR Opening " + pDevice;
     }
 
@@ -175,7 +180,6 @@ string* Input_device_listener::check_mice()
     while (is_running)
     {
         usleep(10);
-        // cout << "check_mice: Loop..." << endl;
         for (auto mouse : *devices)
         {
             if (_loop_answer_mouse(mouse))
