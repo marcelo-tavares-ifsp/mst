@@ -63,7 +63,7 @@ void MainWindow::on_btn_next_4_clicked()
 
 void MainWindow::on_stop_mst_clicked()
 {
-    con->stop_mst();
+    Controller::stop_mst();
 }
 
 /**
