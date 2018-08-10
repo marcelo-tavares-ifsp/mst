@@ -1,5 +1,5 @@
 #include <QLoggingCategory>
-#include "settings-mst.h"
+#include "settings.h"
 
 Q_LOGGING_CATEGORY(settings_category, "mst.settings")
 

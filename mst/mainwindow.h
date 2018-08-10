@@ -3,7 +3,7 @@
 
 #include "ui_mainwindow.h"
 #include "controller.h"
-#include "settings-mst.h"
+#include "settings.h"
 #include "input-device-listener.h"
 #include "utils.h"
 #include "seat_calibration_dialog.h"
