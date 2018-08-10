@@ -1,12 +1,12 @@
-#include "awesome-config.h"
+#include "awesome.h"
 
 
 
-AwesomeConfig::AwesomeConfig(vector<Seat> seats) : seats(seats)
+Awesome::Awesome(vector<Seat> seats) : seats(seats)
 {
 }
 
-static void _print_xephyr(ostream& os, const AwesomeConfig& config)
+static void _print_xephyr(ostream& os, const Awesome& config)
 {
     for (int idx = 0; idx < config.seats.size(); idx++)
     {
@@ -22,12 +22,12 @@ static void _print_xephyr(ostream& os, const AwesomeConfig& config)
     }
 }
 
-static void _print_unclutter(ostream& os, const AwesomeConfig& config)
+static void _print_unclutter(ostream& os, const Awesome& config)
 {
     os << string("os.execute(\"unclutter &\")") << endl;
 }
 
-static void _print_script(ostream& os, const AwesomeConfig& config)
+static void _print_script(ostream& os, const Awesome& config)
 {
     // TODO: 10s waiting seems to be enough for our cases, but this code
     //       likely will lead to some problems in the future.
@@ -38,7 +38,7 @@ static void _print_script(ostream& os, const AwesomeConfig& config)
        << config.seats.size() << " &\")" << endl;
 }
 
-string AwesomeConfig::get_rules()
+string Awesome::get_rules()
 {
     string rules;
     for (int idx = 1; idx <= seats.size(); idx++)
@@ -53,7 +53,7 @@ string AwesomeConfig::get_rules()
     return rules;
 }
 
-ostream& operator << (ostream& os, const AwesomeConfig& config)
+ostream& operator << (ostream& os, const Awesome& config)
 {
     _print_xephyr(os, config);
     _print_unclutter(os, config);

@@ -6,7 +6,7 @@
 #include <QLoggingCategory>
 
 #include "xorg/xorg-config.h"
-#include "awesome/awesome-config.h"
+#include "awesome/awesome.h"
 #include "mainwindow.h"
 #include "seat.h"
 #include "config.h"
@@ -30,7 +30,7 @@ public:
 
 private:
     vector<Seat> seats;
-    AwesomeConfig *awesome_conf;
+    Awesome *awesome_conf;
     XorgConfig *xorg_conf;
     void make_mst();
 

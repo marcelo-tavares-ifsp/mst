@@ -138,7 +138,7 @@ void Controller::make_rc_lua()
     fstream rclua_pattern;
     fstream rclua;
 
-    awesome_conf = new AwesomeConfig(seats);
+    awesome_conf = new Awesome(seats);
     rclua_pattern.open("/usr/share/mst/rc.lua.template", ios::in);
     rclua.open(out_file, ios::out);
 

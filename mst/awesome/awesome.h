@@ -11,15 +11,15 @@ using namespace std;
 
 
 
-class AwesomeConfig
+class Awesome
 {
 public:
-    AwesomeConfig(vector<Seat> seats);
+    Awesome(vector<Seat> seats);
     vector<Seat> seats;
 
     string get_rules();
 
-    friend ostream& operator << (ostream& os, const AwesomeConfig& config);
+    friend ostream& operator << (ostream& os, const Awesome& config);
 };
 
 #endif // AWESOMECONFIG_H

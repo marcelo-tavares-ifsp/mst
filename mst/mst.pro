@@ -39,7 +39,6 @@ SOURCES += \
         mainwindow.cpp \
     lightdm/display-manager.cpp \
     xorg/xorg-config.cpp \
-    awesome/awesome-config.cpp \
     utils.cpp \
     input-device-listener.cpp \
     seat_calibration_dialog.cpp \
@@ -48,13 +47,13 @@ SOURCES += \
     config.cpp \
     controller.cpp \
     reboot_dialog.cpp \
-    settings.cpp
+    settings.cpp \
+    awesome/awesome.cpp
 
 HEADERS += \
         mainwindow.h \
     lightdm/display-manager.h \
     xorg/xorg-config.h \
-    awesome/awesome-config.h \
     utils.h \
     input-device-listener.h \
     seat_calibration_dialog.h \
@@ -64,7 +63,8 @@ HEADERS += \
     controller.h \
     reboot_dialog.h \
     version.h \
-    settings.h
+    settings.h \
+    awesome/awesome.h
 
 FORMS += \
         mainwindow.ui \
