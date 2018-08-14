@@ -44,7 +44,7 @@ const string Awesome::get_raw_version()
 const vector<int> Awesome::get_version()
 {
     const string raw_version = get_raw_version();
-    regex r1("awesome v([0-9]+).([0-9]+).*");
+    regex r1("awesome v([0-9]+).([0-9]+)*");
     smatch sm;
     if (regex_search(raw_version, sm, r1))
     {

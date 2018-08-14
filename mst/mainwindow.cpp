@@ -427,7 +427,10 @@ static void create_backup()
 
 static bool apply_backup()
 {
-    if (system("/home/student/src/mst/src/mst_files/apl_backup.sh"))
+    const string user = Config::get_instance()->get_mst_user();
+    const string cmd = "/usr/local/bin/apl_backup.sh " + user;
+
+    if (system(cmd.c_str()))
     {
         qCritical(main_window_category) << "Could not restore a backup copy.";
         throw "Could not restore a backup copy.";

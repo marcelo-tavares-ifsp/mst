@@ -1,7 +1,9 @@
 #!/bin/bash
 
-XORG="/home/student/.config/xorg.conf"
-GETTY="/home/student/.config/getty@.service"
+mst_user="$1"
+
+XORG="/home/$mst_user/.config/xorg.conf"
+GETTY="/home/$mst_user/.config/getty@.service"
 
 if [ -f "$XORG" ]; then
     mv $XORG /etc/X11/xorg.conf

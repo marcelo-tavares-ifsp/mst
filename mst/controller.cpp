@@ -139,16 +139,16 @@ void Controller::make_rc_lua()
     fstream rclua;
 
     const vector<int> version = Awesome::get_version();
-    awesome_conf = new Awesome(seats);
-    if (version[0] == 3)
-    {
-        qDebug(controller_category) << "Using rc.lua.template for Awesome 3";
-        rclua_pattern.open("/usr/share/mst/rc.lua.template", ios::in);
-    }
-    else
-    {
-         qDebug(controller_category) << "Using rc.lua.template for Awesome 4";
-        rclua_pattern.open("/usr/share/mst/rc.lua.4.template", ios::in);
+        awesome_conf = new Awesome(seats);
+        if (version[0] == 3)
+        {
+            qDebug(controller_category) << "Using rc.lua.template for Awesome 3";
+            rclua_pattern.open("/usr/share/mst/rc.lua.template", ios::in);
+        }
+        else
+        {
+             qDebug(controller_category) << "Using rc.lua.template for Awesome 4";
+            rclua_pattern.open("/usr/share/mst/rc.lua.4.template", ios::in);
     }
     rclua.open(out_file, ios::out);
 
