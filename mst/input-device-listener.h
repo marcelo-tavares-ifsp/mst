@@ -27,7 +27,8 @@ class Input_device_listener: public QObject, public QRunnable
 public:
     enum DEVICE_TYPE {
         KEYBOARD,
-        MOUSE
+        MOUSE,
+        USB
     };
 
     vector<string> *devices;

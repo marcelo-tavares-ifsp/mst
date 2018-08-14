@@ -18,6 +18,7 @@ void Controller::make_mst()
     make_sudoers();
     make_lightdm_conf();
     make_getty_service();
+    make_udev_rules();
 }
 
 void Controller::generate_files()
@@ -74,6 +75,7 @@ void Controller::install_files()
     auto install = [output_dir](const string& src, const string& dst) -> void {
       cp(output_dir + "/" + src, dst);
     };
+
     string cmd = "mkdir -p " + mst_user_home + ".config/awesome/";
     if (system(cmd.c_str()))
     {
@@ -106,6 +108,8 @@ void Controller::install_files()
         install(".xmst",      skel);
     }
     install("sudoers",   Config::get_instance()->get_sudoers_config());
+
+    install("99-mst.rules", "/etc/udev/rules.d/99-mst.rules");
 
 }
 
@@ -245,5 +249,23 @@ void Controller::make_getty_service()
         out << tmp << endl;
     }
     in.close();
+    out.close();
+}
+
+void Controller::make_udev_rules()
+{
+    const string out_file = Config::get_instance()->get_output_dir()
+            + "/99-mst.rules";
+
+    ofstream out(out_file);
+
+    for (auto seat : seats)
+    {
+        out << "ACTION==\"add\", ";
+        out << "KERNEL==\"sd[b-z][0-9]\", ";
+        out << "DEVPATH==\"" << seat.usb << "/*\", ";
+        out << "RUN+=\"/usr/bin/mst.sh /dev/%k " << seat.interface << "\"" << endl;
+    }
+
     out.close();
 }

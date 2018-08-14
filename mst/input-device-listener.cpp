@@ -35,6 +35,8 @@ void Input_device_listener::run()
     case DEVICE_TYPE::MOUSE:
         result = check_mice();
         break;
+    default:
+        break;
     }
 
     if (result)

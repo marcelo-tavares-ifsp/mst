@@ -10,6 +10,7 @@
 #include "controller.h"
 #include "seat.h"
 #include "input-device-listener.h"
+#include "usb_detection_dialog.h"
 
 #include <QThreadPool>
 #include <QString>
