@@ -27,6 +27,8 @@ public:
     void enable_mst();
     void disable_mst();
     static void stop_mst();
+    static void create_backup();
+    static void restore_backup();
 
 private:
     vector<Seat> seats;

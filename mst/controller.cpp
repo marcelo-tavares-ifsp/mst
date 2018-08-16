@@ -280,3 +280,30 @@ void Controller::make_getty_service()
     in.close();
     out.close();
 }
+
+
+void Controller::create_backup()
+{
+    const string user = Config::get_instance()->get_mst_user();
+    const string usr_dir = Config::get_instance()->get_usr_share_dir();
+    const string cmd = "/usr/local/bin/mk_backup.sh " + user;
+    if (system(cmd.c_str()))
+    {
+        qCritical(main_window_category)
+                << "Could not create a backup: "
+                << cmd.c_str();
+        throw "Could not create a backup: " + cmd;
+    }
+}
+
+void Controller::restore_backup()
+{
+    const string user = Config::get_instance()->get_mst_user();
+    const string cmd = "/usr/local/bin/apl_backup.sh " + user;
+
+    if (system(cmd.c_str()))
+    {
+        qCritical(main_window_category) << "Could not restore a backup copy.";
+        throw "Could not restore a backup copy.";
+    }
+}

@@ -9,9 +9,6 @@
 
 Q_LOGGING_CATEGORY(main_window_category, "mst.main_window")
 
-static void create_backup();
-static bool apply_backup();
-
 static Controller *con;
 
 int Seat::width;
@@ -52,7 +49,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btn_next_4_clicked()
 {
-    apply_backup();
+    Controller::restore_backup();
     con->disable_mst();
 
     Reboot_Dialog rebootDialog;
@@ -168,7 +165,7 @@ void MainWindow::on_install_button_clicked()
 {
     try
     {
-        create_backup();
+        Controller::create_backup();
     }
     catch (string msg)
     {
@@ -409,33 +406,6 @@ void MainWindow::get_resolution()
     }
 
     add_resolutions_to_cb(resol, ui->cb_resolution);
-}
-
-static void create_backup()
-{
-    const string user = Config::get_instance()->get_mst_user();
-    const string usr_dir = Config::get_instance()->get_usr_share_dir();
-    const string cmd = "/usr/local/bin/mk_backup.sh " + user;
-    if (system(cmd.c_str()))
-    {
-        qCritical(main_window_category)
-                << "Could not create a backup: "
-                << cmd.c_str();
-        throw "Could not create a backup: " + cmd;
-    }
-}
-
-static bool apply_backup()
-{
-    const string user = Config::get_instance()->get_mst_user();
-    const string cmd = "/usr/local/bin/apl_backup.sh " + user;
-
-    if (system(cmd.c_str()))
-    {
-        qCritical(main_window_category) << "Could not restore a backup copy.";
-        throw "Could not restore a backup copy.";
-    }
-    return true;
 }
 
 
