@@ -8,6 +8,9 @@ main() {
 
     [ -f "/etc/X11/xorg.conf" ] && rm "/etc/X11/xorg.conf"
 
+    [ -e "/etc/skel" ] && [ -f "/etc/skel/.bashrc" ] \
+			      && rm "/etc/skel/.bashrc"
+
     # if [ -f "$xorg_backup" ]; then
     # 	cp "$xorg_backup" /etc/X11/xorg.conf
     # fi
