@@ -157,14 +157,11 @@ void Controller::make_rc_lua()
         qDebug(controller_category)
                 << "writing '" << out_file.c_str() << "' ...";
 
-    stringstream awesome_autostart;
-    awesome_autostart << *awesome_conf;
-
     while(getline(rclua_pattern, str))
     {
 
         str = replace_all(str, "{{mst_autostart}}",
-                          awesome_autostart.str());
+                          awesome_conf->make_autostart());
         str = replace_all(str, "{{mst_awful_rules}}",
                           awesome_conf->make_rules());
 

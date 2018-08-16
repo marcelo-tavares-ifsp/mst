@@ -22,10 +22,9 @@ public:
     vector<Seat> seats;
 
     string make_rules();
+    string make_autostart();
     static const string get_raw_version();
     static const vector<int> get_version();
-
-    friend ostream& operator << (ostream& os, const Awesome& config);
 };
 
 #endif // AWESOMECONFIG_H

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string>
 #include <regex>
+#include <fstream>
 
 #include <QLoggingCategory>
 
@@ -61,36 +62,23 @@ const vector<int> Awesome::get_version()
     }
 }
 
-static void _print_xephyr(ostream& os, const Awesome& config)
+static string _make_xephyr_autostart(const Awesome& config)
 {
+    stringstream result;
+
     for (int idx = 0; idx < config.seats.size(); idx++)
     {
         string mouse_dev = "/dev/input/by-path/" + config.seats[idx].mouse;
         string keybd_dev = "/dev/input/by-path/" + config.seats[idx].keyboard;
-        os << string("os.execute(\"sudo Xephyr -softCursor -ac -br ")
-           << " -mouse \'evdev,5,device=" << mouse_dev << "\'"
-           << " -keybd \'evdev,,device="  << keybd_dev << "\'"
-           << " -screen "
-           << config.seats[idx].width      << string("x")
-           << config.seats[idx].height     << string(" :")
-           << idx + 1                      << string(" &\")")   << endl;
+        result << "os.execute(\"sudo Xephyr -softCursor -ac -br "
+               << " -mouse \'evdev,5,device=" << mouse_dev << "\'"
+               << " -keybd \'evdev,,device=" << keybd_dev << "\'"
+               << " -screen "
+               << config.seats[idx].width  << "x"
+               << config.seats[idx].height << " :"
+               << idx + 1 << " &\")" << endl;
     }
-}
-
-static void _print_unclutter(ostream& os, const Awesome& config)
-{
-    os << string("os.execute(\"unclutter &\")") << endl;
-}
-
-static void _print_script(ostream& os, const Awesome& config)
-{
-    // TODO: 10s waiting seems to be enough for our cases, but this code
-    //       likely will lead to some problems in the future.
-    //       The better solution might be to wait for Xephyr to start in some
-    //       kind of loop.
-    os << "os.execute(\"sleep 10; "
-       << "sudo /usr/local/bin/mst-start-dm "
-       << config.seats.size() << " &\")" << endl;
+    return result.str();
 }
 
 string Awesome::make_rules()
@@ -108,10 +96,19 @@ string Awesome::make_rules()
     return rules;
 }
 
-ostream& operator << (ostream& os, const Awesome& config)
+string Awesome::make_autostart()
 {
-    _print_xephyr(os, config);
-    _print_unclutter(os, config);
-    _print_script(os, config);
-    return os;
+    string result;
+    result += _make_xephyr_autostart(*this);
+    result += "os.execute(\"unclutter &\")\n";
+
+    // TODO: 10s waiting seems to be enough for our cases, but this code
+    //       likely will lead to some problems in the future.
+    //       The better solution might be to wait for Xephyr to start in some
+    //       kind of loop.
+    result += (string) "os.execute(\"sleep 10; "
+            + "sudo /usr/local/bin/mst-start-dm "
+            + to_string(seats.size()) + " &\")\n";
+
+    return result;
 }
