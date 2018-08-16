@@ -166,7 +166,7 @@ void Controller::make_rc_lua()
         str = replace_all(str, "{{mst_autostart}}",
                           awesome_autostart.str());
         str = replace_all(str, "{{mst_awful_rules}}",
-                          awesome_conf->get_rules());
+                          awesome_conf->make_rules());
 
         rclua << str << endl;
     }

@@ -21,7 +21,7 @@ public:
     Awesome(vector<Seat> seats);
     vector<Seat> seats;
 
-    string get_rules();
+    string make_rules();
     static const string get_raw_version();
     static const vector<int> get_version();
 

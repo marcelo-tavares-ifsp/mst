@@ -93,7 +93,7 @@ static void _print_script(ostream& os, const Awesome& config)
        << config.seats.size() << " &\")" << endl;
 }
 
-string Awesome::get_rules()
+string Awesome::make_rules()
 {
     string rules;
     for (int idx = 1; idx <= seats.size(); idx++)
