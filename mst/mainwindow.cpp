@@ -202,14 +202,11 @@ void MainWindow::set_seat_device(QString device, int type)
                 global_seats[i].mouse = d;
             }
 
+            qDebug(main_window_category)
+                    << "Seat interface: '" << global_seats[i].interface.c_str()
+                    << "'; keyboard: '" << global_seats[i].keyboard.c_str()
+                    << "'; mouse: '" << global_seats[i].mouse.c_str() << "'";
 
-            /////////////////test/////////////////
-
-            cout << "Seat interface: " << global_seats[i].interface << endl;
-            cout << "Seat keyboard: " << global_seats[i].keyboard << endl;
-            cout << "Seat mouse: " << global_seats[i].mouse << endl;
-
-            /////////////////test/////////////////
             break;
         }
     }
