@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>378</width>
     <height>159</height>
    </rect>
   </property>
@@ -16,9 +16,9 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>10</x>
      <y>10</y>
-     <width>270</width>
+     <width>358</width>
      <height>131</height>
     </rect>
    </property>
@@ -33,7 +33,7 @@
     <item row="2" column="0">
      <widget class="QPushButton" name="btn_late_reboot">
       <property name="text">
-       <string>Поже</string>
+       <string>Позже</string>
       </property>
      </widget>
     </item>
