@@ -44,6 +44,11 @@ void Controller::make_mst()
     make_getty_service();
 }
 
+bool Controller::is_mst_running()
+{
+    return (system("pgrep -c Xephyr") == 0);
+}
+
 /**
  * @brief Controller::stop_mst -- Stop multiseat if it is running.
  * @throws an error message if stopping is failed.

@@ -38,11 +38,6 @@ QPushButton *button;
 Input_device_listener *mouse_listener;
 Input_device_listener *keybd_listener;
 
-static bool _is_mst_running()
-{
-    return (system("pgrep -c Xephyr") == 0);
-}
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -50,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
 
-    if (_is_mst_running())
+    if (Controller::is_mst_running())
     {
         qDebug(main_window_category) << "MST is running";
         QPushButton *btn = new QPushButton("stop_mst", this);
