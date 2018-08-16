@@ -41,7 +41,7 @@ void Controller::generate_files()
 {
     string out = Config::get_instance()->get_output_dir();
     make_mst();
-    cout << "[debug] files generated: " + out << endl;;
+    qDebug(controller_category) << "files generated: " << out.c_str();
 }
 
 void Controller::enable_mst()
