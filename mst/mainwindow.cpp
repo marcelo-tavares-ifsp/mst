@@ -352,7 +352,8 @@ static void add_resolutions_to_cb(vector<string> resol, QComboBox *cb)
 {
     for(string s : resol)
     {
-        cb->addItem(QString::fromStdString(s));
+        if (! s.empty())
+            cb->addItem(QString::fromStdString(s));
     }
 }
 
