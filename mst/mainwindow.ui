@@ -39,7 +39,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page_hello">
      <widget class="QLabel" name="lbl_hello">
@@ -202,9 +202,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>30</y>
+        <y>50</y>
         <width>211</width>
-        <height>211</height>
+        <height>191</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -250,6 +250,22 @@
       </property>
       <property name="text">
        <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Выберите рабочее место для настройки:</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
