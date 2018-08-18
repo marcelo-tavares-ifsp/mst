@@ -32,7 +32,10 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    QLoggingCategory::setFilterRules("*.debug=true");
+    QLoggingCategory::setFilterRules("*.debug=true\n"
+                                     "qt.qpa.input.events=false\n"
+                                     "qt.widgets.gestures=false\n"
+                                     "qt.qpa.input=false");
     qSetMessagePattern("%{time} [%{category} %{type}] "
                        "%{function}:%{line}: %{message}");
     string cmd = "mkdir -p " + Config::get_instance()->get_output_dir();
