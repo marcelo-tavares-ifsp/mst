@@ -26,8 +26,7 @@
 #include "mainwindow.h"
 #include "config.h"
 #include "reboot_dialog.h"
-//#include "version.h"
-#define VERSION "UNKNOWN"
+#include "version.h"
 
 Q_LOGGING_CATEGORY(main_window_category, "mst.main_window")
 
