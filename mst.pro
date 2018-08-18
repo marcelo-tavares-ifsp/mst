@@ -21,6 +21,7 @@ templates.files += \
     templates/xinitrc.template   \
     templates/xmst.template      \
     templates/lightdm-mst.conf.template \
+    systemd-udevd.service.template \
     getty@.service.template
 
 templates.path = $$(PREIFX)/var/lib/mst
@@ -36,6 +37,7 @@ DISTFILES += \
     scripts/mst-start-dm \
     scripts/mk_backup.sh \
     scripts/apl_backup.sh \
+    scripts/mst-mount \
     templates/bashrc.template    \
     templates/rc.lua.template    \
     templates/rc.lua.4.template  \
