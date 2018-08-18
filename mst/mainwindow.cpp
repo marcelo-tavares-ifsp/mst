@@ -89,6 +89,7 @@ void MainWindow::on_btn_next_1_clicked()
     get_resolution();
 
     ui->stackedWidget->setCurrentIndex(1);
+    ui->cb_resolution->setCurrentIndex(ui->cb_resolution->count() - 1);
 }
 
 void MainWindow::on_btn_next_2_clicked()
