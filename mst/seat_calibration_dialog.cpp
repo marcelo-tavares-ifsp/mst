@@ -39,17 +39,19 @@ Seat_calibration_dialog::~Seat_calibration_dialog()
 
 void Seat_calibration_dialog::on_lineEdit_textChanged(const QString &arg1)
 {
-    ui->buttonBox->setEnabled(true);
+    if (ui->lineEdit->text().length() >= 3)
+    {
+        this->close();
+    }
 }
 
-void Seat_calibration_dialog::on_buttonBox_2_clicked(QAbstractButton *button)
+void Seat_calibration_dialog::on_pushButton_clicked()
 {
-    cout << "click!" << endl;
+    ui->lineEdit->setFocus();
+}
+
+void Seat_calibration_dialog::on_pushButton_2_clicked()
+{
     emit cancel();
     this->close();
-}
-
-void Seat_calibration_dialog::on_buttonBox_clicked(QAbstractButton *button)
-{
-
 }

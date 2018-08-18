@@ -24,9 +24,9 @@ signals:
 private slots:
     void on_lineEdit_textChanged(const QString &arg1);
 
-    void on_buttonBox_2_clicked(QAbstractButton *button);
+    void on_pushButton_clicked();
 
-    void on_buttonBox_clicked(QAbstractButton *button);
+    void on_pushButton_2_clicked();
 
 private:
     Ui::Seat_calibration_dialog *ui;
