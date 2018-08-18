@@ -168,6 +168,8 @@ void MainWindow::on_interface_clicked()
 {
     button = (QPushButton *) sender();
 
+    clear_interface(button->text().toUtf8().constData());
+
     mouse_listener = new Input_device_listener(list_mice, Input_device_listener::MOUSE);
     connect(mouse_listener, SIGNAL(device_found(QString, int)),
                 this, SLOT(set_seat_device(QString, int)));
@@ -450,5 +452,18 @@ void MainWindow::on_lw_interface_itemSelectionChanged()
     else
     {
         ui->btn_next_2->setEnabled(true);
+    }
+}
+
+void MainWindow::clear_interface(string interface)
+{
+    for (int i = 0; i < global_seats.size(); i++)
+    {
+        if (global_seats[i].interface == interface)
+        {
+            global_seats[i].keyboard = "";
+            global_seats[i].mouse = "";
+            return;
+        }
     }
 }

@@ -72,6 +72,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
+    void clear_interface(string interface);
     bool check_collision_seats();
     bool check_fill_seats();
     void clear_layout();
