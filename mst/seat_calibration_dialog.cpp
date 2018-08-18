@@ -37,19 +37,6 @@ Seat_calibration_dialog::~Seat_calibration_dialog()
     delete ui;
 }
 
-void Seat_calibration_dialog::on_lineEdit_textChanged(const QString &arg1)
-{
-    if (ui->lineEdit->text().length() >= 3)
-    {
-        this->close();
-    }
-}
-
-void Seat_calibration_dialog::on_pushButton_clicked()
-{
-    ui->lineEdit->setFocus();
-}
-
 void Seat_calibration_dialog::on_pushButton_2_clicked()
 {
     emit cancel();

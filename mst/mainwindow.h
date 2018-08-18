@@ -38,6 +38,7 @@ public:
     vector<Seat> global_seats;
     vector<string> list_mice;
     vector<string> list_keybs;
+    Seat_calibration_dialog scd;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 

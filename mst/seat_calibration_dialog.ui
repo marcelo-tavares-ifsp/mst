@@ -469,34 +469,21 @@
      <x>10</x>
      <y>70</y>
      <width>331</width>
-     <height>31</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>Нажмите 3 раза мышью кнопку &quot;OK&quot;, а затем 3 любые клавиши на клавиатуре.</string>
+    <string>Нажмайте на мышь и клавиатуру, в пределах этого окна, до тех пор, пока оно не пропадёт. (в среднем 2 клика мыши и 2 нажатия клавиш на клавиатуре)</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>140</y>
-     <width>111</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>OK</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>140</y>
+     <x>110</x>
+     <y>150</y>
      <width>111</width>
      <height>31</height>
     </rect>

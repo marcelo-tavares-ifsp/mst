@@ -168,8 +168,6 @@ void MainWindow::on_interface_clicked()
     QThreadPool::globalInstance()->start(mouse_listener);
     QThreadPool::globalInstance()->start(keybd_listener);
 
-    Seat_calibration_dialog scd;
-
     connect(&scd, SIGNAL(cancel()), mouse_listener, SLOT(cancel()));
     connect(&scd, SIGNAL(cancel()), keybd_listener, SLOT(cancel()));
 
@@ -222,6 +220,11 @@ void MainWindow::set_seat_device(QString device, int type)
                     << "Seat interface: '" << global_seats[i].interface.c_str()
                     << "'; keyboard: '" << global_seats[i].keyboard.c_str()
                     << "'; mouse: '" << global_seats[i].mouse.c_str() << "'";
+
+            if (strlen(global_seats[i].keyboard.c_str()) > 3 && strlen(global_seats[i].mouse.c_str()) > 3)
+            {
+                scd.close();
+            }
 
             break;
         }
