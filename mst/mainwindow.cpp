@@ -203,7 +203,7 @@ void MainWindow::set_seat_device(QString device, int type)
             << "Device assigned: " << d.c_str() << " (" << type << ")";
 
     string device_interface = button->text().toUtf8().constData();
-    for (int i = 0; global_seats.size(); i++)
+    for (int i = 0; i < global_seats.size(); i++)
     {
         if (global_seats[i].interface == device_interface)
         {
@@ -225,8 +225,6 @@ void MainWindow::set_seat_device(QString device, int type)
             {
                 scd.close();
             }
-
-            break;
         }
     }
 }
