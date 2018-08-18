@@ -68,7 +68,7 @@ void UsbDetectionThread::run()
         FD_ZERO(&fdSet);
         FD_SET(monFd, &fdSet);
 
-        cout << ">>> SELECT <<<" << endl;
+        qDebug(usb_detection_thread) << ">>> SELECT <<<";
 
         int selectRetVal = select(monFd + 1, &fdSet, NULL, NULL, &timeout);
 
@@ -85,7 +85,8 @@ void UsbDetectionThread::run()
 
                 if (!dev)
                 {
-                    cout << "udev_monitor_receive_device() retruned NULL" << endl;
+                    qCritical(usb_detection_thread)
+                            << "udev_monitor_receive_device() retruned NULL";
                     return;
                 }
 
