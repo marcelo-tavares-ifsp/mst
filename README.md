@@ -14,3 +14,5 @@ GNU General Public License.
 * Xephyr
 * lightdm
 * bash
+* libqt5-core
+* libudev-devel

@@ -8,6 +8,7 @@ Source0: %{name}%{version}.tar.gz
 Group:   System/Base
 
 Requires: awesome, unclutter, xorg-xephyr, lightdm, bash
+Requires: libqt5-core, libudev-devel
 
 Provides: mst
 
