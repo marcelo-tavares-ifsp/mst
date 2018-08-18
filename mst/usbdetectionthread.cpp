@@ -3,19 +3,19 @@
 #include <libudev.h>
 #include "input-device-listener.h"
 
+Q_LOGGING_CATEGORY(usb_detection_thread, "mst.usb_detection_thread")
+
 using namespace std;
 
 void UsbDetectionThread::run()
 {
-    std::cout << __FUNCTION__ << std::endl;
-
-    cout << __FUNCTION__ << endl;
+    qDebug(usb_detection_thread) << "running...";
 
     struct udev *udev = udev_new();
 
     if (!udev)
     {
-        cout << "udev_new() returned NULL" << endl;
+        qCritical(usb_detection_thread) << "udev_new() returned NULL";
         return;
     }
 
@@ -23,7 +23,8 @@ void UsbDetectionThread::run()
 
     if (!udev_monitor)
     {
-        cout << "udev_monitor_new_from_netlink() retruned NULL" << endl;
+        qCritical(usb_detection_thread)
+                << "udev_monitor_new_from_netlink() retruned NULL";
         return;
     }
 
@@ -31,7 +32,10 @@ void UsbDetectionThread::run()
 
     if (retVal<0)
     {
-        cout << retVal << " = udev_monitor_filter_add_match_subsystem_devtype(udev_monitor, \"usb\", \"usb_device\");" << endl;
+        qCritical(usb_detection_thread)
+                << retVal
+                << " = udev_monitor_filter_add_match_subsystem_devtype"
+                << "(udev_monitor, \"usb\", \"usb_device\");";
         return;
     }
 
@@ -39,7 +43,9 @@ void UsbDetectionThread::run()
 
     if (retVal<0)
     {
-        cout << retVal << " = udev_monitor_enable_receiving(udev_monitor);" << endl;
+        qCritical(usb_detection_thread)
+                << retVal
+                << " = udev_monitor_enable_receiving(udev_monitor);";
         return;
     }
 
@@ -47,7 +53,7 @@ void UsbDetectionThread::run()
 
     if (monFd < 0)
     {
-        cout << "monFd: " << monFd << endl;
+        qCritical(usb_detection_thread) << "monFd: " << monFd;
         return;
     }
 
@@ -68,7 +74,7 @@ void UsbDetectionThread::run()
 
         if (selectRetVal == -1)
         {
-            cout << "selectRetVal: -1" << endl;
+            qCritical(usb_detection_thread) << "selectRetVal: -1";
             break;
         }
         else if (selectRetVal)

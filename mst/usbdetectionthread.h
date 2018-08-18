@@ -2,6 +2,9 @@
 #define USBDETECTIONTHREAD_H
 
 #include <QThread>
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(usb_detection_thread)
 
 class UsbDetectionThread : public QThread
 {
