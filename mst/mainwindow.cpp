@@ -110,7 +110,10 @@ void MainWindow::on_btn_next_2_clicked()
         fill_layout();
     }
 
-    Settings_mst::parse_ls_devices(&list_mice, &list_keybs);
+    if (list_mice.size() == 0)
+    {
+        Settings_mst::parse_ls_devices(&list_mice, &list_keybs);
+    }
 
     ui->stackedWidget->setCurrentIndex(2);
 }
@@ -148,6 +151,12 @@ void MainWindow::on_btn_next_3_clicked()
 void MainWindow::on_btn_back_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+
+    for (auto seat: global_seats)
+    {
+        seat.keyboard = "";
+        seat.mouse = "";
+    }
 }
 
 void MainWindow::on_btn_back_1_clicked()
