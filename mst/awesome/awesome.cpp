@@ -66,7 +66,7 @@ static string _make_xephyr_autostart(const Awesome& config)
 {
     stringstream result;
 
-    for (int idx = 0; idx < config.seats.size(); idx++)
+    for (uint32_t idx = 0; idx < config.seats.size(); idx++)
     {
         string mouse_dev = "/dev/input/by-path/" + config.seats[idx].mouse;
         string keybd_dev = "/dev/input/by-path/" + config.seats[idx].keyboard;
@@ -84,7 +84,7 @@ static string _make_xephyr_autostart(const Awesome& config)
 string Awesome::make_rules()
 {
     string rules;
-    for (int idx = 1; idx <= seats.size(); idx++)
+    for (uint32_t idx = 1; idx <= seats.size(); idx++)
     {
         rules += string("{ rule = { class = \"Xephyr\", name = \"Xephyr on :");
         rules += to_string(idx);

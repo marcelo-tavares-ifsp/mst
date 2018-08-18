@@ -221,7 +221,7 @@ void MainWindow::set_seat_device(QString device, int type)
             << "Device assigned: " << d.c_str() << " (" << type << ")";
 
     string device_interface = button->text().toUtf8().constData();
-    for (int i = 0; i < global_seats.size(); i++)
+    for (uint32_t i = 0; i < global_seats.size(); i++)
     {
         if (global_seats[i].interface == device_interface)
         {
@@ -267,12 +267,12 @@ bool MainWindow::check_collision_seats()
                     || (global_seats[i].usb == global_seats[j].usb));
     };
 
-    int count_seats = global_seats.size();
+    uint32_t count_seats = global_seats.size();
     if (count_seats > 1)
     {
-        for (int i = 0; i < count_seats; i++)
+        for (uint32_t i = 0; i < count_seats; i++)
         {
-            for (int j = 1; j < count_seats; j++)
+            for (uint32_t j = 1; j < count_seats; j++)
             {
                 if (i == j)
                     continue;
@@ -322,8 +322,8 @@ void MainWindow::save_resolution()
 
 void MainWindow::fill_layout()
 {
-    int sz = global_seats.size();
-    for (int idx = 0; idx < sz; ++idx)
+    uint32_t sz = global_seats.size();
+    for (uint32_t idx = 0; idx < sz; ++idx)
     {
         QPushButton *Qpb = new QPushButton("btn" + idx, this);
         Qpb->setText(QString::fromStdString(global_seats[idx].interface));
@@ -421,7 +421,7 @@ void MainWindow::get_resolution()
     }
 
     vector<Xrandr_monitor> xm = Settings_mst::parse_xrandr();
-    int xm_size = xm.size();
+    uint32_t xm_size = xm.size();
     vector<string> resol;
     vector<string>::iterator it;
 
@@ -435,7 +435,7 @@ void MainWindow::get_resolution()
 
     if(xm_size > 1)
     {
-        for (int idx = 1; idx < xm_size; idx++)
+        for (uint32_t idx = 1; idx < xm_size; idx++)
         {
             sort(resol.begin(), resol.end());
             sort(xm[idx].resolutions.begin(), xm[idx].resolutions.end());
@@ -469,7 +469,7 @@ void MainWindow::on_lw_interface_itemSelectionChanged()
 
 void MainWindow::clear_interface(string interface)
 {
-    for (int i = 0; i < global_seats.size(); i++)
+    for (uint32_t i = 0; i < global_seats.size(); i++)
     {
         if (global_seats[i].interface == interface)
         {
