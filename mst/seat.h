@@ -13,6 +13,7 @@ public:
     string mouse;
     string interface;
     string keyboard;
+    string usb;
     static int width;
     static int height;
 };

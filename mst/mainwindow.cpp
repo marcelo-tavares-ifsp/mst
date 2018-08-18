@@ -186,6 +186,11 @@ void MainWindow::on_interface_clicked()
 
     scd.setModal(true);
     scd.exec();
+
+    Usb_detection_dialog usb_det_dlg(this);
+
+    usb_det_dlg.setModal(true);
+    usb_det_dlg.exec();
 }
 
 void MainWindow::on_install_button_clicked()
@@ -220,19 +225,25 @@ void MainWindow::set_seat_device(QString device, int type)
     {
         if (global_seats[i].interface == device_interface)
         {
-            if (type == Input_device_listener::DEVICE_TYPE::KEYBOARD)
-            {
+            switch (type) {
+            case Input_device_listener::DEVICE_TYPE::KEYBOARD:
                 global_seats[i].keyboard = d;
-            }
-            else
-            {
+                break;
+            case Input_device_listener::DEVICE_TYPE::MOUSE:
                 global_seats[i].mouse = d;
+                break;
+            case Input_device_listener::DEVICE_TYPE::USB:
+                global_seats[i].usb = d;
+                break;
+            default:
+                break;
             }
 
             qDebug(main_window_category)
                     << "Seat interface: '" << global_seats[i].interface.c_str()
                     << "'; keyboard: '" << global_seats[i].keyboard.c_str()
-                    << "'; mouse: '" << global_seats[i].mouse.c_str() << "'";
+                    << "'; mouse: '" << global_seats[i].mouse.c_str()
+                    << "'; usb: " << global_seats[i].usb.c_str() << "'";
 
             if (strlen(global_seats[i].keyboard.c_str()) > 3 && strlen(global_seats[i].mouse.c_str()) > 3)
             {
@@ -251,8 +262,9 @@ void MainWindow::set_seat_device(QString device, int type)
 bool MainWindow::check_collision_seats()
 {
     auto is_equal = [this](int i, int j) -> bool {
-        return (global_seats[i].keyboard == global_seats[j].keyboard)
-                || (global_seats[i].mouse == global_seats[j].mouse);
+        return ((global_seats[i].keyboard == global_seats[j].keyboard)
+                || (global_seats[i].mouse == global_seats[j].mouse)
+                    || (global_seats[i].usb == global_seats[j].usb));
     };
 
     int count_seats = global_seats.size();
@@ -279,7 +291,7 @@ bool MainWindow::check_fill_seats()
 {
     for (auto seat : global_seats)
     {
-        if (seat.keyboard == "" || seat.mouse == "")
+        if (seat.keyboard == "" || seat.mouse == "" || seat.usb == "")
         {
             return false;
         }

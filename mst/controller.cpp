@@ -42,6 +42,8 @@ void Controller::make_mst()
     make_sudoers();
     make_lightdm_conf();
     make_getty_service();
+    make_udev_rules();
+    make_udev_service();
 }
 
 bool Controller::is_mst_running()
@@ -123,6 +125,7 @@ void Controller::install_files()
     auto install = [output_dir](const string& src, const string& dst) -> void {
       cp(output_dir + "/" + src, dst);
     };
+
     string cmd = "mkdir -p " + mst_user_home + ".config/awesome/";
     if (system(cmd.c_str()))
     {
@@ -153,6 +156,9 @@ void Controller::install_files()
         install(".xmst",      skel);
     }
     install("sudoers",   Config::get_instance()->get_sudoers_config());
+
+    install("99-mst.rules", "/etc/udev/rules.d/99-mst.rules");
+    install("systemd-udevd.service", "/etc/systemd/system");
 
 }
 
@@ -304,6 +310,37 @@ void Controller::make_getty_service()
     out.close();
 }
 
+void Controller::make_udev_rules()
+{
+    const string out_file = Config::get_instance()->get_output_dir()
+            + "/99-mst.rules";
+
+    ofstream out(out_file);
+
+    for (int idx = 0; idx < seats.size(); ++idx)
+    {
+        out << "ACTION==\"add\", ";
+        out << "KERNEL==\"sd[b-z][0-9]\", ";
+        out << "DEVPATH==\"" << seats[idx].usb << "/*\", ";
+        out << "RUN+=\"/usr/local/bin/mst-mount /dev/%k " << idx + 1 << "\""
+            << endl;
+    }
+
+    out.close();
+}
+
+void Controller::make_udev_service()
+{
+    const string out_file = Config::get_instance()->get_output_dir()
+            + "/systemd-udevd.service";
+    const string in_file = Config::get_instance()->get_usr_share_dir()
+            + "/systemd-udevd.service.template";
+    ofstream out(out_file);
+    ifstream in(in_file);
+    out << in.rdbuf();
+    out.close();
+    in.close();
+}
 
 void Controller::create_backup()
 {

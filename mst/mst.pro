@@ -6,6 +6,7 @@
 
 
 QMAKE_CXXFLAGS += -std=c++11
+LIBS += -ludev
 
 QT       += core gui
 
@@ -47,6 +48,8 @@ SOURCES += \
     config.cpp \
     controller.cpp \
     reboot_dialog.cpp \
+    usb_detection_dialog.cpp \
+    usbdetectionthread.cpp \
     settings.cpp \
     awesome/awesome.cpp
 
@@ -63,13 +66,16 @@ HEADERS += \
     controller.h \
     reboot_dialog.h \
     version.h \
+    usb_detection_dialog.h \
+    usbdetectionthread.h \
     settings.h \
     awesome/awesome.h
 
 FORMS += \
         mainwindow.ui \
     seat_calibration_dialog.ui \
-    reboot_dialog.ui
+    reboot_dialog.ui \
+    usb_detection_dialog.ui
 
 target.path = $$(PREFIX)/bin
 
