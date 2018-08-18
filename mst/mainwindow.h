@@ -67,6 +67,8 @@ public Q_SLOTS:
 private slots:
     void on_pushButton_clicked();
 
+    void on_lw_interface_itemSelectionChanged();
+
 private:
     Ui::MainWindow *ui;
 

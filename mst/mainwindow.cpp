@@ -89,7 +89,9 @@ void MainWindow::on_btn_next_1_clicked()
     get_resolution();
 
     ui->stackedWidget->setCurrentIndex(1);
+
     ui->cb_resolution->setCurrentIndex(ui->cb_resolution->count() - 1);
+    ui->lw_interface->selectAll();
 }
 
 void MainWindow::on_btn_next_2_clicked()
@@ -140,7 +142,6 @@ void MainWindow::on_btn_next_3_clicked()
         QMessageBox::information(this, "Коллизия!",
            "У каждого монитора должна быть уникальная мышь и клавиатура!",
                                  QMessageBox::Ok);
-
     }
 }
 
@@ -429,4 +430,16 @@ void MainWindow::get_resolution()
 void MainWindow::on_pushButton_clicked()
 {
     this->close();
+}
+
+void MainWindow::on_lw_interface_itemSelectionChanged()
+{
+    if (ui->lw_interface->selectedItems().count() == 0)
+    {
+        ui->btn_next_2->setDisabled(true);
+    }
+    else
+    {
+        ui->btn_next_2->setEnabled(true);
+    }
 }

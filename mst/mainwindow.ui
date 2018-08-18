@@ -39,7 +39,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page_hello">
      <widget class="QLabel" name="lbl_hello">
@@ -331,7 +331,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>
