@@ -8,7 +8,8 @@ SUBDIRS = mst
 scripts.files += \
     scripts/mst-start-dm \
     scripts/mk_backup.sh \
-    scripts/apl_backup.sh
+    scripts/apl_backup.sh \
+    scripts/mst-mount
 
 scripts.path = $$(PREFIX)/bin
 
@@ -43,6 +44,7 @@ DISTFILES += \
     templates/xmst.template      \
     templates/lightdm-mst.conf.template \
     templates/getty@.service.template \
+    templates/systemd-udevd.service.template \
     etc/mst
 
 #version.commands += \

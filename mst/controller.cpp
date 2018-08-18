@@ -321,7 +321,8 @@ void Controller::make_udev_rules()
         out << "ACTION==\"add\", ";
         out << "KERNEL==\"sd[b-z][0-9]\", ";
         out << "DEVPATH==\"" << seats[idx].usb << "/*\", ";
-        out << "RUN+=\"/usr/bin/mst.sh /dev/%k " << idx + 1 << "\"" << endl;
+        out << "RUN+=\"/usr/local/bin/mst-mount /dev/%k " << idx + 1 << "\""
+            << endl;
     }
 
     out.close();
