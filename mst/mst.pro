@@ -16,10 +16,10 @@ version.commands += \
     echo \'const string VERSION = \"$$system("git rev-parse HEAD")\";\' \
         > version.h
 
-mst.depends += version
-
 TARGET = mst
 TEMPLATE = app
+
+PRE_TARGETDEPS += version
 
 QMAKE_EXTRA_TARGETS += version
 
@@ -40,8 +40,6 @@ SOURCES += \
         mainwindow.cpp \
     lightdm/display-manager.cpp \
     xorg/xorg-config.cpp \
-    awesome/awesome-config.cpp \
-    settings-mst.cpp \
     utils.cpp \
     input-device-listener.cpp \
     seat_calibration_dialog.cpp \
@@ -51,14 +49,14 @@ SOURCES += \
     controller.cpp \
     reboot_dialog.cpp \
     usb_detection_dialog.cpp \
-    usbdetectionthread.cpp
+    usbdetectionthread.cpp \
+    settings.cpp \
+    awesome/awesome.cpp
 
 HEADERS += \
         mainwindow.h \
     lightdm/display-manager.h \
     xorg/xorg-config.h \
-    awesome/awesome-config.h \
-    settings-mst.h \
     utils.h \
     input-device-listener.h \
     seat_calibration_dialog.h \
@@ -69,7 +67,9 @@ HEADERS += \
     reboot_dialog.h \
     version.h \
     usb_detection_dialog.h \
-    usbdetectionthread.h
+    usbdetectionthread.h \
+    settings.h \
+    awesome/awesome.h
 
 FORMS += \
         mainwindow.ui \

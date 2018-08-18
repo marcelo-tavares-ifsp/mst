@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>MST</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QStackedWidget" name="stackedWidget">
@@ -202,9 +202,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>30</y>
+        <y>50</y>
         <width>211</width>
-        <height>211</height>
+        <height>191</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -217,7 +217,7 @@
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>160</y>
+        <y>190</y>
         <width>150</width>
         <height>22</height>
        </rect>
@@ -252,6 +252,22 @@
        <string>Назад</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Выберите рабочее место для настройки:</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_2">
      <widget class="QWidget" name="gridLayoutWidget_3">
@@ -267,14 +283,14 @@
        <item row="0" column="0">
         <widget class="QPushButton" name="install_button">
          <property name="text">
-          <string>Install</string>
+          <string>Установить</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="pushButton">
          <property name="text">
-          <string>Exit</string>
+          <string>Выйти</string>
          </property>
         </widget>
        </item>
@@ -285,14 +301,27 @@
    <widget class="QLabel" name="lbl_version">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>270</y>
-      <width>371</width>
-      <height>21</height>
+      <x>70</x>
+      <y>260</y>
+      <width>321</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string>version</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>64</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>version:</string>
     </property>
    </widget>
   </widget>

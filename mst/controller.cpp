@@ -1,9 +1,33 @@
+/* controller.cpp -- MST controller.
+ *
+ * Copyright (C) 2018 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+ * Copyright (C) 2018 Anton Plekhanov <plehunov.anton_9@mail.ru>
+ *
+ * This file is part of MST.
+ *
+ * MST is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * MST is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MST.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include <string>
+#include <QLoggingCategory>
 
 #include "controller.h"
 #include "dsv.h"
 #include "config.h"
 #include "utils.h"
+
+Q_LOGGING_CATEGORY(controller_category, "mst.controller")
 
 Controller::Controller(vector<Seat> seats) : seats(seats)
 {
@@ -21,11 +45,30 @@ void Controller::make_mst()
     make_udev_rules();
 }
 
+bool Controller::is_mst_running()
+{
+    return (system("pgrep -c Xephyr") == 0);
+}
+
+/**
+ * @brief Controller::stop_mst -- Stop multiseat if it is running.
+ * @throws an error message if stopping is failed.
+ */
+void Controller::stop_mst()
+{
+    if (system("pkill Xephyr"))
+    {
+        const string msg = "Could not stop MST ('pkill Xephyr' failed.)";
+        qCritical(controller_category) << msg.c_str();
+        throw msg;
+    }
+}
+
 void Controller::generate_files()
 {
     string out = Config::get_instance()->get_output_dir();
     make_mst();
-    cout << "[debug] files generated: " + out << endl;;
+    qDebug(controller_category) << "files generated: " << out.c_str();
 }
 
 void Controller::enable_mst()
@@ -33,15 +76,17 @@ void Controller::enable_mst()
     install_files();
     if (system("systemctl set-default multi-user.target"))
     {
+        qCritical(controller_category) << "Could not enable MST in systemd.";
         throw "Could not enable MST in systemd.";
     }
-    printf("[debug] multiseat enabled.\n");
+    qInfo(controller_category) << "multiseat enabled.";
 }
 
 void Controller::disable_mst()
 {
     if (system("systemctl set-default graphical.target"))
     {
+        qCritical(controller_category) << "Could not disable MST in systemd.";
         throw "Could not disable MST in systemd.";
     }
 
@@ -51,6 +96,7 @@ void Controller::disable_mst()
     {
         string message = "Could not delete "
                 + Config::get_instance()->get_sudoers_config() + ".";
+        qCritical(controller_category) << message.c_str();
         throw message;
     }
 }
@@ -58,9 +104,12 @@ void Controller::disable_mst()
 static void cp(const string& src, const string& dst)
 {
     string cmd = "cp " + src + " " + dst;
-    cout << "[debug] executing: " << cmd << endl;
+    qDebug(controller_category) << "executing: " << cmd.c_str();
     if (system(cmd.c_str()))
     {
+        qCritical(controller_category)
+                << "Could not execute command: "
+                << src.c_str() << " -> " << dst.c_str();
         throw "Could not execute command: "
             + src + " -> " + dst;
     }
@@ -79,9 +128,8 @@ void Controller::install_files()
     string cmd = "mkdir -p " + mst_user_home + ".config/awesome/";
     if (system(cmd.c_str()))
     {
-        cout << "Controller::install_files: "
-             << "Could not create a directory: "
-             << cmd << endl;
+        qCritical(controller_category)
+             << "Could not create a directory: " << cmd.c_str();
         throw "Could not create a directory: " + cmd;
     }
     install("rc.lua",    mst_user_home + ".config/awesome/");
@@ -97,9 +145,8 @@ void Controller::install_files()
         cmd = "mkdir -p " + skel + "/.config/awesome/";
         if (system(cmd.c_str()))
         {
-            cout << "Controller::install_files: "
-                 << "Could not create a directory: "
-                 << cmd << endl;
+            qCritical(controller_category)
+                    << "Could not create a directory: " << cmd.c_str();
             throw "Could not create a directory: " + cmd;
         }
         install("rc.lua",    skel + "/.config/awesome/");
@@ -121,30 +168,39 @@ void Controller::make_rc_lua()
     fstream rclua_pattern;
     fstream rclua;
 
-    awesome_conf = new AwesomeConfig(seats);
-    rclua_pattern.open("/usr/share/mst/rc.lua.template", ios::in);
+    const vector<int> version = Awesome::get_version();
+        awesome_conf = new Awesome(seats);
+        if (version[0] == 3)
+        {
+            qDebug(controller_category) << "Using rc.lua.template for Awesome 3";
+            rclua_pattern.open("/usr/share/mst/rc.lua.template", ios::in);
+        }
+        else
+        {
+             qDebug(controller_category) << "Using rc.lua.template for Awesome 4";
+            rclua_pattern.open("/usr/share/mst/rc.lua.4.template", ios::in);
+    }
     rclua.open(out_file, ios::out);
 
     string str;
 
-    cout << "[debug] writing '" + out_file + "' ..." << endl;
-
-    stringstream awesome_autostart;
-    awesome_autostart << *awesome_conf;
+        qDebug(controller_category)
+                << "writing '" << out_file.c_str() << "' ...";
 
     while(getline(rclua_pattern, str))
     {
 
         str = replace_all(str, "{{mst_autostart}}",
-                          awesome_autostart.str());
+                          awesome_conf->make_autostart());
         str = replace_all(str, "{{mst_awful_rules}}",
-                          awesome_conf->get_rules());
+                          awesome_conf->make_rules());
 
         rclua << str << endl;
     }
     rclua.close();
     rclua_pattern.close();
-    cout << "[debug] writing '" + out_file + "' ... done" << endl;
+    qDebug(controller_category)
+            << "writing '" << out_file.c_str() << "' ... done";
 }
 
 void Controller::make_xorg()
@@ -268,4 +324,30 @@ void Controller::make_udev_rules()
     }
 
     out.close();
+}
+
+void Controller::create_backup()
+{
+    const string user = Config::get_instance()->get_mst_user();
+    const string usr_dir = Config::get_instance()->get_usr_share_dir();
+    const string cmd = "/usr/local/bin/mk_backup.sh " + user;
+    if (system(cmd.c_str()))
+    {
+        qCritical(main_window_category)
+                << "Could not create a backup: "
+                << cmd.c_str();
+        throw "Could not create a backup: " + cmd;
+    }
+}
+
+void Controller::restore_backup()
+{
+    const string user = Config::get_instance()->get_mst_user();
+    const string cmd = "/usr/local/bin/apl_backup.sh " + user;
+
+    if (system(cmd.c_str()))
+    {
+        qCritical(main_window_category) << "Could not restore a backup copy.";
+        throw "Could not restore a backup copy.";
+    }
 }

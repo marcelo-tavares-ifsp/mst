@@ -3,7 +3,7 @@
 
 #include "ui_mainwindow.h"
 #include "controller.h"
-#include "settings-mst.h"
+#include "settings.h"
 #include "input-device-listener.h"
 #include "utils.h"
 #include "seat_calibration_dialog.h"
@@ -20,10 +20,11 @@
 #include <algorithm>
 #include <QListWidgetItem>
 #include <QMainWindow>
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(main_window_category)
 
 using namespace std;
-
-
 
 namespace Ui {
 class MainWindow;

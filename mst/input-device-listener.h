@@ -13,6 +13,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <QObject>
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(input_device_listener_category)
 
 using namespace std;
 

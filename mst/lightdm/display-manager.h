@@ -4,6 +4,10 @@
 #include <string>
 #include <stdlib.h>
 
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(display_manager_category)
+
 using namespace std;
 
 

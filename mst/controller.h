@@ -3,16 +3,17 @@
 
 #include <fstream>
 #include <vector>
+#include <QLoggingCategory>
 
 #include "xorg/xorg-config.h"
-#include "awesome/awesome-config.h"
+#include "awesome/awesome.h"
 #include "mainwindow.h"
 #include "seat.h"
 #include "config.h"
 
+Q_DECLARE_LOGGING_CATEGORY(controller_category)
+
 using namespace std;
-
-
 
 /**
  * @brief The Controller class -- a class to control the multi-seat
@@ -25,10 +26,14 @@ public:
     void generate_files();
     void enable_mst();
     void disable_mst();
+    static bool is_mst_running();
+    static void stop_mst();
+    static void create_backup();
+    static void restore_backup();
 
 private:
     vector<Seat> seats;
-    AwesomeConfig *awesome_conf;
+    Awesome *awesome_conf;
     XorgConfig *xorg_conf;
     void make_mst();
 

@@ -15,6 +15,7 @@ scripts.path = $$(PREFIX)/bin
 templates.files += \
     templates/bashrc.template    \
     templates/rc.lua.template    \
+    templates/rc.lua.4.template  \
     templates/sudoers.template   \
     templates/xinitrc.template   \
     templates/xmst.template      \
@@ -36,6 +37,7 @@ DISTFILES += \
     scripts/apl_backup.sh \
     templates/bashrc.template    \
     templates/rc.lua.template    \
+    templates/rc.lua.4.template  \
     templates/sudoers.template   \
     templates/xinitrc.template   \
     templates/xmst.template      \

@@ -1,6 +1,28 @@
-#include "settings-mst.h"
+/* settings.cpp -- MST settings.
+ *
+ * Copyright (C) 2018 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+ * Copyright (C) 2018 Anton Plekhanov <plehunov.anton_9@mail.ru>
+ *
+ * This file is part of MST.
+ *
+ * MST is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * MST is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MST.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
+#include <QLoggingCategory>
+#include "settings.h"
 
+Q_LOGGING_CATEGORY(settings_category, "mst.settings")
 
 Settings_mst::Settings_mst() {}
 
@@ -23,6 +45,7 @@ vector<string> Settings_mst::run_xrandr()
     }
     else
     {
+        qCritical(settings_category) << "Could not execute xrandr";
         throw "Could not execute xrandr";
     }
 }
@@ -44,8 +67,7 @@ vector<Xrandr_monitor> Settings_mst::parse_xrandr()
 
     for (uint32_t idx = 0; idx < data.size();)
     {
-        cout << "[debug] Settings_mst::parse_xrandr: line: " << data[idx]
-                << endl;
+        qDebug(settings_category) << "line: " << data[idx].c_str();
         if (data[idx].length() == 0)
         {
             idx++;
@@ -58,10 +80,8 @@ vector<Xrandr_monitor> Settings_mst::parse_xrandr()
             {
                 monitor.interface = sm[1];
                 state = 1;
-
-                cout << "[debug] Settings_mst::parse_xrandr: "
-                        << "[state 0] -> [state 1]" << endl;
-                cout << "[debug] Settings_mst::parse_xrandr: " << sm[1] << endl;
+                qDebug(settings_category) << "[state 0] -> [state 1]";
+                qDebug(settings_category) << string(sm[1]).c_str();
             }
             idx++;
             break;
@@ -70,7 +90,7 @@ vector<Xrandr_monitor> Settings_mst::parse_xrandr()
             {
                 monitor.resolutions.push_back(sm[1]);
                 idx++;
-                cout << "[debug] Settings_mst::parse_xrandr: " << sm[1] << endl;
+                qDebug(settings_category) << string(sm[1]).c_str();
             }
             else
             {
@@ -78,8 +98,7 @@ vector<Xrandr_monitor> Settings_mst::parse_xrandr()
                 monitor.interface = "";
                 monitor.resolutions.clear();
                 state = 0;
-                cout << "[debug] Settings_mst::parse_xrandr: "
-                     << "[state 1] -> [state 0]" << endl;
+                qDebug(settings_category) << "[state 1] -> [state 0]";
             }
             break;
         }
@@ -115,6 +134,8 @@ vector<string> Settings_mst::run_ls_devices()
     }
     else
     {
+        qCritical(settings_category)
+                << "Could not execute ls /dev/input/by-path/";
         throw "Could not execute ls /dev/input/by-path/";
     }
 }
@@ -159,6 +180,9 @@ static FILE* open_input_dev(string name) {
     static const char *COMMAND = str.c_str();
     FILE* file = popen(COMMAND, "r");
     if (file == NULL) {
+        qCritical(settings_category)
+                << "Could not execute 'cat /dev/input/by-path/"
+                << name.c_str() << "'";
         throw "Could not execute 'cat /dev/input/by-path/" + name + "'";
     }
 

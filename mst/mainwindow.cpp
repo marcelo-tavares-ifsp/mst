@@ -1,3 +1,27 @@
+/* mainwindow.cpp -- MST main window.
+ *
+ * Copyright (C) 2018 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+ * Copyright (C) 2018 Anton Plekhanov <plehunov.anton_9@mail.ru>
+ *
+ * This file is part of MST.
+ *
+ * MST is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * MST is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MST.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include <QDebug>
+#include <QLoggingCategory>
+
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
 #include "config.h"
@@ -5,8 +29,7 @@
 //#include "version.h"
 #define VERSION "UNKNOWN"
 
-static void create_backup();
-static bool apply_backup();
+Q_LOGGING_CATEGORY(main_window_category, "mst.main_window")
 
 static Controller *con;
 
@@ -16,11 +39,6 @@ QPushButton *button;
 Input_device_listener *mouse_listener;
 Input_device_listener *keybd_listener;
 
-static bool _is_mst_running()
-{
-    return (system("pgrep -c Xephyr") == 0);
-}
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -28,8 +46,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
 
-    if (_is_mst_running())
+    if (Controller::is_mst_running())
     {
+        qDebug(main_window_category) << "MST is running";
         QPushButton *btn = new QPushButton("stop_mst", this);
         btn->setText(QString::fromStdString("Остановить MST"));
         connect(btn, SIGNAL(clicked()), this, SLOT(on_stop_mst_clicked()));
@@ -47,7 +66,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btn_next_4_clicked()
 {
-    apply_backup();
+    Controller::restore_backup();
     con->disable_mst();
 
     Reboot_Dialog rebootDialog;
@@ -58,10 +77,7 @@ void MainWindow::on_btn_next_4_clicked()
 
 void MainWindow::on_stop_mst_clicked()
 {
-    if (system("pkill Xephyr"))
-    {
-        throw "Could not stop MST ('pkill Xephyr' failed.)";
-    }
+    Controller::stop_mst();
 }
 
 /**
@@ -82,6 +98,7 @@ void MainWindow::on_btn_next_2_clicked()
 
     if (is_layout_changed(global_seats, ui->lw_interface->selectedItems()))
     {
+        qDebug(main_window_category) << "Layout changed";
         global_seats.clear();
         fill_global_seats();
 
@@ -109,7 +126,8 @@ void MainWindow::on_btn_next_3_clicked()
             con = new Controller(global_seats);
             con->generate_files();
             ui->stackedWidget->setCurrentIndex(3);
-            cout << "[debug] going to the 3rd panel..." << endl;
+            qDebug(main_window_category)
+                    << "going to the 3rd panel...";
         }
         else
         {
@@ -169,7 +187,7 @@ void MainWindow::on_install_button_clicked()
 {
     try
     {
-        create_backup();
+        Controller::create_backup();
     }
     catch (string msg)
     {
@@ -189,7 +207,8 @@ void MainWindow::set_seat_device(QString device, int type)
 {
     string d = device.toUtf8().constData();
 
-    cout << "Device assigned: " << d << " (" << type << ")" << endl;                                      // test
+    qDebug(main_window_category)
+            << "Device assigned: " << d.c_str() << " (" << type << ")";
 
     string device_interface = button->text().toUtf8().constData();
     for (int i = 0; global_seats.size(); i++)
@@ -210,15 +229,12 @@ void MainWindow::set_seat_device(QString device, int type)
                 break;
             }
 
+            qDebug(main_window_category)
+                    << "Seat interface: '" << global_seats[i].interface.c_str()
+                    << "'; keyboard: '" << global_seats[i].keyboard.c_str()
+                    << "'; mouse: '" << global_seats[i].mouse.c_str()
+                    << "'; usb: " << global_seats[i].usb.c_str() << "'";
 
-            /////////////////test/////////////////
-
-            cout << "Seat interface: " << global_seats[i].interface << endl;
-            cout << "Seat keyboard: " << global_seats[i].keyboard << endl;
-            cout << "Seat mouse: " << global_seats[i].mouse << endl;
-            cout << "Seat usb: " << global_seats[i].usb << endl;
-
-            /////////////////test/////////////////
             break;
         }
     }
@@ -362,7 +378,8 @@ static void add_resolutions_to_cb(vector<string> resol, QComboBox *cb)
 {
     for(string s : resol)
     {
-        cb->addItem(QString::fromStdString(s));
+        if (! s.empty())
+            cb->addItem(QString::fromStdString(s));
     }
 }
 
@@ -416,26 +433,6 @@ void MainWindow::get_resolution()
     }
 
     add_resolutions_to_cb(resol, ui->cb_resolution);
-}
-
-static void create_backup()
-{
-    const string user = Config::get_instance()->get_mst_user();
-    const string usr_dir = Config::get_instance()->get_usr_share_dir();
-    const string cmd = "/usr/local/bin/mk_backup.sh " + user;
-    if (system(cmd.c_str()))
-    {
-        throw "Could not create a backup: " + cmd;
-    }
-}
-
-static bool apply_backup()
-{
-    if (system("/home/student/src/mst/src/mst_files/apl_backup.sh"))
-    {
-        throw "Could not restore a backup copy.";
-    }
-    return true;
 }
 
 

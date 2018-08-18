@@ -9,12 +9,13 @@
 #include <fcntl.h>
 #include <vector>
 #include <QByteArray>
+#include <QLoggingCategory>
 
 #include "utils.h"
 
+Q_DECLARE_LOGGING_CATEGORY(settings_category)
+
 using namespace std;
-
-
 
 struct Xrandr_monitor
 {
