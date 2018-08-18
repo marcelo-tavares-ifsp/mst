@@ -43,6 +43,7 @@ void Controller::make_mst()
     make_lightdm_conf();
     make_getty_service();
     make_udev_rules();
+    make_udev_service();
 }
 
 bool Controller::is_mst_running()
