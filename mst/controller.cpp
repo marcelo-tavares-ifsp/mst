@@ -315,12 +315,12 @@ void Controller::make_udev_rules()
 
     ofstream out(out_file);
 
-    for (auto seat : seats)
+    for (int idx = 0; idx < seats.size(); ++idx)
     {
         out << "ACTION==\"add\", ";
         out << "KERNEL==\"sd[b-z][0-9]\", ";
-        out << "DEVPATH==\"" << seat.usb << "/*\", ";
-        out << "RUN+=\"/usr/bin/mst.sh /dev/%k " << seat.interface << "\"" << endl;
+        out << "DEVPATH==\"" << seats[idx].usb << "/*\", ";
+        out << "RUN+=\"/usr/bin/mst.sh /dev/%k " << idx + 1 << "\"" << endl;
     }
 
     out.close();
