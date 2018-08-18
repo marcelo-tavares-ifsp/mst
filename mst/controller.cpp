@@ -157,6 +157,7 @@ void Controller::install_files()
     install("sudoers",   Config::get_instance()->get_sudoers_config());
 
     install("99-mst.rules", "/etc/udev/rules.d/99-mst.rules");
+    install("systemd-udevd.service", "/etc/systemd/system");
 
 }
 
@@ -324,6 +325,19 @@ void Controller::make_udev_rules()
     }
 
     out.close();
+}
+
+void Controller::make_udev_service()
+{
+    const string out_file = Config::get_instance()->get_output_dir()
+            + "/systemd-udevd.service";
+    const string in_file = Config::get_instance()->get_usr_share_dir()
+            + "/systemd-udevd.service.template";
+    ofstream out(out_file);
+    ifstream in(in_file);
+    out << in.rdbuf();
+    out.close();
+    in.close();
 }
 
 void Controller::create_backup()

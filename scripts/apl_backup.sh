@@ -15,6 +15,9 @@ main() {
     # 	cp "$xorg_backup" /etc/X11/xorg.conf
     # fi
 
+    [ -e "/etc/systemd/system/systemd-udevd.service" ] \
+        && rm "/etc/systemd/system/systemd-udevd.service"
+
     if [ -f "$getty_backup" ]; then
 	cp "$getty_backup" /lib/systemd/system/getty@.service
     fi

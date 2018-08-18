@@ -49,6 +49,7 @@ private:
     void make_lightdm_conf();
     void make_getty_service();
     void make_udev_rules();
+    void make_udev_service();
 
     void install_files();
 };
