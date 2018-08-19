@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64.096497mm"
+   height="58.622688mm"
+   viewBox="0 0 64.096497 58.622688"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/home/avp/src/projects/mst/logo.png"
+   inkscape:export-xdpi="150.47418"
+   inkscape:export-ydpi="150.47418">
+  <title
+     id="title1013">MST Logo</title>
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect912"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect912-2"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect912-0"
+       is_visible="true" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="226.56627"
+     inkscape:cy="92.139272"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="2558"
+     inkscape:window-height="1422"
+     inkscape:window-x="0"
+     inkscape:window-y="16"
+     inkscape:window-maximized="1"
+     fit-margin-top="5"
+     fit-margin-left="5"
+     fit-margin-bottom="5"
+     fit-margin-right="5">
+    <inkscape:grid
+       type="xygrid"
+       id="grid33"
+       originx="-60.2105"
+       originy="-114.90409" />
+    <sodipodi:guide
+       position="56.789501,34.095909"
+       orientation="0,1"
+       id="guide843"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="49.789501,26.095909"
+       orientation="0,1"
+       id="guide889"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="23.393108,43.727799"
+       orientation="0,1"
+       id="guide940"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="53.359531,28.821359"
+       orientation="0,1"
+       id="guide942"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>MST Logo</dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/" />
+        <dc:date></dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Artyom V. Poptsov &lt;poptsov.artyom@gmail.com&gt;</dc:title>
+          </cc:Agent>
+        </dc:creator>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-60.210498,-123.47322)">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ff3232;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10"
+       width="19.276785"
+       height="19.276785"
+       x="-22.399641"
+       y="169.74823"
+       transform="rotate(-30)"
+       inkscape:export-xdpi="150.47418"
+       inkscape:export-ydpi="150.47418" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#3232ff;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10-3"
+       width="19.276785"
+       height="19.276785"
+       x="-96.725418"
+       y="162.91339"
+       transform="rotate(-60)"
+       inkscape:export-xdpi="150.47418"
+       inkscape:export-ydpi="150.47418" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#32ff32;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect10-6"
+       width="19.276785"
+       height="19.276785"
+       x="82.723213"
+       y="128.72322"
+       inkscape:export-xdpi="150.47418"
+       inkscape:export-ydpi="150.47418" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot845"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:'Bitstream Vera Sans';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.26458333,0,0,0.26458333,1.2027129,4.7440341)"
+       inkscape:export-xdpi="150.47418"
+       inkscape:export-ydpi="150.47418"><flowRegion
+         id="flowRegion847"><rect
+           id="rect849"
+           width="56.692913"
+           height="45.354332"
+           x="272.12598"
+           y="589.60632" /></flowRegion><flowPara
+         id="flowPara851"
+         style="font-size:53.33333588px">M</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot845-7"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:'Bitstream Vera Sans';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.26458333,0,0,0.26458333,29.75358,4.6370255)"
+       inkscape:export-xdpi="150.47418"
+       inkscape:export-ydpi="150.47418"><flowRegion
+         id="flowRegion847-5"><rect
+           id="rect849-3"
+           width="56.692913"
+           height="45.354332"
+           x="272.12598"
+           y="589.60632" /></flowRegion><flowPara
+         id="flowPara851-5"
+         style="font-size:53.33333588px">T</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot845-6"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:'Bitstream Vera Sans';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.26458333,0,0,0.26458333,15.937704,-18.200452)"
+       inkscape:export-xdpi="150.47418"
+       inkscape:export-ydpi="150.47418"><flowRegion
+         id="flowRegion847-2"><rect
+           id="rect849-9"
+           width="56.692913"
+           height="45.354332"
+           x="272.12598"
+           y="589.60632" /></flowRegion><flowPara
+         id="flowPara851-1"
+         style="font-size:53.33333588px">S</flowPara></flowRoot>    <path
+       style="fill:none;fill-rule:evenodd;stroke:#fc3e3e;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 65.342441,158.23387 c 0.463987,-6.37529 3.857912,-12.47838 9.028886,-16.23612 2.366444,-1.71969 5.078588,-2.9616 7.926589,-3.62964"
+       id="path910"
+       inkscape:connector-curvature="0"
+       inkscape:path-effect="#path-effect912"
+       inkscape:original-d="m 65.342441,158.23387 c 3.666932,-5.00027 4.644836,-11.85207 9.028886,-16.23612 4.000001,-4 5.926852,-1.96324 7.926589,-3.62964"
+       sodipodi:nodetypes="csc"
+       inkscape:export-xdpi="150.47418"
+       inkscape:export-ydpi="150.47418" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#32ff32;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 102.0417,128.60853 c 5.4284,3.55386 9.09734,9.66976 9.67764,16.13201 0.24903,2.77327 -0.0451,5.59428 -0.86094,8.25651"
+       id="path910-7"
+       inkscape:connector-curvature="0"
+       inkscape:path-effect="#path-effect912-2"
+       inkscape:original-d="m 102.0417,128.60853 c 3.88082,4.83614 6.57765,10.76267 9.67764,16.13201 2.82843,4.89898 -1.95299,5.89361 -0.86094,8.25651"
+       sodipodi:nodetypes="csc"
+       inkscape:export-xdpi="150.47418"
+       inkscape:export-ydpi="150.47418" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#3232ff;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 109.44806,174.97906 c -5.82805,2.5365 -12.66873,2.64655 -18.575354,0.29882 -2.661562,-1.0579 -5.13245,-2.59346 -7.259477,-4.51149"
+       id="path910-9"
+       inkscape:connector-curvature="0"
+       inkscape:path-effect="#path-effect912-0"
+       inkscape:original-d="m 109.44806,174.97906 c -6.16383,-0.67551 -12.586622,1.90349 -18.575354,0.29882 -5.464099,-1.46411 -4.816462,-3.61287 -7.259477,-4.51149"
+       sodipodi:nodetypes="csc"
+       inkscape:export-xdpi="150.47418"
+       inkscape:export-ydpi="150.47418" />
+  </g>
+</svg>
