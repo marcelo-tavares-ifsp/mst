@@ -2,6 +2,10 @@
 Multi-Seat Tool
 
 ## License
+The project was initially written and being developed by "AZ Company
+Group" LLC (https://www.gkaz.ru/)  You can find the list of
+contributors in `AUTHORS` file.
+
 MST is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free
 Software Foundation, either version 3 of the License, or (at your
