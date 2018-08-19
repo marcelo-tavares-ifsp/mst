@@ -26,3 +26,19 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 * bash
 * libqt5-core
 * libudev-devel
+
+## Installation
+
+An RPM package for the project can be built as follows:
+```
+$ make -j4 rpm
+```
+(You should specify apropriate `-j` option according to the number 
+of available CPU cores to speed up the building process.)
+
+Installation from the RPM package:
+
+```
+$ apt-get install awesome unclutter xorg-xephyr libqt5-core libudev-devel
+$ rpm -i mst-1.0.0-1.x86_64.rpm
+```
