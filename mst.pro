@@ -22,7 +22,8 @@ templates.files += \
     templates/xmst.template      \
     templates/lightdm-mst.conf.template \
     templates/systemd-udevd.service.template \
-    templates/getty@.service.template
+    templates/getty@.service.template \
+    templates/vgl.sh.template
 
 templates.path = $$(PREIFX)/var/lib/mst
 
@@ -47,6 +48,7 @@ DISTFILES += \
     templates/lightdm-mst.conf.template \
     templates/getty@.service.template \
     templates/systemd-udevd.service.template \
+    templates/vgl.sh.template \
     etc/mst
 
 #version.commands += \

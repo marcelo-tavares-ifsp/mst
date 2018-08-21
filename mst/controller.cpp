@@ -45,6 +45,7 @@ void Controller::make_mst()
     make_getty_service();
     make_udev_rules();
     make_udev_service();
+    make_vgl();
 }
 
 bool Controller::is_mst_running()
@@ -103,6 +104,15 @@ void Controller::disable_mst()
         qCritical(controller_category) << message.c_str();
         throw message;
     }
+
+    cmd = "rm '/etc/bashrc.d/vgl.sh'";
+    if (system(cmd.c_str()))
+    {
+        string message = "Could not delete "
+                + Config::get_instance()->get_sudoers_config() + ".";
+        qCritical(controller_category) << message.c_str();
+        throw message;
+    }
 }
 
 static void cp(const string& src, const string& dst)
@@ -141,6 +151,7 @@ void Controller::install_files()
     install(".bashrc",   mst_user_home);
     install(".xinitrc",   mst_user_home);
     install(".xmst",      mst_user_home);
+    install("vgl.sh",     "/etc/bashrc.d/");
     install("lightdm-mst.conf", "/etc/lightdm/");
     install("getty@.service",   "/lib/systemd/system/getty@.service");
     if (is_pam_mkhomedir_used())
@@ -338,6 +349,19 @@ void Controller::make_udev_service()
             + "/systemd-udevd.service";
     const string in_file = Config::get_instance()->get_usr_share_dir()
             + "/systemd-udevd.service.template";
+    ofstream out(out_file);
+    ifstream in(in_file);
+    out << in.rdbuf();
+    out.close();
+    in.close();
+}
+
+void Controller::make_vgl()
+{
+    const string out_file = Config::get_instance()->get_output_dir()
+            + "/vgl.sh";
+    const string in_file = Config::get_instance()->get_usr_share_dir()
+            + "/vgl.sh.template";
     ofstream out(out_file);
     ifstream in(in_file);
     out << in.rdbuf();

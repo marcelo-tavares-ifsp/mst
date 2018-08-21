@@ -50,6 +50,7 @@ private:
     void make_getty_service();
     void make_udev_rules();
     void make_udev_service();
+    void make_vgl();
 
     void install_files();
 };
