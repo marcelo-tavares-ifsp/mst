@@ -51,7 +51,8 @@ SOURCES += \
     usb_detection_dialog.cpp \
     usbdetectionthread.cpp \
     settings.cpp \
-    awesome/awesome.cpp
+    awesome/awesome.cpp \
+    vgl/vgl.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -69,7 +70,9 @@ HEADERS += \
     usb_detection_dialog.h \
     usbdetectionthread.h \
     settings.h \
-    awesome/awesome.h
+    awesome/awesome.h \
+    version.h \
+    vgl/vgl.h
 
 FORMS += \
         mainwindow.ui \

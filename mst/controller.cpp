@@ -26,6 +26,7 @@
 #include "dsv.h"
 #include "config.h"
 #include "utils.h"
+#include "vgl/vgl.h"
 
 Q_LOGGING_CATEGORY(controller_category, "mst.controller")
 
@@ -75,6 +76,7 @@ void Controller::generate_files()
 void Controller::enable_mst()
 {
     install_files();
+    Vgl::configure();
     if (system("systemctl set-default multi-user.target"))
     {
         qCritical(controller_category) << "Could not enable MST in systemd.";
@@ -85,6 +87,7 @@ void Controller::enable_mst()
 
 void Controller::disable_mst()
 {
+    Vgl::unconfigure();
     if (system("systemctl set-default graphical.target"))
     {
         qCritical(controller_category) << "Could not disable MST in systemd.";

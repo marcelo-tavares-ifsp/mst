@@ -26,6 +26,7 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 * bash
 * libqt5-core
 * libudev-devel
+* virtualgl
 
 ## Installation
 
