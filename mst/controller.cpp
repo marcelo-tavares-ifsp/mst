@@ -362,9 +362,16 @@ void Controller::make_vgl()
             + "/vgl.sh";
     const string in_file = Config::get_instance()->get_usr_share_dir()
             + "/vgl.sh.template";
+    const string user = Config::get_instance()->get_mst_user();
     ofstream out(out_file);
     ifstream in(in_file);
-    out << in.rdbuf();
+
+    for (string line; getline(in, line); )
+    {
+        string tmp = replace_all(line, "{{user}}", user);
+        out << tmp << endl;
+    }
+
     out.close();
     in.close();
 }
