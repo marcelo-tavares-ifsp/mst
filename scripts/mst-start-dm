@@ -13,12 +13,23 @@ start_lightdm() {
     sleep 1
 }
 
+# Check if a seat is used.
+#
+# Synopsis:
+#   seat_is_used_p display_id
+is_seat_used_p() {
+    local id="$1"
+    [ $(who | grep -cE ".*\(:$id\).*") = "0" ] \
+	&& echo "false" || echo "true"
+}
+
 ###
 
 # Entry point.
 main() {
     local seat_count="$1"
     local idx
+    local running_seats_number
     start_lightdm "/etc/lightdm/lightdm-mst.conf"
 
     xset -dpms
@@ -29,6 +40,15 @@ main() {
     done
 
     while true; do
+	running_seats_number=$(/usr/bin/dm-tool list-seats | grep -c "Seat")
+	if [ $running_seats_number -lt $seat_count ]; then
+	    pkill --full '/usr/sbin/lightdm-gtk-greeter'
+	    for idx in $(seq 1 "$seat_count"); do
+		if [ "$(is_seat_used_p $idx)" = "false" ]; then
+		    add_seat $idx
+		fi
+	    done
+	fi
 	sleep 1
     done
 }
