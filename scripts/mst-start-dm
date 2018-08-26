@@ -42,9 +42,16 @@ main() {
     while true; do
 	running_seats_number=$(/usr/bin/dm-tool list-seats | grep -c "Seat")
 	if [ $running_seats_number -lt $seat_count ]; then
-	    pkill --full '/usr/sbin/lightdm-gtk-greeter'
 	    for idx in $(seq 1 "$seat_count"); do
-		if [ "$(is_seat_used_p $idx)" = "false" ]; then
+		if [ "$(seat_is_used_p $idx)" = "false" ]; then
+		    ls -1 /proc | grep -E "[0-9]+" | while read pid; do
+			res=$(grep "DISPLAY=:$idx" \
+				   "/proc/$pid/environ" > /dev/null 2>&1; \
+			      echo $?)
+			if [ $res -eq 0 ]; then
+			    kill "$pid"
+			fi
+		    done
 		    add_seat $idx
 		fi
 	    done
