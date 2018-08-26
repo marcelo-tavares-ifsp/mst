@@ -1,6 +1,6 @@
-MST_PROJECT_NAME = mst
-MST_VERSION      = 1.0.0
-MST_DIST_NAME    = $$MST_PROJECT_NAME$$MST_VERSION
+PROJECT_NAME = mst
+VERSION      = 1.0.0
+DIST_NAME    = $$PROJECT_NAME$$VERSION
 
 TEMPLATE = subdirs
 SUBDIRS = mst
@@ -60,7 +60,7 @@ rpm.commands += \
     su - multiseat -c rpmdev-setuptree;		\
     ln -s ~multiseat/RPM ~multiseat/rpmbuild;          \
     cp mst.spec ~multiseat/rpmbuild/SPECS;		\
-    cp $$MST_DIST_NAME\\.tar.gz ~multiseat/rpmbuild/SOURCES/;	\
+    cp $$DIST_NAME\\.tar.gz ~multiseat/rpmbuild/SOURCES/;	\
     chown multiseat: ~multiseat/rpmbuild/;		\
     su - multiseat -c \'rpmbuild -ba ~/rpmbuild/SPECS/mst.spec\'
 
@@ -69,13 +69,13 @@ rpm.depends += version dist
 dist.commands += cd mst && make -j4 dist;
 dist.commands += \
     cd ..;                      \
-    mkdir $$MST_DIST_NAME;    \
-    cd $$MST_DIST_NAME;      \
-    tar -xzf ../mst/$$MST_DIST_NAME\\.tar.gz;   \
-    mv $$MST_DIST_NAME mst;                     \
+    mkdir $$DIST_NAME;    \
+    cd $$DIST_NAME;      \
+    tar -xzf ../mst/$$DIST_NAME\\.tar.gz;   \
+    mv $$DIST_NAME mst;                     \
     cp -r ../templates ../scripts ../etc .;     \
     cd ..;                                      \
-    tar -czpf $$MST_DIST_NAME\\.tar.gz $$MST_DIST_NAME; \
-    rm -rf $$MST_DIST_NAME
+    tar -czpf $$DIST_NAME\\.tar.gz $$DIST_NAME; \
+    rm -rf $$DIST_NAME
 
 QMAKE_EXTRA_TARGETS += rpm version dist
