@@ -1,5 +1,5 @@
 PROJECT_NAME = mst
-VERSION      = 1.0.0
+VERSION      = 0.1.0
 DIST_NAME    = $$PROJECT_NAME$$VERSION
 
 TEMPLATE = subdirs
