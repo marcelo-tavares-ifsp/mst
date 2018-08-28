@@ -4,6 +4,7 @@
 #
 #-------------------------------------------------
 
+include(../mst-vars.pri)
 
 QMAKE_CXXFLAGS += -std=c++11
 LIBS += -ludev
@@ -13,7 +14,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 version.commands += \
-    echo \'const string VERSION = \"$$system("git rev-parse HEAD")\";\' \
+    echo \'const string VERSION = \" $$VERSION-$$system("git rev-parse HEAD")\";\' \
         > version.h
 
 TARGET = mst
