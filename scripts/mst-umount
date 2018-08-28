@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SEAT_NUMBER=$(echo "$DISPLAY" | sed -re 's/:([0-9]+)\.[0-9]+.*/\1/g')
-DIRECTORY="${USER}_${SEAT_NUMBER}"
+DIRECTORY="/media/${USER}_${SEAT_NUMBER}"
 
 Xdialog --yesno "Отключить флеш-накопитель?"  10 40
 if [ $? -eq 0 ]; then
