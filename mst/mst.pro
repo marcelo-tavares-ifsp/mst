@@ -14,7 +14,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 version.commands += \
-    echo \'const string VERSION = \" $$VERSION-$$system("git rev-parse HEAD")\";\' \
+    echo \'const string VERSION = \" $$VERSION-$$system("git rev-parse --short HEAD")\";\' \
         > version.h
 
 TARGET = mst
