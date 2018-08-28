@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DEVICE="$1"
+
+Xdialog --yesno "Отключить флеш-накопитель?"  10 40
+if [ $? -eq 0 ]; then
+    sudo umount $DEVICE
+fi
