@@ -4,3 +4,5 @@ Authors of MST.
   The author and current maintainer.
 * Anton Plekhanov <plehunov.anton9@gmail.com>
   The author and current maintainer.
+* Mikhail Shcherbakov <whfrthmo@gmail.com>
+  Implementation of USB assignment to seats with UDEV.
