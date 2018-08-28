@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 SEAT_NUMBER=$(echo "$DISPLAY" | sed -re 's/:([0-9]+)\.[0-9]+.*/\1/g')
 DIRECTORY="${USER}_${SEAT_NUMBER}"
