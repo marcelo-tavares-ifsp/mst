@@ -43,3 +43,25 @@ Installation from the RPM package:
 $ apt-get install awesome unclutter xorg-xephyr libqt5-core libudev-devel virtualgl
 $ rpm -i mst-1.0.0-1.x86_64.rpm
 ```
+
+## Usage
+
+To make a multi-seat configuation, you should run `mst` program as the
+superuser (`root`) and go through the dialogs.
+
+MST assigns a choosen USB port for each seat.  When a USB stick is
+plugged to a assigned USB port, it should mount automatically.  The
+mount point depends on the seat number and the user logged in on the
+seat.  Let's say you have `user1` logged on the 1st seat and `user2`
+on the 2nd, and `user1` plugs in a USB stick to the port assigned to
+his/her seat.  In this scenario, the mount point will be:
+
+```
+/media/user1_1
+```
+
+where `user1` is the user login and `1` is the seat number.
+
+To unmount an USB for the current user you should run `mst-umount`
+command without any arguments.  The user should be allowed to run
+`umount` command without a password.
