@@ -9,7 +9,8 @@ scripts.files += \
     scripts/mst-start-dm \
     scripts/mk_backup.sh \
     scripts/apl_backup.sh \
-    scripts/mst-mount
+    scripts/mst-mount	\
+    scripts/mst-umount
 
 scripts.path = $$(PREFIX)/bin
 
@@ -39,6 +40,7 @@ DISTFILES += \
     scripts/mk_backup.sh \
     scripts/apl_backup.sh \
     scripts/mst-mount \
+    scripts/mst-umount \
     templates/bashrc.template    \
     templates/rc.lua.template    \
     templates/rc.lua.4.template  \
