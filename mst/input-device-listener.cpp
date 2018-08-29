@@ -81,7 +81,7 @@ void Input_device_listener::cancel()
 static ssize_t _try_read(int fd, struct input_event* ie) {
     static uint32_t MAX_COUNT = 100;
     ssize_t bytes = -1;
-    for (int count = 0; count < MAX_COUNT; ++count) {
+    for (uint32_t count = 0; count < MAX_COUNT; ++count) {
         bytes = read(fd, (void *) ie, sizeof(struct input_event));
         if (bytes > 0)
             break;
