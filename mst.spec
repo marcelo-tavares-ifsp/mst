@@ -28,10 +28,10 @@ make -j4
 mkdir -p $RPM_BUILD_ROOT/usr/local/bin
 mkdir -p $RPM_BUILD_ROOT/usr/share/mst
 mkdir -p $RPM_BUILD_ROOT/etc
-install mst/mst $RPM_BUILD_ROOT/usr/local/bin/mst
-install templates/* $RPM_BUILD_ROOT/usr/share/mst/
-install scripts/*   $RPM_BUILD_ROOT/usr/local/bin/
-install etc/mst     $RPM_BUILD_ROOT/etc
+install -m0755 mst/mst $RPM_BUILD_ROOT/usr/local/bin/mst
+install -m0644 templates/* $RPM_BUILD_ROOT/usr/share/mst/
+install -m0755 scripts/*   $RPM_BUILD_ROOT/usr/local/bin/
+install -m0644 etc/mst     $RPM_BUILD_ROOT/etc
 
 %files
 /usr/local/bin/*
