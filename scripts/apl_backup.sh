@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 main() {
     local mst_user="$1"
