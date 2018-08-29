@@ -1,5 +1,27 @@
 #!/bin/bash
 
+### apl_backup.sh -- Restore files from a backup.
+
+# Copyright (C) 2018 Anton Plekhanov <plehunov.anton9@gmail.com>
+# Copyright (C) 2018 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+#
+# This file is part of MST.
+#
+# MST is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# MST is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MST.  If not, see <http://www.gnu.org/licenses/>.
+
+###
+
 main() {
     local mst_user="$1"
     local last_backup_date="$(ls -1 /var/lib/mst/backup/ | head -1)"
@@ -24,3 +46,5 @@ main() {
 }
 
 main $*
+
+### apl_backup.sh ends here.
