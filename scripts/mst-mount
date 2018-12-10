@@ -55,6 +55,10 @@ main() {
 
     sudo /bin/mount -o users,noauto,umask=0022,uid="$user_id",gid="$group_id" \
 	 "$device" "$mount_dir"
+
+    while [ $(df | grep "$mount_dir" -c ) -gt 0 ]; do
+	  sleep 1;
+    done
 }
 
 main $*
