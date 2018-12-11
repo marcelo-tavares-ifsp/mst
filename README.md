@@ -41,6 +41,7 @@ Installation from the RPM package:
 
 ```
 $ apt-get install awesome unclutter xorg-xephyr libqt5-core libudev-devel virtualgl qt5-base-devel rpmdevtools
+$ useradd multiseat
 $ rpm -i mst-1.0.0-1.x86_64.rpm
 ```
 
