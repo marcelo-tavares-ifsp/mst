@@ -40,7 +40,7 @@ of available CPU cores to speed up the building process.)
 Installation from the RPM package:
 
 ```
-$ apt-get install awesome unclutter xorg-xephyr libqt5-core libudev-devel virtualgl
+$ apt-get install awesome unclutter xorg-xephyr libqt5-core libudev-devel virtualgl qt5-base-devel rpmdevtools
 $ rpm -i mst-1.0.0-1.x86_64.rpm
 ```
 
