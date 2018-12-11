@@ -40,6 +40,7 @@ const string Awesome::get_raw_version()
         qCritical(awesome_category) << msg.c_str();
         throw msg;
     }
+    return NULL;
 }
 
 const vector<int> Awesome::get_version()
