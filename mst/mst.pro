@@ -1,21 +1,13 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-04-28T11:15:51
+# Project created by QtCreator 2018-12-16T10:50:20
 #
 #-------------------------------------------------
 
-include(../mst-vars.pri)
-
-QMAKE_CXXFLAGS += -std=c++11
+QT       += core gui
 LIBS += -ludev
 
-QT       += core gui
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-version.commands += \
-    echo \'const string VERSION = \" $$VERSION-$$system("git rev-parse --short HEAD")\";\' \
-        > version.h
 
 TARGET = mst
 TEMPLATE = app
@@ -23,6 +15,10 @@ TEMPLATE = app
 PRE_TARGETDEPS += version
 
 QMAKE_EXTRA_TARGETS += version
+
+version.commands += \
+    echo \'const string VERSION = \" $$VERSION-$$system("git rev-parse --short HEAD")\";\' \
+        > version.h
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -35,52 +31,48 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    lightdm/display-manager.cpp \
-    xorg/xorg-config.cpp \
-    utils.cpp \
-    input-device-listener.cpp \
-    seat_calibration_dialog.cpp \
-    seat.cpp \
-    dsv.cpp \
-    config.cpp \
-    controller.cpp \
-    reboot_dialog.cpp \
-    usb_detection_dialog.cpp \
-    usbdetectionthread.cpp \
-    settings.cpp \
-    awesome/awesome.cpp \
-    vgl/vgl.cpp
+        install_window/installwindow.cpp \
+    install_controller/installcontroller.cpp \
+    configuration/configuration.cpp \
+    common/utilites/utilites.cpp \
+    command_manager/commandmanager.cpp \
+    config_manager/configmanager.cpp \
+    input_divece_listener/inputdivecelistener.cpp \
+    path_manager/pathmanager.cpp \
+    calibration_dialog/calibrationdialog.cpp \
+    common/dsv_parser/dsv.cpp \
+    config_manager/xorg_config.cpp \
+    config_manager/vgl.cpp \
+    config_manager/display_manager.cpp \
+    reboot_dialog/rebootdialog.cpp
 
 HEADERS += \
-        mainwindow.h \
-    lightdm/display-manager.h \
-    xorg/xorg-config.h \
-    utils.h \
-    input-device-listener.h \
-    seat_calibration_dialog.h \
-    seat.h \
-    dsv.h \
-    config.h \
-    controller.h \
-    reboot_dialog.h \
-    version.h \
-    usb_detection_dialog.h \
-    usbdetectionthread.h \
-    settings.h \
-    awesome/awesome.h \
-    version.h \
-    vgl/vgl.h
+        install_window/installwindow.h \
+    install_controller/installcontroller.h \
+    configuration/configuration.h \
+    common/utilites/utilites.h \
+    command_manager/commandmanager.h \
+    config_manager/configmanager.h \
+    input_divece_listener/inputdivecelistener.h \
+    path_manager/pathmanager.h \
+    calibration_dialog/calibrationdialog.h \
+    common/dsv_parser/dsv.h \
+    config_manager/xorg_config.h \
+    config_manager/vgl.h \
+    config_manager/display_manager.h \
+    reboot_dialog/rebootdialog.h \
+    version.h
 
 FORMS += \
-        mainwindow.ui \
-    seat_calibration_dialog.ui \
-    reboot_dialog.ui \
-    usb_detection_dialog.ui
+        install_window/installwindow.ui \
+    calibration_dialog/calibrationdialog.ui \
+    reboot_dialog/rebootdialog.ui
 
-target.path = $$(PREFIX)/bin
-
-INSTALLS += target
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target

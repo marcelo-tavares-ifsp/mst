@@ -27,6 +27,7 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 * libqt5-core
 * libudev-devel
 * virtualgl
+* Xdialog (needed for mst-umount)
 
 ## Installation
 
