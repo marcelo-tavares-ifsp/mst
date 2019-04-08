@@ -13,9 +13,6 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-version.commands += \
-    echo \'const string VERSION = \" $$VERSION-$$system("git rev-parse --short HEAD")\";\' \
-        > version.h
 
 TARGET = mst
 TEMPLATE = app
@@ -23,6 +20,11 @@ TEMPLATE = app
 PRE_TARGETDEPS += version
 
 QMAKE_EXTRA_TARGETS += version
+
+
+version.commands += \
+    echo \'const string VERSION = \" $$VERSION-$$system("git rev-parse --short HEAD")\";\' \
+        > version.h
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
