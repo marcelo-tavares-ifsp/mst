@@ -1,0 +1,627 @@
+2019-06-08 16:32:06.755 WRN default: QMetaObject::connectSlotsByName: No matching signal for on_btninterface_clicked()
+2019-06-08 16:32:06.762 INF mst.install_window: MST is running
+2019-06-08 16:32:09.289 INF mst.command_manager: line:  Screen 0: minimum 320 x 200, current 3520 x 1080, maximum 8192 x 8192
+2019-06-08 16:32:09.290 INF mst.command_manager: line:  eDP-1 connected 1600x900+1920+180 (normal left inverted right x axis y axis) 0mm x 0mm
+2019-06-08 16:32:09.290 INF mst.command_manager: [state 0] -> [state 1]
+2019-06-08 16:32:09.290 INF mst.command_manager: eDP-1
+2019-06-08 16:32:09.290 INF mst.command_manager: line:  1600x900      59.93*+  59.82
+2019-06-08 16:32:09.290 INF mst.command_manager: 1600x900
+2019-06-08 16:32:09.290 INF mst.command_manager: line:  1440x900      59.89
+2019-06-08 16:32:09.290 INF mst.command_manager: 1440x900
+2019-06-08 16:32:09.290 INF mst.command_manager: line:  1400x900      59.96    59.88
+2019-06-08 16:32:09.290 INF mst.command_manager: 1400x900
+2019-06-08 16:32:09.290 INF mst.command_manager: line:  1440x810      60.00    59.97
+2019-06-08 16:32:09.290 INF mst.command_manager: 1440x810
+2019-06-08 16:32:09.290 INF mst.command_manager: line:  1368x768      59.88    59.85
+2019-06-08 16:32:09.290 INF mst.command_manager: 1368x768
+2019-06-08 16:32:09.290 INF mst.command_manager: line:  1360x768      59.80    59.96
+2019-06-08 16:32:09.290 INF mst.command_manager: 1360x768
+2019-06-08 16:32:09.290 INF mst.command_manager: line:  1280x800      59.99    59.97    59.81    59.91
+2019-06-08 16:32:09.291 INF mst.command_manager: 1280x800
+2019-06-08 16:32:09.291 INF mst.command_manager: line:  1152x864      60.00
+2019-06-08 16:32:09.291 INF mst.command_manager: 1152x864
+2019-06-08 16:32:09.291 INF mst.command_manager: line:  1280x720      60.00    59.99    59.86    59.74
+2019-06-08 16:32:09.291 INF mst.command_manager: 1280x720
+2019-06-08 16:32:09.291 INF mst.command_manager: line:  1024x768      60.04    60.00
+2019-06-08 16:32:09.291 INF mst.command_manager: 1024x768
+2019-06-08 16:32:09.291 INF mst.command_manager: line:  960x720       60.00
+2019-06-08 16:32:09.291 INF mst.command_manager: 960x720
+2019-06-08 16:32:09.291 INF mst.command_manager: line:  928x696       60.05
+2019-06-08 16:32:09.291 INF mst.command_manager: 928x696
+2019-06-08 16:32:09.291 INF mst.command_manager: line:  896x672       60.01
+2019-06-08 16:32:09.291 INF mst.command_manager: 896x672
+2019-06-08 16:32:09.291 INF mst.command_manager: line:  1024x576      59.95    59.96    59.90    59.82
+2019-06-08 16:32:09.291 INF mst.command_manager: 1024x576
+2019-06-08 16:32:09.291 INF mst.command_manager: line:  960x600       59.93    60.00
+2019-06-08 16:32:09.291 INF mst.command_manager: 960x600
+2019-06-08 16:32:09.291 INF mst.command_manager: line:  960x540       59.96    59.99    59.63    59.82
+2019-06-08 16:32:09.291 INF mst.command_manager: 960x540
+2019-06-08 16:32:09.291 INF mst.command_manager: line:  800x600       60.00    60.32    56.25
+2019-06-08 16:32:09.292 INF mst.command_manager: 800x600
+2019-06-08 16:32:09.292 INF mst.command_manager: line:  840x525       60.01    59.88
+2019-06-08 16:32:09.292 INF mst.command_manager: 840x525
+2019-06-08 16:32:09.292 INF mst.command_manager: line:  864x486       59.92    59.57
+2019-06-08 16:32:09.292 INF mst.command_manager: 864x486
+2019-06-08 16:32:09.292 INF mst.command_manager: line:  800x512       60.17
+2019-06-08 16:32:09.292 INF mst.command_manager: 800x512
+2019-06-08 16:32:09.292 INF mst.command_manager: line:  700x525       59.98
+2019-06-08 16:32:09.292 INF mst.command_manager: 700x525
+2019-06-08 16:32:09.292 INF mst.command_manager: line:  800x450       59.95    59.82
+2019-06-08 16:32:09.292 INF mst.command_manager: 800x450
+2019-06-08 16:32:09.292 INF mst.command_manager: line:  640x512       60.02
+2019-06-08 16:32:09.292 INF mst.command_manager: 640x512
+2019-06-08 16:32:09.292 INF mst.command_manager: line:  720x450       59.89
+2019-06-08 16:32:09.292 INF mst.command_manager: 720x450
+2019-06-08 16:32:09.292 INF mst.command_manager: line:  700x450       59.96    59.88
+2019-06-08 16:32:09.292 INF mst.command_manager: 700x450
+2019-06-08 16:32:09.292 INF mst.command_manager: line:  640x480       60.00    59.94
+2019-06-08 16:32:09.292 INF mst.command_manager: 640x480
+2019-06-08 16:32:09.292 INF mst.command_manager: line:  720x405       59.51    58.99
+2019-06-08 16:32:09.292 INF mst.command_manager: 720x405
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  684x384       59.88    59.85
+2019-06-08 16:32:09.293 INF mst.command_manager: 684x384
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  680x384       59.80    59.96
+2019-06-08 16:32:09.293 INF mst.command_manager: 680x384
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  640x400       59.88    59.98
+2019-06-08 16:32:09.293 INF mst.command_manager: 640x400
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  576x432       60.06
+2019-06-08 16:32:09.293 INF mst.command_manager: 576x432
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  640x360       59.86    59.83    59.84    59.32
+2019-06-08 16:32:09.293 INF mst.command_manager: 640x360
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  512x384       60.00
+2019-06-08 16:32:09.293 INF mst.command_manager: 512x384
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  512x288       60.00    59.92
+2019-06-08 16:32:09.293 INF mst.command_manager: 512x288
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  480x270       59.63    59.82
+2019-06-08 16:32:09.293 INF mst.command_manager: 480x270
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  400x300       60.32    56.34
+2019-06-08 16:32:09.293 INF mst.command_manager: 400x300
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  432x243       59.92    59.57
+2019-06-08 16:32:09.293 INF mst.command_manager: 432x243
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  320x240       60.05
+2019-06-08 16:32:09.293 INF mst.command_manager: 320x240
+2019-06-08 16:32:09.293 INF mst.command_manager: line:  360x202       59.51    59.13
+2019-06-08 16:32:09.294 INF mst.command_manager: 360x202
+2019-06-08 16:32:09.294 INF mst.command_manager: line:  320x180       59.84    59.32
+2019-06-08 16:32:09.294 INF mst.command_manager: 320x180
+2019-06-08 16:32:09.294 INF mst.command_manager: line:  VGA-1 disconnected (normal left inverted right x axis y axis)
+2019-06-08 16:32:09.294 INF mst.command_manager: [state 1] -> [state 0]
+2019-06-08 16:32:09.294 INF mst.command_manager: line:  VGA-1 disconnected (normal left inverted right x axis y axis)
+2019-06-08 16:32:09.294 INF mst.command_manager: line:  HDMI-1 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 477mm x 268mm
+2019-06-08 16:32:09.294 INF mst.command_manager: [state 0] -> [state 1]
+2019-06-08 16:32:09.294 INF mst.command_manager: HDMI-1
+2019-06-08 16:32:09.294 INF mst.command_manager: line:  1920x1080     60.00*+
+2019-06-08 16:32:09.294 INF mst.command_manager: 1920x1080
+2019-06-08 16:32:09.294 INF mst.command_manager: line:  1680x1050     59.88
+2019-06-08 16:32:09.294 INF mst.command_manager: 1680x1050
+2019-06-08 16:32:09.294 INF mst.command_manager: line:  1280x1024     75.02    60.02
+2019-06-08 16:32:09.294 INF mst.command_manager: 1280x1024
+2019-06-08 16:32:09.294 INF mst.command_manager: line:  1440x900      74.98    59.90
+2019-06-08 16:32:09.294 INF mst.command_manager: 1440x900
+2019-06-08 16:32:09.294 INF mst.command_manager: line:  1280x720      60.00
+2019-06-08 16:32:09.294 INF mst.command_manager: 1280x720
+2019-06-08 16:32:09.294 INF mst.command_manager: line:  1024x768      75.03    60.00
+2019-06-08 16:32:09.294 INF mst.command_manager: 1024x768
+2019-06-08 16:32:09.295 INF mst.command_manager: line:  800x600       75.00    60.32
+2019-06-08 16:32:09.295 INF mst.command_manager: 800x600
+2019-06-08 16:32:09.295 INF mst.command_manager: line:  640x480       75.00    72.81    66.67    59.94
+2019-06-08 16:32:09.295 INF mst.command_manager: 640x480
+2019-06-08 16:32:09.295 INF mst.command_manager: line:  720x400       70.08
+2019-06-08 16:32:09.295 INF mst.command_manager: 720x400
+2019-06-08 16:32:12.855 INF mst.install_controller: Settings for monitors:
+2019-06-08 16:32:12.855 INF mst.install_controller: Name:  eDP-1
+2019-06-08 16:32:12.855 INF mst.install_controller: width:  1400 ; height:  900
+2019-06-08 16:32:12.855 INF mst.install_controller: Name:  HDMI-1
+2019-06-08 16:32:12.855 INF mst.install_controller: width:  1400 ; height:  900
+2019-06-08 16:32:12.855 INF mst.install_controller: layout was cleared
+2019-06-08 16:32:12.855 INF mst.install_controller: Button:  eDP-1  was added
+2019-06-08 16:32:12.855 INF mst.install_controller: Button:  HDMI-1  was added
+2019-06-08 16:32:13.727 INF mst.install_window: eDP-1  was selected
+2019-06-08 16:32:13.727 INF mst.install_controller: interface  eDP-1  was cleared
+2019-06-08 16:32:13.727 INF mst.install_window: MOUSE was started
+2019-06-08 16:32:13.728 INF mst.input_device_listener: MOUSE: 
+2019-06-08 16:32:13.728 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:3:1.0-event-mouse
+2019-06-08 16:32:13.728 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:9:1.0-event-mouse
+2019-06-08 16:32:13.837 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  4
+2019-06-08 16:32:13.909 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -1
+2019-06-08 16:32:14.093 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  1
+2019-06-08 16:32:14.797 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  589825
+2019-06-08 16:32:14.797 INF mst.input_device_listener: Detected:  USB Optical Mouse
+2019-06-08 16:32:14.797 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:9:1.0-event-mouse  ( 1 )
+2019-06-08 16:32:14.797 INF mst.install_controller: Seat interface: ' eDP-1 '; keyboard: '  '; mouse: ' pci-0000:00:14.0-usb-0:9:1.0-event-mouse '; usb:   '
+2019-06-08 16:32:14.797 INF mst.calibration_dialog: work_done
+2019-06-08 16:32:14.799 INF mst.install_window: KEYBOARD was started
+2019-06-08 16:32:14.800 INF mst.input_device_listener: KEYBOARD: 
+2019-06-08 16:32:14.800 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:10:1.0-event-kbd
+2019-06-08 16:32:14.800 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:4:1.0-event-kbd
+2019-06-08 16:32:15.653 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  458770
+2019-06-08 16:32:15.653 INF mst.input_device_listener: Detected:  Chicony USB Keyboard
+2019-06-08 16:32:15.654 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:10:1.0-event-kbd  ( 0 )
+2019-06-08 16:32:15.654 INF mst.install_controller: Seat interface: ' eDP-1 '; keyboard: ' pci-0000:00:14.0-usb-0:10:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:9:1.0-event-mouse '; usb:   '
+2019-06-08 16:32:15.654 INF mst.calibration_dialog: work_done
+2019-06-08 16:32:15.658 INF mst.install_window: USB was started
+2019-06-08 16:32:15.658 INF mst.input_device_listener: USB: 
+2019-06-08 16:32:15.658 INF mst.install_window: USB was started
+2019-06-08 16:32:15.658 INF mst.input_device_listener: USB: 
+2019-06-08 16:32:24.392 INF mst.install_controller: Device assigned:  /devices/pci0000:00/0000:00:14.0/usb2/2-1  ( 2 )
+2019-06-08 16:32:24.392 INF mst.install_controller: Seat interface: ' eDP-1 '; keyboard: ' pci-0000:00:14.0-usb-0:10:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:9:1.0-event-mouse '; usb:  /devices/pci0000:00/0000:00:14.0/usb2/2-1 '
+2019-06-08 16:32:24.392 INF mst.calibration_dialog: work_done
+2019-06-08 16:32:27.878 INF mst.install_window: HDMI-1  was selected
+2019-06-08 16:32:27.878 INF mst.install_controller: interface  HDMI-1  was cleared
+2019-06-08 16:32:27.878 INF mst.install_window: MOUSE was started
+2019-06-08 16:32:27.878 INF mst.input_device_listener: MOUSE: 
+2019-06-08 16:32:27.878 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:3:1.0-event-mouse
+2019-06-08 16:32:27.878 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:9:1.0-event-mouse
+2019-06-08 16:32:28.229 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -1
+2019-06-08 16:32:28.285 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -2
+2019-06-08 16:32:28.341 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -3
+2019-06-08 16:32:28.397 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -5
+2019-06-08 16:32:28.453 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -4
+2019-06-08 16:32:28.573 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  589825
+2019-06-08 16:32:28.573 INF mst.input_device_listener: Detected:  USB Optical Mouse
+2019-06-08 16:32:28.573 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:3:1.0-event-mouse  ( 1 )
+2019-06-08 16:32:28.573 INF mst.install_controller: Seat interface: ' HDMI-1 '; keyboard: '  '; mouse: ' pci-0000:00:14.0-usb-0:3:1.0-event-mouse '; usb:   '
+2019-06-08 16:32:28.573 INF mst.calibration_dialog: work_done
+2019-06-08 16:32:28.577 INF mst.install_window: KEYBOARD was started
+2019-06-08 16:32:28.577 INF mst.install_window: KEYBOARD was started
+2019-06-08 16:32:28.577 INF mst.input_device_listener: KEYBOARD: 
+2019-06-08 16:32:28.577 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:10:1.0-event-kbd
+2019-06-08 16:32:28.577 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:4:1.0-event-kbd
+2019-06-08 16:32:30.461 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  458765
+2019-06-08 16:32:30.461 INF mst.input_device_listener: Detected:  Chicony USB Keyboard
+2019-06-08 16:32:30.461 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:4:1.0-event-kbd  ( 0 )
+2019-06-08 16:32:30.461 INF mst.install_controller: Seat interface: ' HDMI-1 '; keyboard: ' pci-0000:00:14.0-usb-0:4:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:3:1.0-event-mouse '; usb:   '
+2019-06-08 16:32:30.461 INF mst.calibration_dialog: work_done
+2019-06-08 16:32:30.464 INF mst.install_window: USB was started
+2019-06-08 16:32:30.464 INF mst.input_device_listener: USB: 
+2019-06-08 16:32:35.196 INF mst.install_controller: Device assigned:  /devices/pci0000:00/0000:00:14.0/usb2/2-2  ( 2 )
+2019-06-08 16:32:35.196 INF mst.install_controller: Seat interface: ' HDMI-1 '; keyboard: ' pci-0000:00:14.0-usb-0:4:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:3:1.0-event-mouse '; usb:  /devices/pci0000:00/0000:00:14.0/usb2/2-2 '
+2019-06-08 16:32:35.196 INF mst.calibration_dialog: work_done
+2019-06-08 16:32:39.366 INF mst.install_controller: 
+-----START current configuration:
+	seat: eDP-1
+	keyboard: pci-0000:00:14.0-usb-0:10:1.0-event-kbd
+	mouse: pci-0000:00:14.0-usb-0:9:1.0-event-mouse
+	usb: /devices/pci0000:00/0000:00:14.0/usb2/2-1
+	resolution: 1400x900
+	seat: HDMI-1
+	keyboard: pci-0000:00:14.0-usb-0:4:1.0-event-kbd
+	mouse: pci-0000:00:14.0-usb-0:3:1.0-event-mouse
+	usb: /devices/pci0000:00/0000:00:14.0/usb2/2-2
+	resolution: 1400x900
+-----END currecnt cunfiguration
+2019-06-08 16:32:39.366 INF mst.install_controller: Comparison 0 seat, pci-0000:00:14.0-usb-0:10:1.0-event-kbd keyboard, pci-0000:00:14.0-usb-0:9:1.0-event-mouse mouse, /devices/pci0000:00/0000:00:14.0/usb2/2-1 usb AND
+								1 seat, pci-0000:00:14.0-usb-0:4:1.0-event-kbd keyboard, pci-0000:00:14.0-usb-0:3:1.0-event-mouse mouse, /devices/pci0000:00/0000:00:14.0/usb2/2-2 usb
+2019-06-08 16:32:39.366 INF mst.install_controller: 
+2019-06-08 16:32:39.366 INF mst.install_controller: 
+2019-06-08 16:32:40.374 INF mst.config_manager: writing ' /home/multiseat/.local/share/mst/output/rc.lua ' ...
+2019-06-08 16:32:40.378 INF mst.install_controller: make_rc_lua OK
+2019-06-08 16:32:40.378 INF mst.install_controller: make_xorg OK
+2019-06-08 16:32:40.378 INF mst.install_controller: make_bashrc OK
+2019-06-08 16:32:40.378 INF mst.install_controller: make_xinitrc OK
+2019-06-08 16:32:40.378 INF mst.install_controller: make_sudoers OK
+2019-06-08 16:32:40.378 INF mst.install_controller: make_lightdm_conf OK
+2019-06-08 16:32:40.379 INF mst.install_controller: make_getty_service OK
+2019-06-08 16:32:40.379 INF mst.install_controller: make_udev_rules OK
+2019-06-08 16:32:40.379 INF mst.install_controller: make_udev_service OK
+2019-06-08 16:32:40.379 INF mst.install_controller: make_vgl OK
+2019-06-08 16:42:49.783 WRN default: QMetaObject::connectSlotsByName: No matching signal for on_btninterface_clicked()
+2019-06-08 16:42:49.794 INF mst.install_window: MST is running
+2019-06-08 16:42:53.818 INF mst.command_manager: line:  Screen 0: minimum 320 x 200, current 3520 x 1080, maximum 8192 x 8192
+2019-06-08 16:42:53.819 INF mst.command_manager: line:  eDP-1 connected 1600x900+1920+180 (normal left inverted right x axis y axis) 0mm x 0mm
+2019-06-08 16:42:53.819 INF mst.command_manager: [state 0] -> [state 1]
+2019-06-08 16:42:53.819 INF mst.command_manager: eDP-1
+2019-06-08 16:42:53.819 INF mst.command_manager: line:  1600x900      59.93*+  59.82
+2019-06-08 16:42:53.819 INF mst.command_manager: 1600x900
+2019-06-08 16:42:53.819 INF mst.command_manager: line:  1440x900      59.89
+2019-06-08 16:42:53.819 INF mst.command_manager: 1440x900
+2019-06-08 16:42:53.819 INF mst.command_manager: line:  1400x900      59.96    59.88
+2019-06-08 16:42:53.819 INF mst.command_manager: 1400x900
+2019-06-08 16:42:53.819 INF mst.command_manager: line:  1440x810      60.00    59.97
+2019-06-08 16:42:53.819 INF mst.command_manager: 1440x810
+2019-06-08 16:42:53.819 INF mst.command_manager: line:  1368x768      59.88    59.85
+2019-06-08 16:42:53.819 INF mst.command_manager: 1368x768
+2019-06-08 16:42:53.819 INF mst.command_manager: line:  1360x768      59.80    59.96
+2019-06-08 16:42:53.819 INF mst.command_manager: 1360x768
+2019-06-08 16:42:53.819 INF mst.command_manager: line:  1280x800      59.99    59.97    59.81    59.91
+2019-06-08 16:42:53.819 INF mst.command_manager: 1280x800
+2019-06-08 16:42:53.819 INF mst.command_manager: line:  1152x864      60.00
+2019-06-08 16:42:53.819 INF mst.command_manager: 1152x864
+2019-06-08 16:42:53.820 INF mst.command_manager: line:  1280x720      60.00    59.99    59.86    59.74
+2019-06-08 16:42:53.820 INF mst.command_manager: 1280x720
+2019-06-08 16:42:53.820 INF mst.command_manager: line:  1024x768      60.04    60.00
+2019-06-08 16:42:53.820 INF mst.command_manager: 1024x768
+2019-06-08 16:42:53.820 INF mst.command_manager: line:  960x720       60.00
+2019-06-08 16:42:53.820 INF mst.command_manager: 960x720
+2019-06-08 16:42:53.820 INF mst.command_manager: line:  928x696       60.05
+2019-06-08 16:42:53.820 INF mst.command_manager: 928x696
+2019-06-08 16:42:53.820 INF mst.command_manager: line:  896x672       60.01
+2019-06-08 16:42:53.820 INF mst.command_manager: 896x672
+2019-06-08 16:42:53.820 INF mst.command_manager: line:  1024x576      59.95    59.96    59.90    59.82
+2019-06-08 16:42:53.820 INF mst.command_manager: 1024x576
+2019-06-08 16:42:53.820 INF mst.command_manager: line:  960x600       59.93    60.00
+2019-06-08 16:42:53.820 INF mst.command_manager: 960x600
+2019-06-08 16:42:53.820 INF mst.command_manager: line:  960x540       59.96    59.99    59.63    59.82
+2019-06-08 16:42:53.820 INF mst.command_manager: 960x540
+2019-06-08 16:42:53.820 INF mst.command_manager: line:  800x600       60.00    60.32    56.25
+2019-06-08 16:42:53.820 INF mst.command_manager: 800x600
+2019-06-08 16:42:53.820 INF mst.command_manager: line:  840x525       60.01    59.88
+2019-06-08 16:42:53.820 INF mst.command_manager: 840x525
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  864x486       59.92    59.57
+2019-06-08 16:42:53.821 INF mst.command_manager: 864x486
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  800x512       60.17
+2019-06-08 16:42:53.821 INF mst.command_manager: 800x512
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  700x525       59.98
+2019-06-08 16:42:53.821 INF mst.command_manager: 700x525
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  800x450       59.95    59.82
+2019-06-08 16:42:53.821 INF mst.command_manager: 800x450
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  640x512       60.02
+2019-06-08 16:42:53.821 INF mst.command_manager: 640x512
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  720x450       59.89
+2019-06-08 16:42:53.821 INF mst.command_manager: 720x450
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  700x450       59.96    59.88
+2019-06-08 16:42:53.821 INF mst.command_manager: 700x450
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  640x480       60.00    59.94
+2019-06-08 16:42:53.821 INF mst.command_manager: 640x480
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  720x405       59.51    58.99
+2019-06-08 16:42:53.821 INF mst.command_manager: 720x405
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  684x384       59.88    59.85
+2019-06-08 16:42:53.821 INF mst.command_manager: 684x384
+2019-06-08 16:42:53.821 INF mst.command_manager: line:  680x384       59.80    59.96
+2019-06-08 16:42:53.821 INF mst.command_manager: 680x384
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  640x400       59.88    59.98
+2019-06-08 16:42:53.822 INF mst.command_manager: 640x400
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  576x432       60.06
+2019-06-08 16:42:53.822 INF mst.command_manager: 576x432
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  640x360       59.86    59.83    59.84    59.32
+2019-06-08 16:42:53.822 INF mst.command_manager: 640x360
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  512x384       60.00
+2019-06-08 16:42:53.822 INF mst.command_manager: 512x384
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  512x288       60.00    59.92
+2019-06-08 16:42:53.822 INF mst.command_manager: 512x288
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  480x270       59.63    59.82
+2019-06-08 16:42:53.822 INF mst.command_manager: 480x270
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  400x300       60.32    56.34
+2019-06-08 16:42:53.822 INF mst.command_manager: 400x300
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  432x243       59.92    59.57
+2019-06-08 16:42:53.822 INF mst.command_manager: 432x243
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  320x240       60.05
+2019-06-08 16:42:53.822 INF mst.command_manager: 320x240
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  360x202       59.51    59.13
+2019-06-08 16:42:53.822 INF mst.command_manager: 360x202
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  320x180       59.84    59.32
+2019-06-08 16:42:53.822 INF mst.command_manager: 320x180
+2019-06-08 16:42:53.822 INF mst.command_manager: line:  VGA-1 disconnected (normal left inverted right x axis y axis)
+2019-06-08 16:42:53.823 INF mst.command_manager: [state 1] -> [state 0]
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  VGA-1 disconnected (normal left inverted right x axis y axis)
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  HDMI-1 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 477mm x 268mm
+2019-06-08 16:42:53.823 INF mst.command_manager: [state 0] -> [state 1]
+2019-06-08 16:42:53.823 INF mst.command_manager: HDMI-1
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  1920x1080     60.00*+
+2019-06-08 16:42:53.823 INF mst.command_manager: 1920x1080
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  1680x1050     59.88
+2019-06-08 16:42:53.823 INF mst.command_manager: 1680x1050
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  1280x1024     75.02    60.02
+2019-06-08 16:42:53.823 INF mst.command_manager: 1280x1024
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  1440x900      74.98    59.90
+2019-06-08 16:42:53.823 INF mst.command_manager: 1440x900
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  1280x720      60.00
+2019-06-08 16:42:53.823 INF mst.command_manager: 1280x720
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  1024x768      75.03    60.00
+2019-06-08 16:42:53.823 INF mst.command_manager: 1024x768
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  800x600       75.00    60.32
+2019-06-08 16:42:53.823 INF mst.command_manager: 800x600
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  640x480       75.00    72.81    66.67    59.94
+2019-06-08 16:42:53.823 INF mst.command_manager: 640x480
+2019-06-08 16:42:53.823 INF mst.command_manager: line:  720x400       70.08
+2019-06-08 16:42:53.824 INF mst.command_manager: 720x400
+2019-06-08 16:42:58.311 INF mst.install_controller: Settings for monitors:
+2019-06-08 16:42:58.311 INF mst.install_controller: Name:  eDP-1
+2019-06-08 16:42:58.311 INF mst.install_controller: width:  1400 ; height:  900
+2019-06-08 16:42:58.311 INF mst.install_controller: Name:  HDMI-1
+2019-06-08 16:42:58.311 INF mst.install_controller: width:  1400 ; height:  900
+2019-06-08 16:42:58.311 INF mst.install_controller: layout was cleared
+2019-06-08 16:42:58.311 INF mst.install_controller: Button:  eDP-1  was added
+2019-06-08 16:42:58.311 INF mst.install_controller: Button:  HDMI-1  was added
+2019-06-08 16:42:58.959 INF mst.install_window: eDP-1  was selected
+2019-06-08 16:42:58.959 INF mst.install_controller: interface  eDP-1  was cleared
+2019-06-08 16:42:58.959 INF mst.install_window: MOUSE was started
+2019-06-08 16:42:58.961 INF mst.input_device_listener: MOUSE: 
+2019-06-08 16:42:58.961 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:3:1.0-event-mouse
+2019-06-08 16:42:58.961 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:9:1.0-event-mouse
+2019-06-08 16:42:59.134 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -3
+2019-06-08 16:42:59.182 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -3
+2019-06-08 16:42:59.838 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  589825
+2019-06-08 16:42:59.838 INF mst.input_device_listener: Detected:  USB Optical Mouse
+2019-06-08 16:42:59.838 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:9:1.0-event-mouse  ( 1 )
+2019-06-08 16:42:59.838 INF mst.install_controller: Seat interface: ' eDP-1 '; keyboard: '  '; mouse: ' pci-0000:00:14.0-usb-0:9:1.0-event-mouse '; usb:   '
+2019-06-08 16:42:59.838 INF mst.calibration_dialog: work_done
+2019-06-08 16:42:59.842 INF mst.install_window: KEYBOARD was started
+2019-06-08 16:42:59.842 INF mst.input_device_listener: KEYBOARD: 
+2019-06-08 16:42:59.842 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:10:1.0-event-kbd
+2019-06-08 16:42:59.842 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:4:1.0-event-kbd
+2019-06-08 16:43:00.862 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  458766
+2019-06-08 16:43:00.862 INF mst.input_device_listener: Detected:  Chicony USB Keyboard
+2019-06-08 16:43:00.862 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:10:1.0-event-kbd  ( 0 )
+2019-06-08 16:43:00.862 INF mst.install_controller: Seat interface: ' eDP-1 '; keyboard: ' pci-0000:00:14.0-usb-0:10:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:9:1.0-event-mouse '; usb:   '
+2019-06-08 16:43:00.862 INF mst.calibration_dialog: work_done
+2019-06-08 16:43:00.867 INF mst.install_window: USB was started
+2019-06-08 16:43:00.867 INF mst.input_device_listener: USB: 
+2019-06-08 16:43:08.595 INF mst.install_controller: Device assigned:  /devices/pci0000:00/0000:00:14.0/usb2/2-1  ( 2 )
+2019-06-08 16:43:08.595 INF mst.install_controller: Seat interface: ' eDP-1 '; keyboard: ' pci-0000:00:14.0-usb-0:10:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:9:1.0-event-mouse '; usb:  /devices/pci0000:00/0000:00:14.0/usb2/2-1 '
+2019-06-08 16:43:08.595 INF mst.calibration_dialog: work_done
+2019-06-08 16:43:11.007 INF mst.install_window: HDMI-1  was selected
+2019-06-08 16:43:11.007 INF mst.install_controller: interface  HDMI-1  was cleared
+2019-06-08 16:43:11.007 INF mst.install_window: MOUSE was started
+2019-06-08 16:43:11.007 INF mst.input_device_listener: MOUSE: 
+2019-06-08 16:43:11.007 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:3:1.0-event-mouse
+2019-06-08 16:43:11.007 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:9:1.0-event-mouse
+2019-06-08 16:43:11.222 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  1
+2019-06-08 16:43:11.270 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -4
+2019-06-08 16:43:11.318 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  1
+2019-06-08 16:43:11.366 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  1
+2019-06-08 16:43:11.414 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  1
+2019-06-08 16:43:11.598 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -1
+2019-06-08 16:43:11.782 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  589825
+2019-06-08 16:43:11.782 INF mst.input_device_listener: Detected:  USB Optical Mouse
+2019-06-08 16:43:11.782 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:3:1.0-event-mouse  ( 1 )
+2019-06-08 16:43:11.782 INF mst.install_controller: Seat interface: ' HDMI-1 '; keyboard: '  '; mouse: ' pci-0000:00:14.0-usb-0:3:1.0-event-mouse '; usb:   '
+2019-06-08 16:43:11.782 INF mst.calibration_dialog: work_done
+2019-06-08 16:43:11.786 INF mst.install_window: KEYBOARD was started
+2019-06-08 16:43:11.787 INF mst.input_device_listener: KEYBOARD: 
+2019-06-08 16:43:11.787 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:10:1.0-event-kbd
+2019-06-08 16:43:11.787 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:4:1.0-event-kbd
+2019-06-08 16:43:14.270 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  458770
+2019-06-08 16:43:14.270 INF mst.input_device_listener: Detected:  Chicony USB Keyboard
+2019-06-08 16:43:14.270 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:4:1.0-event-kbd  ( 0 )
+2019-06-08 16:43:14.270 INF mst.install_controller: Seat interface: ' HDMI-1 '; keyboard: ' pci-0000:00:14.0-usb-0:4:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:3:1.0-event-mouse '; usb:   '
+2019-06-08 16:43:14.270 INF mst.calibration_dialog: work_done
+2019-06-08 16:43:14.275 INF mst.input_device_listener: USB: 
+2019-06-08 16:43:14.275 INF mst.install_window: USB was started
+2019-06-08 16:43:25.213 INF mst.install_controller: Device assigned:  /devices/pci0000:00/0000:00:14.0/usb2/2-2  ( 2 )
+2019-06-08 16:43:25.213 INF mst.install_controller: Seat interface: ' HDMI-1 '; keyboard: ' pci-0000:00:14.0-usb-0:4:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:3:1.0-event-mouse '; usb:  /devices/pci0000:00/0000:00:14.0/usb2/2-2 '
+2019-06-08 16:43:25.213 INF mst.calibration_dialog: work_done
+2019-06-08 16:43:28.831 INF mst.install_controller: 
+-----START current configuration:
+	seat: eDP-1
+	keyboard: pci-0000:00:14.0-usb-0:10:1.0-event-kbd
+	mouse: pci-0000:00:14.0-usb-0:9:1.0-event-mouse
+	usb: /devices/pci0000:00/0000:00:14.0/usb2/2-1
+	resolution: 1400x900
+	seat: HDMI-1
+	keyboard: pci-0000:00:14.0-usb-0:4:1.0-event-kbd
+	mouse: pci-0000:00:14.0-usb-0:3:1.0-event-mouse
+	usb: /devices/pci0000:00/0000:00:14.0/usb2/2-2
+	resolution: 1400x900
+-----END currecnt cunfiguration
+2019-06-08 16:43:28.831 INF mst.install_controller: Comparison 0 seat, pci-0000:00:14.0-usb-0:10:1.0-event-kbd keyboard, pci-0000:00:14.0-usb-0:9:1.0-event-mouse mouse, /devices/pci0000:00/0000:00:14.0/usb2/2-1 usb AND
+								1 seat, pci-0000:00:14.0-usb-0:4:1.0-event-kbd keyboard, pci-0000:00:14.0-usb-0:3:1.0-event-mouse mouse, /devices/pci0000:00/0000:00:14.0/usb2/2-2 usb
+2019-06-08 16:43:28.831 INF mst.install_controller: 
+2019-06-08 16:43:28.831 INF mst.install_controller: 
+2019-06-08 16:43:29.721 INF mst.config_manager: writing ' /home/multiseat/.local/share/mst/output/rc.lua ' ...
+2019-06-08 16:43:29.727 INF mst.install_controller: make_rc_lua OK
+2019-06-08 16:43:29.727 INF mst.install_controller: make_xorg OK
+2019-06-08 16:43:29.727 INF mst.install_controller: make_bashrc OK
+2019-06-08 16:43:29.728 INF mst.install_controller: make_xinitrc OK
+2019-06-08 16:43:29.728 INF mst.install_controller: make_sudoers OK
+2019-06-08 16:43:29.728 INF mst.install_controller: make_lightdm_conf OK
+2019-06-08 16:43:29.728 INF mst.install_controller: make_getty_service OK
+2019-06-08 16:43:29.728 INF mst.install_controller: make_udev_rules OK
+2019-06-08 16:43:29.728 INF mst.install_controller: make_udev_service OK
+2019-06-08 16:43:29.729 INF mst.install_controller: make_vgl OK
+2019-06-08 16:47:47.243 WRN default: QMetaObject::connectSlotsByName: No matching signal for on_btninterface_clicked()
+2019-06-08 16:47:47.250 INF mst.install_window: MST is running
+2019-06-08 16:47:50.899 INF mst.command_manager: line:  Screen 0: minimum 320 x 200, current 3520 x 1080, maximum 8192 x 8192
+2019-06-08 16:47:50.899 INF mst.command_manager: line:  eDP-1 connected 1600x900+1920+180 (normal left inverted right x axis y axis) 0mm x 0mm
+2019-06-08 16:47:50.899 INF mst.command_manager: [state 0] -> [state 1]
+2019-06-08 16:47:50.899 INF mst.command_manager: eDP-1
+2019-06-08 16:47:50.899 INF mst.command_manager: line:  1600x900      59.93*+  59.82
+2019-06-08 16:47:50.899 INF mst.command_manager: 1600x900
+2019-06-08 16:47:50.899 INF mst.command_manager: line:  1440x900      59.89
+2019-06-08 16:47:50.899 INF mst.command_manager: 1440x900
+2019-06-08 16:47:50.900 INF mst.command_manager: line:  1400x900      59.96    59.88
+2019-06-08 16:47:50.900 INF mst.command_manager: 1400x900
+2019-06-08 16:47:50.900 INF mst.command_manager: line:  1440x810      60.00    59.97
+2019-06-08 16:47:50.900 INF mst.command_manager: 1440x810
+2019-06-08 16:47:50.900 INF mst.command_manager: line:  1368x768      59.88    59.85
+2019-06-08 16:47:50.900 INF mst.command_manager: 1368x768
+2019-06-08 16:47:50.900 INF mst.command_manager: line:  1360x768      59.80    59.96
+2019-06-08 16:47:50.900 INF mst.command_manager: 1360x768
+2019-06-08 16:47:50.900 INF mst.command_manager: line:  1280x800      59.99    59.97    59.81    59.91
+2019-06-08 16:47:50.900 INF mst.command_manager: 1280x800
+2019-06-08 16:47:50.900 INF mst.command_manager: line:  1152x864      60.00
+2019-06-08 16:47:50.900 INF mst.command_manager: 1152x864
+2019-06-08 16:47:50.900 INF mst.command_manager: line:  1280x720      60.00    59.99    59.86    59.74
+2019-06-08 16:47:50.900 INF mst.command_manager: 1280x720
+2019-06-08 16:47:50.900 INF mst.command_manager: line:  1024x768      60.04    60.00
+2019-06-08 16:47:50.900 INF mst.command_manager: 1024x768
+2019-06-08 16:47:50.900 INF mst.command_manager: line:  960x720       60.00
+2019-06-08 16:47:50.900 INF mst.command_manager: 960x720
+2019-06-08 16:47:50.900 INF mst.command_manager: line:  928x696       60.05
+2019-06-08 16:47:50.900 INF mst.command_manager: 928x696
+2019-06-08 16:47:50.901 INF mst.command_manager: line:  896x672       60.01
+2019-06-08 16:47:50.901 INF mst.command_manager: 896x672
+2019-06-08 16:47:50.901 INF mst.command_manager: line:  1024x576      59.95    59.96    59.90    59.82
+2019-06-08 16:47:50.901 INF mst.command_manager: 1024x576
+2019-06-08 16:47:50.901 INF mst.command_manager: line:  960x600       59.93    60.00
+2019-06-08 16:47:50.901 INF mst.command_manager: 960x600
+2019-06-08 16:47:50.901 INF mst.command_manager: line:  960x540       59.96    59.99    59.63    59.82
+2019-06-08 16:47:50.901 INF mst.command_manager: 960x540
+2019-06-08 16:47:50.901 INF mst.command_manager: line:  800x600       60.00    60.32    56.25
+2019-06-08 16:47:50.901 INF mst.command_manager: 800x600
+2019-06-08 16:47:50.901 INF mst.command_manager: line:  840x525       60.01    59.88
+2019-06-08 16:47:50.901 INF mst.command_manager: 840x525
+2019-06-08 16:47:50.901 INF mst.command_manager: line:  864x486       59.92    59.57
+2019-06-08 16:47:50.901 INF mst.command_manager: 864x486
+2019-06-08 16:47:50.901 INF mst.command_manager: line:  800x512       60.17
+2019-06-08 16:47:50.901 INF mst.command_manager: 800x512
+2019-06-08 16:47:50.901 INF mst.command_manager: line:  700x525       59.98
+2019-06-08 16:47:50.901 INF mst.command_manager: 700x525
+2019-06-08 16:47:50.901 INF mst.command_manager: line:  800x450       59.95    59.82
+2019-06-08 16:47:50.901 INF mst.command_manager: 800x450
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  640x512       60.02
+2019-06-08 16:47:50.902 INF mst.command_manager: 640x512
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  720x450       59.89
+2019-06-08 16:47:50.902 INF mst.command_manager: 720x450
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  700x450       59.96    59.88
+2019-06-08 16:47:50.902 INF mst.command_manager: 700x450
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  640x480       60.00    59.94
+2019-06-08 16:47:50.902 INF mst.command_manager: 640x480
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  720x405       59.51    58.99
+2019-06-08 16:47:50.902 INF mst.command_manager: 720x405
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  684x384       59.88    59.85
+2019-06-08 16:47:50.902 INF mst.command_manager: 684x384
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  680x384       59.80    59.96
+2019-06-08 16:47:50.902 INF mst.command_manager: 680x384
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  640x400       59.88    59.98
+2019-06-08 16:47:50.902 INF mst.command_manager: 640x400
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  576x432       60.06
+2019-06-08 16:47:50.902 INF mst.command_manager: 576x432
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  640x360       59.86    59.83    59.84    59.32
+2019-06-08 16:47:50.902 INF mst.command_manager: 640x360
+2019-06-08 16:47:50.902 INF mst.command_manager: line:  512x384       60.00
+2019-06-08 16:47:50.903 INF mst.command_manager: 512x384
+2019-06-08 16:47:50.903 INF mst.command_manager: line:  512x288       60.00    59.92
+2019-06-08 16:47:50.903 INF mst.command_manager: 512x288
+2019-06-08 16:47:50.903 INF mst.command_manager: line:  480x270       59.63    59.82
+2019-06-08 16:47:50.903 INF mst.command_manager: 480x270
+2019-06-08 16:47:50.903 INF mst.command_manager: line:  400x300       60.32    56.34
+2019-06-08 16:47:50.903 INF mst.command_manager: 400x300
+2019-06-08 16:47:50.903 INF mst.command_manager: line:  432x243       59.92    59.57
+2019-06-08 16:47:50.903 INF mst.command_manager: 432x243
+2019-06-08 16:47:50.903 INF mst.command_manager: line:  320x240       60.05
+2019-06-08 16:47:50.903 INF mst.command_manager: 320x240
+2019-06-08 16:47:50.903 INF mst.command_manager: line:  360x202       59.51    59.13
+2019-06-08 16:47:50.903 INF mst.command_manager: 360x202
+2019-06-08 16:47:50.903 INF mst.command_manager: line:  320x180       59.84    59.32
+2019-06-08 16:47:50.903 INF mst.command_manager: 320x180
+2019-06-08 16:47:50.903 INF mst.command_manager: line:  VGA-1 disconnected (normal left inverted right x axis y axis)
+2019-06-08 16:47:50.903 INF mst.command_manager: [state 1] -> [state 0]
+2019-06-08 16:47:50.903 INF mst.command_manager: line:  VGA-1 disconnected (normal left inverted right x axis y axis)
+2019-06-08 16:47:50.903 INF mst.command_manager: line:  HDMI-1 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 477mm x 268mm
+2019-06-08 16:47:50.904 INF mst.command_manager: [state 0] -> [state 1]
+2019-06-08 16:47:50.904 INF mst.command_manager: HDMI-1
+2019-06-08 16:47:50.904 INF mst.command_manager: line:  1920x1080     60.00*+
+2019-06-08 16:47:50.904 INF mst.command_manager: 1920x1080
+2019-06-08 16:47:50.904 INF mst.command_manager: line:  1680x1050     59.88
+2019-06-08 16:47:50.904 INF mst.command_manager: 1680x1050
+2019-06-08 16:47:50.904 INF mst.command_manager: line:  1280x1024     75.02    60.02
+2019-06-08 16:47:50.904 INF mst.command_manager: 1280x1024
+2019-06-08 16:47:50.904 INF mst.command_manager: line:  1440x900      74.98    59.90
+2019-06-08 16:47:50.904 INF mst.command_manager: 1440x900
+2019-06-08 16:47:50.904 INF mst.command_manager: line:  1280x720      60.00
+2019-06-08 16:47:50.904 INF mst.command_manager: 1280x720
+2019-06-08 16:47:50.904 INF mst.command_manager: line:  1024x768      75.03    60.00
+2019-06-08 16:47:50.904 INF mst.command_manager: 1024x768
+2019-06-08 16:47:50.904 INF mst.command_manager: line:  800x600       75.00    60.32
+2019-06-08 16:47:50.904 INF mst.command_manager: 800x600
+2019-06-08 16:47:50.904 INF mst.command_manager: line:  640x480       75.00    72.81    66.67    59.94
+2019-06-08 16:47:50.904 INF mst.command_manager: 640x480
+2019-06-08 16:47:50.904 INF mst.command_manager: line:  720x400       70.08
+2019-06-08 16:47:50.904 INF mst.command_manager: 720x400
+2019-06-08 16:47:51.991 INF mst.install_controller: Settings for monitors:
+2019-06-08 16:47:51.991 INF mst.install_controller: Name:  eDP-1
+2019-06-08 16:47:51.991 INF mst.install_controller: width:  1400 ; height:  900
+2019-06-08 16:47:51.991 INF mst.install_controller: Name:  HDMI-1
+2019-06-08 16:47:51.991 INF mst.install_controller: width:  1400 ; height:  900
+2019-06-08 16:47:51.991 INF mst.install_controller: layout was cleared
+2019-06-08 16:47:51.991 INF mst.install_controller: Button:  eDP-1  was added
+2019-06-08 16:47:51.991 INF mst.install_controller: Button:  HDMI-1  was added
+2019-06-08 16:47:52.831 INF mst.install_window: eDP-1  was selected
+2019-06-08 16:47:52.832 INF mst.install_controller: interface  eDP-1  was cleared
+2019-06-08 16:47:52.832 INF mst.install_window: MOUSE was started
+2019-06-08 16:47:52.833 INF mst.input_device_listener: MOUSE: 
+2019-06-08 16:47:52.834 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:3:1.0-event-mouse
+2019-06-08 16:47:52.834 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:9:1.0-event-mouse
+2019-06-08 16:47:52.878 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  1
+2019-06-08 16:47:52.942 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  1
+2019-06-08 16:47:53.014 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  -1
+2019-06-08 16:47:53.070 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  -1
+2019-06-08 16:47:53.118 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  -1
+2019-06-08 16:47:53.166 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  -1
+2019-06-08 16:47:53.390 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  1
+2019-06-08 16:47:53.446 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  2
+2019-06-08 16:47:53.566 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  589825
+2019-06-08 16:47:53.566 INF mst.input_device_listener: Detected:  USB Optical Mouse
+2019-06-08 16:47:53.566 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:9:1.0-event-mouse  ( 1 )
+2019-06-08 16:47:53.566 INF mst.install_controller: Seat interface: ' eDP-1 '; keyboard: '  '; mouse: ' pci-0000:00:14.0-usb-0:9:1.0-event-mouse '; usb:   '
+2019-06-08 16:47:53.567 INF mst.calibration_dialog: work_done
+2019-06-08 16:47:53.577 INF mst.input_device_listener: KEYBOARD: 
+2019-06-08 16:47:53.577 INF mst.input_device_listener: KEYBOARD: 
+2019-06-08 16:47:53.577 INF mst.install_window: KEYBOARD was started
+2019-06-08 16:47:53.577 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:10:1.0-event-kbd
+2019-06-08 16:47:53.577 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:4:1.0-event-kbd
+2019-06-08 16:47:54.518 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  458767
+2019-06-08 16:47:54.518 INF mst.input_device_listener: Detected:  Chicony USB Keyboard
+2019-06-08 16:47:54.518 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:10:1.0-event-kbd  ( 0 )
+2019-06-08 16:47:54.518 INF mst.install_controller: Seat interface: ' eDP-1 '; keyboard: ' pci-0000:00:14.0-usb-0:10:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:9:1.0-event-mouse '; usb:   '
+2019-06-08 16:47:54.520 INF mst.calibration_dialog: work_done
+2019-06-08 16:47:54.524 INF mst.install_window: USB was started
+2019-06-08 16:47:54.526 INF mst.input_device_listener: USB: 
+2019-06-08 16:48:01.008 INF mst.install_controller: Device assigned:  /devices/pci0000:00/0000:00:14.0/usb2/2-1  ( 2 )
+2019-06-08 16:48:01.008 INF mst.install_controller: Seat interface: ' eDP-1 '; keyboard: ' pci-0000:00:14.0-usb-0:10:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:9:1.0-event-mouse '; usb:  /devices/pci0000:00/0000:00:14.0/usb2/2-1 '
+2019-06-08 16:48:01.008 INF mst.calibration_dialog: work_done
+2019-06-08 16:48:04.847 INF mst.install_window: HDMI-1  was selected
+2019-06-08 16:48:04.848 INF mst.install_controller: interface  HDMI-1  was cleared
+2019-06-08 16:48:04.848 INF mst.input_device_listener: MOUSE: 
+2019-06-08 16:48:04.848 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:3:1.0-event-mouse
+2019-06-08 16:48:04.848 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:9:1.0-event-mouse
+2019-06-08 16:48:04.848 INF mst.install_window: MOUSE was started
+2019-06-08 16:48:05.046 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  1
+2019-06-08 16:48:05.094 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  2
+2019-06-08 16:48:05.142 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  3
+2019-06-08 16:48:05.190 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  5
+2019-06-08 16:48:05.254 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  1
+2019-06-08 16:48:05.318 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -1
+2019-06-08 16:48:05.374 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  1
+2019-06-08 16:48:05.438 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  2
+2019-06-08 16:48:05.502 INF mst.input_device_listener: e.type:  2 ; e.code:  1 ; e.value:  -1
+2019-06-08 16:48:05.766 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  4
+2019-06-08 16:48:05.822 INF mst.input_device_listener: e.type:  2 ; e.code:  0 ; e.value:  5
+2019-06-08 16:48:06.390 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  589825
+2019-06-08 16:48:06.391 INF mst.input_device_listener: Detected:  USB Optical Mouse
+2019-06-08 16:48:06.391 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:3:1.0-event-mouse  ( 1 )
+2019-06-08 16:48:06.391 INF mst.install_controller: Seat interface: ' HDMI-1 '; keyboard: '  '; mouse: ' pci-0000:00:14.0-usb-0:3:1.0-event-mouse '; usb:   '
+2019-06-08 16:48:06.391 INF mst.calibration_dialog: work_done
+2019-06-08 16:48:06.394 INF mst.install_window: KEYBOARD was started
+2019-06-08 16:48:06.394 INF mst.input_device_listener: KEYBOARD: 
+2019-06-08 16:48:06.394 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:10:1.0-event-kbd
+2019-06-08 16:48:06.394 INF mst.input_device_listener:       pci-0000:00:14.0-usb-0:4:1.0-event-kbd
+2019-06-08 16:48:09.423 INF mst.input_device_listener: e.type:  4 ; e.code:  4 ; e.value:  458776
+2019-06-08 16:48:09.423 INF mst.input_device_listener: Detected:  Chicony USB Keyboard
+2019-06-08 16:48:09.423 INF mst.install_controller: Device assigned:  pci-0000:00:14.0-usb-0:4:1.0-event-kbd  ( 0 )
+2019-06-08 16:48:09.423 INF mst.install_controller: Seat interface: ' HDMI-1 '; keyboard: ' pci-0000:00:14.0-usb-0:4:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:3:1.0-event-mouse '; usb:   '
+2019-06-08 16:48:09.423 INF mst.calibration_dialog: work_done
+2019-06-08 16:48:09.430 INF mst.install_window: USB was started
+2019-06-08 16:48:09.430 INF mst.input_device_listener: USB: 
+2019-06-08 16:48:13.757 INF mst.install_controller: Device assigned:  /devices/pci0000:00/0000:00:14.0/usb2/2-2  ( 2 )
+2019-06-08 16:48:13.757 INF mst.install_controller: Seat interface: ' HDMI-1 '; keyboard: ' pci-0000:00:14.0-usb-0:4:1.0-event-kbd '; mouse: ' pci-0000:00:14.0-usb-0:3:1.0-event-mouse '; usb:  /devices/pci0000:00/0000:00:14.0/usb2/2-2 '
+2019-06-08 16:48:13.757 INF mst.calibration_dialog: work_done
+2019-06-08 16:48:17.479 INF mst.install_controller: 
+-----START current configuration:
+	seat: eDP-1
+	keyboard: pci-0000:00:14.0-usb-0:10:1.0-event-kbd
+	mouse: pci-0000:00:14.0-usb-0:9:1.0-event-mouse
+	usb: /devices/pci0000:00/0000:00:14.0/usb2/2-1
+	resolution: 1400x900
+	seat: HDMI-1
+	keyboard: pci-0000:00:14.0-usb-0:4:1.0-event-kbd
+	mouse: pci-0000:00:14.0-usb-0:3:1.0-event-mouse
+	usb: /devices/pci0000:00/0000:00:14.0/usb2/2-2
+	resolution: 1400x900
+-----END currecnt cunfiguration
+2019-06-08 16:48:17.480 INF mst.install_controller: Comparison 0 seat, pci-0000:00:14.0-usb-0:10:1.0-event-kbd keyboard, pci-0000:00:14.0-usb-0:9:1.0-event-mouse mouse, /devices/pci0000:00/0000:00:14.0/usb2/2-1 usb AND
+								1 seat, pci-0000:00:14.0-usb-0:4:1.0-event-kbd keyboard, pci-0000:00:14.0-usb-0:3:1.0-event-mouse mouse, /devices/pci0000:00/0000:00:14.0/usb2/2-2 usb
+2019-06-08 16:48:17.480 INF mst.install_controller: 
+2019-06-08 16:48:17.480 INF mst.install_controller: 
+2019-06-08 16:48:18.498 INF mst.config_manager: writing ' /home/multiseat/.local/share/mst/output/rc.lua ' ...
+2019-06-08 16:48:18.505 INF mst.install_controller: make_rc_lua OK
+2019-06-08 16:48:18.505 INF mst.install_controller: make_xorg OK
+2019-06-08 16:48:18.505 INF mst.install_controller: make_bashrc OK
+2019-06-08 16:48:18.505 INF mst.install_controller: make_xinitrc OK
+2019-06-08 16:48:18.505 INF mst.install_controller: make_sudoers OK
+2019-06-08 16:48:18.506 INF mst.install_controller: make_lightdm_conf OK
+2019-06-08 16:48:18.506 INF mst.install_controller: make_getty_service OK
+2019-06-08 16:48:18.506 INF mst.install_controller: make_udev_rules OK
+2019-06-08 16:48:18.506 INF mst.install_controller: make_udev_service OK
+2019-06-08 16:48:18.507 INF mst.install_controller: make_vgl OK
