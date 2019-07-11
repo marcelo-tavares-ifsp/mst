@@ -1,4 +1,4 @@
-#include "inputdivecelistener.h"
+#include "inputdevicelistener.h"
 
 Q_LOGGING_CATEGORY(input_device_listener_category, "mst.input_device_listener")
 

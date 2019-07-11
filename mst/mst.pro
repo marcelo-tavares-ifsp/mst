@@ -41,14 +41,14 @@ SOURCES += \
     common/utilites/utilites.cpp \
     command_manager/commandmanager.cpp \
     config_manager/configmanager.cpp \
-    input_divece_listener/inputdivecelistener.cpp \
     path_manager/pathmanager.cpp \
     calibration_dialog/calibrationdialog.cpp \
     common/dsv_parser/dsv.cpp \
     config_manager/xorg_config.cpp \
     config_manager/vgl.cpp \
     config_manager/display_manager.cpp \
-    reboot_dialog/rebootdialog.cpp
+    reboot_dialog/rebootdialog.cpp \
+    input_device_listener/inputdevicelistener.cpp
 
 HEADERS += \
         install_window/installwindow.h \
@@ -57,7 +57,6 @@ HEADERS += \
     common/utilites/utilites.h \
     command_manager/commandmanager.h \
     config_manager/configmanager.h \
-    input_divece_listener/inputdivecelistener.h \
     path_manager/pathmanager.h \
     calibration_dialog/calibrationdialog.h \
     common/dsv_parser/dsv.h \
@@ -65,7 +64,8 @@ HEADERS += \
     config_manager/vgl.h \
     config_manager/display_manager.h \
     reboot_dialog/rebootdialog.h \
-    version.h
+    version.h \
+    input_device_listener/inputdevicelistener.h
 
 FORMS += \
         install_window/installwindow.ui \

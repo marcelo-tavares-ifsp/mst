@@ -8,7 +8,7 @@
 #include "configuration/configuration.h"
 #include "command_manager/commandmanager.h"
 #include "common/utilites/utilites.h"
-#include "input_divece_listener/inputdivecelistener.h"
+#include "input_divece_listener/inputdevicelistener.h"
 #include "config_manager/configmanager.h"
 #include "config_manager/vgl.h"
 
