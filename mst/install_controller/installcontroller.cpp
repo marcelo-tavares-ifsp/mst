@@ -231,8 +231,8 @@ void InstallController::begin_install()
 
 void InstallController::install_files()
 {
-    const string output_dir = PathManager::get_output_dir();
-    const string mst_user   = PathManager::get_mst_user();
+    const string output_dir = PathManager::get_instance()->get_output_dir();
+    const string mst_user   = PathManager::get_instance()->get_mst_user();
     const string mst_user_home = "/home/" + mst_user + "/";
 
     auto install = [output_dir](const string& src, const string& dst) -> void {
@@ -277,7 +277,7 @@ void InstallController::install_files()
         install(".xinitrc",   skel);
         install(".xmst",      skel);
     }
-    install("sudoers",   PathManager::get_sudoers_d_config());
+    install("sudoers",   PathManager::get_instance()->get_sudoers_d_config());
 
     install("99-mst.rules", "/etc/udev/rules.d/99-mst.rules");
     install("systemd-udevd.service", "/etc/systemd/system");
@@ -303,12 +303,12 @@ void InstallController::disable_mst()
         throw "Could not disable MST in systemd.";
     }
 
-    string cmd = "rm '" + PathManager::get_sudoers_config() + "'";
+    string cmd = "rm '" + PathManager::get_instance()->get_sudoers_config() + "'";
 
     if (system(cmd.c_str()))
     {
         string message = "Could not delete "
-                + PathManager::get_sudoers_config() + ".";
+                + PathManager::get_instance()->get_sudoers_config() + ".";
         qCritical(install_controller_category) << message.c_str();
         throw message;
     }
@@ -317,7 +317,7 @@ void InstallController::disable_mst()
     if (system(cmd.c_str()))
     {
         string message = "Could not delete "
-                + PathManager::get_vgl_config() + ".";
+                + PathManager::get_instance()->get_vgl_config() + ".";
         qCritical(install_controller_category) << message.c_str();
         throw message;
     }
@@ -325,8 +325,8 @@ void InstallController::disable_mst()
 
 void InstallController::create_backup()
 {
-    const string user = PathManager::get_mst_user();
-    const string usr_dir = PathManager::get_usr_share_dir();
+    const string user = PathManager::get_instance()->get_mst_user();
+    const string usr_dir = PathManager::get_instance()->get_usr_share_dir();
     const string cmd = "/usr/local/bin/mk_backup.sh " + user;
     if (system(cmd.c_str()))
     {
@@ -339,7 +339,7 @@ void InstallController::create_backup()
 
 void InstallController::restore_backup()
 {
-    const string user = PathManager::get_mst_user();
+    const string user = PathManager::get_instance()->get_mst_user();
     const string cmd = "/usr/local/bin/apl_backup.sh " + user;
 
     if (system(cmd.c_str()))

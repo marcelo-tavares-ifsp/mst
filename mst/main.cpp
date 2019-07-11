@@ -10,13 +10,16 @@
 // Умный указатель на файл логирования
 QScopedPointer<QFile>   m_logFile;
 
+const string MST_CONFIG_FILE = "/etc/mst";
+
 // Объявляение обработчика
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    DSV config(MST_CONFIG_FILE);
+    PathManager::get_instance()->set_config(&config);
     if (! QDir("logs").exists()) {
         QDir().mkdir("logs");
     }

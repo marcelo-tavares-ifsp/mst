@@ -14,38 +14,53 @@ using namespace std;
 class PathManager
 {
 public:
-    static string get_device_path();
-    static string get_mst_user();
-    static string get_output_dir();
-    static string get_usr_share_dir();
-    static string get_awesome_config();
-    static string get_sudoers_d_config();
-    static string get_rclua_config();
-    static string get_xorg_config();
-    static string get_bashrc_config();
-    static string get_xinitrc_config();
-    static string get_xmst_config();
-    static string get_sudoers_config();
-    static string get_lightdm_mst_config();
-    static string get_getty_service_config();
-    static string get_udev_rules_config();
-    static string get_systemd_udev_config();
-    static string get_vgl_config();
-    static void set_user(string user_name);
+    static PathManager* get_instance()
+    {
+        static PathManager* instance = NULL;
+        if (instance == NULL) {
+            instance = new PathManager();
+        }
+        return instance;
+    }
+    void set_config(DSV* config);
+    string get_device_path();
+    string get_mst_user();
+    string get_output_dir();
+    string get_usr_share_dir();
+    string get_awesome_config();
+    string get_sudoers_d_config();
+    string get_rclua_config();
+    string get_xorg_config();
+    string get_bashrc_config();
+    string get_xinitrc_config();
+    string get_xmst_config();
+    string get_sudoers_config();
+    string get_lightdm_mst_config();
+    string get_getty_service_config();
+    string get_udev_rules_config();
+    string get_systemd_udev_config();
+    string get_vgl_config();
+    void set_user(string user_name);
 
-    static string get_rclua_template();
-    static string get_rclua4_template();
-    static string get_bashrc_config_template();
-    static string get_xinitrc_config_template();
-    static string get_xmst_config_template();
-    static string get_sudoers_config_template();
-    static string get_lightdm_mst_config_template();
-    static string get_getty_service_config_template();
-    static string get_systemd_udev_config_template();
-    static string get_vgl_config_template();
+    string get_rclua_template();
+    string get_rclua4_template();
+    string get_bashrc_config_template();
+    string get_xinitrc_config_template();
+    string get_xmst_config_template();
+    string get_sudoers_config_template();
+    string get_lightdm_mst_config_template();
+    string get_getty_service_config_template();
+    string get_systemd_udev_config_template();
+    string get_vgl_config_template();
 
 private:
-    PathManager(){}
+    PathManager() {};
+
+    string user;
+    DSV* config;
+    string output_dir;
+    string usrShareDir;
+    string awesome_config;
 };
 
 #endif // PATHMANAGER_H

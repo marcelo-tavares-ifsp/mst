@@ -2,23 +2,22 @@
 
 Q_LOGGING_CATEGORY(path_manager_category, "mst.path_manager")
 
-string user = "";
-string mstConfigFile = "/etc/mst";
 string devicePath = "/dev/input/by-path/";
 
 string sudoersD = "/etc/sudoers.d/mst";
-//string output_dir = "/home/" + PathManager::get_mst_user() + "/.local/share/mst/output";
-string awesome_config = "/home/" + PathManager::get_mst_user() + "/.config/awesome/rc.lua";
 
-DSV* mst_conf = NULL;
-
+void PathManager::set_config(DSV* config)
+{
+    this->config = config;
+    awesome_config = "/home/" + get_mst_user() + "/.config/awesome/rc.lua";
 #ifdef QT_DEBUG
-    string output_dir = "/home/student/Desktop/output";
-    string usrShareDir = "/home/student/Desktop/mst/templates/";
+    output_dir = "/home/student/Desktop/output";
+    usrShareDir = "/home/student/Desktop/mst/templates/";
 #else
-    string output_dir = "/home/" + PathManager::get_mst_user() + "/.local/share/mst/output";
-    string usrShareDir = "/usr/share/mst";
+    output_dir = "/home/" + get_mst_user() + "/.local/share/mst/output";
+    usrShareDir = "/usr/share/mst";
 #endif
+}
 
 string PathManager::get_device_path()
 {
@@ -27,11 +26,7 @@ string PathManager::get_device_path()
 
 string PathManager::get_mst_user()
 {
-    if (! mst_conf)
-    {
-        mst_conf = new DSV(mstConfigFile);
-    }
-    return mst_conf->get("user");
+    return config->get("user");
 }
 
 string PathManager::get_output_dir()
