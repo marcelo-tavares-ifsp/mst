@@ -6,6 +6,16 @@
 
 using namespace std;
 
+class DSV_exception : public runtime_error
+{
+public:
+    DSV_exception(const string& what)
+        : runtime_error(what)
+    {
+        /* Do nothing */
+    }
+};
+
 class DSV
 {
 public:

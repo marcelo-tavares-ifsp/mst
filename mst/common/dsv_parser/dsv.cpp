@@ -17,13 +17,18 @@ static void _parse_x(ifstream& in, map<string, string>& out)
     }
 }
 
+/**
+ * @brief DSV::DSV
+ * @param file_name
+ * @throws DSV_exception
+ */
 DSV::DSV(string file_name)
     : file_name(file_name)
 {
     ifstream in(file_name);
     if (! in.is_open())
     {
-        throw "Could not open config file: " + file_name;
+        throw DSV_exception("Could not open config file: " + file_name);
     }
 
     _parse_x(in, data);
