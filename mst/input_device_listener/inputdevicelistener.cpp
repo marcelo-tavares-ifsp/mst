@@ -56,7 +56,7 @@ static bool is_btn_pressed(struct input_event &e)
     return (e.type == EV_MSC) && (e.code == 4);
 }
 
-static bool loop_answer_device(string device)
+bool InputDeviceListener::loop_answer_device(string device)
 {
     struct input_event ie;
     ssize_t bytes;
@@ -68,8 +68,9 @@ static bool loop_answer_device(string device)
     fd = open(pDevice, O_RDWR  | O_NONBLOCK);
     if (fd == -1)
     {
-        qCritical(input_device_listener_category()) << "Could not open device: " << pDevice;
-        throw (string)"ERROR Opening %s\n" + pDevice;
+        string message = "Could not open device: " + device;
+        qCritical(input_device_listener_category()) << QString::fromStdString(message);
+        throw InputDeviceListener_exception(type, message);
     }
 
     bytes = _try_read(fd, &ie);

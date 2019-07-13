@@ -28,6 +28,23 @@ enum DEVICE_TYPE {
     USB
 };
 
+class InputDeviceListener_exception : public runtime_error
+{
+  public:
+    InputDeviceListener_exception(DEVICE_TYPE type, string& what)
+        : runtime_error(what),
+          type(type)
+    {
+        /* Do nothing */
+    }
+    DEVICE_TYPE get_type()
+    {
+        return type;
+    }
+  private:
+    DEVICE_TYPE type;
+};
+
 class InputDeviceListener: public QObject, public QRunnable
 {
     Q_OBJECT
@@ -51,6 +68,7 @@ private:
     bool is_running;
     string* check_device();
     string* check_usb();
+    bool loop_answer_device(string device);
 };
 
 Q_DECLARE_METATYPE(DEVICE_TYPE)
