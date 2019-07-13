@@ -6,6 +6,7 @@
 #include <QTextStream>
 #include <QDateTime>
 #include <QLoggingCategory>
+#include <unistd.h>
 
 // Умный указатель на файл логирования
 QScopedPointer<QFile>   m_logFile;
@@ -23,10 +24,18 @@ int main(int argc, char *argv[])
     if (! QDir("logs").exists()) {
         QDir().mkdir("logs");
     }
+    if (geteuid() != 0)
+    {
+        QMessageBox messageBox;
+        messageBox.critical(0, "Ошибка",
+                            "MST должен быть запущен от суперпользователя");
+        return 1;
+
+    }
 
     // Устанавливаем файл логирования,
     // внимательно сверьтесь с тем, какой используете путь для файла
-    m_logFile.reset(new QFile("logs/logFile.txt"));
+    m_logFile.reset(new QFile("/tmp/logFile.txt"));
     // Открываем файл логирования
     m_logFile.data()->open(QFile::Append | QFile::Text);
     // Устанавливаем обработчик
