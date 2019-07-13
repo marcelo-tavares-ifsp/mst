@@ -5,7 +5,7 @@
 #include <QThreadPool>
 #include <QMessageBox>
 #include "install_controller/installcontroller.h"
-#include "input_divece_listener/inputdevicelistener.h"
+#include "input_device_listener/inputdevicelistener.h"
 #include "calibration_dialog/calibrationdialog.h"
 #include "reboot_dialog/rebootdialog.h"
 #include "version.h"
