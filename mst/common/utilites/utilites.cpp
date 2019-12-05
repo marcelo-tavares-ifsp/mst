@@ -86,18 +86,27 @@ bool is_pam_mkhomedir_used()
 
 /**
  * @brief _set_intersection -- Get intersection of two vectors, return the
- *          resulting vector.
+ *          resulting vector iterator.
  * @param v1 -- The first input vector.
  * @param v2 -- The seconds input vector.
  * @param r  -- The resulting vector.
  * @return -- A vector iterator.
  */
-vector<string>::iterator _set_intersection(vector<string> v1,
-                                           vector<string> v2,
-                                           vector<string> r)
+vector<string>::iterator _set_intersection(const vector<string>& v1,
+                                           const vector<string>& v2,
+                                           vector<string>& output)
 {
     return set_intersection(v1.begin(), v1.end(), v2.begin(), v2.end(),
-                            r.begin());
+                            output.begin());
+}
+
+void _set_intersection_x(vector<string>& v1, vector<string>& v2,
+                         vector<string>& output, function<bool(const string&, const string&)> sort_function) {
+    sort(v1.begin(), v1.end(), sort_function);
+    sort(v2.begin(), v2.end(), sort_function);
+    auto it = _set_intersection(v1, v2, output);
+    output.resize(it->size());
+
 }
 
 /**

@@ -19,36 +19,39 @@ static void add_resolutions_to_cb(vector<string> resolutions, QComboBox *cb)
 
 static void fill_resolutions_and_interfaces(QComboBox *cb, QListWidget *lw)
 {
+    auto split1 = [] (const string& input, char separator) -> string {
+      return split(input, separator)[0];
+    };
+
+    auto rcomp = [split1] (const string& left, const string& right) -> int {
+            return stoi(split1(left, 'x')) > stoi(split1(right, 'x'));
+    };
+
     cb->clear();
     lw->clear();
 
     vector<xrandrMonitor> availableMonitors = CommandManager::get_interfaces_from_xrandr();
 
     uint32_t am_size = uint32_t(availableMonitors.size());
-    vector<string> resolutions;
-    vector<string>::iterator it;
 
     if (am_size == 0)
     {
         throw "Could not get Xrandr output.";
     }
 
-    resolutions = availableMonitors[0].resolutions;
+    vector<string> result = availableMonitors[0].resolutions;
     lw->addItem(QString::fromStdString(availableMonitors[0].interface));
 
-    if(am_size > 1)
+    if (am_size > 1)
     {
         for (uint32_t idx = 1; idx < am_size; idx++)
         {
-            sort(resolutions.begin(), resolutions.end());
-            sort(availableMonitors[idx].resolutions.begin(), availableMonitors[idx].resolutions.end());
-            it = _set_intersection(resolutions, availableMonitors[idx].resolutions, resolutions);
-            resolutions.resize(it->size());
+            _set_intersection_x(result, availableMonitors[idx].resolutions, result, rcomp);
             lw->addItem(QString::fromStdString(availableMonitors[idx].interface));
         }
     }
-
-    add_resolutions_to_cb(resolutions, cb);
+    sort(result.begin(), result.end(), rcomp);
+    add_resolutions_to_cb(result, cb);
 }
 
 static void clear_layout(QVBoxLayout* vbl, vector<QWidget*> widgets)
