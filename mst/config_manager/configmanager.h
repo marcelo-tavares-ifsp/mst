@@ -10,6 +10,8 @@
 #include <fstream>
 #include <QLoggingCategory>
 
+#include "awesome.h"
+
 using namespace std;
 
 Q_DECLARE_LOGGING_CATEGORY(config_manager_category)

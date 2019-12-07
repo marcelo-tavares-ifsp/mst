@@ -48,7 +48,8 @@ SOURCES += \
     config_manager/vgl.cpp \
     config_manager/display_manager.cpp \
     reboot_dialog/rebootdialog.cpp \
-    input_device_listener/inputdevicelistener.cpp
+    input_device_listener/inputdevicelistener.cpp \
+    config_manager/awesome.cpp
 
 HEADERS += \
         install_window/installwindow.h \
@@ -65,7 +66,8 @@ HEADERS += \
     config_manager/display_manager.h \
     reboot_dialog/rebootdialog.h \
     version.h \
-    input_device_listener/inputdevicelistener.h
+    input_device_listener/inputdevicelistener.h \
+    config_manager/awesome.h
 
 FORMS += \
         install_window/installwindow.ui \
