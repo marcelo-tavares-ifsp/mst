@@ -297,8 +297,9 @@ void InstallController::enable_mst()
     VGL::configure();
     if (system("systemctl set-default multi-user.target"))
         {
-            qCritical(install_controller_category) << "Could not enable MST in systemd.";
-            throw "Could not enable MST in systemd.";
+            string msg = "Could not enable MST in systemd.";
+            qCritical(install_controller_category) << msg;
+            throw InstallController_exception(msg);
         }
     qInfo(install_controller_category) << "multiseat enabled.";
 }
