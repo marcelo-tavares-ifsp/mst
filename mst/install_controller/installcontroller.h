@@ -14,6 +14,18 @@
 
 Q_DECLARE_LOGGING_CATEGORY(install_controller_category)
 
+/**
+ * @brief The InstallController_exception class This class describes an
+ *     exception that can be thrown by InstallController methods.
+ */
+class InstallController_exception: public runtime_error {
+public:
+    InstallController_exception(string what)
+        : runtime_error(what) {
+        // Do nothing.
+    }
+};
+
 class InstallController: public QObject
 {
     Q_OBJECT

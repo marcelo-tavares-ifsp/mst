@@ -17,6 +17,12 @@ static void add_resolutions_to_cb(vector<string> resolutions, QComboBox *cb)
     }
 }
 
+/**
+ * @brief fill_resolutions_and_interfaces
+ * @param cb
+ * @param lw
+ * @throws InstallController_exception
+ */
 static void fill_resolutions_and_interfaces(QComboBox *cb, QListWidget *lw)
 {
     auto split1 = [] (const string& input, char separator) -> string {
@@ -36,7 +42,7 @@ static void fill_resolutions_and_interfaces(QComboBox *cb, QListWidget *lw)
 
     if (am_size == 0)
     {
-        throw "Could not get Xrandr output.";
+        throw InstallController_exception("Could not get Xrandr output.");
     }
 
     vector<string> result = availableMonitors[0].resolutions;
@@ -254,7 +260,7 @@ void InstallController::install_files()
     {
         qCritical(install_controller_category)
              << "Could not create a directory: " << cmd.c_str();
-        throw "Could not create a directory: " + cmd;
+        throw InstallController_exception("Could not create a directory: " + cmd);
     }
 
     install("rc.lua",    mst_user_home + ".config/awesome/");
@@ -273,7 +279,7 @@ void InstallController::install_files()
         {
             qCritical(install_controller_category)
                     << "Could not create a directory: " << cmd.c_str();
-            throw "Could not create a directory: " + cmd;
+            throw InstallController_exception("Could not create a directory: " + cmd);
         }
         install("rc.lua",    skel + "/.config/awesome/");
         install(".bashrc",   skel);
@@ -303,7 +309,7 @@ void InstallController::disable_mst()
     if (system("systemctl set-default graphical.target"))
     {
         qCritical(install_controller_category) << "Could not disable MST in systemd.";
-        throw "Could not disable MST in systemd.";
+        throw InstallController_exception("Could not disable MST in systemd.");
     }
 
     string cmd = "rm '" + PathManager::get_instance()->get_sudoers_config() + "'";
@@ -322,7 +328,7 @@ void InstallController::disable_mst()
         string message = "Could not delete "
                 + PathManager::get_instance()->get_vgl_config() + ".";
         qCritical(install_controller_category) << message.c_str();
-        throw message;
+        throw InstallController_exception(message);
     }
 }
 
@@ -336,7 +342,7 @@ void InstallController::create_backup()
         qCritical(install_controller_category)
                 << "Could not create a backup: "
                 << cmd.c_str();
-        throw "Could not create a backup: " + cmd;
+        throw InstallController_exception("Could not create a backup: " + cmd);
     }
 }
 
@@ -348,7 +354,7 @@ void InstallController::restore_backup()
     if (system(cmd.c_str()))
     {
         qCritical(install_controller_category) << "Could not restore a backup copy.";
-        throw "Could not restore a backup copy.";
+        throw InstallController_exception("Could not restore a backup copy.");
     }
 }
 
@@ -365,7 +371,7 @@ void InstallController::begin_stop()
     {
         const char* msg = "Could not stop MST ('pkill Xephyr' failed.)";
         qCritical(install_controller_category) << msg;
-        throw msg;
+        throw InstallController_exception(msg);
     }
 }
 
