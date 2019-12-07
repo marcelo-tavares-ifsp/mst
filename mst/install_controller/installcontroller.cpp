@@ -298,7 +298,7 @@ void InstallController::enable_mst()
     if (system("systemctl set-default multi-user.target"))
         {
             string msg = "Could not enable MST in systemd.";
-            qCritical(install_controller_category) << msg;
+            qCritical(install_controller_category) << msg.c_str();
             throw InstallController_exception(msg);
         }
     qInfo(install_controller_category) << "multiseat enabled.";
