@@ -2,6 +2,12 @@
 
 Q_LOGGING_CATEGORY(config_manager_category, "mst.config_manager")
 
+/**
+ * @brief _make_xephyr_screens -- Generate Awesome "rc.lua" code that starts
+ *     Xephyr instances.
+ * @param seats -- Number of seats.
+ * @return Generated Lua code as a string.
+ */
 static string _make_xephyr_screens(vector<Seat> seats)
 {
     stringstream result;
@@ -21,6 +27,12 @@ static string _make_xephyr_screens(vector<Seat> seats)
     return result.str();
 }
 
+/**
+ * @brief make_xephyr_rules -- Generate Awesome rules to arrange Xephyr
+ *     instances on the screens.
+ * @param sSize -- Number of seats.
+ * @return Generated Lua code as a string.
+ */
 static string make_xephyr_rules(uint32_t sSize)
 {
     string rules;
@@ -36,6 +48,17 @@ static string make_xephyr_rules(uint32_t sSize)
     return rules;
 }
 
+/**
+ * @param seats
+ * @brief make_xephyr_autostart -- Generate Xephyr autostart commands for
+ *     "rc.lua".
+ *
+ * Generate Lua code that starts Xephyr instances from Awesome "rc.lua" file.
+ *
+ * @param seats -- Number of seats.  This parameter affects the number of Xephyr
+ *     instances.
+ * @return Generated Lua code as a string.
+ */
 static string make_xephyr_autostart(vector<Seat> seats)
 {
     string result;
@@ -53,6 +76,13 @@ static string make_xephyr_autostart(vector<Seat> seats)
     return result;
 }
 
+/**
+ * @brief ConfigManager::make_rc_lua -- Generate Awesome WM "rc.lua" file.
+ *
+ * Generate Awesome WM "rc.lua" file based on a template.
+ *
+ * @param config
+ */
 void ConfigManager::make_rc_lua(Configuration& config)
 {
     string out_file = PathManager::get_instance()->get_rclua_config();
@@ -91,6 +121,11 @@ void ConfigManager::make_rc_lua(Configuration& config)
     qDebug(config_manager_category) << "writing '" << out_file.c_str() << "' ... done";
 }
 
+/**
+ * @brief ConfigManager::make_xorg -- Make Xorg configuration file based on a
+ *     template.
+ * @param config -- MST configuration.
+ */
 void ConfigManager::make_xorg(Configuration& config)
 {
     string out_file = PathManager::get_instance()->get_xorg_config();
@@ -102,6 +137,10 @@ void ConfigManager::make_xorg(Configuration& config)
     xorg.close();
 }
 
+/**
+ * @brief ConfigManager::make_bashrc -- Generate ".bashrc" file for multiseat
+ *     user.
+ */
 void ConfigManager::make_bashrc()
 {
     string out_file = PathManager::get_instance()->get_bashrc_config();
@@ -119,6 +158,9 @@ void ConfigManager::make_bashrc()
     bashrc_template.close();
 }
 
+/**
+ * @brief ConfigManager::make_xinitrc -- Generate ".xinitrc" file.
+ */
 void ConfigManager::make_xinitrc()
 {
     string out_file = PathManager::get_instance()->get_xinitrc_config();
@@ -139,6 +181,9 @@ void ConfigManager::make_xinitrc()
     xmst_template.close();
 }
 
+/**
+ * @brief ConfigManager::make_sudoers -- Generate sudoers file for MST.
+ */
 void ConfigManager::make_sudoers()
 {
     const string user = PathManager::get_instance()->get_mst_user();
@@ -192,6 +237,10 @@ void ConfigManager::make_getty_service()
     out.close();
 }
 
+/**
+ * @brief ConfigManager::make_udev_rules -- Generate udev rules for MST.
+ * @param seats -- A vector of MST seats.
+ */
 void ConfigManager::make_udev_rules(vector<Seat> seats)
 {
     const string out_file = PathManager::get_instance()->get_udev_rules_config();
