@@ -98,6 +98,11 @@ InstallController::InstallController()
 
 // public methods ///////////////////////////////////////////////////////////////
 
+/**
+ * @brief InstallController::get_instance -- Get the instance of
+ *     InstallController.
+ * @return The singleton instance.
+ */
 InstallController *InstallController::get_instance(){
     if (! instance)
     {
