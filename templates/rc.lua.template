@@ -12,6 +12,10 @@ require("menu")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
+function is_screen_available(idx)
+    return idx <= screen.count()
+end
+
 {{mst_autostart}}
 
 -- {{{ Error handling
@@ -222,10 +226,10 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-					 
-{{mst_awful_rules}}
-					 
 }
+
+{{mst_awful_rules}}
+
 -- }}}
 
 -- {{{ Signals

@@ -14,6 +14,10 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+function is_screen_available(idx)
+    return idx <= screen.count()
+end
+
 {{mst_autostart}}
 
 -- {{{ Error handling
@@ -455,9 +459,10 @@ awful.rules.rules = {
      }
     },
 
+}
+
 {{mst_awful_rules}}
 
-}
 -- }}}
 
 -- {{{ Signals

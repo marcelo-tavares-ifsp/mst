@@ -16,13 +16,15 @@ static string _make_xephyr_screens(vector<Seat> seats)
     {
         string mouse_dev = "/dev/input/by-path/" + seats[idx].mouse;
         string keybd_dev = "/dev/input/by-path/" + seats[idx].keyboard;
-        result << "os.execute(\"sudo Xephyr -softCursor -ac -br "
-               << " -mouse \'evdev,5,device=" << mouse_dev << "\'"
-               << " -keybd \'evdev,,device=" << keybd_dev << "\'"
-               << " -screen "
+        result << "if is_screen_available(" << (idx + 1) << ") then" << endl
+               << "    os.execute(\"sudo Xephyr -softCursor -ac -br "
+               << "        -mouse \'evdev,5,device=" << mouse_dev << "\'"
+               << "        -keybd \'evdev,,device=" << keybd_dev << "\'"
+               << "        -screen "
                << seats[idx].resolution.width  << "x"
                << seats[idx].resolution.height << " :"
-               << idx + 1 << " &\")" << endl;
+               << idx + 1 << " &\")" << endl
+               << "end" << endl;
     }
     return result.str();
 }
@@ -35,17 +37,20 @@ static string _make_xephyr_screens(vector<Seat> seats)
  */
 static string make_xephyr_rules(uint32_t sSize)
 {
-    string rules;
+    stringstream result;
     for (uint32_t idx = 1; idx <= sSize; idx++)
     {
-        rules += string("{ rule = { class = \"Xephyr\", name = \"Xephyr on :");
-        rules += to_string(idx);
-        rules += string(".0 (ctrl+shift grabs mouse and keyboard)\" },\n ");
-        rules += string("properties = { floating = true, fullscreen = true, screen = ");
-        rules += to_string(idx);
-        rules += string("} },\n");
+        result << "if is_screen_available(" << idx << ") then\n"
+               << "    table.insert(awful.rules.rules, "
+               << "        { rule = { class = \"Xephyr\", " << endl
+               << "                   name = \"Xephyr on :" << idx << ".0 "
+               << "(ctrl+shift grabs mouse and keyboard)\" }, "  << endl
+               << "          properties = { floating = true, "   << endl
+               << "                         fullscreen = true, " << endl
+               << "                         screen = " << idx << "} })"
+               << endl;
     }
-    return rules;
+    return result.str();
 }
 
 /**
@@ -61,19 +66,19 @@ static string make_xephyr_rules(uint32_t sSize)
  */
 static string make_xephyr_autostart(vector<Seat> seats)
 {
-    string result;
-    result += _make_xephyr_screens(seats);
-    result += "os.execute(\"unclutter &\")\n";
-
+    stringstream result;
+    result << _make_xephyr_screens(seats)
+           << "os.execute(\"unclutter &\")" << endl
     // TODO: 10s waiting seems to be enough for our cases, but this code
     //       likely will lead to some problems in the future.
     //       The better solution might be to wait for Xephyr to start in some
     //       kind of loop.
-    result += (string) "os.execute(\"sleep 10; "
-            + "sudo /usr/local/bin/mst-start-dm "
-            + to_string(seats.size()) + " &\")\n";
+           << "os.execute(\"sleep 10; "
+           << "sudo /usr/local/bin/mst-start-dm \""
+           << ".. screen.count() .. \" &\")"
+           << endl;
 
-    return result;
+    return result.str();
 }
 
 /**
