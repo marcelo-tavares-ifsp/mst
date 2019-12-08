@@ -53,7 +53,8 @@ string Awesome::make_xephyr_rules(uint32_t sSize)
                << "(ctrl+shift grabs mouse and keyboard)\" }, "  << endl
                << "          properties = { floating = true, "   << endl
                << "                         fullscreen = true, " << endl
-               << "                         screen = " << idx << "} })"
+               << "                         screen = " << idx << "} })" << endl
+               << "end"
                << endl;
     }
     return result.str();
