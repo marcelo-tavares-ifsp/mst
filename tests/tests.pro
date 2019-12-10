@@ -4,11 +4,11 @@
 #
 #-------------------------------------------------
 
-QT       += testlib
+QT       += testlib core
 
 QT       -= gui
 
-TARGET = tst_utils
+TARGET = unit_tests
 CONFIG   += console
 CONFIG   -= app_bundle
 
@@ -27,10 +27,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-    ../src/utils.cpp \
-    tst_utils.cpp
+    ../mst/common/utilites/utilites.cpp \
+    unit_tests.cpp \
+    test_utils.cpp
+
+SOURCES += \
+    ../mst/config_manager/awesome.cpp \
+    test_awesome.cpp
 
 HEADERS += \
-    ../src/utils.h
+    ../mst/common/utilites/utilites.h \
+    test_awesome.h \
+    test_utils.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"

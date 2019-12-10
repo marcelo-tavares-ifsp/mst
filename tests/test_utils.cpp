@@ -1,32 +1,17 @@
-#include <QString>
+#include <string>
+#include <vector>
 #include <QtTest>
 
-#include <iostream>
-
-#include <vector>
-#include <string>
-
-#include "../src/utils.h"
+#include "test_utils.h"
+#include "../mst/common/utilites/utilites.h"
 
 using namespace std;
 
-class Utils : public QObject
-{
-    Q_OBJECT
-
-public:
-    Utils();
-
-private Q_SLOTS:
-    void split_test();
-    void replace_all_test();
-};
-
-Utils::Utils()
+Test_utils::Test_utils()
 {
 }
 
-void Utils::split_test()
+void Test_utils::split_test()
 {
     string input = "2x4";
     vector<string> result = split(input, 'x');
@@ -35,7 +20,7 @@ void Utils::split_test()
             errmsg.c_str());
 }
 
-void Utils::replace_all_test()
+void Test_utils::replace_all_test()
 {
     string input = "abc{{d}}";
     string result = replace_all(input, "{{d}}", "e");
@@ -43,7 +28,3 @@ void Utils::replace_all_test()
             + input + " -> " + result;
     QVERIFY2((result == "abce"), errmsg.c_str());
 }
-
-QTEST_APPLESS_MAIN(Utils)
-
-#include "tst_utils.moc"
