@@ -1,4 +1,5 @@
 #include "awesome.h"
+#include "../common/utilites/utilites.h"
 
 using namespace std;
 
@@ -44,18 +45,21 @@ string Awesome::make_xephyr_autostart(vector<Seat> seats)
 string Awesome::make_xephyr_rules(uint32_t sSize)
 {
     stringstream result;
+    string input = "\
+if is_screen_available({{screen_idx}}) then\n\
+    table.insert(\n\
+        awful.rules.rules,\n\
+        { rule = { class = \"Xephyr\",\n\
+                   name  = \"Xephyr on :{{screen_idx}}.0 (ctrl+shift grabs mouse and keyboard)\" },\n\
+          properties = { floating   = true,\n\
+                         fullscreen = true,\n\
+                         screen     = {{screen_idx}}} })\n\
+end\n\
+";
+
     for (uint32_t idx = 1; idx <= sSize; idx++)
     {
-        result << "if is_screen_available(" << idx << ") then\n"
-               << "    table.insert(awful.rules.rules, "
-               << "        { rule = { class = \"Xephyr\", " << endl
-               << "                   name = \"Xephyr on :" << idx << ".0 "
-               << "(ctrl+shift grabs mouse and keyboard)\" }, "  << endl
-               << "          properties = { floating = true, "   << endl
-               << "                         fullscreen = true, " << endl
-               << "                         screen = " << idx << "} })" << endl
-               << "end"
-               << endl;
+        result << replace_all(input, "{{screen_idx}}", to_string(idx));
     }
     return result.str();
 }

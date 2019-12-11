@@ -41,3 +41,7 @@ HEADERS += \
     test_utils.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
+
+DISTFILES += \
+    test_awesome_xephyr_rules.lua
+
