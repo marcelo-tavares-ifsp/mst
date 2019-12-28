@@ -22,16 +22,16 @@ Awesome::Awesome()
 string Awesome::make_xephyr_autostart(vector<Seat> seats)
 {
     stringstream result;
-    result << Awesome::make_xephyr_screens(seats)
-           << "os.execute(\"unclutter &\")" << endl
-    // TODO: 10s waiting seems to be enough for our cases, but this code
+    // TODO: 10s sleep seems to be enough for our cases, but this code
     //       likely will lead to some problems in the future.
     //       The better solution might be to wait for Xephyr to start in some
     //       kind of loop.
-           << "os.execute(\"sleep 10; "
-           << "sudo /usr/local/bin/mst-start-dm \""
-           << ".. screen.count() .. \" &\")"
-           << endl;
+    string execute_commands = "\
+os.execute(\"unclutter &\")\n\
+os.execute(\"sleep 10; sudo /usr/local/bin/mst-start-dm \" .. screen.count() .. \" &\")\n\
+";
+    result << Awesome::make_xephyr_screens(seats)
+           << execute_commands;
 
     return result.str();
 }
