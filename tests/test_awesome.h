@@ -12,6 +12,7 @@ public:
 
 private Q_SLOTS:
     void make_xephyr_rules();
+    void make_xephyr_screens();
 };
 
 #endif // TEST_AWESOME_H

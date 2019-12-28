@@ -43,5 +43,6 @@ HEADERS += \
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 DISTFILES += \
-    test_awesome_xephyr_rules.lua
+    test_awesome_xephyr_rules.lua \
+    test_awesome_xephyr_screens.lua
 

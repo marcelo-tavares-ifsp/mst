@@ -73,20 +73,28 @@ end\n\
 string Awesome::make_xephyr_screens(vector<Seat> seats)
 {
     stringstream result;
+    string input = "\
+if is_screen_available({{screen_idx}}) then\n\
+    os.execute(\"sudo Xephyr -softCursor -ac -br\n\
+                  -mouse  'evdev,5,device=/dev/input/by-path/{{mouse_device}}'\n\
+                  -keybd  'evdev,,device=/dev/input/by-path/{{keybd_device}}'\n\
+                  -screen {{screen_width}}x{{screen_height}} :{{screen_idx}}\n\
+                  &\")\n\
+end\n\
+";
 
+    string output;
     for (uint32_t idx = 0; idx < seats.size(); idx++)
     {
-        string mouse_dev = "/dev/input/by-path/" + seats[idx].mouse;
-        string keybd_dev = "/dev/input/by-path/" + seats[idx].keyboard;
-        result << "if is_screen_available(" << (idx + 1) << ") then" << endl
-               << "    os.execute(\"sudo Xephyr -softCursor -ac -br "
-               << "        -mouse \'evdev,5,device=" << mouse_dev << "\'"
-               << "        -keybd \'evdev,,device=" << keybd_dev << "\'"
-               << "        -screen "
-               << seats[idx].resolution.width  << "x"
-               << seats[idx].resolution.height << " :"
-               << idx + 1 << " &\")" << endl
-               << "end" << endl;
+        output = replace_all(input, "{{screen_idx}}",
+                             to_string(idx + 1));
+        output = replace_all(output, "{{mouse_device}}", seats[idx].mouse);
+        output = replace_all(output, "{{keybd_device}}", seats[idx].keyboard);
+        output = replace_all(output, "{{screen_width}}",
+                             to_string(seats[idx].resolution.width));
+        output = replace_all(output, "{{screen_height}}",
+                             to_string(seats[idx].resolution.height));
+        result << output;
     }
     return result.str();
 }
