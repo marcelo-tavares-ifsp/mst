@@ -52,6 +52,7 @@ DISTFILES += \
     templates/awesome/xephyr_rules.lua.template \
     templates/awesome/xephyr_screens.lua.template \
     templates/awesome/mst_autostart.lua.template \
+    templates/99-mst.rules.template \
     etc/mst
 
 #version.commands += \

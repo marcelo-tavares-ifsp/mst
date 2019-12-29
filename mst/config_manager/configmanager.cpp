@@ -154,15 +154,15 @@ void ConfigManager::make_getty_service()
 void ConfigManager::make_udev_rules(vector<Seat> seats)
 {
     const string out_file = PathManager::get_instance()->get_udev_rules_config();
+    Template tpl = Template_manager::get_instance()
+            ->get_template("99-mst.rules");
     ofstream out(out_file);
 
     for (uint32_t idx = 0; idx < seats.size(); ++idx)
     {
-        out << "ACTION==\"add\", ";
-        out << "KERNEL==\"sd[b-z][0-9]\", ";
-        out << "DEVPATH==\"" << seats[idx].usb << "/*\", ";
-        out << "RUN+=\"/usr/local/bin/mst-mount /dev/%k " << idx + 1 << "\""
-            << endl;
+        out << tpl.set("usb_device", seats[idx].usb)
+               .set("seat_idx", to_string(idx + 1 ))
+               .substitute();
     }
 
     out.close();
