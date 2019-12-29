@@ -1,8 +1,8 @@
 *.o
 *\~
 build-*
-src/mst.pro.user.*
-mst.pro.user
+src/mst.pro.user*
+mst.pro.user*
 tests/tests.pro.user
 .qmake.stash
 Makefile
