@@ -49,6 +49,9 @@ DISTFILES += \
     templates/getty@.service.template \
     templates/systemd-udevd.service.template \
     templates/vgl.sh.template \
+    templates/awesome/xephyr_rules.lua.template \
+    templates/awesome/xephyr_screens.lua.template \
+    templates/awesome/mst_autostart.lua.template \
     etc/mst
 
 #version.commands += \

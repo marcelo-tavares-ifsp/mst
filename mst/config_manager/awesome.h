@@ -13,7 +13,7 @@ class Awesome
 {
 public:
     Awesome();
-    static string make_xephyr_autostart(vector<Seat> seats);
+    static string make_xephyr_autostart();
     static string make_xephyr_rules(uint32_t sSize);
     static string make_xephyr_screens(vector<Seat> seats);
 };

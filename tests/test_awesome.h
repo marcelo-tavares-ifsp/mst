@@ -11,6 +11,7 @@ public:
     Test_awesome();
 
 private Q_SLOTS:
+    void make_xephyr_autostart();
     void make_xephyr_rules();
     void make_xephyr_screens();
 };

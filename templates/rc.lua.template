@@ -17,6 +17,7 @@ function is_screen_available(idx)
 end
 
 {{mst_autostart}}
+{{xephyr_screens}}
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to

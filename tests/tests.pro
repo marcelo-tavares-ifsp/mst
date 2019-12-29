@@ -53,5 +53,6 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 DISTFILES += \
     test_awesome_xephyr_rules.lua \
     test_awesome_xephyr_screens.lua \
-    test_template.txt.template
+    test_template.txt.template \
+    test_awesome_mst_autostart.lua
 
