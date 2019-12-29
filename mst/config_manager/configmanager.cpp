@@ -1,5 +1,8 @@
 #include "configmanager.h"
 
+#include "template_manager/template_manager.h"
+#include "template_manager/template.h"
+
 Q_LOGGING_CATEGORY(config_manager_category, "mst.config_manager")
 
 /**
@@ -11,42 +14,37 @@ Q_LOGGING_CATEGORY(config_manager_category, "mst.config_manager")
  */
 void ConfigManager::make_rc_lua(Configuration& config)
 {
-    string out_file = PathManager::get_instance()->get_rclua_config();
+    string out_file_name = PathManager::get_instance()->get_rclua_config();
     fstream rclua_pattern;
     fstream rclua;
+    string template_name;
 
     const vector<int> version = CommandManager::get_awesome_version();
     if (version[0] == 3)
     {
         qDebug(config_manager_category) << "Using rc.lua.template for Awesome 3";
-        rclua_pattern.open(PathManager::get_instance()->get_rclua_template(), ios::in);
+        template_name = PathManager::get_instance()->get_rclua_template();
     }
     else
     {
         qDebug(config_manager_category) << "Using rc.lua.template for Awesome 4";
-        rclua_pattern.open(PathManager::get_instance()->get_rclua4_template(), ios::in);
-    }
-    rclua.open(out_file, ios::out);
-    if (! rclua_pattern.is_open()) {
-        //throw "ERROR";
-    }
-    string str;
-
-    qInfo(config_manager_category) << "writing '" << out_file.c_str() << "' ...";
-
-    while(getline(rclua_pattern, str))
-    {
-        str = replace_all(str, "{{mst_autostart}}",
-                          Awesome::make_xephyr_autostart(config.seats));
-        str = replace_all(str, "{{mst_awful_rules}}",
-                          Awesome::make_xephyr_rules(config.seats.size()));
-
-        rclua << str << endl;
+        template_name = PathManager::get_instance()->get_rclua4_template();
     }
 
-    rclua.close();
-    rclua_pattern.close();
-    qDebug(config_manager_category) << "writing '" << out_file.c_str() << "' ... done";
+    qInfo(config_manager_category) << "writing '" << out_file_name.c_str()
+                                   << "' ...";
+
+    Template rclua_template
+            = Template_manager::get_instance()->get_template(template_name);
+    rclua_template
+            .set("mst_autostart",
+                  Awesome::make_xephyr_autostart(config.seats))
+            .set("mst_awful_rules",
+                  Awesome::make_xephyr_rules(config.seats.size()))
+            .substitute(out_file_name);
+
+    qDebug(config_manager_category) << "writing '" << out_file_name.c_str()
+                                    << "' ... done";
 }
 
 /**
@@ -71,19 +69,12 @@ void ConfigManager::make_xorg(Configuration& config)
  */
 void ConfigManager::make_bashrc()
 {
-    string out_file = PathManager::get_instance()->get_bashrc_config();
-    string in_file = PathManager::get_instance()->get_bashrc_config_template();
-    ofstream bashrc(out_file);
-    ifstream bashrc_template(in_file);
-
-    for (string line; getline(bashrc_template, line); )
-    {
-        string tmp = replace_all(line, "{{tty}}", "1");
-        bashrc << tmp << endl;
-    }
-
-    bashrc.close();
-    bashrc_template.close();
+    string out_file_name = PathManager::get_instance()->get_bashrc_config();
+    string template_name
+            = PathManager::get_instance()->get_bashrc_config_template();
+    Template bashrc_template
+            = Template_manager::get_instance()->get_template(template_name);
+    bashrc_template.set("tty", "1").substitute(out_file_name);
 }
 
 /**
@@ -115,19 +106,14 @@ void ConfigManager::make_xinitrc()
 void ConfigManager::make_sudoers()
 {
     const string user = PathManager::get_instance()->get_mst_user();
-    const string out_file = PathManager::get_instance()->get_sudoers_config();
-    const string in_file = PathManager::get_instance()->get_sudoers_config_template();
-    ofstream out(out_file);
-    ifstream in(in_file);
+    const string out_file_name
+            = PathManager::get_instance()->get_sudoers_config();
+    const string tpl_name
+            = PathManager::get_instance()->get_sudoers_config_template();
+    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
 
-    string line;
-    getline(in, line);
-    string result = replace_all(replace_all(line, "{{user}}", user),
-                                "{{mst}}",
-                                "/usr/local/bin/mst-start-dm");
-    out << result << endl;
-    out.close();
-    in.close();
+    tpl.set("user", user).set("mst", "/usr/local/bin/mst-start-dm")
+            .substitute(out_file_name);
 }
 
 /**
@@ -150,19 +136,13 @@ void ConfigManager::make_lightdm_conf()
 
 void ConfigManager::make_getty_service()
 {
-    const string out_file = PathManager::get_instance()->get_getty_service_config();
-    const string in_file = PathManager::get_instance()->get_getty_service_config_template();
+    const string out_file_name
+            = PathManager::get_instance()->get_getty_service_config();
+    const string tpl_name
+            = PathManager::get_instance()->get_getty_service_config_template();
     const string user = PathManager::get_instance()->get_mst_user();
-    ifstream in(in_file);
-    ofstream out(out_file);
-
-    for (string line; getline(in, line); )
-    {
-        string tmp = replace_all(line, "{{user}}", user);
-        out << tmp << endl;
-    }
-    in.close();
-    out.close();
+    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
+    tpl.set("user", user).substitute(out_file_name);
 }
 
 /**
@@ -200,18 +180,10 @@ void ConfigManager::make_udev_service()
 
 void ConfigManager::make_vgl()
 {
-    const string out_file = PathManager::get_instance()->get_vgl_config();
-    const string in_file = PathManager::get_instance()->get_vgl_config_template();
+    const string out_file_name = PathManager::get_instance()->get_vgl_config();
+    const string tpl_name
+            = PathManager::get_instance()->get_vgl_config_template();
     const string user = PathManager::get_instance()->get_mst_user();
-    ofstream out(out_file);
-    ifstream in(in_file);
-
-    for (string line; getline(in, line); )
-    {
-        string tmp = replace_all(line, "{{user}}", user);
-        out << tmp << endl;
-    }
-
-    out.close();
-    in.close();
+    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
+    tpl.set("user", user).substitute(out_file_name);
 }

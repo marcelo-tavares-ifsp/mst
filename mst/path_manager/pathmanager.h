@@ -5,7 +5,7 @@
 #include <string>
 #include <stdio.h>
 #include <iostream>
-#include "common/dsv_parser/dsv.h"
+#include "../common/dsv_parser/dsv.h"
 
 Q_DECLARE_LOGGING_CATEGORY(path_manager_category)
 
@@ -30,6 +30,7 @@ public:
     string get_awesome_config();
     string get_sudoers_d_config();
     string get_rclua_config();
+    string get_awesome_xephyr_rules_template();
     string get_xorg_config();
     string get_bashrc_config();
     string get_xinitrc_config();

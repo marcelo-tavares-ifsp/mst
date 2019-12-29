@@ -113,52 +113,57 @@ void PathManager::set_user(string user_name)
 
 string PathManager::get_rclua_template()
 {
-    return PathManager::get_usr_share_dir() + "/rc.lua.template";
+    return "rc.lua";
 }
 
 string PathManager::get_rclua4_template()
 {
-    return PathManager::get_usr_share_dir() + "/rc.lua4.template";
+    return "rc.lua4";
+}
+
+string PathManager::get_awesome_xephyr_rules_template()
+{
+    return "awesome/xephyr_rules";
 }
 
 string PathManager::get_bashrc_config_template()
 {
-    return PathManager::get_usr_share_dir() + "/bashrc.template";
+    return "bashrc";
 }
 
 string PathManager::get_xinitrc_config_template()
 {
-    return PathManager::get_usr_share_dir() + "/xinitrc.template";
+    return "xinitrc";
 }
 
 string PathManager::get_xmst_config_template()
 {
-    return PathManager::get_usr_share_dir() + "/xmst.template";
+    return "xmst";
 }
 
 string PathManager::get_sudoers_config_template()
 {
-    return PathManager::get_usr_share_dir() + "/sudoers.template";
+    return "sudoers";
 }
 
 string PathManager::get_lightdm_mst_config_template()
 {
-    return PathManager::get_usr_share_dir() + "/lightdm-mst.conf.template";
+    return "lightdm-mst.conf";
 }
 
 string PathManager::get_getty_service_config_template()
 {
-    return PathManager::get_usr_share_dir() + "/getty@.service.template";
+    return "getty@.service";
 }
 
 string PathManager::get_systemd_udev_config_template()
 {
-    return PathManager::get_usr_share_dir() + "/systemd-udevd.service.template";
+    return "systemd-udevd.service";
 }
 
 string PathManager::get_vgl_config_template()
 {
-    return PathManager::get_usr_share_dir() + "/vgl.sh.template";
+    return "vgl.sh";
 }
 
 

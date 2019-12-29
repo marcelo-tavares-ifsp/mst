@@ -1,6 +1,8 @@
 #include "awesome.h"
 #include "../common/utilites/utilites.h"
 
+#include "../template_manager/template.h"
+
 using namespace std;
 
 Awesome::Awesome()
@@ -45,7 +47,7 @@ os.execute(\"sleep 10; sudo /usr/local/bin/mst-start-dm \" .. screen.count() .. 
 string Awesome::make_xephyr_rules(uint32_t sSize)
 {
     stringstream result;
-    string input = "\
+    Template tpl("\
 if is_screen_available({{screen_idx}}) then\n\
     table.insert(\n\
         awful.rules.rules,\n\
@@ -55,11 +57,11 @@ if is_screen_available({{screen_idx}}) then\n\
                          fullscreen = true,\n\
                          screen     = {{screen_idx}}} })\n\
 end\n\
-";
+");
 
     for (uint32_t idx = 1; idx <= sSize; idx++)
     {
-        result << replace_all(input, "{{screen_idx}}", to_string(idx));
+        result << tpl.set("screen_idx", to_string(idx)).substitute();
     }
     return result.str();
 }
@@ -73,7 +75,7 @@ end\n\
 string Awesome::make_xephyr_screens(vector<Seat> seats)
 {
     stringstream result;
-    string input = "\
+    Template tpl("\
 if is_screen_available({{screen_idx}}) then\n\
     os.execute(\"sudo Xephyr -softCursor -ac -br\n\
                   -mouse  'evdev,5,device=/dev/input/by-path/{{mouse_device}}'\n\
@@ -81,20 +83,17 @@ if is_screen_available({{screen_idx}}) then\n\
                   -screen {{screen_width}}x{{screen_height}} :{{screen_idx}}\n\
                   &\")\n\
 end\n\
-";
+");
 
-    string output;
     for (uint32_t idx = 0; idx < seats.size(); idx++)
     {
-        output = replace_all(input, "{{screen_idx}}",
-                             to_string(idx + 1));
-        output = replace_all(output, "{{mouse_device}}", seats[idx].mouse);
-        output = replace_all(output, "{{keybd_device}}", seats[idx].keyboard);
-        output = replace_all(output, "{{screen_width}}",
-                             to_string(seats[idx].resolution.width));
-        output = replace_all(output, "{{screen_height}}",
-                             to_string(seats[idx].resolution.height));
-        result << output;
+        tpl.set("screen_idx",    to_string(idx + 1));
+        tpl.set("mouse_device",  seats[idx].mouse);
+        tpl.set("keybd_device",  seats[idx].keyboard);
+        tpl.set("screen_width",  to_string(seats[idx].resolution.width));
+        tpl.set("screen_height", to_string(seats[idx].resolution.height));
+
+        result << tpl.substitute();
     }
     return result.str();
 }

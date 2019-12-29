@@ -8,6 +8,8 @@
 #include <QLoggingCategory>
 #include <unistd.h>
 
+#include "template_manager/template_manager.h"
+
 // Умный указатель на файл логирования
 QScopedPointer<QFile>   m_logFile;
 
@@ -21,6 +23,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     DSV config(MST_CONFIG_FILE);
     PathManager::get_instance()->set_config(&config);
+    Template_manager::get_instance()->set_template_dir(
+                PathManager::get_instance()->get_usr_share_dir());
     if (! QDir("logs").exists()) {
         QDir().mkdir("logs");
     }

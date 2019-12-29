@@ -29,20 +29,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     ../mst/common/utilites/utilites.cpp \
     unit_tests.cpp \
-    test_utils.cpp
+    test_utils.cpp \
+    test_template.cpp
 
 SOURCES += \
     ../mst/config_manager/awesome.cpp \
     test_awesome.cpp
 
+SOURCES += \
+    ../mst/template_manager/template.cpp \
+    ../mst/template_manager/template_manager.cpp \
+    ../mst/path_manager/pathmanager.cpp \
+    ../mst/common/dsv_parser/dsv.cpp
+
 HEADERS += \
     ../mst/common/utilites/utilites.h \
     test_awesome.h \
-    test_utils.h
+    test_utils.h \
+    test_template.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 DISTFILES += \
     test_awesome_xephyr_rules.lua \
-    test_awesome_xephyr_screens.lua
+    test_awesome_xephyr_screens.lua \
+    test_template.txt.template
 

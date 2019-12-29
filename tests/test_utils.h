@@ -12,7 +12,7 @@ public:
 
 private Q_SLOTS:
     void split_test();
-    void replace_all_test();
+   // void replace_all_test();
 };
 
 #endif // TEST_UTILS_H
