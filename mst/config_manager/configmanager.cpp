@@ -38,7 +38,7 @@ void ConfigManager::make_rc_lua(Configuration& config)
             = Template_manager::get_instance()->get_template(template_name);
     rclua_template
             .set("mst_autostart",
-                  Awesome::make_xephyr_autostart()
+                  Awesome::make_xephyr_autostart())
             .set("xephyr_screens",
                  Awesome::make_xephyr_screens(config.seats))
             .set("mst_awful_rules",
