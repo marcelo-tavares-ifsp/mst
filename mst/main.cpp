@@ -23,8 +23,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     DSV config(MST_CONFIG_FILE);
     PathManager::get_instance()->set_config(&config);
-    Template_manager::get_instance()->set_template_dir(
-                PathManager::get_instance()->get_usr_share_dir());
+    Template_manager::get_instance()->set_template_dir("/var/lib/mst/");
     if (! QDir("logs").exists()) {
         QDir().mkdir("logs");
     }
