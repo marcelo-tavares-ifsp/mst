@@ -82,7 +82,8 @@ void InstallWindow::on_btnContinueToEnd_clicked()
     if (inst_controller->config_is_valid())
     {
         set_show_page(3);
-
+        InstallController* con = InstallController::get_instance();
+        con->begin_install();
         qDebug(install_window_category) << "going to the 3rd panel...";
     }
     else
