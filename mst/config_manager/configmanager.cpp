@@ -84,22 +84,17 @@ void ConfigManager::make_bashrc()
  */
 void ConfigManager::make_xinitrc()
 {
-    string out_file = PathManager::get_instance()->get_xinitrc_config();
-    string in_file = PathManager::get_instance()->get_xinitrc_config_template();
-    ofstream xinitrc(out_file, ios::binary);
-    ifstream xinitrc_template(in_file, ios::binary);
+    string out_file_name
+            = PathManager::get_instance()->get_xinitrc_config();
+    string tpl_name
+            = PathManager::get_instance()->get_xinitrc_config_template();
+    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
+    tpl.substitute(out_file_name);
 
-    xinitrc << xinitrc_template.rdbuf();
-    xinitrc.close();
-    xinitrc_template.close();
-
-    out_file = PathManager::get_instance()->get_xmst_config();
-    in_file  = PathManager::get_instance()->get_xmst_config_template();
-    ofstream xmst(out_file);
-    ifstream xmst_template(in_file);
-    xmst << xmst_template.rdbuf();
-    xmst.close();
-    xmst_template.close();
+    out_file_name = PathManager::get_instance()->get_xmst_config();
+    tpl_name  = PathManager::get_instance()->get_xmst_config_template();
+    tpl = Template_manager::get_instance()->get_template(tpl_name);
+    tpl.substitute(out_file_name);
 }
 
 /**
@@ -126,14 +121,12 @@ void ConfigManager::make_sudoers()
  */
 void ConfigManager::make_lightdm_conf()
 {
-    const string out_file = PathManager::get_instance()->get_lightdm_mst_config();
-    const string in_file = PathManager::get_instance()->get_lightdm_mst_config_template();
-    ofstream out(out_file);
-    ifstream in(in_file);
-
-    out << in.rdbuf();
-    out.close();
-    in.close();
+    const string out_file_name
+            = PathManager::get_instance()->get_lightdm_mst_config();
+    const string tpl_name
+            = PathManager::get_instance()->get_lightdm_mst_config_template();
+    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
+    tpl.substitute(out_file_name);
 }
 
 void ConfigManager::make_getty_service()
@@ -170,14 +163,12 @@ void ConfigManager::make_udev_rules(vector<Seat> seats)
 
 void ConfigManager::make_udev_service()
 {
-    const string out_file = PathManager::get_instance()->get_systemd_udev_config();
-    const string in_file = PathManager::get_instance()->get_systemd_udev_config_template();
-    ofstream out(out_file);
-    ifstream in(in_file);
-
-    out << in.rdbuf();
-    out.close();
-    in.close();
+    const string out_file_name
+            = PathManager::get_instance()->get_systemd_udev_config();
+    const string tpl_name
+            = PathManager::get_instance()->get_systemd_udev_config_template();
+    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
+    tpl.substitute(out_file_name);
 }
 
 void ConfigManager::make_vgl()
