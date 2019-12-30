@@ -10,13 +10,9 @@ void PathManager::set_config(DSV* config)
 {
     this->config = config;
     awesome_config = "/home/" + get_mst_user() + "/.config/awesome/rc.lua";
-#ifdef QT_DEBUG
-    output_dir = "/home/student/Desktop/output";
-    usrShareDir = "/home/student/Desktop/mst/templates/";
-#else
+
     output_dir = "/home/" + get_mst_user() + "/.local/share/mst/output";
     usrShareDir = "/usr/share/mst";
-#endif
 }
 
 string PathManager::get_device_path()
