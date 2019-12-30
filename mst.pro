@@ -20,18 +20,25 @@ templates.files += \
     templates/xinitrc.template   \
     templates/xmst.template      \
     templates/lightdm-mst.conf.template \
-    templates/systemd-udevd.service.template \
     templates/getty@.service.template \
-    templates/vgl.sh.template
+    templates/systemd-udevd.service.template \
+    templates/vgl.sh.template \
+    templates/99-mst.rules.template
 
 templates.path = $$(PREIFX)/var/lib/mst
+
+templates_awesome.path = $$(PREIFX)/var/lib/mst/awesome
+templates_awesome.files += \
+    templates/awesome/xephyr_rules.lua.template \
+    templates/awesome/xephyr_screens.lua.template \
+    templates/awesome/mst_autostart.lua.template
 
 etc.files += \
     etc/mst
 
 etc.path = /etc/
 
-INSTALLS += scripts templates etc
+INSTALLS += scripts templates templates_awesome etc
 
 DISTFILES += \
     scripts/mst-start-dm \
