@@ -1,7 +1,7 @@
 if is_screen_available({{screen_idx}}) then
-    os.execute("sudo Xephyr -softCursor -ac -br
-                  -mouse  'evdev,5,device=/dev/input/by-path/{{mouse_device}}'
-                  -keybd  'evdev,,device=/dev/input/by-path/{{keybd_device}}'
-                  -screen {{screen_width}}x{{screen_height}} :{{screen_idx}}
-                  &")
+    os.execute("sudo Xephyr -softCursor -ac -br"
+               .. " -mouse  'evdev,5,device=/dev/input/by-path/{{mouse_device}}'"
+               .. " -keybd  'evdev,,device=/dev/input/by-path/{{keybd_device}}'"
+               .. " -screen {{screen_width}}x{{screen_height}} :{{screen_idx}}"
+               .. " &")
 end
