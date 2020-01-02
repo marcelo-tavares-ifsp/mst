@@ -3,7 +3,6 @@
 
 #include <QObject>
 
-//#include "install_window/installwindow.h"
 #include "ui_installwindow.h"
 #include "configuration/configuration.h"
 #include "command_manager/commandmanager.h"

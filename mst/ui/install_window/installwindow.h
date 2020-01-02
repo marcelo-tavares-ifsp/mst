@@ -4,10 +4,10 @@
 #include <QMainWindow>
 #include <QThreadPool>
 #include <QMessageBox>
+#include "ui/calibration_dialog/calibrationdialog.h"
+#include "ui/reboot_dialog/rebootdialog.h"
 #include "install_controller/installcontroller.h"
 #include "input_device_listener/inputdevicelistener.h"
-#include "calibration_dialog/calibrationdialog.h"
-#include "reboot_dialog/rebootdialog.h"
 #include "version.h"
 
 Q_DECLARE_LOGGING_CATEGORY(install_window_category)
