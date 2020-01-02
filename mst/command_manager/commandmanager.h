@@ -27,6 +27,7 @@ public:
     static vector<xrandrMonitor> get_interfaces_from_xrandr();
     static vector<int> get_awesome_version();
     static bool config_vgl();
+    static void reboot_autoboot();
 
     static void get_devices_from_ls(vector<string>& mice, vector<string>& keybds);
 

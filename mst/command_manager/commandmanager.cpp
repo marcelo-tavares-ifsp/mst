@@ -1,5 +1,9 @@
 #include "commandmanager.h"
 
+#include <unistd.h>
+#include <linux/reboot.h>
+#include <sys/reboot.h>
+
 Q_LOGGING_CATEGORY(command_manager_category, "mst.command_manager")
 
 // static methods ///////////////////////////////////////////////////////////////
@@ -227,4 +231,11 @@ bool CommandManager::config_vgl()
 {
     static const char* cmd = "echo -e '2\nx\n' | vglserver_config";
     return system(cmd) > 0;
+}
+
+void CommandManager::reboot_autoboot()
+{
+    sync();
+    setuid(0);
+    reboot(RB_AUTOBOOT);
 }
