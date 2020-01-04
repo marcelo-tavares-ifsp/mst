@@ -51,7 +51,8 @@ SOURCES += \
     input_device_listener/inputdevicelistener.cpp \
     config_manager/awesome.cpp \
     template_manager/template_manager.cpp \
-    template_manager/template.cpp
+    template_manager/template.cpp \
+    ui/about_dialog/about_dialog.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -71,14 +72,19 @@ HEADERS += \
     input_device_listener/inputdevicelistener.h \
     config_manager/awesome.h \
     template_manager/template_manager.h \
-    template_manager/template.h
+    template_manager/template.h \
+    ui/about_dialog/about_dialog.h
 
 FORMS += \
     ui/install_window/installwindow.ui \
     ui/calibration_dialog/calibrationdialog.ui \
-    ui/reboot_dialog/rebootdialog.ui
+    ui/reboot_dialog/rebootdialog.ui \
+    ui/about_dialog/about_dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc

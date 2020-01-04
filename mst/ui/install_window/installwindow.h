@@ -49,6 +49,8 @@ private slots:
 
     void on_btninterface_clicked();
 
+    void on_about_triggered();
+
 private:
     Ui::InstallWindow *ui;
     InstallController *inst_controller;

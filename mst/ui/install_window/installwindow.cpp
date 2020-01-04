@@ -1,6 +1,8 @@
 #include "installwindow.h"
 #include "ui_installwindow.h"
 
+#include "../about_dialog/about_dialog.h"
+
 Q_LOGGING_CATEGORY(install_window_category, "mst.install_window")
 
 InstallWindow::InstallWindow(QWidget *parent) :
@@ -209,4 +211,12 @@ void InstallWindow::attach_signals(InputDeviceListener* listener, CalibrationDia
 
     connect(listener, SIGNAL(work_done()), cd, SLOT(work_done()));
     connect(cd, SIGNAL(cancel()), listener, SLOT(cancel()));
+}
+
+
+void InstallWindow::on_about_triggered()
+{
+    About_dialog* ad = new About_dialog(this);
+    ad->setModal(true);
+    ad->show();
 }
