@@ -1,4 +1,4 @@
-#include "install_window/installwindow.h"
+#include "ui/install_window/installwindow.h"
 #include <QApplication>
 #include <QFile>
 #include <QDir>
