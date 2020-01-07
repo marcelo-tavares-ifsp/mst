@@ -10,15 +10,31 @@
 
 #include "template_manager/template_manager.h"
 
-// Умный указатель на файл логирования
+/**
+ * @brief m_logFile -- A pointer to logging file.
+ */
 QScopedPointer<QFile>   m_logFile;
 
+/**
+ * @brief MST_CONFIG_FILE -- The default MST configuration file.
+ */
 const string MST_CONFIG_FILE = "/etc/mst";
+
+/**
+ * @brief MST_LOG_FILE -- The default MST logging file.
+ */
 const QString MST_LOG_FILE   = "/var/log/mst.log";
 
-// Объявляение обработчика
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
+void messageHandler(QtMsgType type, const QMessageLogContext &context,
+                    const QString &msg);
 
+/**
+ * @brief main -- The application entry point.
+ * @param argc -- Count of program arguments.
+ * @param argv -- Array of program arguments.
+ * @return A result of execution (0 means OK, non-zero value means that some
+ *     error occured.)
+ */
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -32,15 +48,11 @@ int main(int argc, char *argv[])
         messageBox.critical(0, "Ошибка",
                             "MST должен быть запущен от суперпользователя");
         return 1;
-
     }
 
-    // Устанавливаем файл логирования,
-    // внимательно сверьтесь с тем, какой используете путь для файла
+
     m_logFile.reset(new QFile(MST_LOG_FILE));
-    // Открываем файл логирования
     m_logFile.data()->open(QFile::Append | QFile::Text);
-    // Устанавливаем обработчик
     qInstallMessageHandler(messageHandler);
 
     InstallWindow w;
@@ -49,14 +61,18 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 
-// Реализация обработчика
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+/**
+ * @brief messageHandler -- The MST default logging handler.
+ * @param type -- A log message type.
+ * @param context -- A log message context.
+ * @param msg -- A log message.
+ */
+void messageHandler(QtMsgType type, const QMessageLogContext &context,
+                    const QString &msg)
 {
-    // Открываем поток записи в файл
     QTextStream out(m_logFile.data());
-    // Записываем дату записи
     out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz ");
-    // По типу определяем, к какому уровню относится сообщение
+
     switch (type)
     {
     case QtInfoMsg:     out << "INF "; break;
@@ -65,7 +81,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
     case QtCriticalMsg: out << "CRT "; break;
     case QtFatalMsg:    out << "FTL "; break;
     }
-    // Записываем в вывод категорию сообщения и само сообщение
+
     out << context.category << ": " << msg << endl;
-    out.flush();    // Очищаем буферизированные данные
+    out.flush();
 }
