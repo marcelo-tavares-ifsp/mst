@@ -14,6 +14,7 @@
 QScopedPointer<QFile>   m_logFile;
 
 const string MST_CONFIG_FILE = "/etc/mst";
+const QString MST_LOG_FILE   = "/var/log/mst.log";
 
 // Объявляение обработчика
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
@@ -24,9 +25,7 @@ int main(int argc, char *argv[])
     DSV config(MST_CONFIG_FILE);
     PathManager::get_instance()->set_config(&config);
     Template_manager::get_instance()->set_template_dir("/var/lib/mst/");
-    if (! QDir("logs").exists()) {
-        QDir().mkdir("logs");
-    }
+
     if (geteuid() != 0)
     {
         QMessageBox messageBox;
@@ -38,7 +37,7 @@ int main(int argc, char *argv[])
 
     // Устанавливаем файл логирования,
     // внимательно сверьтесь с тем, какой используете путь для файла
-    m_logFile.reset(new QFile("/tmp/logFile.txt"));
+    m_logFile.reset(new QFile(MST_LOG_FILE));
     // Открываем файл логирования
     m_logFile.data()->open(QFile::Append | QFile::Text);
     // Устанавливаем обработчик
@@ -53,10 +52,6 @@ int main(int argc, char *argv[])
 // Реализация обработчика
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    if (! QDir("logs").exists()) {
-        QDir().mkdir("logs");
-    }
-
     // Открываем поток записи в файл
     QTextStream out(m_logFile.data());
     // Записываем дату записи
