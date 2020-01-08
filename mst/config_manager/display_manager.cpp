@@ -1,10 +1,31 @@
 #include "display_manager.h"
 
+#include "component.h"
+#include "../configuration/configuration.h"
+#include "../template_manager/template.h"
+#include "../template_manager/template_manager.h"
+
 Q_LOGGING_CATEGORY(display_manager_category, "mst.dm")
 
-Display_manager::Display_manager()
+using namespace display_manager;
+
+Display_manager::Display_manager(Configuration& config) : Component(config)
 {
 
+}
+
+void Display_manager::configure(const QString &output_dir)
+{
+    QString out_file_name = output_dir + "/" + LIGHTDM_FILE;
+    Template tpl = prepare_lightdm_template();
+    tpl.substitute(out_file_name.toStdString());
+}
+
+Template display_manager::prepare_lightdm_template()
+{
+    Template tpl = Template_manager::get_instance()->get_template(
+                LIGHTDM_FILE.toStdString());
+    return tpl;
 }
 
 static void _configure_x11() {
@@ -15,7 +36,7 @@ static void _configure_x11() {
     }
 }
 
-void Display_manager::start() {
+void Display_manager::enable() {
     string lightdm_cmd = "/usr/sbin/lightdm --config ";// + config_path;
     if (system(lightdm_cmd.c_str()))
     {

@@ -6,15 +6,41 @@
 #include "command_manager/commandmanager.h"
 #include <QLoggingCategory>
 
+#include "component.h"
+#include "../configuration/configuration.h"
+#include "../template_manager/template.h"
+
 Q_DECLARE_LOGGING_CATEGORY(display_manager_category)
 
-class Display_manager
+namespace display_manager {
+
+//// Constants.
+
+const QString LIGHTDM_FILE = "lightdm-mst.conf";
+
+class Display_manager : public Component
 {
 public:
-    Display_manager();
-    void start();
+    Display_manager(Configuration& config);
+
+    void configure(const QString& output_dir);
+    QString get_version() {
+        // TODO:
+        throw Component_error("Unimplemented");
+    }
+    void enable();
+    void disable() {
+        /* Do nothing. */
+    }
+
     void add_seat(int seat_number);
     void add_seats(int count);
 };
+
+
+//// Helper procedures.
+Template prepare_lightdm_template();
+
+}
 
 #endif // DISPLAY_MANAGER_H

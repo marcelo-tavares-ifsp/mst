@@ -6,6 +6,7 @@
 #include "vgl.h"
 #include "udev.h"
 #include "sudo.h"
+#include "display_manager.h"
 
 Q_LOGGING_CATEGORY(config_manager_category, "mst.config_manager")
 
@@ -86,14 +87,12 @@ void ConfigManager::make_sudoers(Configuration& config)
  *
  * TODO: Use actual number of seats.
  */
-void ConfigManager::make_lightdm_conf()
+void ConfigManager::make_lightdm_conf(Configuration& config)
 {
-    const string out_file_name
-            = PathManager::get_instance()->get_lightdm_mst_config();
-    const string tpl_name
-            = PathManager::get_instance()->get_lightdm_mst_config_template();
-    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
-    tpl.substitute(out_file_name);
+    display_manager::Display_manager dm(config);
+    dm.configure(
+                QString::fromStdString(
+                    PathManager::get_instance()->get_output_dir()));
 }
 
 void ConfigManager::make_getty_service()

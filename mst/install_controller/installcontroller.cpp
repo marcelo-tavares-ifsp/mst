@@ -231,7 +231,7 @@ void InstallController::begin_install()
     qInfo(install_controller_category) << "make_xinitrc OK";
     ConfigManager::make_sudoers(*config);
     qInfo(install_controller_category) << "make_sudoers OK";
-    ConfigManager::make_lightdm_conf();
+    ConfigManager::make_lightdm_conf(*config);
     qInfo(install_controller_category) << "make_lightdm_conf OK";
     ConfigManager::make_getty_service();
     qInfo(install_controller_category) << "make_getty_service OK";
