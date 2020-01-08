@@ -8,10 +8,10 @@
 
 Q_DECLARE_LOGGING_CATEGORY(display_manager_category)
 
-class DisplayManager
+class Display_manager
 {
 public:
-    DisplayManager();
+    Display_manager();
     void start();
     void add_seat(int seat_number);
     void add_seats(int count);
