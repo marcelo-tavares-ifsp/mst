@@ -31,6 +31,12 @@ public:
     Awesome(Configuration& config);
     void configure(const QString& output_dir) override;
     QString get_version() override;
+    void enable() override {
+        /* Do nothing. */
+    }
+    void disable() override {
+        /* Do nothing. */
+    }
 
     void prepare_rclua_template(Template& rclua_template);
 };
