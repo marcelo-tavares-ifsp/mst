@@ -53,7 +53,8 @@ SOURCES += \
     template_manager/template_manager.cpp \
     template_manager/template.cpp \
     ui/about_dialog/about_dialog.cpp \
-    config_manager/xorg.cpp
+    config_manager/xorg.cpp \
+    config_manager/udev.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -75,7 +76,8 @@ HEADERS += \
     template_manager/template_manager.h \
     template_manager/template.h \
     ui/about_dialog/about_dialog.h \
-    config_manager/xorg.h
+    config_manager/xorg.h \
+    config_manager/udev.h
 
 FORMS += \
     ui/install_window/installwindow.ui \

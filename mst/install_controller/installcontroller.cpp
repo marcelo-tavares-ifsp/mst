@@ -235,10 +235,8 @@ void InstallController::begin_install()
     qInfo(install_controller_category) << "make_lightdm_conf OK";
     ConfigManager::make_getty_service();
     qInfo(install_controller_category) << "make_getty_service OK";
-    ConfigManager::make_udev_rules(config->seats);
-    qInfo(install_controller_category) << "make_udev_rules OK";
-    ConfigManager::make_udev_service();
-    qInfo(install_controller_category) << "make_udev_service OK";
+    ConfigManager::configure_udev(*config);
+    qInfo(install_controller_category) << "configure_udev OK";
     ConfigManager::make_vgl(*config);
     qInfo(install_controller_category) << "make_vgl OK";
 }

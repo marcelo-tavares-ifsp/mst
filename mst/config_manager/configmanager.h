@@ -27,8 +27,7 @@ public:
     static void make_sudoers();
     static void make_lightdm_conf();
     static void make_getty_service();
-    static void make_udev_rules(vector<Seat> seats);
-    static void make_udev_service();
+    static void configure_udev(Configuration& config);
     static void make_vgl(Configuration& config);
 
 private:

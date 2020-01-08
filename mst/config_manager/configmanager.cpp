@@ -4,6 +4,7 @@
 #include "template_manager/template.h"
 
 #include "vgl.h"
+#include "udev.h"
 
 Q_LOGGING_CATEGORY(config_manager_category, "mst.config_manager")
 
@@ -110,35 +111,12 @@ void ConfigManager::make_getty_service()
     tpl.set("user", user).substitute(out_file_name);
 }
 
-/**
- * @brief ConfigManager::make_udev_rules -- Generate udev rules for MST.
- * @param seats -- A vector of MST seats.
- */
-void ConfigManager::make_udev_rules(vector<Seat> seats)
+void ConfigManager::configure_udev(Configuration& config)
 {
-    const string out_file = PathManager::get_instance()->get_udev_rules_config();
-    Template tpl = Template_manager::get_instance()
-            ->get_template("99-mst.rules");
-    ofstream out(out_file);
-
-    for (uint32_t idx = 0; idx < seats.size(); ++idx)
-    {
-        out << tpl.set("usb_device", seats[idx].usb)
-               .set("seat_idx", to_string(idx + 1 ))
-               .substitute();
-    }
-
-    out.close();
-}
-
-void ConfigManager::make_udev_service()
-{
-    const string out_file_name
-            = PathManager::get_instance()->get_systemd_udev_config();
-    const string tpl_name
-            = PathManager::get_instance()->get_systemd_udev_config_template();
-    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
-    tpl.substitute(out_file_name);
+    udev::Udev udev(config);
+    udev.configure(
+                QString::fromStdString(
+                    PathManager::get_instance()->get_output_dir()));
 }
 
 void ConfigManager::make_vgl(Configuration& config)
