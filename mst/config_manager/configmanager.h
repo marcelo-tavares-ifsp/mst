@@ -24,7 +24,7 @@ public:
     static void make_xorg(Configuration& config);
     static void make_bashrc();
     static void make_xinitrc();
-    static void make_sudoers();
+    static void make_sudoers(Configuration& config);
     static void make_lightdm_conf();
     static void make_getty_service();
     static void configure_udev(Configuration& config);
