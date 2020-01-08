@@ -62,32 +62,6 @@ static vector<string> run_ls_devices()
     }
 }
 
-/**
- * @brief CommandManager::get_awesome_version -- get Awesome version.
- * @throws an error message on error.
- * @return awesome version as a string.
- */
-static string get_awesome_raw_version()
-{
-    const int BUF_SZ = 255;
-    char buf[BUF_SZ];
-    FILE* f = popen("awesome --version", "r");
-    if (f != NULL)
-    {
-        if (fgets(buf, BUF_SZ, f) != NULL)
-        {
-            return string(buf);
-        }
-    }
-    else
-    {
-        const string msg = "Could not get Awesome version.";
-        qCritical(command_manager_category()) << msg.c_str();
-        throw msg;
-    }
-    return NULL;
-}
-
 // public methods ///////////////////////////////////////////////////////////////
 
 bool CommandManager::is_running(const char *processName)
@@ -204,26 +178,6 @@ void CommandManager::get_devices_from_ls(vector<string>& mice, vector<string>& k
         {
             mice.push_back(sm[1]);
         }
-    }
-}
-
-vector<int> CommandManager::get_awesome_version()
-{
-    const string raw_version = get_awesome_raw_version();
-    regex r1("awesome v([0-9]+).([0-9]+)*");
-    smatch sm;
-    if (regex_search(raw_version, sm, r1))
-    {
-        vector<int> result(2);
-        result[0] = atoi(string(sm[1]).c_str());
-        result[1] = atoi(string(sm[2]).c_str());
-        return result;
-    }
-    else
-    {
-        const string msg = "Could not parse Awesome version: " + raw_version;
-        qCritical(command_manager_category()) << msg.c_str();
-        throw msg;
     }
 }
 

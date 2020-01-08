@@ -14,39 +14,10 @@ Q_LOGGING_CATEGORY(config_manager_category, "mst.config_manager")
  */
 void ConfigManager::make_rc_lua(Configuration& config)
 {
-    string out_file_name = PathManager::get_instance()->get_rclua_config();
-    fstream rclua_pattern;
-    fstream rclua;
-    string template_name;
-
-    const vector<int> version = CommandManager::get_awesome_version();
-    if (version[0] == 3)
-    {
-        qDebug(config_manager_category) << "Using rc.lua.template for Awesome 3";
-        template_name = PathManager::get_instance()->get_rclua_template();
-    }
-    else
-    {
-        qDebug(config_manager_category) << "Using rc.lua.template for Awesome 4";
-        template_name = PathManager::get_instance()->get_rclua4_template();
-    }
-
-    qInfo(config_manager_category) << "writing '" << out_file_name.c_str()
-                                   << "' ...";
-
-    Template rclua_template
-            = Template_manager::get_instance()->get_template(template_name);
-    rclua_template
-            .set("mst_autostart",
-                  Awesome::make_xephyr_autostart())
-            .set("xephyr_screens",
-                 Awesome::make_xephyr_screens(config.seats))
-            .set("mst_awful_rules",
-                  Awesome::make_xephyr_rules(config.seats.size()))
-            .substitute(out_file_name);
-
-    qDebug(config_manager_category) << "writing '" << out_file_name.c_str()
-                                    << "' ... done";
+    awesome::Awesome awesome(config);
+    awesome.configure(
+                QString::fromStdString(
+                    PathManager::get_instance()->get_output_dir()));
 }
 
 /**

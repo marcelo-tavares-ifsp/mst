@@ -6,16 +6,44 @@
 #include <sstream>
 
 #include "../configuration/configuration.h"
+#include "../template_manager/template.h"
+#include "component.h"
+#include <QLoggingCategory>
 
 using namespace std;
 
-class Awesome
+Q_DECLARE_LOGGING_CATEGORY(component_awesome_category)
+
+namespace awesome {
+
+//// Constants.
+
+static const QString RC_LUA_FILE      = "rc.lua";
+static const QString RC_LUA_TPL_FILE  = "rc.lua";
+static const QString RC_LUA4_TPL_FILE = "rc.lua4";
+
+
+//// The main class.
+
+class Awesome : public Component
 {
 public:
-    Awesome();
-    static string make_xephyr_autostart();
-    static string make_xephyr_rules(uint32_t sSize);
-    static string make_xephyr_screens(vector<Seat> seats);
+    Awesome(Configuration& config);
+    void configure(const QString& output_dir) override;
+    QString get_version() override;
+
+    void prepare_rclua_template(Template& rclua_template);
 };
+
+//// Helper procedures.
+
+extern string make_xephyr_autostart();
+extern string make_xephyr_rules(uint32_t sSize);
+extern string make_xephyr_screens(vector<Seat> seats);
+
+extern string get_awesome_raw_version();
+extern vector<int> get_awesome_version();
+
+}
 
 #endif // AWESOME_CONFIG_H

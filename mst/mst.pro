@@ -45,6 +45,7 @@ SOURCES += \
     config_manager/configmanager.cpp \
     path_manager/pathmanager.cpp \
     common/dsv_parser/dsv.cpp \
+    config_manager/component.cpp \
     config_manager/xorg_config.cpp \
     config_manager/vgl.cpp \
     config_manager/display_manager.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     configuration/configuration.h \
     common/utilites/utilites.h \
     command_manager/commandmanager.h \
+    config_manager/component.h \
     config_manager/configmanager.h \
     path_manager/pathmanager.h \
     common/dsv_parser/dsv.h \

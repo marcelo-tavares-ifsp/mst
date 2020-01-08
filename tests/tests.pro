@@ -33,6 +33,8 @@ SOURCES += \
     test_template.cpp
 
 SOURCES += \
+    ../mst/configuration/configuration.cpp \
+    ../mst/config_manager/component.cpp \
     ../mst/config_manager/awesome.cpp \
     test_awesome.cpp
 
@@ -43,6 +45,7 @@ SOURCES += \
     ../mst/common/dsv_parser/dsv.cpp
 
 HEADERS += \
+    ../mst/configuration/configuration.h \
     ../mst/common/utilites/utilites.h \
     test_awesome.h \
     test_utils.h \
