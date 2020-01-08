@@ -14,7 +14,7 @@ Q_LOGGING_CATEGORY(component_awesome_category, "mst.component.awesome")
 Awesome::Awesome(Configuration& config)
     : Component(config)
 {
-    /* Do nothing */
+    config_files[RC_LUA_FILE] = "{{home}}/.config/awesome/rc.lua";
 }
 
 void Awesome::configure(const QString& output_dir)
