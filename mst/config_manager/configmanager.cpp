@@ -29,13 +29,10 @@ void ConfigManager::make_rc_lua(Configuration& config)
  */
 void ConfigManager::make_xorg(Configuration& config)
 {
-    string out_file = PathManager::get_instance()->get_xorg_config();
-    Xorg* xorg_conf = new Xorg(config.seats);
-
-    fstream xorg;
-    xorg.open(out_file, ios::out);
-    xorg << *xorg_conf;
-    xorg.close();
+    xorg::Xorg xorg(config);
+    xorg.configure(
+                QString::fromStdString(
+                    PathManager::get_instance()->get_output_dir()));
 }
 
 /**

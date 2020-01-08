@@ -1,8 +1,13 @@
+#include <fstream>
+
 #include "xorg.h"
+#include "../configuration/configuration.h"
 
-Xorg::Xorg(vector<Seat> seats) : seats(seats)
+using namespace xorg;
+
+Xorg::Xorg(Configuration& config) : Component(config)
 {
-
+    config_files[XORG_FILE] = "/etc/X11/xorg.conf";
 }
 
 /* Config elements' constructors. */
@@ -40,7 +45,7 @@ static const string _sub_elem(const string& name)
 
 /* Config printers. */
 
-static void _print_monitors(ostream& os, const Xorg& config)
+static void _print_monitors(ostream& os, const Configuration& config)
 {
     for (uint32_t idx = 0; idx < config.seats.size(); idx++)
     {
@@ -56,7 +61,7 @@ static void _print_monitors(ostream& os, const Xorg& config)
     }
 }
 
-static void _print_device(ostream& os, const Xorg& config)
+static void _print_device(ostream& os, const Configuration& config)
 {
     os << _section("Device")
        << _elem("Identifier") << string("\"card0\"\n");
@@ -71,7 +76,7 @@ static void _print_device(ostream& os, const Xorg& config)
     os << _end_section("Device");
 }
 
-static void _print_screen(ostream& os, const Xorg& config)
+static void _print_screen(ostream& os, const Configuration& config)
 {
     int total_width = int(config.seats.size()) * config.seats[0].resolution.width;
 
@@ -88,7 +93,7 @@ static void _print_screen(ostream& os, const Xorg& config)
        << _end_section("Screen");
 }
 
-static void _print_layout(ostream& os, const Xorg& config)
+static void _print_layout(ostream& os, const Configuration& config)
 {
     for (uint32_t idx = 0; idx < config.seats.size(); idx++)
     {
@@ -101,11 +106,14 @@ static void _print_layout(ostream& os, const Xorg& config)
     }
 }
 
-ostream& operator << (ostream& os, const Xorg& config)
+void Xorg::configure(const QString &output_dir)
 {
+    QString output_file = output_dir + "/" + XORG_FILE;
+    fstream os;
+    os.open(output_file.toStdString(), ios::out);
     _print_monitors(os, config);
-    _print_device(os, config);
-    _print_screen(os, config);
-    _print_layout(os, config);
-    return os;
+    _print_device(os,   config);
+    _print_screen(os,   config);
+    _print_layout(os,   config);
 }
+
