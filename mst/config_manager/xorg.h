@@ -2,6 +2,7 @@
 #define XORG_CONFIG_H
 
 #include "configuration/configuration.h"
+#include "../template_manager/template.h"
 #include "iostream"
 #include <QLoggingCategory>
 
@@ -14,6 +15,8 @@ namespace xorg {
 //// Constants.
 
 static const QString XORG_FILE = "xorg.conf";
+static const QString XINIT_RC_FILE    = "xinitrc";
+static const QString XMST_FILE        = "xmst";
 
 class Xorg : public Component
 {
@@ -31,6 +34,11 @@ public:
         throw Component_error("Unimplemented");
     }
 };
+
+
+//// Helper procedures.
+Template prepare_xinitrc_template();
+Template prepare_xmst_template();
 
 }
 

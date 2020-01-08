@@ -53,24 +53,6 @@ void ConfigManager::make_bashrc()
 }
 
 /**
- * @brief ConfigManager::make_xinitrc -- Generate ".xinitrc" file.
- */
-void ConfigManager::make_xinitrc()
-{
-    string out_file_name
-            = PathManager::get_instance()->get_xinitrc_config();
-    string tpl_name
-            = PathManager::get_instance()->get_xinitrc_config_template();
-    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
-    tpl.substitute(out_file_name);
-
-    out_file_name = PathManager::get_instance()->get_xmst_config();
-    tpl_name  = PathManager::get_instance()->get_xmst_config_template();
-    tpl = Template_manager::get_instance()->get_template(tpl_name);
-    tpl.substitute(out_file_name);
-}
-
-/**
  * @brief ConfigManager::make_sudoers -- Generate sudoers file for MST.
  */
 void ConfigManager::make_sudoers(Configuration& config)

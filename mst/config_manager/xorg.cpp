@@ -2,12 +2,16 @@
 
 #include "xorg.h"
 #include "../configuration/configuration.h"
+#include "../template_manager/template.h"
+#include "../template_manager/template_manager.h"
 
 using namespace xorg;
 
 Xorg::Xorg(Configuration& config) : Component(config)
 {
     config_files[XORG_FILE] = "/etc/X11/xorg.conf";
+    config_files[XINIT_RC_FILE] = "{{home}}/.xinitrc";
+    config_files[XMST_FILE]     = "{{home}}/.xmst";
 }
 
 /* Config elements' constructors. */
@@ -115,5 +119,25 @@ void Xorg::configure(const QString &output_dir)
     _print_device(os,   config);
     _print_screen(os,   config);
     _print_layout(os,   config);
+
+    Template tpl = xorg::prepare_xinitrc_template();
+    output_file = output_dir + "/" + XINIT_RC_FILE;
+    tpl.substitute(output_file.toStdString());
+
+    tpl = xorg::prepare_xmst_template();
+    output_file = output_dir + "/" + XMST_FILE;
+    tpl.substitute(output_file.toStdString());
 }
 
+Template xorg::prepare_xinitrc_template()
+{
+    return Template_manager::get_instance()->get_template(
+                XINIT_RC_FILE.toStdString());
+}
+
+Template xorg::prepare_xmst_template()
+{
+    return Template_manager::get_instance()->get_template(
+                XMST_FILE.toStdString());
+
+}

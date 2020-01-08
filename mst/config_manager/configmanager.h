@@ -23,7 +23,6 @@ public:
     static void make_rc_lua(Configuration& config);
     static void make_xorg(Configuration& config);
     static void make_bashrc();
-    static void make_xinitrc();
     static void make_sudoers(Configuration& config);
     static void make_lightdm_conf(Configuration& config);
     static void make_getty_service();
