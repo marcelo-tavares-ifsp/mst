@@ -30,7 +30,7 @@ void ConfigManager::make_rc_lua(Configuration& config)
 void ConfigManager::make_xorg(Configuration& config)
 {
     string out_file = PathManager::get_instance()->get_xorg_config();
-    XorgConfig* xorg_conf = new XorgConfig(config.seats);
+    Xorg* xorg_conf = new Xorg(config.seats);
 
     fstream xorg;
     xorg.open(out_file, ios::out);

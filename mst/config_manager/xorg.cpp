@@ -1,6 +1,6 @@
-#include "xorg_config.h"
+#include "xorg.h"
 
-XorgConfig::XorgConfig(vector<Seat> seats) : seats(seats)
+Xorg::Xorg(vector<Seat> seats) : seats(seats)
 {
 
 }
@@ -40,7 +40,7 @@ static const string _sub_elem(const string& name)
 
 /* Config printers. */
 
-static void _print_monitors(ostream& os, const XorgConfig& config)
+static void _print_monitors(ostream& os, const Xorg& config)
 {
     for (uint32_t idx = 0; idx < config.seats.size(); idx++)
     {
@@ -56,7 +56,7 @@ static void _print_monitors(ostream& os, const XorgConfig& config)
     }
 }
 
-static void _print_device(ostream& os, const XorgConfig& config)
+static void _print_device(ostream& os, const Xorg& config)
 {
     os << _section("Device")
        << _elem("Identifier") << string("\"card0\"\n");
@@ -71,7 +71,7 @@ static void _print_device(ostream& os, const XorgConfig& config)
     os << _end_section("Device");
 }
 
-static void _print_screen(ostream& os, const XorgConfig& config)
+static void _print_screen(ostream& os, const Xorg& config)
 {
     int total_width = int(config.seats.size()) * config.seats[0].resolution.width;
 
@@ -88,7 +88,7 @@ static void _print_screen(ostream& os, const XorgConfig& config)
        << _end_section("Screen");
 }
 
-static void _print_layout(ostream& os, const XorgConfig& config)
+static void _print_layout(ostream& os, const Xorg& config)
 {
     for (uint32_t idx = 0; idx < config.seats.size(); idx++)
     {
@@ -101,7 +101,7 @@ static void _print_layout(ostream& os, const XorgConfig& config)
     }
 }
 
-ostream& operator << (ostream& os, const XorgConfig& config)
+ostream& operator << (ostream& os, const Xorg& config)
 {
     _print_monitors(os, config);
     _print_device(os, config);

@@ -3,7 +3,7 @@
 
 #include "configuration/configuration.h"
 #include "path_manager/pathmanager.h"
-#include "xorg_config.h"
+#include "xorg.h"
 #include "common/utilites/utilites.h"
 #include "command_manager/commandmanager.h"
 #include "iostream"

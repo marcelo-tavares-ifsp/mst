@@ -7,13 +7,13 @@
 
 using namespace std;
 
-class XorgConfig
+class Xorg
 {
 public:
-    XorgConfig(vector<Seat> seats);
+    Xorg(vector<Seat> seats);
     vector<Seat> seats;
 
-    friend ostream& operator << (ostream& os, const XorgConfig& config);
+    friend ostream& operator << (ostream& os, const Xorg& config);
 };
 
 #endif // XORG_CONFIG_H
