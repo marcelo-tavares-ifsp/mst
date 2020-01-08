@@ -2,19 +2,45 @@
 #define VGL_H
 
 #include "command_manager/commandmanager.h"
+#include "component.h"
+#include "../configuration/configuration.h"
+#include "../template_manager/template.h"
+
 #include <QLoggingCategory>
 #include <string>
 #include <stdlib.h>
 
 Q_DECLARE_LOGGING_CATEGORY(vgl_category)
 
-class VGL
+namespace vgl {
+
+
+//// Constants.
+
+static const QString VGL_SH_FILE = "vgl.sh";
+
+
+//// The main class.
+
+class VGL : public Component
 {
 public:
-    VGL();
+    VGL(Configuration& config);
+    void configure(const QString& output_dir) override;
+    QString get_version() override {
+        // TODO:
+        throw Component_error("Unimplemented.");
+    }
+    void enable() override;
+    void disable() override;
 
-    static void configure();
-    static void unconfigure();
+    void prepare_vgl_sh_template(Template& tpl);
 };
+
+
+//// Helper procedures.
+
+
+}
 
 #endif // VGL_H

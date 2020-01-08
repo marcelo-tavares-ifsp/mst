@@ -3,6 +3,8 @@
 #include "template_manager/template_manager.h"
 #include "template_manager/template.h"
 
+#include "vgl.h"
+
 Q_LOGGING_CATEGORY(config_manager_category, "mst.config_manager")
 
 /**
@@ -142,12 +144,11 @@ void ConfigManager::make_udev_service()
     tpl.substitute(out_file_name);
 }
 
-void ConfigManager::make_vgl()
+void ConfigManager::make_vgl(Configuration& config)
 {
-    const string out_file_name = PathManager::get_instance()->get_vgl_config();
-    const string tpl_name
-            = PathManager::get_instance()->get_vgl_config_template();
-    const string user = PathManager::get_instance()->get_mst_user();
-    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
-    tpl.set("user", user).substitute(out_file_name);
+    vgl::VGL vgl(config);
+    vgl.configure(
+                QString::fromStdString(
+                    PathManager::get_instance()->get_output_dir()));
+
 }

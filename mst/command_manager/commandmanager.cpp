@@ -181,12 +181,6 @@ void CommandManager::get_devices_from_ls(vector<string>& mice, vector<string>& k
     }
 }
 
-bool CommandManager::config_vgl()
-{
-    static const char* cmd = "echo -e '2\nx\n' | vglserver_config";
-    return system(cmd) > 0;
-}
-
 void CommandManager::reboot_autoboot()
 {
     sync();

@@ -29,7 +29,7 @@ public:
     static void make_getty_service();
     static void make_udev_rules(vector<Seat> seats);
     static void make_udev_service();
-    static void make_vgl();
+    static void make_vgl(Configuration& config);
 
 private:
     ConfigManager(){}

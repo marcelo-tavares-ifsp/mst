@@ -239,7 +239,7 @@ void InstallController::begin_install()
     qInfo(install_controller_category) << "make_udev_rules OK";
     ConfigManager::make_udev_service();
     qInfo(install_controller_category) << "make_udev_service OK";
-    ConfigManager::make_vgl();
+    ConfigManager::make_vgl(*config);
     qInfo(install_controller_category) << "make_vgl OK";
 }
 
@@ -299,7 +299,8 @@ void InstallController::install_files()
 
 void InstallController::enable_mst()
 {
-    VGL::configure();
+    vgl::VGL vgl(*config);
+    vgl.enable();
     if (system("systemctl set-default multi-user.target"))
         {
             string msg = "Could not enable MST in systemd.";
@@ -311,7 +312,8 @@ void InstallController::enable_mst()
 
 void InstallController::disable_mst()
 {
-    VGL::unconfigure();
+    vgl::VGL vgl(*config);
+    vgl.disable();
     if (system("systemctl set-default graphical.target"))
     {
         qCritical(install_controller_category) << "Could not disable MST in systemd.";
