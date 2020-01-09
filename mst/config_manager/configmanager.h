@@ -18,7 +18,6 @@ Q_DECLARE_LOGGING_CATEGORY(config_manager_category)
 class ConfigManager
 {
 public:
-    friend ostream& operator << (ostream& os, const Configuration& config);
     static void make_rc_lua(Configuration& config);
     static void make_xorg(Configuration& config);
     static void configure_system(Configuration& config);
