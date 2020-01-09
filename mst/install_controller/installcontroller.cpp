@@ -3,6 +3,8 @@
 #include <QCoreApplication>
 #include <QMainWindow>
 
+#include "../platform/platform.h"
+
 InstallController* InstallController::instance = 0;
 Q_LOGGING_CATEGORY(install_controller_category, "mst.install_controller")
 
@@ -36,7 +38,7 @@ static void fill_resolutions_and_interfaces(QComboBox *cb, QListWidget *lw)
     cb->clear();
     lw->clear();
 
-    vector<xrandrMonitor> availableMonitors = CommandManager::get_interfaces_from_xrandr();
+    vector<xrandrMonitor> availableMonitors = Platform::xrandr_get_monitors();
 
     uint32_t am_size = uint32_t(availableMonitors.size());
 
@@ -155,7 +157,7 @@ vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
 
     list_mice->clear();
     list_keybs->clear();
-    CommandManager::get_devices_from_ls(*list_mice, *list_keybs);
+    Platform::get_input_devices(*list_mice, *list_keybs);
 
     return *widgets;
 }
@@ -368,8 +370,7 @@ void InstallController::begin_uninstall()
 
 void InstallController::begin_stop()
 {
-    const char processName[7] = "Xephyr";
-    if (CommandManager::kill_process(processName))
+    if (Platform::process_kill("Xephyr"))
     {
         const char* msg = "Could not stop MST ('pkill Xephyr' failed.)";
         qCritical(install_controller_category) << msg;
@@ -379,8 +380,7 @@ void InstallController::begin_stop()
 
 bool InstallController::is_mst_running()
 {
-    const char processName[7] = "Xephyr";
-    return CommandManager::is_running(processName);
+    return Platform::process_is_running("Xephyr");
 }
 
 bool InstallController::config_is_valid()

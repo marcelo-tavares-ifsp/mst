@@ -1,7 +1,6 @@
 #ifndef VGL_H
 #define VGL_H
 
-#include "command_manager/commandmanager.h"
 #include "component.h"
 #include "../configuration/configuration.h"
 #include "../template_manager/template.h"

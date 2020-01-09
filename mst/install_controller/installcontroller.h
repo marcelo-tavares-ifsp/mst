@@ -5,7 +5,6 @@
 
 #include "ui_installwindow.h"
 #include "configuration/configuration.h"
-#include "command_manager/commandmanager.h"
 #include "common/utilites/utilites.h"
 #include "input_device_listener/inputdevicelistener.h"
 #include "config_manager/configmanager.h"

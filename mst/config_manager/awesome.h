@@ -22,7 +22,6 @@ static const QString RC_LUA_FILE      = "rc.lua";
 static const QString RC_LUA_TPL_FILE  = "rc.lua";
 static const QString RC_LUA4_TPL_FILE = "rc.lua4";
 
-
 //// The main class.
 
 class Awesome : public Component

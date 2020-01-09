@@ -3,7 +3,6 @@
 
 #include <string>
 #include <stdlib.h>
-#include "command_manager/commandmanager.h"
 #include <QLoggingCategory>
 
 #include "component.h"

@@ -4,6 +4,7 @@
 #include "../configuration/configuration.h"
 #include "../template_manager/template.h"
 #include "../template_manager/template_manager.h"
+#include "../platform/platform.h"
 
 Q_LOGGING_CATEGORY(display_manager_category, "mst.dm")
 
@@ -29,7 +30,7 @@ Template display_manager::prepare_lightdm_template()
 }
 
 static void _configure_x11() {
-    if (CommandManager::xset_dpms() || CommandManager::xset_soff())
+    if (Platform::xset_dpms() || Platform::xset_soff())
     {
         qCritical(display_manager_category) << "Could not configure X11.";
         throw "Could not configure X11.";
