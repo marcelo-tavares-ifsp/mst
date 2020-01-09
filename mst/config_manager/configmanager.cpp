@@ -7,6 +7,7 @@
 #include "udev.h"
 #include "sudo.h"
 #include "display_manager.h"
+#include "system.h"
 
 Q_LOGGING_CATEGORY(config_manager_category, "mst.config_manager")
 
@@ -38,18 +39,12 @@ void ConfigManager::make_xorg(Configuration& config)
                     PathManager::get_instance()->get_output_dir()));
 }
 
-/**
- * @brief ConfigManager::make_bashrc -- Generate ".bashrc" file for multiseat
- *     user.
- */
-void ConfigManager::make_bashrc()
+void ConfigManager::configure_system(Configuration &config)
 {
-    string out_file_name = PathManager::get_instance()->get_bashrc_config();
-    string template_name
-            = PathManager::get_instance()->get_bashrc_config_template();
-    Template bashrc_template
-            = Template_manager::get_instance()->get_template(template_name);
-    bashrc_template.set("tty", "1").substitute(out_file_name);
+    sys::System sys(config);
+    sys.configure(
+                QString::fromStdString(
+                    PathManager::get_instance()->get_output_dir()));
 }
 
 /**
@@ -75,17 +70,6 @@ void ConfigManager::make_lightdm_conf(Configuration& config)
     dm.configure(
                 QString::fromStdString(
                     PathManager::get_instance()->get_output_dir()));
-}
-
-void ConfigManager::make_getty_service()
-{
-    const string out_file_name
-            = PathManager::get_instance()->get_getty_service_config();
-    const string tpl_name
-            = PathManager::get_instance()->get_getty_service_config_template();
-    const string user = PathManager::get_instance()->get_mst_user();
-    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
-    tpl.set("user", user).substitute(out_file_name);
 }
 
 void ConfigManager::configure_udev(Configuration& config)

@@ -55,7 +55,8 @@ SOURCES += \
     ui/about_dialog/about_dialog.cpp \
     config_manager/xorg.cpp \
     config_manager/udev.cpp \
-    config_manager/sudo.cpp
+    config_manager/sudo.cpp \
+    config_manager/system.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -79,7 +80,8 @@ HEADERS += \
     ui/about_dialog/about_dialog.h \
     config_manager/xorg.h \
     config_manager/udev.h \
-    config_manager/sudo.h
+    config_manager/sudo.h \
+    config_manager/system.h
 
 FORMS += \
     ui/install_window/installwindow.ui \

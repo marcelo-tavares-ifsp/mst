@@ -22,10 +22,9 @@ public:
     friend ostream& operator << (ostream& os, const Configuration& config);
     static void make_rc_lua(Configuration& config);
     static void make_xorg(Configuration& config);
-    static void make_bashrc();
+    static void configure_system(Configuration& config);
     static void make_sudoers(Configuration& config);
     static void make_lightdm_conf(Configuration& config);
-    static void make_getty_service();
     static void configure_udev(Configuration& config);
     static void make_vgl(Configuration& config);
 
