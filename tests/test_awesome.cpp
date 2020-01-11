@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-#include "../mst/config_manager/awesome.h"
+#include "../mst/components/awesome.h"
 
 #include "test_awesome.h"
 

@@ -7,8 +7,8 @@
 #include "configuration/configuration.h"
 #include "common/utilites/utilites.h"
 #include "input_device_listener/inputdevicelistener.h"
-#include "config_manager/component_manager.h"
-#include "config_manager/vgl.h"
+#include "components/component_manager.h"
+#include "components/vgl.h"
 
 Q_DECLARE_LOGGING_CATEGORY(install_controller_category)
 
@@ -63,7 +63,7 @@ private:
     vector<string> *list_mice;
     vector<string> *list_keybs;
     string current_interface_name;
-    Component_manager* config_manager;
+    Component_manager* components;
 };
 
 #endif // INSTALLCONTROLLER_H

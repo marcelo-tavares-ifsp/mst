@@ -34,8 +34,8 @@ SOURCES += \
 
 SOURCES += \
     ../mst/configuration/configuration.cpp \
-    ../mst/config_manager/component.cpp \
-    ../mst/config_manager/awesome.cpp \
+    ../mst/components/component.cpp \
+    ../mst/components/awesome.cpp \
     test_awesome.cpp
 
 SOURCES += \

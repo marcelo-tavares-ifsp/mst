@@ -43,20 +43,20 @@ SOURCES += \
     common/utilites/utilites.cpp \
     path_manager/pathmanager.cpp \
     common/dsv_parser/dsv.cpp \
-    config_manager/component.cpp \
-    config_manager/vgl.cpp \
-    config_manager/display_manager.cpp \
+    components/component.cpp \
+    components/vgl.cpp \
+    components/display_manager.cpp \
     input_device_listener/inputdevicelistener.cpp \
-    config_manager/awesome.cpp \
+    components/awesome.cpp \
     template_manager/template_manager.cpp \
     template_manager/template.cpp \
     ui/about_dialog/about_dialog.cpp \
-    config_manager/xorg.cpp \
-    config_manager/udev.cpp \
-    config_manager/sudo.cpp \
-    config_manager/system.cpp \
+    components/xorg.cpp \
+    components/udev.cpp \
+    components/sudo.cpp \
+    components/system.cpp \
     platform/platform.cpp \
-    config_manager/component_manager.cpp
+    components/component_manager.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -65,23 +65,23 @@ HEADERS += \
     install_controller/installcontroller.h \
     configuration/configuration.h \
     common/utilites/utilites.h \
-    config_manager/component.h \
+    components/component.h \
     path_manager/pathmanager.h \
     common/dsv_parser/dsv.h \
-    config_manager/vgl.h \
-    config_manager/display_manager.h \
+    components/vgl.h \
+    components/display_manager.h \
     version.h \
     input_device_listener/inputdevicelistener.h \
-    config_manager/awesome.h \
+    components/awesome.h \
     template_manager/template_manager.h \
     template_manager/template.h \
     ui/about_dialog/about_dialog.h \
-    config_manager/xorg.h \
-    config_manager/udev.h \
-    config_manager/sudo.h \
-    config_manager/system.h \
+    components/xorg.h \
+    components/udev.h \
+    components/sudo.h \
+    components/system.h \
     platform/platform.h \
-    config_manager/component_manager.h
+    components/component_manager.h
 
 FORMS += \
     ui/install_window/installwindow.ui \
