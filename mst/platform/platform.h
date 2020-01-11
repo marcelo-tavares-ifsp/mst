@@ -42,6 +42,7 @@ public:
 
     static void fs_mkdir(const QString& path);
     static void fs_mkdir(const string& path);
+    static void fs_rm(const QString& path);
 };
 
 #endif // PLATFORM_H

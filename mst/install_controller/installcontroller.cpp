@@ -289,24 +289,10 @@ void InstallController::disable_mst()
         throw InstallController_exception("Could not disable MST in systemd.");
     }
 
-    string cmd = "rm '" + PathManager::get_instance()->get_sudoers_config() + "'";
-
-    if (system(cmd.c_str()))
-    {
-        string message = "Could not delete "
-                + PathManager::get_instance()->get_sudoers_config() + ".";
-        qCritical(install_controller_category) << message.c_str();
-        throw message;
-    }
-
-    cmd = "rm '/etc/bashrc.d/vgl.sh'";
-    if (system(cmd.c_str()))
-    {
-        string message = "Could not delete "
-                + PathManager::get_instance()->get_vgl_config() + ".";
-        qCritical(install_controller_category) << message.c_str();
-        throw InstallController_exception(message);
-    }
+    Platform::fs_rm(
+                QString::fromStdString(
+                    PathManager::get_instance()->get_sudoers_config()));
+    Platform::fs_rm("/etc/bashrc.d/vgl.sh");
 }
 
 void InstallController::create_backup()

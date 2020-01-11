@@ -216,6 +216,17 @@ void Platform::fs_mkdir(const string& path)
     Platform::fs_mkdir(QString::fromStdString(path));
 }
 
+void Platform::fs_rm(const QString& file)
+{
+    QString command = "rm '" + file + "'";
+    if (system(command.toStdString().c_str()))
+    {
+        QString message = "Could not delete '" + file + "'";
+        qCritical(platform_category) << message.toStdString().c_str();
+        throw Platform_exception(message);
+    }
+}
+
 void Platform::system_reboot()
 {
     sync();
