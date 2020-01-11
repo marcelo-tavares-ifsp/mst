@@ -1,3 +1,5 @@
+#include <QString>
+
 #include "system.h"
 
 #include "../configuration/configuration.h"
@@ -25,10 +27,10 @@ void System::configure()
 
 Template sys::prepare_getty_template()
 {
-    const string user = PathManager::get_instance()->get_mst_user();
+    const QString user = PathManager::get_instance()->get_mst_user();
     Template tpl = Template_manager::get_instance()->get_template(
                 GETTY_FILE.toStdString());
-    tpl.set("user", user);
+    tpl.set("user", user.toStdString());
     return tpl;
 }
 

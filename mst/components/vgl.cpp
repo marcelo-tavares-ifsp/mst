@@ -58,8 +58,8 @@ void VGL::disable()
 
 void VGL::prepare_vgl_sh_template(Template& tpl)
 {
-    const string user = PathManager::get_instance()->get_mst_user();
-    tpl.set("user", user);
+    const QString user = PathManager::get_instance()->get_mst_user();
+    tpl.set("user", user.toStdString());
 }
 
 

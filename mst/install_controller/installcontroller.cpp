@@ -235,9 +235,7 @@ void InstallController::install_files()
     const QString output_dir
             = QString::fromStdString(
                 PathManager::get_instance()->get_output_dir());
-    const QString mst_user
-            = QString::fromStdString(
-                PathManager::get_instance()->get_mst_user());
+    const QString mst_user = PathManager::get_instance()->get_mst_user();
     const QString mst_user_home = "/home/" + mst_user + "/";
 
     auto install
@@ -294,24 +292,25 @@ void InstallController::disable_mst()
 
 void InstallController::create_backup()
 {
-    const string user = PathManager::get_instance()->get_mst_user();
+    const QString user = PathManager::get_instance()->get_mst_user();
     const string usr_dir = PathManager::get_instance()->get_usr_share_dir();
-    const string cmd = "/usr/local/bin/mk_backup.sh " + user;
-    if (system(cmd.c_str()))
+    const QString cmd = "/usr/local/bin/mk_backup.sh " + user;
+    if (system(cmd.toStdString().c_str()))
     {
         qCritical(install_controller_category)
                 << "Could not create a backup: "
-                << cmd.c_str();
-        throw InstallController_exception("Could not create a backup: " + cmd);
+                << cmd.toStdString().c_str();
+        throw InstallController_exception("Could not create a backup: "
+                                          + cmd.toStdString());
     }
 }
 
 void InstallController::restore_backup()
 {
-    const string user = PathManager::get_instance()->get_mst_user();
-    const string cmd = "/usr/local/bin/apl_backup.sh " + user;
+    const QString user = PathManager::get_instance()->get_mst_user();
+    const QString cmd = "/usr/local/bin/apl_backup.sh " + user;
 
-    if (system(cmd.c_str()))
+    if (system(cmd.toStdString().c_str()))
     {
         qCritical(install_controller_category) << "Could not restore a backup copy.";
         throw InstallController_exception("Could not restore a backup copy.");

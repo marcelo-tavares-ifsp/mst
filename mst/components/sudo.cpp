@@ -1,3 +1,5 @@
+#include <QString>
+
 #include "sudo.h"
 
 #include "../configuration/configuration.h"
@@ -23,13 +25,14 @@ void Sudo::configure()
 
 Template sudo::prepare_sudoers_template()
 {
-    const string user = PathManager::get_instance()->get_mst_user();
+    const QString user = PathManager::get_instance()->get_mst_user();
     const string out_file_name
             = PathManager::get_instance()->get_sudoers_config();
     const string tpl_name
             = PathManager::get_instance()->get_sudoers_config_template();
     Template tpl = Template_manager::get_instance()->get_template(tpl_name);
 
-    tpl.set("user", user).set("mst", "/usr/local/bin/mst-start-dm");
+    tpl.set("user", user.toStdString())
+            .set("mst", "/usr/local/bin/mst-start-dm");
     return tpl;
 }

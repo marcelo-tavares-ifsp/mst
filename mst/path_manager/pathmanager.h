@@ -24,7 +24,7 @@ public:
     }
     void set_config(DSV* config);
     string get_device_path();
-    string get_mst_user();
+    const QString get_mst_user();
     string get_output_dir();
     string get_usr_share_dir();
     string get_awesome_config();

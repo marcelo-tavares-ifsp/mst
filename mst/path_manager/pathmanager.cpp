@@ -1,3 +1,5 @@
+#include <QString>
+
 #include "pathmanager.h"
 
 Q_LOGGING_CATEGORY(path_manager_category, "mst.path_manager")
@@ -9,9 +11,10 @@ string sudoersD = "/etc/sudoers.d/mst";
 void PathManager::set_config(DSV* config)
 {
     this->config = config;
-    awesome_config = "/home/" + get_mst_user() + "/.config/awesome/rc.lua";
+    string mst_user = get_mst_user().toStdString();
+    awesome_config = "/home/" + mst_user + "/.config/awesome/rc.lua";
 
-    output_dir = "/home/" + get_mst_user() + "/.local/share/mst/output";
+    output_dir = "/home/" + mst_user + "/.local/share/mst/output";
     usrShareDir = "/usr/share/mst";
 }
 
@@ -20,9 +23,9 @@ string PathManager::get_device_path()
     return devicePath;
 }
 
-string PathManager::get_mst_user()
+const QString PathManager::get_mst_user()
 {
-    return config->get("user");
+    return QString::fromStdString(config->get("user"));
 }
 
 string PathManager::get_output_dir()
