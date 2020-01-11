@@ -227,6 +227,16 @@ void Platform::fs_rm(const QString& file)
     }
 }
 
+void Platform::system_set_default_runlevel(const QString& target)
+{
+    QString command = "systemctl set-default " + target + ".target";
+    if (system(command.toStdString().c_str()) != 0) {
+        QString msg = "Could not set default target: " + target;
+        qCritical(platform_category) << msg.toStdString().c_str();
+        throw Platform_exception(msg);
+    }
+}
+
 void Platform::system_reboot()
 {
     sync();

@@ -43,6 +43,8 @@ public:
     static void fs_mkdir(const QString& path);
     static void fs_mkdir(const string& path);
     static void fs_rm(const QString& path);
+
+    static void system_set_default_runlevel(const QString& target);
 };
 
 #endif // PLATFORM_H

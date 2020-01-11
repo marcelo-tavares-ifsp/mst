@@ -270,12 +270,7 @@ void InstallController::enable_mst()
 {
     vgl::VGL vgl(*config);
     vgl.enable();
-    if (system("systemctl set-default multi-user.target"))
-        {
-            string msg = "Could not enable MST in systemd.";
-            qCritical(install_controller_category) << msg.c_str();
-            throw InstallController_exception(msg);
-        }
+    Platform::system_set_default_runlevel("multi-user");
     qInfo(install_controller_category) << "multiseat enabled.";
 }
 
@@ -283,12 +278,7 @@ void InstallController::disable_mst()
 {
     vgl::VGL vgl(*config);
     vgl.disable();
-    if (system("systemctl set-default graphical.target"))
-    {
-        qCritical(install_controller_category) << "Could not disable MST in systemd.";
-        throw InstallController_exception("Could not disable MST in systemd.");
-    }
-
+    Platform::system_set_default_runlevel("graphical");
     Platform::fs_rm(
                 QString::fromStdString(
                     PathManager::get_instance()->get_sudoers_config()));
