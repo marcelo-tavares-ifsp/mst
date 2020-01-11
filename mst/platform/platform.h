@@ -46,6 +46,8 @@ public:
     static void fs_cp(const QString& src, const QString& dst);
 
     static void system_set_default_runlevel(const QString& target);
+
+    static void exec(const QString& command);
 };
 
 #endif // PLATFORM_H

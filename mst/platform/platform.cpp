@@ -247,6 +247,15 @@ void Platform::system_set_default_runlevel(const QString& target)
     }
 }
 
+void Platform::exec(const QString &command)
+{
+    if (system(command.toStdString().c_str()) != 0) {
+        QString msg = "Could not execute command: " + command;
+        qCritical(platform_category) << msg.toStdString().c_str();
+        throw Platform_exception(msg);
+    }
+}
+
 void Platform::system_reboot()
 {
     sync();
