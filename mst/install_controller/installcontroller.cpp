@@ -254,7 +254,7 @@ void InstallController::install_files()
     install("vgl.sh",     "/etc/bashrc.d/");
     install("lightdm-mst.conf", "/etc/lightdm/");
     install("getty@.service",   "/lib/systemd/system/getty@.service");
-    if (is_pam_mkhomedir_used())
+    if (Platform::pam_is_mkhomedir_used())
     {
         QString skel = "/etc/skel/";
         Platform::fs_mkdir(skel + ".config/awesome/");

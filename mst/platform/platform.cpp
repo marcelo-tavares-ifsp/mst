@@ -189,6 +189,17 @@ void Platform::get_input_devices(vector<string>& mice, vector<string>& keybds)
 }
 
 /**
+ * @brief is_pam_mkhomedir_used -- check if a PAM module 'pam_mkhomedir' is
+ *      used (that is, whether or not '/etc/skel' is copied to users home
+ *      directories.)
+ * @return 'true' if the PAM module is used, 'false' otherwise.
+ */
+bool Platform::pam_is_mkhomedir_used()
+{
+    Platform::exec("[ -d /etc/skel ] && [ $(ls -a1 /etc/skel | wc -l) -gt 2 ]");
+}
+
+/**
  * @brief Platform::fs_mkdir -- Create a directory with all needed
  *     subdirectories.
  * @param path -- A path to create.

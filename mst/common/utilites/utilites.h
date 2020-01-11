@@ -16,7 +16,6 @@ using namespace std;
 extern vector<string> split(string input, char separator);
 extern bool contains(vector<string> xm, string s);
 extern string trim(char *s);
-extern bool is_pam_mkhomedir_used();
 extern vector<string>::iterator _set_intersection(const vector<string>& v1,
                                                   const vector<string>& v2,
                                                   vector<string>& output);

@@ -40,6 +40,8 @@ public:
     static vector<xrandrMonitor> xrandr_get_monitors();
     static void get_input_devices(vector<string>& mice, vector<string>& keybds);
 
+    static bool pam_is_mkhomedir_used();
+
     static void fs_mkdir(const QString& path);
     static void fs_mkdir(const string& path);
     static void fs_rm(const QString& path);

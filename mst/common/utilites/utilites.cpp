@@ -53,20 +53,6 @@ string trim(char* str) {
     return result;
 }
 
-
-
-/**
- * @brief is_pam_mkhomedir_used -- check if a PAM module 'pam_mkhomedir' is
- *      used (that is, whether or not '/etc/skel' is copied to users home
- *      directories.)
- * @return 'true' if the PAM module is used, 'false' otherwise.
- */
-bool is_pam_mkhomedir_used()
-{
-    char cmd[58] = "[ -d /etc/skel ] && [ $(ls -a1 /etc/skel | wc -l) -gt 2 ]";
-    return system(cmd) == 0;
-}
-
 /**
  * @brief _set_intersection -- Get intersection of two vectors, return the
  *          resulting vector iterator.
