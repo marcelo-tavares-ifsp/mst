@@ -10,22 +10,18 @@ using namespace udev;
 
 Udev::Udev(Configuration& config) : Component(config)
 {
-    config_files[SYSTEMD_SERVICE_FILE] = "/etc/systemd/system/"
-            + SYSTEMD_SERVICE_FILE;
-    config_files[RULES_FILE] = "/etc/udev/rules.d/"
-            + RULES_FILE;
+    /* Do nothing. */
 }
 
-void Udev::configure(const QString &output_dir)
+void Udev::configure()
 {
-    const QString out_file_name
-            = output_dir + "/" + SYSTEMD_SERVICE_FILE;
-    Template service_tpl = prepare_systemd_service_template();
-    QString rules = prepare_udev_rules(config);
-    service_tpl.substitute(out_file_name.toStdString());
-    ofstream out(out_file_name.toStdString());
-    out << rules.toStdString();
-    out.close();
+    component_configuration.add(SYSTEMD_SERVICE_FILE,
+                                "/etc/systemd/system/",
+                                prepare_systemd_service_template());
+    component_configuration.add(RULES_FILE,
+                                "/etc/udev/rules.d/",
+                                Template(prepare_udev_rules(config)
+                                         .toStdString()));
 }
 
 Template udev::prepare_systemd_service_template()

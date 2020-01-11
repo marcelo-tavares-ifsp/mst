@@ -15,11 +15,10 @@ Display_manager::Display_manager(Configuration& config) : Component(config)
 
 }
 
-void Display_manager::configure(const QString &output_dir)
+void Display_manager::configure()
 {
-    QString out_file_name = output_dir + "/" + LIGHTDM_FILE;
-    Template tpl = prepare_lightdm_template();
-    tpl.substitute(out_file_name.toStdString());
+    component_configuration.add(LIGHTDM_FILE, "/etc/lightdm/",
+                                prepare_lightdm_template());
 }
 
 Template display_manager::prepare_lightdm_template()

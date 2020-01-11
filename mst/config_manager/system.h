@@ -15,7 +15,7 @@ class System : public Component
 {
 public:
     System(Configuration& config);
-    void configure(const QString& output_dir) override;
+    void configure() override;
     QString get_version() override {
         throw Component_error("Unimplemented");
     }

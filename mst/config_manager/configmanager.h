@@ -3,6 +3,7 @@
 
 #include "configuration/configuration.h"
 #include "path_manager/pathmanager.h"
+#include <vector>
 #include "xorg.h"
 #include "common/utilites/utilites.h"
 #include "iostream"
@@ -18,16 +19,13 @@ Q_DECLARE_LOGGING_CATEGORY(config_manager_category)
 class ConfigManager
 {
 public:
-    static void make_rc_lua(Configuration& config);
-    static void make_xorg(Configuration& config);
-    static void configure_system(Configuration& config);
-    static void make_sudoers(Configuration& config);
-    static void make_lightdm_conf(Configuration& config);
-    static void configure_udev(Configuration& config);
-    static void make_vgl(Configuration& config);
+    ConfigManager(Configuration& config);
+    void configure_components();
+    void store_configurations(const QString& output_dir);
+    const vector<Component*>& get_components();
 
 private:
-    ConfigManager(){}
+    vector<Component*> components;
 };
 
 #endif // CONFIGMANAGER_H

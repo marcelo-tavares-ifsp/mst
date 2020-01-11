@@ -14,14 +14,11 @@ Q_LOGGING_CATEGORY(component_awesome_category, "mst.component.awesome")
 Awesome::Awesome(Configuration& config)
     : Component(config)
 {
-    config_files[RC_LUA_FILE] = "{{home}}/.config/awesome/rc.lua";
+    /* Do nothing. */
 }
 
-void Awesome::configure(const QString& output_dir)
+void Awesome::configure()
 {
-    const QString out_file_name = output_dir + "/" + RC_LUA_FILE;
-    fstream rclua_pattern;
-    fstream rclua;
     string template_name;
 
     const vector<int> version = get_awesome_version();
@@ -38,18 +35,11 @@ void Awesome::configure(const QString& output_dir)
         template_name = RC_LUA4_TPL_FILE.toStdString();
     }
 
-    qInfo(component_awesome_category)
-            << "writing '" << out_file_name.toStdString().c_str()
-            << "' ...";
-
     Template rclua_template
             = Template_manager::get_instance()->get_template(template_name);
     prepare_rclua_template(rclua_template);
-    rclua_template.substitute(out_file_name.toStdString());
-
-    qDebug(component_awesome_category)
-            << "writing '" << out_file_name.toStdString().c_str()
-            << "' ... done";
+    component_configuration.add(RC_LUA_FILE, "{{home}}/.config/awesome/rc.lua",
+                                rclua_template);
 }
 
 QString Awesome::get_version()

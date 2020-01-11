@@ -9,21 +9,19 @@ using namespace sys;
 
 System::System(Configuration& config) : Component(config)
 {
-    config_files[BASHRC_FILE] = "{{home}}/.bashrc";
-    config_files[GETTY_FILE]  = "/lib/systemd/system/getty@.service";
+    /* Do nothing. */
 }
 
-void System::configure(const QString &output_dir)
+void System::configure()
 {
-    QString output_file = output_dir + "/" + BASHRC_FILE;
-    Template tpl = prepare_bashrc_template();
-    tpl.substitute(output_file.toStdString());
+    component_configuration.add(BASHRC_FILE,
+                                "{{home}}/.bashrc",
+                                prepare_bashrc_template());
 
-    output_file = output_dir + "/" + GETTY_FILE;
-    tpl = prepare_getty_template();
-    tpl.substitute(output_file.toStdString());
+    component_configuration.add(GETTY_FILE,
+                                "/lib/systemd/system/getty@.service",
+                                prepare_getty_template());
 }
-
 
 Template sys::prepare_getty_template()
 {

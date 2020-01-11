@@ -28,7 +28,7 @@ class Awesome : public Component
 {
 public:
     Awesome(Configuration& config);
-    void configure(const QString& output_dir) override;
+    void configure() override;
     QString get_version() override;
     void enable() override {
         /* Do nothing. */

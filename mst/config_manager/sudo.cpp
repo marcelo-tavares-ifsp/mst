@@ -9,14 +9,13 @@ using namespace sudo;
 
 Sudo::Sudo(Configuration& config) : Component(config)
 {
-    config_files[SUDOERS_FILE] = "/etc/sudoers.d/mst";
+    /* Do nothing. */
 }
 
-void Sudo::configure(const QString& output_dir)
+void Sudo::configure()
 {
-    QString out_file_name = output_dir + "/" + SUDOERS_FILE;
-    Template tpl = prepare_sudoers_template();
-    tpl.substitute(out_file_name.toStdString());
+    component_configuration.add(SUDOERS_FILE, "/etc/sudoers.d/mst",
+                                prepare_sudoers_template());
 }
 
 

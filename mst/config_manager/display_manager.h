@@ -22,7 +22,7 @@ class Display_manager : public Component
 public:
     Display_manager(Configuration& config);
 
-    void configure(const QString& output_dir);
+    void configure();
     QString get_version() {
         // TODO:
         throw Component_error("Unimplemented");

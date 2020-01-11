@@ -19,7 +19,7 @@ class Udev : public Component
 {
 public:
     Udev(Configuration& config);
-    void configure(const QString& output_dir) override;
+    void configure() override;
     QString get_version() override {
         // TODO:
         throw Component_error("Unimplemented");

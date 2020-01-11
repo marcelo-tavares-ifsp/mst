@@ -13,16 +13,17 @@ Q_LOGGING_CATEGORY(vgl_category, "mst.vgl")
 VGL::VGL(Configuration& config)
     : Component(config)
 {
-    config_files[VGL_SH_FILE] = "/etc/bashrc.d/";
+    /* Do nothing. */
 }
 
-void VGL::configure(const QString &output_dir)
+void VGL::configure()
 {
     Template tpl = Template_manager::get_instance()->get_template(
                 VGL_SH_FILE.toStdString());
     prepare_vgl_sh_template(tpl);
-    QString output_file = output_dir + "/" + VGL_SH_FILE;
-    tpl.substitute(output_file.toStdString());
+    component_configuration.add(VGL_SH_FILE, "/etc/bashrc.d/", tpl);
+//    QString output_file = output_dir + "/" + VGL_SH_FILE;
+//    tpl.substitute(output_file.toStdString());
 }
 
 /**

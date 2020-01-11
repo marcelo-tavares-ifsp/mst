@@ -223,20 +223,11 @@ QString InstallController::get_instruction(InputDeviceListener * device_listener
 
 void InstallController::begin_install()
 {
-    ConfigManager::make_rc_lua(*config);
-    qInfo(install_controller_category) << "make_rc_lua OK";
-    ConfigManager::make_xorg(*config);
-    qInfo(install_controller_category) << "make_xorg OK";
-    ConfigManager::configure_system(*config);
-    qInfo(install_controller_category) << "make_bashrc OK";
-    ConfigManager::make_sudoers(*config);
-    qInfo(install_controller_category) << "make_sudoers OK";
-    ConfigManager::make_lightdm_conf(*config);
-    qInfo(install_controller_category) << "make_lightdm_conf OK";
-    ConfigManager::configure_udev(*config);
-    qInfo(install_controller_category) << "configure_udev OK";
-    ConfigManager::make_vgl(*config);
-    qInfo(install_controller_category) << "make_vgl OK";
+    config_manager = new ConfigManager(*config);
+    config_manager->configure_components();
+    config_manager->store_configurations(
+                QString::fromStdString(
+                    PathManager::get_instance()->get_output_dir()));
 }
 
 void InstallController::install_files()

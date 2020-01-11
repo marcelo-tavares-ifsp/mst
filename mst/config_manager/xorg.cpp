@@ -1,4 +1,4 @@
-#include <fstream>
+#include <sstream>
 
 #include "xorg.h"
 #include "../configuration/configuration.h"
@@ -9,9 +9,7 @@ using namespace xorg;
 
 Xorg::Xorg(Configuration& config) : Component(config)
 {
-    config_files[XORG_FILE] = "/etc/X11/xorg.conf";
-    config_files[XINIT_RC_FILE] = "{{home}}/.xinitrc";
-    config_files[XMST_FILE]     = "{{home}}/.xmst";
+    /* Do nothing. */
 }
 
 /* Config elements' constructors. */
@@ -110,23 +108,23 @@ static void _print_layout(ostream& os, const Configuration& config)
     }
 }
 
-void Xorg::configure(const QString &output_dir)
+void Xorg::configure()
 {
-    QString output_file = output_dir + "/" + XORG_FILE;
-    fstream os;
-    os.open(output_file.toStdString(), ios::out);
+    std::stringstream os;
     _print_monitors(os, config);
     _print_device(os,   config);
     _print_screen(os,   config);
     _print_layout(os,   config);
+    component_configuration.add(XORG_FILE,
+                                "/etc/X11/xorg.conf",
+                                Template(os.str()));
 
-    Template tpl = xorg::prepare_xinitrc_template();
-    output_file = output_dir + "/" + XINIT_RC_FILE;
-    tpl.substitute(output_file.toStdString());
-
-    tpl = xorg::prepare_xmst_template();
-    output_file = output_dir + "/" + XMST_FILE;
-    tpl.substitute(output_file.toStdString());
+    component_configuration.add(XINIT_RC_FILE,
+                                "{{home}}/.xinitrc",
+                                xorg::prepare_xinitrc_template());
+    component_configuration.add(XMST_FILE,
+                                "{{home}}/.xmst",
+                                xorg::prepare_xmst_template());
 }
 
 Template xorg::prepare_xinitrc_template()

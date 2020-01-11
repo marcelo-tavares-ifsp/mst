@@ -13,6 +13,9 @@ public:
     static const QString TEMPLATE_BEGIN;
     static const QString TEMPLATE_END;
 
+    Template() {
+        /* Do nothing. */
+    }
     Template(QFile &file);
     Template(const string& template_string);
     Template(char const * template_string);

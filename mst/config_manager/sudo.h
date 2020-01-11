@@ -13,7 +13,7 @@ class Sudo : public Component
 {
 public:
     Sudo(Configuration& config);
-    void configure(const QString& output_dir);
+    void configure() override;
     QString get_version() {
         // TODO:
         throw Component_error("Unimplemented");

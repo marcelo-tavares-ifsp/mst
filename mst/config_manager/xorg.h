@@ -22,7 +22,7 @@ class Xorg : public Component
 {
 public:
     Xorg(Configuration& config);
-    void configure(const QString &output_dir) override;
+    void configure() override;
     void enable() override {
         /* Do nothing. */
     }
