@@ -41,7 +41,6 @@ SOURCES += \
     install_controller/installcontroller.cpp \
     configuration/configuration.cpp \
     common/utilites/utilites.cpp \
-    config_manager/configmanager.cpp \
     path_manager/pathmanager.cpp \
     common/dsv_parser/dsv.cpp \
     config_manager/component.cpp \
@@ -56,7 +55,8 @@ SOURCES += \
     config_manager/udev.cpp \
     config_manager/sudo.cpp \
     config_manager/system.cpp \
-    platform/platform.cpp
+    platform/platform.cpp \
+    config_manager/component_manager.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -66,7 +66,6 @@ HEADERS += \
     configuration/configuration.h \
     common/utilites/utilites.h \
     config_manager/component.h \
-    config_manager/configmanager.h \
     path_manager/pathmanager.h \
     common/dsv_parser/dsv.h \
     config_manager/vgl.h \
@@ -81,7 +80,8 @@ HEADERS += \
     config_manager/udev.h \
     config_manager/sudo.h \
     config_manager/system.h \
-    platform/platform.h
+    platform/platform.h \
+    config_manager/component_manager.h
 
 FORMS += \
     ui/install_window/installwindow.ui \
