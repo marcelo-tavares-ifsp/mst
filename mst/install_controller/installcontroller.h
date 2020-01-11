@@ -63,7 +63,7 @@ private:
     vector<string> *list_mice;
     vector<string> *list_keybs;
     string current_interface_name;
-    Component_manager* components;
+    Component_manager* component_manager;
 };
 
 #endif // INSTALLCONTROLLER_H

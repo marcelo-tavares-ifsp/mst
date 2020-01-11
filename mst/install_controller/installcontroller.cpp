@@ -223,9 +223,9 @@ QString InstallController::get_instruction(InputDeviceListener * device_listener
 
 void InstallController::begin_install()
 {
-    components = new Component_manager(*config);
-    components->configure_components();
-    components->store_configurations(
+    component_manager = new Component_manager(*config);
+    component_manager->configure_components();
+    component_manager->store_configurations(
                 QString::fromStdString(
                     PathManager::get_instance()->get_output_dir()));
 }
