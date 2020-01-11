@@ -254,6 +254,13 @@ void InstallController::install_files()
     install("vgl.sh",     "/etc/bashrc.d/");
     install("lightdm-mst.conf", "/etc/lightdm/");
     install("getty@.service",   "/lib/systemd/system/getty@.service");
+    install("sudoers",
+            QString::fromStdString(
+                PathManager::get_instance()->get_sudoers_d_config()));
+
+    install("99-mst.rules", "/etc/udev/rules.d/99-mst.rules");
+    install("systemd-udevd.service", "/etc/systemd/system");
+
     if (Platform::pam_is_mkhomedir_used())
     {
         QString skel = "/etc/skel/";
@@ -263,12 +270,6 @@ void InstallController::install_files()
         install(".xinitrc",   skel);
         install(".xmst",      skel);
     }
-    install("sudoers",
-            QString::fromStdString(
-                PathManager::get_instance()->get_sudoers_d_config()));
-
-    install("99-mst.rules", "/etc/udev/rules.d/99-mst.rules");
-    install("systemd-udevd.service", "/etc/systemd/system");
 }
 
 void InstallController::enable_mst()
