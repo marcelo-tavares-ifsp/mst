@@ -240,20 +240,8 @@ void InstallController::install_files()
       cp(output_dir + "/" + src, dst);
     };
 
-    string cmd = "mkdir -p " + mst_user_home + ".local/share/mst/output/";
-    if (system(cmd.c_str())) {
-        qCritical(install_controller_category)
-             << "Could not create a directory: " << cmd.c_str();
-        throw "Could not create a directory: " + cmd;
-    }
-
-    cmd = "mkdir -p " + mst_user_home + ".config/awesome/";
-    if (system(cmd.c_str()))
-    {
-        qCritical(install_controller_category)
-             << "Could not create a directory: " << cmd.c_str();
-        throw InstallController_exception("Could not create a directory: " + cmd);
-    }
+    Platform::fs_mkdir(mst_user_home + ".local/share/mst/output/");
+    Platform::fs_mkdir(mst_user_home + ".config/awesome/");
 
     install("rc.lua",    mst_user_home + ".config/awesome/");
     install("xorg.conf", "/etc/X11/xorg.conf");
@@ -265,15 +253,9 @@ void InstallController::install_files()
     install("getty@.service",   "/lib/systemd/system/getty@.service");
     if (is_pam_mkhomedir_used())
     {
-        string skel = "/etc/skel";
-        cmd = "mkdir -p " + skel + "/.config/awesome/";
-        if (system(cmd.c_str()))
-        {
-            qCritical(install_controller_category)
-                    << "Could not create a directory: " << cmd.c_str();
-            throw InstallController_exception("Could not create a directory: " + cmd);
-        }
-        install("rc.lua",    skel + "/.config/awesome/");
+        string skel = "/etc/skel/";
+        Platform::fs_mkdir(skel + ".config/awesome/");
+        install("rc.lua",    skel + ".config/awesome/");
         install(".bashrc",   skel);
         install(".xinitrc",   skel);
         install(".xmst",      skel);

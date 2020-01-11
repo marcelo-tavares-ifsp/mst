@@ -15,6 +15,18 @@ struct xrandrMonitor
     vector<string> resolutions;
 };
 
+/**
+ * @brief The Platform_exception class This class describes an
+ *     exception that can be thrown by Platform methods.
+ */
+class Platform_exception: public runtime_error {
+public:
+    Platform_exception(const QString& what)
+        : runtime_error(what.toStdString()) {
+        // Do nothing.
+    }
+};
+
 class Platform
 {
 public:
@@ -27,6 +39,9 @@ public:
     static int xset_soff();
     static vector<xrandrMonitor> xrandr_get_monitors();
     static void get_input_devices(vector<string>& mice, vector<string>& keybds);
+
+    static void fs_mkdir(const QString& path);
+    static void fs_mkdir(const string& path);
 };
 
 #endif // PLATFORM_H

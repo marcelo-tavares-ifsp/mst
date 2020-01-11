@@ -188,6 +188,34 @@ void Platform::get_input_devices(vector<string>& mice, vector<string>& keybds)
     }
 }
 
+/**
+ * @brief Platform::fs_mkdir -- Create a directory with all needed
+ *     subdirectories.
+ * @param path -- A path to create.
+ */
+void Platform::fs_mkdir(const QString& path)
+{
+    QString command = "mkdir -p '" + path + "'";
+    if (system(command.toStdString().c_str()) != 0)
+    {
+        qCritical(platform_category)
+             << "Could not create a directory: "
+             << path.toStdString().c_str();
+        throw Platform_exception("Could not create a directory: '"
+                                 + path + "'");
+    }
+}
+
+/**
+ * @brief Platform::fs_mkdir -- Create a directory with all needed
+ *     subdirectories.
+ * @param path -- A path to create.
+ */
+void Platform::fs_mkdir(const string& path)
+{
+    Platform::fs_mkdir(QString::fromStdString(path));
+}
+
 void Platform::system_reboot()
 {
     sync();
