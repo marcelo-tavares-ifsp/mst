@@ -3,6 +3,7 @@
 
 #include "../template_manager/template.h"
 #include "../template_manager/template_manager.h"
+#include "../platform/platform.h"
 
 using namespace std;
 using namespace vgl;
@@ -32,12 +33,10 @@ void VGL::configure()
  */
 void VGL::enable()
 {
-    static const char* cmd = "echo -e '1\nn\nn\nn\nx\n' | vglserver_config";
-    if (system(cmd) > 0)
-    {
-        string msg = "Could not configure VirtualGL server";
-        qCritical(vgl_category) << msg.c_str();
-        throw msg;
+    try {
+        Platform::exec("echo -e '1\nn\nn\nn\nx\n' | vglserver_config");
+    } catch (Platform_exception& e) {
+        throw Component_error("Could not configure VirtualGL server");
     }
 }
 
@@ -47,12 +46,10 @@ void VGL::enable()
  */
 void VGL::disable()
 {
-    static const char* cmd = "echo -e '2\nx\n' | vglserver_config";
-    if (system(cmd) > 0)
-    {
-        string msg = "Could not un-configure VirtualGL server";
-        qCritical(vgl_category) << msg.c_str();
-        throw msg;
+    try {
+        Platform::exec("echo -e '2\nx\n' | vglserver_config");
+    } catch (Platform_exception& e) {
+        throw Component_error("Could not un-configure VirtualGL server");
     }
 }
 

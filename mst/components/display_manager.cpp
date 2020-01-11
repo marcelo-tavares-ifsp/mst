@@ -37,22 +37,23 @@ static void _configure_x11() {
 }
 
 void Display_manager::enable() {
-    string lightdm_cmd = "/usr/sbin/lightdm --config ";// + config_path;
-    if (system(lightdm_cmd.c_str()))
-    {
-        qCritical(display_manager_category) << "Could not start lightdm: " << lightdm_cmd.c_str();
-        throw "Could not start lightdm: " + lightdm_cmd;
+    QString lightdm_cmd = "/usr/sbin/lightdm --config ";// + config_path;
+    try {
+        Platform::exec(lightdm_cmd);
+    } catch (Platform_exception& e) {
+        throw Component_error("Could not start lightdm");
     }
+
     _configure_x11();
 }
 
 void Display_manager::add_seat(int seat_number) {
-    string lightdm_cmd = "/usr/bin/dm-tool add-local-x-seat " + seat_number;
-    if (system(lightdm_cmd.c_str()))
-    {
-        qCritical(display_manager_category)
-                << "Could not configure seats: " << lightdm_cmd.c_str();
-        throw "Could not configure seats: " + lightdm_cmd;
+    QString lightdm_cmd = "/usr/bin/dm-tool add-local-x-seat " + seat_number;
+    try {
+        Platform::exec(lightdm_cmd);
+    }
+    catch (Platform_exception& e) {
+        throw Component_error("Could not configure seats");
     }
 }
 
