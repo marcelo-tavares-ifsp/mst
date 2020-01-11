@@ -16,10 +16,10 @@ using namespace std;
 
 Q_DECLARE_LOGGING_CATEGORY(config_manager_category)
 
-class ConfigManager
+class Component_manager
 {
 public:
-    ConfigManager(Configuration& config);
+    Component_manager(Configuration& config);
     void configure_components();
     void store_configurations(const QString& output_dir);
     const vector<Component*>& get_components();

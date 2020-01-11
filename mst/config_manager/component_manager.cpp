@@ -1,4 +1,4 @@
-#include "configmanager.h"
+#include "component_manager.h"
 
 #include "template_manager/template_manager.h"
 #include "template_manager/template.h"
@@ -11,7 +11,7 @@
 
 Q_LOGGING_CATEGORY(config_manager_category, "mst.config_manager")
 
-ConfigManager::ConfigManager(Configuration& config)
+Component_manager::Component_manager(Configuration& config)
 {
     components.push_back(new awesome::Awesome(config));
     components.push_back(new sys::System(config));
@@ -22,21 +22,21 @@ ConfigManager::ConfigManager(Configuration& config)
     components.push_back(new xorg::Xorg(config));
 }
 
-void ConfigManager::configure_components()
+void Component_manager::configure_components()
 {
     for (auto component : components) {
         component->configure();
     }
 }
 
-void ConfigManager::store_configurations(const QString& output_dir)
+void Component_manager::store_configurations(const QString& output_dir)
 {
     for (auto component : components) {
         component->get_configuration().store(output_dir);
     }
 }
 
-const vector<Component*>& ConfigManager::get_components()
+const vector<Component*>& Component_manager::get_components()
 {
     return components;
 }

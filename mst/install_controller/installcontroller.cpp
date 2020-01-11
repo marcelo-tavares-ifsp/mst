@@ -223,7 +223,7 @@ QString InstallController::get_instruction(InputDeviceListener * device_listener
 
 void InstallController::begin_install()
 {
-    config_manager = new ConfigManager(*config);
+    config_manager = new Component_manager(*config);
     config_manager->configure_components();
     config_manager->store_configurations(
                 QString::fromStdString(
