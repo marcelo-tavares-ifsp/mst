@@ -113,18 +113,3 @@ QString to_qstring(string str)
 {
     return QString::fromStdString(str);
 }
-
-void cp(const string& src, const string& dst)
-{
-    string cmd = "cp " + src + " " + dst;
-    //qDebug(controller_category)
-    cout << "executing: " << cmd.c_str() << endl;
-    if (system(cmd.c_str()))
-    {
-        //qCritical(controller_category)
-             cout << "Could not execute command: "
-                << src.c_str() << " -> " << dst.c_str() << endl;
-        throw "Could not execute command: "
-            + src + " -> " + dst + "\n";
-    }
-}

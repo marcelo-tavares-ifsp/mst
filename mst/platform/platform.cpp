@@ -227,6 +227,16 @@ void Platform::fs_rm(const QString& file)
     }
 }
 
+void Platform::fs_cp(const QString &src, const QString &dst)
+{
+    QString command = "cp '" + src + "' '" + dst + "'";
+    if (system(command.toStdString().c_str()))
+    {
+        QString message = "Could not copy: '" + src + "' -> '" + dst + "'";
+        throw Platform_exception(message);
+    }
+}
+
 void Platform::system_set_default_runlevel(const QString& target)
 {
     QString command = "systemctl set-default " + target + ".target";

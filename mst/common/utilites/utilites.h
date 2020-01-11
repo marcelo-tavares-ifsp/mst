@@ -27,6 +27,5 @@ extern void _set_intersection_x(vector<string> &v1,
 extern vector<int> _parse_resolution(QString resolution);
 extern string to_std_string(QString qs);
 extern QString to_qstring(string str);
-extern void cp(const string& src, const string& dst);
 
 #endif // UTILITES_H

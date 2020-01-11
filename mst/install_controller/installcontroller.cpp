@@ -232,12 +232,17 @@ void InstallController::begin_install()
 
 void InstallController::install_files()
 {
-    const string output_dir = PathManager::get_instance()->get_output_dir();
-    const string mst_user   = PathManager::get_instance()->get_mst_user();
-    const string mst_user_home = "/home/" + mst_user + "/";
+    const QString output_dir
+            = QString::fromStdString(
+                PathManager::get_instance()->get_output_dir());
+    const QString mst_user
+            = QString::fromStdString(
+                PathManager::get_instance()->get_mst_user());
+    const QString mst_user_home = "/home/" + mst_user + "/";
 
-    auto install = [output_dir](const string& src, const string& dst) -> void {
-      cp(output_dir + "/" + src, dst);
+    auto install
+            = [output_dir](const QString& src, const QString& dst) -> void {
+      Platform::fs_cp(output_dir + "/" + src, dst);
     };
 
     Platform::fs_mkdir(mst_user_home + ".local/share/mst/output/");
@@ -253,14 +258,16 @@ void InstallController::install_files()
     install("getty@.service",   "/lib/systemd/system/getty@.service");
     if (is_pam_mkhomedir_used())
     {
-        string skel = "/etc/skel/";
+        QString skel = "/etc/skel/";
         Platform::fs_mkdir(skel + ".config/awesome/");
         install("rc.lua",    skel + ".config/awesome/");
         install(".bashrc",   skel);
         install(".xinitrc",   skel);
         install(".xmst",      skel);
     }
-    install("sudoers",   PathManager::get_instance()->get_sudoers_d_config());
+    install("sudoers",
+            QString::fromStdString(
+                PathManager::get_instance()->get_sudoers_d_config()));
 
     install("99-mst.rules", "/etc/udev/rules.d/99-mst.rules");
     install("systemd-udevd.service", "/etc/systemd/system");

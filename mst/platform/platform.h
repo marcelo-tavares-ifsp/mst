@@ -43,6 +43,7 @@ public:
     static void fs_mkdir(const QString& path);
     static void fs_mkdir(const string& path);
     static void fs_rm(const QString& path);
+    static void fs_cp(const QString& src, const QString& dst);
 
     static void system_set_default_runlevel(const QString& target);
 };
