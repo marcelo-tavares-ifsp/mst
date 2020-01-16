@@ -240,35 +240,32 @@ void InstallController::install_files()
 
     auto install
             = [output_dir](const QString& src, const QString& dst) -> void {
-      Platform::fs_cp(output_dir + "/" + src, dst);
+        Platform::fs_mkdir(dst.mid(0, dst.indexOf('/') - 1));
+        Platform::fs_cp(output_dir + "/" + src, dst);
     };
 
     Platform::fs_mkdir(mst_user_home + ".local/share/mst/output/");
     Platform::fs_mkdir(mst_user_home + ".config/awesome/");
+    bool is_pam_mkhomedir_used = Platform::pam_is_mkhomedir_used();
+    QString skel = "/etc/skel/";
 
-    install("rc.lua",    mst_user_home + ".config/awesome/");
-    install("xorg.conf", "/etc/X11/xorg.conf");
-    install(".bashrc",   mst_user_home);
-    install(".xinitrc",   mst_user_home);
-    install(".xmst",      mst_user_home);
-    install("vgl.sh",     "/etc/bashrc.d/");
-    install("lightdm-mst.conf", "/etc/lightdm/");
-    install("getty@.service",   "/lib/systemd/system/getty@.service");
-    install("sudoers",
-            QString::fromStdString(
-                PathManager::get_instance()->get_sudoers_d_config()));
-
-    install("99-mst.rules", "/etc/udev/rules.d/99-mst.rules");
-    install("systemd-udevd.service", "/etc/systemd/system");
-
-    if (Platform::pam_is_mkhomedir_used())
-    {
-        QString skel = "/etc/skel/";
-        Platform::fs_mkdir(skel + ".config/awesome/");
-        install("rc.lua",    skel + ".config/awesome/");
-        install(".bashrc",   skel);
-        install(".xinitrc",   skel);
-        install(".xmst",      skel);
+    vector<Component*> components = component_manager->get_components();
+    for (auto comp : components) {
+        auto install_paths = comp->get_configuration().get_installation_paths();
+        foreach (auto src, install_paths.keys()) {
+            QString dst = install_paths[src];
+            if (dst.contains("{{home}}")) {
+                Template tpl(dst.toStdString());
+                tpl.set("home", mst_user_home.toStdString());
+                install(src, QString::fromStdString(tpl.substitute()));
+                if (is_pam_mkhomedir_used) {
+                    tpl.set("home", skel.toStdString());
+                    install(src, QString::fromStdString(tpl.substitute()));
+                }
+            } else {
+                install(src, dst);
+            }
+        }
     }
 }
 
