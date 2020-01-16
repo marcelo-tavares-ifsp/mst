@@ -30,7 +30,8 @@ SOURCES += \
     ../mst/common/utilites/utilites.cpp \
     unit_tests.cpp \
     test_utils.cpp \
-    test_template.cpp
+    test_template.cpp \
+    test_component.cpp
 
 SOURCES += \
     ../mst/configuration/configuration.cpp \
@@ -49,7 +50,8 @@ HEADERS += \
     ../mst/common/utilites/utilites.h \
     test_awesome.h \
     test_utils.h \
-    test_template.h
+    test_template.h \
+    test_component.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
