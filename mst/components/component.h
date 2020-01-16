@@ -46,7 +46,7 @@ public:
         return templates;
     }
 
-    Template& get_template(QString& name) {
+    Template& get_template(const QString& name) {
         return templates[name];
     }
 
