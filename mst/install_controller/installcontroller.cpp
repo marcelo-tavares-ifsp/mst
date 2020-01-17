@@ -240,7 +240,11 @@ void InstallController::install_files()
 
     auto install
             = [output_dir](const QString& src, const QString& dst) -> void {
-        Platform::fs_mkdir(dst.mid(0, dst.indexOf('/') - 1));
+        try {
+            Platform::fs_mkdir(dst.mid(0, dst.lastIndexOf('/')));
+        } catch (Platform_exception& e) {
+            qWarning(install_controller_category) << e.what();
+        }
         Platform::fs_cp(output_dir + "/" + src, dst);
     };
 
