@@ -221,6 +221,9 @@ QString InstallController::get_instruction(InputDeviceListener * device_listener
     return instruction;
 }
 
+/**
+ * @brief InstallController::begin_install -- Configure all the components.
+ */
 void InstallController::begin_install()
 {
     component_manager = new Component_manager(*config);
@@ -230,6 +233,9 @@ void InstallController::begin_install()
                     PathManager::get_instance()->get_output_dir()));
 }
 
+/**
+ * @brief InstallController::install_files -- Install al configuration files.
+ */
 void InstallController::install_files()
 {
     const QString output_dir

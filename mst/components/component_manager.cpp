@@ -24,6 +24,10 @@ Component_manager::Component_manager(Configuration& config)
     components.push_back(new xorg::Xorg(config));
 }
 
+/**
+ * @brief Component_manager::configure_components -- Configure all existing
+ *     components; all the configurations are stored only in the memory.
+ */
 void Component_manager::configure_components()
 {
     for (auto component : components) {
@@ -31,6 +35,11 @@ void Component_manager::configure_components()
     }
 }
 
+/**
+ * @brief Component_manager::store_configurations -- Store all configurations
+ *     to the main memory.
+ * @param output_dir
+ */
 void Component_manager::store_configurations(const QString& output_dir)
 {
     for (auto component : components) {

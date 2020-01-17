@@ -227,6 +227,11 @@ void Platform::fs_mkdir(const string& path)
     Platform::fs_mkdir(QString::fromStdString(path));
 }
 
+/**
+ * @brief Platform::fs_rm -- Remove a file.
+ * @param file -- A file to remove.
+ * @throws Platform_exception on an error.
+ */
 void Platform::fs_rm(const QString& file)
 {
     QString command = "rm '" + file + "'";
@@ -238,6 +243,12 @@ void Platform::fs_rm(const QString& file)
     }
 }
 
+/**
+ * @brief Platform::fs_cp -- Copy a file SRC to a destination DST.
+ * @param src -- Source file to copy.
+ * @param dst -- Destination for copying.
+ * @throws Platform_exception on an error.
+ */
 void Platform::fs_cp(const QString &src, const QString &dst)
 {
     QString command = "cp '" + src + "' '" + dst + "'";
@@ -248,6 +259,12 @@ void Platform::fs_cp(const QString &src, const QString &dst)
     }
 }
 
+/**
+ * @brief Platform::system_set_default_runlevel -- Set default runlevel for the
+ *     system.
+ * @param target -- A runlevel to set (without ".target" suffix.)
+ * @throws Platform_exception on an error.
+ */
 void Platform::system_set_default_runlevel(const QString& target)
 {
     QString command = "systemctl set-default " + target + ".target";
@@ -258,6 +275,11 @@ void Platform::system_set_default_runlevel(const QString& target)
     }
 }
 
+/**
+ * @brief Platform::exec -- Execute a command.
+ * @param command -- A command to execute.
+ * @throws Platform_exception on an error.
+ */
 void Platform::exec(const QString &command)
 {
     if (system(command.toStdString().c_str()) != 0) {
@@ -267,6 +289,9 @@ void Platform::exec(const QString &command)
     }
 }
 
+/**
+ * @brief Platform::system_reboot -- Reboot the system.
+ */
 void Platform::system_reboot()
 {
     sync();
