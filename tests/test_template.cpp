@@ -11,7 +11,7 @@ Test_template::Test_template(QObject *parent) : QObject(parent)
 
 void Test_template::template_from_string()
 {
-    string data = "{{test1}}{{test2}}";
+    QString data = "{{test1}}{{test2}}";
     Template tpl(data);
     string result = tpl.set("test1", "4").set("test2", "2")
             .substitute();
@@ -20,8 +20,8 @@ void Test_template::template_from_string()
 
 void Test_template::template_from_cstring()
 {
-    string data = "{{test1}}{{test2}}";
-    Template tpl(data.c_str());
+    QString data = "{{test1}}{{test2}}";
+    Template tpl(data.toStdString().c_str());
     string result = tpl.set("test1", "4").set("test2", "2")
             .substitute();
     QVERIFY2(result == "42", result.c_str());
