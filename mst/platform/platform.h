@@ -49,7 +49,7 @@ public:
 
     static void system_set_default_runlevel(const QString& target);
 
-    static void exec(const QString& command);
+    static int exec(const QString& command);
 };
 
 #endif // PLATFORM_H

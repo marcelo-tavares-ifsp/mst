@@ -33,9 +33,7 @@ void VGL::configure()
  */
 void VGL::enable()
 {
-    try {
-        Platform::exec("echo -e '1\nn\nn\nn\nx\n' | vglserver_config");
-    } catch (Platform_exception& e) {
+    if (Platform::exec("echo -e '1\nn\nn\nn\nx\n' | vglserver_config") != 0) {
         throw Component_error("Could not configure VirtualGL server");
     }
 }
@@ -46,9 +44,7 @@ void VGL::enable()
  */
 void VGL::disable()
 {
-    try {
-        Platform::exec("echo -e '2\nx\n' | vglserver_config");
-    } catch (Platform_exception& e) {
+    if (Platform::exec("echo -e '2\nx\n' | vglserver_config") != 0) {
         throw Component_error("Could not un-configure VirtualGL server");
     }
 }

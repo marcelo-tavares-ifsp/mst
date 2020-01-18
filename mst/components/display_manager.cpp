@@ -38,9 +38,7 @@ static void _configure_x11() {
 
 void Display_manager::enable() {
     QString lightdm_cmd = "/usr/sbin/lightdm --config ";// + config_path;
-    try {
-        Platform::exec(lightdm_cmd);
-    } catch (Platform_exception& e) {
+    if (Platform::exec(lightdm_cmd) != 0) {
         throw Component_error("Could not start lightdm");
     }
 
@@ -49,10 +47,7 @@ void Display_manager::enable() {
 
 void Display_manager::add_seat(int seat_number) {
     QString lightdm_cmd = "/usr/bin/dm-tool add-local-x-seat " + seat_number;
-    try {
-        Platform::exec(lightdm_cmd);
-    }
-    catch (Platform_exception& e) {
+    if (Platform::exec(lightdm_cmd) != 0) {
         throw Component_error("Could not configure seats");
     }
 }

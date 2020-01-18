@@ -196,7 +196,8 @@ void Platform::get_input_devices(vector<string>& mice, vector<string>& keybds)
  */
 bool Platform::pam_is_mkhomedir_used()
 {
-    Platform::exec("[ -d /etc/skel ] && [ $(ls -a1 /etc/skel | wc -l) -gt 2 ]");
+    QString cmd = "[ -d /etc/skel ] && [ $(ls -a1 /etc/skel | wc -l) -gt 2 ]";
+    return Platform::exec(cmd) != 0;
 }
 
 /**
@@ -278,15 +279,11 @@ void Platform::system_set_default_runlevel(const QString& target)
 /**
  * @brief Platform::exec -- Execute a command.
  * @param command -- A command to execute.
- * @throws Platform_exception on an error.
+ * @returns return code of the command.
  */
-void Platform::exec(const QString &command)
+int Platform::exec(const QString &command)
 {
-    if (system(command.toStdString().c_str()) != 0) {
-        QString msg = "Could not execute command: " + command;
-        qCritical(platform_category) << msg.toStdString().c_str();
-        throw Platform_exception(msg);
-    }
+    return system(command.toStdString().c_str());
 }
 
 /**
