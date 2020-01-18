@@ -20,8 +20,7 @@ void Udev::configure()
                                 prepare_systemd_service_template());
     component_configuration.add(RULES_FILE,
                                 "/etc/udev/rules.d/",
-                                Template(prepare_udev_rules(config)
-                                         .toStdString()));
+                                Template(prepare_udev_rules(config)));
 }
 
 Template udev::prepare_systemd_service_template()

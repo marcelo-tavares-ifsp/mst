@@ -117,7 +117,7 @@ void Xorg::configure()
     _print_layout(os,   config);
     component_configuration.add(XORG_FILE,
                                 "/etc/X11/xorg.conf",
-                                Template(os.str()));
+                                Template(QString::fromStdString(os.str())));
 
     component_configuration.add(XINIT_RC_FILE,
                                 "{{home}}/.xinitrc",
