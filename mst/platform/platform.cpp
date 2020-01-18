@@ -207,8 +207,7 @@ bool Platform::pam_is_mkhomedir_used()
  */
 void Platform::fs_mkdir(const QString& path)
 {
-    QString command = "mkdir -p '" + path + "'";
-    if (system(command.toStdString().c_str()) != 0)
+    if (Platform::exec("mkdir -p '" + path + "'") != 0)
     {
         qCritical(platform_category)
              << "Could not create a directory: "
@@ -235,8 +234,7 @@ void Platform::fs_mkdir(const string& path)
  */
 void Platform::fs_rm(const QString& file)
 {
-    QString command = "rm '" + file + "'";
-    if (system(command.toStdString().c_str()))
+    if (Platform::exec("rm '" + file + "'") != 0)
     {
         QString message = "Could not delete '" + file + "'";
         qCritical(platform_category) << message.toStdString().c_str();
@@ -252,8 +250,7 @@ void Platform::fs_rm(const QString& file)
  */
 void Platform::fs_cp(const QString &src, const QString &dst)
 {
-    QString command = "cp '" + src + "' '" + dst + "'";
-    if (system(command.toStdString().c_str()))
+    if (Platform::exec("cp '" + src + "' '" + dst + "'") != 0)
     {
         QString message = "Could not copy: '" + src + "' -> '" + dst + "'";
         throw Platform_exception(message);
@@ -268,8 +265,7 @@ void Platform::fs_cp(const QString &src, const QString &dst)
  */
 void Platform::system_set_default_runlevel(const QString& target)
 {
-    QString command = "systemctl set-default " + target + ".target";
-    if (system(command.toStdString().c_str()) != 0) {
+    if (Platform::exec("systemctl set-default " + target + ".target") != 0) {
         QString msg = "Could not set default target: " + target;
         qCritical(platform_category) << msg.toStdString().c_str();
         throw Platform_exception(msg);
