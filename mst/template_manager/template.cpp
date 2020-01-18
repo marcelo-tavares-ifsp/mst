@@ -81,9 +81,9 @@ void Template::substitute(QFile& output_file)
  * @brief Template::substitute Substitute values and store data to a file.
  * @param output_file_name -- A file name to use.
  */
-void Template::substitute(const string& output_file_name)
+void Template::substitute(const QString& output_file_name)
 {
-    QFile output_file(QString::fromStdString(output_file_name));
+    QFile output_file(output_file_name);
     this->substitute(output_file);
 }
 

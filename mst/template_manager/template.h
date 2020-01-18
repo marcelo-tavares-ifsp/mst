@@ -25,7 +25,7 @@ public:
     Template& set(const string& key, const string& value);
     string substitute();
     void substitute(QFile &output_file);
-    void substitute(const string& output_file_name);
+    void substitute(const QString& output_file_name);
 
 
 private:

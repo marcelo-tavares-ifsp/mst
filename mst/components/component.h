@@ -38,8 +38,7 @@ public:
      */
     void store(const QString& output_directory) {
         foreach (auto key, templates.keys()) {
-            templates[key].substitute((output_directory
-                                       + "/" + key).toStdString());
+            templates[key].substitute(output_directory + "/" + key);
         }
     }
 
