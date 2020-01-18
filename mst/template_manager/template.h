@@ -17,7 +17,7 @@ public:
         /* Do nothing. */
     }
     Template(QFile &file);
-    Template(const string& template_string);
+    Template(const QString& template_string);
     Template(char const * template_string);
     string replace_all(const string& tpl,
                        const string& val);

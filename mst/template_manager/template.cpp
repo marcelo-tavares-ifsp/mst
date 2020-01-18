@@ -11,8 +11,8 @@ const QString Template::TEMPLATE_END   = "}}";
  * @brief Template::Template -- Create a template based on a string.
  * @param template_string -- A string to use.
  */
-Template::Template(const string& template_string)
-    : template_string(QString::fromStdString(template_string))
+Template::Template(const QString& template_string)
+    : template_string(template_string)
 {
     /* Do nothing */
 }
