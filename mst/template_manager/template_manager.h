@@ -1,7 +1,6 @@
 #ifndef TEMPLATE_MANAGER_H
 #define TEMPLATE_MANAGER_H
 
-#include <string>
 #include "template.h"
 
 using namespace std;
@@ -14,7 +13,7 @@ public:
     Template get_template(const QString& name);
 
     static Template_manager* get_instance();
-    void set_template_dir(const string& templates_dir);
+    void set_template_dir(const QString& templates_dir);
 
 private:
     QString templates_dir;

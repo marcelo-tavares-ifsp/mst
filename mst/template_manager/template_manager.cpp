@@ -1,6 +1,5 @@
 #include "template_manager.h"
 
-#include <string>
 #include <QFile>
 
 using namespace std;
@@ -14,9 +13,9 @@ const QString Template_manager::TEMPLATE_FILE_EXTENSION = ".template";
 //    /* Do nothing */
 //}
 
-void Template_manager::set_template_dir(const string &templates_dir)
+void Template_manager::set_template_dir(const QString& templates_dir)
 {
-    this->templates_dir = QString::fromStdString(templates_dir);
+    this->templates_dir = templates_dir;
 }
 
 /**
