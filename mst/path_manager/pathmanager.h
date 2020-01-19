@@ -48,7 +48,7 @@ public:
     string get_bashrc_config_template();
     string get_xinitrc_config_template();
     string get_xmst_config_template();
-    string get_sudoers_config_template();
+    QString get_sudoers_config_template();
     string get_lightdm_mst_config_template();
     string get_getty_service_config_template();
     string get_systemd_udev_config_template();

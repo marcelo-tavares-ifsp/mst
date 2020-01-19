@@ -140,7 +140,7 @@ string PathManager::get_xmst_config_template()
     return "xmst";
 }
 
-string PathManager::get_sudoers_config_template()
+QString PathManager::get_sudoers_config_template()
 {
     return "sudoers";
 }
