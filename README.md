@@ -31,6 +31,8 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ## Installation
 
+### AltLinux
+
 An RPM package for the project can be built as follows:
 ```
 $ make -j4 rpm
@@ -46,7 +48,8 @@ $ useradd multiseat
 $ rpm -i mst-1.0.0-1.x86_64.rpm
 ```
 
-On Ubuntu GNU/Linux (experimental):
+### Ubuntu GNU/Linux (experimental)
+Install the needed components:
 ```
 $ sudo apt-get install \
     libudev-dev \
@@ -56,6 +59,15 @@ $ sudo apt-get install \
     build-essential \
     qt5-default \
     qtbase5-dev
+```
+
+Ubuntu GNU/Linux doesn't have VirtualGL in the official repository, so
+you should download `.deb` packages for your system manually from here:
+https://sourceforge.net/projects/virtualgl/files/2.6.3/
+
+Then install the download package:
+```
+$ sudo dpkg -i virtualgl_*.deb
 ```
 
 ## Usage
