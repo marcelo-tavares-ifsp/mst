@@ -6,13 +6,6 @@ using namespace std;
 
 const QString Template_manager::TEMPLATE_FILE_EXTENSION = ".template";
 
-
-//Template_manager::Template_manager(const string& templates_dir)
-//    : templates_dir(templates_dir)
-//{
-//    /* Do nothing */
-//}
-
 void Template_manager::set_template_dir(const QString& templates_dir)
 {
     this->templates_dir = templates_dir;

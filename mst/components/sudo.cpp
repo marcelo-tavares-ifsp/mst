@@ -26,8 +26,6 @@ void Sudo::configure()
 Template sudo::prepare_sudoers_template()
 {
     const QString user = PathManager::get_instance()->get_mst_user();
-    const string out_file_name
-            = PathManager::get_instance()->get_sudoers_config();
     const QString tpl_name
             = QString::fromStdString(
                 PathManager::get_instance()->get_sudoers_config_template());
