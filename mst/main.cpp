@@ -7,6 +7,10 @@
 #include <QDateTime>
 #include <QLoggingCategory>
 #include <unistd.h>
+#include <QDebug>
+#include <QFile>
+#include <QString>
+#include <QTextStream>
 
 #include "template_manager/template_manager.h"
 
@@ -18,7 +22,7 @@ QScopedPointer<QFile>   m_logFile;
 /**
  * @brief MST_CONFIG_FILE -- The default MST configuration file.
  */
-const string MST_CONFIG_FILE = "/etc/mst";
+const QString MST_CONFIG_FILE = "/etc/mst";
 
 /**
  * @brief MST_LOG_FILE -- The default MST logging file.
@@ -27,6 +31,8 @@ const QString MST_LOG_FILE   = "/var/log/mst.log";
 
 void messageHandler(QtMsgType type, const QMessageLogContext &context,
                     const QString &msg);
+
+static void create_config_file(QFile& file);
 
 /**
  * @brief main -- The application entry point.
@@ -38,7 +44,11 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context,
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    DSV config(MST_CONFIG_FILE);
+    QFile file(MST_CONFIG_FILE);
+    if(! file.exists()) {
+        create_config_file(file);
+    }
+    DSV config(MST_CONFIG_FILE.toStdString());
     PathManager::get_instance()->set_config(&config);
     Template_manager::get_instance()->set_template_dir("/var/lib/mst/");
 
@@ -57,7 +67,6 @@ int main(int argc, char *argv[])
 
     InstallWindow w;
     w.show();
-
     return a.exec();
 }
 
@@ -84,4 +93,11 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context,
 
     out << context.category << ": " << msg << endl;
     out.flush();
+}
+
+void create_config_file(QFile& file) {
+    if (! file.open(QIODevice::WriteOnly | QIODevice::Text))
+            return;
+    QTextStream out(&file);
+    out << "user:multiseat";
 }
