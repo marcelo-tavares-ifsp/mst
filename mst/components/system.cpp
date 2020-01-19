@@ -30,7 +30,7 @@ Template sys::prepare_getty_template()
     const QString user = PathManager::get_instance()->get_mst_user();
     Template tpl = Template_manager::get_instance()->get_template(
                 GETTY_FILE.toStdString());
-    tpl.set("user", user.toStdString());
+    tpl.set("user", user);
     return tpl;
 }
 

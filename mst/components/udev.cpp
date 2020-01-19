@@ -34,14 +34,15 @@ QString udev::prepare_udev_rules(Configuration& config)
 {
     Template tpl = Template_manager::get_instance()->get_template(
                 RULES_FILE.toStdString());
-    string result = "";
+    QString result = "";
 
     for (uint32_t idx = 0; idx < config.seats.size(); ++idx)
     {
-        result += tpl.set("usb_device", config.seats[idx].usb)
-                   .set("seat_idx", to_string(idx + 1 ))
+        result += tpl.set("usb_device",
+                          QString::fromStdString(config.seats[idx].usb))
+                   .set("seat_idx", QString::number(idx + 1 ))
                    .substitute();
     }
 
-    return QString::fromStdString(result);
+    return result;
 }

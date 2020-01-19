@@ -3,7 +3,7 @@
 
 #include <string>
 #include <QFile>
-#include <unordered_map>
+#include <QMap>
 
 using namespace std;
 
@@ -19,17 +19,15 @@ public:
     Template(QFile &file);
     Template(const QString& template_string);
     Template(char const * template_string);
-    string replace_all(const string& tpl,
-                       const string& val);
 
-    Template& set(const string& key, const string& value);
-    string substitute();
+    Template& set(const QString& key, const QString& value);
+    QString substitute();
     void substitute(QFile &output_file);
     void substitute(const QString& output_file_name);
 
 
 private:
-    unordered_map<string, string> substitutions;
+    QMap<QString, QString> substitutions;
     QString template_string;
 };
 

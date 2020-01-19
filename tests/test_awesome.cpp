@@ -27,24 +27,24 @@ void Test_awesome::make_xephyr_autostart()
         .resolution = { .width = 640, .height = 480 }
     };
     seats.push_back(seat);
-    string result = awesome::make_xephyr_autostart();
+    QString result = awesome::make_xephyr_autostart();
 
     QFile expected_output_file("./test_awesome_mst_autostart.lua");
     expected_output_file.open(QIODevice::ReadOnly);
     QString expected_output;
     QTextStream s1(&expected_output_file);
     expected_output.append((s1.readAll()));
-    QVERIFY2(result == expected_output.toStdString(), result.c_str());
+    QVERIFY2(result == expected_output, result.toStdString().c_str());
 }
 
 void Test_awesome::make_xephyr_rules() {
-    string result = awesome::make_xephyr_rules(1);
+    QString result = awesome::make_xephyr_rules(1);
     QFile expected_output_file("./test_awesome_xephyr_rules.lua");
     expected_output_file.open(QIODevice::ReadOnly);
     QString expected_output;
     QTextStream s1(&expected_output_file);
     expected_output.append((s1.readAll()));
-    QVERIFY2(result == expected_output.toStdString(), result.c_str());
+    QVERIFY2(result == expected_output, result.toStdString().c_str());
 }
 
 /**
@@ -62,7 +62,7 @@ void Test_awesome::make_xephyr_screens()
         .resolution = { .width = 640, .height = 480 }
     };
     seats.push_back(seat);
-    string result = awesome::make_xephyr_screens(seats);
+    QString result = awesome::make_xephyr_screens(seats);
 
     QFile expected_output_file("./test_awesome_xephyr_screens.lua");
     expected_output_file.open(QIODevice::ReadOnly);
@@ -70,6 +70,6 @@ void Test_awesome::make_xephyr_screens()
     QTextStream s1(&expected_output_file);
     expected_output.append(s1.readAll());
 
-    QVERIFY2(result == expected_output.toStdString(), result.c_str());
+    QVERIFY2(result == expected_output, result.toStdString().c_str());
 }
 
