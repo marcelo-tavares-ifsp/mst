@@ -32,7 +32,7 @@ const QString MST_LOG_FILE   = "/var/log/mst.log";
 void messageHandler(QtMsgType type, const QMessageLogContext &context,
                     const QString &msg);
 
-void createConfigFile(QFile& file);
+static void create_config_file(QFile& file);
 
 /**
  * @brief main -- The application entry point.
@@ -43,11 +43,10 @@ void createConfigFile(QFile& file);
  */
 int main(int argc, char *argv[])
 {
-
     QApplication a(argc, argv);
     QFile file(MST_CONFIG_FILE);
-    if(! file.exists()){
-        createConfigFile(file);
+    if(! file.exists()) {
+        create_config_file(file);
     }
     DSV config(MST_CONFIG_FILE.toStdString());
     PathManager::get_instance()->set_config(&config);
@@ -96,8 +95,8 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context,
     out.flush();
 }
 
-void createConfigFile(QFile& file){
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+void create_config_file(QFile& file) {
+    if (! file.open(QIODevice::WriteOnly | QIODevice::Text))
             return;
     QTextStream out(&file);
     out << "user:multiseat";
