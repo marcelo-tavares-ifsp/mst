@@ -28,8 +28,7 @@ void System::configure()
 Template sys::prepare_getty_template()
 {
     const QString user = PathManager::get_instance()->get_mst_user();
-    Template tpl = Template_manager::get_instance()->get_template(
-                GETTY_FILE.toStdString());
+    Template tpl = Template_manager::get_instance()->get_template(GETTY_FILE);
     tpl.set("user", user);
     return tpl;
 }
@@ -41,7 +40,7 @@ Template sys::prepare_getty_template()
 Template sys::prepare_bashrc_template()
 {
     Template bashrc_template = Template_manager::get_instance()->get_template(
-                BASHRC_FILE.toStdString());
+                BASHRC_FILE);
     bashrc_template.set("tty", "1");
     return bashrc_template;
 }

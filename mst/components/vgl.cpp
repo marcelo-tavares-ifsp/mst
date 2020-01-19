@@ -19,8 +19,7 @@ VGL::VGL(Configuration& config)
 
 void VGL::configure()
 {
-    Template tpl = Template_manager::get_instance()->get_template(
-                VGL_SH_FILE.toStdString());
+    Template tpl = Template_manager::get_instance()->get_template(VGL_SH_FILE);
     prepare_vgl_sh_template(tpl);
     component_configuration.add(VGL_SH_FILE, "/etc/bashrc.d/", tpl);
 //    QString output_file = output_dir + "/" + VGL_SH_FILE;

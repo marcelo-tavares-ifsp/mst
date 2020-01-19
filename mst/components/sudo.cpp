@@ -28,8 +28,9 @@ Template sudo::prepare_sudoers_template()
     const QString user = PathManager::get_instance()->get_mst_user();
     const string out_file_name
             = PathManager::get_instance()->get_sudoers_config();
-    const string tpl_name
-            = PathManager::get_instance()->get_sudoers_config_template();
+    const QString tpl_name
+            = QString::fromStdString(
+                PathManager::get_instance()->get_sudoers_config_template());
     Template tpl = Template_manager::get_instance()->get_template(tpl_name);
 
     tpl.set("user", user).set("mst", "/usr/local/bin/mst-start-dm");

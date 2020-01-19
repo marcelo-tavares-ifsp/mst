@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const string Template_manager::TEMPLATE_FILE_EXTENSION = ".template";
+const QString Template_manager::TEMPLATE_FILE_EXTENSION = ".template";
 
 
 //Template_manager::Template_manager(const string& templates_dir)
@@ -16,7 +16,7 @@ const string Template_manager::TEMPLATE_FILE_EXTENSION = ".template";
 
 void Template_manager::set_template_dir(const string &templates_dir)
 {
-    this->templates_dir = templates_dir;
+    this->templates_dir = QString::fromStdString(templates_dir);
 }
 
 /**
@@ -24,11 +24,11 @@ void Template_manager::set_template_dir(const string &templates_dir)
  * @param name -- Template name to search.
  * @return A new Template instance.
  */
-Template Template_manager::get_template(const string& name)
+Template Template_manager::get_template(const QString& name)
 {
-    string file_name = templates_dir + "./" + name
+    QString file_name = templates_dir + "./" + name
             + Template_manager::TEMPLATE_FILE_EXTENSION;
-    QFile file(QString::fromStdString(file_name));
+    QFile file(file_name);
     return Template(file);
 }
 

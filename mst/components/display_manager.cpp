@@ -23,8 +23,7 @@ void Display_manager::configure()
 
 Template display_manager::prepare_lightdm_template()
 {
-    Template tpl = Template_manager::get_instance()->get_template(
-                LIGHTDM_FILE.toStdString());
+    Template tpl = Template_manager::get_instance()->get_template(LIGHTDM_FILE);
     return tpl;
 }
 

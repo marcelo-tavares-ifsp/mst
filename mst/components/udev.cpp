@@ -26,14 +26,13 @@ void Udev::configure()
 Template udev::prepare_systemd_service_template()
 {
     Template tpl = Template_manager::get_instance()->get_template(
-                SYSTEMD_SERVICE_FILE.toStdString());
+                SYSTEMD_SERVICE_FILE);
     return tpl;
 }
 
 QString udev::prepare_udev_rules(Configuration& config)
 {
-    Template tpl = Template_manager::get_instance()->get_template(
-                RULES_FILE.toStdString());
+    Template tpl = Template_manager::get_instance()->get_template(RULES_FILE);
     QString result = "";
 
     for (uint32_t idx = 0; idx < config.seats.size(); ++idx)

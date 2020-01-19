@@ -19,20 +19,20 @@ Awesome::Awesome(Configuration& config)
 
 void Awesome::configure()
 {
-    string template_name;
+    QString template_name;
 
     const vector<int> version = get_awesome_version();
     if (version[0] == 3)
     {
         qDebug(component_awesome_category)
                 << "Using rc.lua.template for Awesome 3";
-        template_name = RC_LUA_TPL_FILE.toStdString();
+        template_name = RC_LUA_TPL_FILE;
     }
     else
     {
         qDebug(component_awesome_category)
                 << "Using rc.lua.template for Awesome 4";
-        template_name = RC_LUA4_TPL_FILE.toStdString();
+        template_name = RC_LUA4_TPL_FILE;
     }
 
     Template rclua_template

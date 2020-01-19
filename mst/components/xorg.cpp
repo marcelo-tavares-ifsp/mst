@@ -129,13 +129,10 @@ void Xorg::configure()
 
 Template xorg::prepare_xinitrc_template()
 {
-    return Template_manager::get_instance()->get_template(
-                XINIT_RC_FILE.toStdString());
+    return Template_manager::get_instance()->get_template(XINIT_RC_FILE);
 }
 
 Template xorg::prepare_xmst_template()
 {
-    return Template_manager::get_instance()->get_template(
-                XMST_FILE.toStdString());
-
+    return Template_manager::get_instance()->get_template(XMST_FILE);
 }
