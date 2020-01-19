@@ -46,6 +46,18 @@ $ useradd multiseat
 $ rpm -i mst-1.0.0-1.x86_64.rpm
 ```
 
+On Ubuntu GNU/Linux (experimental):
+```
+$ sudo apt-get install \
+    libudev-dev \
+    awesome \
+    unclutter \
+    xserver-xephyr \
+    build-essential \
+    qt5-default \
+    qtbase5-dev
+```
+
 ## Usage
 
 To make a multi-seat configuation, you should run `mst` program as the
