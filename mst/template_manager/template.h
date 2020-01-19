@@ -23,7 +23,7 @@ public:
                        const string& val);
 
     Template& set(const QString& key, const QString& value);
-    string substitute();
+    QString substitute();
     void substitute(QFile &output_file);
     void substitute(const QString& output_file_name);
 

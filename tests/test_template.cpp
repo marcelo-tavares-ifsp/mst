@@ -13,18 +13,18 @@ void Test_template::template_from_string()
 {
     QString data = "{{test1}}{{test2}}";
     Template tpl(data);
-    string result = tpl.set("test1", "4").set("test2", "2")
+    QString result = tpl.set("test1", "4").set("test2", "2")
             .substitute();
-    QVERIFY2(result == "42", result.c_str());
+    QVERIFY2(result == "42", result.toStdString().c_str());
 }
 
 void Test_template::template_from_cstring()
 {
     QString data = "{{test1}}{{test2}}";
     Template tpl(data.toStdString().c_str());
-    string result = tpl.set("test1", "4").set("test2", "2")
+    QString result = tpl.set("test1", "4").set("test2", "2")
             .substitute();
-    QVERIFY2(result == "42", result.c_str());
+    QVERIFY2(result == "42", result.toStdString().c_str());
 }
 
 void Test_template::template_manager_get_template()
@@ -32,6 +32,6 @@ void Test_template::template_manager_get_template()
     Template_manager* inst = Template_manager::get_instance();
     inst->set_template_dir("./");
     Template tpl = inst->get_template("test_template.txt");
-    string result = tpl.set("number", "1").substitute();
-    QVERIFY2(result == "1\n", result.c_str());
+    QString result = tpl.set("number", "1").substitute();
+    QVERIFY2(result == "1\n", result.toStdString().c_str());
 }

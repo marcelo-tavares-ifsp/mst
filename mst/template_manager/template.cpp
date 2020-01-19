@@ -43,7 +43,7 @@ Template::Template(QFile& file)
  * @brief Template::substitute -- Substitute values.
  * @return A string with substituted values.
  */
-string Template::substitute()
+QString Template::substitute()
 {
 
     QString output(this->template_string);
@@ -54,7 +54,7 @@ string Template::substitute()
         output.replace(pattern, substitutions[key]);
     }
 
-    return output.toStdString();
+    return output;
 }
 
 /**
@@ -64,7 +64,7 @@ string Template::substitute()
 void Template::substitute(QFile& output_file)
 {
     output_file.open(QFile::WriteOnly | QIODevice::Text);
-    output_file.write(substitute().c_str());
+    output_file.write(substitute().toStdString().c_str());
     output_file.close();
 }
 

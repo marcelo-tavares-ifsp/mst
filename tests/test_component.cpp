@@ -13,9 +13,9 @@ void Test_component::configuration_test()
 {
     Component_configuration config;
     config.add("test.txt", ".", Template("{{test}}"));
-    string result = config.get_template("test.txt")
+    QString result = config.get_template("test.txt")
             .set("test", "42")
             .substitute();
 
-    QVERIFY2(result == "42", result.c_str());
+    QVERIFY2(result == "42", result.toStdString().c_str());
 }

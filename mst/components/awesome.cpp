@@ -74,7 +74,7 @@ QString awesome::make_xephyr_autostart()
     Template tpl = Template_manager::get_instance()
             ->get_template("awesome/mst_autostart.lua");
 
-    return QString::fromStdString(tpl.substitute());
+    return tpl.substitute();
 }
 
 /**
@@ -86,15 +86,15 @@ QString awesome::make_xephyr_autostart()
  */
 QString awesome::make_xephyr_rules(uint32_t sSize)
 {
-    stringstream result;
+    QString result = "";
     Template tpl = Template_manager::get_instance()
             ->get_template("awesome/xephyr_rules.lua");
 
     for (uint32_t idx = 1; idx <= sSize; idx++)
     {
-        result << tpl.set("screen_idx", QString::number(idx)).substitute();
+        result += tpl.set("screen_idx", QString::number(idx)).substitute();
     }
-    return QString::fromStdString(result.str());
+    return result;
 }
 
 /**
@@ -105,7 +105,7 @@ QString awesome::make_xephyr_rules(uint32_t sSize)
  */
 QString awesome::make_xephyr_screens(vector<Seat> seats)
 {
-    stringstream result;
+    QString result = "";
     Template tpl = Template_manager::get_instance()
             ->get_template("awesome/xephyr_screens.lua");
 
@@ -117,9 +117,9 @@ QString awesome::make_xephyr_screens(vector<Seat> seats)
         tpl.set("screen_width",  QString::number(seats[idx].resolution.width));
         tpl.set("screen_height", QString::number(seats[idx].resolution.height));
 
-        result << tpl.substitute();
+        result += tpl.substitute();
     }
-    return QString::fromStdString(result.str());
+    return result;
 }
 
 /**
