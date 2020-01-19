@@ -65,7 +65,7 @@ void Awesome::prepare_rclua_template(Template& rclua_template)
  *
  * @return Generated Lua code as a string.
  */
-string awesome::make_xephyr_autostart()
+QString awesome::make_xephyr_autostart()
 {
     // TODO: 10s sleep seems to be enough for our cases, but this code
     //       likely will lead to some problems in the future.
@@ -74,7 +74,7 @@ string awesome::make_xephyr_autostart()
     Template tpl = Template_manager::get_instance()
             ->get_template("awesome/mst_autostart.lua");
 
-    return tpl.substitute();
+    return QString::fromStdString(tpl.substitute());
 }
 
 /**
@@ -84,7 +84,7 @@ string awesome::make_xephyr_autostart()
  *     instances.
  * @return Generated Lua code as a string.
  */
-string awesome::make_xephyr_rules(uint32_t sSize)
+QString awesome::make_xephyr_rules(uint32_t sSize)
 {
     stringstream result;
     Template tpl = Template_manager::get_instance()
@@ -92,9 +92,9 @@ string awesome::make_xephyr_rules(uint32_t sSize)
 
     for (uint32_t idx = 1; idx <= sSize; idx++)
     {
-        result << tpl.set("screen_idx", to_string(idx)).substitute();
+        result << tpl.set("screen_idx", QString::number(idx)).substitute();
     }
-    return result.str();
+    return QString::fromStdString(result.str());
 }
 
 /**
@@ -103,7 +103,7 @@ string awesome::make_xephyr_rules(uint32_t sSize)
  * @param seats -- Number of seats.
  * @return Generated Lua code as a string.
  */
-string awesome::make_xephyr_screens(vector<Seat> seats)
+QString awesome::make_xephyr_screens(vector<Seat> seats)
 {
     stringstream result;
     Template tpl = Template_manager::get_instance()
@@ -111,15 +111,15 @@ string awesome::make_xephyr_screens(vector<Seat> seats)
 
     for (uint32_t idx = 0; idx < seats.size(); idx++)
     {
-        tpl.set("screen_idx",    to_string(idx + 1));
-        tpl.set("mouse_device",  seats[idx].mouse);
-        tpl.set("keybd_device",  seats[idx].keyboard);
-        tpl.set("screen_width",  to_string(seats[idx].resolution.width));
-        tpl.set("screen_height", to_string(seats[idx].resolution.height));
+        tpl.set("screen_idx",    QString::number(idx + 1));
+        tpl.set("mouse_device",  QString::fromStdString(seats[idx].mouse));
+        tpl.set("keybd_device",  QString::fromStdString(seats[idx].keyboard));
+        tpl.set("screen_width",  QString::number(seats[idx].resolution.width));
+        tpl.set("screen_height", QString::number(seats[idx].resolution.height));
 
         result << tpl.substitute();
     }
-    return result.str();
+    return QString::fromStdString(result.str());
 }
 
 /**

@@ -42,9 +42,9 @@ public:
 
 //// Helper procedures.
 
-extern string make_xephyr_autostart();
-extern string make_xephyr_rules(uint32_t sSize);
-extern string make_xephyr_screens(vector<Seat> seats);
+extern QString make_xephyr_autostart();
+extern QString make_xephyr_rules(uint32_t sSize);
+extern QString make_xephyr_screens(vector<Seat> seats);
 
 extern string get_awesome_raw_version();
 extern vector<int> get_awesome_version();

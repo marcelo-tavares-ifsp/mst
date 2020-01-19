@@ -46,24 +46,15 @@ Template::Template(QFile& file)
 string Template::substitute()
 {
 
-    string output(this->template_string.toStdString());
-    for_each(this->substitutions.begin(), this->substitutions.end(),
-             [&output](pair<const string&, const string&> elem) {
+    QString output(this->template_string);
+    foreach (auto key, substitutions.keys()) {
         string::size_type pos = 0;
-        QString pattern(Template::TEMPLATE_BEGIN
-                        + QString::fromStdString(elem.first)
+        QString pattern(Template::TEMPLATE_BEGIN + key
                         + Template::TEMPLATE_END);
-        while ((pos = output.find(pattern.toStdString(), pos)) != string::npos)
-        {
-            output.replace(pos,
-                           pattern.size(),
-                           elem.second);
+        output.replace(pattern, substitutions[key]);
+    }
 
-            ++pos;
-        }
-    });
-
-    return output;
+    return output.toStdString();
 }
 
 /**
@@ -93,7 +84,7 @@ void Template::substitute(const QString& output_file_name)
  * @param value -- Value to use.
  * @return This template.
  */
-Template& Template::set(const string &key, const string &value)
+Template& Template::set(const QString &key, const QString& value)
 {
     this->substitutions[key] = value;
     return *this;

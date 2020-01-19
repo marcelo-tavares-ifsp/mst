@@ -266,10 +266,10 @@ void InstallController::install_files()
             QString dst = install_paths[src];
             if (dst.contains("{{home}}")) {
                 Template tpl(dst);
-                tpl.set("home", mst_user_home.toStdString());
+                tpl.set("home", mst_user_home);
                 install(src, QString::fromStdString(tpl.substitute()));
                 if (is_pam_mkhomedir_used) {
-                    tpl.set("home", skel.toStdString());
+                    tpl.set("home", skel);
                     install(src, QString::fromStdString(tpl.substitute()));
                 }
             } else {

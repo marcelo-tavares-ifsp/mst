@@ -32,7 +32,6 @@ Template sudo::prepare_sudoers_template()
             = PathManager::get_instance()->get_sudoers_config_template();
     Template tpl = Template_manager::get_instance()->get_template(tpl_name);
 
-    tpl.set("user", user.toStdString())
-            .set("mst", "/usr/local/bin/mst-start-dm");
+    tpl.set("user", user).set("mst", "/usr/local/bin/mst-start-dm");
     return tpl;
 }
