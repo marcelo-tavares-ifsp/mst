@@ -19,8 +19,6 @@ public:
     Template(QFile &file);
     Template(const QString& template_string);
     Template(char const * template_string);
-    string replace_all(const string& tpl,
-                       const string& val);
 
     Template& set(const QString& key, const QString& value);
     QString substitute();
