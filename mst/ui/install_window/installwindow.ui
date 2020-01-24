@@ -350,31 +350,31 @@
      <rect>
       <x>20</x>
       <y>390</y>
-      <width>121</width>
+      <width>81</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>Версия 1.1</string>
+     <string>Версия</string>
     </property>
    </widget>
    <widget class="QLabel" name="Version">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>80</x>
       <y>390</y>
-      <width>141</width>
+      <width>531</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <property name="text">

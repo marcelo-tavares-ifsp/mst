@@ -17,7 +17,7 @@ InstallWindow::InstallWindow(QWidget *parent) :
         ui->btnBreak->setEnabled(false);
     }
 
-    ui->Version->setText("(" + QString::fromStdString(VERSION) + ")");
+    ui->Version->setText(QString::fromStdString(VERSION));
 
     set_show_page(0);
 }

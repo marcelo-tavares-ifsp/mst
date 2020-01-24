@@ -17,7 +17,9 @@ PRE_TARGETDEPS += version
 QMAKE_EXTRA_TARGETS += version
 
 version.commands += \
-    echo \'const string VERSION = \" $$VERSION-$$system("git rev-parse --short HEAD")\";\' \
+    echo \'const string VERSION = \" \
+        $$system("git describe --abbrev=0")-\
+        $$system("git rev-parse --short HEAD")\";\' \
         > version.h
 
 # The following define makes your compiler emit warnings if you use
@@ -70,7 +72,6 @@ HEADERS += \
     common/dsv_parser/dsv.h \
     components/vgl.h \
     components/display_manager.h \
-    version.h \
     input_device_listener/inputdevicelistener.h \
     components/awesome.h \
     template_manager/template_manager.h \
