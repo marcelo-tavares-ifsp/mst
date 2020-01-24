@@ -62,10 +62,6 @@ DISTFILES += \
     templates/99-mst.rules.template \
     etc/mst
 
-#version.commands += \
-#    echo \"Building $$system("git rev-parse HEAD") ...\"; \
-#    cd mst && make version
-
 # We need 'rpmtools' and 'rpmdevtools' package in AltLinux to do that.
 rpm.commands += \
     su - multiseat -c rpmdev-setuptree;		\
