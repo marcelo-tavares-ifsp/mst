@@ -244,4 +244,5 @@ string* InputDeviceListener::check_usb()
 
     udev_monitor_unref(udev_monitor);
     udev_unref(udev);
+    return NULL;
 }
