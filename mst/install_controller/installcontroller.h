@@ -44,6 +44,7 @@ public:
     void create_backup();
     void restore_backup();
     void enable_mst();
+    void disable_mst();
 
     vector<string> get_list_of_mice();
     vector<string> get_list_of_keybs();
@@ -56,7 +57,6 @@ private:
     bool is_equal(int i, int j);
     bool is_empty(int i);
     void print_config();
-    void disable_mst();
     static InstallController *instance;
     Configuration *config;
     vector<QWidget *> *widgets;

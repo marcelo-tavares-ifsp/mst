@@ -11,6 +11,7 @@
 #include <QFile>
 #include <QString>
 #include <QTextStream>
+#include <QCommandLineParser>
 
 #include "template_manager/template_manager.h"
 
@@ -71,6 +72,16 @@ void create_config_file(QFile& file) {
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QCommandLineParser parser;
+    parser.setApplicationDescription("Multiseat configurator");
+    parser.addHelpOption();
+    parser.addVersionOption();
+    QCommandLineOption rollback_option(
+                QStringList() << "R" << "rollback",
+                QCoreApplication::translate("main",
+                                           "Rollback changes in the system"));
+    parser.addOption(rollback_option);
+    parser.process(a);
     QFile file(MST_CONFIG_FILE);
     if(! file.exists()) {
         create_config_file(file);
@@ -91,6 +102,11 @@ int main(int argc, char *argv[])
     m_logFile.reset(new QFile(MST_LOG_FILE));
     m_logFile.data()->open(QFile::Append | QFile::Text);
     qInstallMessageHandler(messageHandler);
+
+    if (parser.isSet(rollback_option)) {
+        InstallController::get_instance()->disable_mst();
+        return 0;
+    }
 
     InstallWindow w;
     w.show();
