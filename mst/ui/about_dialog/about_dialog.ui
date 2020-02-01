@@ -34,15 +34,21 @@
     <rect>
      <x>10</x>
      <y>20</y>
-     <width>150</width>
-     <height>150</height>
+     <width>141</width>
+     <height>141</height>
     </rect>
    </property>
+   <property name="maximumSize">
+    <size>
+     <width>150</width>
+     <height>150</height>
+    </size>
+   </property>
    <property name="text">
-    <string/>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img width=&quot;150px&quot; height=&quot;150px&quot; src=&quot;:/doc/logo.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="pixmap">
-    <pixmap resource="../../resources.qrc">:/doc/logo.png</pixmap>
+    <pixmap resource="../../../resources.qrc">:/doc/logo.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -85,7 +91,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-201</y>
+      <y>0</y>
       <width>355</width>
       <height>600</height>
      </rect>
@@ -166,7 +172,7 @@ International&lt;/a&gt;.&lt;/p&gt;
   </widget>
  </widget>
  <resources>
-  <include location="../../resources.qrc"/>
+  <include location="../../../resources.qrc"/>
  </resources>
  <connections>
   <connection>

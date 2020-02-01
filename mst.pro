@@ -86,3 +86,6 @@ dist.commands += \
     rm -rf $$DIST_NAME
 
 QMAKE_EXTRA_TARGETS += rpm version dist
+
+RESOURCES += \
+    resources.qrc
