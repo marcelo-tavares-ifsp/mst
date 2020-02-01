@@ -32,7 +32,13 @@ const QString MST_LOG_FILE   = "/var/log/mst.log";
 void messageHandler(QtMsgType type, const QMessageLogContext &context,
                     const QString &msg);
 
-static void create_config_file(QFile& file);
+
+void create_config_file(QFile& file) {
+    if (! file.open(QIODevice::WriteOnly | QIODevice::Text))
+            return;
+    QTextStream out(&file);
+    out << "user:multiseat";
+}
 
 /**
  * @brief main -- The application entry point.
@@ -93,11 +99,4 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context,
 
     out << context.category << ": " << msg << endl;
     out.flush();
-}
-
-void create_config_file(QFile& file) {
-    if (! file.open(QIODevice::WriteOnly | QIODevice::Text))
-            return;
-    QTextStream out(&file);
-    out << "user:multiseat";
 }
