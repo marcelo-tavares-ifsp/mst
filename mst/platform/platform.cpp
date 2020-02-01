@@ -288,6 +288,8 @@ int Platform::exec(const QString &command)
 void Platform::system_reboot()
 {
     sync();
-    setuid(0);
+    if (setuid(0) != 0) {
+        throw Platform_exception("Cound not set UID");
+    }
     reboot(RB_AUTOBOOT);
 }
