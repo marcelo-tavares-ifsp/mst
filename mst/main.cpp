@@ -29,9 +29,30 @@ const QString MST_CONFIG_FILE = "/etc/mst";
  */
 const QString MST_LOG_FILE   = "/var/log/mst.log";
 
+/**
+ * @brief messageHandler -- The MST default logging handler.
+ * @param type -- A log message type.
+ * @param context -- A log message context.
+ * @param msg -- A log message.
+ */
 void messageHandler(QtMsgType type, const QMessageLogContext &context,
-                    const QString &msg);
+                    const QString &msg)
+{
+    QTextStream out(m_logFile.data());
+    out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz ");
 
+    switch (type)
+    {
+    case QtInfoMsg:     out << "INF "; break;
+    case QtDebugMsg:    out << "DBG "; break;
+    case QtWarningMsg:  out << "WRN "; break;
+    case QtCriticalMsg: out << "CRT "; break;
+    case QtFatalMsg:    out << "FTL "; break;
+    }
+
+    out << context.category << ": " << msg << endl;
+    out.flush();
+}
 
 void create_config_file(QFile& file) {
     if (! file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -74,29 +95,4 @@ int main(int argc, char *argv[])
     InstallWindow w;
     w.show();
     return a.exec();
-}
-
-/**
- * @brief messageHandler -- The MST default logging handler.
- * @param type -- A log message type.
- * @param context -- A log message context.
- * @param msg -- A log message.
- */
-void messageHandler(QtMsgType type, const QMessageLogContext &context,
-                    const QString &msg)
-{
-    QTextStream out(m_logFile.data());
-    out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz ");
-
-    switch (type)
-    {
-    case QtInfoMsg:     out << "INF "; break;
-    case QtDebugMsg:    out << "DBG "; break;
-    case QtWarningMsg:  out << "WRN "; break;
-    case QtCriticalMsg: out << "CRT "; break;
-    case QtFatalMsg:    out << "FTL "; break;
-    }
-
-    out << context.category << ": " << msg << endl;
-    out.flush();
 }
