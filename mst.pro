@@ -46,6 +46,8 @@ templates_awesome.files += \
     templates/awesome/xephyr_screens.lua.template \
     templates/awesome/mst_autostart.lua.template
 
+CONFIG += nostrip
+    
 etc.files += \
     etc/mst
 
