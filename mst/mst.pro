@@ -12,6 +12,19 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = mst
 TEMPLATE = app
 
+versiontarget.target = version.h
+versiontarget.commands = \
+    [ -e ../.git ] || echo \'const string VERSION = \"\
+$$system("[ ! -e '../.git' ] || git describe --abbrev=0")-\
+$$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")\";\' \
+   > version.h;
+versiontarget.depends = FORCE
+dist.depends = version.h
+
+PRE_TARGETDEPS += version.h
+
+QMAKE_EXTRA_TARGETS += versiontarget
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
