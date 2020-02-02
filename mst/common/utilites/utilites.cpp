@@ -10,7 +10,7 @@ vector<string> split(string input, char separator) {
 
 bool contains(vector<string> xm, string s)
 {
-    for(int i = 0; i < xm.size(); i++)
+    for(string::size_type i = 0; i < xm.size(); i++)
     {
         if(xm[i] == s)
         {
