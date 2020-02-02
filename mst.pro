@@ -1,5 +1,18 @@
 include(mst-vars.pri)
 
+PRE_TARGETDEPS += version
+
+QMAKE_EXTRA_TARGETS += version
+
+version.target = mst/version.h
+version.commands = \
+    echo \'const string VERSION = \" \
+        $$system("git describe --abbrev=0")-\
+        $$system("git rev-parse --short HEAD")\";\' \
+        > mst/version.h
+version.depends = .git
+dist.depends = version
+
 TEMPLATE = subdirs
 SUBDIRS = mst
 
@@ -71,7 +84,7 @@ rpm.commands += \
     chown multiseat: ~multiseat/rpmbuild/;		\
     su - multiseat -c \'rpmbuild -ba ~/rpmbuild/SPECS/mst.spec\'
 
-rpm.depends += version dist
+rpm.depends += dist
 
 dist.commands += cd mst && make -j4 dist;
 dist.commands += \
@@ -85,7 +98,7 @@ dist.commands += \
     tar -czpf $$DIST_NAME\\.tar.gz $$DIST_NAME; \
     rm -rf $$DIST_NAME
 
-QMAKE_EXTRA_TARGETS += rpm version dist
+QMAKE_EXTRA_TARGETS += rpm dist
 
 RESOURCES += \
     resources.qrc

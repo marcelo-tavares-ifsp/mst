@@ -12,16 +12,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = mst
 TEMPLATE = app
 
-PRE_TARGETDEPS += version
-
-QMAKE_EXTRA_TARGETS += version
-
-version.commands += \
-    echo \'const string VERSION = \" \
-        $$system("git describe --abbrev=0")-\
-        $$system("git rev-parse --short HEAD")\";\' \
-        > version.h
-
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -82,7 +72,8 @@ HEADERS += \
     components/sudo.h \
     components/system.h \
     platform/platform.h \
-    components/component_manager.h
+    components/component_manager.h \
+    version.h
 
 FORMS += \
     ui/install_window/installwindow.ui \
