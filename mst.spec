@@ -26,10 +26,11 @@ make -j4
 
 %install
 mkdir -p $RPM_BUILD_ROOT/usr/local/bin
-mkdir -p $RPM_BUILD_ROOT/usr/share/mst
+mkdir -p $RPM_BUILD_ROOT/usr/share/mst/awesome
 mkdir -p $RPM_BUILD_ROOT/etc
 install -m0755 mst/mst $RPM_BUILD_ROOT/usr/local/bin/mst
-install -m0644 templates/* $RPM_BUILD_ROOT/usr/share/mst/
+install -m0644 templates/*.template $RPM_BUILD_ROOT/usr/share/mst/
+install -m6444 templates/awesome/*.template $RPM_BUILD_ROOT/usr/share/mst/awesome/
 install -m0755 scripts/*   $RPM_BUILD_ROOT/usr/local/bin/
 install -m0644 etc/mst     $RPM_BUILD_ROOT/etc
 
