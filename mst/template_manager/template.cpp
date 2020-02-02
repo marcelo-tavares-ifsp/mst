@@ -48,7 +48,6 @@ QString Template::substitute()
 
     QString output(this->template_string);
     foreach (auto key, substitutions.keys()) {
-        string::size_type pos = 0;
         QString pattern(Template::TEMPLATE_BEGIN + key
                         + Template::TEMPLATE_END);
         output.replace(pattern, substitutions[key]);
