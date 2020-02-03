@@ -20,7 +20,7 @@ namespace awesome {
 
 static const QString RC_LUA_FILE      = "rc.lua";
 static const QString RC_LUA_TPL_FILE  = "rc.lua";
-static const QString RC_LUA4_TPL_FILE = "rc.lua4";
+static const QString RC_LUA4_TPL_FILE = "rc.lua.4";
 
 //// The main class.
 
