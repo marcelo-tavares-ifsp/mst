@@ -39,8 +39,9 @@ QString udev::prepare_udev_rules(Configuration& config)
     {
         result += tpl.set("usb_device",
                           QString::fromStdString(config.seats[idx].usb))
-                   .set("seat_idx", QString::number(idx + 1 ))
-                   .substitute();
+                .set("prefix", QString::fromLocal8Bit(INSTALLATION_PREFIX))
+                .set("seat_idx", QString::number(idx + 1 ))
+                .substitute();
     }
 
     return result;
