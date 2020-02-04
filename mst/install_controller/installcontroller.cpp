@@ -302,7 +302,7 @@ void InstallController::create_backup()
 {
     const QString user = PathManager::get_instance()->get_mst_user();
     const string usr_dir = PathManager::get_instance()->get_usr_share_dir();
-    const QString cmd =  INSTALLATION_PREFIX + "/mk_backup.sh " + user;
+    const QString cmd =  INSTALLATION_PREFIX + "/bin/mk_backup.sh " + user;
     if (Platform::exec(cmd) != 0) {
         throw InstallController_exception("Could not create a backup");
     }
