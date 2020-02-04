@@ -3,7 +3,6 @@
 # Project created by QtCreator 2018-12-16T10:50:20
 #
 #-------------------------------------------------
-
 QT       += core gui
 LIBS += -ludev
 
@@ -94,7 +93,10 @@ FORMS += \
     ui/reboot_dialog/rebootdialog.ui \
     ui/about_dialog/about_dialog.ui
 
-DEFINES += INSTALLATION_PREFIX=\"$$PREFIX\"
+isEmpty(PREFIX) {
+    PREFIX = /usr/
+}
+DEFINES += INSTALLATION_PREFIX=\\\"$${PREFIX}\\\"
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
