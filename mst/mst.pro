@@ -94,6 +94,8 @@ FORMS += \
     ui/reboot_dialog/rebootdialog.ui \
     ui/about_dialog/about_dialog.ui
 
+DEFINES += INSTALLATION_PREFIX=\"$$PREFIX\"
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

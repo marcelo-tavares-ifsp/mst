@@ -302,7 +302,7 @@ void InstallController::create_backup()
 {
     const QString user = PathManager::get_instance()->get_mst_user();
     const string usr_dir = PathManager::get_instance()->get_usr_share_dir();
-    const QString cmd = "/usr/local/bin/mk_backup.sh " + user;
+    const QString cmd =  INSTALLATION_PREFIX + "/mk_backup.sh " + user;
     if (Platform::exec(cmd) != 0) {
         throw InstallController_exception("Could not create a backup");
     }
@@ -311,7 +311,7 @@ void InstallController::create_backup()
 void InstallController::restore_backup()
 {
     const QString user = PathManager::get_instance()->get_mst_user();
-    const QString cmd = "/usr/local/bin/apl_backup.sh " + user;
+    const QString cmd = INSTALLATION_PREFIX + "/apl_backup.sh " + user;
 
     if (system(cmd.toStdString().c_str()))
     {
