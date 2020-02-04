@@ -13,7 +13,7 @@ TEMPLATE = app
 
 versiontarget.target = version.h
 versiontarget.commands = \
-    [ -e ../.git ] || echo \'const string VERSION = \"\
+    [ ! -e ../.git ] || echo \'const string VERSION = \"\
 $$system("[ ! -e '../.git' ] || git describe --abbrev=0")-\
 $$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")\";\' \
    > version.h;
