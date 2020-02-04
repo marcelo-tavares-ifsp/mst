@@ -73,7 +73,7 @@ QString awesome::make_xephyr_autostart()
     //       kind of loop (see the file.)
     Template tpl = Template_manager::get_instance()
             ->get_template("awesome/mst_autostart.lua");
-
+    tpl.set("prefix", QString::fromLocal8Bit(INSTALLATION_PREFIX));
     return tpl.substitute();
 }
 
