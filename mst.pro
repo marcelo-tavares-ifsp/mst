@@ -3,6 +3,10 @@ include(mst-vars.pri)
 TEMPLATE = subdirs
 SUBDIRS = mst
 
+isEmpty(PREFIX) {
+    PREFIX = /usr
+}
+
 scripts.files += \
     scripts/mst-start-dm \
     scripts/mk_backup.sh \
@@ -10,7 +14,7 @@ scripts.files += \
     scripts/mst-mount	\
     scripts/mst-umount
 
-scripts.path = $$(PREFIX)/bin
+scripts.path = $${PREFIX}/bin
 
 templates.files += \
     templates/bashrc.template    \
