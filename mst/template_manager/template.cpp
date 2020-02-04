@@ -63,7 +63,12 @@ QString Template::substitute()
 void Template::substitute(QFile& output_file)
 {
     output_file.open(QFile::WriteOnly | QIODevice::Text);
-    output_file.write(substitute().toStdString().c_str());
+    if (output_file.isOpen()) {
+        output_file.write(substitute().toStdString().c_str());
+    } else {
+        throw Template_error("Could not open output file: "
+                             + output_file.fileName());
+    }
     output_file.close();
 }
 

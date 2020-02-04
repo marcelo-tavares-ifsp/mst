@@ -7,6 +7,17 @@
 
 using namespace std;
 
+/**
+ * @brief The Template_error class -- describes a generic template error.
+ */
+class Template_error : public runtime_error {
+public:
+    Template_error(QString what)
+        : runtime_error(what.toStdString()) {
+        // Do nothing.
+    }
+};
+
 class Template
 {
 public:
