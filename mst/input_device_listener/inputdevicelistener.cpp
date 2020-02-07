@@ -104,7 +104,7 @@ void InputDeviceListener::run()
     string* result = NULL;
     is_running = true;
     _debug_print_devices(type, devices);
-
+    sleep(5);
     switch (type)
     {
     case DEVICE_TYPE::KEYBOARD:
