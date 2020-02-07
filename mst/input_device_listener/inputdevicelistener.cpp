@@ -74,12 +74,23 @@ bool InputDeviceListener::loop_answer_device(string device)
     }
 
     bytes = _try_read(fd, &ie);
-    if ((bytes > 0) && is_btn_pressed(ie))
+
+    if (bytes > 0)
     {
-        char name[256] = "Unknown";
-        ioctl (fd, EVIOCGNAME (sizeof (name)), name);
-        qInfo(input_device_listener_category()) << "Detected: " << name;
-        return true;
+        bool is_pressed;
+        if (this->type == DEVICE_TYPE::MOUSE) {
+            unsigned char* data = (unsigned char*) &ie;
+            is_pressed = (data[0] & 0x1) || (data[0] & 0x2) || (data[0] & 0x4);
+        } else {
+            is_pressed = is_btn_pressed(ie);
+        }
+        if (is_pressed) {
+            char name[256] = "Unknown";
+            ioctl (fd, EVIOCGNAME (sizeof (name)), name);
+            qInfo(input_device_listener_category()) << "Detected: " << name;
+            close(fd);
+            return true;
+        }
     }
 
     close(fd);
