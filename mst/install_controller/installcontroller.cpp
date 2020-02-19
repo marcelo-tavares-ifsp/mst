@@ -391,7 +391,7 @@ bool InstallController::is_equal(int i, int j) {
 }
 
 bool InstallController::is_empty(int i) {
-    string msg = "";
+    QString msg = "";
     bool result = false;
 
     if (config->seats[i].keyboard == "")
@@ -410,7 +410,7 @@ bool InstallController::is_empty(int i) {
         result = true;
     }
 
-    qInfo(install_controller_category()) << msg.c_str();
+    qInfo(install_controller_category()) << msg;
 
     return result;
 }
