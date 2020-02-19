@@ -31,7 +31,8 @@
 get_user_by_display_number() {
     local display_number="$1"
     local user=$(who | grep "(:$display_number)" \
-		     | sed -re 's/^([^ ]+) +:[0-9]+.*/\1/g')
+		     | sed -re 's/^([^ ]+) +.* \(:[0-9]+\)/\1/g' \
+		     | head -1)
     echo "$user"
 }
 
