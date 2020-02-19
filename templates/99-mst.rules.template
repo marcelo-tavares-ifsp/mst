@@ -1,1 +1,1 @@
-ACTION=="ADD", KERNEL=="sd[b-z][0-9]", DEVPATH=="{{usb_device}}", RUN+={{prefix}}/bin/mst-mount /dev/%k {{seat_idx}}"
+ACTION=="add", KERNEL=="sd[b-z][0-9]", DEVPATH=="{{usb_device}}", RUN+={{prefix}}/bin/mst-mount /dev/%k {{seat_idx}}"
