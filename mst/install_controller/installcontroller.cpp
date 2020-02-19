@@ -172,10 +172,8 @@ void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
 {
     // TODO: red and after detecring green mouse and keyboard =)
 
-    string d = to_std_string(device);
-
     qInfo(install_controller_category())
-            << "Device assigned: " << d.c_str() << " (" << type << ")";
+            << "Device assigned: " << device << " (" << type << ")";
 
     for (uint32_t i = 0; i < config->seats.size(); i++)
     {
@@ -183,21 +181,21 @@ void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
         {
             switch (type) {
             case DEVICE_TYPE::KEYBOARD:
-                config->seats[i].keyboard = d;
+                config->seats[i].keyboard = device;
                 break;
             case DEVICE_TYPE::MOUSE:
-                config->seats[i].mouse = d;
+                config->seats[i].mouse = device;
                 break;
             case DEVICE_TYPE::USB:
-                config->seats[i].usb = d;
+                config->seats[i].usb = device;
                 break;
             }
 
             qInfo(install_controller_category())
                     << "Seat interface: '" << config->seats[i].interface
-                    << "'; keyboard: '" << config->seats[i].keyboard.c_str()
-                    << "'; mouse: '" << config->seats[i].mouse.c_str()
-                    << "'; usb: " << config->seats[i].usb.c_str() << "'";
+                    << "'; keyboard: '" << config->seats[i].keyboard
+                    << "'; mouse: '" << config->seats[i].mouse
+                    << "'; usb: " << config->seats[i].usb << "'";
         }
     }
 }
@@ -377,15 +375,15 @@ bool InstallController::config_is_valid()
 }
 
 bool InstallController::is_equal(int i, int j) {
-    string msg = "Comparison " + std::to_string(i) + string(" seat, ")
+    QString msg = "Comparison " + QString::number(i) + " seat, "
                       + config->seats[i].keyboard + " keyboard, "
                       + config->seats[i].mouse + " mouse, "
                       + config->seats[i].usb + " usb AND\n"
-                      + string("\t\t\t\t\t\t\t\t") + std::to_string(j) + " seat, "
+                      + "\t\t\t\t\t\t\t\t" + QString::number(j) + " seat, "
                       + config->seats[j].keyboard + " keyboard, "
                       + config->seats[j].mouse + " mouse, "
                       + config->seats[j].usb + " usb";
-    qInfo(install_controller_category()) << msg.c_str();
+    qInfo(install_controller_category()) << msg;
 
     return ((config->seats[i].keyboard == config->seats[j].keyboard)
             || (config->seats[i].mouse == config->seats[j].mouse)
@@ -434,11 +432,11 @@ void InstallController::print_config() {
         msg += "\tseat: ";
         msg += seat.interface + "\n";
         msg += "\tkeyboard: ";
-        msg += QString::fromStdString(seat.keyboard) + "\n";
+        msg += seat.keyboard + "\n";
         msg += "\tmouse: ";
-        msg += QString::fromStdString(seat.mouse) + "\n";
+        msg += seat.mouse + "\n";
         msg += "\tusb: ";
-        msg += QString::fromStdString(seat.usb) + "\n";
+        msg += seat.usb + "\n";
         msg += "\tresolution: ";
         msg += QString::number(seat.resolution.width);
         msg += "x";
