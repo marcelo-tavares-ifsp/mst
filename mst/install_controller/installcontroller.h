@@ -34,7 +34,7 @@ public:
     void load_interface_page(QComboBox* cb, QListWidget* lw);
     void save_interfaces(QComboBox* cbResolution, QListWidget* lwMonitors);
     vector<QWidget *> load_device_page(QVBoxLayout* vbl);
-    void prepare_for_connect_interface(string name_interface);
+    void prepare_for_connect_interface(QString& name_interface);
     void begin_install();
     void begin_stop();
     void begin_uninstall();
@@ -62,7 +62,7 @@ private:
     vector<QWidget *> *widgets;
     vector<string> *list_mice;
     vector<string> *list_keybs;
-    string current_interface_name;
+    QString current_interface_name;
     Component_manager* component_manager;
 };
 

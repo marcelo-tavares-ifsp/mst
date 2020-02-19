@@ -17,7 +17,7 @@ struct Resolution
 
 struct Seat
 {
-    string interface;
+    QString interface;
     string mouse;
     string keyboard;
     string usb;

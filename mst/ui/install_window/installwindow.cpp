@@ -40,8 +40,8 @@ void InstallWindow::set_show_page(int number)
 void InstallWindow::on_btninterface_clicked()
 {
     QPushButton* button = (QPushButton *) sender();
-    string name_interface = to_std_string(button->text());
-    qInfo(install_window_category()) << name_interface.c_str() << " was selected";
+    QString name_interface = button->text();
+    qInfo(install_window_category()) << name_interface << " was selected";
     inst_controller->prepare_for_connect_interface(name_interface);    
 
     initial_listeners();

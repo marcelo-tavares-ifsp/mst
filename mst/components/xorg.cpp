@@ -71,7 +71,8 @@ static void _print_device(ostream& os, const Configuration& config)
     for (uint32_t idx = 0; idx < config.seats.size(); idx++)
     {
         os << _elem("Option")
-           << string("\"Monitor-") << config.seats[idx].interface << string("\"")
+           << string("\"Monitor-") << config.seats[idx].interface.toStdString()
+           << string("\"")
            << string(" \"monitor") << idx << string("\"\n");
     }
 

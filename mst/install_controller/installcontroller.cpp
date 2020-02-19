@@ -72,7 +72,7 @@ static void clear_layout(QVBoxLayout* vbl, vector<QWidget*> widgets)
     qInfo(install_controller_category()) << "layout was cleared";
 }
 
-static void clear_interface(string name_interface, vector<Seat> seats)
+static void clear_interface(QString& name_interface, vector<Seat> seats)
 {
     for (uint32_t i = 0; i < seats.size(); i++)
     {
@@ -81,7 +81,7 @@ static void clear_interface(string name_interface, vector<Seat> seats)
             seats[i].keyboard = "";
             seats[i].mouse = "";
             seats[i].usb = "";
-            qInfo(install_controller_category()) << "interface " << name_interface.c_str() << " was cleared";
+            qInfo(install_controller_category()) << "interface " << name_interface << " was cleared";
             return;
         }
     }
@@ -132,11 +132,11 @@ void InstallController::save_interfaces(QComboBox* cbResolution, QListWidget* lw
     for (int idx = 0; idx < items.count(); idx++)
     {
         Seat seat;
-        seat.interface = to_std_string(items[idx]->text());
+        seat.interface = items[idx]->text();
         seat.resolution.width = resolution[0];
         seat.resolution.height = resolution[1];
         config->seats.push_back(seat);
-        qInfo(install_controller_category()) << "Name: " << seat.interface.c_str();
+        qInfo(install_controller_category()) << "Name: " << seat.interface;
         qInfo(install_controller_category()) << "width: " << seat.resolution.width
                                              << "; height: " << seat.resolution.height;
     }
@@ -149,8 +149,8 @@ vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
 
     for (auto seat : config->seats)
     {
-        QPushButton *btn = new QPushButton(to_qstring(seat.interface));
-        qInfo(install_controller_category()) << "Button: " << seat.interface.c_str() << " was added";
+        QPushButton *btn = new QPushButton(seat.interface);
+        qInfo(install_controller_category()) << "Button: " << seat.interface << " was added";
         btn->setFocusPolicy(Qt::NoFocus);
         widgets->push_back(btn);
     }
@@ -162,7 +162,7 @@ vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
     return *widgets;
 }
 
-void InstallController::prepare_for_connect_interface(string name_interface)
+void InstallController::prepare_for_connect_interface(QString& name_interface)
 {
     current_interface_name = name_interface;
     clear_interface(name_interface, config->seats);
@@ -194,7 +194,7 @@ void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
             }
 
             qInfo(install_controller_category())
-                    << "Seat interface: '" << config->seats[i].interface.c_str()
+                    << "Seat interface: '" << config->seats[i].interface
                     << "'; keyboard: '" << config->seats[i].keyboard.c_str()
                     << "'; mouse: '" << config->seats[i].mouse.c_str()
                     << "'; usb: " << config->seats[i].usb.c_str() << "'";
@@ -428,23 +428,23 @@ vector<string> InstallController::get_list_of_keybs()
 }
 
 void InstallController::print_config() {
-    string msg = "\n-----START current configuration:\n";
+    QString msg = "\n-----START current configuration:\n";
 
     for (auto seat : config->seats) {
         msg += "\tseat: ";
         msg += seat.interface + "\n";
         msg += "\tkeyboard: ";
-        msg += seat.keyboard + "\n";
+        msg += QString::fromStdString(seat.keyboard) + "\n";
         msg += "\tmouse: ";
-        msg += seat.mouse + "\n";
+        msg += QString::fromStdString(seat.mouse) + "\n";
         msg += "\tusb: ";
-        msg += seat.usb + "\n";
+        msg += QString::fromStdString(seat.usb) + "\n";
         msg += "\tresolution: ";
-        msg += std::to_string(seat.resolution.width);
+        msg += QString::number(seat.resolution.width);
         msg += "x";
-        msg += std::to_string(seat.resolution.height) + "\n";
+        msg += QString::number(seat.resolution.height) + "\n";
     }
 
     msg += "-----END current configuration";
-    qInfo(install_controller_category()) << msg.c_str();
+    qInfo(install_controller_category()) << msg;
 }
