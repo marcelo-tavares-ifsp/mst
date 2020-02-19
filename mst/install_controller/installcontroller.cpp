@@ -445,6 +445,6 @@ void InstallController::print_config() {
         msg += std::to_string(seat.resolution.height) + "\n";
     }
 
-    msg += "-----END currecnt cunfiguration";
+    msg += "-----END current configuration";
     qInfo(install_controller_category()) << msg.c_str();
 }
