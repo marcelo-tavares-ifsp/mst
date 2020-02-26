@@ -58,6 +58,12 @@ static void fill_resolutions_and_interfaces(QComboBox *cb, QListWidget *lw)
             lw->addItem(QString::fromStdString(availableMonitors[idx].interface));
         }
     }
+
+    // TODO: Fix set intersection algorithm to exclude empty strings
+    result.erase(remove_if(result.begin(), result.end(), [](const string& elem) {
+        return elem.empty();
+    }), result.end());
+
     sort(result.begin(), result.end(), rcomp);
     add_resolutions_to_cb(result, cb);
 }
