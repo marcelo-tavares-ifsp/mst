@@ -30,13 +30,13 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>120</y>
+      <y>9</y>
       <width>600</width>
-      <height>270</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="pageStart">
      <widget class="QWidget" name="verticalLayoutWidget">
@@ -115,7 +115,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>229</y>
+        <y>330</y>
         <width>581</width>
         <height>33</height>
        </rect>
@@ -189,20 +189,26 @@
         <x>10</x>
         <y>80</y>
         <width>581</width>
-        <height>141</height>
+        <height>241</height>
        </rect>
       </property>
       <property name="selectionMode">
        <enum>QAbstractItemView::MultiSelection</enum>
       </property>
      </widget>
+     <zorder>cbResolution</zorder>
+     <zorder>horizontalLayoutWidget</zorder>
+     <zorder>lblResolution</zorder>
+     <zorder>lblMonitors</zorder>
+     <zorder>lwMonitors</zorder>
+     <zorder>btnBackToStart</zorder>
     </widget>
     <widget class="QWidget" name="pageDevices">
      <widget class="QWidget" name="horizontalLayoutWidget_2">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>230</y>
+        <y>330</y>
         <width>581</width>
         <height>33</height>
        </rect>
@@ -258,7 +264,7 @@
         <x>10</x>
         <y>40</y>
         <width>581</width>
-        <height>181</height>
+        <height>281</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="vlDevices"/>
@@ -336,33 +342,6 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QLabel" name="lblNameTool">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>600</width>
-      <height>100</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>600</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>30</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Multi-Seat Tool</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="lbl_Version">
     <property name="geometry">
      <rect>
@@ -406,7 +385,7 @@
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>17</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
