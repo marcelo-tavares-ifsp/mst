@@ -19,7 +19,7 @@ InstallWindow::InstallWindow(QWidget *parent) :
 
     ui->Version->setText(QString::fromStdString(VERSION));
 
-    set_show_page(0);
+    show_page(0);
 }
 
 InstallWindow::~InstallWindow()
@@ -28,10 +28,10 @@ InstallWindow::~InstallWindow()
 }
 
 /**
- * @brief InstallWindow::set_show_page -- change install page
- * @param number -- number of page install
+ * @brief InstallWindow::show_page -- change main window page
+ * @param number -- number of page to show
  */
-void InstallWindow::set_show_page(int number)
+void InstallWindow::show_page(int number)
 {
     ui->stackedWidget->setCurrentIndex(number);
     qDebug(install_window_category()) << number + " page is show";
@@ -55,7 +55,7 @@ void InstallWindow::on_btninterface_clicked()
 void InstallWindow::on_btnBeginInstall_clicked()
 {
     inst_controller->load_interface_page(ui->cbResolution, ui->lwMonitors);
-    set_show_page(1);
+    show_page(1);
 }
 
 /**
@@ -73,7 +73,7 @@ void InstallWindow::on_btnContinueToDevices_clicked()
         ui->vlDevices->addWidget(btn);
     }
 
-    set_show_page(2);
+    show_page(2);
 }
 
 /**
@@ -83,7 +83,7 @@ void InstallWindow::on_btnContinueToEnd_clicked()
 {
     if (inst_controller->config_is_valid())
     {
-        set_show_page(3);
+        show_page(3);
         InstallController* con = InstallController::get_instance();
         con->begin_install();
         qDebug(install_window_category) << "going to the 3rd panel...";
@@ -127,17 +127,17 @@ void InstallWindow::on_btnEndInstall_clicked()
 
 void InstallWindow::on_btnBackToStart_clicked()
 {
-    set_show_page(0);
+    show_page(0);
 }
 
 void InstallWindow::on_btnBackToInterface_clicked()
 {
-    set_show_page(1);
+    show_page(1);
 }
 
 void InstallWindow::on_btnBackToDevices_clicked()
 {
-    set_show_page(2);
+    show_page(2);
 }
 
 void InstallWindow::on_btnCancel_clicked()

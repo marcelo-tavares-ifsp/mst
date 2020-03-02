@@ -58,7 +58,7 @@ private:
     void initial_listeners();
     void initial_calibration_dialog(InputDeviceListener* device_listener);
     void attach_signals(InputDeviceListener* listener, CalibrationDialog* cd);
-    void set_show_page(int number);
+    void show_page(int number);
 };
 
 #endif // INSTALLWINDOW_H
