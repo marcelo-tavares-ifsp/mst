@@ -9,6 +9,8 @@
 #include "input_device_listener/inputdevicelistener.h"
 #include "components/component_manager.h"
 #include "components/vgl.h"
+#include <QComboBox>
+#include <QListWidget>
 
 Q_DECLARE_LOGGING_CATEGORY(install_controller_category)
 
@@ -31,7 +33,7 @@ class InstallController: public QObject
 public:
     static InstallController *get_instance();
     QString get_instruction(InputDeviceListener * device_listener);
-    void load_interface_page(QComboBox* cb, QListWidget* lw);
+    void load_interface_page(QVBoxLayout* seats_box);
     void save_interfaces(QComboBox* cbResolution, QListWidget* lwMonitors);
     vector<QWidget *> load_device_page(QVBoxLayout* vbl);
     void prepare_for_connect_interface(QString& name_interface);

@@ -2,6 +2,7 @@
 #include <QPushButton>
 #include <QCoreApplication>
 #include <QMainWindow>
+#include <QListWidget>
 
 #include "../platform/platform.h"
 
@@ -120,11 +121,29 @@ InstallController *InstallController::get_instance(){
     return instance;
 }
 
-void InstallController::load_interface_page(QComboBox *cb, QListWidget *lw)
+void InstallController::load_interface_page(QVBoxLayout* seats_box)
 {
-    fill_resolutions_and_interfaces(cb, lw);
-    cb->setCurrentIndex(cb->count() - 1);
-    lw->selectAll();
+    for (auto w : *widgets) {
+        delete w;
+    }
+    widgets->clear();
+
+    vector<xrandrMonitor> availableMonitors = Platform::xrandr_get_monitors();
+    for (auto monitor : availableMonitors) {
+        QWidget* widget = new QWidget();
+        QListWidget* list = new QListWidget();
+        QVBoxLayout* layout = new QVBoxLayout();
+        QLabel* label = new QLabel(QString::fromStdString(monitor.interface));
+        widget->setLayout(layout);
+        for (auto resolution : monitor.resolutions) {
+            list->addItem(QString::fromStdString(resolution));
+        }
+        list->setCurrentRow(0);
+        layout->addWidget(label);
+        layout->addWidget(list);
+        widgets->push_back(widget);
+        seats_box->addWidget(widget);
+    }
 }
 
 void InstallController::save_interfaces(QComboBox* cbResolution, QListWidget* lwMonitors)
@@ -150,22 +169,22 @@ void InstallController::save_interfaces(QComboBox* cbResolution, QListWidget* lw
 
 vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
 {
-    clear_layout(vbl, *widgets);
+    //clear_layout(vbl, *widgets);
     widgets->clear();
 
-    for (auto seat : config->seats)
-    {
-        QPushButton *btn = new QPushButton(seat.interface);
-        qInfo(install_controller_category()) << "Button: " << seat.interface << " was added";
-        btn->setFocusPolicy(Qt::NoFocus);
-        widgets->push_back(btn);
-    }
+//    for (auto seat : config->seats)
+//    {
+//        QPushButton *btn = new QPushButton(seat.interface);
+//        qInfo(install_controller_category()) << "Button: " << seat.interface << " was added";
+//        btn->setFocusPolicy(Qt::NoFocus);
+//        widgets->push_back(btn);
+//    }
 
-    list_mice->clear();
-    list_keybs->clear();
-    Platform::get_input_devices(*list_mice, *list_keybs);
-
-    return *widgets;
+//    list_mice->clear();
+//    list_keybs->clear();
+//    Platform::get_input_devices(*list_mice, *list_keybs);
+    vector<QWidget *> w;
+    return w;
 }
 
 void InstallController::prepare_for_connect_interface(QString& name_interface)

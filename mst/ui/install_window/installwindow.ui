@@ -101,16 +101,6 @@
      </widget>
     </widget>
     <widget class="QWidget" name="pageInterface">
-     <widget class="QComboBox" name="cbResolution">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>30</y>
-        <width>580</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
        <rect>
@@ -147,61 +137,20 @@
        </item>
       </layout>
      </widget>
-     <widget class="QLabel" name="lblResolution">
+     <widget class="QWidget" name="verticalLayoutWidget_4">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>5</y>
-        <width>580</width>
-        <height>21</height>
+        <x>0</x>
+        <y>40</y>
+        <width>591</width>
+        <height>281</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Выберите разрешение:</string>
-      </property>
+      <layout class="QVBoxLayout" name="vbox_seats"/>
      </widget>
-     <widget class="QLabel" name="lblMonitors">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>53</y>
-        <width>580</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Выберите мониторы:</string>
-      </property>
-     </widget>
-     <widget class="QListWidget" name="lwMonitors">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>581</width>
-        <height>241</height>
-       </rect>
-      </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::MultiSelection</enum>
-      </property>
-     </widget>
-     <zorder>cbResolution</zorder>
      <zorder>horizontalLayoutWidget</zorder>
-     <zorder>lblResolution</zorder>
-     <zorder>lblMonitors</zorder>
-     <zorder>lwMonitors</zorder>
      <zorder>btnBackToStart</zorder>
+     <zorder>verticalLayoutWidget_4</zorder>
     </widget>
     <widget class="QWidget" name="pageDevices">
      <widget class="QWidget" name="horizontalLayoutWidget_2">

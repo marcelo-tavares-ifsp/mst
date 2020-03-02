@@ -54,7 +54,7 @@ void InstallWindow::on_btninterface_clicked()
  */
 void InstallWindow::on_btnBeginInstall_clicked()
 {
-    inst_controller->load_interface_page(ui->cbResolution, ui->lwMonitors);
+    inst_controller->load_interface_page(ui->vbox_seats);
     show_page(Ui::Page::INTERFACES);
 }
 
@@ -63,7 +63,7 @@ void InstallWindow::on_btnBeginInstall_clicked()
  */
 void InstallWindow::on_btnContinueToDevices_clicked()
 {
-    inst_controller->save_interfaces(ui->cbResolution, ui->lwMonitors);
+    //inst_controller->save_interfaces(ui->cbResolution, ui->lwMonitors);
     vector<QWidget *> buttons = inst_controller->load_device_page(ui->vlDevices);
 
     for (auto btn : buttons)
