@@ -34,7 +34,7 @@ InstallWindow::~InstallWindow()
 void InstallWindow::show_page(int number)
 {
     ui->stackedWidget->setCurrentIndex(number);
-    qDebug(install_window_category()) << number + " page is show";
+    qDebug(install_window_category()) << number + " page is shown";
 }
 
 void InstallWindow::on_btninterface_clicked()
