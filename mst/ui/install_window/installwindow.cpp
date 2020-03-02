@@ -55,7 +55,7 @@ void InstallWindow::on_btninterface_clicked()
 void InstallWindow::on_btnBeginInstall_clicked()
 {
     inst_controller->load_interface_page(ui->cbResolution, ui->lwMonitors);
-    show_page(1);
+    show_page(Ui::Page::INTERFACES);
 }
 
 /**
@@ -73,7 +73,7 @@ void InstallWindow::on_btnContinueToDevices_clicked()
         ui->vlDevices->addWidget(btn);
     }
 
-    show_page(2);
+    show_page(Ui::Page::SEATS_CONFIGURATION);
 }
 
 /**
@@ -83,7 +83,7 @@ void InstallWindow::on_btnContinueToEnd_clicked()
 {
     if (inst_controller->config_is_valid())
     {
-        show_page(3);
+        show_page(Ui::Page::CONFIGURATION_END);
         InstallController* con = InstallController::get_instance();
         con->begin_install();
         qDebug(install_window_category) << "going to the 3rd panel...";
@@ -127,17 +127,17 @@ void InstallWindow::on_btnEndInstall_clicked()
 
 void InstallWindow::on_btnBackToStart_clicked()
 {
-    show_page(0);
+    show_page(Ui::Page::START_PAGE);
 }
 
 void InstallWindow::on_btnBackToInterface_clicked()
 {
-    show_page(1);
+    show_page(Ui::Page::INTERFACES);
 }
 
 void InstallWindow::on_btnBackToDevices_clicked()
 {
-    show_page(2);
+    show_page(Ui::Page::SEATS_CONFIGURATION);
 }
 
 void InstallWindow::on_btnCancel_clicked()

@@ -14,6 +14,17 @@ Q_DECLARE_LOGGING_CATEGORY(install_window_category)
 
 namespace Ui {
 class InstallWindow;
+
+/**
+ * @brief The Page enum -- InstallWindow pages.
+ */
+enum Page {
+  START_PAGE          = 0,
+  INTERFACES          = 1,
+  SEATS_CONFIGURATION = 2,
+  CONFIGURATION_END   = 3
+};
+
 }
 
 class InstallWindow : public QMainWindow
