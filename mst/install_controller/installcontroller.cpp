@@ -2,7 +2,7 @@
 #include <QPushButton>
 #include <QCoreApplication>
 #include <QMainWindow>
-#include <QListWidget>
+#include <QComboBox>
 
 #include "../platform/platform.h"
 
@@ -137,7 +137,7 @@ void InstallController::load_interface_page(QHBoxLayout* seats_box)
     vector<xrandrMonitor> availableMonitors = Platform::xrandr_get_monitors();
     for (auto monitor : availableMonitors) {
         QWidget* widget = new QWidget();
-        QListWidget* list = new QListWidget();
+        QComboBox* list = new QComboBox();
         QVBoxLayout* layout = new QVBoxLayout();
         QLabel* label = new QLabel(QString::fromStdString(monitor.interface));
         widget->setStyleSheet("border: 1px solid");
@@ -148,7 +148,7 @@ void InstallController::load_interface_page(QHBoxLayout* seats_box)
         for (auto resolution : monitor.resolutions) {
             list->addItem(QString::fromStdString(resolution));
         }
-        list->setCurrentRow(0);
+        list->setCurrentIndex(0);
         layout->addWidget(label);
         layout->addWidget(list);
         widgets->push_back(widget);
