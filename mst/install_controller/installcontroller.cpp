@@ -140,6 +140,9 @@ void InstallController::load_interface_page(QVBoxLayout* seats_box)
         QListWidget* list = new QListWidget();
         QVBoxLayout* layout = new QVBoxLayout();
         QLabel* label = new QLabel(QString::fromStdString(monitor.interface));
+        widget->setStyleSheet("border: 1px solid");
+        list->setStyleSheet("border: 0px");
+        label->setStyleSheet("border: 0px");
         widget->setLayout(layout);
         sort(monitor.resolutions.begin(), monitor.resolutions.end(), rcomp);
         for (auto resolution : monitor.resolutions) {
