@@ -123,6 +123,12 @@ InstallController *InstallController::get_instance(){
 
 void InstallController::load_interface_page(QVBoxLayout* seats_box)
 {
+    auto split1 = [] (const string& input, char separator) -> string {
+      return split(input, separator)[0];
+    };
+    auto rcomp = [split1] (const string& left, const string& right) -> int {
+            return stoi(split1(left, 'x')) > stoi(split1(right, 'x'));
+    };
     for (auto w : *widgets) {
         delete w;
     }
@@ -135,6 +141,7 @@ void InstallController::load_interface_page(QVBoxLayout* seats_box)
         QVBoxLayout* layout = new QVBoxLayout();
         QLabel* label = new QLabel(QString::fromStdString(monitor.interface));
         widget->setLayout(layout);
+        sort(monitor.resolutions.begin(), monitor.resolutions.end(), rcomp);
         for (auto resolution : monitor.resolutions) {
             list->addItem(QString::fromStdString(resolution));
         }
