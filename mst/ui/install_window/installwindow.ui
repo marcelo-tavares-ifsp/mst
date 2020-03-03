@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="pageStart">
      <widget class="QWidget" name="verticalLayoutWidget">
@@ -137,20 +137,17 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="verticalLayoutWidget_4">
+     <widget class="QWidget" name="horizontalLayoutWidget_3">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>40</y>
-        <width>591</width>
+        <width>581</width>
         <height>281</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="vbox_seats"/>
+      <layout class="QHBoxLayout" name="hbox_seats"/>
      </widget>
-     <zorder>horizontalLayoutWidget</zorder>
-     <zorder>btnBackToStart</zorder>
-     <zorder>verticalLayoutWidget_4</zorder>
     </widget>
     <widget class="QWidget" name="pageDevices">
      <widget class="QWidget" name="horizontalLayoutWidget_2">

@@ -121,7 +121,7 @@ InstallController *InstallController::get_instance(){
     return instance;
 }
 
-void InstallController::load_interface_page(QVBoxLayout* seats_box)
+void InstallController::load_interface_page(QHBoxLayout* seats_box)
 {
     auto split1 = [] (const string& input, char separator) -> string {
       return split(input, separator)[0];

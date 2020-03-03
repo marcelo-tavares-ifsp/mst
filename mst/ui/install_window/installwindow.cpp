@@ -54,7 +54,7 @@ void InstallWindow::on_btninterface_clicked()
  */
 void InstallWindow::on_btnBeginInstall_clicked()
 {
-    inst_controller->load_interface_page(ui->vbox_seats);
+    inst_controller->load_interface_page(ui->hbox_seats);
     show_page(Ui::Page::INTERFACES);
 }
 
