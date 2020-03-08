@@ -3,8 +3,10 @@
 #include <QCoreApplication>
 #include <QMainWindow>
 #include <QComboBox>
+#include <QCheckBox>
 
 #include "../platform/platform.h"
+#include "monitor_widget.h"
 
 InstallController* InstallController::instance = 0;
 Q_LOGGING_CATEGORY(install_controller_category, "mst.install_controller")
@@ -136,21 +138,7 @@ void InstallController::load_interface_page(QHBoxLayout* seats_box)
 
     vector<xrandrMonitor> availableMonitors = Platform::xrandr_get_monitors();
     for (auto monitor : availableMonitors) {
-        QWidget* widget = new QWidget();
-        QComboBox* list = new QComboBox();
-        QVBoxLayout* layout = new QVBoxLayout();
-        QLabel* label = new QLabel(QString::fromStdString(monitor.interface));
-        widget->setStyleSheet("border: 1px solid");
-        list->setStyleSheet("border: 0px");
-        label->setStyleSheet("border: 0px");
-        widget->setLayout(layout);
-        sort(monitor.resolutions.begin(), monitor.resolutions.end(), rcomp);
-        for (auto resolution : monitor.resolutions) {
-            list->addItem(QString::fromStdString(resolution));
-        }
-        list->setCurrentIndex(0);
-        layout->addWidget(label);
-        layout->addWidget(list);
+        QWidget* widget = new Monitor_widget(monitor);
         widgets->push_back(widget);
         seats_box->addWidget(widget);
     }

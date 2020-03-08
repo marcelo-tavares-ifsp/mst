@@ -2,6 +2,8 @@
 #define INSTALLCONTROLLER_H
 
 #include <QObject>
+#include <QComboBox>
+#include <QListWidget>
 
 #include "ui_installwindow.h"
 #include "configuration/configuration.h"
@@ -9,8 +11,6 @@
 #include "input_device_listener/inputdevicelistener.h"
 #include "components/component_manager.h"
 #include "components/vgl.h"
-#include <QComboBox>
-#include <QListWidget>
 
 Q_DECLARE_LOGGING_CATEGORY(install_controller_category)
 
