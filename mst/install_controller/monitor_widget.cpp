@@ -1,4 +1,5 @@
 #include <QVBoxLayout>
+#include <QPainter>
 
 #include "monitor_widget.h"
 #include "common/utilites/utilites.h"
@@ -16,9 +17,6 @@ Monitor_widget::Monitor_widget(xrandrMonitor& monitor)
     resolution_combo_box = new QComboBox();
     monitor_label = new QLabel(QString::fromStdString(monitor.interface));
 
-    this->setStyleSheet("border: 1px solid");
-    resolution_combo_box->setStyleSheet("border: 0px");
-    monitor_label->setStyleSheet("border: 0px");
     monitor_state_check_box->setText("Включить");
     monitor_state_check_box->setChecked(true);
     sort(monitor.resolutions.begin(), monitor.resolutions.end(), rcomp);
@@ -49,4 +47,12 @@ Monitor_widget::~Monitor_widget()
 bool Monitor_widget::is_enabled()
 {
     return monitor_state_check_box->isChecked();
+}
+
+void Monitor_widget::paintEvent(QPaintEvent* ev)
+{
+    QStyleOption o;
+    o.initFrom(this);
+    QPainter p(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
 }

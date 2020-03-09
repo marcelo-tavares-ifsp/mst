@@ -13,10 +13,12 @@
  *     used in the Install_controller.
  */
 class Monitor_widget: public QWidget {
+    Q_OBJECT
 public:
     Monitor_widget(xrandrMonitor& monitor);
     ~Monitor_widget();
     bool is_enabled();
+    void paintEvent(QPaintEvent* ev);
 
 private:
     QCheckBox* monitor_state_check_box;

@@ -60,7 +60,8 @@ SOURCES += \
     components/sudo.cpp \
     components/system.cpp \
     platform/platform.cpp \
-    components/component_manager.cpp
+    components/component_manager.cpp \
+    install_controller/monitor_widget.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -85,7 +86,8 @@ HEADERS += \
     components/system.h \
     platform/platform.h \
     components/component_manager.h \
-    version.h
+    version.h \
+    install_controller/monitor_widget.h
 
 FORMS += \
     ui/install_window/installwindow.ui \
@@ -102,3 +104,5 @@ DEFINES += INSTALLATION_PREFIX=\\\"$${PREFIX}\\\"
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES +=

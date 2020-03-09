@@ -25,6 +25,18 @@
   <property name="windowTitle">
    <string>MST</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">Monitor_widget {
+	border: 1px solid;
+	border-radius: 4px;
+	background-color: white;
+}
+
+Monitor_widget QLabel {
+	border: 1px solid black;
+	qproperty-alignment: AlignCenter;
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
