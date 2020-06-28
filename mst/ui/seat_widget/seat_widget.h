@@ -23,7 +23,6 @@ class Seat_widget: public QWidget {
 public:
     Seat_widget(shared_ptr<Seat> seat);
     ~Seat_widget();
-    Monitor get_monitor();
     void paintEvent(QPaintEvent* ev);
 
 private:
@@ -35,6 +34,7 @@ private:
 
 private slots:
     void device_configuration_button_clicked();
+    void monitor_resolution_changed(int index);
 
 signals:
     void configure_seat(int seat_id);
