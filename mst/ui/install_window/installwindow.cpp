@@ -48,17 +48,12 @@ void InstallWindow::configure_seat(int seat_id)
 // Continue Buttons Handlers //////////////////////////////////////////////////
 
 /**
- * @brief InstallWindow::on_btnBeginInstall_clicked -- First page to Second page
+ * @brief InstallWindow::on_btnBeginInstall_clicked -- The 1st page of
+ *     configuration dialog.
  */
 void InstallWindow::on_btnBeginInstall_clicked()
 {
     inst_controller->load_interface_page(this, ui->hbox_seats);
-//    for (Monitor_widget* monitor : monitors) {
-//        monitor->get_monitor()
-//        btn->setParent(ui->pageDevices);
-//        connect(btn, SIGNAL(clicked()), this, SLOT(on_btninterface_clicked()));
-//        ui->vlDevices->addWidget(btn);
-//    }
     show_page(Ui::Page::INTERFACES);
 }
 
@@ -68,14 +63,14 @@ void InstallWindow::on_btnBeginInstall_clicked()
 void InstallWindow::on_btnContinueToDevices_clicked()
 {
     //inst_controller->save_interfaces(ui->cbResolution, ui->lwMonitors);
-    vector<QWidget *> buttons = inst_controller->load_device_page(ui->vlDevices);
+//    vector<QWidget *> buttons = inst_controller->load_device_page(ui->vlDevices);
 
-    for (auto btn : buttons)
-    {
-        btn->setParent(ui->pageDevices);
-        connect(btn, SIGNAL(clicked()), this, SLOT(configure_seat()));
-        ui->vlDevices->addWidget(btn);
-    }
+//    for (auto btn : buttons)
+//    {
+//        btn->setParent(ui->pageDevices);
+//        connect(btn, SIGNAL(clicked()), this, SLOT(configure_seat()));
+//        ui->vlDevices->addWidget(btn);
+//    }
 
     show_page(Ui::Page::SEATS_CONFIGURATION);
 }
