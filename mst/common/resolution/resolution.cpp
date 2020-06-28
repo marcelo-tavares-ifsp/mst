@@ -15,7 +15,7 @@ using namespace std;
 QPair<int, int> Resolution::parse_string(QString resolution)
 {
     QStringList list = resolution.split("x");
-    return { list.at(0).toInt(), list.at(0).toInt() };
+    return { list.at(0).toInt(), list.at(1).toInt() };
 }
 
 Resolution::Resolution() {
