@@ -37,12 +37,10 @@ void InstallWindow::show_page(int number)
     qDebug(install_window_category()) << number + " page is shown";
 }
 
-void InstallWindow::on_btninterface_clicked()
+void InstallWindow::configure_seat(int seat_id)
 {
-    QPushButton* button = (QPushButton *) sender();
-    QString name_interface = button->text();
-    qInfo(install_window_category()) << name_interface << " was selected";
-    inst_controller->prepare_for_connect_interface(name_interface);    
+    qInfo(install_window_category()) << seat_id << " was selected";
+    inst_controller->prepare_for_device_configuration(seat_id);
 
     initial_listeners();
 }
@@ -54,7 +52,7 @@ void InstallWindow::on_btninterface_clicked()
  */
 void InstallWindow::on_btnBeginInstall_clicked()
 {
-    inst_controller->load_interface_page(ui->hbox_seats);
+    inst_controller->load_interface_page(this, ui->hbox_seats);
 //    for (Monitor_widget* monitor : monitors) {
 //        monitor->get_monitor()
 //        btn->setParent(ui->pageDevices);
@@ -75,7 +73,7 @@ void InstallWindow::on_btnContinueToDevices_clicked()
     for (auto btn : buttons)
     {
         btn->setParent(ui->pageDevices);
-        connect(btn, SIGNAL(clicked()), this, SLOT(on_btninterface_clicked()));
+        connect(btn, SIGNAL(clicked()), this, SLOT(configure_seat()));
         ui->vlDevices->addWidget(btn);
     }
 

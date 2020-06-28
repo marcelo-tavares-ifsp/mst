@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <QLoggingCategory>
+#include <memory>
 #include "common/seat/seat.h"
 
 using namespace std;
@@ -15,7 +16,7 @@ class Configuration
 public:
     Configuration();
 
-    vector<Seat> seats;
+    vector<shared_ptr<Seat>> seats;
 };
 
 #endif // CONFIGURATION_H

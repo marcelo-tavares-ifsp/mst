@@ -1,6 +1,10 @@
+#include <memory>
+
 #include "seat.h"
 
-Seat::Seat()
+
+Seat::Seat(int id)
+    : id(id)
 {
 
 }
@@ -10,6 +14,18 @@ bool Seat::intersects(const Seat& other) const
     return (this->keyboard == other.keyboard)
             || (this->mouse == other.mouse)
             || (this->usb == other.usb);
+}
+
+bool Seat::intersects(const shared_ptr<Seat> other) const
+{
+    return (this->keyboard == other->keyboard)
+            || (this->mouse == other->mouse)
+            || (this->usb == other->usb);
+}
+
+int Seat::get_id() const
+{
+    return this->id;
 }
 
 QString Seat::get_keyboard() const

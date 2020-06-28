@@ -59,8 +59,8 @@ private slots:
     void on_btnBackup_clicked();
 
     void on_about_triggered();
-
-    void on_btninterface_clicked();
+public slots:
+    void configure_seat(int seat_id);
 
 private:
     Ui::InstallWindow *ui;

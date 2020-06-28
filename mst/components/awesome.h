@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <memory>
 
 #include "../configuration/configuration.h"
 #include "../template_manager/template.h"
@@ -44,7 +45,7 @@ public:
 
 extern QString make_xephyr_autostart();
 extern QString make_xephyr_rules(uint32_t sSize);
-extern QString make_xephyr_screens(vector<Seat> seats);
+extern QString make_xephyr_screens(vector<shared_ptr<Seat>> seats);
 
 extern string get_awesome_raw_version();
 extern vector<int> get_awesome_version();

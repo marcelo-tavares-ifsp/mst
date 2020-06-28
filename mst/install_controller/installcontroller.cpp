@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QComboBox>
 #include <QCheckBox>
+#include <memory>
 
 #include "../platform/platform.h"
 #include "ui/seat_widget/seat_widget.h"
@@ -82,19 +83,14 @@ static void clear_layout(QVBoxLayout* vbl, vector<QWidget*> widgets)
     qInfo(install_controller_category()) << "layout was cleared";
 }
 
-static void clear_interface(QString& name_interface, vector<Seat> seats)
+static void clear_interface(shared_ptr<Seat> seat)
 {
-    for (uint32_t i = 0; i < seats.size(); i++)
-    {
-        if (seats[i].get_monitor().get_interface() == name_interface)
-        {
-            seats[i].set_keyboard("");
-            seats[i].set_mouse("");
-            seats[i].set_usb("");
-            qInfo(install_controller_category()) << "interface " << name_interface << " was cleared";
-            return;
-        }
-    }
+    seat->set_keyboard("");
+    seat->set_mouse("");
+    seat->set_usb("");
+    qInfo(install_controller_category())
+            << "interface "
+            << seat->get_monitor().get_interface() << " was cleared";
 }
 
 // constructors ///////////////////////////////////////////////////////////////
@@ -105,7 +101,7 @@ InstallController::InstallController()
     widgets = new vector<QWidget *>;
     list_mice = new vector<string>;
     list_keybs = new vector<string>;
-    current_interface_name = "";
+    current_seat_id = -1;
 }
 
 // public methods ///////////////////////////////////////////////////////////////
@@ -124,20 +120,32 @@ InstallController *InstallController::get_instance(){
     return instance;
 }
 
-void InstallController::load_interface_page(QHBoxLayout* seats_box)
+void InstallController::load_interface_page(QWidget* parent,
+                                            QHBoxLayout* seats_box)
 {
     for (auto w : *widgets) {
         delete w;
     }
     widgets->clear();
 
+    list_mice->clear();
+    list_keybs->clear();
+    Platform::get_input_devices(*list_mice, *list_keybs);
+
     vector<XRandr_monitor> availableMonitors = Platform::xrandr_get_monitors();
+    int idx = 0;
     for (auto xrandr_monitor : availableMonitors) {
         Monitor monitor(xrandr_monitor);
-        QWidget* widget = new Seat_widget(monitor);
+        shared_ptr<Seat> seat = make_shared<Seat>(idx++);
+        seat->add_monitor(monitor);
+        config->seats.push_back(seat);
+        QWidget* widget = new Seat_widget(seat);
+        connect(widget, SIGNAL(configure_seat(int)), parent, SLOT(configure_seat(int)));
         widgets->push_back(widget);
         seats_box->addWidget(widget);
     }
+
+
 }
 
 void InstallController::save_interfaces(QComboBox* cbResolution, QListWidget* lwMonitors)
@@ -166,32 +174,32 @@ void InstallController::save_interfaces(QComboBox* cbResolution, QListWidget* lw
 vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
 {
 
-    config->seats.clear();
-    for (auto w : *widgets) {
-        Seat_widget* seat_widget = (Seat_widget*) w;
-        Monitor monitor = seat_widget->get_monitor();
-        if (monitor.is_enabled()) {
-            Seat seat;
-            seat.add_monitor(monitor);
-            config->seats.push_back(seat);
-            qInfo(install_controller_category()) << "Name: " << monitor.get_interface();
-            qInfo(install_controller_category()) << "width: " << monitor.get_current_resolution().get_width()
-                                                 << "; height: " << monitor.get_current_resolution().get_height();
-        }
-    }
+//    config->seats.clear();
+//    for (auto w : *widgets) {
+//        Seat_widget* seat_widget = (Seat_widget*) w;
+//        Monitor monitor = seat_widget->get_monitor();
+//        if (monitor.is_enabled()) {
+//            Seat seat;
+//            seat.add_monitor(monitor);
+//            config->seats.push_back(seat);
+//            qInfo(install_controller_category()) << "Name: " << monitor.get_interface();
+//            qInfo(install_controller_category()) << "width: " << monitor.get_current_resolution().get_width()
+//                                                 << "; height: " << monitor.get_current_resolution().get_height();
+//        }
+//    }
 
-    clear_layout(vbl, *widgets);
+//    clear_layout(vbl, *widgets);
     widgets->clear();
 
-    for (auto seat : config->seats)
-    {
-        QPushButton *btn = new QPushButton(seat.get_monitor().get_interface());
-        qInfo(install_controller_category())
-                << "Button: " << seat.get_monitor().get_interface()
-                << " was added";
-        btn->setFocusPolicy(Qt::NoFocus);
-        widgets->push_back(btn);
-    }
+//    for (auto seat : config->seats)
+//    {
+//        QPushButton *btn = new QPushButton(seat.get_monitor().get_interface());
+//        qInfo(install_controller_category())
+//                << "Button: " << seat.get_monitor().get_interface()
+//                << " was added";
+//        btn->setFocusPolicy(Qt::NoFocus);
+//        widgets->push_back(btn);
+//    }
 
     list_mice->clear();
     list_keybs->clear();
@@ -200,10 +208,10 @@ vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
     return *widgets;
 }
 
-void InstallController::prepare_for_connect_interface(QString& name_interface)
+void InstallController::prepare_for_device_configuration(int seat_id)
 {
-    current_interface_name = name_interface;
-    clear_interface(name_interface, config->seats);
+    current_seat_id = seat_id;
+    clear_interface(config->seats[seat_id]);
 }
 
 void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
@@ -215,25 +223,25 @@ void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
 
     for (uint32_t i = 0; i < config->seats.size(); i++)
     {
-        if (config->seats[i].get_monitor().get_interface() == current_interface_name)
+        if (config->seats[i]->get_id() == current_seat_id)
         {
             switch (type) {
             case DEVICE_TYPE::KEYBOARD:
-                config->seats[i].set_keyboard(device);
+                config->seats[i]->set_keyboard(device);
                 break;
             case DEVICE_TYPE::MOUSE:
-                config->seats[i].set_mouse(device);
+                config->seats[i]->set_mouse(device);
                 break;
             case DEVICE_TYPE::USB:
-                config->seats[i].set_usb(device);
+                config->seats[i]->set_usb(device);
                 break;
             }
 
             qInfo(install_controller_category())
-                    << "Seat interface: '" << config->seats[i].get_monitor().get_interface()
-                    << "'; keyboard: '" << config->seats[i].get_keyboard()
-                    << "'; mouse: '" << config->seats[i].get_mouse()
-                    << "'; usb: " << config->seats[i].get_usb() << "'";
+                    << "Seat interface: '" << config->seats[i]->get_monitor().get_interface()
+                    << "'; keyboard: '" << config->seats[i]->get_keyboard()
+                    << "'; mouse: '" << config->seats[i]->get_mouse()
+                    << "'; usb: " << config->seats[i]->get_usb() << "'";
         }
     }
 }
@@ -414,33 +422,33 @@ bool InstallController::config_is_valid()
 
 bool InstallController::is_equal(int i, int j) {
     QString msg = "Comparison " + QString::number(i) + " seat, "
-                      + config->seats[i].get_keyboard() + " keyboard, "
-                      + config->seats[i].get_mouse() + " mouse, "
-                      + config->seats[i].get_usb() + " usb AND\n"
+                      + config->seats[i]->get_keyboard() + " keyboard, "
+                      + config->seats[i]->get_mouse() + " mouse, "
+                      + config->seats[i]->get_usb() + " usb AND\n"
                       + "\t\t\t\t\t\t\t\t" + QString::number(j) + " seat, "
-                      + config->seats[j].get_keyboard() + " keyboard, "
-                      + config->seats[j].get_mouse() + " mouse, "
-                      + config->seats[j].get_usb() + " usb";
+                      + config->seats[j]->get_keyboard() + " keyboard, "
+                      + config->seats[j]->get_mouse() + " mouse, "
+                      + config->seats[j]->get_usb() + " usb";
     qInfo(install_controller_category()) << msg;
 
-    return config->seats[i].intersects(config->seats[j]);
+    return config->seats[i]->intersects(config->seats[j]);
 }
 
 bool InstallController::is_empty(int i) {
     QString msg = "";
     bool result = false;
 
-    if (config->seats[i].get_keyboard() == "")
+    if (config->seats[i]->get_keyboard() == "")
     {
         msg += "KEYBOARD, ";
         result = true;
     }
-    if (config->seats[i].get_mouse() == "")
+    if (config->seats[i]->get_mouse() == "")
     {
         msg += "MOUSE, ";
         result = true;
     }
-    if (config->seats[i].get_usb() == "")
+    if (config->seats[i]->get_usb() == "")
     {
         msg += "USB, ";
         result = true;
@@ -466,17 +474,17 @@ void InstallController::print_config() {
 
     for (auto seat : config->seats) {
         msg += "\tseat: ";
-        msg += seat.get_monitor().get_interface() + "\n";
+        msg += seat->get_monitor().get_interface() + "\n";
         msg += "\tkeyboard: ";
-        msg += seat.get_keyboard() + "\n";
+        msg += seat->get_keyboard() + "\n";
         msg += "\tmouse: ";
-        msg += seat.get_mouse() + "\n";
+        msg += seat->get_mouse() + "\n";
         msg += "\tusb: ";
-        msg += seat.get_usb() + "\n";
+        msg += seat->get_usb() + "\n";
         msg += "\tresolution: ";
-        msg += QString::number(seat.get_monitor().get_current_resolution().get_width());
+        msg += QString::number(seat->get_monitor().get_current_resolution().get_width());
         msg += "x";
-        msg += QString::number(seat.get_monitor().get_current_resolution().get_height()) + "\n";
+        msg += QString::number(seat->get_monitor().get_current_resolution().get_height()) + "\n";
     }
 
     msg += "-----END current configuration";

@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "awesome.h"
 #include "component.h"
 #include "../common/utilites/utilites.h"
@@ -103,7 +105,7 @@ QString awesome::make_xephyr_rules(uint32_t sSize)
  * @param seats -- Number of seats.
  * @return Generated Lua code as a string.
  */
-QString awesome::make_xephyr_screens(vector<Seat> seats)
+QString awesome::make_xephyr_screens(vector<shared_ptr<Seat>> seats)
 {
     QString result = "";
     Template tpl = Template_manager::get_instance()
@@ -112,10 +114,10 @@ QString awesome::make_xephyr_screens(vector<Seat> seats)
     for (uint32_t idx = 0; idx < seats.size(); idx++)
     {
         tpl.set("screen_idx",    QString::number(idx + 1));
-        tpl.set("mouse_device",  seats[idx].get_mouse());
-        tpl.set("keybd_device",  seats[idx].get_keyboard());
-        tpl.set("screen_width",  QString::number(seats[idx].get_monitor().get_current_resolution().get_width()));
-        tpl.set("screen_height", QString::number(seats[idx].get_monitor().get_current_resolution().get_height()));
+        tpl.set("mouse_device",  seats[idx]->get_mouse());
+        tpl.set("keybd_device",  seats[idx]->get_keyboard());
+        tpl.set("screen_width",  QString::number(seats[idx]->get_monitor().get_current_resolution().get_width()));
+        tpl.set("screen_height", QString::number(seats[idx]->get_monitor().get_current_resolution().get_height()));
 
         result += tpl.substitute();
     }

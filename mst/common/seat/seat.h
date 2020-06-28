@@ -2,13 +2,15 @@
 #define SEAT_H
 
 #include <QString>
+#include <memory>
 
 #include "common/monitor/monitor.h"
 
 class Seat
 {
 public:
-    Seat();
+    Seat(int id);
+    int get_id() const;
     QString get_mouse() const;
     QString get_keyboard() const;
     QString get_usb() const;
@@ -20,8 +22,10 @@ public:
     void set_usb(QString usb);
 
     bool intersects(const Seat& other) const;
+    bool intersects(const shared_ptr<Seat> other) const;
 
 private:
+    int id;
     QString mouse;
     QString keyboard;
     QString usb;

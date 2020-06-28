@@ -35,10 +35,10 @@ class InstallController: public QObject
 public:
     static InstallController *get_instance();
     QString get_instruction(InputDeviceListener * device_listener);
-    void load_interface_page(QHBoxLayout* seats_box);
+    void load_interface_page(QWidget* parent, QHBoxLayout* seats_box);
     void save_interfaces(QComboBox* cbResolution, QListWidget* lwMonitors);
     vector<QWidget *> load_device_page(QVBoxLayout* vbl);
-    void prepare_for_connect_interface(QString& name_interface);
+    void prepare_for_device_configuration(int seat_id);
     void begin_install();
     void begin_stop();
     void begin_uninstall();
@@ -66,7 +66,7 @@ private:
     vector<QWidget *> *widgets;
     vector<string> *list_mice;
     vector<string> *list_keybs;
-    QString current_interface_name;
+    int current_seat_id;
     Component_manager* component_manager;
 };
 
