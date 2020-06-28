@@ -14,7 +14,7 @@ public:
    Resolution(int width, int height);
    int get_width() const;
    int get_height() const;
-   int get_pair() const;
+   QPair<int, int> get_pair() const;
 
    static QPair<int, int> parse_string(QString resolution_string);
 

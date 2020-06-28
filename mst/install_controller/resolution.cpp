@@ -45,3 +45,7 @@ int Resolution::get_width() const {
 int Resolution::get_height() const {
     return resolution.second;
 }
+
+QPair<int, int> Resolution::get_pair() const {
+    return resolution;
+}
