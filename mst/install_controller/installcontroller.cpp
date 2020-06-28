@@ -126,19 +126,14 @@ InstallController *InstallController::get_instance(){
 
 void InstallController::load_interface_page(QHBoxLayout* seats_box)
 {
-    auto split1 = [] (const string& input, char separator) -> string {
-      return split(input, separator)[0];
-    };
-    auto rcomp = [split1] (const string& left, const string& right) -> int {
-            return stoi(split1(left, 'x')) > stoi(split1(right, 'x'));
-    };
     for (auto w : *widgets) {
         delete w;
     }
     widgets->clear();
 
     vector<XRandr_monitor> availableMonitors = Platform::xrandr_get_monitors();
-    for (auto monitor : availableMonitors) {
+    for (auto xrandr_monitor : availableMonitors) {
+        Monitor monitor(xrandr_monitor);
         QWidget* widget = new Monitor_widget(monitor);
         widgets->push_back(widget);
         seats_box->addWidget(widget);
@@ -173,11 +168,12 @@ vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
 
     config->seats.clear();
     for (auto w : *widgets) {
-        Monitor_widget* monitor = (Monitor_widget*) w;
-        if (monitor->is_monitor_enabled()) {
+        Monitor_widget* monitor_widget = (Monitor_widget*) w;
+        Monitor monitor = monitor_widget->get_monitor();
+        if (monitor.is_enabled()) {
             Seat seat;
-            seat.interface  = monitor->get_interface();
-            seat.resolution = monitor->get_selected_resolution();
+            seat.interface  = monitor.get_interface();
+            seat.resolution = monitor.get_current_resolution();
             config->seats.push_back(seat);
             qInfo(install_controller_category()) << "Name: " << seat.interface;
             qInfo(install_controller_category()) << "width: " << seat.resolution.get_width()

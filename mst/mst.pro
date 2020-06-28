@@ -63,7 +63,8 @@ SOURCES += \
     components/component_manager.cpp \
     ui/monitor_widget/monitor_widget.cpp \
     common/resolution/resolution.cpp \
-    common/xrandr_monitor/xrandr_monitor.cpp
+    common/xrandr_monitor/xrandr_monitor.cpp \
+    common/monitor/monitor.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -91,7 +92,8 @@ HEADERS += \
     version.h \
     ui/monitor_widget/monitor_widget.h \
     common/resolution/resolution.h \
-    common/xrandr_monitor/xrandr_monitor.h
+    common/xrandr_monitor/xrandr_monitor.h \
+    common/monitor/monitor.h
 
 FORMS += \
     ui/install_window/installwindow.ui \

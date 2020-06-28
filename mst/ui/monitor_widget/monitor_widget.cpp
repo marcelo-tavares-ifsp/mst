@@ -5,25 +5,19 @@
 #include "common/resolution/resolution.h"
 #include "common/utilites/utilites.h"
 #include "common/xrandr_monitor/xrandr_monitor.h"
+#include "common/monitor/monitor.h"
 
-Monitor_widget::Monitor_widget(XRandr_monitor& monitor)
+Monitor_widget::Monitor_widget(Monitor monitor)
 {
-    auto split1 = [] (const string& input, char separator) -> string {
-      return split(input, separator)[0];
-    };
-    auto rcomp = [split1] (const string& left, const string& right) -> int {
-            return stoi(split1(left, 'x')) > stoi(split1(right, 'x'));
-    };
-
+    this->monitor = monitor;
     monitor_state_check_box = new QCheckBox();
     resolution_combo_box = new QComboBox();
-    monitor_label = new QLabel(QString::fromStdString(monitor.interface));
+    monitor_label = new QLabel(monitor.get_interface());
 
     monitor_state_check_box->setText("Включить");
     monitor_state_check_box->setChecked(true);
-    sort(monitor.resolutions.begin(), monitor.resolutions.end(), rcomp);
-    for (auto resolution : monitor.resolutions) {
-        resolution_combo_box->addItem(QString::fromStdString(resolution));
+    for (auto resolution : monitor.get_available_resolutions()) {
+        resolution_combo_box->addItem(resolution.to_string());
     }
 
     QVBoxLayout* layout = new QVBoxLayout();
@@ -42,31 +36,10 @@ Monitor_widget::~Monitor_widget()
     delete monitor_label;
 }
 
-/**
- * @brief Monitor_widget::get_interface -- Get Monitor interface.
- * @return QString interface name (e.g. "VGA-1".)
- */
-QString Monitor_widget::get_interface()
-{
-    return this->monitor_label->text();
-}
-
-/**
- * @brief Monitor_widget::get_resolution
- * @return QString resolution in the format WIDTHxHEIGHT.
- */
-Resolution Monitor_widget::get_selected_resolution()
-{
-    return { this->resolution_combo_box->currentText() };
-}
-
-/**
- * @brief Monitor_widget::is_enabled -- Check if the monitor is enabled.
- * @return 'true' if enabled, 'false' otherwise.
- */
-bool Monitor_widget::is_monitor_enabled()
-{
-    return monitor_state_check_box->isChecked();
+Monitor Monitor_widget::get_monitor() {
+    monitor.set_enabled(monitor_state_check_box->isChecked());
+    monitor.set_resolution(resolution_combo_box->currentIndex());
+    return monitor;
 }
 
 void Monitor_widget::paintEvent(QPaintEvent* ev)
