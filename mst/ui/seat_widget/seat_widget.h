@@ -35,6 +35,7 @@ private:
 private slots:
     void device_configuration_button_clicked();
     void monitor_resolution_changed(int index);
+    void seat_state_changed(bool state);
 
 signals:
     void configure_seat(int seat_id);

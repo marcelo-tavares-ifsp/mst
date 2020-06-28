@@ -31,6 +31,9 @@ Seat_widget::Seat_widget(shared_ptr<Seat> seat)
     connect(resolution_combo_box,
             SIGNAL(currentIndexChanged(int)), this,
             SLOT(monitor_resolution_changed(int)));
+    connect(monitor_state_check_box,
+            SIGNAL(toggled(bool)),
+            this, SLOT(seat_state_changed(bool)));
 
     QVBoxLayout* layout = new QVBoxLayout();
     layout->addWidget(monitor_label);
@@ -58,6 +61,14 @@ void Seat_widget::device_configuration_button_clicked()
 void Seat_widget::monitor_resolution_changed(int index)
 {
     seat->get_monitor().set_resolution(index);
+}
+
+void Seat_widget::seat_state_changed(bool state)
+{
+    device_configuration_button->setEnabled(state);
+    monitor_label->setEnabled(state);
+    resolution_combo_box->setEnabled(state);
+    seat->get_monitor().set_enabled(state);
 }
 
 void Seat_widget::paintEvent(QPaintEvent* ev)
