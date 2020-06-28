@@ -18,6 +18,11 @@ public:
 
    static QPair<int, int> parse_string(QString resolution_string);
 
+   QString to_string() const {
+       return QString::number(resolution.first)
+               + "x" + QString::number(resolution.second);
+   }
+
    operator std::string() const {
        return resolution.first + "x" + resolution.second;
    }
