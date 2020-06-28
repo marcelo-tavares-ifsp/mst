@@ -7,7 +7,7 @@
 #include <QLabel>
 
 #include "platform/platform.h"
-#include "install_controller/resolution.h"
+#include "common/resolution/resolution.h"
 
 /**
  * @brief The Monitor_widget class -- A class that describes a monitor widget

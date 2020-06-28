@@ -62,7 +62,7 @@ SOURCES += \
     platform/platform.cpp \
     components/component_manager.cpp \
     ui/monitor_widget/monitor_widget.cpp \
-    install_controller/resolution.cpp
+    common/resolution/resolution.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -89,7 +89,7 @@ HEADERS += \
     components/component_manager.h \
     version.h \
     ui/monitor_widget/monitor_widget.h \
-    install_controller/resolution.h
+    common/resolution/resolution.h
 
 FORMS += \
     ui/install_window/installwindow.ui \

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <QLoggingCategory>
-#include "../install_controller/resolution.h"
+#include "common/resolution/resolution.h"
 
 using namespace std;
 
