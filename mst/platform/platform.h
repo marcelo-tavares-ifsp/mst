@@ -4,16 +4,11 @@
 #include <vector>
 #include <QString>
 #include <QLoggingCategory>
+#include "common/xrandr_monitor/xrandr_monitor.h"
 
 Q_DECLARE_LOGGING_CATEGORY(platform_category)
 
 using namespace std;
-
-struct xrandrMonitor
-{
-    string interface;
-    vector<string> resolutions;
-};
 
 /**
  * @brief The Platform_exception class This class describes an
@@ -37,7 +32,7 @@ public:
     static void system_reboot();
     static int xset_dpms();
     static int xset_soff();
-    static vector<xrandrMonitor> xrandr_get_monitors();
+    static vector<XRandr_monitor> xrandr_get_monitors();
     static void get_input_devices(vector<string>& mice, vector<string>& keybds);
 
     static bool pam_is_mkhomedir_used();

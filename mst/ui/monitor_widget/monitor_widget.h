@@ -8,6 +8,7 @@
 
 #include "platform/platform.h"
 #include "common/resolution/resolution.h"
+#include "common/xrandr_monitor/xrandr_monitor.h"
 
 /**
  * @brief The Monitor_widget class -- A class that describes a monitor widget
@@ -16,7 +17,7 @@
 class Monitor_widget: public QWidget {
     Q_OBJECT
 public:
-    Monitor_widget(xrandrMonitor& monitor);
+    Monitor_widget(XRandr_monitor& monitor);
     ~Monitor_widget();
     bool is_monitor_enabled();
     QString get_interface();

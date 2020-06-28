@@ -6,6 +6,7 @@
 #include <QLoggingCategory>
 #include <QString>
 
+#include "common/xrandr_monitor/xrandr_monitor.h"
 #include "common/utilites/utilites.h"
 
 Q_LOGGING_CATEGORY(platform_category, "mst.platform")
@@ -102,15 +103,15 @@ int Platform::xset_soff()
  *      monitors with supported resolutions.
  * @return a list of monitors.
  */
-vector<xrandrMonitor> Platform::xrandr_get_monitors()
+vector<XRandr_monitor> Platform::xrandr_get_monitors()
 {
     vector<string> data = run_xrandr();
-    vector<xrandrMonitor> result;
+    vector<XRandr_monitor> result;
     regex r1("^(.*) connected.*");
     regex r2("^([0-9]+x[0-9]+).*");
     smatch sm;
     int state = 0;
-    xrandrMonitor currentMonitor;
+    XRandr_monitor currentMonitor;
 
     for (uint32_t idx = 0; idx < data.size();)
     {

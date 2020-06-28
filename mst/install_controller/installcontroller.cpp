@@ -7,6 +7,7 @@
 
 #include "../platform/platform.h"
 #include "ui/monitor_widget/monitor_widget.h"
+#include "common/xrandr_monitor/xrandr_monitor.h"
 
 InstallController* InstallController::instance = 0;
 Q_LOGGING_CATEGORY(install_controller_category, "mst.install_controller")
@@ -41,7 +42,7 @@ static void fill_resolutions_and_interfaces(QComboBox *cb, QListWidget *lw)
     cb->clear();
     lw->clear();
 
-    vector<xrandrMonitor> availableMonitors = Platform::xrandr_get_monitors();
+    vector<XRandr_monitor> availableMonitors = Platform::xrandr_get_monitors();
 
     uint32_t am_size = uint32_t(availableMonitors.size());
 
@@ -136,7 +137,7 @@ void InstallController::load_interface_page(QHBoxLayout* seats_box)
     }
     widgets->clear();
 
-    vector<xrandrMonitor> availableMonitors = Platform::xrandr_get_monitors();
+    vector<XRandr_monitor> availableMonitors = Platform::xrandr_get_monitors();
     for (auto monitor : availableMonitors) {
         QWidget* widget = new Monitor_widget(monitor);
         widgets->push_back(widget);

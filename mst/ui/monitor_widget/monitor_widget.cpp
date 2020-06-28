@@ -4,8 +4,9 @@
 #include "monitor_widget.h"
 #include "common/resolution/resolution.h"
 #include "common/utilites/utilites.h"
+#include "common/xrandr_monitor/xrandr_monitor.h"
 
-Monitor_widget::Monitor_widget(xrandrMonitor& monitor)
+Monitor_widget::Monitor_widget(XRandr_monitor& monitor)
 {
     auto split1 = [] (const string& input, char separator) -> string {
       return split(input, separator)[0];
