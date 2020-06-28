@@ -86,11 +86,11 @@ static void clear_interface(QString& name_interface, vector<Seat> seats)
 {
     for (uint32_t i = 0; i < seats.size(); i++)
     {
-        if (seats[i].interface == name_interface)
+        if (seats[i].get_monitor().get_interface() == name_interface)
         {
-            seats[i].keyboard = "";
-            seats[i].mouse = "";
-            seats[i].usb = "";
+            seats[i].set_keyboard("");
+            seats[i].set_mouse("");
+            seats[i].set_usb("");
             qInfo(install_controller_category()) << "interface " << name_interface << " was cleared";
             return;
         }
@@ -171,13 +171,11 @@ vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
         Monitor_widget* monitor_widget = (Monitor_widget*) w;
         Monitor monitor = monitor_widget->get_monitor();
         if (monitor.is_enabled()) {
-            Seat seat;
-            seat.interface  = monitor.get_interface();
-            seat.resolution = monitor.get_current_resolution();
+            Seat seat(monitor);
             config->seats.push_back(seat);
-            qInfo(install_controller_category()) << "Name: " << seat.interface;
-            qInfo(install_controller_category()) << "width: " << seat.resolution.get_width()
-                                                 << "; height: " << seat.resolution.get_height();
+            qInfo(install_controller_category()) << "Name: " << monitor.get_interface();
+            qInfo(install_controller_category()) << "width: " << monitor.get_current_resolution().get_width()
+                                                 << "; height: " << monitor.get_current_resolution().get_height();
         }
     }
 
@@ -186,8 +184,10 @@ vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
 
     for (auto seat : config->seats)
     {
-        QPushButton *btn = new QPushButton(seat.interface);
-        qInfo(install_controller_category()) << "Button: " << seat.interface << " was added";
+        QPushButton *btn = new QPushButton(seat.get_monitor().get_interface());
+        qInfo(install_controller_category())
+                << "Button: " << seat.get_monitor().get_interface()
+                << " was added";
         btn->setFocusPolicy(Qt::NoFocus);
         widgets->push_back(btn);
     }
@@ -214,25 +214,25 @@ void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
 
     for (uint32_t i = 0; i < config->seats.size(); i++)
     {
-        if (config->seats[i].interface == current_interface_name)
+        if (config->seats[i].get_monitor().get_interface() == current_interface_name)
         {
             switch (type) {
             case DEVICE_TYPE::KEYBOARD:
-                config->seats[i].keyboard = device;
+                config->seats[i].set_keyboard(device);
                 break;
             case DEVICE_TYPE::MOUSE:
-                config->seats[i].mouse = device;
+                config->seats[i].set_mouse(device);
                 break;
             case DEVICE_TYPE::USB:
-                config->seats[i].usb = device;
+                config->seats[i].set_usb(device);
                 break;
             }
 
             qInfo(install_controller_category())
-                    << "Seat interface: '" << config->seats[i].interface
-                    << "'; keyboard: '" << config->seats[i].keyboard
-                    << "'; mouse: '" << config->seats[i].mouse
-                    << "'; usb: " << config->seats[i].usb << "'";
+                    << "Seat interface: '" << config->seats[i].get_monitor().get_interface()
+                    << "'; keyboard: '" << config->seats[i].get_keyboard()
+                    << "'; mouse: '" << config->seats[i].get_mouse()
+                    << "'; usb: " << config->seats[i].get_usb() << "'";
         }
     }
 }
@@ -413,35 +413,33 @@ bool InstallController::config_is_valid()
 
 bool InstallController::is_equal(int i, int j) {
     QString msg = "Comparison " + QString::number(i) + " seat, "
-                      + config->seats[i].keyboard + " keyboard, "
-                      + config->seats[i].mouse + " mouse, "
-                      + config->seats[i].usb + " usb AND\n"
+                      + config->seats[i].get_keyboard() + " keyboard, "
+                      + config->seats[i].get_mouse() + " mouse, "
+                      + config->seats[i].get_usb() + " usb AND\n"
                       + "\t\t\t\t\t\t\t\t" + QString::number(j) + " seat, "
-                      + config->seats[j].keyboard + " keyboard, "
-                      + config->seats[j].mouse + " mouse, "
-                      + config->seats[j].usb + " usb";
+                      + config->seats[j].get_keyboard() + " keyboard, "
+                      + config->seats[j].get_mouse() + " mouse, "
+                      + config->seats[j].get_usb() + " usb";
     qInfo(install_controller_category()) << msg;
 
-    return ((config->seats[i].keyboard == config->seats[j].keyboard)
-            || (config->seats[i].mouse == config->seats[j].mouse)
-                || (config->seats[i].usb == config->seats[j].usb));
+    return config->seats[i].intersects(config->seats[j]);
 }
 
 bool InstallController::is_empty(int i) {
     QString msg = "";
     bool result = false;
 
-    if (config->seats[i].keyboard == "")
+    if (config->seats[i].get_keyboard() == "")
     {
         msg += "KEYBOARD, ";
         result = true;
     }
-    if (config->seats[i].mouse == "")
+    if (config->seats[i].get_mouse() == "")
     {
         msg += "MOUSE, ";
         result = true;
     }
-    if (config->seats[i].usb == "")
+    if (config->seats[i].get_usb() == "")
     {
         msg += "USB, ";
         result = true;
@@ -467,17 +465,17 @@ void InstallController::print_config() {
 
     for (auto seat : config->seats) {
         msg += "\tseat: ";
-        msg += seat.interface + "\n";
+        msg += seat.get_monitor().get_interface() + "\n";
         msg += "\tkeyboard: ";
-        msg += seat.keyboard + "\n";
+        msg += seat.get_keyboard() + "\n";
         msg += "\tmouse: ";
-        msg += seat.mouse + "\n";
+        msg += seat.get_mouse() + "\n";
         msg += "\tusb: ";
-        msg += seat.usb + "\n";
+        msg += seat.get_usb() + "\n";
         msg += "\tresolution: ";
-        msg += QString::number(seat.resolution.get_width());
+        msg += QString::number(seat.get_monitor().get_current_resolution().get_width());
         msg += "x";
-        msg += QString::number(seat.resolution.get_height()) + "\n";
+        msg += QString::number(seat.get_monitor().get_current_resolution().get_height()) + "\n";
     }
 
     msg += "-----END current configuration";

@@ -58,9 +58,9 @@ private slots:
 
     void on_btnBackup_clicked();
 
-    void on_btninterface_clicked();
-
     void on_about_triggered();
+
+    void on_btninterface_clicked();
 
 private:
     Ui::InstallWindow *ui;

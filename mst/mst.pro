@@ -64,7 +64,8 @@ SOURCES += \
     ui/monitor_widget/monitor_widget.cpp \
     common/resolution/resolution.cpp \
     common/xrandr_monitor/xrandr_monitor.cpp \
-    common/monitor/monitor.cpp
+    common/monitor/monitor.cpp \
+    common/seat/seat.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -93,7 +94,8 @@ HEADERS += \
     ui/monitor_widget/monitor_widget.h \
     common/resolution/resolution.h \
     common/xrandr_monitor/xrandr_monitor.h \
-    common/monitor/monitor.h
+    common/monitor/monitor.h \
+    common/seat/seat.h
 
 FORMS += \
     ui/install_window/installwindow.ui \

@@ -55,6 +55,12 @@ void InstallWindow::on_btninterface_clicked()
 void InstallWindow::on_btnBeginInstall_clicked()
 {
     inst_controller->load_interface_page(ui->hbox_seats);
+//    for (Monitor_widget* monitor : monitors) {
+//        monitor->get_monitor()
+//        btn->setParent(ui->pageDevices);
+//        connect(btn, SIGNAL(clicked()), this, SLOT(on_btninterface_clicked()));
+//        ui->vlDevices->addWidget(btn);
+//    }
     show_page(Ui::Page::INTERFACES);
 }
 
