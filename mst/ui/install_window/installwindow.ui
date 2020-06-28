@@ -26,13 +26,13 @@
    <string>MST</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">Monitor_widget {
+   <string notr="true">Seat_widget {
 	border: 1px solid;
 	border-radius: 4px;
 	background-color: white;
 }
 
-Monitor_widget QLabel {
+Seat_widget QLabel {
 	border: 1px solid black;
 	qproperty-alignment: AlignCenter;
 }</string>

@@ -6,7 +6,7 @@
 #include <QCheckBox>
 
 #include "../platform/platform.h"
-#include "ui/monitor_widget/monitor_widget.h"
+#include "ui/seat_widget/seat_widget.h"
 #include "common/xrandr_monitor/xrandr_monitor.h"
 
 InstallController* InstallController::instance = 0;
@@ -134,7 +134,7 @@ void InstallController::load_interface_page(QHBoxLayout* seats_box)
     vector<XRandr_monitor> availableMonitors = Platform::xrandr_get_monitors();
     for (auto xrandr_monitor : availableMonitors) {
         Monitor monitor(xrandr_monitor);
-        QWidget* widget = new Monitor_widget(monitor);
+        QWidget* widget = new Seat_widget(monitor);
         widgets->push_back(widget);
         seats_box->addWidget(widget);
     }
@@ -168,8 +168,8 @@ vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
 
     config->seats.clear();
     for (auto w : *widgets) {
-        Monitor_widget* monitor_widget = (Monitor_widget*) w;
-        Monitor monitor = monitor_widget->get_monitor();
+        Seat_widget* seat_widget = (Seat_widget*) w;
+        Monitor monitor = seat_widget->get_monitor();
         if (monitor.is_enabled()) {
             Seat seat(monitor);
             config->seats.push_back(seat);

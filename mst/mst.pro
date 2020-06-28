@@ -61,11 +61,11 @@ SOURCES += \
     components/system.cpp \
     platform/platform.cpp \
     components/component_manager.cpp \
-    ui/monitor_widget/monitor_widget.cpp \
     common/resolution/resolution.cpp \
     common/xrandr_monitor/xrandr_monitor.cpp \
     common/monitor/monitor.cpp \
-    common/seat/seat.cpp
+    common/seat/seat.cpp \
+    ui/seat_widget/seat_widget.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -91,11 +91,11 @@ HEADERS += \
     platform/platform.h \
     components/component_manager.h \
     version.h \
-    ui/monitor_widget/monitor_widget.h \
     common/resolution/resolution.h \
     common/xrandr_monitor/xrandr_monitor.h \
     common/monitor/monitor.h \
-    common/seat/seat.h
+    common/seat/seat.h \
+    ui/seat_widget/seat_widget.h
 
 FORMS += \
     ui/install_window/installwindow.ui \

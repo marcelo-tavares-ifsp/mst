@@ -1,5 +1,5 @@
-#ifndef MONITOR_WIDGET_H
-#define MONITOR_WIDGET_H
+#ifndef SEAT_WIDGET_H
+#define SEAT_WIDGET_H
 
 #include <QComboBox>
 #include <QListWidget>
@@ -12,14 +12,14 @@
 #include "common/monitor/monitor.h"
 
 /**
- * @brief The Monitor_widget class -- A class that describes a monitor widget
+ * @brief The Seat_widget class -- A class that describes a monitor widget
  *     used in the Install_controller.
  */
-class Monitor_widget: public QWidget {
+class Seat_widget: public QWidget {
     Q_OBJECT
 public:
-    Monitor_widget(Monitor monitor);
-    ~Monitor_widget();
+    Seat_widget(Monitor monitor);
+    ~Seat_widget();
     Monitor get_monitor();
     void paintEvent(QPaintEvent* ev);
 
@@ -30,4 +30,4 @@ private:
     QLabel*    monitor_label;
 };
 
-#endif // MONITOR_WIDGET_H
+#endif // SEAT_WIDGET_H

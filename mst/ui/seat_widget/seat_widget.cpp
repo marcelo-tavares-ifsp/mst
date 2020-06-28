@@ -1,13 +1,13 @@
 #include <QVBoxLayout>
 #include <QPainter>
 
-#include "monitor_widget.h"
+#include "seat_widget.h"
 #include "common/resolution/resolution.h"
 #include "common/utilites/utilites.h"
 #include "common/xrandr_monitor/xrandr_monitor.h"
 #include "common/monitor/monitor.h"
 
-Monitor_widget::Monitor_widget(Monitor monitor)
+Seat_widget::Seat_widget(Monitor monitor)
 {
     this->monitor = monitor;
     monitor_state_check_box = new QCheckBox();
@@ -29,20 +29,20 @@ Monitor_widget::Monitor_widget(Monitor monitor)
     resolution_combo_box->setCurrentIndex(0);
 }
 
-Monitor_widget::~Monitor_widget()
+Seat_widget::~Seat_widget()
 {
     delete monitor_state_check_box;
     delete resolution_combo_box;
     delete monitor_label;
 }
 
-Monitor Monitor_widget::get_monitor() {
+Monitor Seat_widget::get_monitor() {
     monitor.set_enabled(monitor_state_check_box->isChecked());
     monitor.set_resolution(resolution_combo_box->currentIndex());
     return monitor;
 }
 
-void Monitor_widget::paintEvent(QPaintEvent* ev)
+void Seat_widget::paintEvent(QPaintEvent* ev)
 {
     QStyleOption o;
     o.initFrom(this);
