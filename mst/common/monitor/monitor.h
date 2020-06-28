@@ -23,7 +23,7 @@ public:
     void set_resolution(int index);
 
 private:
-    int current_resolution;
+    int current_resolution = 0;
     bool state = false;
     QString interface;
     QVector<Resolution> resolutions;
