@@ -6,7 +6,7 @@
 #include <QCheckBox>
 
 #include "../platform/platform.h"
-#include "monitor_widget.h"
+#include "ui/monitor_widget/monitor_widget.h"
 
 InstallController* InstallController::instance = 0;
 Q_LOGGING_CATEGORY(install_controller_category, "mst.install_controller")

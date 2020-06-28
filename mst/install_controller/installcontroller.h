@@ -11,6 +11,7 @@
 #include "input_device_listener/inputdevicelistener.h"
 #include "components/component_manager.h"
 #include "components/vgl.h"
+#include "ui/monitor_widget/monitor_widget.h"
 
 Q_DECLARE_LOGGING_CATEGORY(install_controller_category)
 

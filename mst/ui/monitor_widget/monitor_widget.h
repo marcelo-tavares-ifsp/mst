@@ -6,8 +6,8 @@
 #include <QCheckBox>
 #include <QLabel>
 
-#include "../platform/platform.h"
-#include "resolution.h"
+#include "platform/platform.h"
+#include "install_controller/resolution.h"
 
 /**
  * @brief The Monitor_widget class -- A class that describes a monitor widget

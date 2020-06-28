@@ -2,7 +2,7 @@
 #include <QPainter>
 
 #include "monitor_widget.h"
-#include "resolution.h"
+#include "install_controller/resolution.h"
 #include "common/utilites/utilites.h"
 
 Monitor_widget::Monitor_widget(xrandrMonitor& monitor)
