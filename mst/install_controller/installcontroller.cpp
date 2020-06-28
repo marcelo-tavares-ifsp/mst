@@ -216,34 +216,27 @@ void InstallController::prepare_for_device_configuration(int seat_id)
 
 void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
 {
-    // TODO: red and after detecring green mouse and keyboard =)
-
+    shared_ptr<Seat> seat = config->seats[current_seat_id];
     qInfo(install_controller_category())
             << "Device assigned: " << device << " (" << type << ")";
 
-    for (uint32_t i = 0; i < config->seats.size(); i++)
-    {
-        if (config->seats[i]->get_id() == current_seat_id)
-        {
-            switch (type) {
-            case DEVICE_TYPE::KEYBOARD:
-                config->seats[i]->set_keyboard(device);
-                break;
-            case DEVICE_TYPE::MOUSE:
-                config->seats[i]->set_mouse(device);
-                break;
-            case DEVICE_TYPE::USB:
-                config->seats[i]->set_usb(device);
-                break;
-            }
-
-            qInfo(install_controller_category())
-                    << "Seat interface: '" << config->seats[i]->get_monitor().get_interface()
-                    << "'; keyboard: '" << config->seats[i]->get_keyboard()
-                    << "'; mouse: '" << config->seats[i]->get_mouse()
-                    << "'; usb: " << config->seats[i]->get_usb() << "'";
-        }
+    switch (type) {
+    case DEVICE_TYPE::KEYBOARD:
+        seat->set_keyboard(device);
+        break;
+    case DEVICE_TYPE::MOUSE:
+        seat->set_mouse(device);
+        break;
+    case DEVICE_TYPE::USB:
+        seat->set_usb(device);
+        break;
     }
+
+    qInfo(install_controller_category())
+            << "Seat interface: '" << seat->get_monitor().get_interface()
+            << "'; keyboard: '" << seat->get_keyboard()
+            << "'; mouse: '" << seat->get_mouse()
+            << "'; usb: " << seat->get_usb() << "'";
 }
 
 QString InstallController::get_instruction(InputDeviceListener * device_listener)
