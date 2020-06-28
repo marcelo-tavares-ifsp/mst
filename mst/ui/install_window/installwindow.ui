@@ -136,7 +136,7 @@ Seat_widget QLabel {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnContinueToDevices">
+        <widget class="QPushButton" name="btnConfigurationEnd">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -159,73 +159,6 @@ Seat_widget QLabel {
        </rect>
       </property>
       <layout class="QHBoxLayout" name="hbox_seats"/>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="pageDevices">
-     <widget class="QWidget" name="horizontalLayoutWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>330</y>
-        <width>581</width>
-        <height>33</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="hlDevices">
-       <item>
-        <widget class="QPushButton" name="btnBackToInterface">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Назад</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnContinueToEnd">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Далее</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QLabel" name="lblMonitors_2">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>580</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Выберите рабочее место для настройки:</string>
-      </property>
-     </widget>
-     <widget class="QWidget" name="verticalLayoutWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>581</width>
-        <height>281</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="vlDevices"/>
      </widget>
     </widget>
     <widget class="QWidget" name="pageEnd">

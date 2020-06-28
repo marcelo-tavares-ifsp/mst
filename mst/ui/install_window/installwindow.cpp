@@ -58,24 +58,6 @@ void InstallWindow::on_btnBeginInstall_clicked()
 }
 
 /**
- * @brief InstallWindow::on_btnContinueToDevices_clicked -- Second page to Theird page
- */
-void InstallWindow::on_btnContinueToDevices_clicked()
-{
-    //inst_controller->save_interfaces(ui->cbResolution, ui->lwMonitors);
-//    vector<QWidget *> buttons = inst_controller->load_device_page(ui->vlDevices);
-
-//    for (auto btn : buttons)
-//    {
-//        btn->setParent(ui->pageDevices);
-//        connect(btn, SIGNAL(clicked()), this, SLOT(configure_seat()));
-//        ui->vlDevices->addWidget(btn);
-//    }
-
-    show_page(Ui::Page::SEATS_CONFIGURATION);
-}
-
-/**
  * @brief InstallWindow::on_btnContinueToEnd_clicked -- Theird page to Fourth page
  */
 void InstallWindow::on_btnContinueToEnd_clicked()
@@ -218,4 +200,21 @@ void InstallWindow::on_about_triggered()
     About_dialog* ad = new About_dialog(this);
     ad->setModal(true);
     ad->show();
+}
+
+void InstallWindow::on_btnConfigurationEnd_clicked()
+{
+    if (inst_controller->config_is_valid())
+    {
+        show_page(Ui::Page::CONFIGURATION_END);
+        InstallController* con = InstallController::get_instance();
+        con->begin_install();
+        qDebug(install_window_category) << "going to the 3rd panel...";
+    }
+    else
+    {
+        QMessageBox::information(this, "Необходимо заполнить!",
+                      "У каждого монитора должна быть мышь и клавиатура! Они не должны пересекаться!", QMessageBox::Ok);
+        // TODO: Show error msg!
+    }
 }

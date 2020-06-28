@@ -40,8 +40,6 @@ private slots:
 
     void on_btnBackToStart_clicked();
 
-    void on_btnContinueToDevices_clicked();
-
     void on_btnBackToInterface_clicked();
 
     void on_btnContinueToEnd_clicked();
@@ -59,6 +57,9 @@ private slots:
     void on_btnBackup_clicked();
 
     void on_about_triggered();
+
+    void on_btnConfigurationEnd_clicked();
+
 public slots:
     void configure_seat(int seat_id);
 
