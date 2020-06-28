@@ -171,7 +171,8 @@ vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
         Seat_widget* seat_widget = (Seat_widget*) w;
         Monitor monitor = seat_widget->get_monitor();
         if (monitor.is_enabled()) {
-            Seat seat(monitor);
+            Seat seat;
+            seat.add_monitor(monitor);
             config->seats.push_back(seat);
             qInfo(install_controller_category()) << "Name: " << monitor.get_interface();
             qInfo(install_controller_category()) << "width: " << monitor.get_current_resolution().get_width()

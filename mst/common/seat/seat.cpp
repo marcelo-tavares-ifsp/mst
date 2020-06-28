@@ -1,7 +1,6 @@
 #include "seat.h"
 
-Seat::Seat(Monitor& monitor)
-    : monitor(monitor)
+Seat::Seat()
 {
 
 }
@@ -28,9 +27,20 @@ QString Seat::get_usb() const
     return this->usb;
 }
 
+void Seat::add_monitor(Monitor &monitor)
+{
+    this->monitors.push_back(monitor);
+}
+
+// TODO: Needed only for compatibility.
 Monitor Seat::get_monitor() const
 {
-    return this->monitor;
+    return this->monitors[0];
+}
+
+QVector<Monitor> Seat::get_monitors() const
+{
+    return this->monitors;
 }
 
 void Seat::set_keyboard(QString keyboard)
