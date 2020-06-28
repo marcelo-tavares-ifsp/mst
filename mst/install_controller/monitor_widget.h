@@ -17,7 +17,9 @@ class Monitor_widget: public QWidget {
 public:
     Monitor_widget(xrandrMonitor& monitor);
     ~Monitor_widget();
-    bool is_enabled();
+    bool is_monitor_enabled();
+    QString get_interface();
+    QString get_selected_resolution();
     void paintEvent(QPaintEvent* ev);
 
 private:

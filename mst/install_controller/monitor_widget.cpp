@@ -41,10 +41,28 @@ Monitor_widget::~Monitor_widget()
 }
 
 /**
+ * @brief Monitor_widget::get_interface -- Get Monitor interface.
+ * @return QString interface name (e.g. "VGA-1".)
+ */
+QString Monitor_widget::get_interface()
+{
+    return this->monitor_label->text();
+}
+
+/**
+ * @brief Monitor_widget::get_resolution
+ * @return QString resolution in the format WIDTHxHEIGHT.
+ */
+QString Monitor_widget::get_selected_resolution()
+{
+    return this->resolution_combo_box->currentText();
+}
+
+/**
  * @brief Monitor_widget::is_enabled -- Check if the monitor is enabled.
  * @return 'true' if enabled, 'false' otherwise.
  */
-bool Monitor_widget::is_enabled()
+bool Monitor_widget::is_monitor_enabled()
 {
     return monitor_state_check_box->isChecked();
 }
