@@ -2,6 +2,7 @@
 #include <QPainter>
 
 #include "monitor_widget.h"
+#include "resolution.h"
 #include "common/utilites/utilites.h"
 
 Monitor_widget::Monitor_widget(xrandrMonitor& monitor)
@@ -53,9 +54,9 @@ QString Monitor_widget::get_interface()
  * @brief Monitor_widget::get_resolution
  * @return QString resolution in the format WIDTHxHEIGHT.
  */
-QString Monitor_widget::get_selected_resolution()
+Resolution Monitor_widget::get_selected_resolution()
 {
-    return this->resolution_combo_box->currentText();
+    return { this->resolution_combo_box->currentText() };
 }
 
 /**

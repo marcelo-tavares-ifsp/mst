@@ -4,16 +4,11 @@
 #include <string>
 #include <vector>
 #include <QLoggingCategory>
+#include "../install_controller/resolution.h"
 
 using namespace std;
 
 Q_DECLARE_LOGGING_CATEGORY(configuration_category)
-
-struct Resolution
-{
-    int width;
-    int height;
-};
 
 struct Seat
 {
@@ -21,7 +16,7 @@ struct Seat
     QString mouse;
     QString keyboard;
     QString usb;
-    struct Resolution resolution;
+    Resolution resolution;
 };
 
 class Configuration

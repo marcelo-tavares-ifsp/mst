@@ -148,6 +148,7 @@ void InstallController::save_interfaces(QComboBox* cbResolution, QListWidget* lw
 {
     config->seats.clear();
 
+    /*
     QList<QListWidgetItem*> items = lwMonitors->selectedItems();
     vector<int> resolution = _parse_resolution(cbResolution->currentText()); // TODO: individual resolution for each monitor
 
@@ -163,6 +164,7 @@ void InstallController::save_interfaces(QComboBox* cbResolution, QListWidget* lw
         qInfo(install_controller_category()) << "width: " << seat.resolution.width
                                              << "; height: " << seat.resolution.height;
     }
+    */
 }
 
 vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
@@ -173,15 +175,12 @@ vector<QWidget *> InstallController::load_device_page(QVBoxLayout* vbl)
         Monitor_widget* monitor = (Monitor_widget*) w;
         if (monitor->is_monitor_enabled()) {
             Seat seat;
-            seat.interface = monitor->get_interface();
-            vector<int> resolution = _parse_resolution(
-                        monitor->get_selected_resolution());
-            seat.resolution.width = resolution[0];
-            seat.resolution.height = resolution[1];
+            seat.interface  = monitor->get_interface();
+            seat.resolution = monitor->get_selected_resolution();
             config->seats.push_back(seat);
             qInfo(install_controller_category()) << "Name: " << seat.interface;
-            qInfo(install_controller_category()) << "width: " << seat.resolution.width
-                                                 << "; height: " << seat.resolution.height;
+            qInfo(install_controller_category()) << "width: " << seat.resolution.get_width()
+                                                 << "; height: " << seat.resolution.get_height();
         }
     }
 
@@ -479,9 +478,9 @@ void InstallController::print_config() {
         msg += "\tusb: ";
         msg += seat.usb + "\n";
         msg += "\tresolution: ";
-        msg += QString::number(seat.resolution.width);
+        msg += QString::number(seat.resolution.get_width());
         msg += "x";
-        msg += QString::number(seat.resolution.height) + "\n";
+        msg += QString::number(seat.resolution.get_height()) + "\n";
     }
 
     msg += "-----END current configuration";

@@ -7,6 +7,7 @@
 #include <QLabel>
 
 #include "../platform/platform.h"
+#include "resolution.h"
 
 /**
  * @brief The Monitor_widget class -- A class that describes a monitor widget
@@ -19,7 +20,7 @@ public:
     ~Monitor_widget();
     bool is_monitor_enabled();
     QString get_interface();
-    QString get_selected_resolution();
+    Resolution get_selected_resolution();
     void paintEvent(QPaintEvent* ev);
 
 private:
