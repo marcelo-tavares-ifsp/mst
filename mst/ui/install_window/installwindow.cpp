@@ -118,7 +118,7 @@ void InstallWindow::on_btnBackToInterface_clicked()
 
 void InstallWindow::on_btnBackToDevices_clicked()
 {
-    show_page(Ui::Page::SEATS_CONFIGURATION);
+    show_page(Ui::Page::CONFIGURATION_END);
 }
 
 void InstallWindow::on_btnCancel_clicked()
