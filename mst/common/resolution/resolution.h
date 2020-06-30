@@ -1,6 +1,7 @@
 #ifndef RESOLUTION_H
 #define RESOLUTION_H
 
+#include <ostream>
 #include <QObject>
 
 using namespace std;
@@ -42,6 +43,9 @@ public:
        resolution.second = rhs.get_height();
        return *this;
    }
+
+   friend std::ostream& operator<< (std::ostream& os,
+                                    const Resolution& resolution);
 
 private:
    QPair<int, int> resolution;

@@ -11,6 +11,7 @@ public:
 
 private Q_SLOTS:
     void parse_string();
+    void to_string();
 
 };
 

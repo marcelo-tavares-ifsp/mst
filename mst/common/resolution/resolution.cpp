@@ -6,6 +6,11 @@
 
 using namespace std;
 
+std::ostream& operator<< (std::ostream& os, const Resolution& resolution) {
+    os << "#<Resolution " << resolution.to_string().toStdString() << ">";
+    return os;
+}
+
 /**
  * @brief _parse_resolution -- parse resolution in "WIDTHxHEIGTH" format.
  * @param resolution -- resolution string.
