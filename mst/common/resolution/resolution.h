@@ -14,8 +14,18 @@ public:
    Resolution(int width, int height);
    int get_width() const;
    int get_height() const;
+
+   /**
+    * @brief get_pair -- get resolution width and height as a QPair.
+    * @return QPair
+    */
    QPair<int, int> get_pair() const;
 
+   /**
+    * @brief parse_string -- parse a common resolution string (e.g. "640x480".)
+    * @param resolution_string
+    * @return QPair with width and height of the resolution.
+    */
    static QPair<int, int> parse_string(QString resolution_string);
 
    QString to_string() const {
