@@ -170,11 +170,7 @@ void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
         break;
     }
 
-    qInfo(install_controller_category())
-            << "Seat interface: '" << seat->get_monitor().get_interface()
-            << "'; keyboard: '" << seat->get_keyboard()
-            << "'; mouse: '" << seat->get_mouse()
-            << "'; usb: " << seat->get_usb() << "'";
+    qInfo(install_controller_category()) << seat.get();
 }
 
 QString InstallController::get_instruction(InputDeviceListener * device_listener)
