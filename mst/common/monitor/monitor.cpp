@@ -1,26 +1,37 @@
 #include "monitor.h"
 
-#include "common/xrandr_monitor/xrandr_monitor.h"
-#include "common/resolution/resolution.h"
+#include "../xrandr_monitor/xrandr_monitor.h"
+#include "../resolution/resolution.h"
 
 Monitor::Monitor()
 {
 
 }
 
-Monitor::Monitor(XRandr_monitor& xrandr_monitor)
+static void _sort_resolutions(QVector<Resolution>& resolutions)
 {
     auto rcomp = [] (const Resolution& left, const Resolution& right) -> int {
-            return left.get_width() > right.get_width();
+        return left.get_width() > right.get_width();
     };
+    sort(resolutions.begin(), resolutions.end(), rcomp);
+}
 
+Monitor::Monitor(QString interface, QVector<Resolution> &resolutions)
+{
+    this->interface = interface;
+    this->resolutions = resolutions;
+    _sort_resolutions(this->resolutions);
+}
+
+Monitor::Monitor(XRandr_monitor& xrandr_monitor)
+{
     resolutions.clear();
     this->interface = QString::fromStdString(xrandr_monitor.interface);
     for (string resolution_string : xrandr_monitor.resolutions) {
         QString resolution_qstring = QString::fromStdString(resolution_string);
         resolutions.push_back(Resolution(resolution_qstring));
     }
-    sort(resolutions.begin(), resolutions.end(), rcomp);
+    _sort_resolutions(resolutions);
 }
 
 bool Monitor::is_enabled() const {

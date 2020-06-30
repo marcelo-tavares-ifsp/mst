@@ -4,8 +4,8 @@
 #include <QString>
 #include <QVector>
 
-#include "common/resolution/resolution.h"
-#include "common/xrandr_monitor/xrandr_monitor.h"
+#include "../resolution/resolution.h"
+#include "../xrandr_monitor/xrandr_monitor.h"
 
 using namespace std;
 
@@ -14,6 +14,7 @@ class Monitor
 public:
     Monitor();
     Monitor(XRandr_monitor& xrandr_monitor);
+    Monitor(QString interface, QVector<Resolution>& resolutions);
     bool is_enabled() const;
     QString get_interface() const;
     QVector<Resolution> get_available_resolutions() const;
