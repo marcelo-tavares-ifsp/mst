@@ -10,7 +10,7 @@ public:
     Test_monitor();
 
 private Q_SLOTS:
-    //void monitor_from_xrandr_monitor_test();
+    void monitor_from_xrandr_monitor_test();
     void monitor_from_qstring_and_resolutions_test();
 };
 

@@ -48,7 +48,8 @@ SOURCES += \
     ../mst/common/dsv_parser/dsv.cpp \
     ../mst/common/seat/seat.cpp \
     ../mst/common/monitor/monitor.cpp \
-    ../mst/common/resolution/resolution.cpp
+    ../mst/common/resolution/resolution.cpp \
+    ../mst/common/xrandr_monitor/xrandr_monitor.cpp
 
 HEADERS += \
     ../mst/configuration/configuration.h \
