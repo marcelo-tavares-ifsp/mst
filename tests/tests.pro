@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+INCLUDEPATH += ../
 
 SOURCES += \
     ../mst/common/utilites/utilites.cpp \
@@ -43,11 +44,16 @@ SOURCES += \
     ../mst/template_manager/template.cpp \
     ../mst/template_manager/template_manager.cpp \
     ../mst/path_manager/pathmanager.cpp \
-    ../mst/common/dsv_parser/dsv.cpp
+    ../mst/common/dsv_parser/dsv.cpp \
+    ../mst/common/seat/seat.cpp \
+    ../mst/common/monitor/monitor.cpp \
+    ../mst/common/resolution/resolution.cpp
 
 HEADERS += \
     ../mst/configuration/configuration.h \
     ../mst/common/utilites/utilites.h \
+    ../mst/common/seat/seat.h \
+    ../mst/common/monitor/monitor.h \
     test_awesome.h \
     test_utils.h \
     test_template.h \
@@ -61,3 +67,4 @@ DISTFILES += \
     test_template.txt.template \
     test_awesome_mst_autostart.lua
 
+DEFINES += INSTALLATION_PREFIX=\\\"$${PREFIX}\\\"
