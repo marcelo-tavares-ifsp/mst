@@ -67,4 +67,4 @@ DISTFILES += \
     test_template.txt.template \
     test_awesome_mst_autostart.lua
 
-DEFINES += INSTALLATION_PREFIX=\\\"$${PREFIX}\\\"
+DEFINES += INSTALLATION_PREFIX="/bin/"
