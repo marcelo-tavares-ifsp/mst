@@ -23,7 +23,6 @@ extern void _set_intersection_x(vector<string> &v1,
                                 vector<string> &v2,
                                 vector<string>& output,
                                 function<bool(const string&, const string&)> sort_function);
-extern vector<int> _parse_resolution(QString resolution);
 extern string to_std_string(QString qs);
 extern QString to_qstring(string str);
 

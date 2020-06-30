@@ -78,18 +78,6 @@ void _set_intersection_x(vector<string>& v1, vector<string>& v2,
 
 }
 
-/**
- * @brief _parse_resolution -- parse resolution in "WIDTHxHEIGTH" format.
- * @param resolution -- resolution string.
- * @return vector with the 1st element set to display width and the 2nd
- *      set to the heigth.
- */
-vector<int> _parse_resolution(QString resolution)
-{
-    vector<string> strs = split(resolution.toUtf8().constData(), 'x');
-    return {  atoi(strs[0].c_str()), atoi(strs[1].c_str()) };
-}
-
 string to_std_string(QString qs)
 {
     return qs.toUtf8().constData();
