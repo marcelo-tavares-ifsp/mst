@@ -4,7 +4,7 @@
 #include <QString>
 #include <memory>
 
-#include "common/monitor/monitor.h"
+#include "../monitor/monitor.h"
 
 class Seat
 {
