@@ -33,7 +33,8 @@ SOURCES += \
     test_utils.cpp \
     test_template.cpp \
     test_component.cpp \
-    test_monitor.cpp
+    test_monitor.cpp \
+    test_seat.cpp
 
 SOURCES += \
     ../mst/configuration/configuration.cpp \
@@ -60,7 +61,8 @@ HEADERS += \
     test_utils.h \
     test_template.h \
     test_component.h \
-    test_monitor.h
+    test_monitor.h \
+    test_seat.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
@@ -70,4 +72,4 @@ DISTFILES += \
     test_template.txt.template \
     test_awesome_mst_autostart.lua
 
-DEFINES += INSTALLATION_PREFIX="/bin/"
+DEFINES += INSTALLATION_PREFIX=\\\"\\\"

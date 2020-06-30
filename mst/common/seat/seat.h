@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <memory>
+#include <ostream>
 
 #include "../monitor/monitor.h"
 
@@ -23,6 +24,8 @@ public:
 
     bool intersects(const Seat& other) const;
     bool intersects(const shared_ptr<Seat> other) const;
+
+    friend std::ostream& operator<< (std::ostream& os, const Seat& seat);
 
 private:
     int id;

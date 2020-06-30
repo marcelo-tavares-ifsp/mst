@@ -1,7 +1,16 @@
 #include <memory>
+#include <ostream>
 
 #include "seat.h"
 
+std::ostream& operator<< (std::ostream& os, const Seat& seat) {
+    os << "#<Seat " << seat.get_monitor().get_interface().toStdString()
+       << " keyboard: " << seat.get_keyboard().toStdString()
+       << " mouse: "    << seat.get_mouse().toStdString()
+       << " usb: "    << seat.get_usb().toStdString()
+       << ">";
+    return os;
+}
 
 Seat::Seat(int id)
     : id(id)
