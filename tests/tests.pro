@@ -34,7 +34,8 @@ SOURCES += \
     test_template.cpp \
     test_component.cpp \
     test_monitor.cpp \
-    test_seat.cpp
+    test_seat.cpp \
+    test_resolution.cpp
 
 SOURCES += \
     ../mst/configuration/configuration.cpp \
@@ -62,7 +63,8 @@ HEADERS += \
     test_template.h \
     test_component.h \
     test_monitor.h \
-    test_seat.h
+    test_seat.h \
+    test_resolution.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
