@@ -14,7 +14,7 @@
 #include "test_utils.h"
 #include "test_template.h"
 #include "test_component.h"
-
+#include "test_monitor.h"
 
 using namespace std;
 
@@ -28,9 +28,11 @@ int main(int argc, char** argv)
     Test_awesome test_awesome;
     Test_template test_template;
     Test_component test_component;
+    Test_monitor   test_monitor;
 
     return QTest::qExec(&test_utils, argc, argv)
             || QTest::qExec(&test_awesome, argc, argv)
             || QTest::qExec(&test_template, argc, argv)
-            || QTest::qExec(&test_component, argc, argv);
+            || QTest::qExec(&test_component, argc, argv)
+            || QTest::qExec(&test_monitor);
 }
