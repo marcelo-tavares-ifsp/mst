@@ -120,8 +120,8 @@ InstallController *InstallController::get_instance(){
     return instance;
 }
 
-void InstallController::load_interface_page(QWidget* parent,
-                                            QHBoxLayout* seats_box)
+void InstallController::load_seat_configuration_page(QWidget* parent,
+                                                     QHBoxLayout* seats_box)
 {
     for (auto w : *widgets) {
         delete w;

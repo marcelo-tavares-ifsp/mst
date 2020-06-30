@@ -53,7 +53,7 @@ void InstallWindow::configure_seat(int seat_id)
  */
 void InstallWindow::on_btnBeginInstall_clicked()
 {
-    inst_controller->load_interface_page(this, ui->hbox_seats);
+    inst_controller->load_seat_configuration_page(this, ui->hbox_seats);
     show_page(Ui::Page::INTERFACES);
 }
 
