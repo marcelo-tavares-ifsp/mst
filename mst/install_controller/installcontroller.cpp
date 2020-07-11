@@ -315,6 +315,16 @@ bool InstallController::is_mst_running()
     return Platform::process_is_running("Xephyr");
 }
 
+void InstallController::set_debug_allow_device_collisions(bool value)
+{
+    this->debug_allow_device_collisions = value;
+}
+
+void InstallController::set_debug_allow_empty_devices(bool value)
+{
+    this->debug_allow_empty_devices = value;
+}
+
 bool InstallController::config_is_valid()
 {
     print_config();
@@ -324,19 +334,21 @@ bool InstallController::config_is_valid()
     {
         for (uint32_t i = 0; i < count_seats; i++)
         {
-            for (uint32_t j = 1; j < count_seats; j++)
-            {
-                if (i == j)
-                    continue;
-
-                if (is_equal(i, j))
+            if (! debug_allow_device_collisions) {
+                for (uint32_t j = 1; j < count_seats; j++)
                 {
-                    qWarning(install_controller_category()) << "COLLISION is found";
-                    return false;
+                    if (i == j)
+                        continue;
+                    if (is_equal(i, j))
+                    {
+                        qWarning(install_controller_category())
+                                << "COLLISION is found";
+                        return false;
+                    }
                 }
             }
 
-            if (is_empty(i))
+            if ((! debug_allow_empty_devices) && is_empty(i))
             {
                 qWarning(install_controller_category()) << "EMPTY is found";
                 return false;

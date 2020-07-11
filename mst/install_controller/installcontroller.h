@@ -53,6 +53,9 @@ public:
     vector<string> get_list_of_mice();
     vector<string> get_list_of_keybs();
 
+    void set_debug_allow_device_collisions(bool value);
+    void set_debug_allow_empty_devices(bool value);
+
 public slots:
     void set_seat_device(QString, DEVICE_TYPE);
 
@@ -68,6 +71,18 @@ private:
     vector<string> *list_keybs;
     int current_seat_id;
     Component_manager* component_manager;
+
+    /**
+     * @brief debug_allow_device_collisions -- if this option is set, then
+     * the controller allows device collisions.
+     */
+    bool debug_allow_device_collisions = false;
+
+    /**
+     * @brief debug_allow_empty_devices -- if this option is set, then
+     * the controller allows empty device configurations.
+     */
+    bool debug_allow_empty_devices = false;
 };
 
 #endif // INSTALLCONTROLLER_H

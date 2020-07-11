@@ -80,7 +80,17 @@ int main(int argc, char *argv[])
                 QStringList() << "R" << "rollback",
                 QCoreApplication::translate("main",
                                            "Rollback changes in the system"));
+    QCommandLineOption debug_allow_empty_devices(
+                QStringList() << "debug-allow-empty-devices",
+                QCoreApplication::translate("main",
+                                            "Allow empty devices"));
+    QCommandLineOption debug_allow_device_collisions(
+                QStringList() << "debug-allow-device-collisions",
+                QCoreApplication::translate("main",
+                                            "Allow device collisions"));
     parser.addOption(rollback_option);
+    parser.addOption(debug_allow_empty_devices);
+    parser.addOption(debug_allow_device_collisions);
     parser.process(a);
     QFile file(MST_CONFIG_FILE);
     if(! file.exists()) {
@@ -102,9 +112,18 @@ int main(int argc, char *argv[])
     m_logFile.reset(new QFile(MST_LOG_FILE));
     m_logFile.data()->open(QFile::Append | QFile::Text);
     qInstallMessageHandler(messageHandler);
+    InstallController* controller = InstallController::get_instance();
+
+    if (parser.isSet(debug_allow_device_collisions)) {
+        controller->set_debug_allow_device_collisions(true);
+    }
+
+    if (parser.isSet(debug_allow_empty_devices)) {
+        controller->set_debug_allow_empty_devices(true);
+    }
 
     if (parser.isSet(rollback_option)) {
-        InstallController::get_instance()->disable_mst();
+        controller->disable_mst();
         return 0;
     }
 
