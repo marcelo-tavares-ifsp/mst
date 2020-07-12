@@ -27,7 +27,7 @@ public:
 
 private:
     /**
-     * @brief seat -- list of seats.
+     * @brief seat -- A shared seat pointer assigned to this widget.
      */
     shared_ptr<Seat> seat;
 
