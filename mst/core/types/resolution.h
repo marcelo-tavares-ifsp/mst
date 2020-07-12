@@ -6,6 +6,9 @@
 
 using namespace std;
 
+/**
+ * @brief The Resolution class -- describes a monitor resolution.
+ */
 class Resolution
 {
 public:
@@ -13,7 +16,17 @@ public:
    Resolution(const Resolution& other);
    Resolution(QString resolution_string);
    Resolution(int width, int height);
+
+   /**
+    * @brief get_width -- get the width part from the resolution.
+    * @return resolution width.
+    */
    int get_width() const;
+
+   /**
+    * @brief get_height -- get the heigth part from the resolution.
+    * @return resolution heigth.
+    */
    int get_height() const;
 
    /**
