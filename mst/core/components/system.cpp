@@ -4,8 +4,8 @@
 
 #include "../configuration.h"
 #include "../types/template.h"
-#include "../../template_manager/template_manager.h"
-#include "../../path_manager/pathmanager.h"
+#include "core/template_manager.h"
+#include "core/pathmanager.h"
 
 using namespace sys;
 

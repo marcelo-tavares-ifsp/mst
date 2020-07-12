@@ -3,8 +3,8 @@
 #include "udev.h"
 
 #include "../configuration.h"
-#include "../../template_manager/template_manager.h"
-#include "../types/template.h"
+#include "core/template_manager.h"
+#include "core/types/template.h"
 
 using namespace udev;
 

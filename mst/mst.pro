@@ -45,21 +45,21 @@ SOURCES += \
     install_controller/installcontroller.cpp \
     core/configuration.cpp \
     core/utilites/utilites.cpp \
-    path_manager/pathmanager.cpp \
+    core/pathmanager.cpp \
     core/dsv_parser/dsv.cpp \
     core/components/component.cpp \
     core/components/vgl.cpp \
     core/components/display_manager.cpp \
     input_device_listener/inputdevicelistener.cpp \
     core/components/awesome.cpp \
-    template_manager/template_manager.cpp \
+    core/template_manager.cpp \
     core/types/template.cpp \
     ui/about_dialog/about_dialog.cpp \
     core/components/xorg.cpp \
     core/components/udev.cpp \
     core/components/sudo.cpp \
     core/components/system.cpp \
-    platform/platform.cpp \
+    core/platform.cpp \
     core/components/component_manager.cpp \
     core/types/resolution.cpp \
     core/types/xrandr_monitor.cpp \
@@ -75,20 +75,20 @@ HEADERS += \
     core/configuration.h \
     core/utilites/utilites.h \
     core/components/component.h \
-    path_manager/pathmanager.h \
+    core/pathmanager.h \
     core/dsv_parser/dsv.h \
     core/components/vgl.h \
     core/components/display_manager.h \
     input_device_listener/inputdevicelistener.h \
     core/components/awesome.h \
-    template_manager/template_manager.h \
+    core/template_manager.h \
     core/types/template.h \
     ui/about_dialog/about_dialog.h \
     core/components/xorg.h \
     core/components/udev.h \
     core/components/sudo.h \
     core/components/system.h \
-    platform/platform.h \
+    core/platform.h \
     core/components/component_manager.h \
     version.h \
     core/types/resolution.h \

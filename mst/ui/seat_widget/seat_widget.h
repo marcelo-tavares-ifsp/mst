@@ -8,7 +8,7 @@
 #include <QPushButton>
 #include <memory>
 
-#include "platform/platform.h"
+#include "core/platform.h"
 #include "core/types/resolution.h"
 #include "core/types/xrandr_monitor.h"
 #include "core/types/monitor.h"

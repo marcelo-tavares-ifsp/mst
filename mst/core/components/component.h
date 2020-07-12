@@ -6,7 +6,7 @@
 
 #include "../configuration.h"
 #include "../types/template.h"
-#include "../../template_manager/template_manager.h"
+#include "../template_manager.h"
 
 /**
  * @brief The Component_error class -- describes a generic component error.

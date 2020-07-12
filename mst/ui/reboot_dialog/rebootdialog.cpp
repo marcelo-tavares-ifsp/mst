@@ -1,6 +1,6 @@
 #include "rebootdialog.h"
 #include "ui_rebootdialog.h"
-#include "platform/platform.h"
+#include "core/platform.h"
 
 Q_LOGGING_CATEGORY(reboot_dialog_category, "mst.reboot_dialog")
 

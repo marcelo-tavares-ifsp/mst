@@ -13,7 +13,7 @@
 #include <QTextStream>
 #include <QCommandLineParser>
 
-#include "template_manager/template_manager.h"
+#include "core/template_manager.h"
 
 /**
  * @brief m_logFile -- A pointer to logging file.

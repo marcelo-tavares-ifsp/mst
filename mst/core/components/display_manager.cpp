@@ -3,8 +3,8 @@
 #include "component.h"
 #include "../configuration.h"
 #include "../types/template.h"
-#include "../../template_manager/template_manager.h"
-#include "../../platform/platform.h"
+#include "core/template_manager.h"
+#include "core/platform.h"
 
 Q_LOGGING_CATEGORY(display_manager_category, "mst.dm")
 

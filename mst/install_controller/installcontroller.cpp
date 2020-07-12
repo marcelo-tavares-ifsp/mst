@@ -6,7 +6,7 @@
 #include <QCheckBox>
 #include <memory>
 
-#include "../platform/platform.h"
+#include "core/platform.h"
 #include "ui/seat_widget/seat_widget.h"
 #include "core/types/xrandr_monitor.h"
 

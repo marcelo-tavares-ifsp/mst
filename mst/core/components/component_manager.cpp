@@ -1,6 +1,6 @@
 #include "component_manager.h"
 
-#include "template_manager/template_manager.h"
+#include "core/template_manager.h"
 #include "core/types/template.h"
 
 #include "vgl.h"

@@ -1,7 +1,7 @@
 #ifndef TEMPLATE_MANAGER_H
 #define TEMPLATE_MANAGER_H
 
-#include "core/types/template.h"
+#include "types/template.h"
 
 using namespace std;
 

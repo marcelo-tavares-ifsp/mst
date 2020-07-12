@@ -3,7 +3,7 @@
 #include "xorg.h"
 #include "../configuration.h"
 #include "../types/template.h"
-#include "../../template_manager/template_manager.h"
+#include "core/template_manager.h"
 
 using namespace xorg;
 

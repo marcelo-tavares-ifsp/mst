@@ -4,7 +4,7 @@
 #include <vector>
 #include <QString>
 #include <QLoggingCategory>
-#include "core/types/xrandr_monitor.h"
+#include "types/xrandr_monitor.h"
 
 Q_DECLARE_LOGGING_CATEGORY(platform_category)
 
