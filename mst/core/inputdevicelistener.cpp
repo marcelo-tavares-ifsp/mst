@@ -68,8 +68,9 @@ bool InputDeviceListener::loop_answer_device(string device)
     fd = open(pDevice, O_RDWR  | O_NONBLOCK);
     if (fd == -1)
     {
-        string message = "Could not open device: " + device;
-        qCritical(input_device_listener_category()) << QString::fromStdString(message);
+        QString message = "Could not open device: "
+                + QString::fromStdString(device);
+        qCritical(input_device_listener_category()) << message;
         throw InputDeviceListener_exception(type, message);
     }
 

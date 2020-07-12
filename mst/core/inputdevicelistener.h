@@ -31,8 +31,8 @@ enum DEVICE_TYPE {
 class InputDeviceListener_exception : public runtime_error
 {
   public:
-    InputDeviceListener_exception(DEVICE_TYPE type, string& what)
-        : runtime_error(what),
+    InputDeviceListener_exception(DEVICE_TYPE type, QString& what)
+        : runtime_error(what.toStdString()),
           type(type)
     {
         /* Do nothing */
