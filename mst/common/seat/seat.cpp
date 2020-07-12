@@ -3,7 +3,7 @@
 
 #include "seat.h"
 
-std::ostream& operator<< (std::ostream& os, const Seat& seat) {
+std::ostream& operator<< (std::ostream& os, Seat& seat) {
     os << "#<Seat " << seat.get_monitor().get_interface().toStdString()
        << " keyboard: " << seat.get_keyboard().toStdString()
        << " mouse: "    << seat.get_mouse().toStdString()
@@ -58,7 +58,7 @@ void Seat::add_monitor(Monitor &monitor)
 }
 
 // TODO: Needed only for compatibility.
-Monitor Seat::get_monitor() const
+Monitor &Seat::get_monitor()
 {
     return this->monitors[0];
 }

@@ -16,7 +16,7 @@ public:
     QString get_keyboard() const;
     QString get_usb() const;
     QVector<Monitor> get_monitors() const;
-    Monitor get_monitor() const;
+    Monitor& get_monitor();
     void add_monitor(Monitor& monitor);
     void set_mouse(QString mouse);
     void set_keyboard(QString keyboard);
