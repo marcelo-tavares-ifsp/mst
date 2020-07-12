@@ -7,6 +7,9 @@
 
 #include "../monitor/monitor.h"
 
+/**
+ * @brief The Seat class -- describes a MST seat configuration.
+ */
 class Seat
 {
 public:
@@ -22,7 +25,20 @@ public:
     void set_keyboard(QString keyboard);
     void set_usb(QString usb);
 
+    /**
+     * @brief intersects -- Check if the seat have common devices with other
+     *     seat.
+     * @param other -- other seat reference to check.
+     * @return true if seats have common devices, false otherwise.
+     */
     bool intersects(const Seat& other) const;
+
+    /**
+     * @brief intersects -- Check if the seat have common devices with other
+     *     seat.
+     * @param other -- other seat shared pointer to check.
+     * @return true if seats have common devices, false otherwise.
+     */
     bool intersects(const shared_ptr<Seat> other) const;
 
     friend std::ostream& operator<< (std::ostream& os, const Seat& seat);
