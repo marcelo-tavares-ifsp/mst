@@ -1,7 +1,7 @@
 #include <sstream>
 
 #include "xorg.h"
-#include "../configuration/configuration.h"
+#include "../core/configuration.h"
 #include "../template_manager/template.h"
 #include "../template_manager/template_manager.h"
 

@@ -1,7 +1,7 @@
 #include "display_manager.h"
 
 #include "component.h"
-#include "../configuration/configuration.h"
+#include "../core/configuration.h"
 #include "../template_manager/template.h"
 #include "../template_manager/template_manager.h"
 #include "../platform/platform.h"

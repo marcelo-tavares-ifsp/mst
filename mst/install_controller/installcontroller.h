@@ -6,7 +6,7 @@
 #include <QListWidget>
 
 #include "ui_installwindow.h"
-#include "configuration/configuration.h"
+#include "core/configuration.h"
 #include "core/utilites/utilites.h"
 #include "input_device_listener/inputdevicelistener.h"
 #include "components/component_manager.h"

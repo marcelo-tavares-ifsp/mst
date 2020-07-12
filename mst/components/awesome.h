@@ -6,7 +6,7 @@
 #include <sstream>
 #include <memory>
 
-#include "../configuration/configuration.h"
+#include "../core/configuration.h"
 #include "../template_manager/template.h"
 #include "component.h"
 #include <QLoggingCategory>

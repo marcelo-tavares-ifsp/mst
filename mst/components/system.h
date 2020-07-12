@@ -2,7 +2,7 @@
 #define SYSTEM_H
 
 #include "component.h"
-#include "../configuration/configuration.h"
+#include "../core/configuration.h"
 #include "../template_manager/template.h"
 
 namespace sys {

@@ -43,7 +43,7 @@ SOURCES += \
     ui/calibration_dialog/calibrationdialog.cpp \
     ui/reboot_dialog/rebootdialog.cpp \
     install_controller/installcontroller.cpp \
-    configuration/configuration.cpp \
+    core/configuration.cpp \
     core/utilites/utilites.cpp \
     path_manager/pathmanager.cpp \
     core/dsv_parser/dsv.cpp \
@@ -72,7 +72,7 @@ HEADERS += \
     ui/calibration_dialog/calibrationdialog.h \
     ui/reboot_dialog/rebootdialog.h \
     install_controller/installcontroller.h \
-    configuration/configuration.h \
+    core/configuration.h \
     core/utilites/utilites.h \
     components/component.h \
     path_manager/pathmanager.h \

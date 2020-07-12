@@ -1,7 +1,7 @@
 #ifndef XORG_CONFIG_H
 #define XORG_CONFIG_H
 
-#include "configuration/configuration.h"
+#include "core/configuration.h"
 #include "../template_manager/template.h"
 #include "iostream"
 #include <QLoggingCategory>
