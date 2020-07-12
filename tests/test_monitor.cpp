@@ -2,9 +2,9 @@
 
 #include "test_monitor.h"
 
-#include "../mst/common/xrandr_monitor/xrandr_monitor.h"
-#include "../mst/common/monitor/monitor.h"
-#include "../mst/common/resolution/resolution.h"
+#include "../mst/core/xrandr_monitor/xrandr_monitor.h"
+#include "../mst/core/monitor/monitor.h"
+#include "../mst/core/resolution/resolution.h"
 
 Test_monitor::Test_monitor() : QObject()
 {

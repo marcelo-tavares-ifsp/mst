@@ -16,7 +16,7 @@
 #include <fcntl.h>
 #include <QLoggingCategory>
 #include "path_manager/pathmanager.h"
-#include "common/utilites/utilites.h"
+#include "core/utilites/utilites.h"
 
 using namespace std;
 

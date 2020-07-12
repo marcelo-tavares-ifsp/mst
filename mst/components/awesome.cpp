@@ -2,8 +2,8 @@
 
 #include "awesome.h"
 #include "component.h"
-#include "../common/utilites/utilites.h"
-#include "../common/monitor/monitor.h"
+#include "../core/utilites/utilites.h"
+#include "../core/monitor/monitor.h"
 
 #include "../template_manager/template.h"
 #include "../template_manager/template_manager.h"

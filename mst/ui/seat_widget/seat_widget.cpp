@@ -4,10 +4,10 @@
 
 #include "ui/install_window/installwindow.h"
 #include "seat_widget.h"
-#include "common/resolution/resolution.h"
-#include "common/utilites/utilites.h"
-#include "common/xrandr_monitor/xrandr_monitor.h"
-#include "common/monitor/monitor.h"
+#include "core/resolution/resolution.h"
+#include "core/utilites/utilites.h"
+#include "core/xrandr_monitor/xrandr_monitor.h"
+#include "core/monitor/monitor.h"
 
 Seat_widget::Seat_widget(shared_ptr<Seat> seat)
 {

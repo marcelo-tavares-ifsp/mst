@@ -6,8 +6,8 @@
 #include <QLoggingCategory>
 #include <QString>
 
-#include "common/xrandr_monitor/xrandr_monitor.h"
-#include "common/utilites/utilites.h"
+#include "core/xrandr_monitor/xrandr_monitor.h"
+#include "core/utilites/utilites.h"
 
 Q_LOGGING_CATEGORY(platform_category, "mst.platform")
 

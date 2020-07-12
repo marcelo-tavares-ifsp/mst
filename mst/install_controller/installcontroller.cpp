@@ -8,7 +8,7 @@
 
 #include "../platform/platform.h"
 #include "ui/seat_widget/seat_widget.h"
-#include "common/xrandr_monitor/xrandr_monitor.h"
+#include "core/xrandr_monitor/xrandr_monitor.h"
 
 InstallController* InstallController::instance = 0;
 Q_LOGGING_CATEGORY(install_controller_category, "mst.install_controller")

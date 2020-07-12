@@ -5,7 +5,7 @@
 #include <string>
 #include <stdio.h>
 #include <iostream>
-#include "../common/dsv_parser/dsv.h"
+#include "../core/dsv_parser/dsv.h"
 
 Q_DECLARE_LOGGING_CATEGORY(path_manager_category)
 

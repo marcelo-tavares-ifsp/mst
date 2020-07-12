@@ -28,7 +28,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += ../
 
 SOURCES += \
-    ../mst/common/utilites/utilites.cpp \
+    ../mst/core/utilites/utilites.cpp \
     unit_tests.cpp \
     test_utils.cpp \
     test_template.cpp \
@@ -47,17 +47,17 @@ SOURCES += \
     ../mst/template_manager/template.cpp \
     ../mst/template_manager/template_manager.cpp \
     ../mst/path_manager/pathmanager.cpp \
-    ../mst/common/dsv_parser/dsv.cpp \
-    ../mst/common/seat/seat.cpp \
-    ../mst/common/monitor/monitor.cpp \
-    ../mst/common/resolution/resolution.cpp \
-    ../mst/common/xrandr_monitor/xrandr_monitor.cpp
+    ../mst/core/dsv_parser/dsv.cpp \
+    ../mst/core/seat/seat.cpp \
+    ../mst/core/monitor/monitor.cpp \
+    ../mst/core/resolution/resolution.cpp \
+    ../mst/core/xrandr_monitor/xrandr_monitor.cpp
 
 HEADERS += \
     ../mst/configuration/configuration.h \
-    ../mst/common/utilites/utilites.h \
-    ../mst/common/seat/seat.h \
-    ../mst/common/monitor/monitor.h \
+    ../mst/core/utilites/utilites.h \
+    ../mst/core/seat/seat.h \
+    ../mst/core/monitor/monitor.h \
     test_awesome.h \
     test_utils.h \
     test_template.h \

@@ -44,9 +44,9 @@ SOURCES += \
     ui/reboot_dialog/rebootdialog.cpp \
     install_controller/installcontroller.cpp \
     configuration/configuration.cpp \
-    common/utilites/utilites.cpp \
+    core/utilites/utilites.cpp \
     path_manager/pathmanager.cpp \
-    common/dsv_parser/dsv.cpp \
+    core/dsv_parser/dsv.cpp \
     components/component.cpp \
     components/vgl.cpp \
     components/display_manager.cpp \
@@ -61,10 +61,10 @@ SOURCES += \
     components/system.cpp \
     platform/platform.cpp \
     components/component_manager.cpp \
-    common/resolution/resolution.cpp \
-    common/xrandr_monitor/xrandr_monitor.cpp \
-    common/monitor/monitor.cpp \
-    common/seat/seat.cpp \
+    core/resolution/resolution.cpp \
+    core/xrandr_monitor/xrandr_monitor.cpp \
+    core/monitor/monitor.cpp \
+    core/seat/seat.cpp \
     ui/seat_widget/seat_widget.cpp
 
 HEADERS += \
@@ -73,10 +73,10 @@ HEADERS += \
     ui/reboot_dialog/rebootdialog.h \
     install_controller/installcontroller.h \
     configuration/configuration.h \
-    common/utilites/utilites.h \
+    core/utilites/utilites.h \
     components/component.h \
     path_manager/pathmanager.h \
-    common/dsv_parser/dsv.h \
+    core/dsv_parser/dsv.h \
     components/vgl.h \
     components/display_manager.h \
     input_device_listener/inputdevicelistener.h \
@@ -91,10 +91,10 @@ HEADERS += \
     platform/platform.h \
     components/component_manager.h \
     version.h \
-    common/resolution/resolution.h \
-    common/xrandr_monitor/xrandr_monitor.h \
-    common/monitor/monitor.h \
-    common/seat/seat.h \
+    core/resolution/resolution.h \
+    core/xrandr_monitor/xrandr_monitor.h \
+    core/monitor/monitor.h \
+    core/seat/seat.h \
     ui/seat_widget/seat_widget.h
 
 FORMS += \

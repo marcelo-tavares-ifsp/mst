@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 
-#include "../mst/common/utilites/utilites.h"
+#include "../mst/core/utilites/utilites.h"
 #include "../mst/template_manager/template_manager.h"
 
 #include "test_awesome.h"

@@ -9,10 +9,10 @@
 #include <memory>
 
 #include "platform/platform.h"
-#include "common/resolution/resolution.h"
-#include "common/xrandr_monitor/xrandr_monitor.h"
-#include "common/monitor/monitor.h"
-#include "common/seat/seat.h"
+#include "core/resolution/resolution.h"
+#include "core/xrandr_monitor/xrandr_monitor.h"
+#include "core/monitor/monitor.h"
+#include "core/seat/seat.h"
 
 /**
  * @brief The Seat_widget class -- A class that describes a monitor widget

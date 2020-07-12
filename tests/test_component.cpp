@@ -2,10 +2,10 @@
 #include <QString>
 
 #include "test_component.h"
-#include "../mst/common/resolution/resolution.h"
-#include "../mst/common/monitor/monitor.h"
+#include "../mst/core/resolution/resolution.h"
+#include "../mst/core/monitor/monitor.h"
 #include "../mst/components/component.h"
-#include "../mst/common/seat/seat.h"
+#include "../mst/core/seat/seat.h"
 
 Test_component::Test_component()
 {
