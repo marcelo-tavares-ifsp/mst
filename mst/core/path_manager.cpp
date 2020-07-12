@@ -1,6 +1,6 @@
 #include <QString>
 
-#include "pathmanager.h"
+#include "path_manager.h"
 
 Q_LOGGING_CATEGORY(path_manager_category, "mst.path_manager")
 

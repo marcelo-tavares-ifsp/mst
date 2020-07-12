@@ -45,7 +45,6 @@ SOURCES += \
     core/installcontroller.cpp \
     core/configuration.cpp \
     core/utilites/utilites.cpp \
-    core/pathmanager.cpp \
     core/dsv_parser/dsv.cpp \
     core/component.cpp \
     core/components/vgl.cpp \
@@ -65,7 +64,8 @@ SOURCES += \
     core/types/xrandr_monitor.cpp \
     core/types/monitor.cpp \
     core/types/seat.cpp \
-    ui/seat_widget/seat_widget.cpp
+    ui/seat_widget/seat_widget.cpp \
+    core/path_manager.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -75,7 +75,6 @@ HEADERS += \
     core/configuration.h \
     core/utilites/utilites.h \
     core/component.h \
-    core/pathmanager.h \
     core/dsv_parser/dsv.h \
     core/components/vgl.h \
     core/components/display_manager.h \
@@ -95,7 +94,8 @@ HEADERS += \
     core/types/xrandr_monitor.h \
     core/types/monitor.h \
     core/types/seat.h \
-    ui/seat_widget/seat_widget.h
+    ui/seat_widget/seat_widget.h \
+    core/path_manager.h
 
 FORMS += \
     ui/install_window/installwindow.ui \
