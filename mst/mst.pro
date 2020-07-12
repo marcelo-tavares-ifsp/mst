@@ -50,7 +50,7 @@ SOURCES += \
     core/component.cpp \
     core/components/vgl.cpp \
     core/components/display_manager.cpp \
-    input_device_listener/inputdevicelistener.cpp \
+    core/inputdevicelistener.cpp \
     core/components/awesome.cpp \
     core/template_manager.cpp \
     core/types/template.cpp \
@@ -79,7 +79,7 @@ HEADERS += \
     core/dsv_parser/dsv.h \
     core/components/vgl.h \
     core/components/display_manager.h \
-    input_device_listener/inputdevicelistener.h \
+    core/inputdevicelistener.h \
     core/components/awesome.h \
     core/template_manager.h \
     core/types/template.h \
