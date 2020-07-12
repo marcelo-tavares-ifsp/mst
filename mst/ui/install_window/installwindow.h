@@ -6,7 +6,7 @@
 #include <QMessageBox>
 #include "ui/calibration_dialog/calibrationdialog.h"
 #include "ui/reboot_dialog/rebootdialog.h"
-#include "install_controller/installcontroller.h"
+#include "core/installcontroller.h"
 #include "core/inputdevicelistener.h"
 #include "version.h"
 

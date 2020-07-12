@@ -42,7 +42,7 @@ SOURCES += \
     ui/install_window/installwindow.cpp \
     ui/calibration_dialog/calibrationdialog.cpp \
     ui/reboot_dialog/rebootdialog.cpp \
-    install_controller/installcontroller.cpp \
+    core/installcontroller.cpp \
     core/configuration.cpp \
     core/utilites/utilites.cpp \
     core/pathmanager.cpp \
@@ -71,7 +71,7 @@ HEADERS += \
     ui/install_window/installwindow.h \
     ui/calibration_dialog/calibrationdialog.h \
     ui/reboot_dialog/rebootdialog.h \
-    install_controller/installcontroller.h \
+    core/installcontroller.h \
     core/configuration.h \
     core/utilites/utilites.h \
     core/component.h \
