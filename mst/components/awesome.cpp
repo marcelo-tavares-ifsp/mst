@@ -5,7 +5,7 @@
 #include "../core/utilites/utilites.h"
 #include "../core/types/monitor.h"
 
-#include "../template_manager/template.h"
+#include "../core/types/template.h"
 #include "../template_manager/template_manager.h"
 #include "../path_manager/pathmanager.h"
 

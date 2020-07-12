@@ -4,7 +4,7 @@
 
 #include "../core/configuration.h"
 #include "../template_manager/template_manager.h"
-#include "../template_manager/template.h"
+#include "../core/types/template.h"
 
 using namespace udev;
 

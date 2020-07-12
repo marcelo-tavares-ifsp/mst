@@ -53,7 +53,7 @@ SOURCES += \
     input_device_listener/inputdevicelistener.cpp \
     components/awesome.cpp \
     template_manager/template_manager.cpp \
-    template_manager/template.cpp \
+    core/types/template.cpp \
     ui/about_dialog/about_dialog.cpp \
     components/xorg.cpp \
     components/udev.cpp \
@@ -82,7 +82,7 @@ HEADERS += \
     input_device_listener/inputdevicelistener.h \
     components/awesome.h \
     template_manager/template_manager.h \
-    template_manager/template.h \
+    core/types/template.h \
     ui/about_dialog/about_dialog.h \
     components/xorg.h \
     components/udev.h \

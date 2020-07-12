@@ -7,7 +7,7 @@
 
 #include "component.h"
 #include "../core/configuration.h"
-#include "../template_manager/template.h"
+#include "../core/types/template.h"
 
 Q_DECLARE_LOGGING_CATEGORY(display_manager_category)
 

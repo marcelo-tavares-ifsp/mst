@@ -2,7 +2,7 @@
 
 #include "component.h"
 #include "../core/configuration.h"
-#include "../template_manager/template.h"
+#include "../core/types/template.h"
 #include "../template_manager/template_manager.h"
 #include "../platform/platform.h"
 
