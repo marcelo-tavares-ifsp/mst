@@ -1,9 +1,9 @@
 #include <sstream>
 
 #include "xorg.h"
-#include "../core/configuration.h"
-#include "../core/types/template.h"
-#include "../template_manager/template_manager.h"
+#include "../configuration.h"
+#include "../types/template.h"
+#include "../../template_manager/template_manager.h"
 
 using namespace xorg;
 

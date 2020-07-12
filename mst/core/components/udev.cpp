@@ -2,9 +2,9 @@
 
 #include "udev.h"
 
-#include "../core/configuration.h"
-#include "../template_manager/template_manager.h"
-#include "../core/types/template.h"
+#include "../configuration.h"
+#include "../../template_manager/template_manager.h"
+#include "../types/template.h"
 
 using namespace udev;
 

@@ -2,12 +2,12 @@
 
 #include "awesome.h"
 #include "component.h"
-#include "../core/utilites/utilites.h"
-#include "../core/types/monitor.h"
+#include "../utilites/utilites.h"
+#include "../types/monitor.h"
 
-#include "../core/types/template.h"
-#include "../template_manager/template_manager.h"
-#include "../path_manager/pathmanager.h"
+#include "../types/template.h"
+#include "../../template_manager/template_manager.h"
+#include "../../path_manager/pathmanager.h"
 
 using namespace std;
 using namespace awesome;

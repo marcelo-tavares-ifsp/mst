@@ -2,7 +2,7 @@
 #define XORG_CONFIG_H
 
 #include "core/configuration.h"
-#include "../core/types/template.h"
+#include "../types/template.h"
 #include "iostream"
 #include <QLoggingCategory>
 

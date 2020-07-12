@@ -4,9 +4,9 @@
 #include <QMap>
 #include <QString>
 
-#include "../core/configuration.h"
-#include "../core/types/template.h"
-#include "../template_manager/template_manager.h"
+#include "../configuration.h"
+#include "../types/template.h"
+#include "../../template_manager/template_manager.h"
 
 /**
  * @brief The Component_error class -- describes a generic component error.

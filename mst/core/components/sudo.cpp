@@ -2,10 +2,10 @@
 
 #include "sudo.h"
 
-#include "../core/configuration.h"
-#include "../core/types/template.h"
-#include "../template_manager/template_manager.h"
-#include "../path_manager/pathmanager.h"
+#include "../configuration.h"
+#include "../types/template.h"
+#include "../../template_manager/template_manager.h"
+#include "../../path_manager/pathmanager.h"
 
 using namespace sudo;
 

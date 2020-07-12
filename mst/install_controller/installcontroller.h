@@ -9,8 +9,8 @@
 #include "core/configuration.h"
 #include "core/utilites/utilites.h"
 #include "input_device_listener/inputdevicelistener.h"
-#include "components/component_manager.h"
-#include "components/vgl.h"
+#include "core/components/component_manager.h"
+#include "core/components/vgl.h"
 #include "ui/seat_widget/seat_widget.h"
 #include "core/types/resolution.h"
 

@@ -6,8 +6,8 @@
 #include <QLoggingCategory>
 
 #include "component.h"
-#include "../core/configuration.h"
-#include "../core/types/template.h"
+#include "../configuration.h"
+#include "../types/template.h"
 
 Q_DECLARE_LOGGING_CATEGORY(display_manager_category)
 

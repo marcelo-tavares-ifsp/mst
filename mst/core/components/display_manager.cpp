@@ -1,10 +1,10 @@
 #include "display_manager.h"
 
 #include "component.h"
-#include "../core/configuration.h"
-#include "../core/types/template.h"
-#include "../template_manager/template_manager.h"
-#include "../platform/platform.h"
+#include "../configuration.h"
+#include "../types/template.h"
+#include "../../template_manager/template_manager.h"
+#include "../../platform/platform.h"
 
 Q_LOGGING_CATEGORY(display_manager_category, "mst.dm")
 

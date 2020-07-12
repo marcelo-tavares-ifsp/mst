@@ -1,9 +1,9 @@
 #include "vgl.h"
-#include "../path_manager/pathmanager.h"
+#include "../../path_manager/pathmanager.h"
 
-#include "../core/types/template.h"
-#include "../template_manager/template_manager.h"
-#include "../platform/platform.h"
+#include "../types/template.h"
+#include "../../template_manager/template_manager.h"
+#include "../../platform/platform.h"
 
 using namespace std;
 using namespace vgl;

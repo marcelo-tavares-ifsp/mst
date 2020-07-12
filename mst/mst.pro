@@ -47,20 +47,20 @@ SOURCES += \
     core/utilites/utilites.cpp \
     path_manager/pathmanager.cpp \
     core/dsv_parser/dsv.cpp \
-    components/component.cpp \
-    components/vgl.cpp \
-    components/display_manager.cpp \
+    core/components/component.cpp \
+    core/components/vgl.cpp \
+    core/components/display_manager.cpp \
     input_device_listener/inputdevicelistener.cpp \
-    components/awesome.cpp \
+    core/components/awesome.cpp \
     template_manager/template_manager.cpp \
     core/types/template.cpp \
     ui/about_dialog/about_dialog.cpp \
-    components/xorg.cpp \
-    components/udev.cpp \
-    components/sudo.cpp \
-    components/system.cpp \
+    core/components/xorg.cpp \
+    core/components/udev.cpp \
+    core/components/sudo.cpp \
+    core/components/system.cpp \
     platform/platform.cpp \
-    components/component_manager.cpp \
+    core/components/component_manager.cpp \
     core/types/resolution.cpp \
     core/types/xrandr_monitor.cpp \
     core/types/monitor.cpp \
@@ -74,22 +74,22 @@ HEADERS += \
     install_controller/installcontroller.h \
     core/configuration.h \
     core/utilites/utilites.h \
-    components/component.h \
+    core/components/component.h \
     path_manager/pathmanager.h \
     core/dsv_parser/dsv.h \
-    components/vgl.h \
-    components/display_manager.h \
+    core/components/vgl.h \
+    core/components/display_manager.h \
     input_device_listener/inputdevicelistener.h \
-    components/awesome.h \
+    core/components/awesome.h \
     template_manager/template_manager.h \
     core/types/template.h \
     ui/about_dialog/about_dialog.h \
-    components/xorg.h \
-    components/udev.h \
-    components/sudo.h \
-    components/system.h \
+    core/components/xorg.h \
+    core/components/udev.h \
+    core/components/sudo.h \
+    core/components/system.h \
     platform/platform.h \
-    components/component_manager.h \
+    core/components/component_manager.h \
     version.h \
     core/types/resolution.h \
     core/types/xrandr_monitor.h \
