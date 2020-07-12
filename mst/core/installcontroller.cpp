@@ -198,7 +198,7 @@ QString InstallController::get_instruction(InputDeviceListener * device_listener
 void InstallController::begin_install()
 {
     QString out_dir = QString::fromStdString(
-                PathManager::get_instance()->get_output_dir());
+                Path_manager::get_instance()->get_output_dir());
     Platform::fs_mkdir(out_dir);
     component_manager = new Component_manager(*config);
     component_manager->configure_components();
@@ -212,8 +212,8 @@ void InstallController::install_files()
 {
     const QString output_dir
             = QString::fromStdString(
-                PathManager::get_instance()->get_output_dir());
-    const QString mst_user = PathManager::get_instance()->get_mst_user();
+                Path_manager::get_instance()->get_output_dir());
+    const QString mst_user = Path_manager::get_instance()->get_mst_user();
     const QString mst_user_home = "/home/" + mst_user + "/";
 
     auto install
@@ -266,14 +266,14 @@ void InstallController::disable_mst()
     Platform::system_set_default_runlevel("graphical");
     Platform::fs_rm(
                 QString::fromStdString(
-                    PathManager::get_instance()->get_sudoers_config()));
+                    Path_manager::get_instance()->get_sudoers_config()));
     Platform::fs_rm("/etc/bashrc.d/vgl.sh");
 }
 
 void InstallController::create_backup()
 {
-    const QString user = PathManager::get_instance()->get_mst_user();
-    const string usr_dir = PathManager::get_instance()->get_usr_share_dir();
+    const QString user = Path_manager::get_instance()->get_mst_user();
+    const string usr_dir = Path_manager::get_instance()->get_usr_share_dir();
     const QString cmd =  QString::fromLocal8Bit(INSTALLATION_PREFIX)
             + "/bin/mk_backup.sh " + user;
     if (Platform::exec(cmd) != 0) {
@@ -283,7 +283,7 @@ void InstallController::create_backup()
 
 void InstallController::restore_backup()
 {
-    const QString user = PathManager::get_instance()->get_mst_user();
+    const QString user = Path_manager::get_instance()->get_mst_user();
     const QString cmd = QString::fromLocal8Bit(INSTALLATION_PREFIX)
             + "/bin/apl_backup.sh " + user;
 

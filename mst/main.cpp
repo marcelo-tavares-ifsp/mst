@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
         create_config_file(file);
     }
     DSV config(MST_CONFIG_FILE.toStdString());
-    PathManager::get_instance()->set_config(&config);
+    Path_manager::get_instance()->set_config(&config);
     Template_manager::get_instance()->set_template_dir("/var/lib/mst/");
 
     if (geteuid() != 0)

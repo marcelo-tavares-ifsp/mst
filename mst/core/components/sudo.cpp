@@ -25,9 +25,9 @@ void Sudo::configure()
 
 Template sudo::prepare_sudoers_template()
 {
-    const QString user = PathManager::get_instance()->get_mst_user();
+    const QString user = Path_manager::get_instance()->get_mst_user();
     const QString tpl_name
-            = PathManager::get_instance()->get_sudoers_config_template();
+            = Path_manager::get_instance()->get_sudoers_config_template();
     Template tpl = Template_manager::get_instance()->get_template(tpl_name);
 
     tpl.set("user", user).set("mst", QString::fromLocal8Bit(INSTALLATION_PREFIX)

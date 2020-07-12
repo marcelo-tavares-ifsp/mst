@@ -27,7 +27,7 @@ void System::configure()
 
 Template sys::prepare_getty_template()
 {
-    const QString user = PathManager::get_instance()->get_mst_user();
+    const QString user = Path_manager::get_instance()->get_mst_user();
     Template tpl = Template_manager::get_instance()->get_template(GETTY_FILE);
     tpl.set("user", user);
     return tpl;

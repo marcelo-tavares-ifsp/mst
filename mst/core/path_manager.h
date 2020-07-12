@@ -11,14 +11,14 @@ Q_DECLARE_LOGGING_CATEGORY(path_manager_category)
 
 using namespace std;
 
-class PathManager
+class Path_manager
 {
 public:
-    static PathManager* get_instance()
+    static Path_manager* get_instance()
     {
-        static PathManager* instance = NULL;
+        static Path_manager* instance = NULL;
         if (instance == NULL) {
-            instance = new PathManager();
+            instance = new Path_manager();
         }
         return instance;
     }
@@ -55,7 +55,7 @@ public:
     string get_vgl_config_template();
 
 private:
-    PathManager() {};
+    Path_manager() {};
 
     string user;
     DSV* config;

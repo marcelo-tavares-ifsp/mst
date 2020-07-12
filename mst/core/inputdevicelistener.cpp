@@ -62,7 +62,7 @@ bool InputDeviceListener::loop_answer_device(string device)
     ssize_t bytes;
     int fd;
 
-    device = PathManager::get_instance()->get_device_path() + device;
+    device = Path_manager::get_instance()->get_device_path() + device;
     const char *pDevice = device.c_str();
 
     fd = open(pDevice, O_RDWR  | O_NONBLOCK);
