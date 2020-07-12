@@ -8,7 +8,7 @@
 
 #include "../configuration.h"
 #include "../types/template.h"
-#include "component.h"
+#include "../component.h"
 #include <QLoggingCategory>
 
 using namespace std;

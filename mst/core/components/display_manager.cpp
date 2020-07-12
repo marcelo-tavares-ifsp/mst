@@ -1,6 +1,6 @@
 #include "display_manager.h"
 
-#include "component.h"
+#include "../component.h"
 #include "../configuration.h"
 #include "../types/template.h"
 #include "core/template_manager.h"

@@ -1,7 +1,7 @@
 #ifndef VGL_H
 #define VGL_H
 
-#include "component.h"
+#include "../component.h"
 #include "../configuration.h"
 #include "../types/template.h"
 

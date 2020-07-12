@@ -47,7 +47,7 @@ SOURCES += \
     core/utilites/utilites.cpp \
     core/pathmanager.cpp \
     core/dsv_parser/dsv.cpp \
-    core/components/component.cpp \
+    core/component.cpp \
     core/components/vgl.cpp \
     core/components/display_manager.cpp \
     input_device_listener/inputdevicelistener.cpp \
@@ -60,7 +60,7 @@ SOURCES += \
     core/components/sudo.cpp \
     core/components/system.cpp \
     core/platform.cpp \
-    core/components/component_manager.cpp \
+    core/component_manager.cpp \
     core/types/resolution.cpp \
     core/types/xrandr_monitor.cpp \
     core/types/monitor.cpp \
@@ -74,7 +74,7 @@ HEADERS += \
     install_controller/installcontroller.h \
     core/configuration.h \
     core/utilites/utilites.h \
-    core/components/component.h \
+    core/component.h \
     core/pathmanager.h \
     core/dsv_parser/dsv.h \
     core/components/vgl.h \
@@ -89,7 +89,7 @@ HEADERS += \
     core/components/sudo.h \
     core/components/system.h \
     core/platform.h \
-    core/components/component_manager.h \
+    core/component_manager.h \
     version.h \
     core/types/resolution.h \
     core/types/xrandr_monitor.h \

@@ -3,13 +3,13 @@
 #include "core/template_manager.h"
 #include "core/types/template.h"
 
-#include "vgl.h"
-#include "udev.h"
-#include "sudo.h"
-#include "display_manager.h"
-#include "system.h"
-#include "awesome.h"
-#include "xorg.h"
+#include "core/components/vgl.h"
+#include "core/components/udev.h"
+#include "core/components/sudo.h"
+#include "core/components/display_manager.h"
+#include "core/components/system.h"
+#include "core/components/awesome.h"
+#include "core/components/xorg.h"
 
 Q_LOGGING_CATEGORY(components_category, "mst.components")
 

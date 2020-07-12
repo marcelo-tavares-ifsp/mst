@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <QLoggingCategory>
 
-#include "component.h"
+#include "../component.h"
 #include "../configuration.h"
 #include "../types/template.h"
 

@@ -1,7 +1,7 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include "component.h"
+#include "../component.h"
 #include "../configuration.h"
 #include "../types/template.h"
 

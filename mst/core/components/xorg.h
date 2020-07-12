@@ -6,7 +6,7 @@
 #include "iostream"
 #include <QLoggingCategory>
 
-#include "component.h"
+#include "../component.h"
 
 using namespace std;
 

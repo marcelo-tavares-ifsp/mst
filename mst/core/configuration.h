@@ -5,8 +5,8 @@
 #include <vector>
 #include <QLoggingCategory>
 #include <memory>
-#include "../core/types/monitor.h"
-#include "../core/types/seat.h"
+#include "core/types/monitor.h"
+#include "core/types/seat.h"
 
 using namespace std;
 

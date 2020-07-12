@@ -1,7 +1,7 @@
 #include <memory>
 
 #include "awesome.h"
-#include "component.h"
+#include "../component.h"
 #include "../utilites/utilites.h"
 #include "../types/monitor.h"
 

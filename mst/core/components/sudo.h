@@ -1,7 +1,7 @@
 #ifndef SUDO_H
 #define SUDO_H
 
-#include "component.h"
+#include "../component.h"
 #include "../configuration.h"
 #include "../types/template.h"
 
