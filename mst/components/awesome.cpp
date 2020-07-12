@@ -3,7 +3,7 @@
 #include "awesome.h"
 #include "component.h"
 #include "../core/utilites/utilites.h"
-#include "../core/monitor/monitor.h"
+#include "../core/types/monitor.h"
 
 #include "../template_manager/template.h"
 #include "../template_manager/template_manager.h"

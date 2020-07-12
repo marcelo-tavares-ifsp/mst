@@ -2,7 +2,7 @@
 #include <sstream>
 
 #include "test_seat.h"
-#include "../mst/core/seat/seat.h"
+#include "../mst/core/types/seat.h"
 
 Test_seat::Test_seat() : QObject()
 {

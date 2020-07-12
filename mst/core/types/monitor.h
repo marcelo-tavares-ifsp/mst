@@ -4,8 +4,8 @@
 #include <QString>
 #include <QVector>
 
-#include "../resolution/resolution.h"
-#include "../xrandr_monitor/xrandr_monitor.h"
+#include "resolution.h"
+#include "xrandr_monitor.h"
 
 using namespace std;
 

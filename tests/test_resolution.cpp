@@ -3,7 +3,7 @@
 #include <iostream>
 #include "test_resolution.h"
 
-#include "../mst/core/resolution/resolution.h"
+#include "../mst/core/types/resolution.h"
 
 Test_resolution::Test_resolution() : QObject()
 {

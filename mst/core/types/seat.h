@@ -5,7 +5,7 @@
 #include <memory>
 #include <ostream>
 
-#include "../monitor/monitor.h"
+#include "monitor.h"
 
 /**
  * @brief The Seat class -- describes a MST seat configuration.

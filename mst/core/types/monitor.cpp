@@ -1,7 +1,7 @@
 #include "monitor.h"
 
-#include "../xrandr_monitor/xrandr_monitor.h"
-#include "../resolution/resolution.h"
+#include "../types/xrandr_monitor.h"
+#include "../types/resolution.h"
 
 Monitor::Monitor()
 {

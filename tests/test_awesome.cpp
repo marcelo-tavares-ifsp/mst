@@ -8,7 +8,7 @@
 #include <memory>
 
 #include "../mst/components/awesome.h"
-#include "../mst/core/seat/seat.h"
+#include "../mst/core/types/seat.h"
 
 #include "test_awesome.h"
 
