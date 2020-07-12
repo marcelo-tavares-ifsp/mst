@@ -56,20 +56,21 @@ static bool is_btn_pressed(struct input_event &e)
     return (e.type == EV_MSC) && (e.code == 4);
 }
 
-bool InputDeviceListener::loop_answer_device(string device)
+bool InputDeviceListener::loop_answer_device(QString device)
 {
     struct input_event ie;
     ssize_t bytes;
     int fd;
 
-    device = Path_manager::get_instance()->get_device_path() + device;
-    const char *pDevice = device.c_str();
+    device = QString::fromStdString(
+                Path_manager::get_instance()->get_device_path())
+            + device;
+    const char *pDevice = device.toStdString().c_str();
 
     fd = open(pDevice, O_RDWR  | O_NONBLOCK);
     if (fd == -1)
     {
-        QString message = "Could not open device: "
-                + QString::fromStdString(device);
+        QString message = "Could not open device: " + device;
         qCritical(input_device_listener_category()) << message;
         throw InputDeviceListener_exception(type, message);
     }
@@ -146,7 +147,7 @@ string* InputDeviceListener::check_device()
         usleep(100);
         for (auto device : *devices)
         {
-            if (loop_answer_device(device))
+            if (loop_answer_device(QString::fromStdString(device)))
             {
                 return new string(device);
             }

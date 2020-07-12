@@ -68,7 +68,7 @@ private:
     bool is_running;
     string* check_device();
     string* check_usb();
-    bool loop_answer_device(string device);
+    bool loop_answer_device(QString device);
 };
 
 Q_DECLARE_METATYPE(DEVICE_TYPE)
