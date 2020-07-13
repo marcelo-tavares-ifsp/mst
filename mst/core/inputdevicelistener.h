@@ -50,10 +50,10 @@ class InputDeviceListener: public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    vector<string> *devices;
+    QVector<string> *devices;
     DEVICE_TYPE type;
 
-    InputDeviceListener(DEVICE_TYPE type, vector<string> devices);
+    InputDeviceListener(DEVICE_TYPE type, QVector<string> devices);
 
     void run();
 

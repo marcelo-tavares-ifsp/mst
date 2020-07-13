@@ -50,8 +50,8 @@ public:
     void enable_mst();
     void disable_mst();
 
-    vector<string> get_list_of_mice();
-    vector<string> get_list_of_keybs();
+    QVector<string> get_list_of_mice();
+    QVector<string> get_list_of_keybs();
 
     void set_debug_allow_device_collisions(bool value);
     void set_debug_allow_empty_devices(bool value);
@@ -67,8 +67,8 @@ private:
     static InstallController *instance;
     Configuration *config;
     vector<QWidget *> *widgets;
-    vector<string> *list_mice;
-    vector<string> *list_keybs;
+    QVector<string> *list_mice;
+    QVector<string> *list_keybs;
     int current_seat_id;
     Component_manager* component_manager;
 

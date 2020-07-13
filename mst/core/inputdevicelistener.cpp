@@ -3,16 +3,16 @@
 
 Q_LOGGING_CATEGORY(input_device_listener_category, "mst.input_device_listener")
 
-InputDeviceListener::InputDeviceListener(DEVICE_TYPE type, vector<string> devices)
+InputDeviceListener::InputDeviceListener(DEVICE_TYPE type, QVector<string> devices)
 {
     this->type = type;
-    this->devices = new vector<string>(devices);
+    this->devices = new QVector<string>(devices);
     qRegisterMetaType<DEVICE_TYPE>();
 }
 
 // static methods ///////////////////////////////////////////////////////////////
 
-static void _debug_print_devices(DEVICE_TYPE type, vector<string>* devices)
+static void _debug_print_devices(DEVICE_TYPE type, QVector<string>* devices)
 {
     switch (type) {
     case DEVICE_TYPE::KEYBOARD:

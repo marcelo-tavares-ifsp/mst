@@ -165,7 +165,7 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
  * @param mice -- Output list of mice.
  * @param keybds -- Output list of keyboards.
  */
-void Platform::get_input_devices(vector<string>& mice, vector<string>& keybds)
+void Platform::get_input_devices(QVector<string>& mice, QVector<string>& keybds)
 {
     vector<string> data = run_ls_devices();
     regex r1("^(.*-event-kbd)$");
