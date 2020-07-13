@@ -1,4 +1,5 @@
 #include "inputdevicelistener.h"
+#include "device.h"
 
 Q_LOGGING_CATEGORY(input_device_listener_category, "mst.input_device_listener")
 
@@ -31,31 +32,6 @@ static void _debug_print_devices(DEVICE_TYPE type, vector<string>* devices)
     }
 }
 
-/**
- * @brief _try_read -- try to read data from a mouse in a loop.
- * @param fd -- mouse file descriptor.
- * @param ie -- input event.
- * @return -1 if there's no data to read, amount of data read otherwise.
- */
-static ssize_t _try_read(int fd, struct input_event* ie) {
-    static uint32_t MAX_COUNT = 100;
-    ssize_t bytes = -1;
-    for (uint32_t count = 0; count < MAX_COUNT; ++count) {
-        bytes = read(fd, (void *) ie, sizeof(struct input_event));
-        if (bytes > 0)
-            break;
-        usleep(100);
-    }
-    return bytes;
-}
-
-static bool is_btn_pressed(struct input_event &e)
-{
-    qInfo(input_device_listener_category()) << "e.type: "
-        << e.type << "; e.code: " << e.code << "; e.value: " << e.value;
-    return (e.type == EV_MSC) && (e.code == 4);
-}
-
 bool InputDeviceListener::loop_answer_device(QString device)
 {
     struct input_event ie;
@@ -75,7 +51,7 @@ bool InputDeviceListener::loop_answer_device(QString device)
         throw InputDeviceListener_exception(type, message);
     }
 
-    bytes = _try_read(fd, &ie);
+    bytes = device::try_read(fd, &ie);
 
     if (bytes > 0)
     {
@@ -84,7 +60,7 @@ bool InputDeviceListener::loop_answer_device(QString device)
             unsigned char* data = (unsigned char*) &ie;
             is_pressed = (data[0] & 0x1) || (data[0] & 0x2) || (data[0] & 0x4);
         } else {
-            is_pressed = is_btn_pressed(ie);
+            is_pressed = device::is_btn_pressed(ie);
         }
         if (is_pressed) {
             char name[256] = "Unknown";

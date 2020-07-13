@@ -65,7 +65,8 @@ SOURCES += \
     core/types/monitor.cpp \
     core/types/seat.cpp \
     ui/seat_widget/seat_widget.cpp \
-    core/path_manager.cpp
+    core/path_manager.cpp \
+    core/device.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -95,7 +96,8 @@ HEADERS += \
     core/types/monitor.h \
     core/types/seat.h \
     ui/seat_widget/seat_widget.h \
-    core/path_manager.h
+    core/path_manager.h \
+    core/device.h
 
 FORMS += \
     ui/install_window/installwindow.ui \
