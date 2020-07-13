@@ -7,13 +7,16 @@ Q_LOGGING_CATEGORY(input_device_listener_category, "mst.input_device_listener")
 InputDeviceListener::InputDeviceListener(DEVICE_TYPE type, QVector<string> devices)
 {
     this->type = type;
-    this->devices = new QVector<string>(devices);
+    this->devices = new QVector<QString>();
+    for (auto d : devices) {
+        this->devices->push_back(QString::fromStdString(d));
+    }
     qRegisterMetaType<DEVICE_TYPE>();
 }
 
 // static methods ///////////////////////////////////////////////////////////////
 
-static void _debug_print_devices(DEVICE_TYPE type, QVector<string>* devices)
+static void _debug_print_devices(DEVICE_TYPE type, QVector<QString>* devices)
 {
     switch (type) {
     case DEVICE_TYPE::KEYBOARD:
@@ -29,7 +32,7 @@ static void _debug_print_devices(DEVICE_TYPE type, QVector<string>* devices)
 
     for (auto d : *devices)
     {
-        qInfo(input_device_listener_category()) << "     " << d.c_str();
+        qInfo(input_device_listener_category()) << "     " << d;
     }
 }
 
@@ -80,7 +83,7 @@ bool InputDeviceListener::loop_answer_device(QString device)
 
 void InputDeviceListener::run()
 {
-    string* result = NULL;
+    QString result = nullptr;
     is_running = true;
     _debug_print_devices(type, devices);
     sleep(5);
@@ -97,9 +100,9 @@ void InputDeviceListener::run()
         break;
     }
 
-    if (result)
+    if (result != nullptr)
     {
-        emit device_found(to_qstring(*result), type);
+        emit device_found(result, type);
         emit work_done();
     }
 }
@@ -117,23 +120,23 @@ void InputDeviceListener::cancel()
  *    keyboards and get the one which buttons pressed.
  * @return An active keyboard device name or NULL if the thread was stopped.
  */
-string* InputDeviceListener::check_device()
+QString InputDeviceListener::check_device()
 {
     while (is_running)
     {
         usleep(100);
         for (auto device : *devices)
         {
-            if (loop_answer_device(QString::fromStdString(device)))
+            if (loop_answer_device(device))
             {
-                return new string(device);
+                return device;
             }
         }
     }
     return NULL;
 }
 
-string* InputDeviceListener::check_usb()
+QString InputDeviceListener::check_usb()
 {
     device::USB_device_scanner scanner;
     while (is_running)
@@ -145,5 +148,5 @@ string* InputDeviceListener::check_usb()
             is_running = false;
         }
     }
-    return NULL;
+    return nullptr;
 }

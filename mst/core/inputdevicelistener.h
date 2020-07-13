@@ -50,7 +50,7 @@ class InputDeviceListener: public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    QVector<string> *devices;
+    QVector<QString> *devices;
     DEVICE_TYPE type;
 
     InputDeviceListener(DEVICE_TYPE type, QVector<string> devices);
@@ -66,8 +66,8 @@ public slots:
 
 private:
     bool is_running;
-    string* check_device();
-    string* check_usb();
+    QString check_device();
+    QString check_usb();
     bool loop_answer_device(QString device);
 };
 
