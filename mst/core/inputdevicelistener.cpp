@@ -1,3 +1,4 @@
+
 #include "inputdevicelistener.h"
 #include "device.h"
 
@@ -134,104 +135,15 @@ string* InputDeviceListener::check_device()
 
 string* InputDeviceListener::check_usb()
 {
-    qDebug(input_device_listener_category()) << "running...";
-
-    struct udev *udev = udev_new();
-
-    if (!udev)
-    {
-        qCritical(input_device_listener_category()) << "udev_new() returned NULL";
-        return NULL;
-    }
-
-    struct udev_monitor *udev_monitor = udev_monitor_new_from_netlink(udev, "udev");
-
-    if (!udev_monitor)
-    {
-        qCritical(input_device_listener_category())
-                << "udev_monitor_new_from_netlink() retruned NULL";
-        return NULL;
-    }
-
-    int retVal = udev_monitor_filter_add_match_subsystem_devtype(udev_monitor, "usb", "usb_device");
-
-    if (retVal<0)
-    {
-        qCritical(input_device_listener_category())
-                << retVal
-                << " = udev_monitor_filter_add_match_subsystem_devtype"
-                << "(udev_monitor, \"usb\", \"usb_device\");";
-        return NULL;
-    }
-
-    retVal = udev_monitor_enable_receiving(udev_monitor);
-
-    if (retVal<0)
-    {
-        qCritical(input_device_listener_category())
-                << retVal
-                << " = udev_monitor_enable_receiving(udev_monitor);";
-        return NULL;
-    }
-
-    int monFd = udev_monitor_get_fd(udev_monitor);
-
-    if (monFd < 0)
-    {
-        qCritical(input_device_listener_category()) << "monFd: " << monFd;
-        return NULL;
-    }
-
+    device::USB_device_scanner scanner;
     while (is_running)
     {
-        fd_set fdSet;
-        struct timeval timeout;
-
-        timeout.tv_sec = 10;
-        timeout.tv_usec = 0;
-
-        FD_ZERO(&fdSet);
-        FD_SET(monFd, &fdSet);
-
-        qDebug(input_device_listener_category()) << ">>> SELECT <<<";
-
-        int selectRetVal = select(monFd + 1, &fdSet, NULL, NULL, &timeout);
-
-        if (selectRetVal == -1)
-        {
-            qCritical(input_device_listener_category()) << "selectRetVal: -1";
-            break;
-        }
-        else if (selectRetVal)
-        {
-            if (FD_ISSET(monFd, &fdSet))
-            {
-                struct udev_device *dev = udev_monitor_receive_device(udev_monitor);
-
-                if (!dev)
-                {
-                    qCritical(input_device_listener_category())
-                            << "udev_monitor_receive_device() retruned NULL";
-                    return NULL;
-                }
-
-                if ((strncmp("add", udev_device_get_action(dev), 3) == 0) ||
-                    (strncmp("remove", udev_device_get_action(dev), 6) == 0))
-                {
-                    emit device_found(QString(udev_device_get_devpath(dev)), type);
-                    emit work_done();
-
-                    udev_device_unref(dev);
-
-                    break;
-                }
-
-                udev_device_unref(dev);
-            }
+        QString devpath = scanner.scan();
+        if (devpath != nullptr) {
+            emit device_found(devpath, type);
+            emit work_done();
+            is_running = false;
         }
     }
-
-    udev_monitor_unref(udev_monitor);
-    udev_unref(udev);
     return NULL;
 }
