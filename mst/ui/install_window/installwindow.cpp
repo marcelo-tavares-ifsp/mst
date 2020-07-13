@@ -150,17 +150,18 @@ void InstallWindow::on_btnBackup_clicked()
 
 void InstallWindow::initial_listeners()
 {
-    QVector<string>* mice;
-    QVector<string>* keybs;
-    QVector<string>* usbs;
+    QVector<string>* mice
+            = new QVector<string>(inst_controller->get_list_of_mice());
+    QVector<string>* keybs
+            = new QVector<string>(inst_controller->get_list_of_mice());
+    QVector<string>* usbs = new QVector<string>();
 
-    mice = new QVector<string>(inst_controller->get_list_of_mice());
-    keybs = new QVector<string>(inst_controller->get_list_of_keybs());
-    usbs = new QVector<string>();
-
-    InputDeviceListener* mouse_listener = new InputDeviceListener(DEVICE_TYPE::MOUSE, * mice);
-    InputDeviceListener* keybd_listener = new InputDeviceListener(DEVICE_TYPE::KEYBOARD, * keybs);
-    InputDeviceListener* usb_listener = new InputDeviceListener(DEVICE_TYPE::USB, * usbs);
+    InputDeviceListener* mouse_listener
+            = new InputDeviceListener(DEVICE_TYPE::MOUSE, * mice);
+    InputDeviceListener* keybd_listener
+            = new InputDeviceListener(DEVICE_TYPE::KEYBOARD, * keybs);
+    InputDeviceListener* usb_listener
+            = new InputDeviceListener(DEVICE_TYPE::USB, * usbs);
 
     QThreadPool::globalInstance()->start(mouse_listener);
     qInfo(install_window_category()) << "MOUSE was started";
