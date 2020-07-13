@@ -18,7 +18,11 @@ Platform::Platform()
 
 //// Helper procedures.
 
-static vector<string> run_xrandr()
+/**
+ * @brief run_xrandr -- Return the output of 'xrandr' command.
+ * @return QVector of strings.
+ */
+static QVector<string> run_xrandr()
 {
     static const char *COMMAND = "xrandr";
     const int BUF_SZ = 255;
@@ -27,7 +31,7 @@ static vector<string> run_xrandr()
 
     if ((file = popen(COMMAND, "r")) != NULL)
     {
-        vector<string> result;
+        QVector<string> result;
         while (fgets(buf, BUF_SZ, file) != NULL)
         {
             result.push_back(trim(buf));
@@ -105,7 +109,7 @@ int Platform::xset_soff()
  */
 vector<XRandr_monitor> Platform::xrandr_get_monitors()
 {
-    vector<string> data = run_xrandr();
+    QVector<string> data = run_xrandr();
     vector<XRandr_monitor> result;
     regex r1("^(.*) connected.*");
     regex r2("^([0-9]+x[0-9]+).*");
