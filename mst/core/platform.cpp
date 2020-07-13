@@ -21,6 +21,7 @@ Platform::Platform()
 /**
  * @brief run_xrandr -- Return the output of 'xrandr' command.
  * @return QVector of strings.
+ * @throws Platform_exception
  */
 static QVector<string> run_xrandr()
 {
@@ -41,8 +42,9 @@ static QVector<string> run_xrandr()
     }
     else
     {
-        qCritical(platform_category) << "Could not execute xrandr";
-        throw "Could not execute xrandr";
+        QString msg = "Could not execute xrandr";
+        qCritical(platform_category) << msg;
+        throw Platform_exception(msg);
     }
 }
 
