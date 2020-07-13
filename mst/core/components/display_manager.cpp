@@ -6,7 +6,7 @@
 #include "core/template_manager.h"
 #include "core/platform.h"
 
-Q_LOGGING_CATEGORY(display_manager_category, "mst.dm")
+Q_LOGGING_CATEGORY(display_manager_category, "mst.core.component.dm")
 
 using namespace display_manager;
 

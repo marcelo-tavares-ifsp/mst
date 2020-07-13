@@ -11,7 +11,7 @@
 #include "core/types/xrandr_monitor.h"
 
 InstallController* InstallController::instance = 0;
-Q_LOGGING_CATEGORY(install_controller_category, "mst.install_controller")
+Q_LOGGING_CATEGORY(install_controller_category, "mst.core.install_controller")
 
 // static methods ///////////////////////////////////////////////////////////////
 

@@ -8,7 +8,7 @@
 using namespace std;
 using namespace vgl;
 
-Q_LOGGING_CATEGORY(vgl_category, "mst.vgl")
+Q_LOGGING_CATEGORY(vgl_category, "mst.core.vgl")
 
 
 VGL::VGL(Configuration& config)

@@ -2,7 +2,8 @@
 #include "inputdevicelistener.h"
 #include "device.h"
 
-Q_LOGGING_CATEGORY(input_device_listener_category, "mst.input_device_listener")
+Q_LOGGING_CATEGORY(input_device_listener_category,
+                   "mst.core.input_device_listener")
 
 InputDeviceListener::InputDeviceListener(DEVICE_TYPE type, QVector<string> devices)
 {

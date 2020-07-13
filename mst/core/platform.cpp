@@ -9,7 +9,7 @@
 #include "core/types/xrandr_monitor.h"
 #include "core/utilites/utilites.h"
 
-Q_LOGGING_CATEGORY(platform_category, "mst.platform")
+Q_LOGGING_CATEGORY(platform_category, "mst.core.platform")
 
 Platform::Platform()
 {

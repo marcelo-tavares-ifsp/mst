@@ -12,7 +12,7 @@
 using namespace std;
 using namespace awesome;
 
-Q_LOGGING_CATEGORY(component_awesome_category, "mst.component.awesome")
+Q_LOGGING_CATEGORY(component_awesome_category, "mst.core.component.awesome")
 
 Awesome::Awesome(Configuration& config)
     : Component(config)
