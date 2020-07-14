@@ -1,7 +1,10 @@
+#include <QLoggingCategory>
 #include <memory>
 #include <ostream>
 
 #include "seat.h"
+
+Q_LOGGING_CATEGORY(seat_category, "mst.core.types.seat")
 
 std::ostream& operator<< (std::ostream& os, Seat& seat) {
     os << "#<Seat " << seat.get_monitor().get_interface().toStdString()
@@ -81,4 +84,27 @@ void Seat::set_mouse(QString mouse)
 void Seat::set_usb(QString usb)
 {
     this->usb = usb;
+}
+
+bool Seat::is_configured() const
+{
+    QString msg = "";
+    bool result = true;
+
+    if (get_keyboard() == "") {
+        msg += "KEYBOARD, ";
+        result = true;
+    }
+    if (get_mouse() == "") {
+        msg += "MOUSE, ";
+        result = true;
+    }
+    if (get_usb() == "") {
+        msg += "USB, ";
+        result = true;
+    }
+
+    qInfo(seat_category()) << msg << "not configured";
+
+    return result;
 }

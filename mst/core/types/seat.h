@@ -1,11 +1,14 @@
 #ifndef SEAT_H
 #define SEAT_H
 
+#include <QLoggingCategory>
 #include <QString>
 #include <memory>
 #include <ostream>
 
 #include "monitor.h"
+
+Q_DECLARE_LOGGING_CATEGORY(seat_category)
 
 /**
  * @brief The Seat class -- describes a MST seat configuration.
@@ -24,6 +27,7 @@ public:
     void set_mouse(QString mouse);
     void set_keyboard(QString keyboard);
     void set_usb(QString usb);
+    bool is_configured() const;
 
     /**
      * @brief intersects -- Check if the seat have common devices with other
