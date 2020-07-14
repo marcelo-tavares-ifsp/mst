@@ -5,6 +5,8 @@
 #include <sys/reboot.h>
 #include <QLoggingCategory>
 #include <QString>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 #include "core/types/xrandr_monitor.h"
 #include "core/utilites/utilites.h"
@@ -25,19 +27,18 @@ Platform::Platform()
  * @return QVector of strings.
  * @throws Platform_exception
  */
-QVector<string> platform::run_xrandr()
+QVector<QString> platform::run_xrandr()
 {
     static const char *COMMAND = "xrandr";
     const int BUF_SZ = 255;
-    char buf[BUF_SZ];
     FILE* file;
 
     if ((file = popen(COMMAND, "r")) != NULL)
     {
-        QVector<string> result;
-        while (fgets(buf, BUF_SZ, file) != NULL)
-        {
-            result.push_back(trim(buf));
+        char buf[BUF_SZ];
+        QVector<QString> result;
+        while (fgets(buf, BUF_SZ, file) != NULL) {
+            result.push_back(QString::fromStdString(trim(buf)));
         }
         pclose(file);
         return result;
@@ -113,17 +114,17 @@ int Platform::xset_soff()
  */
 vector<XRandr_monitor> Platform::xrandr_get_monitors()
 {
-    QVector<string> data = run_xrandr();
+    QVector<QString> data = run_xrandr();
     vector<XRandr_monitor> result;
-    regex r1("^(.*) connected.*");
-    regex r2("^([0-9]+x[0-9]+).*");
-    smatch sm;
+    QRegularExpression r1("^(.*) connected.*");
+    QRegularExpression r2("^([0-9]+x[0-9]+).*");
     int state = 0;
     XRandr_monitor currentMonitor;
+    QRegularExpressionMatch match;
 
     for (uint32_t idx = 0; idx < data.size();)
     {
-        qInfo(platform_category) << "line: " << data[idx].c_str();
+        qInfo(platform_category) << "line: " << data[idx];
         if (data[idx].length() == 0)
         {
             idx++;
@@ -133,21 +134,24 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
         switch (state)
         {
         case 0:
-            if (regex_match(data[idx], sm, r1))
+            match = r1.match(data[idx]);
+            if (match.hasMatch()) //regex_match(data[idx], sm, r1))
             {
-                currentMonitor.interface = sm[1];
+                currentMonitor.interface = match.captured(1).toStdString();
                 state = 1;
                 qInfo(platform_category) << "[state 0] -> [state 1]";
-                qInfo(platform_category) << string(sm[1]).c_str();
+                qInfo(platform_category) << match.captured(1);
             }
             idx++;
             break;
         case 1:
-            if (regex_match(data[idx], sm, r2))
+            match = r2.match(data[idx]);
+            if (match.hasMatch())
             {
-                currentMonitor.resolutions.push_back(sm[1]);
+                currentMonitor.resolutions.push_back(
+                            match.captured(1).toStdString());
                 idx++;
-                qInfo(platform_category) << string(sm[1]).c_str();
+                qInfo(platform_category) << match.captured(1);
             }
             else
             {

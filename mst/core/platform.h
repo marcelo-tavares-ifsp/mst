@@ -50,7 +50,7 @@ public:
 
 namespace platform {
 
-QVector<string> run_xrandr();
+QVector<QString> run_xrandr();
 vector<string> run_ls_devices();
 
 }
