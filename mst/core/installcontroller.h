@@ -8,7 +8,7 @@
 #include "ui_installwindow.h"
 #include "core/configuration.h"
 #include "core/utilites/utilites.h"
-#include "core/inputdevicelistener.h"
+#include "core/device/inputdevicelistener.h"
 #include "core/component_manager.h"
 #include "core/components/vgl.h"
 #include "ui/seat_widget/seat_widget.h"

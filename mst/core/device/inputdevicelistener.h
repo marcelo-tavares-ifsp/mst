@@ -17,7 +17,7 @@
 #include <QLoggingCategory>
 #include "core/path_manager.h"
 #include "core/utilites/utilites.h"
-#include "core/device.h"
+#include "core/device/device.h"
 
 using namespace std;
 
