@@ -42,17 +42,18 @@ bool InputDeviceListener::loop_answer_device(QString device)
     ssize_t bytes;
     int fd;
 
-    device = QString::fromStdString(
-                Path_manager::get_instance()->get_device_path())
-            + device;
-    const char *pDevice = device.toStdString().c_str();
+    string devpath = Path_manager::get_instance()->get_device_path()
+                    + device.toStdString();
+
+    const char *pDevice = devpath.c_str();
 
     fd = open(pDevice, O_RDWR  | O_NONBLOCK);
     if (fd == -1)
     {
         QString message = "Could not open device: " + device;
         qCritical(input_device_listener_category()) << message;
-        throw InputDeviceListener_exception(type, message);
+        return false;
+        //throw InputDeviceListener_exception(type, message);
     }
 
     bytes = device::try_read(fd, &ie);
