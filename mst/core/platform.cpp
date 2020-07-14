@@ -116,7 +116,7 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
     XRandr_monitor currentMonitor;
     QRegularExpressionMatch match;
 
-    for (uint32_t idx = 0; idx < data.size();) {
+    for (int idx = 0; idx < data.size();) {
         qInfo(platform_category) << "line: " << data[idx];
         if (data[idx].length() == 0) {
             idx++;
