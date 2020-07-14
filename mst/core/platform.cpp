@@ -52,6 +52,7 @@ QVector<QString> platform::run_xrandr()
  * @brief run_ls_devices -- get a list of input
  *      devices.
  * @return a list of devices.
+ * @throws Platform_exception
  */
 vector<string> platform::run_ls_devices()
 {
@@ -67,12 +68,10 @@ vector<string> platform::run_ls_devices()
         }
         pclose(file);
         return result;
-    }
-    else
-    {
-        qCritical(platform_category)
-                << "Could not execute ls /dev/input/by-path/";
-        throw "Could not execute ls /dev/input/by-path/";
+    } else {
+        QString msg = "Could not execute ls /dev/input/by-path/";
+        qCritical(platform_category) << msg;
+        throw Platform_exception(msg);
     }
 }
 
