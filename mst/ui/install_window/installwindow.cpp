@@ -153,7 +153,7 @@ void InstallWindow::initial_listeners()
     QVector<string>* mice
             = new QVector<string>(inst_controller->get_list_of_mice());
     QVector<string>* keybs
-            = new QVector<string>(inst_controller->get_list_of_mice());
+            = new QVector<string>(inst_controller->get_list_of_keybs());
     QVector<string>* usbs = new QVector<string>();
 
     InputDeviceListener* mouse_listener
