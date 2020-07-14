@@ -28,10 +28,10 @@ enum DEVICE_TYPE {
     USB
 };
 
-class InputDeviceListener_exception : public runtime_error
+class Device_listener_exception : public runtime_error
 {
   public:
-    InputDeviceListener_exception(DEVICE_TYPE type, QString& what)
+    Device_listener_exception(DEVICE_TYPE type, QString& what)
         : runtime_error(what.toStdString()),
           type(type)
     {
