@@ -66,7 +66,9 @@ SOURCES += \
     ui/seat_widget/seat_widget.cpp \
     core/path_manager.cpp \
     core/device/device.cpp \
-    core/device/device_listener.cpp
+    core/device/device_listener.cpp \
+    core/device/usb_device_listener.cpp \
+    core/device/input_device_listener.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -97,7 +99,9 @@ HEADERS += \
     ui/seat_widget/seat_widget.h \
     core/path_manager.h \
     core/device/device.h \
-    core/device/device_listener.h
+    core/device/device_listener.h \
+    core/device/usb_device_listener.h \
+    core/device/input_device_listener.h
 
 FORMS += \
     ui/install_window/installwindow.ui \

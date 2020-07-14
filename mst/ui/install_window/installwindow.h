@@ -8,6 +8,8 @@
 #include "ui/reboot_dialog/rebootdialog.h"
 #include "core/installcontroller.h"
 #include "core/device/device_listener.h"
+#include "core/device/input_device_listener.h"
+#include "core/device/usb_device_listener.h"
 #include "version.h"
 
 Q_DECLARE_LOGGING_CATEGORY(install_window_category)

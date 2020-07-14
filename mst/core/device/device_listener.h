@@ -3,9 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <unistd.h>
-#include <linux/input.h>
-#include <libudev.h>
+
 #include <QObject>
 #include <QRunnable>
 #include <QString>
@@ -69,30 +67,6 @@ private:
     virtual QString poll() = 0;
 };
 
-class Input_device_listener: public Device_listener
-{
-    Q_OBJECT
-
-public:
-    Input_device_listener(DEVICE_TYPE type, QVector<QString> devices);
-
-private:
-    QVector<QString> *devices;
-    QString poll();
-    bool loop_answer_device(QString device);
-};
-
-class USB_device_listener: public Device_listener
-{
-    Q_OBJECT
-
-public:
-    USB_device_listener(DEVICE_TYPE type);
-
-private:
-    device::USB_device_scanner scanner;
-    QString poll();
-};
 
 Q_DECLARE_METATYPE(DEVICE_TYPE)
 
