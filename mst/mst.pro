@@ -49,7 +49,6 @@ SOURCES += \
     core/component.cpp \
     core/components/vgl.cpp \
     core/components/display_manager.cpp \
-    core/device/inputdevicelistener.cpp \
     core/components/awesome.cpp \
     core/template_manager.cpp \
     core/types/template.cpp \
@@ -66,7 +65,8 @@ SOURCES += \
     core/types/seat.cpp \
     ui/seat_widget/seat_widget.cpp \
     core/path_manager.cpp \
-    core/device/device.cpp
+    core/device/device.cpp \
+    core/device/device_listener.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -79,7 +79,6 @@ HEADERS += \
     core/dsv_parser/dsv.h \
     core/components/vgl.h \
     core/components/display_manager.h \
-    core/device/inputdevicelistener.h \
     core/components/awesome.h \
     core/template_manager.h \
     core/types/template.h \
@@ -97,7 +96,8 @@ HEADERS += \
     core/types/seat.h \
     ui/seat_widget/seat_widget.h \
     core/path_manager.h \
-    core/device/device.h
+    core/device/device.h \
+    core/device/device_listener.h
 
 FORMS += \
     ui/install_window/installwindow.ui \

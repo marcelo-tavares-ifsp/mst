@@ -7,7 +7,7 @@
 #include "ui/calibration_dialog/calibrationdialog.h"
 #include "ui/reboot_dialog/rebootdialog.h"
 #include "core/installcontroller.h"
-#include "core/device/inputdevicelistener.h"
+#include "core/device/device_listener.h"
 #include "version.h"
 
 Q_DECLARE_LOGGING_CATEGORY(install_window_category)

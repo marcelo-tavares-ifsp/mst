@@ -1,5 +1,5 @@
 
-#include "inputdevicelistener.h"
+#include "device_listener.h"
 #include "device.h"
 
 Q_LOGGING_CATEGORY(input_device_listener_category,
