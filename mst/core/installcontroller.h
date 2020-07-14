@@ -59,8 +59,7 @@ public slots:
 
 private:
     InstallController();
-    bool is_equal(int i, int j);
-    bool is_empty(int i);
+
     void print_config();
     static InstallController *instance;
     Configuration *config;
@@ -69,18 +68,6 @@ private:
     QVector<QString> *list_keybs;
     int current_seat_id;
     Component_manager* component_manager;
-
-    /**
-     * @brief debug_allow_device_collisions -- if this option is set, then
-     * the controller allows device collisions.
-     */
-    bool debug_allow_device_collisions = false;
-
-    /**
-     * @brief debug_allow_empty_devices -- if this option is set, then
-     * the controller allows empty device configurations.
-     */
-    bool debug_allow_empty_devices = false;
 };
 
 #endif // INSTALLCONTROLLER_H

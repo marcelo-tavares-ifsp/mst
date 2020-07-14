@@ -257,85 +257,19 @@ bool InstallController::is_mst_running()
 
 void InstallController::set_debug_allow_device_collisions(bool value)
 {
-    this->debug_allow_device_collisions = value;
+    this->config->set_debug_allow_device_collisions(value);
 }
 
 void InstallController::set_debug_allow_empty_devices(bool value)
 {
-    this->debug_allow_empty_devices = value;
+    this->config->set_debug_allow_empty_devices(value);
 }
 
 bool InstallController::config_is_valid()
 {
     print_config();
 
-    uint32_t count_seats = config->seats.size();
-    if (count_seats > 1)
-    {
-        for (uint32_t i = 0; i < count_seats; i++)
-        {
-            if (! debug_allow_device_collisions) {
-                for (uint32_t j = 1; j < count_seats; j++)
-                {
-                    if (i == j)
-                        continue;
-                    if (is_equal(i, j))
-                    {
-                        qWarning(install_controller_category())
-                                << "COLLISION is found";
-                        return false;
-                    }
-                }
-            }
-
-            if ((! debug_allow_empty_devices) && is_empty(i))
-            {
-                qWarning(install_controller_category()) << "EMPTY is found";
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
-bool InstallController::is_equal(int i, int j) {
-    QString msg = "Comparison " + QString::number(i) + " seat, "
-                      + config->seats[i]->get_keyboard() + " keyboard, "
-                      + config->seats[i]->get_mouse() + " mouse, "
-                      + config->seats[i]->get_usb() + " usb AND\n"
-                      + "\t\t\t\t\t\t\t\t" + QString::number(j) + " seat, "
-                      + config->seats[j]->get_keyboard() + " keyboard, "
-                      + config->seats[j]->get_mouse() + " mouse, "
-                      + config->seats[j]->get_usb() + " usb";
-    qInfo(install_controller_category()) << msg;
-
-    return config->seats[i]->intersects(config->seats[j]);
-}
-
-bool InstallController::is_empty(int i) {
-    QString msg = "";
-    bool result = false;
-
-    if (config->seats[i]->get_keyboard() == "")
-    {
-        msg += "KEYBOARD, ";
-        result = true;
-    }
-    if (config->seats[i]->get_mouse() == "")
-    {
-        msg += "MOUSE, ";
-        result = true;
-    }
-    if (config->seats[i]->get_usb() == "")
-    {
-        msg += "USB, ";
-        result = true;
-    }
-
-    qInfo(install_controller_category()) << msg;
-
-    return result;
+    return config->is_valid();
 }
 
 QVector<QString> InstallController::get_list_of_mice()
