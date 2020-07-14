@@ -13,66 +13,6 @@
 InstallController* InstallController::instance = 0;
 Q_LOGGING_CATEGORY(install_controller_category, "mst.core.install_controller")
 
-// static methods ///////////////////////////////////////////////////////////////
-
-static void add_resolutions_to_cb(vector<string> resolutions, QComboBox *cb)
-{
-    for(string s : resolutions)
-    {
-        if (! s.empty())
-            cb->addItem(QString::fromStdString(s));
-    }
-}
-
-/**
- * @brief fill_resolutions_and_interfaces
- * @param cb
- * @param lw
- * @throws InstallController_exception
- */
-static void fill_resolutions_and_interfaces(QComboBox *cb, QListWidget *lw)
-{
-    auto split1 = [] (const string& input, char separator) -> string {
-      return split(input, separator)[0];
-    };
-
-    auto rcomp = [split1] (const string& left, const string& right) -> int {
-            return stoi(split1(left, 'x')) > stoi(split1(right, 'x'));
-    };
-
-    cb->clear();
-    lw->clear();
-
-    vector<XRandr_monitor> availableMonitors = Platform::xrandr_get_monitors();
-
-    uint32_t am_size = uint32_t(availableMonitors.size());
-
-    if (am_size == 0)
-    {
-        throw InstallController_exception("Could not get Xrandr output.");
-    }
-
-    vector<string> result = availableMonitors[0].resolutions;
-    lw->addItem(QString::fromStdString(availableMonitors[0].interface));
-
-    if (am_size > 1)
-    {
-        for (uint32_t idx = 1; idx < am_size; idx++)
-        {
-            _set_intersection_x(result, availableMonitors[idx].resolutions, result, rcomp);
-            lw->addItem(QString::fromStdString(availableMonitors[idx].interface));
-        }
-    }
-
-    // TODO: Fix set intersection algorithm to exclude empty strings
-    result.erase(remove_if(result.begin(), result.end(), [](const string& elem) {
-        return elem.empty();
-    }), result.end());
-
-    sort(result.begin(), result.end(), rcomp);
-    add_resolutions_to_cb(result, cb);
-}
-
 static void clear_layout(QVBoxLayout* vbl, vector<QWidget*> widgets)
 {
     for (auto widget : widgets)
