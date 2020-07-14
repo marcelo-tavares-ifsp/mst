@@ -11,7 +11,7 @@
 Q_DECLARE_LOGGING_CATEGORY(seat_category)
 
 /**
- * @brief The Seat class -- describes a MST seat configuration.
+ * @brief The Seat class -- Describes a MST seat configuration.
  */
 class Seat
 {
@@ -23,10 +23,35 @@ public:
     QString get_usb() const;
     QVector<Monitor> get_monitors() const;
     Monitor& get_monitor();
+
+    /**
+     * @brief add_monitor -- Add a monitor to this seat.
+     * @param monitor -- A monitor to add.
+     */
     void add_monitor(Monitor& monitor);
+
+    /**
+     * @brief set_mouse -- Attach a mouse to this seat.
+     * @param mouse -- A mouse to attach.
+     */
     void set_mouse(QString mouse);
+
+    /**
+     * @brief set_keyboard -- Attach a keyboard to this seat.
+     * @param keyboard -- A keyboard to attach.
+     */
     void set_keyboard(QString keyboard);
+
+    /**
+     * @brief set_usb -- Attach a USB port to this seat.
+     * @param usb -- A USB port to attach.
+     */
     void set_usb(QString usb);
+
+    /**
+     * @brief is_configured -- Predicate.  Checks if the seat is configured.
+     * @return true if it is, false otherwise.
+     */
     bool is_configured() const;
 
     /**
