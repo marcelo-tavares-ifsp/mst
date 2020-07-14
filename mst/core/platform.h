@@ -50,8 +50,9 @@ public:
 
 namespace platform {
 
+QVector<QString> popen_read(QString command);
 QVector<QString> run_xrandr();
-vector<string> run_ls_devices();
+QVector<QString> run_ls_devices();
 
 }
 

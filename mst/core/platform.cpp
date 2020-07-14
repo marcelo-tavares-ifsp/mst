@@ -23,29 +23,38 @@ Platform::Platform()
 //// Helper procedures.
 
 /**
- * @brief run_xrandr -- Return the output of 'xrandr' command.
- * @return QVector of strings.
- * @throws Platform_exception
+ * @brief platform::popen_read -- execute a command and read output from it.
+ * @param command -- a command to execute.
+ * @return QVector of output lines.
  */
-QVector<QString> platform::run_xrandr()
+QVector<QString> platform::popen_read(QString command)
 {
-    static const char *COMMAND = "xrandr";
     const int BUF_SZ = 255;
+    char buf[BUF_SZ];
     FILE* file;
-
-    if ((file = popen(COMMAND, "r")) != NULL) {
-        char buf[BUF_SZ];
-        QVector<QString> result;
+    QVector<QString> result;
+    string std_command = command.toStdString();
+    if ((file = ::popen(std_command.c_str(), "r")) != NULL) {
         while (fgets(buf, BUF_SZ, file) != NULL) {
             result.push_back(QString::fromStdString(trim(buf)));
         }
         pclose(file);
         return result;
     } else {
-        QString msg = "Could not execute xrandr";
+        QString msg = "Could not open command pipe: " + command;
         qCritical(platform_category) << msg;
         throw Platform_exception(msg);
     }
+}
+
+/**
+ * @brief run_xrandr -- Return the output of 'xrandr' command.
+ * @return QVector of strings.
+ * @throws Platform_exception
+ */
+QVector<QString> platform::run_xrandr()
+{
+    return platform::popen_read("xrandr");
 }
 
 /**
@@ -54,25 +63,9 @@ QVector<QString> platform::run_xrandr()
  * @return a list of devices.
  * @throws Platform_exception
  */
-vector<string> platform::run_ls_devices()
+QVector<QString> platform::run_ls_devices()
 {
-    static const char *COMMAND = "ls /dev/input/by-path/";
-    const int BUF_SZ = 255;
-    char buf[BUF_SZ];
-    FILE* file;
-
-    if ((file = popen(COMMAND, "r")) != NULL) {
-        vector<string> result;
-        while (fgets(buf, BUF_SZ, file) != NULL) {
-            result.push_back(trim(buf));
-        }
-        pclose(file);
-        return result;
-    } else {
-        QString msg = "Could not execute ls /dev/input/by-path/";
-        qCritical(platform_category) << msg;
-        throw Platform_exception(msg);
-    }
+    return platform::popen_read("ls /dev/input/by-path/");
 }
 
 //// Methods.
@@ -167,21 +160,21 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
  */
 void Platform::get_input_devices(QVector<string>& mice, QVector<string>& keybds)
 {
-    vector<string> data = run_ls_devices();
-    regex r1("^(.*-event-kbd)$");
-    regex r2("^(.*-event-mouse)$");
-    smatch sm;
+    QVector<QString> data = run_ls_devices();
+    QRegularExpression r1("^(.*-event-kbd)$");
+    QRegularExpression r2("^(.*-event-mouse)$");
+    QRegularExpressionMatch match;
 
-    for (string line : data) {
+    for (QString line : data) {
         if (line.length() == 0)
             continue;
-
-        if(regex_match(line, sm, r1)) {
-            keybds.push_back(sm[1]);
+        match = r1.match(line);
+        if(match.hasMatch()) {
+            keybds.push_back(match.captured(1).toStdString());
         }
-
-        if(regex_match(line, sm, r2)) {
-            mice.push_back(sm[1]);
+        match = r2.match(line);
+        if(match.hasMatch()) {
+            mice.push_back(match.captured(1).toStdString());
         }
     }
 }
