@@ -48,4 +48,11 @@ public:
     static int exec(const QString& command);
 };
 
+namespace platform {
+
+QVector<string> run_xrandr();
+vector<string> run_ls_devices();
+
+}
+
 #endif // PLATFORM_H

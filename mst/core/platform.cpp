@@ -9,6 +9,8 @@
 #include "core/types/xrandr_monitor.h"
 #include "core/utilites/utilites.h"
 
+using namespace platform;
+
 Q_LOGGING_CATEGORY(platform_category, "mst.core.platform")
 
 Platform::Platform()
@@ -23,7 +25,7 @@ Platform::Platform()
  * @return QVector of strings.
  * @throws Platform_exception
  */
-static QVector<string> run_xrandr()
+QVector<string> platform::run_xrandr()
 {
     static const char *COMMAND = "xrandr";
     const int BUF_SZ = 255;
@@ -53,7 +55,7 @@ static QVector<string> run_xrandr()
  *      devices.
  * @return a list of devices.
  */
-static vector<string> run_ls_devices()
+vector<string> platform::run_ls_devices()
 {
     static const char *COMMAND = "ls /dev/input/by-path/";
     const int BUF_SZ = 255;
