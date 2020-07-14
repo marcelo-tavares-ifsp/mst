@@ -17,6 +17,7 @@
 #include <QLoggingCategory>
 #include "core/path_manager.h"
 #include "core/utilites/utilites.h"
+#include "core/device.h"
 
 using namespace std;
 
@@ -50,10 +51,9 @@ class Device_listener: public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    QVector<QString> *devices;
     DEVICE_TYPE type;
 
-    Device_listener(DEVICE_TYPE type, QVector<QString> devices);
+    Device_listener(DEVICE_TYPE type);
 
     void run();
 
@@ -66,9 +66,32 @@ public slots:
 
 private:
     bool is_running;
-    QString check_device();
-    QString check_usb();
+    virtual QString poll() = 0;
+};
+
+class Input_device_listener: public Device_listener
+{
+    Q_OBJECT
+
+public:
+    Input_device_listener(DEVICE_TYPE type, QVector<QString> devices);
+
+private:
+    QVector<QString> *devices;
+    QString poll();
     bool loop_answer_device(QString device);
+};
+
+class USB_device_listener: public Device_listener
+{
+    Q_OBJECT
+
+public:
+    USB_device_listener(DEVICE_TYPE type);
+
+private:
+    device::USB_device_scanner scanner;
+    QString poll();
 };
 
 Q_DECLARE_METATYPE(DEVICE_TYPE)
