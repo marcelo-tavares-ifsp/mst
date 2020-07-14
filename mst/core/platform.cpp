@@ -158,7 +158,8 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
  * @param mice -- Output list of mice.
  * @param keybds -- Output list of keyboards.
  */
-void Platform::get_input_devices(QVector<string>& mice, QVector<string>& keybds)
+void Platform::get_input_devices(QVector<QString>& mice,
+                                 QVector<QString>& keybds)
 {
     QVector<QString> data = run_ls_devices();
     QRegularExpression r1("^(.*-event-kbd)$");
@@ -170,11 +171,11 @@ void Platform::get_input_devices(QVector<string>& mice, QVector<string>& keybds)
             continue;
         match = r1.match(line);
         if(match.hasMatch()) {
-            keybds.push_back(match.captured(1).toStdString());
+            keybds.push_back(match.captured(1));
         }
         match = r2.match(line);
         if(match.hasMatch()) {
-            mice.push_back(match.captured(1).toStdString());
+            mice.push_back(match.captured(1));
         }
     }
 }

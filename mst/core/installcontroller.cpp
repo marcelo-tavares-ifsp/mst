@@ -99,8 +99,8 @@ InstallController::InstallController()
 {
     config = new Configuration();
     widgets = new vector<QWidget *>;
-    list_mice = new QVector<string>;
-    list_keybs = new QVector<string>;
+    list_mice = new QVector<QString>;
+    list_keybs = new QVector<QString>;
     current_seat_id = -1;
 }
 
@@ -398,12 +398,12 @@ bool InstallController::is_empty(int i) {
     return result;
 }
 
-QVector<string> InstallController::get_list_of_mice()
+QVector<QString> InstallController::get_list_of_mice()
 {
     return *list_mice;
 }
 
-QVector<string> InstallController::get_list_of_keybs()
+QVector<QString> InstallController::get_list_of_keybs()
 {
     return *list_keybs;
 }

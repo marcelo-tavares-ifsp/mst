@@ -5,13 +5,10 @@
 Q_LOGGING_CATEGORY(input_device_listener_category,
                    "mst.core.input_device_listener")
 
-InputDeviceListener::InputDeviceListener(DEVICE_TYPE type, QVector<string> devices)
+InputDeviceListener::InputDeviceListener(DEVICE_TYPE type, QVector<QString> devices)
 {
     this->type = type;
-    this->devices = new QVector<QString>();
-    for (auto d : devices) {
-        this->devices->push_back(QString::fromStdString(d));
-    }
+    this->devices = new QVector<QString>(devices);
     qRegisterMetaType<DEVICE_TYPE>();
 }
 

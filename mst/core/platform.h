@@ -33,8 +33,8 @@ public:
     static int xset_dpms();
     static int xset_soff();
     static vector<XRandr_monitor> xrandr_get_monitors();
-    static void get_input_devices(QVector<string> &mice,
-                                  QVector<string> &keybds);
+    static void get_input_devices(QVector<QString> &mice,
+                                  QVector<QString> &keybds);
 
     static bool pam_is_mkhomedir_used();
 

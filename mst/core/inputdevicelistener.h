@@ -53,7 +53,7 @@ public:
     QVector<QString> *devices;
     DEVICE_TYPE type;
 
-    InputDeviceListener(DEVICE_TYPE type, QVector<string> devices);
+    InputDeviceListener(DEVICE_TYPE type, QVector<QString> devices);
 
     void run();
 
