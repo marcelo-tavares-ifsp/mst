@@ -33,8 +33,7 @@ QVector<QString> platform::run_xrandr()
     const int BUF_SZ = 255;
     FILE* file;
 
-    if ((file = popen(COMMAND, "r")) != NULL)
-    {
+    if ((file = popen(COMMAND, "r")) != NULL) {
         char buf[BUF_SZ];
         QVector<QString> result;
         while (fgets(buf, BUF_SZ, file) != NULL) {
@@ -42,9 +41,7 @@ QVector<QString> platform::run_xrandr()
         }
         pclose(file);
         return result;
-    }
-    else
-    {
+    } else {
         QString msg = "Could not execute xrandr";
         qCritical(platform_category) << msg;
         throw Platform_exception(msg);
@@ -63,11 +60,9 @@ vector<string> platform::run_ls_devices()
     char buf[BUF_SZ];
     FILE* file;
 
-    if ((file = popen(COMMAND, "r")) != NULL)
-    {
+    if ((file = popen(COMMAND, "r")) != NULL) {
         vector<string> result;
-        while (fgets(buf, BUF_SZ, file) != NULL)
-        {
+        while (fgets(buf, BUF_SZ, file) != NULL) {
             result.push_back(trim(buf));
         }
         pclose(file);
@@ -122,11 +117,9 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
     XRandr_monitor currentMonitor;
     QRegularExpressionMatch match;
 
-    for (uint32_t idx = 0; idx < data.size();)
-    {
+    for (uint32_t idx = 0; idx < data.size();) {
         qInfo(platform_category) << "line: " << data[idx];
-        if (data[idx].length() == 0)
-        {
+        if (data[idx].length() == 0) {
             idx++;
             continue;
         }
@@ -135,8 +128,7 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
         {
         case 0:
             match = r1.match(data[idx]);
-            if (match.hasMatch()) //regex_match(data[idx], sm, r1))
-            {
+            if (match.hasMatch()) {
                 currentMonitor.interface = match.captured(1).toStdString();
                 state = 1;
                 qInfo(platform_category) << "[state 0] -> [state 1]";
@@ -146,15 +138,12 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
             break;
         case 1:
             match = r2.match(data[idx]);
-            if (match.hasMatch())
-            {
+            if (match.hasMatch()) {
                 currentMonitor.resolutions.push_back(
                             match.captured(1).toStdString());
                 idx++;
                 qInfo(platform_category) << match.captured(1);
-            }
-            else
-            {
+            } else {
                 result.push_back(currentMonitor);
                 currentMonitor.interface = "";
                 currentMonitor.resolutions.clear();
@@ -184,18 +173,15 @@ void Platform::get_input_devices(QVector<string>& mice, QVector<string>& keybds)
     regex r2("^(.*-event-mouse)$");
     smatch sm;
 
-    for (string line : data)
-    {
+    for (string line : data) {
         if (line.length() == 0)
             continue;
 
-        if(regex_match(line, sm, r1))
-        {
+        if(regex_match(line, sm, r1)) {
             keybds.push_back(sm[1]);
         }
 
-        if(regex_match(line, sm, r2))
-        {
+        if(regex_match(line, sm, r2)) {
             mice.push_back(sm[1]);
         }
     }
@@ -220,8 +206,7 @@ bool Platform::pam_is_mkhomedir_used()
  */
 void Platform::fs_mkdir(const QString& path)
 {
-    if (Platform::exec("mkdir -p '" + path + "'") != 0)
-    {
+    if (Platform::exec("mkdir -p '" + path + "'") != 0) {
         qCritical(platform_category)
              << "Could not create a directory: "
              << path.toStdString().c_str();
@@ -247,8 +232,7 @@ void Platform::fs_mkdir(const string& path)
  */
 void Platform::fs_rm(const QString& file)
 {
-    if (Platform::exec("rm '" + file + "'") != 0)
-    {
+    if (Platform::exec("rm '" + file + "'") != 0) {
         QString message = "Could not delete '" + file + "'";
         qCritical(platform_category) << message.toStdString().c_str();
         throw Platform_exception(message);
