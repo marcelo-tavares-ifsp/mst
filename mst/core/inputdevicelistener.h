@@ -45,7 +45,7 @@ class InputDeviceListener_exception : public runtime_error
     DEVICE_TYPE type;
 };
 
-class InputDeviceListener: public QObject, public QRunnable
+class Device_listener: public QObject, public QRunnable
 {
     Q_OBJECT
 
@@ -53,7 +53,7 @@ public:
     QVector<QString> *devices;
     DEVICE_TYPE type;
 
-    InputDeviceListener(DEVICE_TYPE type, QVector<QString> devices);
+    Device_listener(DEVICE_TYPE type, QVector<QString> devices);
 
     void run();
 

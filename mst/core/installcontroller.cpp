@@ -173,7 +173,7 @@ void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
     qInfo(install_controller_category()) << seat.get();
 }
 
-QString InstallController::get_instruction(InputDeviceListener * device_listener)
+QString InstallController::get_instruction(Device_listener * device_listener)
 {
     QString instruction = "";
 

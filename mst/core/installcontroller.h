@@ -34,7 +34,7 @@ class InstallController: public QObject
 
 public:
     static InstallController *get_instance();
-    QString get_instruction(InputDeviceListener * device_listener);
+    QString get_instruction(Device_listener * device_listener);
     void load_seat_configuration_page(QWidget* parent, QHBoxLayout* seats_box);
     void save_interfaces(QComboBox* cbResolution, QListWidget* lwMonitors);
     vector<QWidget *> load_device_page(QVBoxLayout* vbl);

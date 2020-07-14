@@ -67,8 +67,8 @@ private:
     InstallController *inst_controller;
 
     void initial_listeners();
-    void initial_calibration_dialog(InputDeviceListener* device_listener);
-    void attach_signals(InputDeviceListener* listener, CalibrationDialog* cd);
+    void initial_calibration_dialog(Device_listener* device_listener);
+    void attach_signals(Device_listener* listener, CalibrationDialog* cd);
     void show_page(int number);
 };
 

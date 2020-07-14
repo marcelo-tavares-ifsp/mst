@@ -156,12 +156,12 @@ void InstallWindow::initial_listeners()
             = new QVector<QString>(inst_controller->get_list_of_keybs());
     QVector<QString>* usbs = new QVector<QString>();
 
-    InputDeviceListener* mouse_listener
-            = new InputDeviceListener(DEVICE_TYPE::MOUSE, * mice);
-    InputDeviceListener* keybd_listener
-            = new InputDeviceListener(DEVICE_TYPE::KEYBOARD, * keybs);
-    InputDeviceListener* usb_listener
-            = new InputDeviceListener(DEVICE_TYPE::USB, * usbs);
+    Device_listener* mouse_listener
+            = new Device_listener(DEVICE_TYPE::MOUSE, * mice);
+    Device_listener* keybd_listener
+            = new Device_listener(DEVICE_TYPE::KEYBOARD, * keybs);
+    Device_listener* usb_listener
+            = new Device_listener(DEVICE_TYPE::USB, * usbs);
 
     QThreadPool::globalInstance()->start(mouse_listener);
     qInfo(install_window_category()) << "MOUSE was started";
@@ -176,7 +176,7 @@ void InstallWindow::initial_listeners()
     initial_calibration_dialog(usb_listener);
 }
 
-void InstallWindow::initial_calibration_dialog(InputDeviceListener* device_listener)
+void InstallWindow::initial_calibration_dialog(Device_listener* device_listener)
 {
     CalibrationDialog* cd = new CalibrationDialog(this, inst_controller->get_instruction(device_listener));
 
@@ -186,7 +186,7 @@ void InstallWindow::initial_calibration_dialog(InputDeviceListener* device_liste
     cd->exec();
 }
 
-void InstallWindow::attach_signals(InputDeviceListener* listener, CalibrationDialog* cd)
+void InstallWindow::attach_signals(Device_listener* listener, CalibrationDialog* cd)
 {
     connect(listener, SIGNAL(device_found(QString, DEVICE_TYPE)),
         inst_controller, SLOT(set_seat_device(QString, DEVICE_TYPE)));

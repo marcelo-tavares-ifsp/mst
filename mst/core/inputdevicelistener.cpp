@@ -5,7 +5,7 @@
 Q_LOGGING_CATEGORY(input_device_listener_category,
                    "mst.core.input_device_listener")
 
-InputDeviceListener::InputDeviceListener(DEVICE_TYPE type, QVector<QString> devices)
+Device_listener::Device_listener(DEVICE_TYPE type, QVector<QString> devices)
 {
     this->type = type;
     this->devices = new QVector<QString>(devices);
@@ -34,7 +34,7 @@ static void _debug_print_devices(DEVICE_TYPE type, QVector<QString>* devices)
     }
 }
 
-bool InputDeviceListener::loop_answer_device(QString device)
+bool Device_listener::loop_answer_device(QString device)
 {
     struct input_event ie;
     ssize_t bytes;
@@ -80,7 +80,7 @@ bool InputDeviceListener::loop_answer_device(QString device)
 
 // public methods ///////////////////////////////////////////////////////////////
 
-void InputDeviceListener::run()
+void Device_listener::run()
 {
     QString result = nullptr;
     is_running = true;
@@ -106,7 +106,7 @@ void InputDeviceListener::run()
     }
 }
 
-void InputDeviceListener::cancel()
+void Device_listener::cancel()
 {
     qInfo(input_device_listener_category()) << "Stopping the device thread...";
     is_running = false;
@@ -119,7 +119,7 @@ void InputDeviceListener::cancel()
  *    keyboards and get the one which buttons pressed.
  * @return An active keyboard device name or NULL if the thread was stopped.
  */
-QString InputDeviceListener::check_device()
+QString Device_listener::check_device()
 {
     while (is_running)
     {
@@ -135,7 +135,7 @@ QString InputDeviceListener::check_device()
     return NULL;
 }
 
-QString InputDeviceListener::check_usb()
+QString Device_listener::check_usb()
 {
     device::USB_device_scanner scanner;
     while (is_running)
