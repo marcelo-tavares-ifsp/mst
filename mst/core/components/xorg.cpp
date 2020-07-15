@@ -49,7 +49,7 @@ static const string _sub_elem(const string& name)
 
 static void _print_monitors(ostream& os, const Configuration& config)
 {
-    for (uint32_t idx = 0; idx < config.seats.size(); idx++)
+    for (int32_t idx = 0; idx < config.seats.size(); idx++)
     {
         os << _section("Monitor")
            << _elem("Identifier") << string("\"") << "monitor" << idx << string("\"\n");
@@ -68,7 +68,7 @@ static void _print_device(ostream& os, const Configuration& config)
     os << _section("Device")
        << _elem("Identifier") << string("\"card0\"\n");
 
-    for (uint32_t idx = 0; idx < config.seats.size(); idx++)
+    for (int32_t idx = 0; idx < config.seats.size(); idx++)
     {
         os << _elem("Option")
            << string("\"Monitor-") << config.seats[idx]->get_monitor().get_interface().toStdString()
@@ -98,7 +98,7 @@ static void _print_screen(ostream& os, const Configuration& config)
 
 static void _print_layout(ostream& os, const Configuration& config)
 {
-    for (uint32_t idx = 0; idx < config.seats.size(); idx++)
+    for (int32_t idx = 0; idx < config.seats.size(); idx++)
     {
         os << _section("ServerLayout")
            << _elem("Identifier") << string("\"seat")       << idx << "\"\n"
