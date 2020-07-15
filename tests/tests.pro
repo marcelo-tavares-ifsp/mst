@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += ../
+INCLUDEPATH += ../mst/
 
 SOURCES += \
     ../mst/core/utilites/utilites.cpp \
@@ -38,26 +38,26 @@ SOURCES += \
     test_resolution.cpp
 
 SOURCES += \
-    ../mst/configuration/configuration.cpp \
-    ../mst/components/component.cpp \
-    ../mst/components/awesome.cpp \
+    ../mst/core/configuration.cpp \
+    ../mst/core/component.cpp \
+    ../mst/core/components/awesome.cpp \
     test_awesome.cpp
 
 SOURCES += \
-    ../mst/template_manager/template.cpp \
-    ../mst/template_manager/template_manager.cpp \
-    ../mst/path_manager/pathmanager.cpp \
-    ../mst/core/dsv_parser/dsv.cpp \
-    ../mst/core/seat/seat.cpp \
-    ../mst/core/monitor/monitor.cpp \
-    ../mst/core/resolution/resolution.cpp \
-    ../mst/core/xrandr_monitor/xrandr_monitor.cpp
+    ../mst/core/types/template.cpp \
+    ../mst/core/types/seat.cpp \
+    ../mst/core/types/monitor.cpp \
+    ../mst/core/types/resolution.cpp \
+    ../mst/core/types/xrandr_monitor.cpp \
+    ../mst/core/template_manager.cpp \
+    ../mst/core/path_manager.cpp \
+    ../mst/core/dsv_parser/dsv.cpp
 
 HEADERS += \
-    ../mst/configuration/configuration.h \
+    ../mst/core/configuration.h \
     ../mst/core/utilites/utilites.h \
-    ../mst/core/seat/seat.h \
-    ../mst/core/monitor/monitor.h \
+    ../mst/core/types/seat.h \
+    ../mst/core/types/monitor.h \
     test_awesome.h \
     test_utils.h \
     test_template.h \

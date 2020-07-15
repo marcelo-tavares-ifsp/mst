@@ -1,8 +1,8 @@
 #include <QtTest>
 
 #include "test_template.h"
-#include "../mst/template_manager/template.h"
-#include "../mst/template_manager/template_manager.h"
+#include "../mst/core/types/template.h"
+#include "../mst/core/template_manager.h"
 
 Test_template::Test_template(QObject *parent) : QObject(parent)
 {

@@ -4,7 +4,7 @@
 #include "test_component.h"
 #include "../mst/core/types/resolution.h"
 #include "../mst/core/types/monitor.h"
-#include "../mst/components/component.h"
+#include "../mst/core/component.h"
 #include "../mst/core/types/seat.h"
 
 Test_component::Test_component()

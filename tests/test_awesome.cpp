@@ -7,7 +7,7 @@
 #include <string>
 #include <memory>
 
-#include "../mst/components/awesome.h"
+#include "../mst/core/components/awesome.h"
 #include "../mst/core/types/seat.h"
 
 #include "test_awesome.h"
@@ -46,7 +46,7 @@ void Test_awesome::make_xephyr_rules() {
  */
 void Test_awesome::make_xephyr_screens()
 {
-    vector<shared_ptr<Seat>> seats;
+    QVector<shared_ptr<Seat>> seats;
     shared_ptr<Seat> seat = make_shared<Seat>(0);
     QVector<Resolution> resolutions = { Resolution("640x480") };
     Monitor monitor("VGA-1", resolutions);
