@@ -106,13 +106,13 @@ QString awesome::make_xephyr_rules(uint32_t sSize)
  * @param seats -- Number of seats.
  * @return Generated Lua code as a string.
  */
-QString awesome::make_xephyr_screens(vector<shared_ptr<Seat>> seats)
+QString awesome::make_xephyr_screens(QVector<shared_ptr<Seat>> seats)
 {
     QString result = "";
     Template tpl = Template_manager::get_instance()
             ->get_template("awesome/xephyr_screens.lua");
 
-    for (uint32_t idx = 0; idx < seats.size(); idx++)
+    for (int32_t idx = 0; idx < seats.size(); idx++)
     {
         tpl.set("screen_idx",    QString::number(idx + 1));
         tpl.set("mouse_device",  seats[idx]->get_mouse());

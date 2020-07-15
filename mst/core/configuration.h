@@ -24,7 +24,7 @@ public:
      */
     bool is_valid();
 
-    vector<shared_ptr<Seat>> seats;
+    QVector<shared_ptr<Seat>> seats;
 
 private:
     /**
