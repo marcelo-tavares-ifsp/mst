@@ -39,7 +39,14 @@ private:
 //// Procedures.
 
 ssize_t try_read(int fd, struct input_event* ie);
-bool is_btn_pressed(struct input_event &e);
+
+/**
+ * @brief is_button_pressed -- Predicate.  Check if any button is pressed
+ *     on an input device.
+ * @param e -- An input event.
+ * @return true if a button is pressed, false otherwise.
+ */
+bool is_button_pressed(struct input_event &e);
 
 }
 

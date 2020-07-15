@@ -39,7 +39,7 @@ bool Input_device_listener::loop_answer_device(QString device)
             unsigned char* data = (unsigned char*) &ie;
             is_pressed = (data[0] & 0x1) || (data[0] & 0x2) || (data[0] & 0x4);
         } else {
-            is_pressed = device::is_btn_pressed(ie);
+            is_pressed = device::is_button_pressed(ie);
         }
         if (is_pressed) {
             char name[256] = "Unknown";

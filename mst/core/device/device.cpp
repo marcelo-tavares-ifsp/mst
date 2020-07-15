@@ -35,7 +35,7 @@ ssize_t device::try_read(int fd, struct input_event* ie)
     return bytes;
 }
 
-bool device::is_btn_pressed(struct input_event &e)
+bool device::is_button_pressed(struct input_event &e)
 {
     qInfo(device_category()) << "e.type: "
         << e.type << "; e.code: " << e.code << "; e.value: " << e.value;
