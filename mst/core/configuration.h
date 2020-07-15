@@ -24,9 +24,34 @@ public:
      */
     bool is_valid();
 
-    QVector<shared_ptr<Seat>> seats;
+    /**
+     * @brief add_seat -- Add a new seat.
+     * @param seat -- A Seat instance.
+     */
+    void add_seat(shared_ptr<Seat> seat);
+
+    /**
+     * @brief get_seat_count -- Get number of added seats.
+     * @return the number of seats.
+     */
+    int32_t get_seat_count() const;
+
+    /**
+     * @brief get_seat -- Get a seat.
+     * @param idx -- A seat index.
+     * @return A shared pointer to a seat.
+     */
+    shared_ptr<Seat> get_seat(int32_t idx);
+
+    /**
+     * @brief get_seats -- Get a vector of seats.
+     * @return QVector of Seat instances.
+     */
+    QVector<shared_ptr<Seat>> get_seats();
 
 private:
+    QVector<shared_ptr<Seat>> seats;
+
     /**
      * @brief debug_allow_device_collisions -- if this option is set, then
      * the controller allows device collisions.

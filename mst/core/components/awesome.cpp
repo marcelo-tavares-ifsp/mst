@@ -54,8 +54,8 @@ void Awesome::prepare_rclua_template(Template& rclua_template)
 {
     rclua_template
         .set("mst_autostart",   make_xephyr_autostart())
-        .set("xephyr_screens",  make_xephyr_screens(config.seats))
-        .set("mst_awful_rules", make_xephyr_rules(config.seats.size()));
+        .set("xephyr_screens",  make_xephyr_screens(config.get_seats()))
+        .set("mst_awful_rules", make_xephyr_rules(config.get_seat_count()));
 }
 
 //// Helper procedures.

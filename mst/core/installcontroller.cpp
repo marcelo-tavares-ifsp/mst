@@ -78,7 +78,7 @@ void InstallController::load_seat_configuration_page(QWidget* parent,
         Monitor monitor(xrandr_monitor);
         shared_ptr<Seat> seat = make_shared<Seat>(idx++);
         seat->add_monitor(monitor);
-        config->seats.push_back(seat);
+        config->add_seat(seat);
         QWidget* widget = new Seat_widget(seat);
         connect(widget, SIGNAL(configure_seat(int)), parent, SLOT(configure_seat(int)));
         widgets->push_back(widget);
@@ -89,12 +89,12 @@ void InstallController::load_seat_configuration_page(QWidget* parent,
 void InstallController::prepare_for_device_configuration(int seat_id)
 {
     current_seat_id = seat_id;
-    clear_interface(config->seats[seat_id]);
+    clear_interface(config->get_seat(seat_id));
 }
 
 void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
 {
-    shared_ptr<Seat> seat = config->seats[current_seat_id];
+    shared_ptr<Seat> seat = config->get_seat(current_seat_id);
     qInfo(install_controller_category())
             << "Device assigned: " << device << " (" << type << ")";
 
@@ -291,7 +291,7 @@ QVector<QString> InstallController::get_list_of_keybs()
 void InstallController::print_config() {
     QString msg = "\n-----START current configuration:\n";
 
-    for (auto seat : config->seats) {
+    for (auto seat : config->get_seats()) {
         msg += "\tseat: ";
         msg += seat->get_monitor().get_interface() + "\n";
         msg += "\tkeyboard: ";

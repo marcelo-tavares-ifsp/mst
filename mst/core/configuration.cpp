@@ -7,6 +7,26 @@ Configuration::Configuration()
 
 }
 
+void Configuration::add_seat(shared_ptr<Seat> seat)
+{
+    seats.push_back(seat);
+}
+
+int32_t Configuration::get_seat_count() const
+{
+    return seats.size();
+}
+
+shared_ptr<Seat> Configuration::get_seat(int32_t idx)
+{
+    return seats[idx];
+}
+
+QVector<shared_ptr<Seat>> Configuration::get_seats()
+{
+    return seats;
+}
+
 void Configuration::set_debug_allow_device_collisions(bool value)
 {
     debug_allow_device_collisions = value;

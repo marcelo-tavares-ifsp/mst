@@ -49,12 +49,12 @@ static const string _sub_elem(const string& name)
 
 static void _print_monitors(ostream& os, const Configuration& config)
 {
-    for (int32_t idx = 0; idx < config.seats.size(); idx++)
+    for (int32_t idx = 0; idx < config.get_seat_count(); idx++)
     {
         os << _section("Monitor")
            << _elem("Identifier") << string("\"") << "monitor" << idx << string("\"\n");
 
-        if (idx < (config.seats.size() - 1))
+        if (idx < (config.get_seat_count() - 1))
         {
             os << _elem("Option") << "\"LeftOf\"\t" << "\"monitor" << idx + 1 << "\"\n";
         }
@@ -63,15 +63,15 @@ static void _print_monitors(ostream& os, const Configuration& config)
     }
 }
 
-static void _print_device(ostream& os, const Configuration& config)
+static void _print_device(ostream& os, Configuration& config)
 {
     os << _section("Device")
        << _elem("Identifier") << string("\"card0\"\n");
 
-    for (int32_t idx = 0; idx < config.seats.size(); idx++)
+    for (int32_t idx = 0; idx < config.get_seat_count(); idx++)
     {
         os << _elem("Option")
-           << string("\"Monitor-") << config.seats[idx]->get_monitor().get_interface().toStdString()
+           << string("\"Monitor-") << config.get_seat(idx)->get_monitor().get_interface().toStdString()
            << string("\"")
            << string(" \"monitor") << idx << string("\"\n");
     }
@@ -79,9 +79,9 @@ static void _print_device(ostream& os, const Configuration& config)
     os << _end_section("Device");
 }
 
-static void _print_screen(ostream& os, const Configuration& config)
+static void _print_screen(ostream& os, Configuration& config)
 {
-    int total_width = int(config.seats.size()) * config.seats[0]->get_monitor().get_current_resolution().get_width();
+    int total_width = int(config.get_seat_count()) * config.get_seat(0)->get_monitor().get_current_resolution().get_width();
 
     static const int depth = 24;
     os << _section("Screen")
@@ -91,14 +91,14 @@ static void _print_screen(ostream& os, const Configuration& config)
        << _elem("DefaultDepth") << depth << endl
        << _sub_section("Display")
        << _sub_elem("Depth")    << depth << endl
-       << _sub_elem("Virtual")  << total_width << " " << config.seats[0]->get_monitor().get_current_resolution().get_height() << endl
+       << _sub_elem("Virtual")  << total_width << " " << config.get_seat(0)->get_monitor().get_current_resolution().get_height() << endl
        << _end_sub_section("Display")
        << _end_section("Screen");
 }
 
-static void _print_layout(ostream& os, const Configuration& config)
+static void _print_layout(ostream& os, Configuration& config)
 {
-    for (int32_t idx = 0; idx < config.seats.size(); idx++)
+    for (int32_t idx = 0; idx < config.get_seat_count(); idx++)
     {
         os << _section("ServerLayout")
            << _elem("Identifier") << string("\"seat")       << idx << "\"\n"
