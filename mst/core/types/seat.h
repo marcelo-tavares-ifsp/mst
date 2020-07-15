@@ -70,7 +70,7 @@ public:
      */
     bool intersects(const shared_ptr<Seat> other) const;
 
-    friend std::ostream& operator<< (std::ostream& os, const Seat& seat);
+    friend std::ostream& operator<< (std::ostream& os, Seat& seat);
 
 private:
     int id;
