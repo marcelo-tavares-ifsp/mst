@@ -15,6 +15,8 @@
 
 #include "core/template_manager.h"
 
+using namespace std;
+
 /**
  * @brief m_logFile -- A pointer to logging file.
  */
@@ -63,6 +65,18 @@ void create_config_file(QFile& file) {
 }
 
 /**
+ * @brief is_graphics_available -- check if the program is run in the graphic
+ *     mode.
+ * @return true if it is, false otherwise.
+ */
+bool is_graphics_available()
+{
+    char* display = getenv("DISPLAY");
+    cout << display << endl;
+    return (display != NULL) && (strlen(display) > 0);
+}
+
+/**
  * @brief main -- The application entry point.
  * @param argc -- Count of program arguments.
  * @param argv -- Array of program arguments.
@@ -71,7 +85,15 @@ void create_config_file(QFile& file) {
  */
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QSharedPointer<QCoreApplication> a;
+    bool is_graphic_mode = is_graphics_available();
+
+    if (is_graphic_mode) {
+        a.reset(new QApplication(argc, argv));
+    } else {
+        a.reset(new QCoreApplication(argc, argv));
+    }
+
     QCommandLineParser parser;
     parser.setApplicationDescription("Multiseat configurator");
     parser.addHelpOption();
@@ -91,7 +113,7 @@ int main(int argc, char *argv[])
     parser.addOption(rollback_option);
     parser.addOption(debug_allow_empty_devices);
     parser.addOption(debug_allow_device_collisions);
-    parser.process(a);
+    parser.process(*a);
     QFile file(MST_CONFIG_FILE);
     if(! file.exists()) {
         create_config_file(file);
@@ -102,9 +124,13 @@ int main(int argc, char *argv[])
 
     if (geteuid() != 0)
     {
-        QMessageBox messageBox;
-        messageBox.critical(0, "Ошибка",
-                            "MST должен быть запущен от суперпользователя");
+        if (is_graphic_mode) {
+            QMessageBox messageBox;
+            messageBox.critical(0, "Ошибка",
+                                "MST должен быть запущен от суперпользователя");
+        } else {
+            cerr << "MST должен быть запущен от суперпользователя" << endl;
+        }
         return 1;
     }
 
@@ -127,7 +153,14 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    InstallWindow w;
-    w.show();
-    return a.exec();
+    if (is_graphic_mode) {
+        InstallWindow w;
+        w.show();
+        return a->exec();
+    } else {
+        cerr << "На данный момент MST не поддерживает работу"
+             << " в консольном режиме."
+             << endl;
+        return 1;
+    }
 }
