@@ -1,10 +1,10 @@
-#include "rebootdialog.h"
+#include "reboot_dialog.h"
 #include "ui_rebootdialog.h"
 #include "core/platform.h"
 
 Q_LOGGING_CATEGORY(reboot_dialog_category, "mst.reboot_dialog")
 
-RebootDialog::RebootDialog(QWidget *parent) :
+Reboot_dialog::Reboot_dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RebootDialog)
 {
@@ -12,17 +12,17 @@ RebootDialog::RebootDialog(QWidget *parent) :
     this->setWindowTitle("Перезагрузка компьютера");
 }
 
-RebootDialog::~RebootDialog()
+Reboot_dialog::~Reboot_dialog()
 {
     delete ui;
 }
 
-void RebootDialog::on_btnYesReboot_clicked()
+void Reboot_dialog::on_btnYesReboot_clicked()
 {
     Platform::system_reboot();
 }
 
-void RebootDialog::on_btnNoReboot_clicked()
+void Reboot_dialog::on_btnNoReboot_clicked()
 {
     this->close();
 }

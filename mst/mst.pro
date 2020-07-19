@@ -41,7 +41,6 @@ SOURCES += \
     main.cpp \
     ui/install_window/installwindow.cpp \
     ui/calibration_dialog/calibrationdialog.cpp \
-    ui/reboot_dialog/rebootdialog.cpp \
     core/installcontroller.cpp \
     core/configuration.cpp \
     core/utilites/utilites.cpp \
@@ -68,12 +67,12 @@ SOURCES += \
     core/device/device.cpp \
     core/device/device_listener.cpp \
     core/device/usb_device_listener.cpp \
-    core/device/input_device_listener.cpp
+    core/device/input_device_listener.cpp \
+    ui/reboot_dialog/reboot_dialog.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
     ui/calibration_dialog/calibrationdialog.h \
-    ui/reboot_dialog/rebootdialog.h \
     core/installcontroller.h \
     core/configuration.h \
     core/utilites/utilites.h \
@@ -101,7 +100,8 @@ HEADERS += \
     core/device/device.h \
     core/device/device_listener.h \
     core/device/usb_device_listener.h \
-    core/device/input_device_listener.h
+    core/device/input_device_listener.h \
+    ui/reboot_dialog/reboot_dialog.h
 
 FORMS += \
     ui/install_window/installwindow.ui \

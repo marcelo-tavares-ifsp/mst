@@ -96,7 +96,7 @@ void InstallWindow::on_btnEndInstall_clicked()
     inst_controller->enable_mst();
     ui->btnEndInstall->setEnabled(false);
 
-    RebootDialog* rd = new RebootDialog(this);
+    Reboot_dialog* rd = new Reboot_dialog(this);
 
     rd->setModal(true);
     rd->exec();
@@ -140,7 +140,7 @@ void InstallWindow::on_btnBackup_clicked()
 {
     inst_controller->begin_uninstall(); // TODO: Dialog OK/Cancel
 
-    RebootDialog* rd = new RebootDialog(this);
+    Reboot_dialog* rd = new Reboot_dialog(this);
 
     rd->setModal(true);
     rd->exec();

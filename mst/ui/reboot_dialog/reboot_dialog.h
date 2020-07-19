@@ -13,13 +13,13 @@ namespace Ui {
 class RebootDialog;
 }
 
-class RebootDialog : public QDialog
+class Reboot_dialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit RebootDialog(QWidget *parent = 0);
-    ~RebootDialog();
+    explicit Reboot_dialog(QWidget *parent = 0);
+    ~Reboot_dialog();
 
 private slots:
     void on_btnYesReboot_clicked();

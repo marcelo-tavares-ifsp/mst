@@ -5,7 +5,7 @@
 #include <QThreadPool>
 #include <QMessageBox>
 #include "ui/calibration_dialog/calibrationdialog.h"
-#include "ui/reboot_dialog/rebootdialog.h"
+#include "ui/reboot_dialog/reboot_dialog.h"
 #include "core/installcontroller.h"
 #include "core/device/device_listener.h"
 #include "core/device/input_device_listener.h"
