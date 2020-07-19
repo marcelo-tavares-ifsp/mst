@@ -1,0 +1,19 @@
+image: fotengauer/altlinux-p8
+
+# Select what we should cache
+# cache:
+#   paths:
+#   - vendor/
+
+before_script:
+# Install git, the php image doesn't have installed
+- apt-get update -yqq
+- apt-get install git -yqq
+- apt-get install -yqq libudev-devel awesome unclutter xorg-xephyr qt5-base-common qt5-base-devel make
+
+test:app:
+  script:
+  - qmake-qt5
+  - make -j2
+  - make -j2 check
+
