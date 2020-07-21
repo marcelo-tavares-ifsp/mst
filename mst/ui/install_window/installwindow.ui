@@ -48,7 +48,7 @@ Seat_widget QLabel {
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="pageStart">
      <widget class="QWidget" name="verticalLayoutWidget">
@@ -81,7 +81,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Удалить MST</string>
+          <string>Удалить настройки</string>
          </property>
         </widget>
        </item>
@@ -93,7 +93,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Остановить MST</string>
+          <string>Остановить мультисит</string>
          </property>
         </widget>
        </item>
@@ -276,7 +276,7 @@ Seat_widget QLabel {
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>20</height>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
