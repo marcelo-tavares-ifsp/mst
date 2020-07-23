@@ -3,6 +3,8 @@
 # MST
 Multi-Seat Tool
 
+[![pipeline status](https://gitlab.com/gkaz/mst/badges/master/pipeline.svg)](https://gitlab.com/gkaz/mst/-/commits/master)
+
 ## License
 The project was initially written and being developed by "AZ Company
 Group" LLC (https://www.gkaz.ru/)  You can find the list of
