@@ -1,4 +1,4 @@
-image: fotengauer/altlinux-p8
+image: alt:p8
 
 # Select what we should cache
 # cache:
