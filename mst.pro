@@ -1,7 +1,8 @@
 include(mst-vars.pri)
 
 TEMPLATE = subdirs
-SUBDIRS = mst tests
+SUBDIRS = mst tests \
+    mstd
 
 isEmpty(PREFIX) {
     PREFIX = /usr
