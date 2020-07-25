@@ -1,0 +1,3 @@
+[submodule "guile-udev"]
+	path = guile-udev
+	url = https://github.com/artyom-poptsov/guile-udev
