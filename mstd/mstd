@@ -30,35 +30,53 @@
 ;;; Code:
 
 (use-modules (udev udev)
-             (udev monitor)
-             (udev device)
-             (ice-9 popen)
-             (ice-9 getopt-long))
+	     (udev monitor)
+	     (udev device)
+	     (ice-9 popen)
+	     (ice-9 rdelim)
+	     (ice-9 getopt-long))
 
 
 ;;; Global constants and variables:
 
 (define %default-pid-file      "/var/run/mstd.pid")
+(define %seat-configuration-file "/etc/mst-seats")
 
 (define *debug?* #f)
 
 
 (define (display-number->user display-number)
-  "Find out the user by its display number."
+  "Find out the user by its display number.  Return user name or #f if the
+user is not found."
   (let ((port (open-input-pipe
-               (string-append
-                "who"
-                " | "
-                (format #f "grep '(:~d)'" display-number)
-                " | "
-                "sed -re 's/^([^ ]+) +.* \\(:[0-9]+\\)/\\1/g'"
-                " | "
-                "head -1"))))
-    (read-line port)))
+	       (string-append
+		"who"
+		" | "
+		(format #f "grep '(:~a)'" display-number)
+		" | "
+		"sed -re 's/^([^ ]+) +.* \\(:[0-9]+\\)/\\1/g'"
+		" | "
+		"head -1"))))
+    (let ((result (read-line port)))
+      (if (not (eof-object? result))
+	  result
+          #f))))
 
-;; TODO:
-;; (define (device-path->display-number device-path)
-;;   )
+(define (read-seats-configuration config-file)
+  (let ((port (open-input-file config-file)))
+    (let read ((line (read-line port))
+	       (data '()))
+      (if (eof-object? line)
+	  data
+	  (read (read-line port)
+		(cons (string-split line #\space) data))))))
+
+(define (device-path->display-number config device-path)
+  (let* ((record       (car config))
+         (base-devpath (car record)))
+    (if (string-contains device-path base-devpath)
+        (cadr record)
+        (device-path->display-number (cdr config) device-path))))
 
 (define (mount device user)
   "Mount a DEVICE for a USER by means of udisksctl command."
@@ -72,12 +90,31 @@
   (display (udev-device-get-devpath device))
   (newline))
 
-(define (start-listener)
+(define (start-listener config)
   "Start udev listener."
   (let* ((udev         (make-udev))
          (udev-monitor (make-udev-monitor udev)))
+    (when *debug?*
+      (format #t "Config: ~a~%" config))
+
     (udev-monitor-add-filter! udev-monitor "usb" "usb_device")
-    (udev-monitor-set-callback! udev-monitor callback)
+
+    (let ((callback
+           (lambda (device)
+             (let* ((devpath        (udev-device-get-devpath device))
+                    (display-number (device-path->display-number config
+                                                                 devpath))
+                    (user           (display-number->user display-number)))
+	       (if user
+		   (begin
+		     (when *debug?*
+			   (format #t "Mounting ~a for seat ~a (user ~a)~%"
+				   devpath display-number user))
+		     (mount devpath user))
+		   (display "Could not determine user."))))))
+
+      (udev-monitor-set-callback! udev-monitor callback))
+
     (udev-monitor-start-scanning! udev-monitor)
     (while #t
       (sleep 1))))
@@ -85,6 +122,7 @@
 (define *option-spec*
   '((pid-file                 (value #t))
     (detach                   (value #f))
+    (debug                    (value #f))
     (help   (single-char #\h) (value #f))))
 
 (define (write-pid pid-file)
@@ -126,7 +164,6 @@ Options:
       (let ((pid (primitive-fork)))
         (cond
          ((zero? pid)
-          (close-ports)
           (setsid))
          ((> pid 0)
           (exit))
@@ -135,6 +172,6 @@ Options:
 
     (write-pid pid-file)
 
-    (start-listener)))
+    (start-listener (read-seats-configuration %seat-configuration-file))))
 
 ;;; mstd ends here.
