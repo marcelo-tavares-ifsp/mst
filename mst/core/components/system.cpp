@@ -23,6 +23,18 @@ void System::configure()
     component_configuration.add(GETTY_FILE,
                                 "/lib/systemd/system/getty@.service",
                                 prepare_getty_template());
+
+    // TODO: Don't write the config right away, store it in a template.
+    QFile config_file("/etc/mst-seats");
+    config_file.open(QFile::WriteOnly);
+    Template config_template("{{device_path}} {{seat_number}}");
+    for (shared_ptr<Seat> seat : config.get_seats()) {
+        config_template
+                .set("device_path", seat->get_usb())
+                .set("seat_number", QString::number(seat->get_id()));
+        config_file.write(config_template.substitute().toStdString().c_str());
+        config_file.write("\n");
+    }
 }
 
 Template sys::prepare_getty_template()
