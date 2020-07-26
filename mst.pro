@@ -92,7 +92,13 @@ rpm_dist.commands += \
     tar -czpf $$DIST_NAME\\.tar.gz $$DIST_NAME; \
     rm -rf $$DIST_NAME
 
-QMAKE_EXTRA_TARGETS += rpm rpm_dist dist
+guile_udev.commands += \
+    cd guile-udev \
+    && autoreconf -vif \
+    && ./configure --with-guilesitedir=/usr/share/guile/site/2.0 \
+    && make -j4 install
+
+QMAKE_EXTRA_TARGETS += rpm rpm_dist dist guile_udev
 
 RESOURCES += \
     resources.qrc
