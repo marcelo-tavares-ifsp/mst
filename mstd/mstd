@@ -80,10 +80,13 @@ user is not found."
 
 (define (mount device user)
   "Mount a DEVICE for a USER by means of udisksctl command."
-  (system (string-append
-           (format #f "sudo --user='~s' -- " user)
-           "udisksctl mount --no-user-interaction --block-device "
-           device)))
+  (let ((command (string-append
+                  (format #f "sudo --user='~s' -- " user)
+                  "udisksctl mount --no-user-interaction --block-device "
+                  device)))
+    (when *debug?*
+      (format #t "mount command: ~a~%" command))
+    (system command)))
 
 (define (callback device)
   (display "device: ")
