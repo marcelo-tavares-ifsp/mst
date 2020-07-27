@@ -100,21 +100,24 @@ user is not found."
     (when *debug?*
       (format #t "Config: ~a~%" config))
 
-    (udev-monitor-add-filter! udev-monitor "usb" "usb_device")
+    (udev-monitor-add-filter! udev-monitor "block" "partition")
 
     (let ((callback
            (lambda (device)
-             (let* ((devpath        (udev-device-get-devpath device))
-                    (display-number (device-path->display-number config
-                                                                 devpath))
-                    (user           (display-number->user display-number)))
-               (if user
-                   (begin
-                     (when *debug?*
-                           (format #t "Mounting ~a for seat ~a (user ~a)~%"
-                                   devpath display-number user))
-                     (mount devpath user))
-                   (display "Could not determine user."))))))
+             (when (string=? (udev-device-get-action device) "add")
+               (let* ((devpath        (udev-device-get-devpath device))
+                      (display-number (device-path->display-number config
+                                                                   devpath))
+                      (user           (display-number->user display-number))
+                      (devname (udev-device-get-property-value device
+                                                               "DEVNAME")))
+                 (if user
+                     (begin
+                       (when *debug?*
+                             (format #t "Mounting ~a for seat ~a (user ~a)~%"
+                                     devpath display-number user))
+                       (mount devname user))
+                     (display "Could not determine user.")))))))
 
       (udev-monitor-set-callback! udev-monitor callback))
 
