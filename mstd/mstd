@@ -30,11 +30,11 @@
 ;;; Code:
 
 (use-modules (udev udev)
-	     (udev monitor)
-	     (udev device)
-	     (ice-9 popen)
-	     (ice-9 rdelim)
-	     (ice-9 getopt-long))
+             (udev monitor)
+             (udev device)
+             (ice-9 popen)
+             (ice-9 rdelim)
+             (ice-9 getopt-long))
 
 
 ;;; Global constants and variables:
@@ -49,27 +49,27 @@
   "Find out the user by its display number.  Return user name or #f if the
 user is not found."
   (let ((port (open-input-pipe
-	       (string-append
-		"who"
-		" | "
-		(format #f "grep '(:~a)'" display-number)
-		" | "
-		"sed -re 's/^([^ ]+) +.* \\(:[0-9]+\\)/\\1/g'"
-		" | "
-		"head -1"))))
+               (string-append
+                "who"
+                " | "
+                (format #f "grep '(:~a)'" display-number)
+                " | "
+                "sed -re 's/^([^ ]+) +.* \\(:[0-9]+\\)/\\1/g'"
+                " | "
+                "head -1"))))
     (let ((result (read-line port)))
       (if (not (eof-object? result))
-	  result
+          result
           #f))))
 
 (define (read-seats-configuration config-file)
   (let ((port (open-input-file config-file)))
     (let read ((line (read-line port))
-	       (data '()))
+               (data '()))
       (if (eof-object? line)
-	  data
-	  (read (read-line port)
-		(cons (string-split line #\space) data))))))
+          data
+          (read (read-line port)
+                (cons (string-split line #\space) data))))))
 
 (define (device-path->display-number config device-path)
   (let* ((record       (car config))
@@ -105,13 +105,13 @@ user is not found."
                     (display-number (device-path->display-number config
                                                                  devpath))
                     (user           (display-number->user display-number)))
-	       (if user
-		   (begin
-		     (when *debug?*
-			   (format #t "Mounting ~a for seat ~a (user ~a)~%"
-				   devpath display-number user))
-		     (mount devpath user))
-		   (display "Could not determine user."))))))
+               (if user
+                   (begin
+                     (when *debug?*
+                           (format #t "Mounting ~a for seat ~a (user ~a)~%"
+                                   devpath display-number user))
+                     (mount devpath user))
+                   (display "Could not determine user."))))))
 
       (udev-monitor-set-callback! udev-monitor callback))
 
