@@ -36,6 +36,28 @@ void Component_manager::configure_components()
 }
 
 /**
+ * @brief Component_manager::enable_components -- Enable all existing
+ *     components.
+ */
+void Component_manager::enable_components()
+{
+    for (auto component : components) {
+        component->enable();
+    }
+}
+
+/**
+ * @brief Component_manager::disable_components -- Disable all existing
+ *     components.
+ */
+void Component_manager::disable_components()
+{
+    for (auto component : components) {
+        component->disable();
+    }
+}
+
+/**
  * @brief Component_manager::store_configurations -- Store all configurations
  *     to the main memory.
  * @param output_dir

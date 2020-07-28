@@ -15,6 +15,8 @@ class Component_manager
 public:
     Component_manager(Configuration& config);
     void configure_components();
+    void enable_components();
+    void disable_components();
     void store_configurations(const QString& output_dir);
     const vector<Component*>& get_components();
 

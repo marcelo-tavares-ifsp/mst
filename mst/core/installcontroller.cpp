@@ -199,16 +199,14 @@ void InstallController::install_files()
 
 void InstallController::enable_mst()
 {
-    vgl::VGL vgl(*config);
-    vgl.enable();
+    component_manager->enable_components();
     Platform::system_set_default_runlevel("multi-user");
     qInfo(install_controller_category) << "multiseat enabled.";
 }
 
 void InstallController::disable_mst()
 {
-    vgl::VGL vgl(*config);
-    vgl.disable();
+    component_manager->disable_components();
     Platform::system_set_default_runlevel("graphical");
     Platform::fs_rm(
                 QString::fromStdString(
