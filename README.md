@@ -30,10 +30,26 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 * libudev-devel
 * virtualgl
 * Xdialog (needed for mst-umount)
+* guile20
+* libguile20
 
-## Installation
+### Buld-time tependencies
+* guile20-devel
+* libguile20-devel
+* texinfo
 
-### AltLinux
+## Building and installation
+```
+$ qmake-qt5
+$ make build_deps
+$ make
+$ make install_deps
+$ make install
+```
+
+### Installation using an RPM package
+
+#### AltLinux
 
 An RPM package for the project can be built as follows:
 ```
@@ -50,7 +66,7 @@ $ useradd multiseat
 $ rpm -i mst-1.0.0-1.x86_64.rpm
 ```
 
-### Ubuntu GNU/Linux (experimental)
+#### Ubuntu GNU/Linux (experimental)
 Install the needed components:
 ```
 $ sudo apt-get install \

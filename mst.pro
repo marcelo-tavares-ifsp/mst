@@ -92,14 +92,29 @@ rpm_dist.commands += \
     tar -czpf $$DIST_NAME\\.tar.gz $$DIST_NAME; \
     rm -rf $$DIST_NAME
 
-guile_udev.commands += \
+guile_udev_build.name = "Build Guile-Udev library."
+guile_udev_build.commands += \
+    @echo "----- Building Guile-Udev -----"; \
     cd guile-udev \
     && autoreconf -vif \
     && ./configure --with-guilesitedir=/usr/share/guile/site/2.0 \
        --prefix=/usr --libdir=$$[QT_INSTALL_LIBS] \
     && make -j4 install
 
-QMAKE_EXTRA_TARGETS += rpm rpm_dist dist guile_udev
+guile_udev_install.name = "Install Guile-Udev library."
+guile_udev_install.commands += \
+    @echo "----- Installing Gule-Udev -----" \
+    && cd guile-udev \
+    && make -j4 install
+guile_udev_install.depends += guile_udev_build
+
+build_deps.name      = "Build dependencies."
+build_deps.depends   += guile_udev_build
+install_deps.name    = "Install dependencies."
+install_deps.depends += guile_udev_install
+
+QMAKE_EXTRA_TARGETS += rpm rpm_dist dist guile_udev_build guile_udev_install
+QMAKE_EXTRA_TARGETS += build_deps install_deps
 
 RESOURCES += \
     resources.qrc
