@@ -73,6 +73,7 @@ void Seat_widget::seat_state_changed(bool state)
 
 void Seat_widget::paintEvent(QPaintEvent* ev)
 {
+    (void) ev;
     QStyleOption o;
     o.initFrom(this);
     QPainter p(this);
