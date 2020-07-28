@@ -1,0 +1,9 @@
+[Unit]
+Description=MST daemon.
+
+[Service]
+ExecStart=/usr/bin/mstd --detach --pid-file /var/run/mstd.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
