@@ -19,7 +19,7 @@ Component_manager::Component_manager(Configuration& config)
     components.push_back(new sys::System(config));
     components.push_back(new sudo::Sudo(config));
     components.push_back(new display_manager::Display_manager(config));
-    components.push_back(new udev::Udev(config));
+    //components.push_back(new udev::Udev(config));
     components.push_back(new vgl::VGL(config));
     components.push_back(new xorg::Xorg(config));
 }
