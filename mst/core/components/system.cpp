@@ -6,6 +6,8 @@
 #include "../types/template.h"
 #include "core/template_manager.h"
 #include "core/path_manager.h"
+#include "core/platform.h"
+
 
 using namespace sys;
 
@@ -35,6 +37,16 @@ void System::configure()
         config_file.write(config_template.substitute().toStdString().c_str());
         config_file.write("\n");
     }
+}
+
+void System::enable()
+{
+    Platform::exec("systemctl enable mstd");
+}
+
+void System::disable()
+{
+    Platform::exec("systemctl disable mstd");
 }
 
 Template sys::prepare_getty_template()

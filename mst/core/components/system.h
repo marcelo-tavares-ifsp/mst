@@ -19,12 +19,8 @@ public:
     QString get_version() override {
         throw Component_error("Unimplemented");
     }
-    void enable() {
-        /* Do nothing */
-    }
-    void disable() {
-        /* Do nothing. */
-    }
+    void enable();
+    void disable();
 };
 
 Template prepare_bashrc_template();
