@@ -95,7 +95,8 @@ rpm_dist.commands += \
 guile_udev.commands += \
     cd guile-udev \
     && autoreconf -vif \
-    && ./configure --with-guilesitedir=/usr/share/guile/site/2.0 --prefix=/usr \
+    && ./configure --with-guilesitedir=/usr/share/guile/site/2.0 \
+       --prefix=/usr --libdir=$$[QT_INSTALL_LIBS] \
     && make -j4 install
 
 QMAKE_EXTRA_TARGETS += rpm rpm_dist dist guile_udev
