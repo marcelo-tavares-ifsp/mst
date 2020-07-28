@@ -45,7 +45,11 @@ etc.files += \
 
 etc.path = /etc/
 
-INSTALLS += scripts templates templates_awesome etc
+systemd_services.files += \
+    etc/mstd.service
+systemd_services.path = /lib/systemd/system
+
+INSTALLS += scripts templates templates_awesome etc systemd_services
 
 DISTFILES += \
     scripts/mst-start-dm \
