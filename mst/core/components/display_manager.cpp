@@ -36,12 +36,12 @@ static void _configure_x11() {
 }
 
 void Display_manager::enable() {
-    QString lightdm_cmd = "/usr/sbin/lightdm --config ";// + config_path;
-    if (Platform::exec(lightdm_cmd) != 0) {
-        throw Component_error("Could not start lightdm");
-    }
+//    QString lightdm_cmd = "/usr/sbin/lightdm --config ";// + config_path;
+//    if (Platform::exec(lightdm_cmd) != 0) {
+//        throw Component_error("Could not start lightdm");
+//    }
 
-    _configure_x11();
+//    _configure_x11();
 }
 
 void Display_manager::add_seat(int seat_number) {
