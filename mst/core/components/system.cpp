@@ -33,7 +33,7 @@ void System::configure()
     for (shared_ptr<Seat> seat : config.get_seats()) {
         config_template
                 .set("device_path", seat->get_usb())
-                .set("seat_number", QString::number(seat->get_id()));
+                .set("seat_number", QString::number(seat->get_id() + 1));
         config_file.write(config_template.substitute().toStdString().c_str());
         config_file.write("\n");
     }
