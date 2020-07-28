@@ -28,7 +28,7 @@ void System::configure()
 
     // TODO: Don't write the config right away, store it in a template.
     QFile config_file("/etc/mst-seats");
-    config_file.open(QFile::WriteOnly);
+    config_file.open(QFile::WriteOnly | QIODevice::Truncate | QIODevice::Text);
     Template config_template("{{device_path}} {{seat_number}}");
     for (shared_ptr<Seat> seat : config.get_seats()) {
         config_template
