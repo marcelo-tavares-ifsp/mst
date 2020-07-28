@@ -19,7 +19,7 @@ void Test_resolution::parse_string()
 void Test_resolution::to_string()
 {
     Resolution res("640x480");
-    std:stringstream ss;
+    std::stringstream ss;
     ss << res;
     QVERIFY( ss.str() == "#<Resolution 640x480>" );
 }
