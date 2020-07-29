@@ -91,14 +91,32 @@ user is not found."
       (format #t "mount command: ~a~%" command))
     (system command)))
 
+(define (notify-send display-number message)
+  "Show a notify with a MESSAGE on the given DISPLAY-NUMBER."
+  (system (string-append
+           (format #f "DISPLAY=:~a" display-number)
+           " /usr/bin/notify-send"
+           " --urgency=critical"
+           " --icon=error"
+           (string-append " '" message "'"))))
+
+(define (notify-broadcast config message)
+  "Broadcast a notify with a MESSAGE across all seats that are listed
+in a CONFIG."
+  (for-each (lambda (rec)
+              (notify-send (cadr rec) message))
+            config))
+
 (define (start-listener config)
   "Start udev listener."
   (let* ((udev         (make-udev))
-         (udev-monitor (make-udev-monitor udev)))
+         (udev-monitor (make-udev-monitor udev))
+         (udev-input-monitor (make-udev-monitor udev)))
     (when *debug?*
       (format #t "Config: ~a~%" config))
 
-    (udev-monitor-add-filter! udev-monitor "block" "partition")
+    (udev-monitor-add-filter! udev-monitor       "block" "partition")
+    (udev-monitor-add-filter! udev-input-monitor "usb"   "usb_device")
 
     (let ((callback
            (lambda (device)
@@ -119,7 +137,30 @@ user is not found."
 
       (udev-monitor-set-callback! udev-monitor callback))
 
+    (let ((callback
+           (lambda (device)
+             (let ((action  (udev-device-get-property-value device "ACTION"))
+                   (devname (udev-device-get-property-value device
+                                                            "DEVNAME"))
+                   (devpath (udev-device-get-devpath device)))
+               (cond
+                ((string=? action "remove")
+                 (when *debug?*
+                   (format #t "Device ~a was removed.~%" devname))
+                 (unless (device-path->display-number config devpath)
+                   (notify-broadcast config
+                                     (format #f
+                                             (string-append
+                                              "Seat input device ~a was removed.~%"
+                                              "Please re-connect the device and"
+                                              " reboot the computer.")
+                                             devname))))
+                ((string=? action "add")
+                 (format #t "Device ~a was added.~%" devname)))))))
+      (udev-monitor-set-callback! udev-input-monitor callback))
+
     (udev-monitor-start-scanning! udev-monitor)
+    (udev-monitor-start-scanning! udev-input-monitor)
     (while #t
       (sleep 1))))
 
