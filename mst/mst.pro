@@ -11,11 +11,12 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = mst
 TEMPLATE = app
 
+MST_VERSION = $$system("[ ! -e '../.git' ] || git describe --abbrev=0")
+MST_HASH    = $$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")
 versiontarget.target = version.h
 versiontarget.commands = \
     [ ! -e ../.git ] || echo \'const string VERSION = \"\
-$$system("[ ! -e '../.git' ] || git describe --abbrev=0")-\
-$$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")\";\' \
+$${MST_VERSION}-$${MST_HASH}\";\' \
    > version.h;
 versiontarget.depends = FORCE
 dist.depends = version.h
