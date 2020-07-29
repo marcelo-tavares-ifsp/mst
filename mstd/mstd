@@ -89,11 +89,6 @@ user is not found."
       (format #t "mount command: ~a~%" command))
     (system command)))
 
-(define (callback device)
-  (display "device: ")
-  (display (udev-device-get-devpath device))
-  (newline))
-
 (define (start-listener config)
   "Start udev listener."
   (let* ((udev         (make-udev))
