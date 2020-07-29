@@ -64,6 +64,8 @@ user is not found."
           #f))))
 
 (define (read-seats-configuration config-file)
+  "Read seats configuration from a CONFIG-FILE.  Return the
+configuration as an alist."
   (let ((port (open-input-file config-file)))
     (let read ((line (read-line port))
                (data '()))
@@ -73,6 +75,8 @@ user is not found."
                 (cons (string-split line #\space) data))))))
 
 (define (device-path->display-number config device-path)
+  "Try to determine a display number that device specified by its
+DEVICE-PATH belongs to, using a CONFIG."
   (let* ((record       (car config))
          (base-devpath (car record)))
     (if (string-contains device-path base-devpath)
