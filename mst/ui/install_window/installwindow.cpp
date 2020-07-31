@@ -150,15 +150,12 @@ void InstallWindow::on_btnBackup_clicked()
 
 void InstallWindow::initial_listeners()
 {
-    QVector<QString>* mice
-            = new QVector<QString>(inst_controller->get_list_of_mice());
-    QVector<QString>* keybs
-            = new QVector<QString>(inst_controller->get_list_of_keybs());
-
     Device_listener* mouse_listener
-            = new Input_device_listener(DEVICE_TYPE::MOUSE, * mice);
+            = new Input_device_listener(DEVICE_TYPE::MOUSE,
+                                        inst_controller->get_list_of_mice());
     Device_listener* keybd_listener
-            = new Input_device_listener(DEVICE_TYPE::KEYBOARD, * keybs);
+            = new Input_device_listener(DEVICE_TYPE::KEYBOARD,
+                                        inst_controller->get_list_of_keybs());
     Device_listener* usb_listener
             = new USB_device_listener(DEVICE_TYPE::USB);
 
