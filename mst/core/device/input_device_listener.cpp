@@ -10,6 +10,11 @@ Input_device_listener::Input_device_listener(DEVICE_TYPE type,
     this->devices = new QVector<QString>(devices);
 }
 
+Input_device_listener::~Input_device_listener()
+{
+    delete(this->devices);
+}
+
 bool Input_device_listener::loop_answer_device(QString device)
 {
     struct input_event ie;

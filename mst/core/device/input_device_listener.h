@@ -11,6 +11,7 @@ class Input_device_listener: public Device_listener
 
 public:
     Input_device_listener(DEVICE_TYPE type, QVector<QString> devices);
+    ~Input_device_listener();
 
 private:
     QVector<QString> *devices;
