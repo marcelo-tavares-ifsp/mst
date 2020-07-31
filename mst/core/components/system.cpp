@@ -26,17 +26,9 @@ void System::configure()
                                 "/lib/systemd/system/getty@.service",
                                 prepare_getty_template());
 
-    // TODO: Don't write the config right away, store it in a template.
-    QFile config_file("/etc/mst-seats");
-    config_file.open(QFile::WriteOnly | QIODevice::Truncate | QIODevice::Text);
-    Template config_template("{{device_path}} {{seat_number}}");
-    for (shared_ptr<Seat> seat : config.get_seats()) {
-        config_template
-                .set("device_path", seat->get_usb())
-                .set("seat_number", QString::number(seat->get_id() + 1));
-        config_file.write(config_template.substitute().toStdString().c_str());
-        config_file.write("\n");
-    }
+    component_configuration.add(SEATS_CONFIG,
+                                "/etc/mst-seats",
+                                prepare_seat_configuration_template());
 }
 
 void System::enable()
@@ -47,6 +39,20 @@ void System::enable()
 void System::disable()
 {
     Platform::exec("systemctl disable mstd");
+}
+
+Template System::prepare_seat_configuration_template()
+{
+    Template seat_template("{{device_path}} {{seat_number}}");
+    QString config_contents;
+    for (shared_ptr<Seat> seat : config.get_seats()) {
+        seat_template
+                .set("device_path", seat->get_usb())
+                .set("seat_number", QString::number(seat->get_id() + 1));
+        config_contents += seat_template.substitute() + "\n";
+    }
+
+    return Template(config_contents);
 }
 
 Template sys::prepare_getty_template()

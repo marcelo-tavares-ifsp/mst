@@ -10,6 +10,7 @@ namespace sys {
 //// Constants.
 const QString BASHRC_FILE = "bashrc";
 const QString GETTY_FILE  = "getty@.service";
+const QString SEATS_CONFIG = "mst-seats";
 
 class System : public Component
 {
@@ -21,6 +22,13 @@ public:
     }
     void enable();
     void disable();
+
+    /**
+     * @brief prepare_seat_configuration_template -- Prepare seats configuration
+     *     file template.
+     * @return A new seats template.
+     */
+    Template prepare_seat_configuration_template();
 };
 
 Template prepare_bashrc_template();
