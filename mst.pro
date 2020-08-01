@@ -94,12 +94,14 @@ rpm_dist.commands += \
     tar -czpf $$DIST_NAME\\.tar.gz $$DIST_NAME; \
     rm -rf $$DIST_NAME
 
+GUILE_VERSION=$$system("guile -c '(display (effective-version))'")
+
 guile_udev_build.name = "Build Guile-Udev library."
 guile_udev_build.commands += \
     @echo "----- Building Guile-Udev -----"; \
     cd guile-udev \
     && autoreconf -vif \
-    && ./configure --with-guilesitedir=/usr/share/guile/site/2.0 \
+    && ./configure --with-guilesitedir=/usr/share/guile/site/$${GUILE_VERSION} \
        --prefix=/usr --libdir=$$[QT_INSTALL_LIBS]
 
 guile_udev_install.name = "Install Guile-Udev library."
