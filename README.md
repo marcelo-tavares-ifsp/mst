@@ -40,6 +40,10 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ## Building and installation
 ```
+$ git clone https://gitlab.com/gkaz/mst.git
+$ cd mst
+$ git submodule init
+$ git submodule update --remote
 $ qmake-qt5
 $ make build_deps
 $ make
