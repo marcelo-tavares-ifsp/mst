@@ -100,8 +100,7 @@ guile_udev_build.commands += \
     cd guile-udev \
     && autoreconf -vif \
     && ./configure --with-guilesitedir=/usr/share/guile/site/2.0 \
-       --prefix=/usr --libdir=$$[QT_INSTALL_LIBS] \
-    && make -j4 install
+       --prefix=/usr --libdir=$$[QT_INSTALL_LIBS]
 
 guile_udev_install.name = "Install Guile-Udev library."
 guile_udev_install.commands += \
