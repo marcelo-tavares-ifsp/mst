@@ -80,7 +80,9 @@ $ sudo apt-get install \
     xserver-xephyr \
     build-essential \
     qt5-default \
-    qtbase5-dev
+    qtbase5-dev \
+    guile-2.2 \
+    guile-2.2-dev
 ```
 
 Ubuntu GNU/Linux doesn't have VirtualGL in the official repository, so
