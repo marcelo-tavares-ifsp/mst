@@ -82,7 +82,8 @@ $ sudo apt-get install \
     qt5-default \
     qtbase5-dev \
     guile-2.2 \
-    guile-2.2-dev
+    guile-2.2-dev \
+    texinfo
 ```
 
 Ubuntu GNU/Linux doesn't have VirtualGL in the official repository, so
