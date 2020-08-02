@@ -114,13 +114,14 @@ in a CONFIG."
 (define (start-listener config)
   "Start udev listener."
   (let* ((udev         (make-udev))
-         (udev-monitor (make-udev-monitor udev))
-         (udev-input-monitor (make-udev-monitor udev)))
+         (udev-monitor (make-udev-monitor udev
+					  #:timeout-sec 1
+					  #:filter '("block" "partition")))
+         (udev-input-monitor (make-udev-monitor udev
+						#:timeout-sec 1
+						#:filter '("usb" "usb_device"))))
     (when *debug?*
       (format #t "Config: ~a~%" config))
-
-    (udev-monitor-add-filter! udev-monitor       "block" "partition")
-    (udev-monitor-add-filter! udev-input-monitor "usb"   "usb_device")
 
     (let ((callback
            (lambda (device)
