@@ -13,6 +13,7 @@ scripts.files += \
     scripts/mk_backup.sh \
     scripts/apl_backup.sh \
     scripts/mst-mount	\
+    scripts/mst-umount \
     scripts/mst-umount
 
 scripts.path = $${PREFIX}/bin
@@ -28,7 +29,8 @@ templates.files += \
     templates/getty@.service.template \
     templates/systemd-udevd.service.template \
     templates/vgl.sh.template \
-    templates/99-mst.rules.template
+    templates/99-mst.rules.template \
+    templates/10-mst.polkit.rules.template
 
 templates.path = $$(PREIFX)/var/lib/mst
 
@@ -69,6 +71,7 @@ DISTFILES += \
     templates/awesome/xephyr_screens.lua.template \
     templates/awesome/mst_autostart.lua.template \
     templates/99-mst.rules.template \
+    templates/10-mst.polkit.rules.template \
     etc/mst
 
 # We need 'rpmtools' and 'rpmdevtools' package in AltLinux to do that.
