@@ -13,16 +13,6 @@
 InstallController* InstallController::instance = 0;
 Q_LOGGING_CATEGORY(install_controller_category, "mst.core.install_controller")
 
-static void clear_layout(QVBoxLayout* vbl, vector<QWidget*> widgets)
-{
-    for (auto widget : widgets)
-    {
-        vbl->removeWidget(widget);
-        delete widget;
-    }
-    qInfo(install_controller_category()) << "layout was cleared";
-}
-
 static void clear_interface(shared_ptr<Seat> seat)
 {
     seat->set_keyboard("");
