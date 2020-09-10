@@ -1,6 +1,5 @@
 <RCC>
-    <qresource prefix="/etc"/>
-    <qresource prefix="/">
+    <qresource>
         <file>doc/logo.png</file>
     </qresource>
 </RCC>

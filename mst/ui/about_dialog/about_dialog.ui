@@ -45,7 +45,7 @@
     </size>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img width=&quot;150px&quot; height=&quot;150px&quot; src=&quot;:/doc/logo.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string/>
    </property>
    <property name="pixmap">
     <pixmap resource="../../../resources.qrc">:/doc/logo.png</pixmap>

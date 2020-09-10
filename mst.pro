@@ -122,5 +122,3 @@ install_deps.depends += guile_udev_install
 QMAKE_EXTRA_TARGETS += rpm rpm_dist dist guile_udev_build guile_udev_install
 QMAKE_EXTRA_TARGETS += build_deps install_deps
 
-RESOURCES += \
-    resources.qrc
