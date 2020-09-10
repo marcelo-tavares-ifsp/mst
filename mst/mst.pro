@@ -69,7 +69,8 @@ SOURCES += \
     core/device/device_listener.cpp \
     core/device/usb_device_listener.cpp \
     core/device/input_device_listener.cpp \
-    ui/reboot_dialog/reboot_dialog.cpp
+    ui/reboot_dialog/reboot_dialog.cpp \
+    core/components/polkit.cpp
 
 HEADERS += \
     ui/install_window/installwindow.h \
@@ -102,7 +103,8 @@ HEADERS += \
     core/device/device_listener.h \
     core/device/usb_device_listener.h \
     core/device/input_device_listener.h \
-    ui/reboot_dialog/reboot_dialog.h
+    ui/reboot_dialog/reboot_dialog.h \
+    core/components/polkit.h
 
 FORMS += \
     ui/install_window/installwindow.ui \
