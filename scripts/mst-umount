@@ -1,0 +1,35 @@
+#!/bin/bash
+
+### mst-umount -- Unmount partitions mounted by 'mst-mount'.
+
+# Copyright (C) 2018-2020 Artyom V. Poptsov <a@gkaz.ru>
+#
+# This file is part of MST.
+#
+# MST is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# MST is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MST.  If not, see <http://www.gnu.org/licenses/>.
+
+###
+
+export IFS=$(echo -en "\n\b")
+
+Xdialog --yesno "Отключить флеш-накопитель?"  10 40
+if [ $? -eq 0 ]; then
+    sync
+
+    for dir in $(ls -1 "/run/media/${USER}/"); do
+        sudo umount "/run/media/${USER}/${dir}"
+    done
+fi
+
+### mst-umount ends here.
