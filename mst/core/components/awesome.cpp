@@ -91,10 +91,6 @@ void Awesome::prepare_rclua_template(Template& rclua_template)
  */
 QString awesome::make_xephyr_autostart()
 {
-    // TODO: 10s sleep seems to be enough for our cases, but this code
-    //       likely will lead to some problems in the future.
-    //       The better solution might be to wait for Xephyr to start in some
-    //       kind of loop (see the file.)
     Template tpl = Template_manager::get_instance()
             ->get_template("awesome/mst_autostart.lua");
     tpl.set("prefix", QString::fromLocal8Bit(INSTALLATION_PREFIX));
@@ -172,6 +168,11 @@ string awesome::get_awesome_raw_version()
     return NULL;
 }
 
+/**
+ * @brief awesome::get_awesome_version -- get Awesome version as a vector of
+ *     strings.
+ * @return awesome version as a vector of two values.
+ */
 vector<int> awesome::get_awesome_version()
 {
     const string raw_version = get_awesome_raw_version();
