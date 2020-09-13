@@ -33,10 +33,11 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 * guile20
 * libguile20
 
-### Buld-time tependencies
+### Build-time tependencies
 * guile20-devel
 * libguile20-devel
 * texinfo
+* gettext
 
 ## Building and installation
 ```
@@ -83,7 +84,17 @@ $ sudo apt-get install \
     qtbase5-dev \
     guile-2.2 \
     guile-2.2-dev \
-    texinfo
+    texinfo \
+    gettext
+```
+
+Build and install MST:
+```
+$ qmake
+$ make build_deps
+$ make
+$ make install_deps
+$ make install
 ```
 
 Ubuntu GNU/Linux doesn't have VirtualGL in the official repository, so
@@ -100,18 +111,8 @@ $ sudo dpkg -i virtualgl_*.deb
 To make a multi-seat configuation, you should run `mst` program as the
 superuser (`root`) and go through the dialogs.
 
-MST assigns a choosen USB port for each seat.  When a USB stick is
-plugged to a assigned USB port, it should mount automatically.  The
-mount point depends on the seat number and the user logged in on the
-seat.  Let's say you have `user1` logged on the 1st seat and `user2`
-on the 2nd, and `user1` plugs in a USB stick to the port assigned to
-his/her seat.  In this scenario, the mount point will be:
-
-```
-/media/user1_1
-```
-
-where `user1` is the user login and `1` is the seat number.
+MST assigns a choosen USB port for each seat. When a USB stick is plugged to a
+assigned USB port, it should mount automatically by means of udisks2.
 
 To unmount an USB for the current user you should run `mst-umount`
 command without any arguments.  The user should be allowed to run
