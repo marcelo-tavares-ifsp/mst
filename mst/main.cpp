@@ -35,6 +35,7 @@
 #include <QString>
 #include <QTextStream>
 #include <QCommandLineParser>
+#include <QTranslator>
 
 #include "core/template_manager.h"
 
@@ -117,6 +118,15 @@ int main(int argc, char *argv[])
         a.reset(new QCoreApplication(argc, argv));
     }
 
+    QTranslator translator;
+    cout << QLocale().system().name().toStdString() << endl;
+    bool ok = translator.load(":/i18n/mst_" + QLocale().system().name());
+    if (ok) {
+        a->installTranslator(&translator);
+   } else {
+        cerr << "Could not load translations" << endl;
+    }
+
     QCommandLineParser parser;
     parser.setApplicationDescription("Multiseat configurator");
     parser.addHelpOption();
@@ -149,10 +159,18 @@ int main(int argc, char *argv[])
     {
         if (is_graphic_mode) {
             QMessageBox messageBox;
-            messageBox.critical(0, "Ошибка",
-                                "MST должен быть запущен от суперпользователя");
+            messageBox.critical(
+                        0,
+                        QCoreApplication::translate("main",
+                                                    "Error"),
+                        QCoreApplication::translate(
+                            "main",
+                            "MST must be run as a superuser"));
         } else {
-            cerr << "MST должен быть запущен от суперпользователя" << endl;
+            cerr << QCoreApplication::translate(
+                        "main",
+                        "MST must be run as a superuser").toStdString()
+                 << endl;
         }
         return 1;
     }
@@ -181,8 +199,10 @@ int main(int argc, char *argv[])
         w.show();
         return a->exec();
     } else {
-        cerr << "На данный момент MST не поддерживает работу"
-             << " в консольном режиме."
+        cerr << QCoreApplication::translate(
+                    "main",
+                    "Currently MST does not support console mode.")
+                .toStdString()
              << endl;
         return 1;
     }

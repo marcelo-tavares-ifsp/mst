@@ -48,7 +48,7 @@ Seat_widget QLabel {
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="pageStart">
      <widget class="QWidget" name="verticalLayoutWidget">
@@ -69,7 +69,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Начать установку</string>
+          <string>Begin configuration</string>
          </property>
         </widget>
        </item>
@@ -81,7 +81,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Удалить настройки</string>
+          <string>Remove multiseat configuration</string>
          </property>
         </widget>
        </item>
@@ -93,7 +93,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Остановить мультисит</string>
+          <string>Stop multiseat</string>
          </property>
         </widget>
        </item>
@@ -105,7 +105,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Выход</string>
+          <string>Exit</string>
          </property>
         </widget>
        </item>
@@ -131,7 +131,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Назад</string>
+          <string>Back</string>
          </property>
         </widget>
        </item>
@@ -143,7 +143,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Далее</string>
+          <string>Next</string>
          </property>
         </widget>
        </item>
@@ -180,7 +180,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Установить</string>
+          <string>Install</string>
          </property>
         </widget>
        </item>
@@ -192,7 +192,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Назад</string>
+          <string>Back</string>
          </property>
         </widget>
        </item>
@@ -204,7 +204,7 @@ Seat_widget QLabel {
           </font>
          </property>
          <property name="text">
-          <string>Отмена</string>
+          <string>Cancel</string>
          </property>
         </widget>
        </item>
@@ -225,7 +225,7 @@ Seat_widget QLabel {
        </font>
       </property>
       <property name="text">
-       <string>Конфигурирование Multi-Seat Tool завершено!</string>
+       <string>Multiseat configuration prepared.</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -248,7 +248,7 @@ Seat_widget QLabel {
      </font>
     </property>
     <property name="text">
-     <string>Версия</string>
+     <string>Version</string>
     </property>
    </widget>
    <widget class="QLabel" name="Version">
@@ -276,12 +276,12 @@ Seat_widget QLabel {
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>17</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>Справка</string>
+     <string>Help</string>
     </property>
     <addaction name="about"/>
    </widget>
@@ -290,7 +290,7 @@ Seat_widget QLabel {
   <widget class="QStatusBar" name="statusBar"/>
   <action name="about">
    <property name="text">
-    <string>О программе...</string>
+    <string>About</string>
    </property>
   </action>
  </widget>

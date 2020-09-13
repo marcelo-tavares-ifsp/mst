@@ -40,7 +40,7 @@ templates_awesome.files += \
     templates/awesome/xephyr_screens.lua.template \
     templates/awesome/mst_autostart.lua.template
 
-CONFIG += nostrip
+CONFIG += nostrip lrelease embed_translations
     
 etc.files += \
     etc/mst
@@ -122,3 +122,4 @@ install_deps.depends += guile_udev_install
 QMAKE_EXTRA_TARGETS += rpm rpm_dist dist guile_udev_build guile_udev_install
 QMAKE_EXTRA_TARGETS += build_deps install_deps
 
+TRANSLATIONS = i18n/mst_ru.ts

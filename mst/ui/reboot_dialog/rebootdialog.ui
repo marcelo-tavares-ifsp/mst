@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Installation is finished</string>
   </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>10</y>
      <width>421</width>
-     <height>91</height>
+     <height>96</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -29,17 +29,7 @@
        <number>1</number>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Для установки MST необходима перезагрузка компьютера.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Выполнить перезагрузку сейчас?</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;To finish MST configuration the computer must be rebooted.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Do you want to reboot now?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
@@ -87,7 +77,7 @@
       <item>
        <widget class="QPushButton" name="btnYesReboot">
         <property name="text">
-         <string>Да</string>
+         <string>Yes</string>
         </property>
        </widget>
       </item>
@@ -107,7 +97,7 @@
       <item>
        <widget class="QPushButton" name="btnNoReboot">
         <property name="text">
-         <string>Нет</string>
+         <string>No</string>
         </property>
        </widget>
       </item>

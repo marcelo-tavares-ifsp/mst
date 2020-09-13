@@ -9,7 +9,7 @@ Reboot_dialog::Reboot_dialog(QWidget *parent) :
     ui(new Ui::RebootDialog)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Перезагрузка компьютера");
+    this->setWindowTitle(tr("Reboot"));
 }
 
 Reboot_dialog::~Reboot_dialog()

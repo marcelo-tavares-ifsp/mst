@@ -1,5 +1,6 @@
 <RCC>
     <qresource>
         <file>doc/logo.png</file>
+	<file>i18n/mst_ru.qm</file>
     </qresource>
 </RCC>
