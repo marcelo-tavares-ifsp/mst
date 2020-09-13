@@ -214,8 +214,12 @@ void InstallWindow::on_btnConfigurationEnd_clicked()
     }
     else
     {
-        QMessageBox::information(this, "Необходимо заполнить!",
-                      "У каждого монитора должна быть мышь и клавиатура! Они не должны пересекаться!", QMessageBox::Ok);
-        // TODO: Show error msg!
+        QMessageBox::information(
+                    this,
+                    QApplication::translate("main", "Incomplete configuration"),
+                    QApplication::translate("main",
+                                            "Each seat must have configured"
+                                            " unique keyboard and mouse."),
+                    QMessageBox::Ok);
     }
 }
