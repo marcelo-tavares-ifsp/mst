@@ -82,18 +82,16 @@ static void _print_device(ostream& os, Configuration& config)
 static void _print_screen(ostream& os, Configuration& config)
 {
     int total_width = int(config.get_seat_count()) * config.get_seat(0)->get_monitor().get_current_resolution().get_width();
+    Template tpl = Template_manager::get_instance()
+            ->get_template("xorg/screen");
+    int height = config.get_seat(0)->get_monitor().get_current_resolution()
+            .get_height();
 
-    static const int depth = 24;
-    os << _section("Screen")
-       << _elem("Identifier")   << string("\"screen0\"")  << endl
-       << _elem("Device")       << string("\"card0\"")    << endl
-       << _elem("Monitor")      << string("\"monitor0\"") << endl
-       << _elem("DefaultDepth") << depth << endl
-       << _sub_section("Display")
-       << _sub_elem("Depth")    << depth << endl
-       << _sub_elem("Virtual")  << total_width << " " << config.get_seat(0)->get_monitor().get_current_resolution().get_height() << endl
-       << _end_sub_section("Display")
-       << _end_section("Screen");
+    tpl.set("depth", "24")
+            .set("width",  QString::number(total_width))
+            .set("height", QString::number(height));
+
+    os << tpl.substitute().toStdString();
 }
 
 static void _print_layout(ostream& os, Configuration& config)

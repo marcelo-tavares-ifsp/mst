@@ -40,6 +40,10 @@ templates_awesome.files += \
     templates/awesome/xephyr_screens.lua.template \
     templates/awesome/mst_autostart.lua.template
 
+templates_xorg.path = $$(PREFIX)/var/lib/mst/xorg
+templates_xorg.files += \
+    templates/xorg/screen.template
+
 CONFIG += nostrip lrelease embed_translations
     
 etc.files += \
@@ -51,7 +55,8 @@ systemd_services.files += \
     etc/mstd.service
 systemd_services.path = /lib/systemd/system
 
-INSTALLS += scripts templates templates_awesome etc systemd_services
+INSTALLS += scripts templates templates_awesome templates_xorg \
+    etc systemd_services
 
 DISTFILES += \
     scripts/mst-start-dm \
