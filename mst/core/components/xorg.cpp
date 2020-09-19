@@ -12,38 +12,24 @@ Xorg::Xorg(Configuration& config) : Component(config)
     /* Do nothing. */
 }
 
-/* Config elements' constructors. */
-
-static const string _section(const string& name)
-{
-    return "Section \"" + name + "\"\n";
-}
-
-static const string _end_section(const string& name)
-{
-    return "EndSection\t# " + name + "\n\n";
-}
-
-static const string _elem(const string& name)
-{
-   return "\t" + name + "\t\t";
-}
-
 /* Config printers. */
 
 static void _print_monitors(ostream& os, const Configuration& config)
 {
-    for (int32_t idx = 0; idx < config.get_seat_count(); idx++)
-    {
-        os << _section("Monitor")
-           << _elem("Identifier") << string("\"") << "monitor" << idx << string("\"\n");
-
-        if (idx < (config.get_seat_count() - 1))
-        {
-            os << _elem("Option") << "\"LeftOf\"\t" << "\"monitor" << idx + 1 << "\"\n";
+    Template_manager* template_manager = Template_manager::get_instance();
+    Template monitor_tpl = template_manager->get_template("xorg/Monitor");
+    Template option_tpl  = template_manager->get_template("xorg/Option");
+    option_tpl.set("name", "LeftOf");
+    for (int32_t idx = 0; idx < config.get_seat_count(); idx++) {
+        monitor_tpl.set("index", QString::number(idx));
+        if (idx < (config.get_seat_count() - 1)) {
+            monitor_tpl.set("options",
+                            option_tpl.set("value", QString::number(idx + 1))
+                    .substitute());
+        } else {
+            monitor_tpl.set("options", "");
         }
-
-        os << _end_section("Monitor");
+        os << monitor_tpl.substitute().toStdString();
     }
 }
 

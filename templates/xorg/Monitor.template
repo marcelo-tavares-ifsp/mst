@@ -1,0 +1,5 @@
+Section "Monitor"
+    Identifier    "monitor{{index}}"
+    {{options}}
+EndSection # Monitor
+

@@ -43,6 +43,8 @@ templates_awesome.files += \
 templates_xorg.path = $$(PREFIX)/var/lib/mst/xorg
 templates_xorg.files += \
     templates/xorg/Device.template \
+    templates/xorg/Monitor.template \
+    templates/xorg/Option.template \
     templates/xorg/Screen.template \
     templates/xorg/ServerLayout.template
 
