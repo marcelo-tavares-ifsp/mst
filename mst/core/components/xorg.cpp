@@ -83,7 +83,7 @@ static void _print_screen(ostream& os, Configuration& config)
 {
     int total_width = int(config.get_seat_count()) * config.get_seat(0)->get_monitor().get_current_resolution().get_width();
     Template tpl = Template_manager::get_instance()
-            ->get_template("xorg/screen");
+            ->get_template("xorg/Screen");
     int height = config.get_seat(0)->get_monitor().get_current_resolution()
             .get_height();
 
