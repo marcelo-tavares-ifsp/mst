@@ -42,7 +42,8 @@ templates_awesome.files += \
 
 templates_xorg.path = $$(PREFIX)/var/lib/mst/xorg
 templates_xorg.files += \
-    templates/xorg/screen.template \
+    templates/xorg/Device.template \
+    templates/xorg/Screen.template \
     templates/xorg/ServerLayout.template
 
 CONFIG += nostrip lrelease embed_translations

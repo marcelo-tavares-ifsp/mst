@@ -24,26 +24,10 @@ static const string _end_section(const string& name)
     return "EndSection\t# " + name + "\n\n";
 }
 
-static const string _sub_section(const string& name)
-{
-    return "\tSubSection \"" + name + "\"\n";
-}
-
-static const string _end_sub_section(const string& name)
-{
-    return "\tEndSubSection\t# " + name + "\n";
-}
-
 static const string _elem(const string& name)
 {
    return "\t" + name + "\t\t";
 }
-
-static const string _sub_elem(const string& name)
-{
-    return "\t" + _elem(name);
-}
-
 
 /* Config printers. */
 
@@ -65,18 +49,16 @@ static void _print_monitors(ostream& os, const Configuration& config)
 
 static void _print_device(ostream& os, Configuration& config)
 {
-    os << _section("Device")
-       << _elem("Identifier") << string("\"card0\"\n");
+    Template tpl = Template_manager::get_instance()
+            ->get_template("xorg/Device");
 
     for (int32_t idx = 0; idx < config.get_seat_count(); idx++)
     {
-        os << _elem("Option")
-           << string("\"Monitor-") << config.get_seat(idx)->get_monitor().get_interface().toStdString()
-           << string("\"")
-           << string(" \"monitor") << idx << string("\"\n");
+        QString interface = config.get_seat(idx)->get_monitor().get_interface();
+        os << tpl.set("interface", interface)
+              .set("index", QString::number(idx))
+              .substitute().toStdString();
     }
-
-    os << _end_section("Device");
 }
 
 static void _print_screen(ostream& os, Configuration& config)
