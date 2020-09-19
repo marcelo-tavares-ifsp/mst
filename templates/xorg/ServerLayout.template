@@ -1,0 +1,5 @@
+Section "ServerLayout"
+    Identifier    "seat{{seat_index}}"
+    Screen        "screen0"
+    Option        "Seat" "seat{{seat_index}}"
+EndSection # ServerLayout

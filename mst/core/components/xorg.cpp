@@ -96,14 +96,11 @@ static void _print_screen(ostream& os, Configuration& config)
 
 static void _print_layout(ostream& os, Configuration& config)
 {
-    for (int32_t idx = 0; idx < config.get_seat_count(); idx++)
-    {
-        os << _section("ServerLayout")
-           << _elem("Identifier") << string("\"seat")       << idx << "\"\n"
-           << _elem("Screen")     << string("\"screen0\"\n")
-           << _elem("Option")     << string("\"Seat\"\t")   << string("\"seat")
-           << idx << "\"\n"
-           << _end_section("ServerLayout");
+    Template tpl = Template_manager::get_instance()
+            ->get_template("xorg/ServerLayout");
+    for (int32_t idx = 0; idx < config.get_seat_count(); idx++) {
+        os << tpl.set("seat_index", QString::number(idx))
+              .substitute().toStdString();
     }
 }
 
