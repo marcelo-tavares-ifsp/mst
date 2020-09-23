@@ -128,7 +128,10 @@ build_deps.depends   += guile_udev_build
 install_deps.name    = "Install dependencies."
 install_deps.depends += guile_udev_install
 
+install_vgl.name = "Install VGL"
+install_vgl.commands += bash ./install_vgl.sh
+
 QMAKE_EXTRA_TARGETS += rpm rpm_dist dist guile_udev_build guile_udev_install
-QMAKE_EXTRA_TARGETS += build_deps install_deps
+QMAKE_EXTRA_TARGETS += build_deps install_deps install_vgl
 
 TRANSLATIONS = i18n/mst_ru.ts
