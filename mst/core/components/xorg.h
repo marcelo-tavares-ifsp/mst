@@ -16,7 +16,6 @@ namespace xorg {
 
 static const QString XORG_FILE = "xorg.conf";
 static const QString XINIT_RC_FILE    = "xinitrc";
-static const QString XMST_FILE        = "xmst";
 
 class Xorg : public Component
 {
@@ -38,7 +37,6 @@ public:
 
 //// Helper procedures.
 Template prepare_xinitrc_template();
-Template prepare_xmst_template();
 
 }
 

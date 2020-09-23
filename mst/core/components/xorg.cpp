@@ -88,17 +88,9 @@ void Xorg::configure()
     component_configuration.add(XINIT_RC_FILE,
                                 "{{home}}/.xinitrc",
                                 xorg::prepare_xinitrc_template());
-    component_configuration.add(XMST_FILE,
-                                "{{home}}/.xmst",
-                                xorg::prepare_xmst_template());
 }
 
 Template xorg::prepare_xinitrc_template()
 {
     return Template_manager::get_instance()->get_template(XINIT_RC_FILE);
-}
-
-Template xorg::prepare_xmst_template()
-{
-    return Template_manager::get_instance()->get_template(XMST_FILE);
 }
