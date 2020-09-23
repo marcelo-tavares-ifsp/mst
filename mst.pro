@@ -129,7 +129,7 @@ install_deps.name    = "Install dependencies."
 install_deps.depends += guile_udev_install
 
 install_vgl.name = "Install VGL"
-install_vgl.commands += bash ./install_vgl.sh
+install_vgl.commands += bash ./install_vgl.sh 2.6.4
 
 QMAKE_EXTRA_TARGETS += rpm rpm_dist dist guile_udev_build guile_udev_install
 QMAKE_EXTRA_TARGETS += build_deps install_deps install_vgl
