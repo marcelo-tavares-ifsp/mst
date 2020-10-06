@@ -8,7 +8,8 @@ Source0: %{name}%{version}.tar.gz
 Group:   System/Base
 
 Requires: awesome, unclutter, xorg-xephyr, lightdm, bash
-Requires: libqt5-core, libudev-devel, virtualgl
+Requires: libqt5-core, libudev-devel, virtualgl, Xdialog
+Requires: guile20, libguile20
 
 Provides: mst
 
@@ -32,6 +33,7 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/mst
 mkdir -p $RPM_BUILD_ROOT/var/lib/mst/awesome/
 mkdir -p $RPM_BUILD_ROOT/var/lib/mst/xorg/
 install -m0755 mst/mst $RPM_BUILD_ROOT/usr/local/bin/mst
+install -m0755 mstd/mstd $RPM_BUILD_ROOT/usr/local/bin/mstd
 install -m0644 templates/*.template $RPM_BUILD_ROOT/var/lib/mst
 install -m0644 templates/awesome/*.template $RPM_BUILD_ROOT/var/lib/mst/awesome/
 install -m0644 templates/xorg/*.template $RPM_BUILD_ROOT/var/lib/mst/xorg/
