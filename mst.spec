@@ -30,9 +30,11 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/mst/awesome
 mkdir -p $RPM_BUILD_ROOT/etc
 mkdir -p $RPM_BUILD_ROOT/var/lib/mst
 mkdir -p $RPM_BUILD_ROOT/var/lib/mst/awesome/
+mkdir -p $RPM_BUILD_ROOT/var/lib/mst/xorg/
 install -m0755 mst/mst $RPM_BUILD_ROOT/usr/local/bin/mst
 install -m0644 templates/*.template $RPM_BUILD_ROOT/var/lib/mst
-install -m6444 templates/awesome/*.template $RPM_BUILD_ROOT/var/lib/mst/awesome/
+install -m0644 templates/awesome/*.template $RPM_BUILD_ROOT/var/lib/mst/awesome/
+install -m0644 templates/xorg/*.template $RPM_BUILD_ROOT/var/lib/mst/xorg/
 install -m0755 scripts/*   $RPM_BUILD_ROOT/usr/local/bin/
 install -m0644 etc/mst     $RPM_BUILD_ROOT/etc
 
@@ -40,6 +42,7 @@ install -m0644 etc/mst     $RPM_BUILD_ROOT/etc
 /usr/local/bin/*
 /var/lib/mst/*
 /var/lib/mst/awesome/*
+/var/lib/mst/xorg/*
 /etc/mst
 
 %post
