@@ -20,7 +20,7 @@ static QString _make_monitors_section(const Configuration& config)
     QString result = "";
     option_tpl.set("name", "LeftOf");
     for (int32_t idx = 0; idx < config.get_seat_count(); idx++) {
-        monitor_tpl.set("index", QString::number(idx));
+        monitor_tpl.set("index", "monitor" + QString::number(idx));
         if (idx < (config.get_seat_count() - 1)) {
             monitor_tpl.set("options",
                             option_tpl.set("value", QString::number(idx + 1))
