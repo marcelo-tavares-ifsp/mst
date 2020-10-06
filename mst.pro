@@ -75,11 +75,18 @@ DISTFILES += \
     templates/systemd-udevd.service.template \
     templates/vgl.sh.template \
     templates/awesome/xephyr_rules.lua.template \
+    templates/xorg/Device.template \
+    templates/xorg/Monitor.template \
+    templates/xorg/Option.template \
+    templates/xorg/Screen.template \
+    templates/xorg/ServerLayout.template \
     templates/awesome/xephyr_screens.lua.template \
     templates/awesome/mst_autostart.lua.template \
     templates/99-mst.rules.template \
     templates/10-mst.polkit.rules.template \
-    etc/mst
+    etc/mst \
+    doc/logo.png \
+    i18n/mst_ru.qm
 
 # We need 'rpmtools' and 'rpmdevtools' package in AltLinux to do that.
 rpm.commands += \
