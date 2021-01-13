@@ -16,8 +16,9 @@ function is_screen_available(idx)
     return idx <= screen.count()
 end
 
-{{mst_autostart}}
 {{xephyr_screens}}
+
+{{mst_autostart}}
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
