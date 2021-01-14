@@ -1,4 +1,4 @@
 os.execute("unclutter &")
 os.execute("sleep 2; "
            .. " sudo pkill mst-start-dm; "
-	   .. " sudo {{prefix}}/bin/mst-start-dm " .. screen.count() .. " &")
+           .. " sudo {{prefix}}/bin/mst-start-dm " .. screen.count() .. " &")
