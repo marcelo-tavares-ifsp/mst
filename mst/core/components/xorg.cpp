@@ -50,17 +50,15 @@ static QString _make_device_section(Configuration& config)
 
 static QString _make_screen_section(Configuration& config)
 {
-    int total_width = int(config.get_seat_count()) * config.get_seat(0)->get_monitor().get_current_resolution().get_width();
     Template tpl = Template_manager::get_instance()
             ->get_template("xorg/Screen");
-    int height = config.get_seat(0)->get_monitor().get_current_resolution()
-            .get_height();
+    tpl.set("depth", "24");
+    QString result = "";
+    for (int32_t idx = 0; idx < config.get_seat_count(); idx++) {
+        result += tpl.set("index", QString::number(idx)).substitute();
+    }
 
-    tpl.set("depth", "24")
-            .set("width",  QString::number(total_width))
-            .set("height", QString::number(height));
-
-    return tpl.substitute();
+    return result;
 }
 
 static QString _make_layout_section(Configuration& config)

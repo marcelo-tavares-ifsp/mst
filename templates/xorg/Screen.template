@@ -1,11 +1,7 @@
 Section "Screen"
-    Identifier    "screen0"
+    Identifier    "screen{{index}}"
     Device        "card0"
-    Monitor       "monitor0"
+    Monitor       "monitor{{index}}"
     DefaultDepth  {{depth}}
-    SubSection "Display"
-        Depth    {{depth}}
-        Virtual  {{width}} {{height}}
-    EndSubSection # Display
 EndSection # Screen
 
