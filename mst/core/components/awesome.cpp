@@ -131,11 +131,18 @@ QString awesome::make_xephyr_screens(QVector<shared_ptr<Seat>> seats)
 
     for (int32_t idx = 0; idx < seats.size(); idx++)
     {
+        Monitor monitor = seats[idx]->get_monitor();
+        int screen_width = monitor
+                .get_current_resolution()
+                .get_width();
+        int screen_height = monitor
+                .get_current_resolution()
+                .get_height();
         tpl.set("screen_idx",    QString::number(idx + 1));
         tpl.set("mouse_device",  seats[idx]->get_mouse());
         tpl.set("keybd_device",  seats[idx]->get_keyboard());
-        tpl.set("screen_width",  QString::number(seats[idx]->get_monitor().get_current_resolution().get_width()));
-        tpl.set("screen_height", QString::number(seats[idx]->get_monitor().get_current_resolution().get_height()));
+        tpl.set("screen_width",  QString::number(screen_width));
+        tpl.set("screen_height", QString::number(screen_height));
 
         result += tpl.substitute();
     }
