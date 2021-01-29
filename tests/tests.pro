@@ -76,3 +76,9 @@ DISTFILES += \
     test_awesome_mst_autostart.lua
 
 DEFINES += INSTALLATION_PREFIX=\\\"\\\"
+
+copydata.commands = cd $$PWD; $(COPY) $$DISTFILES $$OUT_PWD
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
