@@ -77,7 +77,7 @@ DISTFILES += \
 
 DEFINES += INSTALLATION_PREFIX=\\\"\\\"
 
-copydata.commands = cd $$PWD; $(COPY) $$DISTFILES $$OUT_PWD
+copydata.commands = cd $$PWD; $(COPY) $$DISTFILES $$OUT_PWD || :
 first.depends = $(first) copydata
 export(first.depends)
 export(copydata.commands)
