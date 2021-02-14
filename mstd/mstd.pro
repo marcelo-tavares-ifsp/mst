@@ -7,6 +7,15 @@ isEmpty(PREFIX) {
 executable.files = mstd
 executable.path  = $${PREFIX}/bin/
 
-DISTFILES = mstd
+guile_modules_mst.files = \
+    modules/mst/system.scm
 
-INSTALLS += executable
+guile_modules_mst.path = $${PREFIX}/share/guile/site/mst/
+
+DISTFILES = \
+    mstd        \
+    modules/mst/system.scm
+
+INSTALLS += \
+    executable  \
+    guile_modules_mst
