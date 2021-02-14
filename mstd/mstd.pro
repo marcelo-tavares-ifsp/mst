@@ -1,7 +1,11 @@
 TEMPLATE = aux
 
+isEmpty(PREFIX) {
+    PREFIX = /usr
+}
+
 executable.files = mstd
-executable.path  = $$(PREIFX)/usr/bin/
+executable.path  = $${PREFIX}/bin/
 
 DISTFILES = mstd
 
