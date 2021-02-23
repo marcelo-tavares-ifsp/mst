@@ -54,9 +54,9 @@
       (for-each
        (lambda (pid)
 	 (let* ((env  (proc-environ pid))
-		(disp (memq env)))
+		(disp (memq "DISPLAY" env)))
 	   (when (and disp (= (string->number (cdr disp)) idx))
-		 (kill pid))))
+		 (kill pid SIGTERM))))
        (proc-get-pids))
       (add-seat idx))
     (when (< idx seat-number)
