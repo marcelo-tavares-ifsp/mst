@@ -3,7 +3,6 @@
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 threads)
-  #:use-module (ice-9 ftw)
   #:export (add-seat
 	    is-seat-used?
 	    get-running-seats
@@ -49,9 +48,17 @@
     (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
 
 (define (start-seats seat-number)
-  (sleep 1))
-  ;; (let loop ((idx 1))
-  ;;   (if (not (is-seat-used? idx))
+  (let loop ((idx 1))
+    (if (not (is-seat-used? idx))
+	(for-each
+	 (lambda (pid)
+	   (let* ((env  (proc-environ pid))
+		  (disp (memq env)))
+	     (when (and disp (= (string->number (cdr disp)) idx))
+		   (kill pid))))
+	 (proc-get-pids)))
+    (while (< idx seat-number)
+	   (loop (+ idx 1)))))
 
 (define (main-loop seat-count)
   (start-lightdm "/etc/lightdm/lightdm-mst.conf")
