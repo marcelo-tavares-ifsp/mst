@@ -50,16 +50,17 @@
 
 (define (start-seats seat-number)
   (let loop ((idx 1))
-    (if (not (is-seat-used? idx))
-	(for-each
-	 (lambda (pid)
-	   (let* ((env  (proc-environ pid))
-		  (disp (memq env)))
-	     (when (and disp (= (string->number (cdr disp)) idx))
-		   (kill pid))))
-	 (proc-get-pids)))
+    (unless (is-seat-used? idx)
+      (for-each
+       (lambda (pid)
+	 (let* ((env  (proc-environ pid))
+		(disp (memq env)))
+	   (when (and disp (= (string->number (cdr disp)) idx))
+		 (kill pid))))
+       (proc-get-pids))
+      (add-seat idx))
     (when (< idx seat-number)
-	  (loop (+ idx 1)))))
+      (loop (+ idx 1)))))
 
 (define (main-loop seat-count)
   (start-lightdm "/etc/lightdm/lightdm-mst.conf")
