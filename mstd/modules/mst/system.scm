@@ -30,6 +30,7 @@
   #:use-module (ice-9 rdelim)
   #:export (notify-send
 	    display-number->user
+	    proc-get-pids
 	    mount
 	    set-system-debug!))
 
@@ -76,3 +77,8 @@ user is not found."
       (if (not (eof-object? result))
           result
           #f))))
+
+
+(define (proc-get-pids)
+  (scandir "/proc" (lambda (entry)
+		     (string-match "[0-9]+" entry))))
