@@ -2,8 +2,10 @@
   #:use-module (ice-9 regex)
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
+  #:use-module (ice-9 threads)
   #:export (add-seat
 	    is-seat-used?
+	    get-running-seats
 	    start-lightdm))
 
 (define *debug?* #f)
@@ -38,3 +40,35 @@
 	  (if (string-match regexp line)
 	      #t
 	      (loop p))))))
+
+(define (get-running-seats)
+  "Get the number of running seats."
+  (string->number
+   (read-line
+    (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
+
+(define (start-seats seat-number)
+  (sleep 1))
+  ;; (let loop ((idx 1))
+  ;;   (if (not (is-seat-used? idx))
+
+(define (main-loop seat-count)
+  (start-lightdm "/etc/lightdm/lightdm-mst.conf")
+
+  (system "xset -dpms")
+  (system "xset s off")
+
+  (let loop ((idx 1))
+    (add-seat idx)
+    (if (< idx seat-count)
+	(loop (+ idx 1))))
+
+  (while #t
+	 (let ((running-seats-number (get-running-seats)))
+	   (if (< running-seats-number seat-count)
+	       (start-seats seat-count)))))
+  
+(define (dm-start seat-count)
+  "Returns a new thread."
+  (start-lightdm "/etc/lightdm/lightdm-mst.conf")
+  (make-thread main-loop seat-count))
