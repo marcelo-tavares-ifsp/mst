@@ -28,6 +28,8 @@
 (define-module (mst system)
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
+  #:use-module (ice-9 regex)
+  #:use-module (ice-9 ftw)
   #:export (notify-send
 	    display-number->user
 	    proc-get-pids
@@ -81,8 +83,9 @@ user is not found."
 
 
 (define (proc-get-pids)
-  (scandir "/proc" (lambda (entry)
-		     (string-match "[0-9]+" entry))))
+  (map string->number
+       (scandir "/proc" (lambda (entry)
+			  (string-match "[0-9]+" entry)))))
 
 (define (proc-environ pid)
   "Get the environment of a process with the PID."
