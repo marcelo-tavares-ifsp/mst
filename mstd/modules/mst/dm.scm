@@ -74,7 +74,8 @@
   (while #t
 	 (let ((running-seats-number (get-running-seats)))
 	   (if (< running-seats-number seat-count)
-	       (start-seats seat-count)))))
+	       (start-seats seat-count)))
+	 (sleep 1)))
   
 (define (dm-start seat-count)
   "Returns a new thread."
