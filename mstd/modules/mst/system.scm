@@ -31,6 +31,7 @@
   #:export (notify-send
 	    display-number->user
 	    proc-get-pids
+	    proc-environ
 	    mount
 	    set-system-debug!))
 
@@ -82,3 +83,10 @@ user is not found."
 (define (proc-get-pids)
   (scandir "/proc" (lambda (entry)
 		     (string-match "[0-9]+" entry))))
+
+(define (proc-environ pid)
+  "Get the environment of a process with the PID."
+  (let ((port (open-input-file (format #f "/proc/~a/environ" pid))))
+    (map (lambda (env)
+	   (string-split env #\=))
+	 (string-split (string-drop-right (read-line port) 1) #\nul))))
