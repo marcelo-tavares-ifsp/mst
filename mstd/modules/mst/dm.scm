@@ -3,6 +3,7 @@
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 threads)
+  #:use-module (mst system)
   #:export (add-seat
 	    is-seat-used?
 	    get-running-seats
