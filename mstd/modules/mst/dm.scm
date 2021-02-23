@@ -3,8 +3,10 @@
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 threads)
+  #:use-module (ice-9 ftw)
   #:export (add-seat
 	    is-seat-used?
+	    proc-get-pids
 	    get-running-seats
 	    start-lightdm))
 
@@ -46,6 +48,11 @@
   (string->number
    (read-line
     (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
+
+(define (proc-get-pids)
+  (scandir "/proc" (lambda (entry)
+		     (string-match "[0-9]+" entry))))
+    
 
 (define (start-seats seat-number)
   (sleep 1))
