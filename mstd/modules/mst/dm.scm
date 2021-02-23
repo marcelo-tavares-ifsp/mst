@@ -58,8 +58,8 @@
 	     (when (and disp (= (string->number (cdr disp)) idx))
 		   (kill pid))))
 	 (proc-get-pids)))
-    (while (< idx seat-number)
-	   (loop (+ idx 1)))))
+    (when (< idx seat-number)
+	  (loop (+ idx 1)))))
 
 (define (main-loop seat-count)
   (start-lightdm "/etc/lightdm/lightdm-mst.conf")
