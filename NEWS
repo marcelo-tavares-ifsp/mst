@@ -1,6 +1,23 @@
 #+TITLE: MST News -- history of user-visible changes.
 #+STARTUP: content hidestars
 
+* Changes in version 1.0.0 (2021-02-24)
+** Release of the first stable version of MST
+** New USB auto-mount implementation
+   It is implemented in a separate "mstd" daemon that mounts connected USB
+   storage devices using the standard udev subsystem.
+** Allow to use MST in heterogeneous setups
+   MST now allows to configure a multi-seat setup on systems with displays that
+   using different resolutions.
+** Add screen warnings on USB input device disconnections
+   When a USB input device attached to seat disconnects, the "mstd" shows a
+   warning.  This helps to track down bad USB contacts.
+** Implement new configuration UI
+** Now MST depends on Guile-UDEV and GNU Guile
+   Currently Guile-UDEV is used as a project sub-module and built along with the
+   MST source code.
+
+ 
 * Changes in version 0.1.0 (2018-08-29)
 ** Release of the first version of MST.
 
