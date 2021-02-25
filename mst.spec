@@ -1,5 +1,5 @@
 Name:    mst
-Version: 0.1.0
+Version: 1.0.0
 Release: 1
 Summary: Multi-Seat Tool (MST)
 License: GPLv3+
