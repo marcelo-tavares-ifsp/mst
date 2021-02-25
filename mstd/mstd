@@ -31,11 +31,11 @@
 ;;; Code:
 
 (use-modules (udev udev)
-             (udev monitor)
-             (udev device)
-             (ice-9 popen)
-             (ice-9 rdelim)
-             (ice-9 getopt-long)
+	     (udev monitor)
+	     (udev device)
+	     (ice-9 popen)
+	     (ice-9 rdelim)
+	     (ice-9 getopt-long)
 	     (mst system)
 	     (mst dm))
 
@@ -53,81 +53,81 @@
 configuration as an alist."
   (let ((port (open-input-file config-file)))
     (let read ((line (read-line port))
-               (data '()))
+	       (data '()))
       (if (eof-object? line)
-          data
-          (read (read-line port)
-                (cons (string-split line #\space) data))))))
+	  data
+	  (read (read-line port)
+		(cons (string-split line #\space) data))))))
 
 (define (device-path->display-number config device-path)
   "Try to determine a display number that device specified by its
 DEVICE-PATH belongs to, using a CONFIG."
   (let* ((record       (car config))
-         (base-devpath (car record)))
+	 (base-devpath (car record)))
     (if (string-contains device-path base-devpath)
-        (cadr record)
-        (if (null? (cdr config))
-            #f
-            (device-path->display-number (cdr config) device-path)))))
+	(cadr record)
+	(if (null? (cdr config))
+	    #f
+	    (device-path->display-number (cdr config) device-path)))))
 
 (define (notify-broadcast config message)
   "Broadcast a notify with a MESSAGE across all seats that are listed
 in a CONFIG."
   (for-each (lambda (rec)
-              (notify-send (cadr rec) message))
-            config))
+	      (notify-send (cadr rec) message))
+	    config))
 
 (define (start-listener config)
   "Start udev listener."
   (let* ((udev         (make-udev))
-         (udev-monitor (make-udev-monitor udev
+	 (udev-monitor (make-udev-monitor udev
 					  #:timeout-sec 1
 					  #:filter '("block" "partition")))
-         (udev-input-monitor (make-udev-monitor udev
+	 (udev-input-monitor (make-udev-monitor udev
 						#:timeout-sec 1
 						#:filter '("usb" "usb_device"))))
     (when *debug?*
       (format #t "Config: ~a~%" config))
 
     (let ((callback
-           (lambda (device)
-             (when (string=? (udev-device-get-action device) "add")
-               (let* ((devpath        (udev-device-get-devpath device))
-                      (display-number (device-path->display-number config
-                                                                   devpath))
-                      (user           (display-number->user display-number))
-                      (devname (udev-device-get-property-value device
-                                                               "DEVNAME")))
-                 (if user
-                     (begin
-                       (when *debug?*
-                             (format #t "Mounting ~a for seat ~a (user ~a)~%"
-                                     devpath display-number user))
-                       (mount devname user))
-                     (display "Could not determine user.")))))))
+	   (lambda (device)
+	     (when (string=? (udev-device-get-action device) "add")
+	       (let* ((devpath        (udev-device-get-devpath device))
+		      (display-number (device-path->display-number config
+								   devpath))
+		      (user           (display-number->user display-number))
+		      (devname (udev-device-get-property-value device
+							       "DEVNAME")))
+		 (if user
+		     (begin
+		       (when *debug?*
+			     (format #t "Mounting ~a for seat ~a (user ~a)~%"
+				     devpath display-number user))
+		       (mount devname user))
+		     (display "Could not determine user.")))))))
 
       (udev-monitor-set-callback! udev-monitor callback))
 
     (let ((callback
-           (lambda (device)
-             (let ((action  (udev-device-get-property-value device "ACTION"))
-                   (devname (udev-device-get-property-value device
-                                                            "DEVNAME"))
-                   (devpath (udev-device-get-devpath device)))
-               (cond
-                ((string=? action "remove")
-                 (when *debug?*
-                   (format #t "Device ~a was removed.~%" devname))
-                 (unless (device-path->display-number config devpath)
-                   (notify-broadcast config
-                                     (format #f
-                                             (string-append
-                                              "Seat input device ~a was removed.~%"
-                                              "Please re-connect the device and"
-                                              " reboot the computer.")
-                                             devname))))
-                ((string=? action "add")
-                 (format #t "Device ~a was added.~%" devname)))))))
+	   (lambda (device)
+	     (let ((action  (udev-device-get-property-value device "ACTION"))
+		   (devname (udev-device-get-property-value device
+							    "DEVNAME"))
+		   (devpath (udev-device-get-devpath device)))
+	       (cond
+		((string=? action "remove")
+		 (when *debug?*
+		   (format #t "Device ~a was removed.~%" devname))
+		 (unless (device-path->display-number config devpath)
+		   (notify-broadcast config
+				     (format #f
+					     (string-append
+					      "Seat input device ~a was removed.~%"
+					      "Please re-connect the device and"
+					      " reboot the computer.")
+					     devname))))
+		((string=? action "add")
+		 (format #t "Device ~a was added.~%" devname)))))))
       (udev-monitor-set-callback! udev-input-monitor callback))
 
     (udev-monitor-start-scanning! udev-monitor)
@@ -156,8 +156,8 @@ Options:
   --detach                      Detach mode.
   --debug                       Debug mode.
   --pid-file=<file-name>        File to store PID after the server starts to
-                                listen to the socket.
-                                Default: " %default-pid-file "
+				listen to the socket.
+				Default: " %default-pid-file "
   --help, -h                    Print this message and exit.
 "))
   (exit))
@@ -166,10 +166,10 @@ Options:
 (define (main args)
   "Program entry point."
   (let* ((options       (getopt-long args *option-spec*))
-         (detach-wanted (option-ref options 'detach   #f))
-         (pid-file      (option-ref options 'pid-file %default-pid-file))
-         (debug-wanted? (option-ref options 'debug    #f))
-         (help-wanted?  (option-ref options 'help     #f)))
+	 (detach-wanted (option-ref options 'detach   #f))
+	 (pid-file      (option-ref options 'pid-file %default-pid-file))
+	 (debug-wanted? (option-ref options 'debug    #f))
+	 (help-wanted?  (option-ref options 'help     #f)))
 
     (when help-wanted?
       (print-help-and-exit))
@@ -179,18 +179,18 @@ Options:
 
     (when detach-wanted
       (let ((pid (primitive-fork)))
-        (cond
-         ((zero? pid)
-          (setsid))
-         ((> pid 0)
-          (exit))
-         (#t
-          (error "Could not fork the process.")))))
+	(cond
+	 ((zero? pid)
+	  (setsid))
+	 ((> pid 0)
+	  (exit))
+	 (#t
+	  (error "Could not fork the process.")))))
 
     (write-pid pid-file)
 
     (let* ((config    (read-seats-configuration %seat-configuration-file))
-	   (dm-thread (dm-start config)))
+           (dm-thread (dm-start config)))
       (start-listener config))))
 
 ;;; mstd ends here.
