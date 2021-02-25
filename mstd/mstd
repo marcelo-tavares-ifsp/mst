@@ -36,7 +36,8 @@
              (ice-9 popen)
              (ice-9 rdelim)
              (ice-9 getopt-long)
-	     (mst system))
+	     (mst system)
+	     (mst dm))
 
 
 ;;; Global constants and variables:
@@ -188,6 +189,8 @@ Options:
 
     (write-pid pid-file)
 
-    (start-listener (read-seats-configuration %seat-configuration-file))))
+    (let* ((config    (read-seats-configuration %seat-configuration-file))
+	   (dm-thread (dm-start config)))
+      (start-listener config))))
 
 ;;; mstd ends here.
