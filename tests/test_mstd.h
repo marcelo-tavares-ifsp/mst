@@ -13,6 +13,7 @@ public:
 signals:
 
 private Q_SLOTS:
+    void config_test();
     void dm_test();
     void system_test();
 };

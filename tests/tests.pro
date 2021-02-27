@@ -76,7 +76,9 @@ DISTFILES += \
     test_awesome_xephyr_screens.lua \
     test_template.txt.template \
     test_awesome_mst_autostart.lua \
-    mstd-system.scm
+    mstd-system.scm \
+    mstd-config.scm \
+    mstd-config-seats
 
 DEFINES += INSTALLATION_PREFIX=\\\"\\\"
 

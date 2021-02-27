@@ -18,6 +18,10 @@ void Test_mstd::system_test()
     QVERIFY(run_guile_test("mstd-system.scm"));
 }
 
+void Test_mstd::config_test() {
+    QVERIFY(run_guile_test("mstd-config.scm"));
+}
+
 void Test_mstd::dm_test()
 {
 
