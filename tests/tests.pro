@@ -83,10 +83,15 @@ DEFINES += INSTALLATION_PREFIX=\\\"\\\"
 copydata.commands = cd $$PWD; \
     $(COPY) $$DISTFILES $$OUT_PWD || :
 
-first.depends = $(first) copydata
+copy_guile_modules.commands = \
+    $(COPY) -r ../mstd/modules $$OUT_PWD/ || :
+
+first.depends = $(first) copydata copy_guile_modules
 export(first.depends)
 export(copydata.commands)
+export(copy_guile_modules.commands)
 
 QMAKE_EXTRA_TARGETS += \
     first       \
-    copydata
+    copydata    \
+    copy_guile_modules

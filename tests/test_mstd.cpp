@@ -9,7 +9,7 @@ Test_mstd::Test_mstd() : QObject()
 bool Test_mstd::run_guile_test(QString file_name)
 {
     QString command
-            = "guile -L ../mstd/modules --no-auto-compile -s '" + file_name + "'";
+            = "guile -L modules --no-auto-compile -s '" + file_name + "'";
     return system(command.toStdString().c_str()) == 0;
 }
 
