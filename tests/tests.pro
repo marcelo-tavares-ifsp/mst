@@ -36,7 +36,8 @@ SOURCES += \
     test_component.cpp \
     test_monitor.cpp \
     test_seat.cpp \
-    test_resolution.cpp
+    test_resolution.cpp \
+    test_mstd.cpp
 
 SOURCES += \
     ../mst/core/configuration.cpp \
@@ -65,7 +66,8 @@ HEADERS += \
     test_component.h \
     test_monitor.h \
     test_seat.h \
-    test_resolution.h
+    test_resolution.h \
+    test_mstd.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
@@ -73,12 +75,18 @@ DISTFILES += \
     test_awesome_xephyr_rules.lua \
     test_awesome_xephyr_screens.lua \
     test_template.txt.template \
-    test_awesome_mst_autostart.lua
+    test_awesome_mst_autostart.lua \
+    mstd-system.scm
 
 DEFINES += INSTALLATION_PREFIX=\\\"\\\"
 
-copydata.commands = cd $$PWD; $(COPY) $$DISTFILES $$OUT_PWD || :
+copydata.commands = cd $$PWD; \
+    $(COPY) $$DISTFILES $$OUT_PWD || :
+
 first.depends = $(first) copydata
 export(first.depends)
 export(copydata.commands)
-QMAKE_EXTRA_TARGETS += first copydata
+
+QMAKE_EXTRA_TARGETS += \
+    first       \
+    copydata

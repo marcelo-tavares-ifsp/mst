@@ -17,6 +17,7 @@
 #include "test_monitor.h"
 #include "test_seat.h"
 #include "test_resolution.h"
+#include "test_mstd.h"
 
 using namespace std;
 
@@ -33,6 +34,7 @@ int main(int argc, char** argv)
     Test_monitor   test_monitor;
     Test_seat      test_seat;
     Test_resolution test_resolution;
+    Test_mstd test_mstd;
 
     return QTest::qExec(&test_utils, argc, argv)
             || QTest::qExec(&test_awesome, argc, argv)
@@ -40,5 +42,6 @@ int main(int argc, char** argv)
             || QTest::qExec(&test_component, argc, argv)
             || QTest::qExec(&test_monitor)
             || QTest::qExec(&test_seat)
-            || QTest::qExec(&test_resolution);
+            || QTest::qExec(&test_resolution)
+            || QTest::qExec(&test_mstd);
 }
