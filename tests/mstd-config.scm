@@ -6,7 +6,10 @@
 
 (test-assert "read-seats-configuration"
   (let ((config (read-seats-configuration "mstd-config-seats")))
-    config))
+    (and (string=? (caar   config) "/device/path/1")
+    	 (string=? (cadar  config) "1")
+    	 (string=? (caadr  config)  "/device/path/2")
+    	 (string=? (cadadr config) "2"))))
 
 
 (define result (test-runner-fail-count (test-runner-current)))

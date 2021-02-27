@@ -36,7 +36,7 @@ configuration as an alist."
     (let read ((line (read-line port))
 	       (data '()))
       (if (eof-object? line)
-	  data
+	  (reverse data)
 	  (read (read-line port)
 		(cons (string-split line #\space) data))))))
 
