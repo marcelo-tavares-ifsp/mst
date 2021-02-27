@@ -36,6 +36,7 @@
 	     (ice-9 popen)
 	     (ice-9 rdelim)
 	     (ice-9 getopt-long)
+	     (mst config)
 	     (mst system)
 	     (mst dm))
 
@@ -48,17 +49,6 @@
 (define *debug?* #f)
 
 
-(define (read-seats-configuration config-file)
-  "Read seats configuration from a CONFIG-FILE.  Return the
-configuration as an alist."
-  (let ((port (open-input-file config-file)))
-    (let read ((line (read-line port))
-	       (data '()))
-      (if (eof-object? line)
-	  data
-	  (read (read-line port)
-		(cons (string-split line #\space) data))))))
-
 (define (device-path->display-number config device-path)
   "Try to determine a display number that device specified by its
 DEVICE-PATH belongs to, using a CONFIG."
