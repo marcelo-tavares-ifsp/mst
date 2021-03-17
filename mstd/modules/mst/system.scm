@@ -32,6 +32,7 @@
   #:use-module (ice-9 ftw)
   #:export (notify-send
 	    display-number->user
+            graphics-available?
 	    proc-get-pids
 	    proc-environ
 	    mount
@@ -80,6 +81,11 @@ user is not found."
       (if (not (eof-object? result))
           result
           #f))))
+
+(define (graphics-available?)
+  (let* ((port   (open-input-pipe "who | grep ':.'"))
+         (result (read-line port)))
+    (not (eof-object? result))))
 
 
 (define (proc-get-pids)

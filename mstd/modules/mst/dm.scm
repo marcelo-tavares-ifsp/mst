@@ -64,21 +64,24 @@
       (loop (+ idx 1)))))
 
 (define (main-loop seat-count)
-  (start-lightdm "/etc/lightdm/lightdm-mst.conf")
+  (if (graphics-available?)
+      (begin
+        (start-lightdm "/etc/lightdm/lightdm-mst.conf")
 
-  (system "xset -dpms")
-  (system "xset s off")
+        (system "xset -dpms")
+        (system "xset s off")
 
-  (let loop ((idx 1))
-    (add-seat idx)
-    (if (< idx seat-count)
-	(loop (+ idx 1))))
+        (let loop ((idx 1))
+          (add-seat idx)
+          (if (< idx seat-count)
+              (loop (+ idx 1))))
 
-  (while #t
-	 (let ((running-seats-number (get-running-seats)))
-	   (if (< running-seats-number seat-count)
-	       (start-seats seat-count)))
-	 (sleep 1)))
+        (while #t
+               (let ((running-seats-number (get-running-seats)))
+                 (if (< running-seats-number seat-count)
+                     (start-seats seat-count)))
+               (sleep 1)))
+      (main-loop seat-count)))
   
 (define (dm-start seat-count)
   "Returns a new thread."
