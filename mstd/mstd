@@ -179,8 +179,8 @@ Options:
 
     (write-pid pid-file)
 
-    (let* ((config    (read-seats-configuration %seat-configuration-file))
-           (dm-thread (dm-start config)))
+    (let ((config (read-seats-configuration %seat-configuration-file)))
+      (dm-start config)
       (start-listener config))))
 
 ;;; mstd ends here.
