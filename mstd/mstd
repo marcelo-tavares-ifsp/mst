@@ -180,7 +180,7 @@ Options:
     (write-pid pid-file)
 
     (let ((config (read-seats-configuration %seat-configuration-file)))
-      (dm-start config)
+      (dm-start (length config))
       (start-listener config))))
 
 ;;; mstd ends here.
