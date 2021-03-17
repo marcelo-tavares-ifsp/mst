@@ -83,7 +83,7 @@ user is not found."
           #f))))
 
 (define (graphics-available?)
-  (let* ((port   (open-input-pipe "who | grep ':.'"))
+  (let* ((port   (open-input-pipe "who | grep -E '* :[0-9]+ *'"))
          (result (read-line port)))
     (not (eof-object? result))))
 
