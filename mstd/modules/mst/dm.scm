@@ -5,6 +5,7 @@
   #:use-module (ice-9 threads)
   #:use-module (mst system)
   #:export (add-seat
+            dm-start
 	    is-seat-used?
 	    get-running-seats
 	    start-lightdm))
