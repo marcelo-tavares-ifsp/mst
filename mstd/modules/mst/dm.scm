@@ -83,4 +83,11 @@
 (define (dm-start seat-count)
   "Returns a new thread."
   (start-lightdm "/etc/lightdm/lightdm-mst.conf")
-  (make-thread main-loop seat-count))
+  (let ((pid (primitive-fork)))
+    (cond
+     ((zero? pid)
+      (main-loop seat-count))
+     ((> pid 0)
+      pid)
+     (else
+      (error "Could not start the DM main loop")))))
