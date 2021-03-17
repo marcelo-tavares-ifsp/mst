@@ -81,7 +81,9 @@
                  (if (< running-seats-number seat-count)
                      (start-seats seat-count)))
                (sleep 1)))
-      (main-loop seat-count)))
+      (begin
+        (sleep 1)
+        (main-loop seat-count))))
   
 (define (dm-start seat-count)
   "Returns a new thread."
