@@ -90,12 +90,11 @@
          (log-info "  Checking PID: ~a ..." pid)
          (let ((env (proc-environ pid)))
          (log-info "  ENV: ~a ..." env)
-           (unless env
-             (log-error "Process is not available: ~a" pid)
-             (error "Process is not available" pid))
-           (let ((disp (memq "DISPLAY" env)))
-	   (when (and disp (= (string->number (cdr disp)) idx))
-		 (kill pid SIGTERM)))))
+           (if env
+               (let ((disp (memq "DISPLAY" env)))
+                 (when (and disp (= (string->number (cdr disp)) idx))
+                       (kill pid SIGTERM)))
+               (log-error "Process is not available: ~a" pid))))
        (proc-get-pids))
       (add-seat idx))
     (when (< idx seat-number)
