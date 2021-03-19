@@ -89,9 +89,9 @@
        (lambda (pid)
          (log-info "  Checking PID: ~a ..." pid)
          (let ((env (proc-environ pid)))
-         (log-info "  ENV: ~a ..." env)
            (if env
                (let ((disp (memq "DISPLAY" env)))
+                 (log-info "  ~PID: a, DISPLAY: ~a ..." pid disp)
                  (when (and disp (= (string->number (cdr disp)) idx))
                        (kill pid SIGTERM)))
                (log-error "Process is not available: ~a" pid))))
@@ -123,8 +123,6 @@
 
         (while #t
                (let ((running-seats-number (get-running-seats)))
-                 (log-info "running seats number: ~a; seat-count: ~a"
-                            running-seats-number seat-count)
                  (if (< running-seats-number seat-count)
                      (start-seats seat-count)))
                (sleep 1)))
