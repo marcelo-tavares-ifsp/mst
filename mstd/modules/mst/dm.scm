@@ -108,7 +108,7 @@
             (error "Could not execute 'xset -dpms'" result)))
 
         (let ((result (system "xset s off")))
-          (unless (zero result)
+          (unless (zero? result)
             (log-error "Could not execute 'xset s off': ~a" result)
             (error "Could not execute 'xset s off'" result)))
 
