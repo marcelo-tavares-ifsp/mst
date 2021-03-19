@@ -98,12 +98,17 @@ user is not found."
 (define (proc-environ pid)
   "Get the environment of a process with the PID.  Returns #f when the
 process is not available."
-  (let* ((port (open-input-file (format #f "/proc/~a/environ" pid)))
-         (env  (read-line port)))
-    (if (eof-object? env)
-        (begin
-          (log-error "Could not read the process environment: ~a" pid)
-          #f)
-        (map (lambda (env)
-               (string-split env #\=))
-             (string-split (string-drop-right env 1) #\nul)))))
+  (catch #t
+   (lambda ()
+     (let* ((port (open-input-file (format #f "/proc/~a/environ" pid)))
+            (env  (read-line port)))
+       (if (eof-object? env)
+           (begin
+             (log-error "Could not read the process environment: ~a" pid)
+             #f)
+           (map (lambda (env)
+                  (string-split env #\=))
+                (string-split (string-drop-right env 1) #\nul)))))
+   
+   (lambda args
+     #f)))
