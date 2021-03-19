@@ -30,6 +30,7 @@
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 regex)
   #:use-module (ice-9 ftw)
+  #:use-module (mst log)
   #:export (notify-send
 	    display-number->user
             graphics-available?
@@ -94,8 +95,14 @@ user is not found."
 			  (string-match "[0-9]+" entry)))))
 
 (define (proc-environ pid)
-  "Get the environment of a process with the PID."
-  (let ((port (open-input-file (format #f "/proc/~a/environ" pid))))
-    (map (lambda (env)
-	   (string-split env #\=))
-	 (string-split (string-drop-right (read-line port) 1) #\nul))))
+  "Get the environment of a process with the PID.  Returns #f when the
+process is not available."
+  (let* ((port (open-input-file (format #f "/proc/~a/environ" pid)))
+         (env  (read-line port)))
+    (if (eof-object? env)
+        (begin
+          (log-error "Could not read the process environment: ~a" pid)
+          #f)
+        (map (lambda (env)
+               (string-split env #\=))
+             (string-split (string-drop-right env 1) #\nul)))))

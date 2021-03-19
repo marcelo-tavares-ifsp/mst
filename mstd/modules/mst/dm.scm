@@ -84,10 +84,13 @@
     (unless (is-seat-used? idx)
       (for-each
        (lambda (pid)
-	 (let* ((env  (proc-environ pid))
-		(disp (memq "DISPLAY" env)))
+         (let ((env (proc-environ pid)))
+           (unless env
+             (log-error "Process is not available: ~a" pid)
+             (error "Process is not available" pid))
+           (let ((disp (memq "DISPLAY" env)))
 	   (when (and disp (= (string->number (cdr disp)) idx))
-		 (kill pid SIGTERM))))
+		 (kill pid SIGTERM)))))
        (proc-get-pids))
       (add-seat idx))
     (when (< idx seat-number)
