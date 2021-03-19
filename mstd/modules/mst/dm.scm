@@ -133,7 +133,6 @@
   
 (define (dm-start seat-count)
   "Returns a new thread."
-  (start-lightdm "/etc/lightdm/lightdm-mst.conf")
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
