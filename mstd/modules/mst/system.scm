@@ -84,8 +84,9 @@ user is not found."
           #f))))
 
 (define (graphics-available?)
-  (let* ((port   (open-input-pipe "who | grep -E '* :[0-9]+ *'"))
+  (let* ((port   (open-input-pipe "ps aux | grep xinit | grep -v grep"))
          (result (read-line port)))
+    (log-info "graphics-available?: ~a" result)
     (not (eof-object? result))))
 
 
