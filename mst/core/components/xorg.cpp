@@ -39,12 +39,12 @@ static QString _make_monitors_section(const Configuration& config)
     Template monitor_tpl = template_manager->get_template("xorg/Monitor");
     Template option_tpl  = template_manager->get_template("xorg/Option");
     QString result = "";
-    option_tpl.set("name", "LeftOf");
+    option_tpl.set("name", "RightOf");
     for (int32_t idx = 0; idx < config.get_seat_count(); idx++) {
         monitor_tpl.set("index", QString::number(idx));
-        if (idx < (config.get_seat_count() - 1)) {
+        if (idx > 0) {
             monitor_tpl.set("options",
-                            option_tpl.set("value", QString::number(idx + 1))
+                            option_tpl.set("value", QString::number(idx - 1))
                             .substitute());
         } else {
             monitor_tpl.set("options", "");
