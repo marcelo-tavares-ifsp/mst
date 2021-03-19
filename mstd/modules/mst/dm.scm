@@ -81,11 +81,15 @@
     (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
 
 (define (start-seats seat-number)
+  (log-info "Starting seats: ~a" seat-number)
   (let loop ((idx 1))
+    (log-info "  Checking seat: ~a ..." idx)
     (unless (is-seat-used? idx)
       (for-each
        (lambda (pid)
+         (log-info "  Checking PID: ~a ..." pid)
          (let ((env (proc-environ pid)))
+         (log-info "  ENV: ~a ..." env)
            (unless env
              (log-error "Process is not available: ~a" pid)
              (error "Process is not available" pid))
@@ -120,11 +124,13 @@
 
         (while #t
                (let ((running-seats-number (get-running-seats)))
+                 (log-info "running seats number: ~a; seat-count: ~a"
+                            running-seats-number seat-count)
                  (if (< running-seats-number seat-count)
                      (start-seats seat-count)))
                (sleep 1)))
       (begin
-        (log-debug "Graphics is not available.  Waiting...")
+        (log-info "Graphics is not available.  Waiting...")
         (sleep 1)
         (main-loop seat-count))))
   
