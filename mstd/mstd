@@ -38,6 +38,7 @@
 	     (ice-9 getopt-long)
 	     (mst config)
 	     (mst system)
+             (mst log)
 	     (mst dm))
 
 
@@ -76,8 +77,7 @@ in a CONFIG."
 	 (udev-input-monitor (make-udev-monitor udev
 						#:timeout-sec 1
 						#:filter '("usb" "usb_device"))))
-    (when *debug?*
-      (format #t "Config: ~a~%" config))
+    (log-info "Config: ~a~%" config)
 
     (let ((callback
 	   (lambda (device)
@@ -90,9 +90,8 @@ in a CONFIG."
 							       "DEVNAME")))
 		 (if user
 		     (begin
-		       (when *debug?*
-			     (format #t "Mounting ~a for seat ~a (user ~a)~%"
-				     devpath display-number user))
+                       (log-info "Mounting ~a for seat ~a (user ~a)~%"
+                                 devpath display-number user)
 		       (mount devname user))
 		     (display "Could not determine user.")))))))
 
@@ -106,8 +105,7 @@ in a CONFIG."
 		   (devpath (udev-device-get-devpath device)))
 	       (cond
 		((string=? action "remove")
-		 (when *debug?*
-		   (format #t "Device ~a was removed.~%" devname))
+                 (log-info "Device ~a was removed.~%" devname)
 		 (unless (device-path->display-number config devpath)
 		   (notify-broadcast config
 				     (format #f
@@ -117,7 +115,7 @@ in a CONFIG."
 					      " reboot the computer.")
 					     devname))))
 		((string=? action "add")
-		 (format #t "Device ~a was added.~%" devname)))))))
+		 (log-info "Device ~a was added.~%" devname)))))))
       (udev-monitor-set-callback! udev-input-monitor callback))
 
     (udev-monitor-start-scanning! udev-monitor)
@@ -175,6 +173,7 @@ Options:
 	 ((> pid 0)
 	  (exit))
 	 (#t
+          (log-error "Could not fork the process.")
 	  (error "Could not fork the process.")))))
 
     (write-pid pid-file)
