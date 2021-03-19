@@ -93,8 +93,8 @@
                (let ((disp (memq "DISPLAY" env)))
                  (log-info "  ~PID: a, DISPLAY: ~a ..." pid disp)
                  (when (and disp (= (string->number (cdr disp)) idx))
-                       (kill pid SIGTERM)))
-               (log-error "Process is not available: ~a" pid))))
+                       (kill pid SIGTERM))))))
+               ;; (log-error "Process is not available: ~a" pid))))
        (proc-get-pids))
       (add-seat idx))
     (when (< idx seat-number)
@@ -105,7 +105,7 @@
       (begin
         (log-info "Graphics available; starting seats: ~a" seat-count)
         (start-lightdm "/etc/lightdm/lightdm-mst.conf")
-
+        (sleep 1)
         ;; (let ((result (system "xset -dpms")))
         ;;   (unless (zero? result)
         ;;     (log-error "Could not execute 'xset -dpms': ~a" result)
@@ -120,6 +120,8 @@
           (add-seat idx)
           (if (< idx seat-count)
               (loop (+ idx 1))))
+
+        (sleep 1)
 
         (while #t
                (let ((running-seats-number (get-running-seats)))
