@@ -49,11 +49,12 @@
   (system (format #f "/usr/bin/dm-tool add-local-x-seat ~a" number)))
 
 (define (start-lightdm config-file)
-  (log-info "Staring lightdm with the config: ~a" config-file)
+  (log-info "Starting lightdm with the config: ~a" config-file)
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
-      (system (format #f "/usr/sbin/lightdm --config ~a" config-file)))
+      (execlp "/usr/sbin/lightdm" "/usr/sbin/lightdm"
+              "--config" config-file))
      ((> pid 0)
       (log-info "Lightdm started.  PID: ~a" pid)
       pid)
@@ -123,6 +124,7 @@
                      (start-seats seat-count)))
                (sleep 1)))
       (begin
+        (log-debug "Graphics is not available.  Waiting...")
         (sleep 1)
         (main-loop seat-count))))
   
