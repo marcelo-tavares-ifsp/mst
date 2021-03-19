@@ -4,6 +4,7 @@
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 threads)
   #:use-module (mst system)
+  #:use-module (mst log)
   #:export (add-seat
             dm-start
 	    is-seat-used?
@@ -17,18 +18,20 @@
 
 
 (define (add-seat number)
+  (log-info "Adding seat number ~a" number)
   (system (format #f "/usr/bin/dm-tool add-local-x-seat ~a" number)))
 
 (define (start-lightdm config-file)
+  (log-info "Staring lightdm with the config: ~a" config-file)
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
       (system (format #f "/usr/sbin/lightdm --config ~a" config-file)))
      ((> pid 0)
-      (when *debug?*
-        (format #t "Lightdm started.  PID: ~a" pid))
+      (log-info "Lightdm started.  PID: ~a" pid)
       pid)
      (else
+      (log-error "Could not start the display manager")
       (error "Could not start the display manager")))))
 
 
@@ -66,6 +69,7 @@
 (define (main-loop seat-count)
   (if (graphics-available?)
       (begin
+        (log-info "Graphics available; starting seats: ~a" seat-count)
         (start-lightdm "/etc/lightdm/lightdm-mst.conf")
 
         (system "xset -dpms")
@@ -93,6 +97,7 @@
      ((zero? pid)
       (main-loop seat-count))
      ((> pid 0)
+      (log-info "Display manager started; PID: ~a" pid)
       pid)
      (else
       (error "Could not start the DM main loop")))))
