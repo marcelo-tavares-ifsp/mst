@@ -86,7 +86,7 @@ user is not found."
 (define (graphics-available?)
   (let* ((port   (open-input-pipe "ps aux | grep xinit | grep -v grep"))
          (result (read-line port)))
-    (log-info "graphics-available?: ~a" result)
+    (waitpid -1 WNOHANG)
     (not (eof-object? result))))
 
 
@@ -103,12 +103,9 @@ process is not available."
      (let* ((port (open-input-file (format #f "/proc/~a/environ" pid)))
             (env  (read-line port)))
        (if (eof-object? env)
-           (begin
-             (log-error "Could not read the process environment: ~a" pid)
-             #f)
+           #f
            (map (lambda (env)
                   (string-split env #\=))
                 (string-split (string-drop-right env 1) #\nul)))))
-   
-   (lambda args
+      (lambda args
      #f)))
