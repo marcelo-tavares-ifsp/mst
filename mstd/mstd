@@ -167,14 +167,14 @@ Options:
 
     (when detach-wanted
       (let ((pid (primitive-fork)))
-	(cond
-	 ((zero? pid)
-	  (setsid))
-	 ((> pid 0)
-	  (exit))
-	 (#t
+        (cond
+         ((zero? pid)
+          (setsid))
+         ((> pid 0)
+          (exit))
+         (#t
           (log-error "Could not fork the process.")
-	  (error "Could not fork the process.")))))
+          (error "Could not fork the process.")))))
 
     (write-pid pid-file)
 
