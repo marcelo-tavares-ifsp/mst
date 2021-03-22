@@ -79,6 +79,7 @@ user is not found."
                 " | "
                 "head -1"))))
     (let ((result (read-line port)))
+      (waitpid -1 WNOHANG)
       (if (not (eof-object? result))
           result
           #f))))
