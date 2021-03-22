@@ -110,16 +110,6 @@
         (log-info "Graphics available; starting lightdm ...")
         (start-lightdm %lightdm-config)
         (sleep 1)
-        ;; (let ((result (system "xset -dpms")))
-        ;;   (unless (zero? result)
-        ;;     (log-error "Could not execute 'xset -dpms': ~a" result)
-        ;;     (error "Could not execute 'xset -dpms'" result)))
-
-        ;; (let ((result (system "xset s off")))
-        ;;   (unless (zero? result)
-        ;;     (log-error "Could not execute 'xset s off': ~a" result)
-        ;;     (error "Could not execute 'xset s off'" result)))
-
         (log-info "Starting seats: ~a ..." seat-count)
         (let loop ((idx 1))
           (add-seat idx)
