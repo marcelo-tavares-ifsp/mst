@@ -68,6 +68,7 @@
   (define regexp (format #f ".*(:~a).*" id))
   (let loop ((p (open-input-pipe "who")))
     (let ((line (read-line p)))
+      (waitpid -1 WNOHANG)
       (if (eof-object? line)
 	  #f
 	  (if (string-match regexp line)
@@ -76,9 +77,12 @@
 
 (define (get-running-seats)
   "Get the number of running seats."
-  (string->number
-   (read-line
-    (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
+  (let ((result
+         (string->number
+          (read-line
+           (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'")))))
+    (waitpid -1 WNOHANG)
+    result))
 
 (define (start-seats seat-number)
   (log-info "Starting seats: ~a" seat-number)
@@ -91,7 +95,6 @@
          (let ((env (proc-environ pid)))
            (if env
                (let ((disp (memq "DISPLAY" env)))
-                 (log-info "  ~PID: a, DISPLAY: ~a ..." pid disp)
                  (when (and disp (= (string->number (cdr disp)) idx))
                        (kill pid SIGTERM))))))
                ;; (log-error "Process is not available: ~a" pid))))
