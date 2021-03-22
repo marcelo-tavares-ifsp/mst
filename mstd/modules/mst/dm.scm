@@ -43,6 +43,8 @@
 (define (set-dm-debug! value)
   (set! *debug?* value))
 
+(define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
+
 
 (define (add-seat number)
   (log-info "Adding seat number ~a" number)
@@ -106,7 +108,7 @@
   (if (graphics-available?)
       (begin
         (log-info "Graphics available; starting lightdm ...")
-        (start-lightdm "/etc/lightdm/lightdm-mst.conf")
+        (start-lightdm %lightdm-config)
         (sleep 1)
         ;; (let ((result (system "xset -dpms")))
         ;;   (unless (zero? result)
