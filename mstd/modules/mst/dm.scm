@@ -106,7 +106,7 @@
 (define (main-loop seat-count)
   (if (graphics-available?)
       (begin
-        (log-info "Graphics available; starting seats: ~a" seat-count)
+        (log-info "Graphics available; starting lightdm ...")
         (start-lightdm "/etc/lightdm/lightdm-mst.conf")
         (sleep 1)
         ;; (let ((result (system "xset -dpms")))
@@ -119,12 +119,16 @@
         ;;     (log-error "Could not execute 'xset s off': ~a" result)
         ;;     (error "Could not execute 'xset s off'" result)))
 
+        (log-info "Starting seats: ~a ..." seat-count)
         (let loop ((idx 1))
           (add-seat idx)
+          (log-info "    starting seat: ~a ..." idx)
           (if (< idx seat-count)
               (loop (+ idx 1))))
-
+        (log-info "Starting seats: ~a ... done" seat-count)
         (sleep 1)
+
+        (log-info "Starting main loop")
 
         (while #t
                (let ((running-seats-number (get-running-seats)))
