@@ -70,10 +70,10 @@
     (let ((line (read-line p)))
       (waitpid -1 WNOHANG)
       (if (eof-object? line)
-	  #f
-	  (if (string-match regexp line)
-	      #t
-	      (loop p))))))
+          #f
+          (if (string-match regexp line)
+              #t
+              (loop p))))))
 
 (define (get-running-seats)
   "Get the number of running seats."
@@ -97,7 +97,6 @@
                (let ((disp (memq "DISPLAY" env)))
                  (when (and disp (= (string->number (cdr disp)) idx))
                        (kill pid SIGTERM))))))
-               ;; (log-error "Process is not available: ~a" pid))))
        (proc-get-pids))
       (add-seat idx))
     (when (< idx seat-number)
@@ -139,7 +138,7 @@
         (log-info "Graphics is not available.  Waiting...")
         (sleep 1)
         (main-loop seat-count))))
-  
+
 (define (dm-start seat-count)
   "Returns a new thread."
   (let ((pid (primitive-fork)))
