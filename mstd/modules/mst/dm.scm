@@ -34,9 +34,9 @@
   #:use-module (mst log)
   #:export (add-seat
             dm-start
-	    is-seat-used?
-	    get-running-seats
-	    start-lightdm))
+            is-seat-used?
+            get-running-seats
+            start-lightdm))
 
 (define *debug?* #f)
 
