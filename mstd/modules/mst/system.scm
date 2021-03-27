@@ -79,13 +79,9 @@
 
 (define (%make-command:display-number->user display-number)
   (string-append
-   "who"
-   " | "
+   "who | "
    (format #f "grep '(:~a)'" display-number)
-   " | "
-   "sed -re 's/^([^ ]+) +.* \\(:[0-9]+\\)/\\1/g'"
-   " | "
-   "head -1"))
+   " | sed -re 's/^([^ ]+) +.* \\(:[0-9]+\\)/\\1/g' | head -1"))
 
 (define (display-number->user display-number)
   "Find out the user by its display number.  Return user name or #f if the
