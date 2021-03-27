@@ -37,7 +37,9 @@
             proc-get-pids
             proc-environ
             mount
-            set-system-debug!))
+            set-system-debug!
+
+            %make-mount-command))
 
 
 (define *debug?* #f)
@@ -56,12 +58,16 @@
            " --icon=error"
            (string-append " '" message "'"))))
 
+;; Make a 'mount' command to mount a DEVICE for a specified USER.
+(define (%make-mount-command device user)
+  (string-append
+   (format #f "sudo --user='~a' -- " user)
+   "udisksctl mount --no-user-interaction --block-device "
+   device))
+
 (define (mount device user)
   "Mount a DEVICE for a USER by means of udisksctl command."
-  (let ((command (string-append
-                  (format #f "sudo --user='~a' -- " user)
-                  "udisksctl mount --no-user-interaction --block-device "
-                  device)))
+  (let ((command (%make-mount-command device user)))
     (when *debug?*
           (format #t "mount command: ~a~%" command))
     (system command)))
