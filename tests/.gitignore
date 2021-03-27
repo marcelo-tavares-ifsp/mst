@@ -1,3 +1,4 @@
 unit_tests
 moc_*
 target_wrapper.sh
+*.log
