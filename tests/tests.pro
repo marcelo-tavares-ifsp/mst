@@ -78,6 +78,7 @@ DISTFILES += \
     test_awesome_mst_autostart.lua \
     mstd-system.scm \
     mstd-config.scm \
+    mstd-dm.scm \
     mstd-config-seats
 
 DEFINES += INSTALLATION_PREFIX=\\\"\\\"

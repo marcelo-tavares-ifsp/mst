@@ -24,5 +24,5 @@ void Test_mstd::config_test() {
 
 void Test_mstd::dm_test()
 {
-
+  QVERIFY(run_guile_test("mstd-dm.scm"));
 }

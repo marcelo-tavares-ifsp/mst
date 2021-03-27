@@ -36,7 +36,9 @@
             dm-start
             is-seat-used?
             get-running-seats
-            start-lightdm))
+            start-lightdm
+
+            %make-command:add-seat))
 
 (define *debug?* #f)
 
@@ -46,9 +48,12 @@
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
 
 
+(define (%make-command:add-seat number)
+  (format #f "/usr/bin/dm-tool add-local-x-seat ~a" number))
+
 (define (add-seat number)
   (log-info "Adding seat number ~a" number)
-  (system (format #f "/usr/bin/dm-tool add-local-x-seat ~a" number)))
+  (system (%make-command:add-seat number)))
 
 (define (start-lightdm config-file)
   (log-info "Starting lightdm with the config: ~a" config-file)
