@@ -45,6 +45,7 @@
 (define (set-dm-debug! value)
   (set! *debug?* value))
 
+(define %lightdm-binary "/usr/sbin/lightdm")
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
 
 
@@ -60,8 +61,7 @@
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
-      (execlp "/usr/sbin/lightdm" "/usr/sbin/lightdm"
-              "--config" config-file))
+      (execlp %lightdm-binary %lightdm-binary "--config" config-file))
      ((> pid 0)
       (log-info "Lightdm started.  PID: ~a" pid)
       pid)
