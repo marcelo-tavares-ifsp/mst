@@ -32,12 +32,12 @@
   #:use-module (ice-9 ftw)
   #:use-module (mst log)
   #:export (notify-send
-	    display-number->user
+            display-number->user
             graphics-available?
-	    proc-get-pids
-	    proc-environ
-	    mount
-	    set-system-debug!))
+            proc-get-pids
+            proc-environ
+            mount
+            set-system-debug!))
 
 
 (define *debug?* #f)
@@ -63,7 +63,7 @@
                   "udisksctl mount --no-user-interaction --block-device "
                   device)))
     (when *debug?*
-      (format #t "mount command: ~a~%" command))
+          (format #t "mount command: ~a~%" command))
     (system command)))
 
 (define (display-number->user display-number)
@@ -94,19 +94,19 @@ user is not found."
 (define (proc-get-pids)
   (map string->number
        (scandir "/proc" (lambda (entry)
-			  (string-match "[0-9]+" entry)))))
+                          (string-match "[0-9]+" entry)))))
 
 (define (proc-environ pid)
   "Get the environment of a process with the PID.  Returns #f when the
 process is not available."
   (catch #t
-   (lambda ()
-     (let* ((port (open-input-file (format #f "/proc/~a/environ" pid)))
-            (env  (read-line port)))
-       (if (eof-object? env)
-           #f
-           (map (lambda (env)
-                  (string-split env #\=))
-                (string-split (string-drop-right env 1) #\nul)))))
-      (lambda args
-     #f)))
+         (lambda ()
+           (let* ((port (open-input-file (format #f "/proc/~a/environ" pid)))
+                  (env  (read-line port)))
+             (if (eof-object? env)
+                 #f
+                 (map (lambda (env)
+                        (string-split env #\=))
+                      (string-split (string-drop-right env 1) #\nul)))))
+         (lambda args
+           #f)))
