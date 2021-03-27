@@ -97,7 +97,8 @@
     (unless (is-seat-used? idx)
       (for-each
        (lambda (pid)
-         (log-info "  Checking PID: ~a ..." pid)
+         (when *debug?*
+               (log-info "  Checking PID: ~a ..." pid))
          (let ((env (proc-environ pid)))
            (if env
                (let ((disp (memq "DISPLAY" env)))
@@ -121,7 +122,8 @@
           (if (< idx seat-count)
               (loop (+ idx 1))))
         (log-info "Starting seats: ~a ... done" seat-count)
-        (sleep 1)
+
+        (sleep 5)
 
         (log-info "Starting main loop")
 
