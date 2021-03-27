@@ -39,7 +39,8 @@
             mount
             set-system-debug!
 
-            %make-mount-command))
+            %make-mount-command
+            %make-notify-send-command))
 
 
 (define *debug?* #f)
@@ -49,14 +50,17 @@
   (set! *debug?* value))
 
 
+(define (%make-notify-send-command display-number message)
+  (string-append
+   (format #f "DISPLAY=:~a" display-number)
+   " /usr/bin/notify-send"
+   " --urgency=critical"
+   " --icon=error"
+   (string-append " '" message "'")))
+
 (define (notify-send display-number message)
   "Show a notify with a MESSAGE on the given DISPLAY-NUMBER."
-  (system (string-append
-           (format #f "DISPLAY=:~a" display-number)
-           " /usr/bin/notify-send"
-           " --urgency=critical"
-           " --icon=error"
-           (string-append " '" message "'"))))
+  (system (%make-notify-send-command display-number message)))
 
 ;; Make a 'mount' command to mount a DEVICE for a specified USER.
 (define (%make-mount-command device user)
