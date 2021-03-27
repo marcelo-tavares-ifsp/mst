@@ -68,14 +68,19 @@ in a CONFIG."
               (notify-send (cadr rec) message))
             config))
 
+(define (error-handler monitor error-message)
+  (log-error "ERROR: In ~a: ~a~%" monitor error-message))
+
 (define (start-listener config)
   "Start udev listener."
   (let* ((udev         (make-udev))
          (udev-monitor (make-udev-monitor udev
                                           #:timeout-sec 1
+                                          #:error-callback error-handler
                                           #:filter '("block" "partition")))
          (udev-input-monitor (make-udev-monitor udev
                                                 #:timeout-sec 1
+                                                #:error-callback error-handler
                                                 #:filter '("usb" "usb_device"))))
     (log-info "Config: ~a~%" config)
 
@@ -115,12 +120,8 @@ in a CONFIG."
                                                     " reboot the computer.")
                                                    devname))))
                 ((string=? action "add")
-                 (log-info "Device ~a was added.~%" devname))))))
-          (error-callback
-           (lambda (monitor error-message)
-             (log-error "ERROR: In ~a: ~a~%" monitor error-message))))
+                 (log-info "Device ~a was added.~%" devname)))))))
 
-      (udev-monitor-set-error-callback! udev-input-monitor callback)
       (udev-monitor-set-callback! udev-input-monitor callback))
 
     (udev-monitor-start-scanning! udev-monitor)
