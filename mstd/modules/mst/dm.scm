@@ -70,7 +70,11 @@
   (define regexp (format #f ".*(:~a).*" id))
   (let loop ((p (open-input-pipe "who")))
     (let ((line (read-line p)))
-      (waitpid -1 WNOHANG)
+      (catch #t
+             (lambda ()
+               (waitpid -1 WNOHANG))
+             (lambda args
+               #t))
       (if (eof-object? line)
           #f
           (if (string-match regexp line)
