@@ -115,7 +115,12 @@ in a CONFIG."
                                                     " reboot the computer.")
                                                    devname))))
                 ((string=? action "add")
-                 (log-info "Device ~a was added.~%" devname)))))))
+                 (log-info "Device ~a was added.~%" devname))))))
+          (error-callback
+           (lambda (monitor error-message)
+             (log-error "ERROR: In ~a: ~a~%" monitor error-message))))
+
+      (udev-monitor-set-error-callback! udev-input-monitor callback)
       (udev-monitor-set-callback! udev-input-monitor callback))
 
     (udev-monitor-start-scanning! udev-monitor)
