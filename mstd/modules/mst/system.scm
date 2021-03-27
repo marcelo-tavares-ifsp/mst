@@ -34,6 +34,7 @@
   #:export (notify-send
             display-number->user
             graphics-available?
+            lightdm-started?
             proc-get-pids
             proc-environ
             mount
@@ -96,6 +97,12 @@ user is not found."
 
 (define (graphics-available?)
   (let* ((port   (open-input-pipe "ps aux | grep xinit | grep -v grep"))
+         (result (read-line port)))
+    (waitpid -1 WNOHANG)
+    (not (eof-object? result))))
+
+(define (lightdm-started?)
+  (let* ((port   (open-input-pipe "ps aux | grep lightdm | grep -v grep"))
          (result (read-line port)))
     (waitpid -1 WNOHANG)
     (not (eof-object? result))))

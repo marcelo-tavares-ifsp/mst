@@ -117,8 +117,11 @@
 (define (main-loop seat-count)
   (if (graphics-available?)
       (begin
-        (log-info "Graphics available; starting lightdm ...")
-        (start-lightdm %lightdm-config)
+        (log-info "Graphics available")
+        (unless (lightdm-started?)
+          (log-info "  starting lightdm ...")
+          (start-lightdm %lightdm-config)
+          (log-info "  starting lightdm ... done"))
         (sleep 1)
         (log-info "Starting seats: ~a ..." seat-count)
         (let loop ((idx 1))
