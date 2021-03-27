@@ -133,6 +133,7 @@ in a CONFIG."
   '((pid-file                 (value #t))
     (detach                   (value #f))
     (debug                    (value #f))
+    (stderr                   (value #f))
     (help   (single-char #\h) (value #f))))
 
 (define (write-pid pid-file)
@@ -152,6 +153,8 @@ Options:
   --pid-file=<file-name>        File to store PID after the server starts to
 				listen to the socket.
 				Default: " %default-pid-file "
+  --stderr                      Print the logs to stderr as well as to
+                                the system log.
   --help, -h                    Print this message and exit.
 "))
   (exit))
@@ -163,10 +166,14 @@ Options:
          (detach-wanted (option-ref options 'detach   #f))
          (pid-file      (option-ref options 'pid-file %default-pid-file))
          (debug-wanted? (option-ref options 'debug    #f))
+         (stderr-wanted? (option-ref options 'stderr  #f))
          (help-wanted?  (option-ref options 'help     #f)))
 
     (when help-wanted?
           (print-help-and-exit))
+
+    (when stderr-wanted?
+          (log-use-stderr! #t))
 
     (set! *debug?* debug-wanted?)
     (set-system-debug! debug-wanted?)

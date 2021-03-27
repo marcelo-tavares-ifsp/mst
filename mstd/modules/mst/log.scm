@@ -29,15 +29,24 @@
   #:export (log
             log-error
             log-warning
-            log-info))
+            log-info
+            log-use-stderr!))
 
 (define %logger "/usr/bin/logger")
 (define %tag    "mstd")
 
+(define *use-stderr?* #f)
+
+(define (log-use-stderr! value)
+  (set! *use-stderr?* value))
+
 (define (log level fmt . args)
   (let* ((message (apply format #f fmt args))
-         (command (format #f "~a --priority=daemon.~a --tag='~a' '~a'"
+         (command (format #f "~a ~a --priority=daemon.~a --tag='~a' '~a'"
                           %logger
+                          (if *use-stderr?*
+                              "--stderr"
+                              "")
                           level
                           %tag
                           message))
