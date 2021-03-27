@@ -39,8 +39,9 @@
             mount
             set-system-debug!
 
-            %make-mount-command
-            %make-notify-send-command))
+            %make-command:mount
+            %make-command:notify-send
+            %make-command:display-number->user))
 
 
 (define *debug?* #f)
@@ -50,7 +51,7 @@
   (set! *debug?* value))
 
 
-(define (%make-notify-send-command display-number message)
+(define (%make-command:notify-send display-number message)
   (string-append
    (format #f "DISPLAY=:~a" display-number)
    " /usr/bin/notify-send"
@@ -60,10 +61,10 @@
 
 (define (notify-send display-number message)
   "Show a notify with a MESSAGE on the given DISPLAY-NUMBER."
-  (system (%make-notify-send-command display-number message)))
+  (system (%make-command:notify-send display-number message)))
 
 ;; Make a 'mount' command to mount a DEVICE for a specified USER.
-(define (%make-mount-command device user)
+(define (%make-command:mount device user)
   (string-append
    (format #f "sudo --user='~a' -- " user)
    "udisksctl mount --no-user-interaction --block-device "
@@ -71,23 +72,26 @@
 
 (define (mount device user)
   "Mount a DEVICE for a USER by means of udisksctl command."
-  (let ((command (%make-mount-command device user)))
+  (let ((command (%make-command:mount device user)))
     (when *debug?*
           (format #t "mount command: ~a~%" command))
     (system command)))
+
+(define (%make-command:display-number->user display-number)
+  (string-append
+   "who"
+   " | "
+   (format #f "grep '(:~a)'" display-number)
+   " | "
+   "sed -re 's/^([^ ]+) +.* \\(:[0-9]+\\)/\\1/g'"
+   " | "
+   "head -1"))
 
 (define (display-number->user display-number)
   "Find out the user by its display number.  Return user name or #f if the
 user is not found."
   (let ((port (open-input-pipe
-               (string-append
-                "who"
-                " | "
-                (format #f "grep '(:~a)'" display-number)
-                " | "
-                "sed -re 's/^([^ ]+) +.* \\(:[0-9]+\\)/\\1/g'"
-                " | "
-                "head -1"))))
+               (%make-command:display-number->user display-number))))
     (let ((result (read-line port)))
       (waitpid -1 WNOHANG)
       (if (not (eof-object? result))
