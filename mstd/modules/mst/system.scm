@@ -35,6 +35,7 @@
             display-number->user
             graphics-available?
             lightdm-started?
+            xephyr-started?
             proc-get-pids
             proc-environ
             mount
@@ -106,6 +107,13 @@ user is not found."
          (result (read-line port)))
     (waitpid -1 WNOHANG)
     (not (eof-object? result))))
+
+(define (xephyr-started? number)
+  (let* ((port   (open-input-pipe
+                  (format #f "ps aux | grep \"Xephyr.*:~a$\" | grep -v grep"))
+         (result (read-line port)))
+    (waitpid -1 WNOHANG)
+    (not (eof-object? result)))))
 
 
 (define (proc-get-pids)
