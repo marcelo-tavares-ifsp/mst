@@ -115,7 +115,7 @@
       (loop (+ idx 1)))))
 
 (define (main-loop seat-count)
-  (if (xephyr-started? seat-count)
+  (if (xephyr-started?)
       (begin
         (log-info "Graphics available")
         (unless (lightdm-started?)

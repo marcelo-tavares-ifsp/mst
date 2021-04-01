@@ -108,13 +108,21 @@ user is not found."
     (waitpid -1 WNOHANG)
     (not (eof-object? result))))
 
-(define (xephyr-started? number)
-  (let* ((port   (open-input-pipe
-                  (format #f "ps aux | grep \"Xephyr.*:~a$\" | grep -v grep"
-                          number)))
-         (result (read-line port)))
-    (waitpid -1 WNOHANG)
-    (not (eof-object? result))))
+(define xephyr-started?
+  (case-lambda
+   ((number)
+    (let* ((port   (open-input-pipe
+                    (format #f "ps aux | grep \"Xephyr.*:~a$\" | grep -v grep"
+                            number)))
+           (result (read-line port)))
+      (waitpid -1 WNOHANG)
+      (not (eof-object? result))))
+   (()
+    (let* ((port (open-input-pipe
+                  "ps aux | grep \"Xephyr.*:.*$\" | grep -v grep"))
+           (result (read-line port)))
+      (waitpid -1 WNOHANG)
+      (not (eof-object? result))))))
 
 
 (define (proc-get-pids)
