@@ -86,6 +86,14 @@
               #t
               (loop p))))))
 
+(define (is-seat-running? id)
+  "Check if a seat with ID is running."
+  (let* ((port (open-input-pipe
+                (format #f "/usr/bin/dm-tool list-seats | grep 'Seat~a'" id)))
+         (result (read-line port)))
+    (waitpid -1 WNOHANG)
+    (not (eof-object? result))))
+
 (define (get-running-seats)
   "Get the number of running seats."
   (let ((result
@@ -99,7 +107,9 @@
   (log-info "Starting seats: ~a" seat-number)
   (let loop ((idx 1))
     (log-info "  Checking seat: ~a ..." idx)
-    (unless (or (is-seat-used? idx) (not (xephyr-started? idx)))
+    (unless (or (is-seat-used? idx)
+                (not (xephyr-started? idx))
+                (is-seat-running? idx))
       (for-each
        (lambda (pid)
          (when *debug?*
