@@ -99,7 +99,7 @@
   (log-info "Starting seats: ~a" seat-number)
   (let loop ((idx 1))
     (log-info "  Checking seat: ~a ..." idx)
-    (unless (is-seat-used? idx)
+    (unless (or (is-seat-used? idx) (not (xephyr-started? idx)))
       (for-each
        (lambda (pid)
          (when *debug?*
