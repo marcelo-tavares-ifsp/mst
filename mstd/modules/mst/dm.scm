@@ -47,6 +47,7 @@
 
 (define %lightdm-binary "/usr/sbin/lightdm")
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
+(define %xephyr-binary "/usr/bin/Xephyr")
 
 
 (define (%make-command:add-seat number)
@@ -61,13 +62,37 @@
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
-      (execlp %lightdm-binary %lightdm-binary "--config" config-file))
+      (execle %lightdm-binary (environ)
+              %lightdm-binary "--config" config-file))
      ((> pid 0)
       (log-info "Lightdm started.  PID: ~a" pid)
       pid)
      (else
       (log-error "Could not start the display manager")
       (error "Could not start the display manager")))))
+
+(define (start-xephyr display-number resolution mouse keyboard)
+  (log-info "Starting Xephyr for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
+            display-number resolution mouse keyboard)
+  (let ((pid (primitive-fork)))
+    (cond
+     ((zero? pid)
+      (execle %xephyr-binary (cons "DISPLAY=:0" (environ))
+              %xephyr-binary
+              "-softCursor"
+              "-ac"
+              "-br"
+              "-resizeable"
+              "-mouse" (format #f "evdev,5,device=~a" mouse)
+              "-keybd" (format #f "evdev,,device=~a" keyboard)
+              "-screen" (format #f "~a" resolution)
+              (format #f ":~a" display-number)))
+     ((> pid 0)
+      (log-info "Xephyr is started.  PID: ~a" pid)
+      pid)
+     (else
+      (log-error "Could not start a Xephyr instance")
+      (error "Could not start a Xephyr instance")))))
 
 
 ;; Check if a seat with ID is used.
@@ -89,7 +114,8 @@
 (define (is-seat-running? id)
   "Check if a seat with ID is running."
   (let* ((port (open-input-pipe
-                (format #f "/usr/bin/dm-tool list-seats | grep 'Seat~a'" id)))
+                (format #f "/usr/bin/dm-tool list-seats | grep 'Seat~a'"
+                        (- id 1))))
          (result (read-line port)))
     (waitpid -1 WNOHANG)
     (not (eof-object? result))))
@@ -125,23 +151,32 @@
       (loop (+ idx 1)))))
 
 (define (main-loop seat-count)
-  (if (xephyr-started?)
+  (if (graphics-available?)
       (begin
         (log-info "Graphics available")
         (unless (lightdm-started?)
           (log-info "  starting lightdm ...")
           (start-lightdm %lightdm-config)
           (log-info "  starting lightdm ... done"))
+        (start-xephyr 1
+                      "1600x900"
+                      "/dev/input/by-path/pci-0000:00:14.0-usb-0:10:1.0-event-mouse"
+                      "/dev/input/by-path/pci-0000:00:14.0-usb-0:9:1.0-event-kbd")
         (sleep 1)
+        (start-xephyr 2
+                      "1366x768"
+                      "/dev/input/by-path/pci-0000:00:14.0-usb-0:3:1.0-event-mouse"
+                      "/dev/input/by-path/pci-0000:00:14.0-usb-0:4:1.0-event-kbd")
+        (sleep 2)
         (log-info "Starting seats: ~a ..." seat-count)
-        (let loop ((idx 1))
-          (add-seat idx)
-          (log-info "    starting seat: ~a ..." idx)
-          (if (< idx seat-count)
-              (loop (+ idx 1))))
+        ;; (let loop ((idx 1))
+        ;;   (add-seat idx)
+        ;;   (log-info "    starting seat: ~a ..." idx)
+        ;;   (if (< idx seat-count)
+        ;;       (loop (+ idx 1))))
         (log-info "Starting seats: ~a ... done" seat-count)
 
-        (sleep 5)
+        (sleep 1)
 
         (log-info "Starting main loop")
 
@@ -160,6 +195,10 @@
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
+      (setenv "XAUTHORITY" "/home/multiseat/.Xauthority")
+      (setenv "XDG_RUNTIME_DIR" "/run/user/501")
+      (setenv "DISPLAY" ":0")
+      (setenv "DBUS_SESSION_BUS_ADDRESS" "unix:path=/run/user/501/bus")
       (main-loop seat-count))
      ((> pid 0)
       (log-info "Display manager started; PID: ~a" pid)
