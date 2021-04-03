@@ -179,12 +179,12 @@
                                               (list-ref seat-config 3))))
                         (when (and seat-display
                                    seat-resolution
-                                   seat-keyboard
-                                   seat-mouse)
+                                   seat-mouse
+                                   seat-keyboard)
                               (start-xephyr seat-display
                                             seat-resolution
-                                            seat-keyboard
-                                            seat-mouse))))
+                                            seat-mouse
+                                            seat-keyboard))))
                     config)
           (log-info "  starting Xephyrs ... done")
 
