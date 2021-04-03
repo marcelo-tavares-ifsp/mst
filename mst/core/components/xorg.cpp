@@ -59,15 +59,21 @@ static QString _make_device_section(Configuration& config)
 {
     Template tpl = Template_manager::get_instance()
             ->get_template("xorg/Device");
-    QString result = "";
+    Template option_tpl = Template_manager::get_instance()
+            ->get_template("xorg/Option");
+    QString monitors = "";
     for (int32_t idx = 0; idx < config.get_seat_count(); idx++)
     {
         QString interface = config.get_seat(idx)->get_monitor().get_interface();
-        result += tpl.set("interface", interface)
-                .set("index", QString::number(idx))
-                .substitute();
+        option_tpl.set("name",  "Monitor-" + interface);
+        option_tpl.set("value", "monitor" + QString::number(idx));
+        monitors += "    " + option_tpl
+          .set("name",  "Monitor-" + interface)
+          .set("value", "monitor" + QString::number(idx))
+          .substitute() + "\n";
     }
-    return result;
+    tpl.set("monitors", monitors);
+    return tpl.substitute();
 }
 
 static QString _make_screen_section(Configuration& config)
