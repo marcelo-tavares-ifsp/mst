@@ -153,41 +153,43 @@
     (when (< idx seat-number)
       (loop (+ idx 1)))))
 
-(define (main-loop seat-count)
-  (if (graphics-available?)
-      (begin
-        (log-info "Graphics available")
-        (unless (lightdm-started?)
-          (log-info "  starting lightdm ...")
-          (start-lightdm %lightdm-config)
-          (log-info "  starting lightdm ... done"))
-        (start-xephyr 1
-                      "1600x900"
-                      "/dev/input/by-path/pci-0000:00:14.0-usb-0:10:1.0-event-mouse"
-                      "/dev/input/by-path/pci-0000:00:14.0-usb-0:9:1.0-event-kbd")
-        (sleep 1)
-        (start-xephyr 2
-                      "1366x768"
-                      "/dev/input/by-path/pci-0000:00:14.0-usb-0:3:1.0-event-mouse"
-                      "/dev/input/by-path/pci-0000:00:14.0-usb-0:4:1.0-event-kbd")
-        (sleep 2)
+(define (main-loop config)
+  (let ((seat-count (length config)))
+    (if (graphics-available?)
+        (begin
+          (log-info "Graphics available")
+          (unless (lightdm-started?)
+                  (log-info "  starting lightdm ...")
+                  (start-lightdm %lightdm-config)
+                  (log-info "  starting lightdm ... done"))
 
-        (log-info "Starting seats: ~a ..." seat-count)
-        (start-seats seat-count)
-        (log-info "Starting seats: ~a ... done" seat-count)
+          (log-info "  starting Xephyrs ... "))
+          (for-each (lambda (seat-config)
+                      (start-xephyr (list-ref seat-config 0)
+                                    (list-ref seat-config 1)
+                                    (list-ref seat-config 2)
+                                    (list-ref seat-config 3)))
+                    config)
+          (log-info "  starting Xephyrs ... done"))
 
-        (log-info "Starting main loop")
-        (while #t
-               (let ((running-seats-number (get-running-seats)))
-                 (if (< running-seats-number seat-count)
-                     (start-seats seat-count)))
-               (sleep 1)))
-      (begin
-        (log-info "Graphics is not available.  Waiting...")
-        (sleep 1)
-        (main-loop seat-count))))
+          (sleep 2)
 
-(define (dm-start seat-count)
+          (log-info "Starting seats: ~a ..." seat-count)
+          (start-seats seat-count)
+          (log-info "Starting seats: ~a ... done" seat-count)
+
+          (log-info "Starting main loop")
+          (while #t
+                 (let ((running-seats-number (get-running-seats)))
+                   (if (< running-seats-number seat-count)
+                       (start-seats seat-count)))
+                 (sleep 1)))
+        (begin
+          (log-info "Graphics is not available.  Waiting...")
+          (sleep 1)
+          (main-loop seat-count)))))
+
+(define (dm-start config)
   "Returns a new thread."
   (let ((pid (primitive-fork)))
     (cond
@@ -196,7 +198,7 @@
       (setenv "XDG_RUNTIME_DIR" "/run/user/501")
       (setenv "DISPLAY" ":0")
       (setenv "DBUS_SESSION_BUS_ADDRESS" "unix:path=/run/user/501/bus")
-      (main-loop seat-count))
+      (main-loop config))
      ((> pid 0)
       (log-info "Display manager started; PID: ~a" pid)
       pid)
