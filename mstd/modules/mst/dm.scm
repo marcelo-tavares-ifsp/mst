@@ -203,7 +203,7 @@
         (begin
           (log-info "Graphics is not available.  Waiting...")
           (sleep 1)
-          (main-loop seat-count)))))
+          (main-loop config)))))
 
 (define (dm-start config)
   "Returns a new thread."
