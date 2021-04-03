@@ -83,8 +83,8 @@
               "-ac"
               "-br"
               "-resizeable"
-              "-mouse" (format #f "evdev,5,device=~a" mouse)
-              "-keybd" (format #f "evdev,,device=~a" keyboard)
+              ;; "-mouse" (format #f "evdev,5,device=~a" mouse)
+              ;; "-keybd" (format #f "evdev,,device=~a" keyboard)
               "-screen" (format #f "~a" resolution)
               (format #f ":~a" display-number)))
      ((> pid 0)
