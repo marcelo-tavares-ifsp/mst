@@ -64,11 +64,13 @@ void System::disable()
 
 Template System::prepare_seat_configuration_template()
 {
-    Template seat_template("{{seat}} {{kbd}} {{mouse}} {{usb}}");
+    Template seat_template("{{seat}} {{resolution}} {{kbd}} {{mouse}} {{usb}}");
     QString config_contents;
     for (shared_ptr<Seat> seat : config.get_seats()) {
+        Resolution resolution = seat->get_monitor().get_current_resolution();
         seat_template
                 .set("seat",  QString::number(seat->get_id() + 1))
+                .set("resolution", resolution.to_string())
                 .set("kbd",   seat->get_keyboard())
                 .set("mouse", seat->get_mouse())
                 .set("usb",   seat->get_usb());
