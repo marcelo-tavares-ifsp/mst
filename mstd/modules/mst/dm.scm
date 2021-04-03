@@ -165,10 +165,26 @@
 
           (log-info "  starting Xephyrs ... ")
           (for-each (lambda (seat-config)
-                      (start-xephyr (list-ref seat-config 0)
-                                    (list-ref seat-config 1)
-                                    (list-ref seat-config 2)
-                                    (list-ref seat-config 3)))
+                      (let ((seat-display    (and
+                                              (> (length seat-config) 0)
+                                              (list-ref seat-config 0)))
+                            (seat-resolution (and
+                                              (> (length seat-config) 1)
+                                              (list-ref seat-config 1)))
+                            (seat-keyboard   (and
+                                              (> (length seat-config) 2)
+                                              (list-ref seat-config 2)))
+                            (seat-mouse      (and
+                                              (> (length seat-config) 3)
+                                              (list-ref seat-config 3))))
+                        (when (and seat-display
+                                   seat-resolution
+                                   seat-keyboard
+                                   seat-mouse)
+                              (start-xephyr seat-display
+                                            seat-resolution
+                                            seat-keyboard
+                                            seat-mouse))))
                     config)
           (log-info "  starting Xephyrs ... done")
 
