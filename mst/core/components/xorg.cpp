@@ -44,7 +44,8 @@ static QString _make_monitors_section(const Configuration& config)
         monitor_tpl.set("index", QString::number(idx));
         if (idx > 0) {
             monitor_tpl.set("options",
-                            option_tpl.set("value", QString::number(idx - 1))
+                            option_tpl.set("value",
+                                           "monitor" + QString::number(idx - 1))
                             .substitute());
         } else {
             monitor_tpl.set("options", "");
