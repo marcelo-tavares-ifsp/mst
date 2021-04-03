@@ -97,7 +97,7 @@
 
 ;; Check if a seat with ID is used.
 (define (is-seat-used? id)
-  (define regexp (format #f ".*(:~a).*" id))
+  (define regexp (format #f ".* (:~a)$" id))
   (let loop ((p (open-input-pipe "who")))
     (let ((line (read-line p)))
       (catch #t
