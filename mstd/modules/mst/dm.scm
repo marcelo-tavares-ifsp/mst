@@ -163,14 +163,14 @@
                   (start-lightdm %lightdm-config)
                   (log-info "  starting lightdm ... done"))
 
-          (log-info "  starting Xephyrs ... "))
+          (log-info "  starting Xephyrs ... ")
           (for-each (lambda (seat-config)
                       (start-xephyr (list-ref seat-config 0)
                                     (list-ref seat-config 1)
                                     (list-ref seat-config 2)
                                     (list-ref seat-config 3)))
                     config)
-          (log-info "  starting Xephyrs ... done"))
+          (log-info "  starting Xephyrs ... done")
 
           (sleep 2)
 
