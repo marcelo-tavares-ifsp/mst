@@ -168,18 +168,12 @@
                       "/dev/input/by-path/pci-0000:00:14.0-usb-0:3:1.0-event-mouse"
                       "/dev/input/by-path/pci-0000:00:14.0-usb-0:4:1.0-event-kbd")
         (sleep 2)
+
         (log-info "Starting seats: ~a ..." seat-count)
-        ;; (let loop ((idx 1))
-        ;;   (add-seat idx)
-        ;;   (log-info "    starting seat: ~a ..." idx)
-        ;;   (if (< idx seat-count)
-        ;;       (loop (+ idx 1))))
+        (start-seats seat-count)
         (log-info "Starting seats: ~a ... done" seat-count)
 
-        (sleep 1)
-
         (log-info "Starting main loop")
-
         (while #t
                (let ((running-seats-number (get-running-seats)))
                  (if (< running-seats-number seat-count)
