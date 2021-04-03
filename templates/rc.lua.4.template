@@ -536,4 +536,4 @@ os.execute("sudo /usr/bin/xset -dpms")
 os.execute("sudo /usr/bin/xset s off")
 
 {{mst_autostart}}
-{{xephyr_screens}}
+

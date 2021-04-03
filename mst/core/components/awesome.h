@@ -66,7 +66,6 @@ public:
 
 extern QString make_xephyr_autostart();
 extern QString make_xephyr_rules(uint32_t sSize);
-extern QString make_xephyr_screens(QVector<shared_ptr<Seat>> seats);
 
 extern string get_awesome_raw_version();
 extern vector<int> get_awesome_version();

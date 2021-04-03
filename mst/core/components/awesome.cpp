@@ -75,7 +75,6 @@ void Awesome::prepare_rclua_template(Template& rclua_template)
 {
     rclua_template
         .set("mst_autostart",   make_xephyr_autostart())
-        .set("xephyr_screens",  make_xephyr_screens(config.get_seats()))
         .set("mst_awful_rules", make_xephyr_rules(config.get_seat_count()));
 }
 
@@ -113,38 +112,6 @@ QString awesome::make_xephyr_rules(uint32_t sSize)
     for (uint32_t idx = 1; idx <= sSize; idx++)
     {
         result += tpl.set("screen_idx", QString::number(idx)).substitute();
-    }
-    return result;
-}
-
-/**
- * @brief _make_xephyr_screens -- Generate Awesome "rc.lua" code that starts
- *     Xephyr instances.
- * @param seats -- Number of seats.
- * @return Generated Lua code as a string.
- */
-QString awesome::make_xephyr_screens(QVector<shared_ptr<Seat>> seats)
-{
-    QString result = "";
-    Template tpl = Template_manager::get_instance()
-            ->get_template("awesome/xephyr_screens.lua");
-
-    for (int32_t idx = 0; idx < seats.size(); idx++)
-    {
-        Monitor monitor = seats[idx]->get_monitor();
-        int screen_width = monitor
-                .get_current_resolution()
-                .get_width();
-        int screen_height = monitor
-                .get_current_resolution()
-                .get_height();
-        tpl.set("screen_idx",    QString::number(idx + 1));
-        tpl.set("mouse_device",  seats[idx]->get_mouse());
-        tpl.set("keybd_device",  seats[idx]->get_keyboard());
-        tpl.set("screen_width",  QString::number(screen_width));
-        tpl.set("screen_height", QString::number(screen_height));
-
-        result += tpl.substitute();
     }
     return result;
 }
