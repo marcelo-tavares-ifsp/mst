@@ -64,12 +64,14 @@ void System::disable()
 
 Template System::prepare_seat_configuration_template()
 {
-    Template seat_template("{{device_path}} {{seat_number}}");
+    Template seat_template("{{seat}} {{kbd}} {{mouse}} {{usb}}");
     QString config_contents;
     for (shared_ptr<Seat> seat : config.get_seats()) {
         seat_template
-                .set("device_path", seat->get_usb())
-                .set("seat_number", QString::number(seat->get_id() + 1));
+                .set("seat",  QString::number(seat->get_id() + 1))
+                .set("kbd",   seat->get_keyboard())
+                .set("mouse", seat->get_mouse())
+                .set("usb",   seat->get_usb());
         config_contents += seat_template.substitute() + "\n";
     }
 

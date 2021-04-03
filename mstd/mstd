@@ -54,7 +54,7 @@
   "Try to determine a display number that device specified by its
 DEVICE-PATH belongs to, using a CONFIG."
   (let* ((record       (car config))
-         (base-devpath (car record)))
+         (base-devpath (list-ref record 3)))
     (if (string-contains device-path base-devpath)
         (cadr record)
         (if (null? (cdr config))
@@ -65,7 +65,7 @@ DEVICE-PATH belongs to, using a CONFIG."
   "Broadcast a notify with a MESSAGE across all seats that are listed
 in a CONFIG."
   (for-each (lambda (rec)
-              (notify-send (cadr rec) message))
+              (notify-send (list-ref rec 0) message))
             config))
 
 (define (error-handler monitor error-message)
