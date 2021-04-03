@@ -132,21 +132,24 @@
 (define (start-seats seat-number)
   (log-info "Starting seats: ~a" seat-number)
   (let loop ((idx 1))
-    (log-info "  Checking seat: ~a ..." idx)
-    (unless (or (is-seat-used? idx)
-                (not (xephyr-started? idx))
-                (is-seat-running? idx))
-      (for-each
-       (lambda (pid)
-         (when *debug?*
-               (log-info "  Checking PID: ~a ..." pid))
-         (let ((env (proc-environ pid)))
-           (if env
-               (let ((disp (memq "DISPLAY" env)))
-                 (when (and disp (= (string->number (cdr disp)) idx))
-                       (kill pid SIGTERM))))))
-       (proc-get-pids))
-      (add-seat idx))
+    ;; (log-info "  Checking seat: ~a ..." idx)
+    ;; (log-info "    is-seat-used?:    ~a" (is-seat-used? idx))
+    ;; (log-info "    is-seat-running?: ~a" (is-seat-running? idx))
+    ;; (log-info "    xephyr-started?:  ~a" (xephyr-started? idx))
+    ;; (unless (or (is-seat-used? idx)
+    ;;             (not (xephyr-started? idx))
+    ;;             (is-seat-running? idx))
+    ;;   (for-each
+    ;;    (lambda (pid)
+    ;;      (when *debug?*
+    ;;            (log-info "  Checking PID: ~a ..." pid))
+    ;;      (let ((env (proc-environ pid)))
+    ;;        (if env
+    ;;            (let ((disp (memq "DISPLAY" env)))
+    ;;              (when (and disp (= (string->number (cdr disp)) idx))
+    ;;                    (kill pid SIGTERM))))))
+    ;;    (proc-get-pids))
+    (add-seat idx)
     (when (< idx seat-number)
       (loop (+ idx 1)))))
 
