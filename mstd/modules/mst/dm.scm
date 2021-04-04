@@ -48,6 +48,8 @@
 (define %lightdm-binary "/usr/sbin/lightdm")
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
 (define %xephyr-binary "/usr/bin/Xephyr")
+(define %xephyr-docker-image "gkaz/xephyr")
+(define %docker-binary "/usr/bin/docker")
 
 
 (define (%make-command:add-seat number)
@@ -70,6 +72,43 @@
      (else
       (log-error "Could not start the display manager")
       (error "Could not start the display manager")))))
+
+
+
+(define (start-xephyr/docker display-number resolution mouse keyboard)
+  (log-info "Starting Xephyr (~a) for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
+            %xephyr-docker-image
+            display-number resolution mouse keyboard)
+  (let ((pid (primitive-fork)))
+    (cond
+     ((zero? pid)
+      (execle %docker-binary (cons "DISPLAY=:0" (environ))
+              %docker-binary
+              "run"
+              "-it"
+              "-d"
+              "--device" (string-append "/dev/input/by-path/"
+                                        mouse)
+              "--device" (string-append "/dev/input/by-path/"
+                                        keyboard)
+              "-e" "DISPLAY=:0"
+              "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+              %xephyr-docker-image
+              %xephyr-binary
+              "-softCursor"
+              "-ac"
+              "-br"
+              "-resizeable"
+              "-mouse" (format #f "evdev,5,device=/dev/input/by-path/~a" mouse)
+              "-keybd" (format #f "evdev,,device=/dev/input/by-path/~a" keyboard)
+              "-screen" (format #f "~a" resolution)
+              (format #f ":~a" display-number)))
+     ((> pid 0)
+      (log-info "Xephyr is started.  PID: ~a" pid)
+      pid)
+     (else
+      (log-error "Could not start a Xephyr instance")
+      (error "Could not start a Xephyr instance")))))
 
 (define (start-xephyr display-number resolution mouse keyboard)
   (log-info "Starting Xephyr for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
@@ -181,7 +220,7 @@
                                    seat-resolution
                                    seat-mouse
                                    seat-keyboard)
-                              (start-xephyr seat-display
+                              (start-xephyr/docker seat-display
                                             seat-resolution
                                             seat-mouse
                                             seat-keyboard))))
