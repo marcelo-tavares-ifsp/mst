@@ -22,8 +22,8 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ## Dependencies
 * Awesome
+* Docker
 * unclutter
-* Xephyr
 * lightdm
 * bash
 * libqt5-core
