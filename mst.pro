@@ -9,7 +9,6 @@ isEmpty(PREFIX) {
 }
 
 scripts.files += \
-    scripts/mst-start-dm \
     scripts/mk_backup.sh \
     scripts/apl_backup.sh \
     scripts/mst-mount	\
@@ -62,7 +61,6 @@ INSTALLS += scripts templates templates_awesome templates_xorg \
     etc systemd_services
 
 DISTFILES += \
-    scripts/mst-start-dm \
     scripts/mk_backup.sh \
     scripts/apl_backup.sh \
     templates/bashrc.template    \
