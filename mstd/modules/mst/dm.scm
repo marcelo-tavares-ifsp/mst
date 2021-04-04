@@ -210,10 +210,6 @@
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
-      (setenv "XAUTHORITY" "/home/multiseat/.Xauthority")
-      (setenv "XDG_RUNTIME_DIR" "/run/user/501")
-      (setenv "DISPLAY" ":0")
-      (setenv "DBUS_SESSION_BUS_ADDRESS" "unix:path=/run/user/501/bus")
       (main-loop config))
      ((> pid 0)
       (log-info "Display manager started; PID: ~a" pid)
