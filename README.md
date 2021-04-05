@@ -132,3 +132,32 @@ assigned USB port, it should mount automatically by means of udisks2.
 To unmount an USB for the current user you should run `mst-umount`
 command without any arguments.  The user should be allowed to run
 `umount` command without a password.
+
+Seat configuration is stored in `/etc/mst-seats` file.
+
+### The "mstd" daemon
+
+The daemon is managed by SystemD.  For example, you can restart the
+daemon by the following command:
+
+```
+$ sudo systemctl restart mstd
+```
+
+Note that when daemon is stopped, the multiseat configuration is
+stopped too.
+
+## Disabling and enabling mst configuration
+To disable mst manually, you must issue the following commands:
+```
+$ sudo systemctl stop mstd
+$ sudo systemctl disable mstd
+$ sudo systemctl set-default graphical
+```
+
+You can restore the multiseat configuration as follows:
+```
+$ sudo systemctl enable mstd
+$ sudo systemctl start mstd
+$ sudo systemctl set-default multi-user
+```
