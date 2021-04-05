@@ -66,7 +66,14 @@ of available CPU cores to speed up the building process.)
 Installation from the RPM package:
 
 ```
-$ apt-get install awesome unclutter xorg-xephyr libqt5-core libudev-devel virtualgl qt5-base-devel rpmdevtools
+$ apt-get install \
+    awesome \
+    unclutter \
+    libqt5-core \
+    libudev-devel \
+    virtualgl \
+    qt5-base-devel \
+    rpmdevtools
 $ useradd multiseat
 $ rpm -i mst-1.0.0-1.x86_64.rpm
 ```
@@ -75,10 +82,10 @@ $ rpm -i mst-1.0.0-1.x86_64.rpm
 Install the needed components:
 ```
 $ sudo apt-get install \
+    docker.io \
     libudev-dev \
     awesome \
     unclutter \
-    xserver-xephyr \
     build-essential \
     qt5-default \
     qtbase5-dev \
