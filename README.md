@@ -108,9 +108,10 @@ Ubuntu GNU/Linux doesn't have VirtualGL in the official repository, so
 you should download `.deb` packages for your system manually from here:
 https://sourceforge.net/projects/virtualgl/files/2.6.3/
 
-Then install the downloaded package:
+There's a convenient script that allows to download and install
+VirtualGL automatically for your distribution:
 ```
-$ sudo dpkg -i virtualgl_*.deb
+$ sudo ./install_vgl.sh 2.6.3
 ```
 
 ## Usage
