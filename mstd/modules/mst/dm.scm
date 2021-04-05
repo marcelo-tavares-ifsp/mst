@@ -85,7 +85,9 @@
   (log-info "Starting Xephyr (~a) for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
             %xephyr-docker-image
             display-number resolution mouse keyboard)
-  (let ((pid (primitive-fork)))
+  (let ((pid (primitive-fork))
+        (mouse-dev    (device-name->path mouse))
+        (keyboard-dev (device-name->path keyboard)))
     (cond
      ((zero? pid)
       (execle %docker-binary (cons "DISPLAY=:0" (environ))
@@ -93,8 +95,8 @@
               "run"
               "-it"
               "-d"
-              "--device" (device-name->path mouse)
-              "--device" (device-name->path keyboard)
+              "--device" mouse-dev
+              "--device" keyboard-dev
               "-e" "DISPLAY=:0"
               "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
               %xephyr-docker-image
@@ -103,8 +105,8 @@
               "-ac"
               "-br"
               "-resizeable"
-              "-mouse" (format #f "evdev,5,device=/dev/input/by-path/~a" mouse)
-              "-keybd" (format #f "evdev,,device=/dev/input/by-path/~a" keyboard)
+              "-mouse" (format #f "evdev,5,device=~a" mouse-dev)
+              "-keybd" (format #f "evdev,,device=~a" keyboard-dev)
               "-screen" (format #f "~a" resolution)
               (format #f ":~a" display-number)))
      ((> pid 0)
