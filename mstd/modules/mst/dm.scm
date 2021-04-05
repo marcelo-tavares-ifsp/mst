@@ -75,6 +75,12 @@
 
 
 
+(define (device-name->path name)
+  (let ((event (readlink (string-append "/dev/input/by-path/"
+                                        name))))
+    (string-append "/dev/input/"
+                   (basename event))))
+
 (define (start-xephyr/docker display-number resolution mouse keyboard)
   (log-info "Starting Xephyr (~a) for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
             %xephyr-docker-image
@@ -87,10 +93,8 @@
               "run"
               "-it"
               "-d"
-              "--device" (string-append "/dev/input/by-path/"
-                                        mouse)
-              "--device" (string-append "/dev/input/by-path/"
-                                        keyboard)
+              "--device" (device-name->path mouse)
+              "--device" (device-name->path keyboard)
               "-e" "DISPLAY=:0"
               "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
               %xephyr-docker-image
