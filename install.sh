@@ -60,7 +60,7 @@ install_deps_ubuntu() {
     echo ">>> Installing required packages ... done"
 }
 
-install_deps_alt() {
+install_deps_alt_p8() {
     echo ">>> Installing required packages ..."
     apt-get install \
             guile20-devel \
@@ -83,6 +83,41 @@ install_deps_alt() {
     echo ">>> Installing required packages ... done"
 }
 
+install_deps_alt_p9() {
+    echo ">>> Installing required packages ..."
+    apt-get install \
+            guile22-devel \
+            texinfo \
+            autoconf_2.60 \
+            automake_1.14 \
+            make \
+            gettext \
+            awesome \
+            docker-ce \
+            unclutter \
+            lightdm \
+            libqt5-core \
+            libudev-devel \
+            virtualgl \
+            Xdialog \
+            guile22 \
+            libguile20
+    echo ">>> Installing required packages ... done"
+}
+
+install_deps_alt() {
+    local version=$(lsb_release -r \
+			| sed -e 's/Release:.*\([0-9]\).[0-9]/\1/g')
+    if [ "$version" -eq 8 ]; then
+	install_deps_alt_p8
+    elif [ "$version" -eq 9 ]; then
+	install_deps_alt_p9
+    else
+	echo "ERROR: Unsupported ALT Linux release"
+	exit 1
+    fi
+}
+
 print_help_and_exit() {
 cat <<EOF
 Usage: ./install.sh <distribution-name>
@@ -102,6 +137,7 @@ EOF
 # Entry point
 main() {
     local distro="$1"
+    local version
 
     case $distro in
         "alt")
