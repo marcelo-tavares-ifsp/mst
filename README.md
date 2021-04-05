@@ -21,6 +21,9 @@ terms of [Creative Commons Attribution-ShareAlike 4.0
 International](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ## Dependencies
+
+### Runtime
+
 * Awesome
 * Docker
 * unclutter
@@ -33,7 +36,10 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 * guile20
 * libguile20
 
-### Build-time tependencies
+### Build-time
+* Automake
+* Autoconf
+* make
 * guile20-devel
 * libguile20-devel
 * texinfo
@@ -52,9 +58,7 @@ $ sudo make install_deps
 $ sudo make install
 ```
 
-### Installation using an RPM package
-
-#### AltLinux
+### Building an RPM package on ALT Linux
 
 An RPM package for the project can be built as follows:
 ```
@@ -78,10 +82,13 @@ $ useradd multiseat
 $ rpm -i mst-1.0.0-1.x86_64.rpm
 ```
 
-### Ubuntu GNU/Linux (experimental)
+## Ubuntu GNU/Linux (experimental)
 Install the needed components:
 ```
 $ sudo apt-get install \
+    autoconf \
+    automake \
+    make \
     docker.io \
     libudev-dev \
     awesome \
