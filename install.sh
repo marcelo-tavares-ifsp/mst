@@ -142,6 +142,8 @@ main() {
     case $distro in
         "alt")
             install_deps_alt
+            build
+            install_mst
             ;;
         "ubuntu")
             install_deps_ubuntu
