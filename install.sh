@@ -36,6 +36,7 @@ install_mst() {
 }
 
 install_deps_ubuntu() {
+    apt update
     echo ">>> Installing VirtualGL ... "
     ./install_vgl.sh
     echo ">>> Installing VirtualGL ... done"
@@ -100,14 +101,14 @@ install_deps_alt_p9() {
             libudev-devel \
             virtualgl \
             Xdialog \
-            guile22 \
-            libguile20
+            guile22
     echo ">>> Installing required packages ... done"
 }
 
 install_deps_alt() {
     local version=$(lsb_release -r \
 			| sed -e 's/Release:.*\([0-9]\).[0-9]/\1/g')
+    apt-get update
     if [ "$version" -eq 8 ]; then
 	install_deps_alt_p8
     elif [ "$version" -eq 9 ]; then
