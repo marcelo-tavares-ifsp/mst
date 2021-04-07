@@ -42,7 +42,7 @@ install_deps_ubuntu() {
     echo ">>> Installing VirtualGL ... done"
 
     echo ">>> Installing required packages ..."
-    apt install \
+    apt install -y \
         autoconf \
         automake \
         docker.io \
@@ -63,7 +63,7 @@ install_deps_ubuntu() {
 
 install_deps_alt_p8() {
     echo ">>> Installing required packages ..."
-    apt-get install \
+    apt-get install -y \
             guile20-devel \
             libguile20-devel \
             texinfo \
@@ -86,7 +86,7 @@ install_deps_alt_p8() {
 
 install_deps_alt_p9() {
     echo ">>> Installing required packages ..."
-    apt-get install \
+    apt-get install -y \
             guile22-devel \
             texinfo \
             autoconf_2.60 \
