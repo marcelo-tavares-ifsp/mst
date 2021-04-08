@@ -165,6 +165,8 @@ main() {
             install_mst
             ;;
     esac
+    systemctl enable docker
+    systemctl start docker
 }
 
 main $*
