@@ -55,6 +55,7 @@ install_deps_ubuntu() {
         automake \
         docker.io \
         libudev-dev \
+        lightdm \
         awesome \
         unclutter \
         build-essential \
