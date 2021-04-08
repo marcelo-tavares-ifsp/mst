@@ -38,7 +38,7 @@ install_mst() {
 install_deps_ubuntu() {
     apt update
     echo ">>> Installing VirtualGL ... "
-    ./install_vgl.sh
+    ./install_vgl.sh 2.6.3
     echo ">>> Installing VirtualGL ... done"
 
     echo ">>> Installing required packages ..."
