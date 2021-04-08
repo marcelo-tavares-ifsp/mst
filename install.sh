@@ -22,6 +22,8 @@
 
 ###
 
+MST_USER="multiseat"
+
 build() {
     git submodule init
     git submodule update --remote
@@ -41,6 +43,16 @@ build_ubuntu() {
 install_mst() {
     make install_deps
     make install
+}
+
+add_multiseat_user() {
+    useradd -m -s /bin/bash $MST_USER
+}
+
+ubuntu_add_user_to_groups() {
+    usermod -a -G docker $MST_USER
+    usermod -a -G video $MST_USER
+    usermod -a -G sudo $MST_USER
 }
 
 install_deps_ubuntu() {
@@ -149,6 +161,8 @@ main() {
     local distro="$1"
     local version
 
+    add_multiseat_user
+
     case $distro in
         "alt")
             install_deps_alt
@@ -157,6 +171,7 @@ main() {
             ;;
         "ubuntu")
             install_deps_ubuntu
+            ubuntu_add_user_to_groups
             build_ubuntu
             install_mst
             ;;
