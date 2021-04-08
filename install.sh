@@ -30,6 +30,14 @@ build() {
     make -j2
 }
 
+build_ubuntu() {
+    git submodule init
+    git submodule update --remote
+    qmake
+    make -j2 build_deps
+    make -j2
+}
+
 install_mst() {
     make install_deps
     make install
@@ -148,7 +156,7 @@ main() {
             ;;
         "ubuntu")
             install_deps_ubuntu
-            build
+            build_ubuntu
             install_mst
             ;;
         *)
