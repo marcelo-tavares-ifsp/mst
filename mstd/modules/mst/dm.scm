@@ -34,11 +34,13 @@
   #:use-module (mst log)
   #:export (add-seat
             dm-start
+	    dm-stop-xephyrs
             is-seat-used?
             get-running-seats
             start-lightdm
 
-            %make-command:add-seat))
+            %make-command:add-seat
+	    %make-command:xephyr/docker))
 
 (define *debug?* #f)
 
@@ -81,40 +83,51 @@
     (string-append "/dev/input/"
                    (basename event))))
 
+(define (%make-command:xephyr/docker display-number resolution mouse keyboard)
+  (let ((mouse-dev    (device-name->path mouse))
+        (keyboard-dev (device-name->path keyboard)))
+    (string-join (list %docker-binary
+		       "run"
+		       "-it"
+		       "-d"
+		       "--device" mouse-dev
+		       "--device" keyboard-dev
+		       "-e" "DISPLAY=:0"
+		       "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+		       %xephyr-docker-image
+		       %xephyr-binary
+		       "-softCursor"
+		       "-ac"
+		       "-br"
+		       "-resizeable"
+		       "-mouse" (format #f "evdev,5,device=~a" mouse-dev)
+		       "-keybd" (format #f "evdev,,device=~a" keyboard-dev)
+		       "-screen" (format #f "~a" resolution)
+		       (format #f ":~a" display-number)))))
+
+(define *xephyrs* (make-hash-table 2))
+
 (define (start-xephyr/docker display-number resolution mouse keyboard)
   (log-info "Starting Xephyr (~a) for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
             %xephyr-docker-image
             display-number resolution mouse keyboard)
-  (let ((pid (primitive-fork))
-        (mouse-dev    (device-name->path mouse))
-        (keyboard-dev (device-name->path keyboard)))
-    (cond
-     ((zero? pid)
-      (execle %docker-binary (cons "DISPLAY=:0" (environ))
-              %docker-binary
-              "run"
-              "-it"
-              "-d"
-              "--device" mouse-dev
-              "--device" keyboard-dev
-              "-e" "DISPLAY=:0"
-              "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
-              %xephyr-docker-image
-              %xephyr-binary
-              "-softCursor"
-              "-ac"
-              "-br"
-              "-resizeable"
-              "-mouse" (format #f "evdev,5,device=~a" mouse-dev)
-              "-keybd" (format #f "evdev,,device=~a" keyboard-dev)
-              "-screen" (format #f "~a" resolution)
-              (format #f ":~a" display-number)))
-     ((> pid 0)
-      (log-info "Xephyr is started.  PID: ~a" pid)
-      pid)
-     (else
+  (let ((port (open-input-pipe (%make-command:xephyr/docker display-number
+							    resolution
+							    mouse
+							    keyboard))))
+    (unless port
       (log-error "Could not start a Xephyr instance")
-      (error "Could not start a Xephyr instance")))))
+      (error "Could not start a Xephyr instance"))
+
+    (let ((output (read-line port)))
+
+      (when (eof-object? output)
+	(log-error "Could not start a Xephyr instance")
+	(error "Could not start a Xephyr instance"))
+
+      (log-info "Xephyr is started.  Container ID: ~a" output)
+
+      output)))
 
 (define (start-xephyr display-number resolution mouse keyboard)
   (log-info "Starting Xephyr for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
@@ -226,10 +239,11 @@
                                    seat-resolution
                                    seat-mouse
                                    seat-keyboard)
-                              (start-xephyr/docker seat-display
-                                            seat-resolution
-                                            seat-mouse
-                                            seat-keyboard))))
+			  (let ((id (start-xephyr/docker seat-display
+							 seat-resolution
+							 seat-mouse
+							 seat-keyboard)))
+			    (hash-set! *xephyrs* seat-display id)))))
                     config)
           (log-info "  starting Xephyrs ... done")
 
@@ -255,9 +269,26 @@
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
+      (let ((sighandler (lambda (arg)
+			  (dm-stop-xephyrs)
+			  (exit))))
+	(sigaction SIGINT sighandler)
+	(sigaction SIGTERM sighandler))
       (main-loop config))
      ((> pid 0)
       (log-info "Display manager started; PID: ~a" pid)
       pid)
      (else
       (error "Could not start the DM main loop")))))
+
+(define (dm-stop-xephyrs)
+  (hash-for-each
+   (lambda (key value)
+     (log-info "Stopping container ~a for seat: ~a ..."
+	       key value)
+
+     (system* %docker-binary "stop" value)
+
+     (log-info "Stopping container ~a for seat: ~a ... done"
+	       key value) )
+   *xephyrs*))
