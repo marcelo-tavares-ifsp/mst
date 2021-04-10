@@ -52,6 +52,7 @@ add_multiseat_user() {
 ubuntu_add_user_to_groups() {
     usermod -a -G docker $MST_USER
     usermod -a -G video $MST_USER
+    usermod -a -G render $MST_USER
     usermod -a -G sudo $MST_USER
 }
 
