@@ -33,13 +33,13 @@
   #:use-module (mst system)
   #:use-module (mst log)
   #:export (add-seat
-            dm-start
+	    dm-start
 	    dm-stop-xephyrs
-            is-seat-used?
-            get-running-seats
-            start-lightdm
+	    is-seat-used?
+	    get-running-seats
+	    start-lightdm
 
-            %make-command:add-seat
+	    %make-command:add-seat
 	    %make-command:xephyr/docker))
 
 (define *debug?* #f)
@@ -67,7 +67,7 @@
     (cond
      ((zero? pid)
       (execle %lightdm-binary (environ)
-              %lightdm-binary "--config" config-file))
+	      %lightdm-binary "--config" config-file))
      ((> pid 0)
       (log-info "Lightdm started.  PID: ~a" pid)
       pid)
@@ -79,31 +79,31 @@
 
 (define (device-name->path name)
   (let ((event (readlink (string-append "/dev/input/by-path/"
-                                        name))))
+					name))))
     (string-append "/dev/input/"
-                   (basename event))))
+		   (basename event))))
 
 (define (%make-command:xephyr/docker display-number resolution mouse keyboard)
   (let ((mouse-dev    (device-name->path mouse))
-        (keyboard-dev (device-name->path keyboard)))
+	(keyboard-dev (device-name->path keyboard)))
     (string-join (list %docker-binary
-		       "run"
-		       "-it"
-		       "-d"
-		       "--device" mouse-dev
-		       "--device" keyboard-dev
-		       "-e" "DISPLAY=:0"
-		       "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
-		       %xephyr-docker-image
-		       %xephyr-binary
-		       "-softCursor"
-		       "-ac"
-		       "-br"
-		       "-resizeable"
-		       "-mouse" (format #f "evdev,5,device=~a" mouse-dev)
-		       "-keybd" (format #f "evdev,,device=~a" keyboard-dev)
-		       "-screen" (format #f "~a" resolution)
-		       (format #f ":~a" display-number)))))
+                       "run"
+                       "-it"
+                       "-d"
+                       "--device" mouse-dev
+                       "--device" keyboard-dev
+                       "-e" "DISPLAY=:0"
+                       "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+                       %xephyr-docker-image
+                       %xephyr-binary
+                       "-softCursor"
+                       "-ac"
+                       "-br"
+                       "-resizeable"
+                       "-mouse" (format #f "evdev,5,device=~a" mouse-dev)
+                       "-keybd" (format #f "evdev,,device=~a" keyboard-dev)
+                       "-screen" (format #f "~a" resolution)
+                       (format #f ":~a" display-number)))))
 
 (define *xephyrs* (make-hash-table 2))
 
@@ -112,9 +112,9 @@
             %xephyr-docker-image
             display-number resolution mouse keyboard)
   (let ((port (open-input-pipe (%make-command:xephyr/docker display-number
-							    resolution
-							    mouse
-							    keyboard))))
+                                                            resolution
+                                                            mouse
+                                                            keyboard))))
     (unless port
       (log-error "Could not start a Xephyr instance")
       (error "Could not start a Xephyr instance"))
@@ -122,8 +122,8 @@
     (let ((output (read-line port)))
 
       (when (eof-object? output)
-	(log-error "Could not start a Xephyr instance")
-	(error "Could not start a Xephyr instance"))
+        (log-error "Could not start a Xephyr instance")
+        (error "Could not start a Xephyr instance"))
 
       (log-info "Xephyr is started.  Container ID: ~a" output)
 
@@ -217,9 +217,9 @@
         (begin
           (log-info "Graphics available")
           (unless (lightdm-started?)
-                  (log-info "  starting lightdm ...")
-                  (start-lightdm %lightdm-config)
-                  (log-info "  starting lightdm ... done"))
+            (log-info "  starting lightdm ...")
+            (start-lightdm %lightdm-config)
+            (log-info "  starting lightdm ... done"))
 
           (log-info "  starting Xephyrs ... ")
           (for-each (lambda (seat-config)
@@ -239,11 +239,11 @@
                                    seat-resolution
                                    seat-mouse
                                    seat-keyboard)
-			  (let ((id (start-xephyr/docker seat-display
-							 seat-resolution
-							 seat-mouse
-							 seat-keyboard)))
-			    (hash-set! *xephyrs* seat-display id)))))
+                          (let ((id (start-xephyr/docker seat-display
+                                                         seat-resolution
+                                                         seat-mouse
+                                                         seat-keyboard)))
+                            (hash-set! *xephyrs* seat-display id)))))
                     config)
           (log-info "  starting Xephyrs ... done")
 
@@ -270,10 +270,10 @@
     (cond
      ((zero? pid)
       (let ((sighandler (lambda (arg)
-			  (dm-stop-xephyrs)
-			  (exit))))
-	(sigaction SIGINT sighandler)
-	(sigaction SIGTERM sighandler))
+                          (dm-stop-xephyrs)
+                          (exit))))
+        (sigaction SIGINT sighandler)
+        (sigaction SIGTERM sighandler))
       (main-loop config))
      ((> pid 0)
       (log-info "Display manager started; PID: ~a" pid)
@@ -285,10 +285,10 @@
   (hash-for-each
    (lambda (key value)
      (log-info "Stopping container ~a for seat: ~a ..."
-	       key value)
+               key value)
 
      (system* %docker-binary "stop" value)
 
      (log-info "Stopping container ~a for seat: ~a ... done"
-	       key value) )
+               key value) )
    *xephyrs*))
