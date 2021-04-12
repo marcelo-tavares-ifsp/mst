@@ -292,7 +292,7 @@ void Platform::system_reboot()
  */
 struct passwd* Platform::getpwnam(const QString& name)
 {
-    return getpwnam(name.toStdString().c_str());
+    return ::getpwnam(name.toStdString().c_str());
 }
 
 /**
@@ -303,5 +303,5 @@ struct passwd* Platform::getpwnam(const QString& name)
  */
 void Platform::chown(const QString& path, uid_t uid, gid_t gid)
 {
-    chown(path.toStdString().c_str(), uid, gid);
+    ::chown(path.toStdString().c_str(), uid, gid);
 }
