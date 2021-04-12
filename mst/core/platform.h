@@ -46,6 +46,9 @@ public:
     static void system_set_default_runlevel(const QString& target);
 
     static int exec(const QString& command);
+
+    static struct passwd* getpwnam(const QString& name);
+    static void chown(const QString& path, uid_t uid, gid_t gid);
 };
 
 namespace platform {

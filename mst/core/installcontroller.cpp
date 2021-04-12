@@ -5,6 +5,7 @@
 #include <QComboBox>
 #include <QCheckBox>
 #include <memory>
+#include <pwd.h> // getpwnam
 
 #include "core/platform.h"
 #include "ui/seat_widget/seat_widget.h"
@@ -166,6 +167,7 @@ void InstallController::install_files()
     Platform::fs_mkdir(mst_user_home + ".config/awesome/");
     bool is_pam_mkhomedir_used = Platform::pam_is_mkhomedir_used();
     QString skel = "/etc/skel/";
+    struct passwd* pwd = Platform::getpwnam(mst_user);
 
     vector<Component*> components = component_manager->get_components();
     for (auto comp : components) {
@@ -176,6 +178,7 @@ void InstallController::install_files()
                 Template tpl(dst);
                 tpl.set("home", mst_user_home);
                 install(src, tpl.substitute());
+                Platform::chown(tpl.substitute(), pwd->pw_uid, pwd->pw_gid);
                 if (is_pam_mkhomedir_used) {
                     tpl.set("home", skel);
                     install(src, tpl.substitute());

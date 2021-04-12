@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <linux/reboot.h>
 #include <sys/reboot.h>
+#include <pwd.h> // getpwnam
 #include <QLoggingCategory>
 #include <QString>
 #include <QRegularExpression>
@@ -282,4 +283,25 @@ void Platform::system_reboot()
         throw Platform_exception("Cound not set UID");
     }
     reboot(RB_AUTOBOOT);
+}
+
+/**
+ * @brief Platform::getpwnam -- Get the passwd entry for the given user name.
+ * @param name -- Username to get passwd entry for.
+ * @return A pointer to a passwd entry.
+ */
+struct passwd* Platform::getpwnam(const QString& name)
+{
+    return getpwnam(name.toStdString().c_str());
+}
+
+/**
+ * @brief Platform::chown -- Change owner of a file specified by the path.
+ * @param path -- Path to a file.
+ * @param uid -- User ID.
+ * @param gid -- Group ID.
+ */
+void Platform::chown(const QString& path, uid_t uid, gid_t gid)
+{
+    chown(path.toStdString().c_str(), uid, gid);
 }
