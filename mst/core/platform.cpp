@@ -303,5 +303,7 @@ struct passwd* Platform::getpwnam(const QString& name)
  */
 void Platform::chown(const QString& path, uid_t uid, gid_t gid)
 {
-    ::chown(path.toStdString().c_str(), uid, gid);
+     if (::chown(path.toStdString().c_str(), uid, gid) != 0) {
+	  throw Platform_exception("Could not apply 'chown' on " + path);
+     }
 }
