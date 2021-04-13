@@ -8,6 +8,8 @@
 #include <QString>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QFileInfo>
+#include <QDir>
 
 #include "core/types/xrandr_monitor.h"
 #include "core/utilites/utilites.h"
@@ -300,10 +302,23 @@ struct passwd* Platform::getpwnam(const QString& name)
  * @param path -- Path to a file.
  * @param uid -- User ID.
  * @param gid -- Group ID.
+ * @param is_recursive -- If set to 'true' change owner of the directories
+ *     recursively.
  */
-void Platform::chown(const QString& path, uid_t uid, gid_t gid)
+void Platform::chown(const QString& path, uid_t uid, gid_t gid,
+                     bool is_recursive)
 {
      if (::chown(path.toStdString().c_str(), uid, gid) != 0) {
-	  throw Platform_exception("Could not apply 'chown' on " + path);
+          throw Platform_exception("Could not apply 'chown' on " + path);
+     }
+
+     QFileInfo file_info(path);
+     if (file_info.isDir() && is_recursive) {
+          QDir root(path);
+          QFileInfoList list = root.entryInfoList(QDir::NoDotAndDotDot,
+                                                  QDir::DirsFirst);
+          for(int idx = 0; idx < list.size(); ++idx) {
+               chown(list.at(idx).absoluteFilePath(), uid, gid);
+          }
      }
 }

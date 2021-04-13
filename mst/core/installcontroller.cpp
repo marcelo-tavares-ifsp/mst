@@ -178,7 +178,6 @@ void InstallController::install_files()
                 Template tpl(dst);
                 tpl.set("home", mst_user_home);
                 install(src, tpl.substitute());
-                Platform::chown(tpl.substitute(), pwd->pw_uid, pwd->pw_gid);
                 if (is_pam_mkhomedir_used) {
                     tpl.set("home", skel);
                     install(src, tpl.substitute());
@@ -188,6 +187,8 @@ void InstallController::install_files()
             }
         }
     }
+
+    Platform::chown(mst_user_home, pwd->pw_uid, pwd->pw_gid, true);
 }
 
 void InstallController::enable_mst()

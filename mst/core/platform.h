@@ -48,7 +48,8 @@ public:
     static int exec(const QString& command);
 
     static struct passwd* getpwnam(const QString& name);
-    static void chown(const QString& path, uid_t uid, gid_t gid);
+    static void chown(const QString& path, uid_t uid, gid_t gid,
+	bool is_recursive = false);
 };
 
 namespace platform {
