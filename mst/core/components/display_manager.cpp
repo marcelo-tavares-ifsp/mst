@@ -48,32 +48,6 @@ Template display_manager::prepare_lightdm_template()
     return tpl;
 }
 
-static void _configure_x11() {
-    if (Platform::xset_dpms() || Platform::xset_soff())
-    {
-        qCritical(display_manager_category) << "Could not configure X11.";
-        throw "Could not configure X11.";
-    }
-}
-
 void Display_manager::enable() {
-//    QString lightdm_cmd = "/usr/sbin/lightdm --config ";// + config_path;
-//    if (Platform::exec(lightdm_cmd) != 0) {
-//        throw Component_error("Could not start lightdm");
-//    }
-
-//    _configure_x11();
-}
-
-void Display_manager::add_seat(int seat_number) {
-    QString lightdm_cmd = "/usr/bin/dm-tool add-local-x-seat " + seat_number;
-    if (Platform::exec(lightdm_cmd) != 0) {
-        throw Component_error("Could not configure seats");
-    }
-}
-
-void Display_manager::add_seats(int count) {
-    for (int idx = 1; idx <= count; ++idx) {
-        add_seat(idx);
-    }
+     // Do nothing.
 }

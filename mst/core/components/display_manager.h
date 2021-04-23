@@ -31,9 +31,6 @@ public:
     void disable() {
         /* Do nothing. */
     }
-
-    void add_seat(int seat_number);
-    void add_seats(int count);
 };
 
 
