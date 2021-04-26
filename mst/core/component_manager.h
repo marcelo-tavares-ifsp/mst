@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <QLoggingCategory>
+#include <QString>
 
 #include "component.h"
 
