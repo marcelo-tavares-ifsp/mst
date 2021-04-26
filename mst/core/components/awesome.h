@@ -32,8 +32,6 @@
 #include "../component.h"
 #include <QLoggingCategory>
 
-using namespace std;
-
 Q_DECLARE_LOGGING_CATEGORY(component_awesome_category)
 
 namespace awesome {
@@ -67,8 +65,8 @@ public:
 extern QString make_xephyr_autostart();
 extern QString make_xephyr_rules(uint32_t sSize);
 
-extern string get_awesome_raw_version();
-extern vector<int> get_awesome_version();
+extern std::string get_awesome_raw_version();
+extern std::vector<int> get_awesome_version();
 
 }
 
