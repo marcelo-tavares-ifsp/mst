@@ -154,6 +154,7 @@ void InstallWindow::on_btnBackup_clicked()
 
 void InstallWindow::initial_listeners()
 {
+    qDebug(install_window_category(), "initial_listeners: Creating and starting I/O listeners ...");
     Device_listener* mouse_listener
             = new Input_device_listener(DEVICE_TYPE::MOUSE,
                                         inst_controller->get_list_of_mice());
@@ -164,16 +165,17 @@ void InstallWindow::initial_listeners()
             = new USB_device_listener(DEVICE_TYPE::USB);
 
     QThreadPool::globalInstance()->start(mouse_listener);
-    qInfo(install_window_category()) << "MOUSE was started";
+    qInfo(install_window_category()) << "Mouse input listener was started";
     initial_calibration_dialog(mouse_listener);
 
     QThreadPool::globalInstance()->start(keybd_listener);
-    qInfo(install_window_category()) << "KEYBOARD was started";
+    qInfo(install_window_category()) << "Keyboard input listener was started";
     initial_calibration_dialog(keybd_listener);
 
     QThreadPool::globalInstance()->start(usb_listener);
-    qInfo(install_window_category()) << "USB was started";
+    qInfo(install_window_category()) << "USB listener was started";
     initial_calibration_dialog(usb_listener);
+    qDebug(install_window_category(), "initial_listeners: Creating and starting I/O listeners ... done");
 }
 
 void InstallWindow::initial_calibration_dialog(Device_listener* device_listener)
@@ -188,11 +190,13 @@ void InstallWindow::initial_calibration_dialog(Device_listener* device_listener)
 
 void InstallWindow::attach_signals(Device_listener* listener, CalibrationDialog* cd)
 {
+    qDebug(install_window_category(), "Attaching signals from listeners to slots ...");
     connect(listener, SIGNAL(device_found(QString, DEVICE_TYPE)),
         inst_controller, SLOT(set_seat_device(QString, DEVICE_TYPE)));
 
     connect(listener, SIGNAL(work_done()), cd, SLOT(work_done()));
     connect(cd, SIGNAL(cancel()), listener, SLOT(cancel()));
+    qDebug(install_window_category(), "Attaching signals from listeners to slots ... done");
 }
 
 
@@ -210,7 +214,7 @@ void InstallWindow::on_btnConfigurationEnd_clicked()
         show_page(Ui::Page::CONFIGURATION_END);
         InstallController* con = InstallController::get_instance();
         con->begin_install();
-        qDebug(install_window_category) << "going to the 3rd panel...";
+        qDebug(install_window_category) << "Going to the 3rd panel...";
     }
     else
     {
