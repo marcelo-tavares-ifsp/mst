@@ -11,10 +11,10 @@
 /**
  * @brief The Component_error class -- describes a generic component error.
  */
-class Component_error : public runtime_error {
+class Component_error : public std::runtime_error {
 public:
-    Component_error(string what)
-        : runtime_error(what) {
+    Component_error(std::string what)
+        : std::runtime_error(what) {
         // Do nothing.
     }
 };
