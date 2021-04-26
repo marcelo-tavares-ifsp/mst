@@ -8,8 +8,6 @@
 
 #include "../component.h"
 
-using namespace std;
-
 namespace xorg {
 
 //// Constants.
