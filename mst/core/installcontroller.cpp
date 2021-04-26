@@ -270,12 +270,12 @@ bool InstallController::config_is_valid()
     return config->is_valid();
 }
 
-QVector<QString> InstallController::get_list_of_mice()
+QVector<QString> InstallController::get_mice()
 {
     return *list_mice;
 }
 
-QVector<QString> InstallController::get_list_of_keybs()
+QVector<QString> InstallController::get_keyboards()
 {
     return *list_keybs;
 }

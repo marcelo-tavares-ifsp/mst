@@ -48,8 +48,8 @@ public:
     void enable_mst();
     void disable_mst();
 
-    QVector<QString> get_list_of_mice();
-    QVector<QString> get_list_of_keybs();
+    QVector<QString> get_mice();
+    QVector<QString> get_keyboards();
 
     void set_debug_allow_device_collisions(bool value);
     void set_debug_allow_empty_devices(bool value);

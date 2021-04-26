@@ -157,10 +157,10 @@ void InstallWindow::initial_listeners()
     qDebug(install_window_category(), "initial_listeners: Creating and starting I/O listeners ...");
     Device_listener* mouse_listener
             = new Input_device_listener(DEVICE_TYPE::MOUSE,
-                                        inst_controller->get_list_of_mice());
+                                        inst_controller->get_mice());
     Device_listener* keybd_listener
             = new Input_device_listener(DEVICE_TYPE::KEYBOARD,
-                                        inst_controller->get_list_of_keybs());
+                                        inst_controller->get_keyboards());
     Device_listener* usb_listener
             = new USB_device_listener(DEVICE_TYPE::USB);
 
