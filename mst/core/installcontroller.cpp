@@ -110,17 +110,17 @@ QString InstallController::get_instruction(Device_listener * device_listener)
 
     switch (device_listener->type) {
     case DEVICE_TYPE::KEYBOARD:
-        instruction = "Пожалуйста нажимайте на кнопки той клавиатуры,"
+        instruction = "Пожалуйста, нажимайте на кнопки той клавиатуры,"
                       " которую хотите использовать для выбранного рабочего"
                       " места.";
         break;
     case DEVICE_TYPE::MOUSE:
-        instruction = "Пожалуйста нажимайте на кнопки той мыши,"
+        instruction = "Пожалуйста, нажимайте на кнопки той мыши,"
                       " которую хотите использовать для выбранного рабочего"
                       " места.";
         break;
     case DEVICE_TYPE::USB:
-        instruction = "Пожалуйста вставьте USB  -устройство в тот USB-разъём,"
+        instruction = "Пожалуйста вставьте USB-устройство в тот USB-разъём,"
                       " который хотите использовать для выбранного рабочего"
                       " места.";
         break;
