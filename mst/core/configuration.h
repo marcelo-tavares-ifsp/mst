@@ -6,8 +6,6 @@
 #include <QLoggingCategory>
 #include "core/types/seat.h"
 
-using namespace std;
-
 Q_DECLARE_LOGGING_CATEGORY(configuration_category)
 
 class Configuration
@@ -28,7 +26,7 @@ public:
      * @brief add_seat -- Add a new seat.
      * @param seat -- A Seat instance.
      */
-    void add_seat(shared_ptr<Seat> seat);
+    void add_seat(std::shared_ptr<Seat> seat);
 
     /**
      * @brief get_seat_count -- Get number of added seats.
@@ -41,16 +39,16 @@ public:
      * @param idx -- A seat index.
      * @return A shared pointer to a seat.
      */
-    shared_ptr<Seat> get_seat(int32_t idx);
+    std::shared_ptr<Seat> get_seat(int32_t idx);
 
     /**
      * @brief get_seats -- Get a vector of seats.
      * @return QVector of Seat instances.
      */
-    QVector<shared_ptr<Seat>> get_seats();
+    QVector<std::shared_ptr<Seat>> get_seats();
 
 private:
-    QVector<shared_ptr<Seat>> seats;
+    QVector<std::shared_ptr<Seat>> seats;
 
     /**
      * @brief debug_allow_device_collisions -- if this option is set, then

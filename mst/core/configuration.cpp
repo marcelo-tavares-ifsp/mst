@@ -1,5 +1,7 @@
 #include "configuration.h"
 
+using namespace std;
+
 Q_LOGGING_CATEGORY(configuration_category, "mst.core.configuration")
 
 Configuration::Configuration()
