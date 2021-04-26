@@ -4,12 +4,10 @@
 #include <map>
 #include <string>
 
-using namespace std;
-
-class DSV_exception : public runtime_error
+class DSV_exception : public std::runtime_error
 {
 public:
-    DSV_exception(const string& what)
+    DSV_exception(const std::string& what)
         : runtime_error(what)
     {
         /* Do nothing */
@@ -19,14 +17,14 @@ public:
 class DSV
 {
 public:
-    DSV(string file_name);
-    void put(string key, string value);
-    const string get(const string key) const;
+    DSV(std::string file_name);
+    void put(std::string key, std::string value);
+    const std::string get(const std::string key) const;
     void save();
 
 private:
-    string file_name;
-    map<string, string> data;
+    std::string file_name;
+    std::map<std::string, std::string> data;
 };
 
 #endif // DSV_H
