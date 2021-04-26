@@ -4,6 +4,8 @@
 
 #include "seat.h"
 
+using namespace std;
+
 Q_LOGGING_CATEGORY(seat_category, "mst.core.types.seat")
 
 std::ostream& operator<< (std::ostream& os, Seat& seat) {

@@ -68,7 +68,7 @@ public:
      * @param other -- other seat shared pointer to check.
      * @return true if seats have common devices, false otherwise.
      */
-    bool intersects(const shared_ptr<Seat> other) const;
+    bool intersects(const std::shared_ptr<Seat> other) const;
 
     friend std::ostream& operator<< (std::ostream& os, Seat& seat);
 

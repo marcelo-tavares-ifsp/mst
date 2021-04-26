@@ -3,6 +3,8 @@
 #include "../types/xrandr_monitor.h"
 #include "../types/resolution.h"
 
+using namespace std;
+
 Monitor::Monitor()
 {
 

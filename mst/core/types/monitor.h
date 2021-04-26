@@ -7,8 +7,6 @@
 #include "resolution.h"
 #include "xrandr_monitor.h"
 
-using namespace std;
-
 /**
  * @brief The Monitor class -- describes a monitor connected to the system.
  */

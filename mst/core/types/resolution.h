@@ -4,8 +4,6 @@
 #include <ostream>
 #include <QObject>
 
-using namespace std;
-
 /**
  * @brief The Resolution class -- describes a monitor resolution.
  */
