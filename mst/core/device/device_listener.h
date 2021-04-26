@@ -1,7 +1,6 @@
 #ifndef INPUTDIVECELISTENER_H
 #define INPUTDIVECELISTENER_H
 
-#include <string>
 #include <vector>
 
 #include <QObject>
@@ -9,15 +8,10 @@
 #include <QString>
 #include <algorithm>
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
 #include <QLoggingCategory>
 #include "core/path_manager.h"
 #include "core/utilites/utilites.h"
 #include "core/device/device.h"
-
-using namespace std;
 
 Q_DECLARE_LOGGING_CATEGORY(input_device_listener_category)
 
@@ -27,7 +21,7 @@ enum DEVICE_TYPE {
     USB
 };
 
-class Device_listener_exception : public runtime_error
+class Device_listener_exception : public std::runtime_error
 {
   public:
     Device_listener_exception(DEVICE_TYPE type, QString& what)

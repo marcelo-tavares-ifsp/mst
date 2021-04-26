@@ -2,6 +2,8 @@
 #include "device_listener.h"
 #include "device.h"
 
+using namespace std;
+
 Q_LOGGING_CATEGORY(input_device_listener_category,
                    "mst.core.input_device_listener")
 
