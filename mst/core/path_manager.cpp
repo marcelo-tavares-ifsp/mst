@@ -2,6 +2,8 @@
 
 #include "path_manager.h"
 
+using namespace std;
+
 Q_LOGGING_CATEGORY(path_manager_category, "mst.core.path_manager")
 
 string devicePath = "/dev/input/by-path/";
