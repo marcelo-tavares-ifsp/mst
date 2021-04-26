@@ -54,7 +54,8 @@ bool Configuration::is_valid()
                     if (seats[i]->intersects(seats[j]))
                     {
                         qWarning(configuration_category())
-                                << "COLLISION is found";
+                                << "Collision is found: "
+                                << seats[i] << " intersects " << seats[j];
                         return false;
                     }
                 }
@@ -62,7 +63,8 @@ bool Configuration::is_valid()
 
             if ((! debug_allow_empty_devices) && (! seats[i]->is_configured()))
             {
-                qWarning(configuration_category()) << "EMPTY is found";
+                qWarning(configuration_category()) << "Seat is not properly configured: "
+                                                   << seats[j];
                 return false;
             }
         }
