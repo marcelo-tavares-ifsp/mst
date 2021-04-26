@@ -9,8 +9,6 @@
 
 Q_DECLARE_LOGGING_CATEGORY(path_manager_category)
 
-using namespace std;
-
 class Path_manager
 {
 public:
@@ -23,45 +21,45 @@ public:
         return instance;
     }
     void set_config(DSV* config);
-    string get_device_path();
+    std::string get_device_path();
     const QString get_mst_user();
-    string get_output_dir();
-    string get_usr_share_dir();
-    string get_awesome_config();
-    string get_sudoers_d_config();
-    string get_rclua_config();
-    string get_awesome_xephyr_rules_template();
-    string get_xorg_config();
-    string get_bashrc_config();
-    string get_xinitrc_config();
-    string get_xmst_config();
-    string get_sudoers_config();
-    string get_lightdm_mst_config();
-    string get_getty_service_config();
-    string get_udev_rules_config();
-    string get_systemd_udev_config();
-    string get_vgl_config();
-    void set_user(string user_name);
+    std::string get_output_dir();
+    std::string get_usr_share_dir();
+    std::string get_awesome_config();
+    std::string get_sudoers_d_config();
+    std::string get_rclua_config();
+    std::string get_awesome_xephyr_rules_template();
+    std::string get_xorg_config();
+    std::string get_bashrc_config();
+    std::string get_xinitrc_config();
+    std::string get_xmst_config();
+    std::string get_sudoers_config();
+    std::string get_lightdm_mst_config();
+    std::string get_getty_service_config();
+    std::string get_udev_rules_config();
+    std::string get_systemd_udev_config();
+    std::string get_vgl_config();
+    void set_user(std::string user_name);
 
-    string get_rclua_template();
-    string get_rclua4_template();
-    string get_bashrc_config_template();
-    string get_xinitrc_config_template();
-    string get_xmst_config_template();
+    std::string get_rclua_template();
+    std::string get_rclua4_template();
+    std::string get_bashrc_config_template();
+    std::string get_xinitrc_config_template();
+    std::string get_xmst_config_template();
     QString get_sudoers_config_template();
-    string get_lightdm_mst_config_template();
-    string get_getty_service_config_template();
-    string get_systemd_udev_config_template();
-    string get_vgl_config_template();
+    std::string get_lightdm_mst_config_template();
+    std::string get_getty_service_config_template();
+    std::string get_systemd_udev_config_template();
+    std::string get_vgl_config_template();
 
 private:
     Path_manager() {};
 
-    string user;
+    std::string user;
     DSV* config;
-    string output_dir;
-    string usrShareDir;
-    string awesome_config;
+    std::string output_dir;
+    std::string usrShareDir;
+    std::string awesome_config;
 };
 
 #endif // PATHMANAGER_H
