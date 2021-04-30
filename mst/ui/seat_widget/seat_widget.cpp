@@ -15,14 +15,14 @@ Seat_widget::Seat_widget(shared_ptr<Seat> seat)
       resolution_combo_box(new QComboBox()),
       monitor_label(new QLabel())
 {
-    monitor_state_check_box->setText("Включить");
+    monitor_state_check_box->setText(tr("Enable"));
     monitor_state_check_box->setChecked(true);
     for (auto resolution : seat->get_monitor().get_available_resolutions()) {
         resolution_combo_box->addItem(resolution.to_string());
     }
 
     device_configuration_button
-            = new QPushButton("Настроить устройства ввода");
+            = new QPushButton(tr("Настроить устройства ввода"));
     device_configuration_button->setParent(this);
     connect(device_configuration_button,
             SIGNAL(clicked()), this,

@@ -114,6 +114,13 @@ International&lt;/a&gt;.&lt;/p&gt;
     </message>
 </context>
 <context>
+    <name>Seat_widget</name>
+    <message>
+        <source>Enable</source>
+        <translation>Включить</translation>
+    </message>
+</context>
+<context>
     <name>RebootDialog</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;To finish MST configuration the computer must be rebooted.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Do you want to reboot now?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
