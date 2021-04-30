@@ -10,12 +10,11 @@
 #include "core/types/monitor.h"
 
 Seat_widget::Seat_widget(shared_ptr<Seat> seat)
+    : seat(seat),
+      monitor_state_check_box(new QCheckBox()),
+      resolution_combo_box(new QComboBox()),
+      monitor_label(new QLabel())
 {
-    this->seat = seat;
-    monitor_state_check_box = new QCheckBox();
-    resolution_combo_box = new QComboBox();
-    monitor_label = new QLabel(seat->get_monitor().get_interface());
-
     monitor_state_check_box->setText("Включить");
     monitor_state_check_box->setChecked(true);
     for (auto resolution : seat->get_monitor().get_available_resolutions()) {
