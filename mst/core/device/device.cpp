@@ -73,14 +73,14 @@ USB_device_scanner::USB_device_scanner()
     ret = udev_monitor_enable_receiving(udev_monitor);
     if (ret < 0) {
         QString msg = "udev_monitor_enable_receiving(udev_monitor) returned "
-                + ret;
+                + QString(ret);
         qCritical(device_category()) << msg;
         throw Device_exception(msg);
     }
 
     monitor_fd = udev_monitor_get_fd(udev_monitor);
     if (monitor_fd < 0) {
-        QString msg = "mon_fd: " + monitor_fd;
+        QString msg = "mon_fd: " + QString(monitor_fd);
         qCritical(device_category()) << msg;
         throw Device_exception(msg);
     }
