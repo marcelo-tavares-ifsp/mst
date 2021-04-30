@@ -55,7 +55,7 @@ bool Configuration::is_valid()
                     {
                         qWarning(configuration_category())
                                 << "Collision is found: "
-                                << seats[i] << " intersects " << seats[j];
+                                << seats[i].get() << " intersects " << seats[j].get();
                         return false;
                     }
                 }
@@ -64,7 +64,7 @@ bool Configuration::is_valid()
             if ((! debug_allow_empty_devices) && (! seats[i]->is_configured()))
             {
                 qWarning(configuration_category()) << "Seat is not properly configured: "
-                                                   << seats[j];
+                                                   << seats[i].get();
                 return false;
             }
         }
