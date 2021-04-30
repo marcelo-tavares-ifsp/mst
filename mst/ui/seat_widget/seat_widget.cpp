@@ -78,4 +78,9 @@ void Seat_widget::paintEvent(QPaintEvent* ev)
     o.initFrom(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
+    this->monitor_label->setText(
+                "<h1>" + seat->get_monitor().get_interface() + "</h1><br/><hr/><br/>"
+                + ((seat->get_mouse().length() > 0) ? "<b>Mouse:</b> " + seat->get_mouse() : "")
+                + "<br/>"
+                + ((seat->get_keyboard().length() > 0) ? "<b>Keyboard</b>: " + seat->get_keyboard() : "") );
 }

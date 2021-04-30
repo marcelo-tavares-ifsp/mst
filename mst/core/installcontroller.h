@@ -66,6 +66,7 @@ private:
     vector<QWidget *> *widgets;
     QVector<QString> *list_mice;
     QVector<QString> *list_keybs;
+    QHBoxLayout* seats_box;
     int current_seat_id;
     Component_manager* component_manager;
 };

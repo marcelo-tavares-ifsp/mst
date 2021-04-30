@@ -62,6 +62,7 @@ void InstallController::load_seat_configuration_page(QWidget* parent,
     list_mice->clear();
     list_keybs->clear();
     Platform::get_input_devices(*list_mice, *list_keybs);
+    this->seats_box = seats_box;
 
     vector<XRandr_monitor> availableMonitors = Platform::xrandr_get_monitors();
     int idx = 0;
@@ -100,6 +101,8 @@ void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
         seat->set_usb(device);
         break;
     }
+
+    this->seats_box->update();
 
     qInfo(install_controller_category()) << seat.get();
 }
