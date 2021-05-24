@@ -33,14 +33,14 @@
   #:use-module (mst system)
   #:use-module (mst log)
   #:export (add-seat
-	    dm-start
-	    dm-stop-xephyrs
-	    is-seat-used?
-	    get-running-seats
-	    start-lightdm
+            dm-start
+            dm-stop-xephyrs
+            is-seat-used?
+            get-running-seats
+            start-lightdm
 
-	    %make-command:add-seat
-	    %make-command:xephyr/docker))
+            %make-command:add-seat
+            %make-command:xephyr/docker))
 
 (define *debug?* #f)
 
@@ -67,7 +67,7 @@
     (cond
      ((zero? pid)
       (execle %lightdm-binary (environ)
-	      %lightdm-binary "--config" config-file))
+              %lightdm-binary "--config" config-file))
      ((> pid 0)
       (log-info "Lightdm started.  PID: ~a" pid)
       pid)
@@ -79,13 +79,13 @@
 
 (define (device-name->path name)
   (let ((event (readlink (string-append "/dev/input/by-path/"
-					name))))
+                                        name))))
     (string-append "/dev/input/"
-		   (basename event))))
+                   (basename event))))
 
 (define (%make-command:xephyr/docker display-number resolution mouse keyboard)
   (let ((mouse-dev    (device-name->path mouse))
-	(keyboard-dev (device-name->path keyboard)))
+        (keyboard-dev (device-name->path keyboard)))
     (string-join (list %docker-binary
                        "run"
                        "-it"
