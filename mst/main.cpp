@@ -95,7 +95,7 @@ void create_config_file(QFile& file) {
  */
 bool is_graphics_available()
 {
-    return system("xset -q") == 0;
+    return system("xset -q > /dev/null 2>&1") == 0;
 }
 
 /**
