@@ -95,9 +95,7 @@ void create_config_file(QFile& file) {
  */
 bool is_graphics_available()
 {
-    char* display = getenv("DISPLAY");
-    cout << display << endl;
-    return (display != NULL) && (strlen(display) > 0);
+    return system("xset -q") == 0;
 }
 
 /**
@@ -113,6 +111,8 @@ int main(int argc, char *argv[])
     bool is_graphic_mode = is_graphics_available();
 
     if (is_graphic_mode) {
+        char* display = getenv("DISPLAY");
+        cerr << "Starting on display " << display << " ..." << endl;
         a.reset(new QApplication(argc, argv));
     } else {
         a.reset(new QCoreApplication(argc, argv));
