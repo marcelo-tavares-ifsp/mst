@@ -11,6 +11,8 @@ public:
 
 private Q_SLOTS:
     void string_from_seat();
+    void intersects();
+    void not_intersects();
 };
 
 #endif // TEST_SEAT_H
