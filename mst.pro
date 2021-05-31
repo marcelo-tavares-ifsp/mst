@@ -46,6 +46,7 @@ templates_xorg.files += \
     templates/xorg/ServerLayout.template
 
 CONFIG += nostrip lrelease embed_translations
+CONFIG += silent
     
 etc.files += \
     etc/mst
