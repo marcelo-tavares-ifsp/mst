@@ -120,6 +120,7 @@ install_deps_alt_p9() {
             unclutter \
             lightdm \
             libqt5-core \
+            qt5-base-devel \
             libudev-devel \
             virtualgl \
             Xdialog \
