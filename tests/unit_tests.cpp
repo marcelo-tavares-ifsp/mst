@@ -40,8 +40,8 @@ int main(int argc, char** argv)
             || QTest::qExec(&test_awesome, argc, argv)
             || QTest::qExec(&test_template, argc, argv)
             || QTest::qExec(&test_component, argc, argv)
-            || QTest::qExec(&test_monitor)
-            || QTest::qExec(&test_seat)
-            || QTest::qExec(&test_resolution)
-            || QTest::qExec(&test_mstd);
+            || QTest::qExec(&test_monitor, argc, argv)
+            || QTest::qExec(&test_seat, argc, argv)
+            || QTest::qExec(&test_resolution, argc, argv)
+            || QTest::qExec(&test_mstd, argc, argv);
 }
