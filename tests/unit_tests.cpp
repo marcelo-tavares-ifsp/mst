@@ -25,7 +25,7 @@ int main(int argc, char** argv)
 {
     //QApplication app(argc, argv);
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
-    Template_manager::get_instance()->set_template_dir("../templates/");
+    Template_manager::get_instance()->set_template_dir(SRCDIR "/../templates/");
 
     Test_utils test_utils;
     Test_awesome test_awesome;
