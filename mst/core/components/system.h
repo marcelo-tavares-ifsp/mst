@@ -20,8 +20,8 @@ public:
     QString get_version() override {
         throw Component_error("Unimplemented");
     }
-    void enable();
-    void disable();
+    void enable() override;
+    void disable() override;
 
     /**
      * @brief prepare_seat_configuration_template -- Prepare seats configuration

@@ -22,13 +22,13 @@ class Display_manager : public Component
 public:
     Display_manager(Configuration& config);
 
-    void configure();
-    QString get_version() {
+    void configure() override;
+    QString get_version() override {
         // TODO:
         throw Component_error("Unimplemented");
     }
-    void enable();
-    void disable() {
+    void enable() override;
+    void disable() override {
         /* Do nothing. */
     }
 };
