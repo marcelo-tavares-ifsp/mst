@@ -14,6 +14,7 @@
 #include "core/types/xrandr_monitor.h"
 #include "core/utilites/utilites.h"
 
+using namespace std;
 using namespace platform;
 
 Q_LOGGING_CATEGORY(platform_category, "mst.core.platform")

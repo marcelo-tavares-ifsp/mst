@@ -8,16 +8,14 @@
 
 Q_DECLARE_LOGGING_CATEGORY(platform_category)
 
-using namespace std;
-
 /**
  * @brief The Platform_exception class This class describes an
  *     exception that can be thrown by Platform methods.
  */
-class Platform_exception: public runtime_error {
+class Platform_exception: public std::runtime_error {
 public:
     Platform_exception(const QString& what)
-        : runtime_error(what.toStdString()) {
+        : std::runtime_error(what.toStdString()) {
         // Do nothing.
     }
 };
@@ -32,14 +30,14 @@ public:
     static void system_reboot();
     static int xset_dpms();
     static int xset_soff();
-    static vector<XRandr_monitor> xrandr_get_monitors();
+    static std::vector<XRandr_monitor> xrandr_get_monitors();
     static void get_input_devices(QVector<QString> &mice,
                                   QVector<QString> &keybds);
 
     static bool pam_is_mkhomedir_used();
 
     static void fs_mkdir(const QString& path);
-    static void fs_mkdir(const string& path);
+    static void fs_mkdir(const std::string& path);
     static void fs_rm(const QString& path);
     static void fs_cp(const QString& src, const QString& dst);
 
