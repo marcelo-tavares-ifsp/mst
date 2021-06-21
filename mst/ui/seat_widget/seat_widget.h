@@ -21,7 +21,7 @@
 class Seat_widget: public QWidget {
     Q_OBJECT
 public:
-    Seat_widget(shared_ptr<Seat> seat);
+    Seat_widget(std::shared_ptr<Seat> seat);
     ~Seat_widget();
     void paintEvent(QPaintEvent* ev);
 
@@ -29,7 +29,7 @@ private:
     /**
      * @brief seat -- A shared seat pointer assigned to this widget.
      */
-    shared_ptr<Seat> seat;
+    std::shared_ptr<Seat> seat;
 
     QCheckBox* monitor_state_check_box;
     QComboBox* resolution_combo_box;
