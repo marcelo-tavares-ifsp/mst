@@ -46,7 +46,8 @@ public:
    }
 
    operator std::string() const {
-       return resolution.first + "x" + resolution.second;
+       return (QString::number(resolution.first)
+               + "x" + QString::number(resolution.second)).toStdString();
    }
 
    Resolution& operator=(const Resolution& rhs) {
