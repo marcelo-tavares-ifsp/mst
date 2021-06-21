@@ -64,9 +64,11 @@ void InstallWindow::on_btnContinueToEnd_clicked()
 {
     if (inst_controller->config_is_valid())
     {
+        qInfo(install_window_category) << "Configuration is valid";
         show_page(Ui::Page::CONFIGURATION_END);
         InstallController* con = InstallController::get_instance();
         con->begin_install();
+        con->create_backup();
         qDebug(install_window_category) << "going to the 3rd panel...";
     }
     else
@@ -211,9 +213,11 @@ void InstallWindow::on_btnConfigurationEnd_clicked()
 {
     if (inst_controller->config_is_valid())
     {
+        qInfo(install_window_category) << "Configuration is valid";
         show_page(Ui::Page::CONFIGURATION_END);
         InstallController* con = InstallController::get_instance();
         con->begin_install();
+        con->create_backup();
         qDebug(install_window_category) << "Going to the 3rd panel...";
     }
     else

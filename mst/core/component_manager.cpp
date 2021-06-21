@@ -69,6 +69,20 @@ void Component_manager::store_configurations(const QString& output_dir)
     }
 }
 
+void Component_manager::backup_configurations(const QString& output_dir)
+{
+    for (auto component : components) {
+        component->get_configuration().backup(output_dir);
+    }
+}
+
+void Component_manager::restore_configurations(const QString& output_dir)
+{
+    for (auto component : components) {
+        component->get_configuration().restore(output_dir);
+    }
+}
+
 const vector<Component*>& Component_manager::get_components()
 {
     return components;

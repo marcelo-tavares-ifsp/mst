@@ -19,6 +19,8 @@ public:
     void enable_components();
     void disable_components();
     void store_configurations(const QString& output_dir);
+    void backup_configurations(const QString& output_dir);
+    void restore_configurations(const QString& output_dir);
     const vector<Component*>& get_components();
 
 private:

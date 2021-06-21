@@ -7,6 +7,8 @@
 #include "configuration.h"
 #include "types/template.h"
 #include "template_manager.h"
+#include "platform.h"
+#include "path_manager.h"
 
 /**
  * @brief The Component_error class -- describes a generic component error.
@@ -39,6 +41,46 @@ public:
     void store(const QString& output_directory) {
         foreach (auto key, templates.keys()) {
             templates[key].substitute(output_directory + "/" + key);
+        }
+    }
+
+    /**
+     * @brief backup -- Create a backup copy of the component onfiguration.
+     * @param backup_directory -- A directory to store backups.
+     */
+    void backup(const QString& backup_directory) {
+        const QString mst_user = Path_manager::get_instance()->get_mst_user();
+        const QString mst_user_home = "/home/" + mst_user + "/";
+        foreach (auto key, installation_paths.keys()) {
+            QString dest = installation_paths[key];
+            if (dest.contains("{{home}}")) {
+                Template tpl(dest);
+                tpl.set("home", mst_user_home);
+                dest = tpl.substitute();
+            }
+            try {
+                Platform::fs_cp(dest, backup_directory + "/" + key);
+            } catch (Platform_exception& e) {
+                //qWarning(install_controller_category) << e.what();
+            }
+        }
+    }
+
+    /**
+     * @brief restore -- Restore a backup copy of the configuration.
+     * @param backup_directory -- A directory to store backups.
+     */
+    void restore(const QString& backup_directory) {
+        const QString mst_user = Path_manager::get_instance()->get_mst_user();
+        const QString mst_user_home = "/home/" + mst_user + "/";
+        foreach (auto key, installation_paths.keys()) {
+            QString dest = installation_paths[key];
+            if (dest.contains("{{home}}")) {
+                Template tpl(dest);
+                tpl.set("home", mst_user_home);
+                dest = tpl.substitute();
+            }
+            Platform::fs_cp(backup_directory + "/" + key, dest);
         }
     }
 
