@@ -14,7 +14,7 @@ InstallWindow::InstallWindow(QWidget *parent) :
 
     if (! inst_controller->is_mst_running()) {
         qInfo(install_window_category()) << "MST is running";
-        ui->btnBreak->setEnabled(false);
+        ui->button_stop_mst->setEnabled(false);
     }
 
     ui->Version->setText(QString::fromStdString(VERSION));
@@ -51,42 +51,16 @@ void InstallWindow::configure_seat(int seat_id)
  * @brief InstallWindow::on_btnBeginInstall_clicked -- The 1st page of
  *     configuration dialog.
  */
-void InstallWindow::on_btnBeginInstall_clicked()
+void InstallWindow::on_button_begin_configuration_clicked()
 {
     inst_controller->load_seat_configuration_page(this, ui->hbox_seats);
     show_page(Ui::Page::INTERFACES);
 }
 
 /**
- * @brief InstallWindow::on_btnContinueToEnd_clicked -- Theird page to Fourth page
- */
-void InstallWindow::on_btnContinueToEnd_clicked()
-{
-    if (inst_controller->config_is_valid())
-    {
-        qInfo(install_window_category) << "Configuration is valid";
-        show_page(Ui::Page::CONFIGURATION_END);
-        InstallController* con = InstallController::get_instance();
-        con->begin_install();
-        con->create_backup();
-        qDebug(install_window_category) << "going to the 3rd panel...";
-    }
-    else
-    {
-        QMessageBox::information(
-                    this,
-                    QApplication::translate("main", "Incomplete configuration"),
-                    QApplication::translate("main",
-                                            "Each seat must have configured"
-                                            " unique keyboard and mouse."),
-                    QMessageBox::Ok);
-    }
-}
-
-/**
  * @brief InstallWindow::on_btnEndInstall_clicked -- Begin install button
  */
-void InstallWindow::on_btnEndInstall_clicked()
+void InstallWindow::on_button_install_mst_clicked()
 {
     try
       {
@@ -100,7 +74,7 @@ void InstallWindow::on_btnEndInstall_clicked()
     inst_controller->begin_install(); // TODO: Dialog OK/Cancel
     inst_controller->install_files();
     inst_controller->enable_mst();
-    ui->btnEndInstall->setEnabled(false);
+    ui->button_next_to_installation->setEnabled(false);
 
     Reboot_dialog* rd = new Reboot_dialog(this);
 
@@ -112,37 +86,32 @@ void InstallWindow::on_btnEndInstall_clicked()
 
 // Back and Cancel Buttons Handlers ///////////////////////////////////////////
 
-void InstallWindow::on_btnBackToStart_clicked()
+void InstallWindow::on_button_back_to_main_screen_clicked()
 {
     show_page(Ui::Page::START_PAGE);
 }
 
-void InstallWindow::on_btnBackToInterface_clicked()
+void InstallWindow::on_button_back_to_configuration_clicked()
 {
     show_page(Ui::Page::INTERFACES);
 }
 
-void InstallWindow::on_btnBackToDevices_clicked()
-{
-    show_page(Ui::Page::INTERFACES);
-}
-
-void InstallWindow::on_btnCancel_clicked()
+void InstallWindow::on_button_cancel_clicked()
 {
     this->close(); // TODO: Dialog OK/Cancel
 }
 
-void InstallWindow::on_btnExit_clicked()
+void InstallWindow::on_button_exit_clicked()
 {
     this->close(); // TODO: Dialog OK/Cancel
 }
 
-void InstallWindow::on_btnBreak_clicked()
+void InstallWindow::on_button_stop_mst_clicked()
 {
     inst_controller->begin_stop(); // TODO: Dialog OK/Cancel
 }
 
-void InstallWindow::on_btnBackup_clicked()
+void InstallWindow::on_button_restore_backup_clicked()
 {
     inst_controller->begin_uninstall(); // TODO: Dialog OK/Cancel
 
@@ -209,7 +178,7 @@ void InstallWindow::on_about_triggered()
     ad->show();
 }
 
-void InstallWindow::on_btnConfigurationEnd_clicked()
+void InstallWindow::on_button_next_to_installation_clicked()
 {
     if (inst_controller->config_is_valid())
     {

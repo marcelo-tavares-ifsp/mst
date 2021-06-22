@@ -36,33 +36,21 @@ public:
     explicit InstallWindow(QWidget *parent = nullptr);
     ~InstallWindow();
 
-private slots:
-    void on_btnBeginInstall_clicked();
-
-    void on_btnBackToStart_clicked();
-
-    void on_btnBackToInterface_clicked();
-
-    void on_btnContinueToEnd_clicked();
-
-    void on_btnBackToDevices_clicked();
-
-    void on_btnCancel_clicked();
-
-    void on_btnEndInstall_clicked();
-
-    void on_btnExit_clicked();
-
-    void on_btnBreak_clicked();
-
-    void on_btnBackup_clicked();
-
-    void on_about_triggered();
-
-    void on_btnConfigurationEnd_clicked();
-
 public slots:
+    void on_about_triggered();
     void configure_seat(int seat_id);
+
+private slots:
+    void on_button_begin_configuration_clicked();
+    void on_button_install_mst_clicked();
+    void on_button_back_to_main_screen_clicked();
+    void on_button_back_to_configuration_clicked();
+    void on_button_cancel_clicked();
+    void on_button_exit_clicked();
+    void on_button_stop_mst_clicked();
+    void on_button_restore_backup_clicked();
+    void on_button_next_to_installation_clicked();
+
 
 private:
     Ui::InstallWindow *ui;

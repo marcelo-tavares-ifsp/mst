@@ -48,7 +48,7 @@ Seat_widget QLabel {
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="pageStart">
      <widget class="QWidget" name="verticalLayoutWidget">
