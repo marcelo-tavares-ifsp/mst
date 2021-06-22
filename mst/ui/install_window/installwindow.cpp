@@ -133,7 +133,7 @@ void InstallWindow::initial_listeners()
     Device_listener* mouse_listener
             = new Input_device_listener(DEVICE_TYPE::MOUSE,
                                         inst_controller->get_mice());
-    Device_listener* keybd_listener
+    Device_listener* keyboard_listener
             = new Input_device_listener(DEVICE_TYPE::KEYBOARD,
                                         inst_controller->get_keyboards());
     Device_listener* usb_listener
@@ -143,9 +143,9 @@ void InstallWindow::initial_listeners()
     qInfo(install_window_category()) << "Mouse input listener was started";
     initial_calibration_dialog(mouse_listener);
 
-    QThreadPool::globalInstance()->start(keybd_listener);
+    QThreadPool::globalInstance()->start(keyboard_listener);
     qInfo(install_window_category()) << "Keyboard input listener was started";
-    initial_calibration_dialog(keybd_listener);
+    initial_calibration_dialog(keyboard_listener);
 
     QThreadPool::globalInstance()->start(usb_listener);
     qInfo(install_window_category()) << "USB listener was started";
