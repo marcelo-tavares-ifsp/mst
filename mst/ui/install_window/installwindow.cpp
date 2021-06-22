@@ -54,7 +54,7 @@ void InstallWindow::configure_seat(int seat_id)
 void InstallWindow::on_button_begin_configuration_clicked()
 {
     inst_controller->load_seat_configuration_page(this, ui->hbox_seats);
-    show_page(Ui::Page::INTERFACES);
+    show_page(Ui::Page::CONFIGURATION);
 }
 
 /**
@@ -93,7 +93,7 @@ void InstallWindow::on_button_back_to_main_screen_clicked()
 
 void InstallWindow::on_button_back_to_configuration_clicked()
 {
-    show_page(Ui::Page::INTERFACES);
+    show_page(Ui::Page::CONFIGURATION);
 }
 
 void InstallWindow::on_button_cancel_clicked()

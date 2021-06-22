@@ -22,7 +22,7 @@ class InstallWindow;
  */
 enum Page {
   START_PAGE          = 0,
-  INTERFACES          = 1,
+  CONFIGURATION       = 1,
   CONFIGURATION_END   = 2
 };
 
