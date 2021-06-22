@@ -3,3 +3,4 @@ ui_*
 mst
 version.h
 mst.pro.user*
+*.gcno
