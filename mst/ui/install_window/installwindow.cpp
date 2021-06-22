@@ -76,7 +76,13 @@ void InstallWindow::on_button_install_mst_clicked()
 
         this->close();
     } catch (string msg) {
-        cout << msg << endl;
+        qWarning(install_window_category()) << QString::fromStdString(msg);
+        QMessageBox::information(
+                    this,
+                    QApplication::translate("main", "Unable to make a backup"),
+                    QApplication::translate("main",
+                                            "Aborting installation"),
+                    QMessageBox::Ok);
     }
 }
 
