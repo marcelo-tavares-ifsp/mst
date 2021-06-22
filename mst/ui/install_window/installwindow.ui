@@ -62,7 +62,7 @@ Seat_widget QLabel {
       </property>
       <layout class="QVBoxLayout" name="vlStart">
        <item>
-        <widget class="QPushButton" name="btnBeginInstall">
+        <widget class="QPushButton" name="button_begin_configuration">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -74,7 +74,7 @@ Seat_widget QLabel {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnBackup">
+        <widget class="QPushButton" name="button_restore_backup">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -86,7 +86,7 @@ Seat_widget QLabel {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnBreak">
+        <widget class="QPushButton" name="button_stop_mst">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -98,7 +98,7 @@ Seat_widget QLabel {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnExit">
+        <widget class="QPushButton" name="button_exit">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -124,7 +124,7 @@ Seat_widget QLabel {
       </property>
       <layout class="QHBoxLayout" name="hlInterface">
        <item>
-        <widget class="QPushButton" name="btnBackToStart">
+        <widget class="QPushButton" name="button_back_to_main_screen">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -136,7 +136,7 @@ Seat_widget QLabel {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnConfigurationEnd">
+        <widget class="QPushButton" name="button_next_to_installation">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -173,7 +173,7 @@ Seat_widget QLabel {
       </property>
       <layout class="QVBoxLayout" name="vlEnd">
        <item>
-        <widget class="QPushButton" name="btnEndInstall">
+        <widget class="QPushButton" name="button_install_mst">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -185,7 +185,7 @@ Seat_widget QLabel {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnBackToDevices">
+        <widget class="QPushButton" name="button_back_to_configuration">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -197,7 +197,7 @@ Seat_widget QLabel {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnCancel">
+        <widget class="QPushButton" name="button_cancel">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -276,7 +276,7 @@ Seat_widget QLabel {
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>20</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
