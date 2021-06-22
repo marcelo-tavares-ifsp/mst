@@ -62,26 +62,22 @@ void InstallWindow::on_button_begin_configuration_clicked()
  */
 void InstallWindow::on_button_install_mst_clicked()
 {
-    try
-      {
-          inst_controller->create_backup();
-      }
-      catch (string msg)
-      {
-          cout << msg << endl;
-      }
+    try {
+        inst_controller->create_backup();
+        inst_controller->begin_install(); // TODO: Dialog OK/Cancel
+        inst_controller->install_files();
+        inst_controller->enable_mst();
+        ui->button_next_to_installation->setEnabled(false);
 
-    inst_controller->begin_install(); // TODO: Dialog OK/Cancel
-    inst_controller->install_files();
-    inst_controller->enable_mst();
-    ui->button_next_to_installation->setEnabled(false);
+        Reboot_dialog* rd = new Reboot_dialog(this);
 
-    Reboot_dialog* rd = new Reboot_dialog(this);
+        rd->setModal(true);
+        rd->exec();
 
-    rd->setModal(true);
-    rd->exec();
-
-    this->close();
+        this->close();
+    } catch (string msg) {
+        cout << msg << endl;
+    }
 }
 
 // Back and Cancel Buttons Handlers ///////////////////////////////////////////
