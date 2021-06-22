@@ -42,6 +42,8 @@ public:
     static void fs_cp(const QString& src, const QString& dst);
 
     static void system_set_default_runlevel(const QString& target);
+    static void system_enable_service(const QString& service_name);
+    static void system_disable_service(const QString& service_name);
 
     static int exec(const QString& command);
 

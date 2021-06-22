@@ -267,6 +267,24 @@ void Platform::system_set_default_runlevel(const QString& target)
 }
 
 /**
+ * @brief Platform::system_enable_service -- Enable a system service.
+ * @param service_name -- The name of a service.
+ */
+void Platform::system_enable_service(const QString& service_name)
+{
+    Platform::exec("systemctl enable " + service_name);
+}
+
+/**
+ * @brief Platform::system_disable_service -- Disable a system service.
+ * @param service_name -- The name of a service.
+ */
+void Platform::system_disable_service(const QString& service_name)
+{
+    Platform::exec("systemctl disable " + service_name);
+}
+
+/**
  * @brief Platform::exec -- Execute a command.
  * @param command -- A command to execute.
  * @returns return code of the command.

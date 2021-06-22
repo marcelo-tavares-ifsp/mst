@@ -55,13 +55,13 @@ void System::configure()
 void System::enable()
 {
     Platform::system_set_default_runlevel("multi-user");
-    Platform::exec("systemctl enable mstd");
+    Platform::system_enable_service("mstd");
 }
 
 void System::disable()
 {
     Platform::system_set_default_runlevel("graphical");
-    Platform::exec("systemctl disable mstd");
+    Platform::system_disable_service("mstd");
 }
 
 Template System::prepare_seat_configuration_template()
