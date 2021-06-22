@@ -48,7 +48,7 @@ void InstallWindow::configure_seat(int seat_id)
 // Continue Buttons Handlers //////////////////////////////////////////////////
 
 /**
- * @brief InstallWindow::on_btnBeginInstall_clicked -- The 1st page of
+ * @brief InstallWindow::on_button_begin_configuration_clicked -- The 1st page of
  *     configuration dialog.
  */
 void InstallWindow::on_button_begin_configuration_clicked()
@@ -58,7 +58,7 @@ void InstallWindow::on_button_begin_configuration_clicked()
 }
 
 /**
- * @brief InstallWindow::on_btnEndInstall_clicked -- Begin install button
+ * @brief InstallWindow::on_button_install_mst_clicked -- Begin install button
  */
 void InstallWindow::on_button_install_mst_clicked()
 {
