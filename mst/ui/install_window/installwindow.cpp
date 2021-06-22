@@ -186,7 +186,6 @@ void InstallWindow::on_button_next_to_installation_clicked()
         show_page(Ui::Page::CONFIGURATION_END);
         InstallController* con = InstallController::get_instance();
         con->begin_install();
-        con->create_backup();
         qDebug(install_window_category) << "Going to the 3rd panel...";
     }
     else
