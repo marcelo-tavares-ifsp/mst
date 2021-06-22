@@ -25,20 +25,7 @@ public:
     const QString get_mst_user();
     std::string get_output_dir();
     std::string get_usr_share_dir();
-    std::string get_awesome_config();
-    std::string get_sudoers_d_config();
-    std::string get_rclua_config();
-    std::string get_awesome_xephyr_rules_template();
-    std::string get_xorg_config();
-    std::string get_bashrc_config();
-    std::string get_xinitrc_config();
-    std::string get_xmst_config();
     std::string get_sudoers_config();
-    std::string get_lightdm_mst_config();
-    std::string get_getty_service_config();
-    std::string get_udev_rules_config();
-    std::string get_systemd_udev_config();
-    std::string get_vgl_config();
     void set_user(std::string user_name);
 
 private:
