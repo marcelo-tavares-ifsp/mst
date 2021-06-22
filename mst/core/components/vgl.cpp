@@ -67,6 +67,8 @@ void VGL::disable()
     if (Platform::exec("echo -e '2\nx\n' | vglserver_config") != 0) {
         throw Component_error("Could not un-configure VirtualGL server");
     }
+    // TODO: This must be in a 'remove' method.
+    Platform::fs_rm("/etc/bashrc.d/vgl.sh");
 }
 
 void VGL::prepare_vgl_sh_template(Template& tpl)

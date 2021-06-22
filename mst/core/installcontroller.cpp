@@ -207,7 +207,6 @@ void InstallController::disable_mst()
 {
     component_manager->disable_components();
     Platform::system_set_default_runlevel("graphical");
-    Platform::fs_rm("/etc/bashrc.d/vgl.sh");
 }
 
 void InstallController::create_backup()
