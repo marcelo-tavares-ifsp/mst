@@ -109,10 +109,3 @@ void Path_manager::set_user(string user_name)
 {
     user = user_name;
 }
-
-///////////////Templates paths/////////////////////////////////////////////////
-
-QString Path_manager::get_sudoers_config_template()
-{
-    return "sudoers";
-}

@@ -41,8 +41,6 @@ public:
     std::string get_vgl_config();
     void set_user(std::string user_name);
 
-    QString get_sudoers_config_template();
-
 private:
     Path_manager() {};
 

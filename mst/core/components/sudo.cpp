@@ -47,9 +47,7 @@ void Sudo::configure()
 Template sudo::prepare_sudoers_template()
 {
     const QString user = Path_manager::get_instance()->get_mst_user();
-    const QString tpl_name
-            = Path_manager::get_instance()->get_sudoers_config_template();
-    Template tpl = Template_manager::get_instance()->get_template(tpl_name);
+    Template tpl = Template_manager::get_instance()->get_template("sudoers");
 
     tpl.set("user", user).set("mst", QString::fromLocal8Bit(INSTALLATION_PREFIX)
                               + "/bin/mst-start-dm");
