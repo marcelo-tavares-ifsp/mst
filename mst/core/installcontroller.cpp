@@ -205,6 +205,7 @@ void InstallController::enable_mst()
 void InstallController::disable_mst()
 {
     component_manager->disable_components();
+    qInfo(install_controller_category) << "multiseat disabled.";
 }
 
 void InstallController::create_backup()
