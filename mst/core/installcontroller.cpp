@@ -205,9 +205,6 @@ void InstallController::disable_mst()
 {
     component_manager->disable_components();
     Platform::system_set_default_runlevel("graphical");
-    Platform::fs_rm(
-                QString::fromStdString(
-                    Path_manager::get_instance()->get_sudoers_config()));
     Platform::fs_rm("/etc/bashrc.d/vgl.sh");
 }
 

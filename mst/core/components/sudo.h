@@ -21,9 +21,7 @@ public:
     void enable() override {
         /* Do nothing. */
     }
-    void disable() override {
-        /* Do nothing. */
-    }
+    void disable() override;
 };
 
 //// Helper procedures.

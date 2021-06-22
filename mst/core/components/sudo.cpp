@@ -21,6 +21,8 @@
 
 #include <QString>
 
+#include <core/platform.h>
+
 #include "sudo.h"
 
 #include "../configuration.h"
@@ -41,6 +43,10 @@ void Sudo::configure()
                                 prepare_sudoers_template());
 }
 
+void Sudo::disable()
+{
+    Platform::fs_rm(QString::fromStdString("/etc/sudoers.d/mst"));
+}
 
 //// Helper procedures.
 
