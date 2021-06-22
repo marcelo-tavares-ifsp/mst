@@ -41,16 +41,7 @@ public:
     std::string get_vgl_config();
     void set_user(std::string user_name);
 
-    std::string get_rclua_template();
-    std::string get_rclua4_template();
-    std::string get_bashrc_config_template();
-    std::string get_xinitrc_config_template();
-    std::string get_xmst_config_template();
     QString get_sudoers_config_template();
-    std::string get_lightdm_mst_config_template();
-    std::string get_getty_service_config_template();
-    std::string get_systemd_udev_config_template();
-    std::string get_vgl_config_template();
 
 private:
     Path_manager() {};

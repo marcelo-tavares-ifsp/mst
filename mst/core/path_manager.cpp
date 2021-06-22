@@ -112,59 +112,7 @@ void Path_manager::set_user(string user_name)
 
 ///////////////Templates paths/////////////////////////////////////////////////
 
-string Path_manager::get_rclua_template()
-{
-    return "rc.lua";
-}
-
-string Path_manager::get_rclua4_template()
-{
-    return "rc.lua4";
-}
-
-string Path_manager::get_awesome_xephyr_rules_template()
-{
-    return "awesome/xephyr_rules";
-}
-
-string Path_manager::get_bashrc_config_template()
-{
-    return "bashrc";
-}
-
-string Path_manager::get_xinitrc_config_template()
-{
-    return "xinitrc";
-}
-
-string Path_manager::get_xmst_config_template()
-{
-    return "xmst";
-}
-
 QString Path_manager::get_sudoers_config_template()
 {
     return "sudoers";
 }
-
-string Path_manager::get_lightdm_mst_config_template()
-{
-    return "lightdm-mst.conf";
-}
-
-string Path_manager::get_getty_service_config_template()
-{
-    return "getty@.service";
-}
-
-string Path_manager::get_systemd_udev_config_template()
-{
-    return "systemd-udevd.service";
-}
-
-string Path_manager::get_vgl_config_template()
-{
-    return "vgl.sh";
-}
-
-
