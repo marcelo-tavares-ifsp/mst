@@ -13,8 +13,10 @@ InstallWindow::InstallWindow(QWidget *parent) :
     inst_controller = InstallController::get_instance();
 
     if (! inst_controller->is_mst_running()) {
-        qInfo(install_window_category()) << "MST is running";
+        qInfo(install_window_category()) << "MST is not running";
         ui->button_stop_mst->setEnabled(false);
+    } else {
+        qInfo(install_window_category()) << "MST is running";
     }
 
     ui->Version->setText(QString::fromStdString(VERSION));
