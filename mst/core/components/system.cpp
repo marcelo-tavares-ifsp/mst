@@ -54,11 +54,13 @@ void System::configure()
 
 void System::enable()
 {
+    Platform::system_set_default_runlevel("multi-user");
     Platform::exec("systemctl enable mstd");
 }
 
 void System::disable()
 {
+    Platform::system_set_default_runlevel("graphical");
     Platform::exec("systemctl disable mstd");
 }
 
