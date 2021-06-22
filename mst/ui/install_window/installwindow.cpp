@@ -19,7 +19,7 @@ InstallWindow::InstallWindow(QWidget *parent) :
 
     ui->Version->setText(QString::fromStdString(VERSION));
 
-    show_page(0);
+    show_page(Ui::Page::START_PAGE);
 }
 
 InstallWindow::~InstallWindow()
