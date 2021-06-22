@@ -69,6 +69,8 @@ private:
     QHBoxLayout* seats_box;
     int current_seat_id;
     Component_manager* component_manager;
+
+    QString backup_dir;
 };
 
 #endif // INSTALLCONTROLLER_H

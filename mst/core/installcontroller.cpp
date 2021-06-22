@@ -33,6 +33,8 @@ InstallController::InstallController()
     list_mice = new QVector<QString>;
     list_keybs = new QVector<QString>;
     current_seat_id = -1;
+    const QString user = Path_manager::get_instance()->get_mst_user();
+    this->backup_dir = "/home/" + user + "/.local/share/mst/backup/";
 }
 
 // public methods ///////////////////////////////////////////////////////////////
@@ -210,26 +212,18 @@ void InstallController::disable_mst()
 
 void InstallController::create_backup()
 {
-    const QString user = Path_manager::get_instance()->get_mst_user();
-    const string usr_dir = Path_manager::get_instance()->get_usr_share_dir();
-    const QString cmd =  QString::fromLocal8Bit(INSTALLATION_PREFIX)
-            + "/bin/mk_backup.sh " + user;
-    if (Platform::exec(cmd) != 0) {
-        throw InstallController_exception("Could not create a backup");
+    try {
+        Platform::fs_mkdir(backup_dir);
+        component_manager->backup_configurations(backup_dir);
+    } catch (Platform_exception& e) {
+        qCritical(install_controller_category) << e.what();
+        throw InstallController_exception(e.what());
     }
 }
 
 void InstallController::restore_backup()
 {
-    const QString user = Path_manager::get_instance()->get_mst_user();
-    const QString cmd = QString::fromLocal8Bit(INSTALLATION_PREFIX)
-            + "/bin/apl_backup.sh " + user;
-
-    if (system(cmd.toStdString().c_str()))
-    {
-        qCritical(install_controller_category) << "Could not restore a backup copy.";
-        throw InstallController_exception("Could not restore a backup copy.");
-    }
+    component_manager->restore_configurations(backup_dir);
 }
 
 void InstallController::begin_uninstall()
