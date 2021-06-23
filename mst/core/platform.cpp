@@ -276,6 +276,11 @@ void Platform::system_enable_service(const QString& service_name)
     Platform::exec("systemctl enable " + service_name);
 }
 
+bool Platform::system_service_active_p(const QString& service_name)
+{
+    return Platform::exec("systemctl is-active --quiet " + service_name) == 0;
+}
+
 /**
  * @brief Platform::system_disable_service -- Disable a system service.
  * @param service_name -- The name of a service.

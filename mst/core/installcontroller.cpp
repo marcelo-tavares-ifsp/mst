@@ -232,7 +232,7 @@ void InstallController::begin_stop()
 
 bool InstallController::is_mst_running()
 {
-    return Platform::process_is_running("Xephyr");
+    return Platform::system_service_active_p("mstd");
 }
 
 void InstallController::set_debug_allow_device_collisions(bool value)
