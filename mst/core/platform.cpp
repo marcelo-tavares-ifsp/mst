@@ -11,6 +11,7 @@
 #include <QFileInfo>
 #include <QDir>
 
+#include "platform.h"
 #include "core/types/xrandr_monitor.h"
 #include "core/utilites/utilites.h"
 

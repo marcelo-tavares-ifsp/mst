@@ -38,51 +38,19 @@ public:
      * @brief store -- Store confituration to the specified output directory.
      * @param output_directory -- A path to the output directory.
      */
-    void store(const QString& output_directory) {
-        foreach (auto key, templates.keys()) {
-            templates[key].substitute(output_directory + "/" + key);
-        }
-    }
+    void store(const QString& output_directory);
 
     /**
      * @brief backup -- Create a backup copy of the component onfiguration.
      * @param backup_directory -- A directory to store backups.
      */
-    void backup(const QString& backup_directory) {
-        const QString mst_user = Path_manager::get_instance()->get_mst_user();
-        const QString mst_user_home = "/home/" + mst_user + "/";
-        foreach (auto key, installation_paths.keys()) {
-            QString dest = installation_paths[key];
-            if (dest.contains("{{home}}")) {
-                Template tpl(dest);
-                tpl.set("home", mst_user_home);
-                dest = tpl.substitute();
-            }
-            try {
-                Platform::fs_cp(dest, backup_directory + "/" + key);
-            } catch (Platform_exception& e) {
-                //qWarning(install_controller_category) << e.what();
-            }
-        }
-    }
+    void backup(const QString& backup_directory);
 
     /**
      * @brief restore -- Restore a backup copy of the configuration.
      * @param backup_directory -- A directory to store backups.
      */
-    void restore(const QString& backup_directory) {
-        const QString mst_user = Path_manager::get_instance()->get_mst_user();
-        const QString mst_user_home = "/home/" + mst_user + "/";
-        foreach (auto key, installation_paths.keys()) {
-            QString dest = installation_paths[key];
-            if (dest.contains("{{home}}")) {
-                Template tpl(dest);
-                tpl.set("home", mst_user_home);
-                dest = tpl.substitute();
-            }
-            Platform::fs_cp(backup_directory + "/" + key, dest);
-        }
-    }
+    void restore(const QString& backup_directory);
 
     /**
      * @brief add -- Add a new configuration file to the configuration.
@@ -92,10 +60,7 @@ public:
      * @param file_template -- A template for the configuration file.
      */
     void add(const QString& file_name, const QString& installation_path,
-             const Template& file_template) {
-        installation_paths[file_name] = installation_path;
-        templates[file_name]          = file_template;
-    }
+             const Template& file_template);
 
     /**
      * @brief get_templates -- Get templates for configuration files.

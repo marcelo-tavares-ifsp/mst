@@ -42,6 +42,7 @@ SOURCES += \
 
 SOURCES += \
     ../mst/core/configuration.cpp \
+    ../mst/core/platform.cpp \
     ../mst/core/component.cpp \
     ../mst/core/components/awesome.cpp \
     test_awesome.cpp

@@ -1,6 +1,7 @@
 #include <QtTest>
 #include <QString>
 
+#include "../mst/core/platform.h"
 #include "test_component.h"
 #include "../mst/core/types/resolution.h"
 #include "../mst/core/types/monitor.h"
