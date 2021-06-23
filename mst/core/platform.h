@@ -42,7 +42,14 @@ public:
     static void fs_cp(const QString& src, const QString& dst);
 
     static void system_set_default_runlevel(const QString& target);
+
+    /**
+     * @brief system_service_active_p -- Check if @a service is active.
+     * @param service_name -- A service to check.
+     * @return True if the service is active, false if not.
+     */
     static bool system_service_active_p(const QString& service_name);
+
     static void system_enable_service(const QString& service_name);
     static void system_disable_service(const QString& service_name);
 
