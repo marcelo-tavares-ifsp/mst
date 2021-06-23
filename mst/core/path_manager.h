@@ -21,21 +21,21 @@ public:
         return instance;
     }
     void set_config(DSV* config);
-    std::string get_device_path();
+    QString get_device_path();
     const QString get_mst_user();
-    std::string get_output_dir();
-    std::string get_usr_share_dir();
-    std::string get_sudoers_config();
-    void set_user(std::string user_name);
+    QString get_output_dir();
+    QString get_usr_share_dir();
+    QString get_sudoers_config();
+    void set_user(QString user_name);
 
 private:
     Path_manager() {};
 
-    std::string user;
+    QString user;
     DSV* config;
-    std::string output_dir;
-    std::string usrShareDir;
-    std::string awesome_config;
+    QString output_dir;
+    QString usrShareDir;
+    QString awesome_config;
 };
 
 #endif // PATHMANAGER_H

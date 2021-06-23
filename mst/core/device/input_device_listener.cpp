@@ -24,10 +24,10 @@ bool Input_device_listener::loop_answer_device(QString device)
     ssize_t bytes;
     int fd;
 
-    string devpath = Path_manager::get_instance()->get_device_path()
-                    + device.toStdString();
+    QString devpath = Path_manager::get_instance()->get_device_path()
+                    + device;
 
-    const char *pDevice = devpath.c_str();
+    const char *pDevice = devpath.toStdString().c_str();
 
     fd = open(pDevice, O_RDWR  | O_NONBLOCK);
     if (fd == -1)

@@ -129,8 +129,7 @@ QString InstallController::get_instruction(Device_listener * device_listener)
  */
 void InstallController::begin_install()
 {
-    QString out_dir = QString::fromStdString(
-                Path_manager::get_instance()->get_output_dir());
+    QString out_dir = Path_manager::get_instance()->get_output_dir();
     Platform::fs_mkdir(out_dir);
     component_manager = new Component_manager(*config);
     component_manager->configure_components();
@@ -143,8 +142,7 @@ void InstallController::begin_install()
 void InstallController::install_files()
 {
     const QString output_dir
-            = QString::fromStdString(
-                Path_manager::get_instance()->get_output_dir());
+            = Path_manager::get_instance()->get_output_dir();
     const QString mst_user = Path_manager::get_instance()->get_mst_user();
     const QString mst_user_home = "/home/" + mst_user + "/";
 
