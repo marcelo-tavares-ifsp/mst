@@ -14,16 +14,6 @@
 InstallController* InstallController::instance = 0;
 Q_LOGGING_CATEGORY(install_controller_category, "mst.core.install_controller")
 
-static void clear_interface(shared_ptr<Seat> seat)
-{
-    seat->set_keyboard("");
-    seat->set_mouse("");
-    seat->set_usb("");
-    qInfo(install_controller_category())
-            << "interface "
-            << seat->get_monitor().get_interface() << " was cleared";
-}
-
 // constructors ///////////////////////////////////////////////////////////////
 
 InstallController::InstallController()
@@ -83,7 +73,7 @@ void InstallController::load_seat_configuration_page(QWidget* parent,
 void InstallController::prepare_for_device_configuration(int seat_id)
 {
     current_seat_id = seat_id;
-    clear_interface(config->get_seat(seat_id));
+    config->get_seat(seat_id)->reset_devices();
 }
 
 void InstallController::set_seat_device(QString device, DEVICE_TYPE type)

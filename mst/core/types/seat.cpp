@@ -110,3 +110,12 @@ bool Seat::is_configured() const
 
     return result;
 }
+
+void Seat::reset_devices()
+{
+    qInfo(seat_category()) << "Resetting " << this << " ...";
+    this->usb      = "";
+    this->keyboard = "";
+    this->usb      = "";
+    qInfo(seat_category()) << "Resetting " << this << " ... done";
+}

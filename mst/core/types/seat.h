@@ -70,6 +70,12 @@ public:
      */
     bool intersects(const std::shared_ptr<Seat> other) const;
 
+    /**
+     * @brief reset_devices -- Reset mouse, keyboard and USB devices
+     *     to an empty string.
+     */
+    void reset_devices();
+
     friend std::ostream& operator<< (std::ostream& os, Seat& seat);
 
 private:
