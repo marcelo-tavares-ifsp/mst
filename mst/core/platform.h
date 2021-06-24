@@ -20,6 +20,9 @@ public:
     }
 };
 
+/**
+ * @brief The Platform class contains platform-specific tools.
+ */
 class Platform
 {
 public:
@@ -62,8 +65,26 @@ public:
 
 namespace platform {
 
+/**
+ * @brief platform::popen_read -- execute a command and read output from it.
+ * @param command -- a command to execute.
+ * @return QVector of output lines.
+ */
 QVector<QString> popen_read(QString command);
+
+/**
+ * @brief run_xrandr -- Return the output of 'xrandr' command.
+ * @return QVector of strings.
+ * @throws Platform_exception
+ */
 QVector<QString> run_xrandr();
+
+/**
+ * @brief run_ls_devices -- get a list of input
+ *      devices.
+ * @return a list of devices.
+ * @throws Platform_exception
+ */
 QVector<QString> run_ls_devices();
 
 }

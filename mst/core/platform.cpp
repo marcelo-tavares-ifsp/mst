@@ -27,11 +27,6 @@ Platform::Platform()
 
 //// Helper procedures.
 
-/**
- * @brief platform::popen_read -- execute a command and read output from it.
- * @param command -- a command to execute.
- * @return QVector of output lines.
- */
 QVector<QString> platform::popen_read(QString command)
 {
     const int BUF_SZ = 255;
@@ -52,22 +47,11 @@ QVector<QString> platform::popen_read(QString command)
     }
 }
 
-/**
- * @brief run_xrandr -- Return the output of 'xrandr' command.
- * @return QVector of strings.
- * @throws Platform_exception
- */
 QVector<QString> platform::run_xrandr()
 {
     return platform::popen_read("xrandr");
 }
 
-/**
- * @brief run_ls_devices -- get a list of input
- *      devices.
- * @return a list of devices.
- * @throws Platform_exception
- */
 QVector<QString> platform::run_ls_devices()
 {
     return platform::popen_read("ls /dev/input/by-path/");
