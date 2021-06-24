@@ -26,7 +26,6 @@ public:
     QString get_output_dir();
     QString get_usr_share_dir();
     QString get_sudoers_config();
-    void set_user(QString user_name);
 
 private:
     Path_manager() {};

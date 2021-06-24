@@ -44,8 +44,3 @@ QString Path_manager::get_sudoers_config()
 {
     return Path_manager::get_output_dir() + "/sudoers";
 }
-
-void Path_manager::set_user(QString user_name)
-{
-    user = user_name;
-}
