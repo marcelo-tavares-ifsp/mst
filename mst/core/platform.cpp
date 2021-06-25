@@ -276,6 +276,16 @@ void Platform::system_disable_service(const QString& service_name)
     Platform::exec("systemctl disable " + service_name);
 }
 
+void Platform::system_stop_service(const QString& service_name)
+{
+    Platform::exec("systemctl stop " + service_name);
+}
+
+void Platform::system_start_service(const QString& service_name)
+{
+    Platform::exec("systemctl start " + service_name);
+}
+
 /**
  * @brief Platform::exec -- Execute a command.
  * @param command -- A command to execute.

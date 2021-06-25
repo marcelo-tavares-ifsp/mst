@@ -56,6 +56,17 @@ public:
     static void system_enable_service(const QString& service_name);
     static void system_disable_service(const QString& service_name);
 
+    /**
+     * @brief system_stop_service -- Stop a service.
+     * @param service_name
+     */
+    static void system_stop_service(const QString& service_name);
+    /**
+     * @brief system_start_service -- Start a service.
+     * @param service_name
+     */
+    static void system_start_service(const QString& service_name);
+
     static int exec(const QString& command);
 
     static struct passwd* getpwnam(const QString& name);
