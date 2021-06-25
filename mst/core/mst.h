@@ -17,12 +17,12 @@
 Q_DECLARE_LOGGING_CATEGORY(install_controller_category)
 
 /**
- * @brief The InstallController_exception class This class describes an
- *     exception that can be thrown by InstallController methods.
+ * @brief The MST_exception class This class describes an
+ *     exception that can be thrown by MST methods.
  */
-class InstallController_exception: public std::runtime_error {
+class MST_exception: public std::runtime_error {
 public:
-    InstallController_exception(std::string what)
+    MST_exception(std::string what)
         : std::runtime_error(what) {
         // Do nothing.
     }

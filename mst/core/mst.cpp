@@ -188,7 +188,7 @@ void MST::create_backup()
         component_manager->backup_configurations(backup_dir);
     } catch (Platform_exception& e) {
         qCritical(install_controller_category) << e.what();
-        throw InstallController_exception(e.what());
+        throw MST_exception(e.what());
     }
 }
 
