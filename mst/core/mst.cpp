@@ -1,14 +1,8 @@
 #include "mst.h"
-#include <QPushButton>
-#include <QCoreApplication>
-#include <QMainWindow>
-#include <QComboBox>
-#include <QCheckBox>
 #include <memory>
 #include <pwd.h> // getpwnam
 
 #include "core/platform.h"
-#include "ui/seat_widget/seat_widget.h"
 #include "core/types/xrandr_monitor.h"
 
 MST* MST::instance = 0;

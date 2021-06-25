@@ -2,16 +2,12 @@
 #define INSTALLCONTROLLER_H
 
 #include <QObject>
-#include <QComboBox>
-#include <QListWidget>
 
-#include "ui_installwindow.h"
 #include "core/configuration.h"
 #include "core/utilites/utilites.h"
 #include "core/device/device_listener.h"
 #include "core/component_manager.h"
 #include "core/components/vgl.h"
-#include "ui/seat_widget/seat_widget.h"
 #include "core/types/resolution.h"
 
 Q_DECLARE_LOGGING_CATEGORY(install_controller_category)

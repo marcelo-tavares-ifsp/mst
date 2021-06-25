@@ -3,6 +3,8 @@
 
 #include "../about_dialog/about_dialog.h"
 
+#include <ui/seat_widget/seat_widget.h>
+
 Q_LOGGING_CATEGORY(install_window_category, "mst.install_window")
 
 InstallWindow::InstallWindow(QWidget *parent) :
