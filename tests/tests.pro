@@ -54,7 +54,6 @@ SOURCES += \
     ../mst/core/types/resolution.cpp \
     ../mst/core/types/xrandr_monitor.cpp \
     ../mst/core/template_manager.cpp \
-    ../mst/core/path_manager.cpp \
     ../mst/core/dsv_parser/dsv.cpp
 
 HEADERS += \

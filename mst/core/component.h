@@ -8,7 +8,6 @@
 #include "types/template.h"
 #include "template_manager.h"
 #include "platform.h"
-#include "path_manager.h"
 
 /**
  * @brief The Component_error class -- describes a generic component error.
@@ -30,6 +29,8 @@ class Component_configuration
     friend class Component;
 
 public:
+    Component_configuration(Configuration& config);
+
     const QMap<QString, QString>& get_installation_paths() {
         return installation_paths;
     }
@@ -80,6 +81,8 @@ public:
     }
 
 private:
+    Configuration& config;
+
     /**
      * @brief templates -- Configuration templates.
      */

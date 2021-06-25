@@ -29,10 +29,11 @@ public:
      * @return A new seats template.
      */
     Template prepare_seat_configuration_template();
+
+    Template prepare_getty_template();
 };
 
 Template prepare_bashrc_template();
-Template prepare_getty_template();
 
 }
 

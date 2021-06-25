@@ -1,5 +1,7 @@
 #include "configuration.h"
 
+#include <QFile>
+
 using namespace std;
 
 Q_LOGGING_CATEGORY(configuration_category, "mst.core.configuration")
@@ -7,6 +9,37 @@ Q_LOGGING_CATEGORY(configuration_category, "mst.core.configuration")
 Configuration::Configuration()
 {
 
+}
+
+static void create_config_file(QFile& file) {
+    if (! file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+    QTextStream out(&file);
+    out << "user:multiseat";
+    file.close();
+}
+
+/**
+ * TODO: Load current seat configuration from a file.
+ */
+void Configuration::load(QString system_config_file)
+{
+    QFile file(system_config_file);
+    if(! file.exists()) {
+        create_config_file(file);
+    }
+    this->system_config = shared_ptr<DSV>(new DSV(system_config_file.toStdString()));
+}
+
+QString Configuration::get_system_mst_user() const
+{
+    return QString::fromStdString(system_config->get("user"));
+}
+
+QString Configuration::get_output_directory() const
+{
+    QString mst_user = QString::fromStdString(system_config->get("user"));
+    return "/home/" + mst_user + "/.local/share/mst/output";
 }
 
 void Configuration::add_seat(shared_ptr<Seat> seat)

@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <QLoggingCategory>
+#include <core/dsv_parser/dsv.h>
 #include "core/types/seat.h"
 
 Q_DECLARE_LOGGING_CATEGORY(configuration_category)
@@ -12,6 +13,8 @@ class Configuration
 {
 public:
     Configuration();
+
+    void load(QString system_config_file);
 
     void set_debug_allow_device_collisions(bool value);
     void set_debug_allow_empty_devices(bool value);
@@ -47,7 +50,21 @@ public:
      */
     QVector<std::shared_ptr<Seat>> get_seats();
 
+    /**
+     * @brief get_system_mst_user -- Get the MST system user.
+     * @return Username as a QString.
+     */
+    QString get_system_mst_user() const;
+
+    /**
+     * @brief get_output_directory -- Get the MST configuration
+     *      output directory.
+     * @return The directory path as a QString.
+     */
+    QString get_output_directory() const;
+
 private:
+    std::shared_ptr<DSV> system_config;
     QVector<std::shared_ptr<Seat>> seats;
 
     /**

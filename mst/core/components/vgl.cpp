@@ -20,7 +20,6 @@
  */
 
 #include "vgl.h"
-#include "core/path_manager.h"
 
 #include "../types/template.h"
 #include "core/template_manager.h"
@@ -73,7 +72,7 @@ void VGL::disable()
 
 void VGL::prepare_vgl_sh_template(Template& tpl)
 {
-    const QString user = Path_manager::get_instance()->get_mst_user();
+    const QString user = config.get_system_mst_user();
     tpl.set("user", user);
 }
 

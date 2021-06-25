@@ -34,6 +34,7 @@ class InstallController: public QObject
 
 public:
     static InstallController *get_instance();
+    void set_configuration(Configuration& config);
     QString get_instruction(Device_listener * device_listener);
     void load_seat_configuration_page(QWidget* parent, QHBoxLayout* seats_box);
     void prepare_for_device_configuration(int seat_id);
@@ -62,7 +63,7 @@ private:
 
     void print_config();
     static InstallController *instance;
-    Configuration *config;
+    std::shared_ptr<Configuration> config;
     vector<QWidget *> *widgets;
     QVector<QString> *list_mice;
     QVector<QString> *list_keybs;

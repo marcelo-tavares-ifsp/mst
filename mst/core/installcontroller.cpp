@@ -18,16 +18,20 @@ Q_LOGGING_CATEGORY(install_controller_category, "mst.core.install_controller")
 
 InstallController::InstallController()
 {
-    config = new Configuration();
     widgets = new vector<QWidget *>;
     list_mice = new QVector<QString>;
     list_keybs = new QVector<QString>;
     current_seat_id = -1;
-    const QString user = Path_manager::get_instance()->get_mst_user();
-    this->backup_dir = "/home/" + user + "/.local/share/mst/backup/";
 }
 
 // public methods ///////////////////////////////////////////////////////////////
+
+void InstallController::set_configuration(Configuration &config)
+{
+    this->config = std::shared_ptr<Configuration>(&config);
+    this->backup_dir = "/home/" + config.get_system_mst_user()
+            + "/.local/share/mst/backup/";
+}
 
 /**
  * @brief InstallController::get_instance -- Get the instance of
@@ -129,7 +133,7 @@ QString InstallController::get_instruction(Device_listener * device_listener)
  */
 void InstallController::begin_install()
 {
-    QString out_dir = Path_manager::get_instance()->get_output_dir();
+    QString out_dir = config->get_output_directory();
     Platform::fs_mkdir(out_dir);
     component_manager = new Component_manager(*config);
     component_manager->configure_components();
@@ -141,9 +145,8 @@ void InstallController::begin_install()
  */
 void InstallController::install_files()
 {
-    const QString output_dir
-            = Path_manager::get_instance()->get_output_dir();
-    const QString mst_user = Path_manager::get_instance()->get_mst_user();
+    const QString output_dir = config->get_output_directory();
+    const QString mst_user = config->get_system_mst_user();
     const QString mst_user_home = "/home/" + mst_user + "/";
 
     auto install

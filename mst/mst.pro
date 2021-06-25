@@ -65,7 +65,6 @@ SOURCES += \
     core/types/monitor.cpp \
     core/types/seat.cpp \
     ui/seat_widget/seat_widget.cpp \
-    core/path_manager.cpp \
     core/device/device.cpp \
     core/device/device_listener.cpp \
     core/device/usb_device_listener.cpp \
@@ -99,7 +98,6 @@ HEADERS += \
     core/types/monitor.h \
     core/types/seat.h \
     ui/seat_widget/seat_widget.h \
-    core/path_manager.h \
     core/device/device.h \
     core/device/device_listener.h \
     core/device/usb_device_listener.h \

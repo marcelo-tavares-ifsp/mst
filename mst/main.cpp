@@ -147,12 +147,9 @@ int main(int argc, char *argv[])
     parser.addOption(debug_allow_empty_devices);
     parser.addOption(debug_allow_device_collisions);
     parser.process(*a);
-    QFile file(MST_CONFIG_FILE);
-    if(! file.exists()) {
-        create_config_file(file);
-    }
-    DSV config(MST_CONFIG_FILE.toStdString());
-    Path_manager::get_instance()->set_config(&config);
+    Configuration config;
+    config.load(MST_CONFIG_FILE);
+
     Template_manager::get_instance()->set_template_dir("/var/lib/mst/");
 
     if (geteuid() != 0)
@@ -180,6 +177,7 @@ int main(int argc, char *argv[])
     m_logFile.data()->open(QFile::Append | QFile::Text);
     qInstallMessageHandler(messageHandler);
     InstallController* controller = InstallController::get_instance();
+    controller->set_configuration(config);
 
     if (parser.isSet(debug_allow_device_collisions)) {
         controller->set_debug_allow_device_collisions(true);

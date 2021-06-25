@@ -26,7 +26,6 @@
 #include "../configuration.h"
 #include "../types/template.h"
 #include "core/template_manager.h"
-#include "core/path_manager.h"
 #include "core/platform.h"
 
 
@@ -82,9 +81,9 @@ Template System::prepare_seat_configuration_template()
     return Template(config_contents);
 }
 
-Template sys::prepare_getty_template()
+Template System::prepare_getty_template()
 {
-    const QString user = Path_manager::get_instance()->get_mst_user();
+    const QString user = config.get_system_mst_user();
     Template tpl = Template_manager::get_instance()->get_template(GETTY_FILE);
     tpl.set("user", user);
     return tpl;

@@ -15,7 +15,8 @@ Test_component::Test_component()
 
 void Test_component::configuration_test()
 {
-    Component_configuration config;
+    Configuration sysconf;
+    Component_configuration config(sysconf);
     config.add("test.txt", ".", Template("{{test}}"));
     QString result = config.get_template("test.txt")
             .set("test", "42")

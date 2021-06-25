@@ -28,7 +28,6 @@
 #include "../configuration.h"
 #include "../types/template.h"
 #include "core/template_manager.h"
-#include "core/path_manager.h"
 
 using namespace sudo;
 
@@ -50,9 +49,9 @@ void Sudo::disable()
 
 //// Helper procedures.
 
-Template sudo::prepare_sudoers_template()
+Template Sudo::prepare_sudoers_template()
 {
-    const QString user = Path_manager::get_instance()->get_mst_user();
+    const QString user = config.get_system_mst_user();
     Template tpl = Template_manager::get_instance()->get_template("sudoers");
 
     tpl.set("user", user).set("mst", QString::fromLocal8Bit(INSTALLATION_PREFIX)

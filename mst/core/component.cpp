@@ -2,9 +2,16 @@
 #include "platform.h"
 
 Component::Component(Configuration& config)
-    : config(config)
+    : config(config),
+      component_configuration(Component_configuration(config))
 {
     /* Do nothing */
+}
+
+Component_configuration::Component_configuration(Configuration &config)
+    : config(config)
+{
+
 }
 
 void Component_configuration::store(const QString &output_directory) {
@@ -14,7 +21,7 @@ void Component_configuration::store(const QString &output_directory) {
 }
 
 void Component_configuration::backup(const QString &backup_directory) {
-    const QString mst_user = Path_manager::get_instance()->get_mst_user();
+    const QString mst_user = config.get_system_mst_user();
     const QString mst_user_home = "/home/" + mst_user + "/";
     foreach (auto key, installation_paths.keys()) {
         QString dest = installation_paths[key];
@@ -32,7 +39,7 @@ void Component_configuration::backup(const QString &backup_directory) {
 }
 
 void Component_configuration::restore(const QString &backup_directory) {
-    const QString mst_user = Path_manager::get_instance()->get_mst_user();
+    const QString mst_user = config.get_system_mst_user();
     const QString mst_user_home = "/home/" + mst_user + "/";
     foreach (auto key, installation_paths.keys()) {
         QString dest = installation_paths[key];

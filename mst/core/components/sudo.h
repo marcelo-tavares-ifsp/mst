@@ -22,11 +22,9 @@ public:
         /* Do nothing. */
     }
     void disable() override;
+
+    Template prepare_sudoers_template();
 };
-
-//// Helper procedures.
-
-Template prepare_sudoers_template();
 
 }
 

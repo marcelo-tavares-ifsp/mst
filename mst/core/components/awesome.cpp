@@ -28,7 +28,6 @@
 
 #include "../types/template.h"
 #include "core/template_manager.h"
-#include "core/path_manager.h"
 
 using namespace std;
 using namespace awesome;
