@@ -48,6 +48,18 @@ InstallController *InstallController::get_instance(){
     return instance;
 }
 
+void InstallController::load_seats()
+{
+    vector<XRandr_monitor> availableMonitors = Platform::xrandr_get_monitors();
+    int idx = 0;
+    for (auto xrandr_monitor : availableMonitors) {
+        Monitor monitor(xrandr_monitor);
+        shared_ptr<Seat> seat = make_shared<Seat>(idx++);
+        seat->add_monitor(monitor);
+        config->add_seat(seat);
+    }
+}
+
 void InstallController::load_seat_configuration_page(QWidget* parent,
                                                      QHBoxLayout* seats_box)
 {
@@ -61,13 +73,7 @@ void InstallController::load_seat_configuration_page(QWidget* parent,
     Platform::get_input_devices(*list_mice, *list_keybs);
     this->seats_box = seats_box;
 
-    vector<XRandr_monitor> availableMonitors = Platform::xrandr_get_monitors();
-    int idx = 0;
-    for (auto xrandr_monitor : availableMonitors) {
-        Monitor monitor(xrandr_monitor);
-        shared_ptr<Seat> seat = make_shared<Seat>(idx++);
-        seat->add_monitor(monitor);
-        config->add_seat(seat);
+    for (auto seat : config->get_seats()) {
         QWidget* widget = new Seat_widget(seat);
         connect(widget, SIGNAL(configure_seat(int)), parent, SLOT(configure_seat(int)));
         widgets->push_back(widget);

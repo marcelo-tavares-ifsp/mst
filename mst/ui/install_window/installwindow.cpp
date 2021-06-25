@@ -55,6 +55,7 @@ void InstallWindow::configure_seat(int seat_id)
  */
 void InstallWindow::on_button_begin_configuration_clicked()
 {
+    inst_controller->load_seats();
     inst_controller->load_seat_configuration_page(this, ui->hbox_seats);
     show_page(Ui::Page::CONFIGURATION);
 }
