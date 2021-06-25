@@ -9,11 +9,18 @@
 
 Q_DECLARE_LOGGING_CATEGORY(configuration_category)
 
+/**
+ * @brief The Configuration class describes MST configuration.
+ */
 class Configuration
 {
 public:
     Configuration();
 
+    /**
+     * @brief load -- Load configuration from a file.
+     * @param system_config_file -- Name of the file to load.
+     */
     void load(QString system_config_file);
 
     void set_debug_allow_device_collisions(bool value);
@@ -64,7 +71,14 @@ public:
     QString get_output_directory() const;
 
 private:
+    /**
+     * @brief system_config -- System configuration.
+     */
     std::shared_ptr<DSV> system_config;
+
+    /**
+     * @brief seats -- Seats configuration.
+     */
     QVector<std::shared_ptr<Seat>> seats;
 
     /**
