@@ -110,30 +110,6 @@ void MST::set_seat_device(QString device, DEVICE_TYPE type)
     qInfo(install_controller_category()) << seat.get();
 }
 
-QString MST::get_instruction(Device_listener * device_listener)
-{
-    QString instruction = "";
-
-    switch (device_listener->type) {
-    case DEVICE_TYPE::KEYBOARD:
-        instruction = "Пожалуйста, нажимайте на кнопки той клавиатуры,"
-                      " которую хотите использовать для выбранного рабочего"
-                      " места.";
-        break;
-    case DEVICE_TYPE::MOUSE:
-        instruction = "Пожалуйста, нажимайте на кнопки той мыши,"
-                      " которую хотите использовать для выбранного рабочего"
-                      " места.";
-        break;
-    case DEVICE_TYPE::USB:
-        instruction = "Пожалуйста вставьте USB-устройство в тот USB-разъём,"
-                      " который хотите использовать для выбранного рабочего"
-                      " места.";
-        break;
-    }
-
-    return instruction;
-}
 
 /**
  * @brief MST::configure -- Configure all the components.
