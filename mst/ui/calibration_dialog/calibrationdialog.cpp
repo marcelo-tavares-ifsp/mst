@@ -1,7 +1,7 @@
 #include "calibrationdialog.h"
 #include "ui_calibrationdialog.h"
 
-Q_LOGGING_CATEGORY(calibration_dialog_category, "mst.calibration_dialog")
+Q_LOGGING_CATEGORY(calibration_dialog_category, "mst.ui.calibration_dialog")
 
 CalibrationDialog::CalibrationDialog(QWidget *parent, QString instruction) :
     QDialog(parent),

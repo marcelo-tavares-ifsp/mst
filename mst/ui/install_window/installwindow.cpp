@@ -5,7 +5,7 @@
 
 #include <ui/seat_widget/seat_widget.h>
 
-Q_LOGGING_CATEGORY(install_window_category, "mst.install_window")
+Q_LOGGING_CATEGORY(install_window_category, "mst.ui.install_window")
 
 InstallWindow::InstallWindow(QWidget *parent) :
     QMainWindow(parent),
