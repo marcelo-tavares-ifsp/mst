@@ -54,7 +54,7 @@ private slots:
 
 private:
     Ui::InstallWindow *ui;
-    MST *inst_controller;
+    MST *mst;
 
     void initial_listeners();
     void initial_calibration_dialog(Device_listener* device_listener);

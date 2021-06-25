@@ -10,9 +10,9 @@ InstallWindow::InstallWindow(QWidget *parent) :
     ui(new Ui::InstallWindow)
 {
     ui->setupUi(this);
-    inst_controller = MST::get_instance();
+    mst = MST::get_instance();
 
-    if (! inst_controller->running_p()) {
+    if (! mst->running_p()) {
         qInfo(install_window_category()) << "MST is not running";
         ui->button_stop_mst->setEnabled(false);
     } else {
@@ -42,7 +42,7 @@ void InstallWindow::show_page(int number)
 void InstallWindow::configure_seat(int seat_id)
 {
     qInfo(install_window_category()) << seat_id << " was selected";
-    inst_controller->prepare_for_device_configuration(seat_id);
+    mst->prepare_for_device_configuration(seat_id);
 
     initial_listeners();
 }
@@ -55,8 +55,8 @@ void InstallWindow::configure_seat(int seat_id)
  */
 void InstallWindow::on_button_begin_configuration_clicked()
 {
-    inst_controller->load_seats();
-    inst_controller->load_seat_configuration_page(this, ui->hbox_seats);
+    mst->load_seats();
+    mst->load_seat_configuration_page(this, ui->hbox_seats);
     show_page(Ui::Page::CONFIGURATION);
 }
 
@@ -66,10 +66,10 @@ void InstallWindow::on_button_begin_configuration_clicked()
 void InstallWindow::on_button_install_mst_clicked()
 {
     try {
-        inst_controller->create_backup();
-        inst_controller->configure(); // TODO: Dialog OK/Cancel
-        inst_controller->install();
-        inst_controller->enable();
+        mst->create_backup();
+        mst->configure(); // TODO: Dialog OK/Cancel
+        mst->install();
+        mst->enable();
         ui->button_next_to_installation->setEnabled(false);
 
         Reboot_dialog* rd = new Reboot_dialog(this);
@@ -113,12 +113,12 @@ void InstallWindow::on_button_exit_clicked()
 
 void InstallWindow::on_button_stop_mst_clicked()
 {
-    inst_controller->stop(); // TODO: Dialog OK/Cancel
+    mst->stop(); // TODO: Dialog OK/Cancel
 }
 
 void InstallWindow::on_button_restore_backup_clicked()
 {
-    inst_controller->uninstall(); // TODO: Dialog OK/Cancel
+    mst->uninstall(); // TODO: Dialog OK/Cancel
 
     Reboot_dialog* rd = new Reboot_dialog(this);
 
@@ -133,10 +133,10 @@ void InstallWindow::initial_listeners()
     qDebug(install_window_category(), "initial_listeners: Creating and starting I/O listeners ...");
     Device_listener* mouse_listener
             = new Input_device_listener(DEVICE_TYPE::MOUSE,
-                                        inst_controller->get_mice());
+                                        mst->get_mice());
     Device_listener* keyboard_listener
             = new Input_device_listener(DEVICE_TYPE::KEYBOARD,
-                                        inst_controller->get_keyboards());
+                                        mst->get_keyboards());
     Device_listener* usb_listener
             = new USB_device_listener(DEVICE_TYPE::USB);
 
@@ -194,7 +194,7 @@ void InstallWindow::attach_signals(Device_listener* listener, CalibrationDialog*
 {
     qDebug(install_window_category(), "Attaching signals from listeners to slots ...");
     connect(listener, SIGNAL(device_found(QString, DEVICE_TYPE)),
-        inst_controller, SLOT(set_seat_device(QString, DEVICE_TYPE)));
+        mst, SLOT(set_seat_device(QString, DEVICE_TYPE)));
 
     connect(listener, SIGNAL(work_done()), cd, SLOT(work_done()));
     connect(cd, SIGNAL(cancel()), listener, SLOT(cancel()));
@@ -211,7 +211,7 @@ void InstallWindow::on_about_triggered()
 
 void InstallWindow::on_button_next_to_installation_clicked()
 {
-    if (inst_controller->config_is_valid())
+    if (mst->config_is_valid())
     {
         qInfo(install_window_category) << "Configuration is valid";
         show_page(Ui::Page::CONFIGURATION_END);
