@@ -188,7 +188,7 @@ int main(int argc, char *argv[])
     }
 
     if (parser.isSet(rollback_option)) {
-        controller->disable_mst();
+        controller->disable();
         return 0;
     }
 

@@ -149,7 +149,7 @@ void MST::configure()
 /**
  * @brief MST::install_files -- Install al configuration files.
  */
-void MST::install_files()
+void MST::install()
 {
     const QString output_dir = config->get_output_directory();
     const QString mst_user = config->get_system_mst_user();
@@ -193,13 +193,13 @@ void MST::install_files()
     Platform::chown(mst_user_home, pwd->pw_uid, pwd->pw_gid, true);
 }
 
-void MST::enable_mst()
+void MST::enable()
 {
     component_manager->enable_components();
     qInfo(install_controller_category) << "multiseat enabled.";
 }
 
-void MST::disable_mst()
+void MST::disable()
 {
     component_manager->disable_components();
     qInfo(install_controller_category) << "multiseat disabled.";
@@ -221,13 +221,13 @@ void MST::restore_backup()
     component_manager->restore_configurations(backup_dir);
 }
 
-void MST::begin_uninstall()
+void MST::uninstall()
 {
     restore_backup();
-    disable_mst();
+    disable();
 }
 
-void MST::begin_stop()
+void MST::stop()
 {
     component_manager->stop_components();
 }

@@ -68,8 +68,8 @@ void InstallWindow::on_button_install_mst_clicked()
     try {
         inst_controller->create_backup();
         inst_controller->configure(); // TODO: Dialog OK/Cancel
-        inst_controller->install_files();
-        inst_controller->enable_mst();
+        inst_controller->install();
+        inst_controller->enable();
         ui->button_next_to_installation->setEnabled(false);
 
         Reboot_dialog* rd = new Reboot_dialog(this);
@@ -113,12 +113,12 @@ void InstallWindow::on_button_exit_clicked()
 
 void InstallWindow::on_button_stop_mst_clicked()
 {
-    inst_controller->begin_stop(); // TODO: Dialog OK/Cancel
+    inst_controller->stop(); // TODO: Dialog OK/Cancel
 }
 
 void InstallWindow::on_button_restore_backup_clicked()
 {
-    inst_controller->begin_uninstall(); // TODO: Dialog OK/Cancel
+    inst_controller->uninstall(); // TODO: Dialog OK/Cancel
 
     Reboot_dialog* rd = new Reboot_dialog(this);
 

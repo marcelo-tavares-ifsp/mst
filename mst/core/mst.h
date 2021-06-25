@@ -35,20 +35,21 @@ class MST: public QObject
 public:
     static MST *get_instance();
     void set_configuration(Configuration& config);
-    QString get_instruction(Device_listener * device_listener);
     void load_seats();
-    void load_seat_configuration_page(QWidget* parent, QHBoxLayout* seats_box);
-    void prepare_for_device_configuration(int seat_id);
     void configure();
-    void begin_stop();
-    void begin_uninstall();
+    void stop();
     bool running_p();
     bool config_is_valid();
-    void install_files();
+    void uninstall();
+    void install();
     void create_backup();
     void restore_backup();
-    void enable_mst();
-    void disable_mst();
+    void enable();
+    void disable();
+
+    void prepare_for_device_configuration(int seat_id);
+    QString get_instruction(Device_listener * device_listener);
+    void load_seat_configuration_page(QWidget* parent, QHBoxLayout* seats_box);
 
     QVector<QString> get_mice();
     QVector<QString> get_keyboards();
