@@ -35,11 +35,15 @@ class MST: public QObject
 public:
     static MST *get_instance();
     void set_configuration(Configuration& config);
+    void set_device(int32_t seat_idx, QString device, DEVICE_TYPE type);
     void load_seats();
+    QVector<shared_ptr<Seat>> get_seats() const;
     void configure();
     void stop();
     bool running_p();
     bool config_is_valid();
+    void reset_devices(int32_t seat_id);
+    void get_devices(QVector<QString>& mice, QVector<QString>& keyboards);
     void uninstall();
     void install();
     void create_backup();
@@ -47,14 +51,8 @@ public:
     void enable();
     void disable();
 
-    void prepare_for_device_configuration(int seat_id);
-    void load_seat_configuration_page(QWidget* parent, QHBoxLayout* seats_box);
-
     QVector<QString> get_mice();
     QVector<QString> get_keyboards();
-
-public slots:
-    void set_seat_device(QString, DEVICE_TYPE);
 
 private:
     MST();
@@ -62,11 +60,6 @@ private:
     void print_config();
     static MST *instance;
     std::shared_ptr<Configuration> config;
-    vector<QWidget *> *widgets;
-    QVector<QString> *list_mice;
-    QVector<QString> *list_keybs;
-    QHBoxLayout* seats_box;
-    int current_seat_id;
     Component_manager* component_manager;
 
     QString backup_dir;

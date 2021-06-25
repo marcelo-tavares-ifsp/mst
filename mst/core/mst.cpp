@@ -18,10 +18,7 @@ Q_LOGGING_CATEGORY(install_controller_category, "mst.core.install_controller")
 
 MST::MST()
 {
-    widgets = new vector<QWidget *>;
-    list_mice = new QVector<QString>;
-    list_keybs = new QVector<QString>;
-    current_seat_id = -1;
+
 }
 
 // public methods ///////////////////////////////////////////////////////////////
@@ -60,38 +57,19 @@ void MST::load_seats()
     }
 }
 
-void MST::load_seat_configuration_page(QWidget* parent,
-                                                     QHBoxLayout* seats_box)
+QVector<shared_ptr<Seat>> MST::get_seats() const
 {
-    for (auto w : *widgets) {
-        delete w;
-    }
-    widgets->clear();
-
-    list_mice->clear();
-    list_keybs->clear();
-    Platform::get_input_devices(*list_mice, *list_keybs);
-    this->seats_box = seats_box;
-
-    for (auto seat : config->get_seats()) {
-        QWidget* widget = new Seat_widget(seat);
-        connect(widget, SIGNAL(configure_seat(int)), parent, SLOT(configure_seat(int)));
-        widgets->push_back(widget);
-        seats_box->addWidget(widget);
-    }
+    return config->get_seats();
 }
 
-void MST::prepare_for_device_configuration(int seat_id)
+void MST::reset_devices(int32_t seat_id)
 {
-    current_seat_id = seat_id;
     config->get_seat(seat_id)->reset_devices();
 }
 
-void MST::set_seat_device(QString device, DEVICE_TYPE type)
+void MST::set_device(int32_t seat_idx, QString device, DEVICE_TYPE type)
 {
-    shared_ptr<Seat> seat = config->get_seat(current_seat_id);
-    qInfo(install_controller_category())
-            << "Device assigned: " << device << " (" << type << ")";
+    shared_ptr<Seat> seat = config->get_seat(seat_idx);
 
     switch (type) {
     case DEVICE_TYPE::KEYBOARD:
@@ -105,8 +83,8 @@ void MST::set_seat_device(QString device, DEVICE_TYPE type)
         break;
     }
 
-    this->seats_box->update();
-
+    qInfo(install_controller_category())
+            << "Device assigned: " << device << " (" << type << ")";
     qInfo(install_controller_category()) << seat.get();
 }
 
@@ -220,14 +198,9 @@ bool MST::config_is_valid()
     return config->is_valid();
 }
 
-QVector<QString> MST::get_mice()
+void MST::get_devices(QVector<QString>& mice, QVector<QString>& keyboards)
 {
-    return *list_mice;
-}
-
-QVector<QString> MST::get_keyboards()
-{
-    return *list_keybs;
+    Platform::get_input_devices(mice, keyboards);
 }
 
 void MST::print_config() {

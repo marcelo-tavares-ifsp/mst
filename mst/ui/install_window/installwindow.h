@@ -39,6 +39,7 @@ public:
 public slots:
     void on_about_triggered();
     void configure_seat(int seat_id);
+    void set_seat_device(QString, DEVICE_TYPE);
 
 private slots:
     void on_button_begin_configuration_clicked();
@@ -54,8 +55,13 @@ private slots:
 
 private:
     Ui::InstallWindow *ui;
+    std::vector<QWidget *> widgets;
     MST *mst;
+    QVector<QString> mice;
+    QVector<QString> keyboards;
+    int32_t current_seat_id;
 
+    void load_seat_configuration_page();
     void initial_listeners();
     void initial_calibration_dialog(Device_listener* device_listener);
     void attach_signals(Device_listener* listener, CalibrationDialog* cd);

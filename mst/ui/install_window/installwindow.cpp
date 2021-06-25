@@ -7,7 +7,8 @@ Q_LOGGING_CATEGORY(install_window_category, "mst.install_window")
 
 InstallWindow::InstallWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::InstallWindow)
+    ui(new Ui::InstallWindow),
+    current_seat_id(-1)
 {
     ui->setupUi(this);
     mst = MST::get_instance();
@@ -42,9 +43,28 @@ void InstallWindow::show_page(int number)
 void InstallWindow::configure_seat(int seat_id)
 {
     qInfo(install_window_category()) << seat_id << " was selected";
-    mst->prepare_for_device_configuration(seat_id);
-
+    mst->reset_devices(seat_id);
+    current_seat_id = seat_id;
     initial_listeners();
+}
+
+void InstallWindow::load_seat_configuration_page()
+{
+    for (auto w : widgets) {
+        delete w;
+    }
+    widgets.clear();
+
+    mice.clear();
+    keyboards.clear();
+    mst->get_devices(mice, keyboards);
+
+    for (auto seat : mst->get_seats()) {
+        QWidget* widget = new Seat_widget(seat);
+        connect(widget, SIGNAL(configure_seat(int)), this, SLOT(configure_seat(int)));
+        widgets.push_back(widget);
+        ui->hbox_seats->addWidget(widget);
+    }
 }
 
 // Continue Buttons Handlers //////////////////////////////////////////////////
@@ -56,7 +76,7 @@ void InstallWindow::configure_seat(int seat_id)
 void InstallWindow::on_button_begin_configuration_clicked()
 {
     mst->load_seats();
-    mst->load_seat_configuration_page(this, ui->hbox_seats);
+    load_seat_configuration_page();
     show_page(Ui::Page::CONFIGURATION);
 }
 
@@ -132,11 +152,9 @@ void InstallWindow::initial_listeners()
 {
     qDebug(install_window_category(), "initial_listeners: Creating and starting I/O listeners ...");
     Device_listener* mouse_listener
-            = new Input_device_listener(DEVICE_TYPE::MOUSE,
-                                        mst->get_mice());
+            = new Input_device_listener(DEVICE_TYPE::MOUSE, mice);
     Device_listener* keyboard_listener
-            = new Input_device_listener(DEVICE_TYPE::KEYBOARD,
-                                        mst->get_keyboards());
+            = new Input_device_listener(DEVICE_TYPE::KEYBOARD, keyboards);
     Device_listener* usb_listener
             = new USB_device_listener(DEVICE_TYPE::USB);
 
@@ -190,11 +208,17 @@ void InstallWindow::initial_calibration_dialog(Device_listener* device_listener)
     cd->exec();
 }
 
+void InstallWindow::set_seat_device(QString device, DEVICE_TYPE type)
+{
+    mst->set_device(current_seat_id, device, type);
+    ui->hbox_seats->update();
+}
+
 void InstallWindow::attach_signals(Device_listener* listener, CalibrationDialog* cd)
 {
     qDebug(install_window_category(), "Attaching signals from listeners to slots ...");
     connect(listener, SIGNAL(device_found(QString, DEVICE_TYPE)),
-        mst, SLOT(set_seat_device(QString, DEVICE_TYPE)));
+        this, SLOT(set_seat_device(QString, DEVICE_TYPE)));
 
     connect(listener, SIGNAL(work_done()), cd, SLOT(work_done()));
     connect(cd, SIGNAL(cancel()), listener, SLOT(cancel()));
