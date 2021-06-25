@@ -232,7 +232,7 @@ void MST::begin_stop()
     component_manager->stop_components();
 }
 
-bool MST::is_mst_running()
+bool MST::running_p()
 {
     return Platform::system_service_active_p("mstd");
 }

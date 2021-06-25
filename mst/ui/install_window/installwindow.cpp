@@ -12,7 +12,7 @@ InstallWindow::InstallWindow(QWidget *parent) :
     ui->setupUi(this);
     inst_controller = MST::get_instance();
 
-    if (! inst_controller->is_mst_running()) {
+    if (! inst_controller->running_p()) {
         qInfo(install_window_category()) << "MST is not running";
         ui->button_stop_mst->setEnabled(false);
     } else {

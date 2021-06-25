@@ -42,7 +42,7 @@ public:
     void configure();
     void begin_stop();
     void begin_uninstall();
-    bool is_mst_running();
+    bool running_p();
     bool config_is_valid();
     void install_files();
     void create_backup();
