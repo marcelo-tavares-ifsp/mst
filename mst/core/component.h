@@ -31,6 +31,12 @@ class Component_configuration
 public:
     Component_configuration(Configuration& config);
 
+    /**
+     * @brief get_installation_paths -- Get installation paths
+     *      for the component.
+     * @return A hash map where key is file name and value is the
+     *      installation path for the file.
+     */
     const QMap<QString, QString>& get_installation_paths() {
         return installation_paths;
     }
