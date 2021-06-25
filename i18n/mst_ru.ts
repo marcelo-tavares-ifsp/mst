@@ -119,6 +119,10 @@ International&lt;/a&gt;.&lt;/p&gt;
         <source>Enable</source>
         <translation>Включить</translation>
     </message>
+        <message>
+        <source>Configure</source>
+        <translation>Настроить</translation>
+    </message>
 </context>
 <context>
     <name>RebootDialog</name>

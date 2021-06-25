@@ -22,7 +22,7 @@ Seat_widget::Seat_widget(shared_ptr<Seat> seat)
     }
 
     device_configuration_button
-            = new QPushButton(tr("Настроить устройства ввода"));
+            = new QPushButton(tr("Configure"));
     device_configuration_button->setParent(this);
     connect(device_configuration_button,
             SIGNAL(clicked()), this,
