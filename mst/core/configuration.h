@@ -23,7 +23,24 @@ public:
      */
     void load(QString system_config_file);
 
+    /**
+     * @brief allow_device_collisions -- Set whether device collisions
+     *      should be allowed in the configuration or not.
+     *
+     * Useful for debugging purposes.
+     *
+     * @param value -- 'true' or 'false'.
+     */
     void allow_device_collisions(bool value);
+
+    /**
+     * @brief allow_empty_devices -- Set whether empty (non-configured)
+     *      devices should be allowed in the configuration or not.
+     *
+     * Useful for debugging purposes.
+     *
+     * @param value -- 'true' or 'false'.
+     */
     void allow_empty_devices(bool value);
 
     /**
