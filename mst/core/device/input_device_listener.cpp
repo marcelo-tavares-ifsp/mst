@@ -27,9 +27,7 @@ bool Input_device_listener::loop_answer_device(QString device)
 
     QString devpath = platform::INPUT_DEVICES_PATH + device;
 
-    const char *pDevice = devpath.toStdString().c_str();
-
-    fd = open(pDevice, O_RDWR  | O_NONBLOCK);
+    fd = open(devpath.toStdString().c_str(), O_RDWR  | O_NONBLOCK);
     if (fd == -1)
     {
         QString message = "Could not open device: " + device;
