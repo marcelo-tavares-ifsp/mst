@@ -126,6 +126,14 @@ public:
     virtual void disable() = 0;
 
     /**
+     * @brief stop -- Stop the component without disabling it so
+     *      it can be started again (e.g. after reboot.)
+     */
+    void stop() {
+        /* Do nothing. */
+    }
+
+    /**
      * @brief get_configuration -- Returns a component configuration.
      * @return A component configuration.
      */
