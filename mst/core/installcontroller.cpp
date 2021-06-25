@@ -236,16 +236,6 @@ bool InstallController::is_mst_running()
     return Platform::system_service_active_p("mstd");
 }
 
-void InstallController::set_debug_allow_device_collisions(bool value)
-{
-    this->config->set_debug_allow_device_collisions(value);
-}
-
-void InstallController::set_debug_allow_empty_devices(bool value)
-{
-    this->config->set_debug_allow_empty_devices(value);
-}
-
 bool InstallController::config_is_valid()
 {
     print_config();

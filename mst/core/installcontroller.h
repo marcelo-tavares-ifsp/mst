@@ -52,9 +52,6 @@ public:
     QVector<QString> get_mice();
     QVector<QString> get_keyboards();
 
-    void set_debug_allow_device_collisions(bool value);
-    void set_debug_allow_empty_devices(bool value);
-
 public slots:
     void set_seat_device(QString, DEVICE_TYPE);
 

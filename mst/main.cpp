@@ -180,11 +180,11 @@ int main(int argc, char *argv[])
     controller->set_configuration(config);
 
     if (parser.isSet(debug_allow_device_collisions)) {
-        controller->set_debug_allow_device_collisions(true);
+        config.set_debug_allow_device_collisions(true);
     }
 
     if (parser.isSet(debug_allow_empty_devices)) {
-        controller->set_debug_allow_empty_devices(true);
+        config.set_debug_allow_empty_devices(true);
     }
 
     if (parser.isSet(rollback_option)) {
