@@ -10,7 +10,7 @@ InstallWindow::InstallWindow(QWidget *parent) :
     ui(new Ui::InstallWindow)
 {
     ui->setupUi(this);
-    inst_controller = InstallController::get_instance();
+    inst_controller = MST::get_instance();
 
     if (! inst_controller->is_mst_running()) {
         qInfo(install_window_category()) << "MST is not running";
@@ -189,7 +189,7 @@ void InstallWindow::on_button_next_to_installation_clicked()
     {
         qInfo(install_window_category) << "Configuration is valid";
         show_page(Ui::Page::CONFIGURATION_END);
-        InstallController* con = InstallController::get_instance();
+        MST* con = MST::get_instance();
         con->begin_install();
         qDebug(install_window_category) << "Going to the 3rd panel...";
     }

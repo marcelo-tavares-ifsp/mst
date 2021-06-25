@@ -176,7 +176,7 @@ int main(int argc, char *argv[])
     m_logFile.reset(new QFile(MST_LOG_FILE));
     m_logFile.data()->open(QFile::Append | QFile::Text);
     qInstallMessageHandler(messageHandler);
-    InstallController* controller = InstallController::get_instance();
+    MST* controller = MST::get_instance();
     controller->set_configuration(config);
 
     if (parser.isSet(debug_allow_device_collisions)) {

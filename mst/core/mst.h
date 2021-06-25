@@ -28,12 +28,12 @@ public:
     }
 };
 
-class InstallController: public QObject
+class MST: public QObject
 {
     Q_OBJECT
 
 public:
-    static InstallController *get_instance();
+    static MST *get_instance();
     void set_configuration(Configuration& config);
     QString get_instruction(Device_listener * device_listener);
     void load_seats();
@@ -57,10 +57,10 @@ public slots:
     void set_seat_device(QString, DEVICE_TYPE);
 
 private:
-    InstallController();
+    MST();
 
     void print_config();
-    static InstallController *instance;
+    static MST *instance;
     std::shared_ptr<Configuration> config;
     vector<QWidget *> *widgets;
     QVector<QString> *list_mice;

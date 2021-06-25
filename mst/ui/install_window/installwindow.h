@@ -6,7 +6,7 @@
 #include <QMessageBox>
 #include "ui/calibration_dialog/calibrationdialog.h"
 #include "ui/reboot_dialog/reboot_dialog.h"
-#include "core/installcontroller.h"
+#include "core/mst.h"
 #include "core/device/device_listener.h"
 #include "core/device/input_device_listener.h"
 #include "core/device/usb_device_listener.h"
@@ -54,7 +54,7 @@ private slots:
 
 private:
     Ui::InstallWindow *ui;
-    InstallController *inst_controller;
+    MST *inst_controller;
 
     void initial_listeners();
     void initial_calibration_dialog(Device_listener* device_listener);

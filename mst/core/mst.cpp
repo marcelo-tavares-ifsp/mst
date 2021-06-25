@@ -1,4 +1,4 @@
-#include "installcontroller.h"
+#include "mst.h"
 #include <QPushButton>
 #include <QCoreApplication>
 #include <QMainWindow>
@@ -11,12 +11,12 @@
 #include "ui/seat_widget/seat_widget.h"
 #include "core/types/xrandr_monitor.h"
 
-InstallController* InstallController::instance = 0;
+MST* MST::instance = 0;
 Q_LOGGING_CATEGORY(install_controller_category, "mst.core.install_controller")
 
 // constructors ///////////////////////////////////////////////////////////////
 
-InstallController::InstallController()
+MST::MST()
 {
     widgets = new vector<QWidget *>;
     list_mice = new QVector<QString>;
@@ -26,7 +26,7 @@ InstallController::InstallController()
 
 // public methods ///////////////////////////////////////////////////////////////
 
-void InstallController::set_configuration(Configuration &config)
+void MST::set_configuration(Configuration &config)
 {
     this->config = std::shared_ptr<Configuration>(&config);
     this->backup_dir = "/home/" + config.get_system_mst_user()
@@ -35,20 +35,20 @@ void InstallController::set_configuration(Configuration &config)
 }
 
 /**
- * @brief InstallController::get_instance -- Get the instance of
- *     InstallController.
+ * @brief MST::get_instance -- Get the instance of
+ *     MST.
  * @return The singleton instance.
  */
-InstallController *InstallController::get_instance(){
+MST *MST::get_instance(){
     if (! instance)
     {
-        instance = new InstallController();
+        instance = new MST();
     }
 
     return instance;
 }
 
-void InstallController::load_seats()
+void MST::load_seats()
 {
     vector<XRandr_monitor> availableMonitors = Platform::xrandr_get_monitors();
     int idx = 0;
@@ -60,7 +60,7 @@ void InstallController::load_seats()
     }
 }
 
-void InstallController::load_seat_configuration_page(QWidget* parent,
+void MST::load_seat_configuration_page(QWidget* parent,
                                                      QHBoxLayout* seats_box)
 {
     for (auto w : *widgets) {
@@ -81,13 +81,13 @@ void InstallController::load_seat_configuration_page(QWidget* parent,
     }
 }
 
-void InstallController::prepare_for_device_configuration(int seat_id)
+void MST::prepare_for_device_configuration(int seat_id)
 {
     current_seat_id = seat_id;
     config->get_seat(seat_id)->reset_devices();
 }
 
-void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
+void MST::set_seat_device(QString device, DEVICE_TYPE type)
 {
     shared_ptr<Seat> seat = config->get_seat(current_seat_id);
     qInfo(install_controller_category())
@@ -110,7 +110,7 @@ void InstallController::set_seat_device(QString device, DEVICE_TYPE type)
     qInfo(install_controller_category()) << seat.get();
 }
 
-QString InstallController::get_instruction(Device_listener * device_listener)
+QString MST::get_instruction(Device_listener * device_listener)
 {
     QString instruction = "";
 
@@ -136,9 +136,9 @@ QString InstallController::get_instruction(Device_listener * device_listener)
 }
 
 /**
- * @brief InstallController::begin_install -- Configure all the components.
+ * @brief MST::begin_install -- Configure all the components.
  */
-void InstallController::begin_install()
+void MST::begin_install()
 {
     QString out_dir = config->get_output_directory();
     Platform::fs_mkdir(out_dir);
@@ -147,9 +147,9 @@ void InstallController::begin_install()
 }
 
 /**
- * @brief InstallController::install_files -- Install al configuration files.
+ * @brief MST::install_files -- Install al configuration files.
  */
-void InstallController::install_files()
+void MST::install_files()
 {
     const QString output_dir = config->get_output_directory();
     const QString mst_user = config->get_system_mst_user();
@@ -193,19 +193,19 @@ void InstallController::install_files()
     Platform::chown(mst_user_home, pwd->pw_uid, pwd->pw_gid, true);
 }
 
-void InstallController::enable_mst()
+void MST::enable_mst()
 {
     component_manager->enable_components();
     qInfo(install_controller_category) << "multiseat enabled.";
 }
 
-void InstallController::disable_mst()
+void MST::disable_mst()
 {
     component_manager->disable_components();
     qInfo(install_controller_category) << "multiseat disabled.";
 }
 
-void InstallController::create_backup()
+void MST::create_backup()
 {
     try {
         Platform::fs_mkdir(backup_dir);
@@ -216,45 +216,45 @@ void InstallController::create_backup()
     }
 }
 
-void InstallController::restore_backup()
+void MST::restore_backup()
 {
     component_manager->restore_configurations(backup_dir);
 }
 
-void InstallController::begin_uninstall()
+void MST::begin_uninstall()
 {
     restore_backup();
     disable_mst();
 }
 
-void InstallController::begin_stop()
+void MST::begin_stop()
 {
     component_manager->stop_components();
 }
 
-bool InstallController::is_mst_running()
+bool MST::is_mst_running()
 {
     return Platform::system_service_active_p("mstd");
 }
 
-bool InstallController::config_is_valid()
+bool MST::config_is_valid()
 {
     print_config();
 
     return config->is_valid();
 }
 
-QVector<QString> InstallController::get_mice()
+QVector<QString> MST::get_mice()
 {
     return *list_mice;
 }
 
-QVector<QString> InstallController::get_keyboards()
+QVector<QString> MST::get_keyboards()
 {
     return *list_keybs;
 }
 
-void InstallController::print_config() {
+void MST::print_config() {
     QString msg = "\n-----START current configuration:\n";
 
     for (auto seat : config->get_seats()) {

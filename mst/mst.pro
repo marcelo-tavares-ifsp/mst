@@ -40,10 +40,10 @@ CONFIG += c++11 strip
 CONFIG += silent
 
 SOURCES += \
+    core/mst.cpp \
     main.cpp \
     ui/install_window/installwindow.cpp \
     ui/calibration_dialog/calibrationdialog.cpp \
-    core/installcontroller.cpp \
     core/configuration.cpp \
     core/utilites/utilites.cpp \
     core/dsv_parser/dsv.cpp \
@@ -73,9 +73,9 @@ SOURCES += \
     core/components/polkit.cpp
 
 HEADERS += \
+    core/mst.h \
     ui/install_window/installwindow.h \
     ui/calibration_dialog/calibrationdialog.h \
-    core/installcontroller.h \
     core/configuration.h \
     core/utilites/utilites.h \
     core/component.h \
