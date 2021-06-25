@@ -23,8 +23,8 @@ public:
      */
     void load(QString system_config_file);
 
-    void set_debug_allow_device_collisions(bool value);
-    void set_debug_allow_empty_devices(bool value);
+    void allow_device_collisions(bool value);
+    void allow_empty_devices(bool value);
 
     /**
      * @brief is_valid -- Predicate.  Check if the configuration is valid.
@@ -82,16 +82,16 @@ private:
     QVector<std::shared_ptr<Seat>> seats;
 
     /**
-     * @brief debug_allow_device_collisions -- if this option is set, then
+     * @brief device_collisions_allowed_p -- if this option is set, then
      * the controller allows device collisions.
      */
-    bool debug_allow_device_collisions = false;
+    bool device_collisions_allowed_p = false;
 
     /**
-     * @brief debug_allow_empty_devices -- if this option is set, then
+     * @brief empty_devices_allowed_p -- if this option is set, then
      * the controller allows empty device configurations.
      */
-    bool debug_allow_empty_devices = false;
+    bool empty_devices_allowed_p = false;
 };
 
 #endif // CONFIGURATION_H

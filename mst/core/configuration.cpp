@@ -62,14 +62,14 @@ QVector<shared_ptr<Seat>> Configuration::get_seats()
     return seats;
 }
 
-void Configuration::set_debug_allow_device_collisions(bool value)
+void Configuration::allow_device_collisions(bool value)
 {
-    debug_allow_device_collisions = value;
+    device_collisions_allowed_p = value;
 }
 
-void Configuration::set_debug_allow_empty_devices(bool value)
+void Configuration::allow_empty_devices(bool value)
 {
-    debug_allow_empty_devices = value;
+    empty_devices_allowed_p = value;
 }
 
 bool Configuration::is_valid()
@@ -79,7 +79,7 @@ bool Configuration::is_valid()
     {
         for (size_t i = 0; i < count_seats; i++)
         {
-            if (! debug_allow_device_collisions) {
+            if (! device_collisions_allowed_p) {
                 for (uint32_t j = 1; j < count_seats; j++)
                 {
                     if (i == j)
@@ -94,7 +94,7 @@ bool Configuration::is_valid()
                 }
             }
 
-            if ((! debug_allow_empty_devices) && (! seats[i]->is_configured()))
+            if ((! empty_devices_allowed_p) && (! seats[i]->is_configured()))
             {
                 qWarning(configuration_category()) << "Seat is not properly configured: "
                                                    << seats[i].get();
