@@ -34,7 +34,6 @@ private:
     DSV* config;
     QString output_dir;
     QString usrShareDir;
-    QString awesome_config;
 };
 
 #endif // PATHMANAGER_H

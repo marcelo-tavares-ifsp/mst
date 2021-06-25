@@ -14,7 +14,6 @@ void Path_manager::set_config(DSV* config)
 {
     this->config = config;
     QString mst_user = get_mst_user();
-    awesome_config = "/home/" + mst_user + "/.config/awesome/rc.lua";
 
     output_dir = "/home/" + mst_user + "/.local/share/mst/output";
     usrShareDir = "/usr/share/mst";
