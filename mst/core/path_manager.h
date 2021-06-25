@@ -24,8 +24,6 @@ public:
     QString get_device_path();
     const QString get_mst_user();
     QString get_output_dir();
-    QString get_usr_share_dir();
-    QString get_sudoers_config();
 
 private:
     Path_manager() {};
@@ -33,7 +31,6 @@ private:
     QString user;
     DSV* config;
     QString output_dir;
-    QString usrShareDir;
 };
 
 #endif // PATHMANAGER_H

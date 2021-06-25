@@ -16,7 +16,6 @@ void Path_manager::set_config(DSV* config)
     QString mst_user = get_mst_user();
 
     output_dir = "/home/" + mst_user + "/.local/share/mst/output";
-    usrShareDir = "/usr/share/mst";
 }
 
 QString Path_manager::get_device_path()
@@ -32,14 +31,4 @@ const QString Path_manager::get_mst_user()
 QString Path_manager::get_output_dir()
 {
     return output_dir;
-}
-
-QString Path_manager::get_usr_share_dir()
-{
-    return usrShareDir;
-}
-
-QString Path_manager::get_sudoers_config()
-{
-    return Path_manager::get_output_dir() + "/sudoers";
 }
