@@ -31,6 +31,7 @@ void InstallController::set_configuration(Configuration &config)
     this->config = std::shared_ptr<Configuration>(&config);
     this->backup_dir = "/home/" + config.get_system_mst_user()
             + "/.local/share/mst/backup/";
+    component_manager = new Component_manager(config);
 }
 
 /**
@@ -135,7 +136,6 @@ void InstallController::begin_install()
 {
     QString out_dir = config->get_output_directory();
     Platform::fs_mkdir(out_dir);
-    component_manager = new Component_manager(*config);
     component_manager->configure_components();
     component_manager->store_configurations(out_dir);
 }
@@ -223,12 +223,7 @@ void InstallController::begin_uninstall()
 
 void InstallController::begin_stop()
 {
-    if (Platform::process_kill("Xephyr"))
-    {
-        const char* msg = "Could not stop MST ('pkill Xephyr' failed.)";
-        qCritical(install_controller_category) << msg;
-        throw InstallController_exception(msg);
-    }
+    component_manager->stop_components();
 }
 
 bool InstallController::is_mst_running()

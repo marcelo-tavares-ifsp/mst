@@ -57,6 +57,13 @@ void Component_manager::disable_components()
     }
 }
 
+void Component_manager::stop_components()
+{
+    for (auto component : components) {
+        component->stop();
+    }
+}
+
 /**
  * @brief Component_manager::store_configurations -- Store all configurations
  *     to the main memory.
