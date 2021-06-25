@@ -21,7 +21,6 @@ public:
         return instance;
     }
     void set_config(DSV* config);
-    QString get_device_path();
     const QString get_mst_user();
     QString get_output_dir();
 

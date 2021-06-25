@@ -20,6 +20,8 @@ using namespace platform;
 
 Q_LOGGING_CATEGORY(platform_category, "mst.core.platform")
 
+const QString& platform::INPUT_DEVICES_PATH = "/dev/input/by-path/";
+
 Platform::Platform()
 {
 

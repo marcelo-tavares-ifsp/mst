@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+#include "../platform.h"
 #include "input_device_listener.h"
 
 Input_device_listener::Input_device_listener(DEVICE_TYPE type,
@@ -24,8 +25,7 @@ bool Input_device_listener::loop_answer_device(QString device)
     ssize_t bytes;
     int fd;
 
-    QString devpath = Path_manager::get_instance()->get_device_path()
-                    + device;
+    QString devpath = platform::INPUT_DEVICES_PATH + device;
 
     const char *pDevice = devpath.toStdString().c_str();
 

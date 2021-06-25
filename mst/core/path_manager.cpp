@@ -6,8 +6,6 @@ using namespace std;
 
 Q_LOGGING_CATEGORY(path_manager_category, "mst.core.path_manager")
 
-QString devicePath = "/dev/input/by-path/";
-
 QString sudoersD = "/etc/sudoers.d/mst";
 
 void Path_manager::set_config(DSV* config)
@@ -16,11 +14,6 @@ void Path_manager::set_config(DSV* config)
     QString mst_user = get_mst_user();
 
     output_dir = "/home/" + mst_user + "/.local/share/mst/output";
-}
-
-QString Path_manager::get_device_path()
-{
-    return devicePath;
 }
 
 const QString Path_manager::get_mst_user()

@@ -66,6 +66,11 @@ public:
 namespace platform {
 
 /**
+ * @brief INPUT_DEVICES_PATH -- Path to search input devices.
+ */
+extern const QString& INPUT_DEVICES_PATH;
+
+/**
  * @brief platform::popen_read -- execute a command and read output from it.
  * @param command -- a command to execute.
  * @return QVector of output lines.
