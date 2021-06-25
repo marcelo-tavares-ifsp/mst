@@ -136,9 +136,9 @@ QString MST::get_instruction(Device_listener * device_listener)
 }
 
 /**
- * @brief MST::begin_install -- Configure all the components.
+ * @brief MST::configure -- Configure all the components.
  */
-void MST::begin_install()
+void MST::configure()
 {
     QString out_dir = config->get_output_directory();
     Platform::fs_mkdir(out_dir);

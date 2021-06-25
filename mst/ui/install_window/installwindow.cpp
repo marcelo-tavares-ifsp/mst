@@ -67,7 +67,7 @@ void InstallWindow::on_button_install_mst_clicked()
 {
     try {
         inst_controller->create_backup();
-        inst_controller->begin_install(); // TODO: Dialog OK/Cancel
+        inst_controller->configure(); // TODO: Dialog OK/Cancel
         inst_controller->install_files();
         inst_controller->enable_mst();
         ui->button_next_to_installation->setEnabled(false);
@@ -190,7 +190,7 @@ void InstallWindow::on_button_next_to_installation_clicked()
         qInfo(install_window_category) << "Configuration is valid";
         show_page(Ui::Page::CONFIGURATION_END);
         MST* con = MST::get_instance();
-        con->begin_install();
+        con->configure();
         qDebug(install_window_category) << "Going to the 3rd panel...";
     }
     else

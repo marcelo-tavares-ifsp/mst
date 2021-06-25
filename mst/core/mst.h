@@ -39,7 +39,7 @@ public:
     void load_seats();
     void load_seat_configuration_page(QWidget* parent, QHBoxLayout* seats_box);
     void prepare_for_device_configuration(int seat_id);
-    void begin_install();
+    void configure();
     void begin_stop();
     void begin_uninstall();
     bool is_mst_running();
