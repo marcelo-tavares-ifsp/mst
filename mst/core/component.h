@@ -129,7 +129,7 @@ public:
      * @brief stop -- Stop the component without disabling it so
      *      it can be started again (e.g. after reboot.)
      */
-    void stop() {
+    virtual void stop() {
         /* Do nothing. */
     }
 

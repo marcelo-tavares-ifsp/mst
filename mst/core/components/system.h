@@ -22,7 +22,7 @@ public:
     }
     void enable() override;
     void disable() override;
-    void stop();
+    void stop() override;
 
     /**
      * @brief prepare_seat_configuration_template -- Prepare seats configuration
