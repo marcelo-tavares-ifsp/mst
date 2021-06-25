@@ -6,8 +6,6 @@ using namespace std;
 
 Q_LOGGING_CATEGORY(path_manager_category, "mst.core.path_manager")
 
-QString sudoersD = "/etc/sudoers.d/mst";
-
 void Path_manager::set_config(DSV* config)
 {
     this->config = config;
