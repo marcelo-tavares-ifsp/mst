@@ -88,8 +88,8 @@ void InstallWindow::on_button_begin_configuration_clicked()
 void InstallWindow::on_button_install_mst_clicked()
 {
     try {
-        mst->create_backup();
         mst->configure(); // TODO: Dialog OK/Cancel
+        mst->create_backup();
         mst->install();
         mst->enable();
         ui->button_next_to_installation->setEnabled(false);
