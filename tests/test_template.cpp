@@ -4,7 +4,7 @@
 #include "../mst/core/types/template.h"
 #include "../mst/core/template_manager.h"
 
-Test_template::Test_template(QObject *parent) : QObject(parent)
+Test_template::Test_template() : Test()
 {
 
 }

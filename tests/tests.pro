@@ -31,6 +31,7 @@ INCLUDEPATH += ../mst/
 
 SOURCES += \
     ../mst/core/utilites/utilites.cpp \
+    test.cpp \
     unit_tests.cpp \
     test_utils.cpp \
     test_template.cpp \
@@ -61,6 +62,7 @@ HEADERS += \
     ../mst/core/utilites/utilites.h \
     ../mst/core/types/seat.h \
     ../mst/core/types/monitor.h \
+    test.h \
     test_awesome.h \
     test_utils.h \
     test_template.h \

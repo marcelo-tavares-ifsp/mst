@@ -26,22 +26,24 @@ int main(int argc, char** argv)
     //QApplication app(argc, argv);
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     Template_manager::get_instance()->set_template_dir(SRCDIR "/../templates/");
+    QVector<shared_ptr<Test>> tests;
+    tests.push_back(make_shared<Test_utils>());
+    tests.push_back(make_shared<Test_awesome>());
+    tests.push_back(make_shared<Test_template>());
+    tests.push_back(make_shared<Test_component>());
+    tests.push_back(make_shared<Test_monitor>());
+    tests.push_back(make_shared<Test_seat>());
+    tests.push_back(make_shared<Test_resolution>());
+    tests.push_back(make_shared<Test_mstd>());
 
-    Test_utils test_utils;
-    Test_awesome test_awesome;
-    Test_template test_template;
-    Test_component test_component;
-    Test_monitor   test_monitor;
-    Test_seat      test_seat;
-    Test_resolution test_resolution;
-    Test_mstd test_mstd;
+    int rc = 0;
+    for (shared_ptr<Test> test : tests) {
+        rc |= QTest::qExec(test.get(), argc, argv);
+    }
 
-    return QTest::qExec(&test_utils, argc, argv)
-            || QTest::qExec(&test_awesome, argc, argv)
-            || QTest::qExec(&test_template, argc, argv)
-            || QTest::qExec(&test_component, argc, argv)
-            || QTest::qExec(&test_monitor, argc, argv)
-            || QTest::qExec(&test_seat, argc, argv)
-            || QTest::qExec(&test_resolution, argc, argv)
-            || QTest::qExec(&test_mstd, argc, argv);
+    for (shared_ptr<Test> test : tests) {
+        test.reset();
+    }
+
+    return rc;
 }

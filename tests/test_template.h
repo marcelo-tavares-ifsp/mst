@@ -3,11 +3,13 @@
 
 #include <QObject>
 
-class Test_template : public QObject
+#include "test.h"
+
+class Test_template : public Test
 {
     Q_OBJECT
 public:
-    explicit Test_template(QObject *parent = nullptr);
+    explicit Test_template();
 
 signals:
 

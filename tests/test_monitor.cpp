@@ -6,7 +6,7 @@
 #include "../mst/core/types/monitor.h"
 #include "../mst/core/types/resolution.h"
 
-Test_monitor::Test_monitor() : QObject()
+Test_monitor::Test_monitor() : Test()
 {
 
 }

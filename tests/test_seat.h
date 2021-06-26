@@ -3,7 +3,9 @@
 
 #include <QObject>
 
-class Test_seat : public QObject
+#include "test.h"
+
+class Test_seat : public Test
 {
     Q_OBJECT
 public:

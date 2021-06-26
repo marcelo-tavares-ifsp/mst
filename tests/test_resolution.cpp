@@ -5,7 +5,7 @@
 
 #include "../mst/core/types/resolution.h"
 
-Test_resolution::Test_resolution() : QObject()
+Test_resolution::Test_resolution() : Test()
 {
 
 }

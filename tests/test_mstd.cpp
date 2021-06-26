@@ -1,7 +1,7 @@
 #include <QtTest>
 #include "test_mstd.h"
 
-Test_mstd::Test_mstd() : QObject()
+Test_mstd::Test_mstd() : Test()
 {
 
 }

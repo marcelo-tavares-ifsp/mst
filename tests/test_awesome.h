@@ -3,7 +3,9 @@
 
 #include <QtTest>
 
-class Test_awesome : public QObject
+#include "test.h"
+
+class Test_awesome : public Test
 {
     Q_OBJECT
 
