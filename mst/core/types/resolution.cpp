@@ -11,6 +11,11 @@ std::ostream& operator<< (std::ostream& os, const Resolution& resolution) {
     return os;
 }
 
+bool operator==(const Resolution& lhs, const Resolution& rhs) {
+    return (lhs.get_height() == rhs.get_height())
+            && (lhs.get_width() == rhs.get_width());
+}
+
 /**
  * @brief _parse_resolution -- parse resolution in "WIDTHxHEIGTH" format.
  * @param resolution -- resolution string.

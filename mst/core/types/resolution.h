@@ -56,6 +56,7 @@ public:
        return *this;
    }
 
+   friend bool operator==(const Resolution& lhs, const Resolution& rhs);
    friend std::ostream& operator<< (std::ostream& os,
                                     const Resolution& resolution);
 
