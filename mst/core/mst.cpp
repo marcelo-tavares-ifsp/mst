@@ -1,6 +1,7 @@
 #include "mst.h"
 #include <QCollator>
 #include <QDateTime>
+#include <QDir>
 #include <memory>
 #include <pwd.h> // getpwnam
 
