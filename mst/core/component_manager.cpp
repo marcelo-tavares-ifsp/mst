@@ -57,6 +57,13 @@ void Component_manager::disable_components()
     }
 }
 
+void Component_manager::start_components()
+{
+    for (auto component : components) {
+        component->start();
+    }
+}
+
 void Component_manager::stop_components()
 {
     for (auto component : components) {

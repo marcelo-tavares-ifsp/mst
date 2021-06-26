@@ -19,6 +19,7 @@ public:
     void enable_components();
     void disable_components();
     void stop_components();
+    void start_components();
     void store_configurations(const QString& output_dir);
     void backup_configurations(const QString& output_dir);
     void restore_configurations(const QString& output_dir);
