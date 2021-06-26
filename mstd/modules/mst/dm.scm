@@ -250,7 +250,7 @@
                                               (list-ref seat-config 0)))
 			    (seat-interface  (and
                                               (> (length seat-config) 1)
-                                              (list-ref seat-config 1))
+                                              (list-ref seat-config 1)))
                             (seat-resolution (and
                                               (> (length seat-config) 2)
                                               (list-ref seat-config 2)))
