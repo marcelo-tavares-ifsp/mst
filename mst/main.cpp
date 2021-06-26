@@ -186,20 +186,20 @@ int main(int argc, char *argv[])
     m_logFile.reset(new QFile(MST_LOG_FILE));
     m_logFile.data()->open(QFile::Append | QFile::Text);
     qInstallMessageHandler(messageHandler);
-    MST* controller = MST::get_instance();
-    controller->set_configuration(config);
+    MST* mst = MST::get_instance();
+    mst->set_configuration(config);
 
     if (parser.isSet(stop_option)) {
-        controller->stop();
+        mst->stop();
         return 0;
     }
 
     if (parser.isSet(list_backups_option)) {
         cout << "Backup directory: "
-             << controller->get_backup_directory().toStdString()
+             << mst->get_backup_directory().toStdString()
              << endl;
-        for (QString s : controller->list_backups()) {
-            if (controller->list_backups().first() == s) {
+        for (QString s : mst->list_backups()) {
+            if (mst->list_backups().first() == s) {
                 cout << "* ";
             } else {
                 cout << "  ";
@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
     }
 
     if (parser.isSet(rollback_option)) {
-        controller->disable();
+        mst->disable();
         return 0;
     }
 
