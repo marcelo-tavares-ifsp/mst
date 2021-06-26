@@ -231,7 +231,7 @@ void Platform::fs_rm(const QString& file)
  */
 void Platform::fs_cp(const QString &src, const QString &dst)
 {
-    if (Platform::exec("cp '" + src + "' '" + dst + "'") != 0)
+    if (Platform::exec("cp -p '" + src + "' '" + dst + "'") != 0)
     {
         QString message = "Could not copy: '" + src + "' -> '" + dst + "'";
         throw Platform_exception(message);
