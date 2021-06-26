@@ -108,8 +108,12 @@ void MST::install()
 
     auto install
             = [output_dir](const QString& src, const QString& dst) -> void {
+        qInfo(install_controller_category())
+                << "Installing '" + src + "' to '" + dst + "' ...";
         try {
             Platform::fs_mkdir(dst.mid(0, dst.lastIndexOf('/')));
+            qInfo(install_controller_category())
+                    << "Installing '" + src + "' to '" + dst + "' ... done";
         } catch (Platform_exception& e) {
             qWarning(install_controller_category) << e.what();
         }
