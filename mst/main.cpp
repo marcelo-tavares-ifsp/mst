@@ -109,6 +109,10 @@ bool is_graphics_available()
  */
 int main(int argc, char *argv[])
 {
+    m_logFile.reset(new QFile(MST_LOG_FILE));
+    m_logFile.data()->open(QFile::Append | QFile::Text);
+    qInstallMessageHandler(messageHandler);
+
     QSharedPointer<QCoreApplication> a;
     bool is_graphic_mode = is_graphics_available();
 
@@ -167,6 +171,7 @@ int main(int argc, char *argv[])
     parser.addOption(debug_allow_empty_devices);
     parser.addOption(debug_allow_device_collisions);
     parser.process(*a);
+
     Configuration config;
     config.load(MST_CONFIG_FILE, MST_SEATS_CONFIG_FILE);
     Template_manager::get_instance()->set_template_dir("/var/lib/mst/");
@@ -191,10 +196,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-
-    m_logFile.reset(new QFile(MST_LOG_FILE));
-    m_logFile.data()->open(QFile::Append | QFile::Text);
-    qInstallMessageHandler(messageHandler);
     MST* mst = MST::get_instance();
     mst->set_configuration(config);
 
