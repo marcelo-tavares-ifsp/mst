@@ -111,20 +111,17 @@ int main(int argc, char *argv[])
     bool is_graphic_mode = is_graphics_available();
 
     if (is_graphic_mode) {
-        char* display = getenv("DISPLAY");
-        cerr << "Starting on display " << display << " ..." << endl;
         a.reset(new QApplication(argc, argv));
     } else {
         a.reset(new QCoreApplication(argc, argv));
     }
 
     QTranslator translator;
-    cout << QLocale().system().name().toStdString() << endl;
     bool ok = translator.load(":/i18n/mst_" + QLocale().system().name());
     if (ok) {
         a->installTranslator(&translator);
    } else {
-        cerr << "Could not load translations" << endl;
+        cerr << "ERROR: Could not load translations" << endl;
     }
 
     QCommandLineParser parser;
@@ -235,6 +232,8 @@ int main(int argc, char *argv[])
     }
 
     if (is_graphic_mode) {
+        char* display = getenv("DISPLAY");
+        cerr << "Starting on display " << display << " ..." << endl;
         InstallWindow w;
         w.show();
         return a->exec();
