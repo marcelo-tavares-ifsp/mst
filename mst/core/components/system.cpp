@@ -28,6 +28,7 @@
 #include "core/template_manager.h"
 #include "core/platform.h"
 
+Q_LOGGING_CATEGORY(component_system_category, "mst.core.component.system")
 
 using namespace sys;
 
@@ -80,7 +81,10 @@ Template System::prepare_seat_configuration_template()
                 .set("kbd",   seat->get_keyboard())
                 .set("mouse", seat->get_mouse())
                 .set("usb",   seat->get_usb());
-        config_contents += seat_template.substitute() + "\n";
+        QString seat_config = seat_template.substitute();
+        qInfo(component_system_category())
+                << "Seat:" << seat_config;
+        config_contents += seat_config + "\n";
     }
 
     return Template(config_contents);

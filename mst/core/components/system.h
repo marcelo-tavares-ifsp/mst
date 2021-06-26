@@ -1,9 +1,13 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include <QLoggingCategory>
+
 #include "../component.h"
 #include "../configuration.h"
 #include "../types/template.h"
+
+Q_DECLARE_LOGGING_CATEGORY(component_system_category)
 
 namespace sys {
 
