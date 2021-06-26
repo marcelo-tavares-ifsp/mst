@@ -22,13 +22,47 @@ static void create_config_file(QFile& file) {
 /**
  * TODO: Load current seat configuration from a file.
  */
-void Configuration::load(QString system_config_file)
+void Configuration::load(QString system_config_file, QString seats_config_file)
 {
     QFile file(system_config_file);
     if(! file.exists()) {
+        qInfo(configuration_category())
+                << "Creating default configuration file"
+                << "'" + system_config_file +  "' ...";
         create_config_file(file);
+        qInfo(configuration_category())
+                << "Creating default configuration file"
+                << "'" + system_config_file + "' ... done";
     }
     this->system_config = shared_ptr<DSV>(new DSV(system_config_file.toStdString()));
+
+    QFile seats_config(seats_config_file);
+
+    if (seats_config.open(QIODevice::ReadOnly)) {
+        qInfo(configuration_category())
+                << "Loading seats configuration from"
+                << "'" + seats_config_file + "' ...";
+        QTextStream stream(&seats_config);
+        for (QString line = stream.readLine();
+             (! line.isNull());
+             line = stream.readLine()) {
+            qInfo(configuration_category())
+                    << "  Parsing line:" << line;
+            QStringList params = line.split(" ");
+            shared_ptr<Seat> seat = make_shared<Seat>(params[0].toInt());
+            QVector<Resolution> resolutions;
+            resolutions.push_back(params[2]);
+            Monitor monitor(params[1], resolutions);
+            seat->add_monitor(monitor);
+            seat->set_keyboard(params[3]);
+            seat->set_mouse(params[4]);
+            seat->set_usb(params[5]);
+            add_seat(seat);
+        }
+        qInfo(configuration_category())
+                << "Loading seats configuration from"
+                << "'" + seats_config_file + "' ... done";
+    }
 }
 
 QString Configuration::get_system_mst_user() const
@@ -54,7 +88,11 @@ int32_t Configuration::get_seat_count() const
 
 shared_ptr<Seat> Configuration::get_seat(int32_t idx)
 {
-    return seats[idx];
+    int32_t count = seats.size();
+    if ((idx >= (count - 1)) && (idx <= count))
+        return seats[idx];
+    else
+        return nullptr;
 }
 
 QVector<shared_ptr<Seat>> Configuration::get_seats()

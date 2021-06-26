@@ -20,8 +20,9 @@ public:
     /**
      * @brief load -- Load configuration from a file.
      * @param system_config_file -- Name of the file to load.
+     * @param seats_config_file -- Name of the seats configuration file to load.
      */
-    void load(QString system_config_file);
+    void load(QString system_config_file, QString seats_config_file);
 
     /**
      * @brief allow_device_collisions -- Set whether device collisions

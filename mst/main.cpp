@@ -51,6 +51,8 @@ QScopedPointer<QFile>   m_logFile;
  */
 const QString MST_CONFIG_FILE = "/etc/mst";
 
+const QString MST_SEATS_CONFIG_FILE = "/etc/mst-seats";
+
 /**
  * @brief MST_LOG_FILE -- The default MST logging file.
  */
@@ -166,7 +168,7 @@ int main(int argc, char *argv[])
     parser.addOption(debug_allow_device_collisions);
     parser.process(*a);
     Configuration config;
-    config.load(MST_CONFIG_FILE);
+    config.load(MST_CONFIG_FILE, MST_SEATS_CONFIG_FILE);
     Template_manager::get_instance()->set_template_dir("/var/lib/mst/");
 
     if (geteuid() != 0)

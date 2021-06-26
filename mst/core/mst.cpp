@@ -50,9 +50,41 @@ void MST::load_seats()
     for (auto xrandr_monitor : availableMonitors) {
         qInfo(mst_category())
                 << "XRandr monitor:" << QString::fromStdString(xrandr_monitor.interface);
+       // qInfo(mst_category()) << config->get_seat(idx);
+        shared_ptr<Seat> s = config->get_seat(idx);
+        if (s != nullptr) {
+            Monitor& monitor = s->get_monitor();
+            QString interface = QString::fromStdString(xrandr_monitor.interface);
+            if (monitor.get_interface() == interface) {
+                qInfo(mst_category())
+                        << "  Updating seat" << interface << "...";
+                const Resolution& current_resolution
+                        = monitor.get_current_resolution();
+                monitor.add_resolutions(xrandr_monitor.resolutions);
+                int res_idx = 0;
+                for (auto res : monitor.get_available_resolutions()) {
+                    if (res == current_resolution) {
+                        monitor.set_resolution(res_idx);
+                        break;
+                    }
+                    res_idx++;
+                }
+                qInfo(mst_category())
+                        << "  Updating seat" << interface << "... done";
+                continue;
+            }
+        }
+        qInfo(mst_category())
+                << "  Adding seat"
+                << QString::fromStdString(xrandr_monitor.interface)
+                << "...";
         Monitor monitor(xrandr_monitor);
         shared_ptr<Seat> seat = make_shared<Seat>(idx++);
         seat->add_monitor(monitor);
+        qInfo(mst_category())
+                << "  Adding seat"
+                << QString::fromStdString(xrandr_monitor.interface)
+                << "... done";
         config->add_seat(seat);
     }
     qInfo(mst_category()) << "Adding" << availableMonitors.size() << "seats ... done";
