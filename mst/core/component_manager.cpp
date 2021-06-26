@@ -11,7 +11,7 @@
 #include "core/components/awesome.h"
 #include "core/components/xorg.h"
 
-Q_LOGGING_CATEGORY(components_category, "mst.core.components")
+Q_LOGGING_CATEGORY(component_manager_category, "mst.core.component_manager")
 
 Component_manager::Component_manager(Configuration& config)
 {

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-Q_DECLARE_LOGGING_CATEGORY(components_category)
+Q_DECLARE_LOGGING_CATEGORY(component_manager_category)
 
 class Component_manager
 {
