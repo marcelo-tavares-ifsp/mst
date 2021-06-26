@@ -182,11 +182,6 @@ Options:
           (let ((pid (primitive-fork)))
             (cond
              ((zero? pid)
-	      (let ((sighandler (lambda (arg)
-				  (dm-stop-xephyrs)
-				  (exit))))
-		(sigaction SIGINT sighandler)
-		(sigaction SIGTERM sighandler))
               (setsid))
              ((> pid 0)
               (exit))
@@ -197,7 +192,12 @@ Options:
     (write-pid pid-file)
 
     (let ((config (read-seats-configuration %seat-configuration-file)))
-      (dm-start config)
+      (let ((pid (dm-start config)))
+	(let ((sighandler (lambda (arg)
+			    (kill pid SIGTERM)
+			    (exit))))
+	  (sigaction SIGINT sighandler)
+	  (sigaction SIGTERM sighandler)))
       (start-listener config))))
 
 ;;; mstd ends here.
