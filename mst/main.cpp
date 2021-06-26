@@ -201,6 +201,13 @@ int main(int argc, char *argv[])
     if (parser.isSet(status_option)) {
         cout << "mstd: " << (mst->running_p() ? "running" : "stopped")
              << endl;
+        int32_t seat_count = mst->get_seats().size();
+        if (seat_count > 0) {
+            cout << seat_count << " seat(s):" << endl;
+            for (auto seat : mst->get_seats()) {
+                cout << "  " << *seat << endl;
+            }
+        }
         return 0;
     }
 
