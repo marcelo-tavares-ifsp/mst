@@ -139,6 +139,10 @@ int main(int argc, char *argv[])
                 QStringList() << "R" << "rollback",
                 QCoreApplication::translate("main",
                                            "Rollback changes in the system"));
+    QCommandLineOption stop_option(
+                QStringList() << "S" << "stop",
+                QCoreApplication::translate("main",
+                                            "Stop MST."));
     QCommandLineOption debug_allow_empty_devices(
                 QStringList() << "debug-allow-empty-devices",
                 QCoreApplication::translate("main",
@@ -150,6 +154,7 @@ int main(int argc, char *argv[])
 
     parser.addOption(list_backups_option);
     parser.addOption(rollback_option);
+    parser.addOption(stop_option);
     parser.addOption(debug_allow_empty_devices);
     parser.addOption(debug_allow_device_collisions);
     parser.process(*a);
@@ -183,6 +188,11 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
     MST* controller = MST::get_instance();
     controller->set_configuration(config);
+
+    if (parser.isSet(stop_option)) {
+        controller->stop();
+        return 0;
+    }
 
     if (parser.isSet(list_backups_option)) {
         cout << "Backup directory: "
