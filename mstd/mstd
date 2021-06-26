@@ -182,6 +182,11 @@ Options:
           (let ((pid (primitive-fork)))
             (cond
              ((zero? pid)
+	      (let ((sighandler (lambda (arg)
+				  (dm-stop-xephyrs)
+				  (exit))))
+		(sigaction SIGINT sighandler)
+		(sigaction SIGTERM sighandler))
               (setsid))
              ((> pid 0)
               (exit))
