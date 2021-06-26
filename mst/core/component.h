@@ -145,7 +145,7 @@ protected:
     /**
      * @brief config -- An MST configuration.
      */
-    Configuration config;
+    Configuration& config;
 
     /**
      * @brief component_configuration -- A configuration of this component.
