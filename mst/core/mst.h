@@ -71,6 +71,11 @@ public:
     void stop();
 
     /**
+     * @brief start -- Start the running MST.
+     */
+    void start();
+
+    /**
      * @brief running_p -- Predicate.  Check if MST is running.
      * @return A boolean value.
      */

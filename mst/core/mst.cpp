@@ -210,6 +210,11 @@ void MST::uninstall()
     restore_backup(list.last());
 }
 
+void MST::start()
+{
+    component_manager->start_components();
+}
+
 void MST::stop()
 {
     component_manager->stop_components();
