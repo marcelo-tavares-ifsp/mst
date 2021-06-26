@@ -203,7 +203,7 @@
 (define (get-running-seats)
   "Get the number of running seats."
   (let ((data (read-line
-	       (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
+               (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
     (waitpid -1 WNOHANG)
     (if (eof-object? data)
 	0
