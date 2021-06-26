@@ -136,12 +136,16 @@ int main(int argc, char *argv[])
                 QStringList() << "R" << "rollback",
                 QCoreApplication::translate("main",
                                            "Rollback changes in the system"));
+    QCommandLineOption start_option(
+                QStringList() << "s" << "start",
+                QCoreApplication::translate("main",
+                                            "Start mstd."));
     QCommandLineOption stop_option(
                 QStringList() << "S" << "stop",
                 QCoreApplication::translate("main",
-                                            "Stop MST."));
+                                            "Stop mstd."));
     QCommandLineOption status_option(
-                QStringList() << "s" << "status",
+                QStringList() << "status",
                 QCoreApplication::translate("main",
                                             "Show MST status"));
     QCommandLineOption debug_allow_empty_devices(
@@ -155,6 +159,7 @@ int main(int argc, char *argv[])
 
     parser.addOption(list_backups_option);
     parser.addOption(rollback_option);
+    parser.addOption(start_option);
     parser.addOption(stop_option);
     parser.addOption(status_option);
     parser.addOption(debug_allow_empty_devices);
@@ -194,6 +199,11 @@ int main(int argc, char *argv[])
     if (parser.isSet(status_option)) {
         cout << "mstd: " << (mst->running_p() ? "running" : "stopped")
              << endl;
+        return 0;
+    }
+
+    if (parser.isSet(start_option)) {
+        mst->start();
         return 0;
     }
 
