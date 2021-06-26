@@ -29,9 +29,17 @@ Monitor::Monitor(XRandr_monitor& xrandr_monitor)
 {
     resolutions.clear();
     this->interface = QString::fromStdString(xrandr_monitor.interface);
-    for (string resolution_string : xrandr_monitor.resolutions) {
+    add_resolutions(xrandr_monitor.resolutions);
+}
+
+void Monitor::add_resolutions(const std::vector<std::string>& new_resolutions)
+{
+    for (string resolution_string : new_resolutions) {
         QString resolution_qstring = QString::fromStdString(resolution_string);
-        resolutions.push_back(Resolution(resolution_qstring));
+        Resolution resolution(resolution_qstring);
+        if (! resolutions.contains(resolution)) {
+            resolutions.push_back(resolution);
+        }
     }
     _sort_resolutions(resolutions);
 }

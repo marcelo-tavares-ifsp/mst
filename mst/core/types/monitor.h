@@ -51,6 +51,8 @@ public:
      */
     void set_resolution(int index);
 
+    void add_resolutions(const std::vector<std::string>& resolutions);
+
 private:
     /**
      * @brief current_resolution -- selected index in resolutions vector.
