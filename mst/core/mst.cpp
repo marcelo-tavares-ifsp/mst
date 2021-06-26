@@ -9,7 +9,7 @@
 #include "core/types/xrandr_monitor.h"
 
 MST* MST::instance = 0;
-Q_LOGGING_CATEGORY(install_controller_category, "mst.core.install_controller")
+Q_LOGGING_CATEGORY(mst_category, "mst.core.mst")
 
 // constructors ///////////////////////////////////////////////////////////////
 
@@ -80,9 +80,9 @@ void MST::set_device(int32_t seat_idx, QString device, DEVICE_TYPE type)
         break;
     }
 
-    qInfo(install_controller_category())
+    qInfo(mst_category())
             << "Device assigned: " << device << " (" << type << ")";
-    qInfo(install_controller_category()) << seat.get();
+    qInfo(mst_category()) << seat.get();
 }
 
 
@@ -108,14 +108,14 @@ void MST::install()
 
     auto install
             = [output_dir](const QString& src, const QString& dst) -> void {
-        qInfo(install_controller_category())
+        qInfo(mst_category())
                 << "Installing '" + src + "' to '" + dst + "' ...";
         try {
             Platform::fs_mkdir(dst.mid(0, dst.lastIndexOf('/')));
-            qInfo(install_controller_category())
+            qInfo(mst_category())
                     << "Installing '" + src + "' to '" + dst + "' ... done";
         } catch (Platform_exception& e) {
-            qWarning(install_controller_category) << e.what();
+            qWarning(mst_category) << e.what();
         }
         Platform::fs_cp(output_dir + "/" + src, dst);
     };
@@ -151,13 +151,13 @@ void MST::install()
 void MST::enable()
 {
     component_manager->enable_components();
-    qInfo(install_controller_category) << "multiseat enabled.";
+    qInfo(mst_category) << "multiseat enabled.";
 }
 
 void MST::disable()
 {
     component_manager->disable_components();
-    qInfo(install_controller_category) << "multiseat disabled.";
+    qInfo(mst_category) << "multiseat disabled.";
 }
 
 void MST::create_backup()
@@ -170,7 +170,7 @@ void MST::create_backup()
         Platform::fs_mkdir(current_backup_dir);
         component_manager->backup_configurations(current_backup_dir);
     } catch (Platform_exception& e) {
-        qCritical(install_controller_category) << e.what();
+        qCritical(mst_category) << e.what();
         throw MST_exception(e.what());
     }
 }
@@ -192,10 +192,10 @@ QStringList MST::list_backups() const
 void MST::restore_backup(QString backup_name)
 {
     QString backup_path = backup_dir + backup_name + "/";
-    qInfo(install_controller_category())
+    qInfo(mst_category())
             << "Restoring backup '" << backup_path << "' ...";
     component_manager->restore_configurations(backup_path);
-    qInfo(install_controller_category())
+    qInfo(mst_category())
             << "Restoring backup '" << backup_path << "' ... done";
 }
 
@@ -247,7 +247,7 @@ void MST::print_config() {
     }
 
     msg += "-----END current configuration";
-    qInfo(install_controller_category()) << msg;
+    qInfo(mst_category()) << msg;
 }
 
 QString MST::get_backup_directory() const

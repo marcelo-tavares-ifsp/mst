@@ -10,7 +10,7 @@
 #include "core/components/vgl.h"
 #include "core/types/resolution.h"
 
-Q_DECLARE_LOGGING_CATEGORY(install_controller_category)
+Q_DECLARE_LOGGING_CATEGORY(mst_category)
 
 /**
  * @brief The MST_exception class This class describes an
