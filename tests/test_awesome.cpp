@@ -7,8 +7,8 @@
 #include <string>
 #include <memory>
 
-#include "../mst/core/components/awesome.h"
-#include "../mst/core/types/seat.h"
+#include "core/components/awesome.h"
+#include "core/types/seat.h"
 
 #include "test_awesome.h"
 

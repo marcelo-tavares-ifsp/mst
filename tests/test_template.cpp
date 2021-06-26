@@ -1,8 +1,8 @@
 #include <QtTest>
 
 #include "test_template.h"
-#include "../mst/core/types/template.h"
-#include "../mst/core/template_manager.h"
+#include "core/types/template.h"
+#include "core/template_manager.h"
 
 Test_template::Test_template() : Test()
 {

@@ -2,9 +2,9 @@
 
 #include "test_monitor.h"
 
-#include "../mst/core/types/xrandr_monitor.h"
-#include "../mst/core/types/monitor.h"
-#include "../mst/core/types/resolution.h"
+#include "core/types/xrandr_monitor.h"
+#include "core/types/monitor.h"
+#include "core/types/resolution.h"
 
 Test_monitor::Test_monitor() : Test()
 {

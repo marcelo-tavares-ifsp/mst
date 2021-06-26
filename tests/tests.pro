@@ -28,10 +28,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += ../mst/
+INCLUDEPATH +=      \
+    ../mst/         \
+    ../mst/core/
 
 SOURCES += \
     ../mst/core/utilites/utilites.cpp \
+    ../mst/core/configuration.cpp \
+    ../mst/core/platform.cpp \
+    ../mst/core/component.cpp \
+    ../mst/core/components/awesome.cpp \
+    ../mst/core/types/template.cpp \
+    ../mst/core/types/seat.cpp \
+    ../mst/core/types/monitor.cpp \
+    ../mst/core/types/resolution.cpp \
+    ../mst/core/types/xrandr_monitor.cpp \
+    ../mst/core/template_manager.cpp \
+    ../mst/core/dsv_parser/dsv.cpp \
     test.cpp \
     unit_tests.cpp \
     test_utils.cpp \
@@ -40,23 +53,8 @@ SOURCES += \
     test_monitor.cpp \
     test_seat.cpp \
     test_resolution.cpp \
-    test_mstd.cpp
-
-SOURCES += \
-    ../mst/core/configuration.cpp \
-    ../mst/core/platform.cpp \
-    ../mst/core/component.cpp \
-    ../mst/core/components/awesome.cpp \
+    test_mstd.cpp   \
     test_awesome.cpp
-
-SOURCES += \
-    ../mst/core/types/template.cpp \
-    ../mst/core/types/seat.cpp \
-    ../mst/core/types/monitor.cpp \
-    ../mst/core/types/resolution.cpp \
-    ../mst/core/types/xrandr_monitor.cpp \
-    ../mst/core/template_manager.cpp \
-    ../mst/core/dsv_parser/dsv.cpp
 
 HEADERS += \
     ../mst/core/configuration.h \

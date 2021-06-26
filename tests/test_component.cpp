@@ -1,12 +1,12 @@
 #include <QtTest>
 #include <QString>
 
-#include "../mst/core/platform.h"
 #include "test_component.h"
-#include "../mst/core/types/resolution.h"
-#include "../mst/core/types/monitor.h"
-#include "../mst/core/component.h"
-#include "../mst/core/types/seat.h"
+#include "core/platform.h"
+#include "core/types/resolution.h"
+#include "core/types/monitor.h"
+#include "core/types/seat.h"
+#include "core/component.h"
 
 Test_component::Test_component()
 {

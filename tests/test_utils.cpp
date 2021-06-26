@@ -3,7 +3,7 @@
 #include <QtTest>
 
 #include "test_utils.h"
-#include "../mst/core/utilites/utilites.h"
+#include "core/utilites/utilites.h"
 
 using namespace std;
 
