@@ -112,14 +112,16 @@ install_deps_alt_p9() {
             guile22-devel \
             texinfo \
             autoconf_2.60 \
-            automake_1.14 \
+            automake \
             make \
             gettext \
+            gettext-tools \
             awesome \
             docker-ce \
             unclutter \
             lightdm \
             libqt5-core \
+	    libtool \
             qt5-base-devel \
             libudev-devel \
             virtualgl \
