@@ -245,3 +245,8 @@ void MST::print_config() {
     msg += "-----END current configuration";
     qInfo(install_controller_category()) << msg;
 }
+
+QString MST::get_backup_directory() const
+{
+    return backup_dir;
+}

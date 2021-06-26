@@ -138,6 +138,12 @@ public:
     QVector<QString> get_mice();
     QVector<QString> get_keyboards();
 
+    /**
+     * @brief get_backup_directory -- Get the current backup directory.
+     * @return Backup directory path as a QString.
+     */
+    QString get_backup_directory() const;
+
 private:
     MST();
 

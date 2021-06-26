@@ -131,6 +131,10 @@ int main(int argc, char *argv[])
     parser.setApplicationDescription("Multiseat configurator");
     parser.addHelpOption();
     parser.addVersionOption();
+    QCommandLineOption list_backups_option(
+                QStringList() << "list-backups",
+                QCoreApplication::translate("main",
+                                           "Show the list of system backups"));
     QCommandLineOption rollback_option(
                 QStringList() << "R" << "rollback",
                 QCoreApplication::translate("main",
@@ -143,13 +147,14 @@ int main(int argc, char *argv[])
                 QStringList() << "debug-allow-device-collisions",
                 QCoreApplication::translate("main",
                                             "Allow device collisions"));
+
+    parser.addOption(list_backups_option);
     parser.addOption(rollback_option);
     parser.addOption(debug_allow_empty_devices);
     parser.addOption(debug_allow_device_collisions);
     parser.process(*a);
     Configuration config;
     config.load(MST_CONFIG_FILE);
-
     Template_manager::get_instance()->set_template_dir("/var/lib/mst/");
 
     if (geteuid() != 0)
@@ -178,6 +183,22 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
     MST* controller = MST::get_instance();
     controller->set_configuration(config);
+
+    if (parser.isSet(list_backups_option)) {
+        cout << "Backup directory: "
+             << controller->get_backup_directory().toStdString()
+             << endl;
+        for (QString s : controller->list_backups()) {
+            if (controller->list_backups().first() == s) {
+                cout << "* ";
+            } else {
+                cout << "  ";
+            }
+            cout << s.toStdString() << endl;
+        }
+        return 0;
+    }
+
 
     if (parser.isSet(debug_allow_device_collisions)) {
         config.allow_device_collisions(true);
