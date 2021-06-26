@@ -97,7 +97,7 @@
       (log-error "Cannot find the specified mouse device: '~a'" mouse))
 
     (unless keyboard-dev
-      (log-error "Cannot find the specified keyboard device: '~a' keyboard"))
+      (log-error "Cannot find the specified keyboard device: '~a'" keyboard))
 
     (if (and mouse-dev keyboard-dev)
         (string-join (list %docker-binary
