@@ -143,6 +143,10 @@ int main(int argc, char *argv[])
                 QStringList() << "S" << "stop",
                 QCoreApplication::translate("main",
                                             "Stop MST."));
+    QCommandLineOption status_option(
+                QStringList() << "s" << "status",
+                QCoreApplication::translate("main",
+                                            "Show MST status"));
     QCommandLineOption debug_allow_empty_devices(
                 QStringList() << "debug-allow-empty-devices",
                 QCoreApplication::translate("main",
@@ -155,6 +159,7 @@ int main(int argc, char *argv[])
     parser.addOption(list_backups_option);
     parser.addOption(rollback_option);
     parser.addOption(stop_option);
+    parser.addOption(status_option);
     parser.addOption(debug_allow_empty_devices);
     parser.addOption(debug_allow_device_collisions);
     parser.process(*a);
@@ -188,6 +193,12 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
     MST* mst = MST::get_instance();
     mst->set_configuration(config);
+
+    if (parser.isSet(status_option)) {
+        cout << "mstd: " << (mst->running_p() ? "running" : "stopped")
+             << endl;
+        return 0;
+    }
 
     if (parser.isSet(stop_option)) {
         mst->stop();
