@@ -76,7 +76,7 @@ void System::stop()
 
 Template System::prepare_seat_configuration_template()
 {
-    Template seat_template("{{seat}} {{resolution}} {{kbd}} {{mouse}} {{usb}}");
+    Template seat_template("{{seat}} {{interface}} {{resolution}} {{kbd}} {{mouse}} {{usb}}");
     QString config_contents;
     qInfo(component_system_category())
             << "Configuring" << config.get_seat_count() << "seats ...";
@@ -84,6 +84,7 @@ Template System::prepare_seat_configuration_template()
         Resolution resolution = seat->get_monitor().get_current_resolution();
         seat_template
                 .set("seat",  QString::number(seat->get_id() + 1))
+                .set("interface", seat->get_monitor().get_interface())
                 .set("resolution", resolution.to_string())
                 .set("kbd",   seat->get_keyboard())
                 .set("mouse", seat->get_mouse())

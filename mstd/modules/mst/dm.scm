@@ -248,15 +248,18 @@
                       (let ((seat-display    (and
                                               (> (length seat-config) 0)
                                               (list-ref seat-config 0)))
-                            (seat-resolution (and
+			    (seat-interface  (and
                                               (> (length seat-config) 1)
-                                              (list-ref seat-config 1)))
-                            (seat-keyboard   (and
+                                              (list-ref seat-config 1))
+                            (seat-resolution (and
                                               (> (length seat-config) 2)
                                               (list-ref seat-config 2)))
-                            (seat-mouse      (and
+                            (seat-keyboard   (and
                                               (> (length seat-config) 3)
-                                              (list-ref seat-config 3))))
+                                              (list-ref seat-config 3)))
+                            (seat-mouse      (and
+                                              (> (length seat-config) 4)
+                                              (list-ref seat-config 4))))
                         (when (and seat-display
                                    seat-resolution
                                    seat-mouse
