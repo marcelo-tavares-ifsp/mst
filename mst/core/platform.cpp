@@ -112,7 +112,7 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
         case 0:
             match = r1.match(data[idx]);
             if (match.hasMatch()) {
-                currentMonitor.interface = match.captured(1).toStdString();
+                currentMonitor.interface = match.captured(1);
                 state = 1;
                 qInfo(platform_category) << "[state 0] -> [state 1]";
                 qInfo(platform_category) << match.captured(1);
@@ -123,7 +123,7 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
             match = r2.match(data[idx]);
             if (match.hasMatch()) {
                 currentMonitor.resolutions.push_back(
-                            match.captured(1).toStdString());
+                            match.captured(1));
                 idx++;
                 qInfo(platform_category) << match.captured(1);
             } else {

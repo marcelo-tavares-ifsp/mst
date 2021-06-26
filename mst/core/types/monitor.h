@@ -51,7 +51,7 @@ public:
      */
     void set_resolution(int index);
 
-    void add_resolutions(const std::vector<std::string>& resolutions);
+    void add_resolutions(const QVector<QString>& resolutions);
 
 private:
     /**

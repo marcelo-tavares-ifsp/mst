@@ -49,12 +49,12 @@ void MST::load_seats()
     qInfo(mst_category()) << "Adding" << availableMonitors.size() << "seats ...";
     for (auto xrandr_monitor : availableMonitors) {
         qInfo(mst_category())
-                << "XRandr monitor:" << QString::fromStdString(xrandr_monitor.interface);
+                << "XRandr monitor:" << xrandr_monitor.interface;
        // qInfo(mst_category()) << config->get_seat(idx);
         shared_ptr<Seat> s = config->get_seat(idx);
         if (s != nullptr) {
             Monitor& monitor = s->get_monitor();
-            QString interface = QString::fromStdString(xrandr_monitor.interface);
+            QString interface = xrandr_monitor.interface;
             if (monitor.get_interface() == interface) {
                 qInfo(mst_category())
                         << "  Updating seat" << interface << "...";
@@ -76,14 +76,14 @@ void MST::load_seats()
         }
         qInfo(mst_category())
                 << "  Adding seat"
-                << QString::fromStdString(xrandr_monitor.interface)
+                << xrandr_monitor.interface
                 << "...";
         Monitor monitor(xrandr_monitor);
         shared_ptr<Seat> seat = make_shared<Seat>(idx++);
         seat->add_monitor(monitor);
         qInfo(mst_category())
                 << "  Adding seat"
-                << QString::fromStdString(xrandr_monitor.interface)
+                << xrandr_monitor.interface
                 << "... done";
         config->add_seat(seat);
     }

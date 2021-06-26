@@ -1,15 +1,15 @@
 #ifndef XRANDR_MONITOR_H
 #define XRANDR_MONITOR_H
 
-#include <vector>
-#include <string>
+#include <QString>
+#include <QVector>
 
 class XRandr_monitor
 {
 public:
     XRandr_monitor();
-    std::string interface;
-    std::vector<std::string> resolutions;
+    QString interface;
+    QVector<QString> resolutions;
 };
 
 #endif // XRANDR_MONITOR_H

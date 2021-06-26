@@ -28,15 +28,14 @@ Monitor::Monitor(QString interface, QVector<Resolution> &resolutions)
 Monitor::Monitor(XRandr_monitor& xrandr_monitor)
 {
     resolutions.clear();
-    this->interface = QString::fromStdString(xrandr_monitor.interface);
+    this->interface = xrandr_monitor.interface;
     add_resolutions(xrandr_monitor.resolutions);
 }
 
-void Monitor::add_resolutions(const std::vector<std::string>& new_resolutions)
+void Monitor::add_resolutions(const QVector<QString>& new_resolutions)
 {
-    for (string resolution_string : new_resolutions) {
-        QString resolution_qstring = QString::fromStdString(resolution_string);
-        Resolution resolution(resolution_qstring);
+    for (QString resolution_string : new_resolutions) {
+        Resolution resolution(resolution_string);
         if (! resolutions.contains(resolution)) {
             resolutions.push_back(resolution);
         }
