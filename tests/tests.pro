@@ -12,6 +12,7 @@ TARGET = unit_tests
 CONFIG   += console
 CONFIG   += testcase
 CONFIG   += silent
+CONFIG   += c++11
 CONFIG   -= app_bundle
 
 TEMPLATE = app
