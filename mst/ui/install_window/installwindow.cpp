@@ -89,9 +89,15 @@ void InstallWindow::on_button_install_mst_clicked()
 {
     try {
         mst->configure(); // TODO: Dialog OK/Cancel
+        qInfo(install_window_category()) << "Creating backup ...";
         mst->create_backup();
+        qInfo(install_window_category()) << "Creating backup ... done";
+        qInfo(install_window_category()) << "Installing ... ";
         mst->install();
+        qInfo(install_window_category()) << "Installing ... done";
+        qInfo(install_window_category()) << "Enabling components ...";
         mst->enable();
+        qInfo(install_window_category()) << "Enabling components ... done";
         ui->button_next_to_installation->setEnabled(false);
 
         Reboot_dialog* rd = new Reboot_dialog(this);
