@@ -73,6 +73,8 @@ Template System::prepare_seat_configuration_template()
 {
     Template seat_template("{{seat}} {{resolution}} {{kbd}} {{mouse}} {{usb}}");
     QString config_contents;
+    qInfo(component_system_category())
+            << "Configuring" << config.get_seat_count() << "seats ...";
     for (shared_ptr<Seat> seat : config.get_seats()) {
         Resolution resolution = seat->get_monitor().get_current_resolution();
         seat_template
@@ -86,7 +88,7 @@ Template System::prepare_seat_configuration_template()
                 << "Seat:" << seat_config;
         config_contents += seat_config + "\n";
     }
-
+    qInfo(component_system_category()) << "Configuring seats" << config.get_seat_count() << " ... done";
     return Template(config_contents);
 }
 
