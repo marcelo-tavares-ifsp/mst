@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 #include <QLoggingCategory>
-#include <core/dsv_parser/dsv.h>
+#include "core/dsv_parser/dsv.h"
 #include "core/types/seat.h"
 
 Q_DECLARE_LOGGING_CATEGORY(configuration_category)
