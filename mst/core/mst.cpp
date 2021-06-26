@@ -1,4 +1,6 @@
 #include "mst.h"
+#include <QCollator>
+#include <QDateTime>
 #include <memory>
 #include <pwd.h> // getpwnam
 
@@ -155,24 +157,48 @@ void MST::disable()
 
 void MST::create_backup()
 {
+    QString timestamp = QDateTime::currentDateTime()
+            .toString(Qt::DateFormat::ISODate)
+            .replace(":", "-");
+    QString current_backup_dir = backup_dir + "/" + timestamp + "/";
     try {
-        Platform::fs_mkdir(backup_dir);
-        component_manager->backup_configurations(backup_dir);
+        Platform::fs_mkdir(current_backup_dir);
+        component_manager->backup_configurations(current_backup_dir);
     } catch (Platform_exception& e) {
         qCritical(install_controller_category) << e.what();
         throw MST_exception(e.what());
     }
 }
 
-void MST::restore_backup()
+QStringList MST::list_backups() const
 {
-    component_manager->restore_configurations(backup_dir);
+    QDir dir(backup_dir);
+    dir.setFilter(QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot);
+    dir.setSorting(QDir::NoSort);
+
+    QCollator collator;
+    collator.setNumericMode(true);
+
+    QStringList list = dir.entryList();
+    sort(list.begin(), list.end(), collator);
+    return list;
+}
+
+void MST::restore_backup(QString backup_name)
+{
+    QString backup_path = backup_dir + backup_name + "/";
+    qInfo(install_controller_category())
+            << "Restoring backup '" << backup_path << "' ...";
+    component_manager->restore_configurations(backup_path);
+    qInfo(install_controller_category())
+            << "Restoring backup '" << backup_path << "' ... done";
 }
 
 void MST::uninstall()
 {
-    restore_backup();
     disable();
+    QStringList list =  list_backups();
+    restore_backup(list.last());
 }
 
 void MST::stop()

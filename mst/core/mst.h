@@ -97,6 +97,9 @@ public:
 
     /**
      * @brief uninstall -- Uninstall MST configuration from the system.
+     *
+     * Calling this method does the same effect as calling 'disable' method
+     * and then restoring the first backup copy of the system configuration.
      */
     void uninstall();
 
@@ -113,11 +116,14 @@ public:
      */
     void create_backup();
 
+    QStringList list_backups() const;
+
     /**
      * @brief restore_backup -- Restore the system configuration from a backup
      *      copy.
+     * @param backup_name -- Name of the backup to restore.
      */
-    void restore_backup();
+    void restore_backup(QString backup_name);
 
     /**
      * @brief enable -- Enable MST.
