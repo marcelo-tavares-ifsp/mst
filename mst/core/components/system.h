@@ -26,6 +26,7 @@ public:
     }
     void enable() override;
     void disable() override;
+    void start() override;
     void stop() override;
 
     /**

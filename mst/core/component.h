@@ -126,6 +126,13 @@ public:
     virtual void disable() = 0;
 
     /**
+     * @brief start -- Start the component.
+     */
+    virtual void start() {
+        /* Do nothing. */
+    }
+
+    /**
      * @brief stop -- Stop the component without disabling it so
      *      it can be started again (e.g. after reboot.)
      */

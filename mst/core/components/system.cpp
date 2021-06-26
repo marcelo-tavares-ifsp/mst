@@ -64,6 +64,11 @@ void System::disable()
     Platform::system_disable_service("mstd");
 }
 
+void System::start()
+{
+     Platform::system_start_service("mstd");
+}
+
 void System::stop()
 {
     Platform::system_stop_service("mstd");
