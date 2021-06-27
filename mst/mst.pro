@@ -40,6 +40,7 @@ CONFIG += c++11 strip
 CONFIG += silent
 
 SOURCES += \
+    core/components/pam.cpp \
     core/mst.cpp \
     main.cpp \
     ui/install_window/installwindow.cpp \
@@ -73,6 +74,7 @@ SOURCES += \
     core/components/polkit.cpp
 
 HEADERS += \
+    core/components/pam.h \
     core/mst.h \
     ui/install_window/installwindow.h \
     ui/calibration_dialog/calibrationdialog.h \
