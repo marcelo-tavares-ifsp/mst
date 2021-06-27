@@ -49,6 +49,10 @@ add_multiseat_user() {
     useradd -m -s /bin/bash $MST_USER
 }
 
+add_multiseat_user_to_wheel_group() {
+    usermod -a -G wheel $MST_USER
+}
+
 ubuntu_add_user_to_groups() {
     usermod -a -G docker $MST_USER
     usermod -a -G video $MST_USER
@@ -170,6 +174,7 @@ main() {
     case $distro in
         "alt")
             install_deps_alt
+	    add_multiseat_user_to_wheel_group
             build
             install_mst
             ;;
