@@ -135,8 +135,15 @@ install_deps_alt_p9() {
 }
 
 install_deps_alt() {
-    local version=$(lsb_release -r \
-			| sed -e 's/Release:.*\([0-9]\).[0-9]/\1/g')
+    local version
+    if $(command -V lsb_release &> /dev/null); then
+	version=$(lsb_release -r \
+		      | sed -e 's/Release:.*\([0-9]\).[0-9]/\1/g')
+    else
+	version=$(cat /etc/system-release \
+		      | sed -e 's/.* \([0-9]\).[0-9].*/\1/g')
+    fi
+
     apt-get update
     if [ "$version" -eq 8 ]; then
 	install_deps_alt_p8
