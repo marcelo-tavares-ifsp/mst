@@ -11,12 +11,14 @@ Configuration::Configuration()
 
 }
 
-static void create_config_file(QFile& file) {
-    if (! file.open(QIODevice::WriteOnly | QIODevice::Text))
-        return;
+static bool create_config_file(QFile& file) {
+    if (! file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        return false;
+    }
     QTextStream out(&file);
     out << "user:multiseat" << endl;
     file.close();
+    return true;
 }
 
 /**
@@ -29,10 +31,18 @@ void Configuration::load(QString system_config_file, QString seats_config_file)
         qInfo(configuration_category())
                 << "Creating default configuration file"
                 << "'" + system_config_file +  "' ...";
-        create_config_file(file);
-        qInfo(configuration_category())
-                << "Creating default configuration file"
-                << "'" + system_config_file + "' ... done";
+        if (create_config_file(file)) {
+            qInfo(configuration_category())
+                    << "Creating default configuration file"
+                    << "'" + system_config_file + "' ... done";
+        } else {
+            qCritical(configuration_category())
+                    << "Could not create configuration file:"
+                    << system_config_file;
+            qInfo(configuration_category())
+                    << "Creating default configuration file"
+                    << "'" + system_config_file + "' ... FAIL";
+        }
     }
     this->system_config = make_shared<DSV>(system_config_file.toStdString());
 
