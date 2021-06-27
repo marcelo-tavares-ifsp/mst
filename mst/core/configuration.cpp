@@ -38,7 +38,7 @@ void Configuration::load(QString system_config_file, QString seats_config_file)
 
     QFile seats_config(seats_config_file);
 
-    if (seats_config.open(QIODevice::ReadOnly)) {
+    if (seats_config.exists() && seats_config.open(QIODevice::ReadOnly)) {
         qInfo(configuration_category())
                 << "Loading seats configuration from"
                 << "'" + seats_config_file + "' ...";
