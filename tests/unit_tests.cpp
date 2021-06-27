@@ -14,6 +14,7 @@
 #include "test_utils.h"
 #include "test_template.h"
 #include "test_component.h"
+#include "test_configuration.h"
 #include "test_monitor.h"
 #include "test_seat.h"
 #include "test_resolution.h"
@@ -31,6 +32,7 @@ int main(int argc, char** argv)
     tests.push_back(make_shared<Test_awesome>());
     tests.push_back(make_shared<Test_template>());
     tests.push_back(make_shared<Test_component>());
+    tests.push_back(make_shared<Test_configuration>());
     tests.push_back(make_shared<Test_monitor>());
     tests.push_back(make_shared<Test_seat>());
     tests.push_back(make_shared<Test_resolution>());

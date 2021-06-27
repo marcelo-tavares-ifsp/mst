@@ -46,6 +46,7 @@ SOURCES += \
     ../mst/core/template_manager.cpp \
     ../mst/core/dsv_parser/dsv.cpp \
     test.cpp \
+    test_configuration.cpp \
     unit_tests.cpp \
     test_utils.cpp \
     test_template.cpp \
@@ -63,6 +64,7 @@ HEADERS += \
     ../mst/core/types/monitor.h \
     test.h \
     test_awesome.h \
+    test_configuration.h \
     test_utils.h \
     test_template.h \
     test_component.h \
