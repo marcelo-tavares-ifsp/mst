@@ -15,7 +15,7 @@ static void create_config_file(QFile& file) {
     if (! file.open(QIODevice::WriteOnly | QIODevice::Text))
         return;
     QTextStream out(&file);
-    out << "user:multiseat";
+    out << "user:multiseat" << endl;
     file.close();
 }
 
