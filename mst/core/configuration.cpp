@@ -34,7 +34,7 @@ void Configuration::load(QString system_config_file, QString seats_config_file)
                 << "Creating default configuration file"
                 << "'" + system_config_file + "' ... done";
     }
-    this->system_config = shared_ptr<DSV>(new DSV(system_config_file.toStdString()));
+    this->system_config = make_shared<DSV>(system_config_file.toStdString());
 
     QFile seats_config(seats_config_file);
 
