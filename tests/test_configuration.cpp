@@ -19,7 +19,6 @@ void Test_configuration::load_non_existing_config_test()
 
     if (system_config.open()) {
         QString file_name = system_config.fileName();
-        std::cout << file_name.toStdString() << std::endl;
         system_config.remove();
         config.load(file_name, "");
     }
