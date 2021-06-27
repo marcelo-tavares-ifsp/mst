@@ -59,6 +59,7 @@ void Configuration::load(QString system_config_file, QString seats_config_file)
             seat->set_usb(params[5]);
             add_seat(seat);
         }
+        seats_config.close();
         qInfo(configuration_category())
                 << "Loading seats configuration from"
                 << "'" + seats_config_file + "' ... done";
