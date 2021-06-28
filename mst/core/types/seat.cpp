@@ -95,15 +95,15 @@ bool Seat::is_configured() const
 
     if (get_keyboard() == "") {
         msg += "KEYBOARD, ";
-        result = true;
+        result = false;
     }
     if (get_mouse() == "") {
         msg += "MOUSE, ";
-        result = true;
+        result = false;
     }
     if (get_usb() == "") {
         msg += "USB, ";
-        result = true;
+        result = false;
     }
 
     qInfo(seat_category()) << msg << "not configured";
