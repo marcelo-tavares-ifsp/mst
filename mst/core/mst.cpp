@@ -138,49 +138,14 @@ void MST::configure()
  */
 void MST::install()
 {
-    const QString output_dir = config->get_output_directory();
     const QString mst_user = config->get_system_mst_user();
     const QString mst_user_home = "/home/" + mst_user + "/";
-
-    auto install
-            = [output_dir](const QString& src, const QString& dst) -> void {
-        qInfo(mst_category())
-                << "Installing '" + src + "' to '" + dst + "' ...";
-        try {
-            Platform::fs_mkdir(dst.mid(0, dst.lastIndexOf('/')));
-            qInfo(mst_category())
-                    << "Installing '" + src + "' to '" + dst + "' ... done";
-        } catch (Platform_exception& e) {
-            qWarning(mst_category) << e.what();
-        }
-        Platform::fs_cp(output_dir + "/" + src, dst);
-    };
-
     Platform::fs_mkdir(mst_user_home + ".local/share/mst/output/");
     Platform::fs_mkdir(mst_user_home + ".config/awesome/");
-    bool is_pam_mkhomedir_used = Platform::pam_is_mkhomedir_used();
-    QString skel = "/etc/skel/";
+
+    component_manager->install_components();
+
     struct passwd* pwd = Platform::getpwnam(mst_user);
-
-    vector<Component*> components = component_manager->get_components();
-    for (auto comp : components) {
-        auto install_paths = comp->get_configuration().get_installation_paths();
-        foreach (auto src, install_paths.keys()) {
-            QString dst = install_paths[src];
-            if (dst.contains("{{home}}")) {
-                Template tpl(dst);
-                tpl.set("home", mst_user_home);
-                install(src, tpl.substitute());
-                if (is_pam_mkhomedir_used) {
-                    tpl.set("home", skel);
-                    install(src, tpl.substitute());
-                }
-            } else {
-                install(src, dst);
-            }
-        }
-    }
-
     Platform::chown(mst_user_home, pwd->pw_uid, pwd->pw_gid, true);
 }
 
