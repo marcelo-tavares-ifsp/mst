@@ -10,6 +10,17 @@
 Q_DECLARE_LOGGING_CATEGORY(configuration_category)
 
 /**
+ * @brief The Configuration_error class -- describes a Configuration error.
+ */
+class Configuration_error : public std::runtime_error {
+public:
+    Configuration_error(QString what)
+        : std::runtime_error(what.toStdString()) {
+        // Do nothing.
+    }
+};
+
+/**
  * @brief The Configuration class describes MST configuration.
  */
 class Configuration

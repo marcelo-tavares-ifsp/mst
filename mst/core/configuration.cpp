@@ -61,13 +61,21 @@ void Configuration::load(QString system_config_file, QString seats_config_file)
             QStringList params = line.split(" ");
             shared_ptr<Seat> seat = make_shared<Seat>(params[0].toInt());
             QVector<Resolution> resolutions;
-            resolutions.push_back(params[2]);
-            Monitor monitor(params[1], resolutions);
-            seat->add_monitor(monitor);
-            seat->set_keyboard(params[3]);
-            seat->set_mouse(params[4]);
-            seat->set_usb(params[5]);
-            add_seat(seat);
+            try {
+                resolutions.push_back(params[2]);
+                Monitor monitor(params[1], resolutions);
+                seat->add_monitor(monitor);
+                seat->set_keyboard(params[3]);
+                seat->set_mouse(params[4]);
+                seat->set_usb(params[5]);
+                add_seat(seat);
+            } catch (Resolution_error& error) {
+                QString msg = "Could not parse the line \""
+                        + line + "\": Resolution_error: "
+                        + error.what();
+                qCritical(configuration_category()) << msg;
+                throw Configuration_error(msg);
+            }
         }
         seats_config.close();
         qInfo(configuration_category())
