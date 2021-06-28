@@ -5,6 +5,17 @@
 #include <QObject>
 
 /**
+ * @brief The Resolution_error class -- describes a Resolution error.
+ */
+class Resolution_error : public std::runtime_error {
+public:
+    Resolution_error(QString what)
+        : std::runtime_error(what.toStdString()) {
+        // Do nothing.
+    }
+};
+
+/**
  * @brief The Resolution class -- describes a monitor resolution.
  */
 class Resolution
