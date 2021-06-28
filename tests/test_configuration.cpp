@@ -78,3 +78,58 @@ void Test_configuration::get_seat_nullptr()
     QVERIFY2(config.get_seat(0) == nullptr,
              "The method returned unexpected value");
 }
+
+void Test_configuration::is_valid_zero_seat_test()
+{
+    Configuration config;
+    QTemporaryFile system_config;
+    QTemporaryFile seats_config;
+
+    if (system_config.open() && seats_config.open()) {
+        QString file_name = system_config.fileName();
+        system_config.remove();
+        config.load(file_name, seats_config.fileName());
+    }
+
+    QVERIFY2(! config.is_valid(),
+             "Valid config with zero configured seats.");
+}
+
+void Test_configuration::is_valid_one_unconfigured_seat_test()
+{
+    Configuration config;
+    QTemporaryFile system_config;
+    QTemporaryFile seats_config;
+
+    if (system_config.open() && seats_config.open()) {
+        QString file_name = system_config.fileName();
+        system_config.remove();
+        QTextStream stream(&seats_config);
+        stream << "1 LVDS-1 1280x800 pci-0000:00:1d.2-usb-0:2:1.0-event-kbd platform-i8042-serio-4-event-mouse"
+               << endl;
+        config.load(file_name, seats_config.fileName());
+    }
+
+    QVERIFY2(! config.is_valid(),
+             "Valid config with one unconfigured seats.");
+}
+
+
+void Test_configuration::is_valid_one_configured_seat_test()
+{
+    Configuration config;
+    QTemporaryFile system_config;
+    QTemporaryFile seats_config;
+
+    if (system_config.open() && seats_config.open()) {
+        QString file_name = system_config.fileName();
+        system_config.remove();
+        QTextStream stream(&seats_config);
+        stream << "1 LVDS-1 1280x800 pci-0000:00:1d.2-usb-0:2:1.0-event-kbd platform-i8042-serio-4-event-mouse /devices/pci0000:00/0000:00:1d.7/usb4/4-4"
+               << endl;
+        config.load(file_name, seats_config.fileName());
+    }
+
+    QVERIFY2(config.is_valid(),
+             "Valid configuration with one configured seat considered invalid.");
+}
