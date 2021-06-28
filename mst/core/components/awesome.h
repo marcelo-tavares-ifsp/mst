@@ -57,6 +57,8 @@ public:
         /* Do nothing. */
     }
 
+    void install() override;
+
     void prepare_rclua_template(Template& rclua_template);
 };
 

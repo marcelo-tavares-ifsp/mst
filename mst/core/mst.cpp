@@ -141,7 +141,6 @@ void MST::install()
     const QString mst_user = config->get_system_mst_user();
     const QString mst_user_home = "/home/" + mst_user + "/";
     Platform::fs_mkdir(mst_user_home + ".local/share/mst/output/");
-    Platform::fs_mkdir(mst_user_home + ".config/awesome/");
 
     component_manager->install_components();
 

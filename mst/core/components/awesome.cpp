@@ -65,6 +65,13 @@ void Awesome::configure()
                                 rclua_template);
 }
 
+void Awesome::install()
+{
+    Platform::fs_mkdir("/home/" + config.get_system_mst_user()
+                       + ".config/awesome/");
+    Component::install();
+}
+
 QString Awesome::get_version()
 {
     return QString::fromStdString(get_awesome_raw_version());
