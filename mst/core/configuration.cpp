@@ -158,7 +158,10 @@ bool Configuration::is_valid()
                 return false;
             }
         }
+        return true;
+    } else if (count_seats == 1) {
+        return seats[0]->is_configured();
+    } else {
+        return false;
     }
-
-    return true;
 }
