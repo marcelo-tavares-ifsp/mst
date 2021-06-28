@@ -21,6 +21,8 @@
 
 #include "pam.h"
 
+const QString PAM_ENV_CONF = "pam_env.conf";
+
 PAM::PAM(Configuration& config) : Component(config)
 {
 
@@ -28,6 +30,20 @@ PAM::PAM(Configuration& config) : Component(config)
 
 void PAM::configure()
 {
-//    component_configuration.add(POLKIT_TEMPLATE_FILE, "/etc/security/pam_env.conf",
-//                                prepare_polkit_template());
+    component_configuration.add(PAM_ENV_CONF, "/etc/security/pam_env.conf",
+                                "XDG_SEAT=seat0\n"
+                                "XDG_VTNR=1\n");
+}
+
+void PAM::install()
+{
+    QString path = component_configuration.get_installation_paths()[PAM_ENV_CONF];
+    QFile output_file(path);
+    output_file.open(QIODevice::WriteOnly | QIODevice::Append);
+    QTextStream stream(&output_file);
+    stream << endl
+           << "# BEGIN: Added by MST" << endl
+           << component_configuration.get_template(PAM_ENV_CONF).substitute()
+           << "# END: Added by MST" << endl;
+    output_file.close();
 }

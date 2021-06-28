@@ -30,6 +30,7 @@ public:
     PAM(Configuration& config);
 
     void configure() override;
+    void install() override;
 };
 
 #endif // PAM_H
