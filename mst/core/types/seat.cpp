@@ -106,7 +106,9 @@ bool Seat::is_configured() const
         result = false;
     }
 
-    qInfo(seat_category()) << msg << "not configured";
+    if (msg.length() > 0) {
+        qInfo(seat_category()) << msg << "not configured";
+    }
 
     return result;
 }
