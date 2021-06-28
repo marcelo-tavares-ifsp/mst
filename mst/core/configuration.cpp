@@ -67,7 +67,9 @@ void Configuration::load(QString system_config_file, QString seats_config_file)
                 seat->add_monitor(monitor);
                 seat->set_keyboard(params[3]);
                 seat->set_mouse(params[4]);
-                seat->set_usb(params[5]);
+                if (params.size() == 6) {
+                    seat->set_usb(params[5]);
+                }
                 add_seat(seat);
             } catch (Resolution_error& error) {
                 QString msg = "Could not parse the line \""
