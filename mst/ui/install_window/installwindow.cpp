@@ -17,7 +17,13 @@ InstallWindow::InstallWindow(QWidget *parent) :
 
     if (! mst->running_p()) {
         qInfo(install_window_category()) << "MST is not running";
-        ui->button_stop_mst->setEnabled(false);
+        if (mst->running_p()) {
+            ui->button_stop_mst->setText(tr("Stop multiseat"));
+        } else if (mst->config_is_valid()) {
+            ui->button_stop_mst->setText(tr("Start multiseat"));
+        } else {
+            ui->button_stop_mst->setEnabled(false);
+        }
     } else {
         qInfo(install_window_category()) << "MST is running";
     }
@@ -141,7 +147,22 @@ void InstallWindow::on_button_exit_clicked()
 
 void InstallWindow::on_button_stop_mst_clicked()
 {
-    mst->stop(); // TODO: Dialog OK/Cancel
+    if (mst->running_p()) {
+        ui->button_stop_mst->setText(tr("Multiseat is stopping ..."));
+        mst->stop(); // TODO: Dialog OK/Cancel
+        if (! mst->running_p()) {
+            //ui->button_stop_mst->setEnabled(false);
+            if (mst->config_is_valid()) {
+                ui->button_stop_mst->setText(tr("Start multiseat"));
+            }
+        }
+    } else if (mst->config_is_valid()) {
+        ui->button_stop_mst->setText(tr("Multiseat is starting ..."));
+        mst->start();
+        if (mst->running_p()) {
+            ui->button_stop_mst->setText(tr("Stop multiseat"));
+        }
+    }
 }
 
 void InstallWindow::on_button_restore_backup_clicked()
