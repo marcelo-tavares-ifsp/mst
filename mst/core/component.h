@@ -9,6 +9,8 @@
 #include "template_manager.h"
 #include "platform.h"
 
+Q_DECLARE_LOGGING_CATEGORY(component_category)
+
 /**
  * @brief The Component_error class -- describes a generic component error.
  */
@@ -126,6 +128,11 @@ public:
     virtual void disable() = 0;
 
     /**
+     * @brief install -- Install the component to the system.
+     */
+    virtual void install();
+
+    /**
      * @brief start -- Start the component.
      */
     virtual void start() {
@@ -158,6 +165,14 @@ protected:
      * @brief component_configuration -- A configuration of this component.
      */
     Component_configuration component_configuration;
+
+private:
+    /**
+     * @brief install -- Install a file to the specified destination.
+     * @param src -- Source file.
+     * @param dst -- Destination.
+     */
+    void install(const QString& src, const QString& dst);
 };
 
 #endif // COMPONENT_H
