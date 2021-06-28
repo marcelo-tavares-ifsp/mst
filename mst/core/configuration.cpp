@@ -132,29 +132,28 @@ void Configuration::allow_empty_devices(bool value)
 bool Configuration::is_valid()
 {
     size_t count_seats = seats.size();
-    if (count_seats > 1)
-    {
-        for (size_t i = 0; i < count_seats; i++)
-        {
+    if (count_seats > 1) {
+        for (size_t i = 0; i < count_seats; i++) {
             if (! device_collisions_allowed_p) {
-                for (uint32_t j = 1; j < count_seats; j++)
-                {
+                for (uint32_t j = 1; j < count_seats; j++) {
                     if (i == j)
                         continue;
-                    if (seats[i]->intersects(seats[j]))
-                    {
+
+                    if (seats[i]->intersects(seats[j])) {
                         qWarning(configuration_category())
                                 << "Collision is found: "
-                                << seats[i].get() << " intersects " << seats[j].get();
+                                << seats[i].get()
+                                << " intersects "
+                                << seats[j].get();
                         return false;
                     }
                 }
             }
 
-            if ((! empty_devices_allowed_p) && (! seats[i]->is_configured()))
-            {
-                qWarning(configuration_category()) << "Seat is not properly configured: "
-                                                   << seats[i].get();
+            if ((! empty_devices_allowed_p) && (! seats[i]->is_configured())) {
+                qWarning(configuration_category())
+                        << "Seat is not properly configured: "
+                        << seats[i].get();
                 return false;
             }
         }
