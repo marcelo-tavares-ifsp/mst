@@ -16,6 +16,7 @@ class Component_manager
 public:
     Component_manager(Configuration& config);
     void configure_components();
+    void install_components();
     void enable_components();
     void disable_components();
     void stop_components();

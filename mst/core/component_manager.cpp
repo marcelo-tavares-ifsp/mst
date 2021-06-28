@@ -35,6 +35,13 @@ void Component_manager::configure_components()
     }
 }
 
+void Component_manager::install_components()
+{
+    for (auto component : components) {
+        component->install();
+    }
+}
+
 /**
  * @brief Component_manager::enable_components -- Enable all existing
  *     components.
