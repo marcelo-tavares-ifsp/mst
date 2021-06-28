@@ -34,10 +34,6 @@ class Polkit : public Component
 {
     Polkit(Configuration& config);
     void configure() override;
-    QString get_version() override {
-        // TODO:
-        throw Component_error("Unimplemented");
-    }
     void enable() override {
         /* Do nothing. */
     }

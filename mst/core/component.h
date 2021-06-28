@@ -117,7 +117,10 @@ public:
      * @brief get_version -- Get the component version.
      * @return A version string.
      */
-    virtual QString get_version() = 0;
+    virtual QString get_version() {
+        throw Component_error("Unimplemented");
+    }
+
     /**
      * @brief enable -- Enable the component.
      */

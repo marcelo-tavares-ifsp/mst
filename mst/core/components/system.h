@@ -21,9 +21,6 @@ class System : public Component
 public:
     System(Configuration& config);
     void configure() override;
-    QString get_version() override {
-        throw Component_error("Unimplemented");
-    }
     void enable() override;
     void disable() override;
     void start() override;

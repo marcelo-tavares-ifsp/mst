@@ -23,10 +23,6 @@ public:
     Display_manager(Configuration& config);
 
     void configure() override;
-    QString get_version() override {
-        // TODO:
-        throw Component_error("Unimplemented");
-    }
     void enable() override;
     void disable() override {
         /* Do nothing. */

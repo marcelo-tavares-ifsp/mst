@@ -26,10 +26,6 @@ public:
     void disable() override {
         /* Do nothing. */
     }
-    QString get_version() override {
-        // TODO:
-        throw Component_error("Unimplemented");
-    }
 };
 
 
