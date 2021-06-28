@@ -20,12 +20,6 @@ class Udev : public Component
 public:
     Udev(Configuration& config);
     void configure() override;
-    void enable() override {
-        /* Do nothing. */
-    }
-    void disable() override {
-        /* Do nothing */
-    }
 };
 
 

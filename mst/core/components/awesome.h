@@ -50,13 +50,6 @@ public:
     Awesome(Configuration& config);
     void configure() override;
     QString get_version() override;
-    void enable() override {
-        /* Do nothing. */
-    }
-    void disable() override {
-        /* Do nothing. */
-    }
-
     void install() override;
 
     void prepare_rclua_template(Template& rclua_template);

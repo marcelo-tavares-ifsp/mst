@@ -20,12 +20,6 @@ class Xorg : public Component
 public:
     Xorg(Configuration& config);
     void configure() override;
-    void enable() override {
-        /* Do nothing. */
-    }
-    void disable() override {
-        /* Do nothing. */
-    }
 };
 
 

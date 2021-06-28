@@ -34,12 +34,6 @@ class Polkit : public Component
 {
     Polkit(Configuration& config);
     void configure() override;
-    void enable() override {
-        /* Do nothing. */
-    }
-    void disable() override {
-        /* Do nothing. */
-    }
 };
 
 //// Helper procedures.

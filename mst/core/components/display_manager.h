@@ -24,9 +24,6 @@ public:
 
     void configure() override;
     void enable() override;
-    void disable() override {
-        /* Do nothing. */
-    }
 };
 
 

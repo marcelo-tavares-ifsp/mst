@@ -124,11 +124,16 @@ public:
     /**
      * @brief enable -- Enable the component.
      */
-    virtual void enable() = 0;
+    virtual void enable() {
+        /* Do nothing. */
+    }
+
     /**
      * @brief disable -- Disable the component.
      */
-    virtual void disable() = 0;
+    virtual void disable() {
+        /* Do nothing. */
+    }
 
     /**
      * @brief install -- Install the component to the system.

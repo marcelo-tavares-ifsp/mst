@@ -14,9 +14,6 @@ class Sudo : public Component
 public:
     Sudo(Configuration& config);
     void configure() override;
-    void enable() override {
-        /* Do nothing. */
-    }
     void disable() override;
 
     Template prepare_sudoers_template();
