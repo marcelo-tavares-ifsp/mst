@@ -28,7 +28,7 @@ QPair<int, int> Resolution::parse_string(QString resolution)
     static QRegExp regex("([0-9]+)x([0-9]+)");
     if (regex.exactMatch(resolution)) {
         regex.indexIn(resolution);
-        return { regex.cap(0).toInt(), regex.cap(1).toInt() };
+        return { regex.cap(1).toInt(), regex.cap(2).toInt() };
     } else {
         throw Resolution_error("Wrong format: " + resolution);
     }
