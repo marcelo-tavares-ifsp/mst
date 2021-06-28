@@ -62,3 +62,19 @@ void Test_configuration::load_seats_config_test()
     QVERIFY2(seat->get_usb() == "/devices/pci0000:00/0000:00:1d.7/usb4/4-4",
              seat->get_usb().toStdString().c_str());
 }
+
+void Test_configuration::get_seat_nullptr()
+{
+    Configuration config;
+    QTemporaryFile system_config;
+    QTemporaryFile seats_config;
+
+    if (system_config.open() && seats_config.open()) {
+        QString file_name = system_config.fileName();
+        system_config.remove();
+        config.load(file_name, seats_config.fileName());
+    }
+
+    QVERIFY2(config.get_seat(0) == nullptr,
+             "The method returned unexpected value");
+}

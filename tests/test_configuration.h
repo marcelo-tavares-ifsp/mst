@@ -14,6 +14,7 @@ public:
 private Q_SLOTS:
     void load_non_existing_config_test();
     void load_seats_config_test();
+    void get_seat_nullptr();
 };
 
 #endif // TEST_CONFIGURATION_H
