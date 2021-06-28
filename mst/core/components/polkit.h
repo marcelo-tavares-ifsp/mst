@@ -1,7 +1,7 @@
 /* polkit.cpp -- PolicyKit configuration.
  *
- * Copyright (C) 2020 "AZ Company Group" LLC <https://gkaz.ru/>
- * Copyright (C) 2020 Artyom V. Poptsov <a@gkaz.ru>b
+ * Copyright (C) 2020-2021 "AZ Company Group" LLC <https://gkaz.ru/>
+ * Copyright (C) 2020-2021 Artyom V. Poptsov <a@gkaz.ru>b
  *
  * This file is part of MST.
  *
