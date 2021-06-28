@@ -13,6 +13,7 @@ public:
 
 private Q_SLOTS:
     void parse_string();
+    void parse_string_error();
     void to_string();
 
 };

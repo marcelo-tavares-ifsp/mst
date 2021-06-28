@@ -16,6 +16,13 @@ void Test_resolution::parse_string()
     QVERIFY( (pair.first == 640) && (pair.second == 480) );
 }
 
+void Test_resolution::parse_string_error()
+{
+    QVERIFY_EXCEPTION_THROWN(Resolution::parse_string("640 480"),
+                             Resolution_error);
+}
+
+
 void Test_resolution::to_string()
 {
     Resolution res("640x480");
