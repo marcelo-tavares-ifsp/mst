@@ -64,6 +64,7 @@
 (define (start-lightdm config-file)
   (log-info "Starting lightdm with the config: ~a" config-file)
   (let ((pid (primitive-fork)))
+    (log-info "LightDM PID: ~a" pid)
     (cond
      ((zero? pid)
       (execle %lightdm-binary (environ)

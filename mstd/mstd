@@ -182,8 +182,10 @@ Options:
           (let ((pid (primitive-fork)))
             (cond
              ((zero? pid)
+	      (log-info "mstd started")
               (setsid))
              ((> pid 0)
+	      (log-info "mstd PID: ~a" pid)
               (exit))
              (#t
               (log-error "Could not fork the process.")
@@ -192,12 +194,15 @@ Options:
     (write-pid pid-file)
 
     (let ((config (read-seats-configuration %seat-configuration-file)))
+      (log-info "Configuration: ~a" config)
+      (log-info "Starting display manager ...")
       (let ((pid (dm-start config)))
 	(let ((sighandler (lambda (arg)
 			    (kill pid SIGTERM)
 			    (exit))))
 	  (sigaction SIGINT sighandler)
 	  (sigaction SIGTERM sighandler)))
+      (log-info "Starting display manager ... done")
       (start-listener config))))
 
 ;;; mstd ends here.
