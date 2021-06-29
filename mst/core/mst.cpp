@@ -73,19 +73,20 @@ void MST::load_seats()
                         << "  Updating seat" << interface << "... done";
                 continue;
             }
+        } else {
+            qInfo(mst_category())
+                    << "  Adding seat"
+                    << xrandr_monitor.interface
+                    << "...";
+            Monitor monitor(xrandr_monitor);
+            shared_ptr<Seat> seat = make_shared<Seat>(idx++);
+            seat->add_monitor(monitor);
+            qInfo(mst_category())
+                    << "  Adding seat"
+                    << xrandr_monitor.interface
+                    << "... done";
+            config->add_seat(seat);
         }
-        qInfo(mst_category())
-                << "  Adding seat"
-                << xrandr_monitor.interface
-                << "...";
-        Monitor monitor(xrandr_monitor);
-        shared_ptr<Seat> seat = make_shared<Seat>(idx++);
-        seat->add_monitor(monitor);
-        qInfo(mst_category())
-                << "  Adding seat"
-                << xrandr_monitor.interface
-                << "... done";
-        config->add_seat(seat);
     }
     qInfo(mst_category()) << "Adding" << availableMonitors.size() << "seats ... done";
 }
