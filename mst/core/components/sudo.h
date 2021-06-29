@@ -36,6 +36,7 @@ public:
     Sudo(Configuration& config);
     void configure() override;
     void disable() override;
+    void install() override;
 
     Template prepare_sudoers_template();
 };

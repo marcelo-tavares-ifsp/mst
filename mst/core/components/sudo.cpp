@@ -21,6 +21,8 @@
 
 #include <QString>
 
+#include <pwd.h> // getpwnam
+
 #include <core/platform.h>
 
 #include "sudo.h"
@@ -45,6 +47,16 @@ void Sudo::configure()
 void Sudo::disable()
 {
     Platform::fs_rm(QString::fromStdString("/etc/sudoers.d/mst"));
+}
+
+void Sudo::install()
+{
+    Component::install();
+
+    struct passwd* pwd = Platform::getpwnam("root");
+    QString file_path
+            = component_configuration.get_installation_paths()[SUDOERS_FILE];
+    Platform::chown(file_path,  pwd->pw_uid, pwd->pw_gid);
 }
 
 //// Helper procedures.
