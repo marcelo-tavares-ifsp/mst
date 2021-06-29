@@ -51,7 +51,7 @@ void Test_configuration::load_seats_config_test()
              QString(config.get_seat_count()).toStdString().c_str());
 
     std::shared_ptr<Seat> seat = config.get_seat(0);
-    QVERIFY2(seat->get_id() == 1,
+    QVERIFY2(seat->get_id() == 0,
              QString(seat->get_id()).toStdString().c_str());
     QVERIFY2(seat->get_monitor().get_interface() == "LVDS-1",
              seat->get_monitor().get_interface().toStdString().c_str());
