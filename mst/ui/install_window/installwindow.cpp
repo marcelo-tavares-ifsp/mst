@@ -110,8 +110,6 @@ void InstallWindow::on_button_install_mst_clicked()
 
         rd->setModal(true);
         rd->exec();
-
-        this->close();
     } catch (string msg) {
         qWarning(install_window_category()) << QString::fromStdString(msg);
         QMessageBox::information(
