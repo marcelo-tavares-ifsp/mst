@@ -44,6 +44,14 @@ public:
     }
 
     /**
+     * @brief get_installation_path -- Get installation path
+     *      for the specified file.
+     * @param file_name
+     * @return Installation path as a string.
+     */
+    const QString get_installation_path(const QString& file_name) const;
+
+    /**
      * @brief store -- Store confituration to the specified output directory.
      * @param output_directory -- A path to the output directory.
      */

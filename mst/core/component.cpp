@@ -59,6 +59,12 @@ void Component_configuration::add(const QString &file_name, const QString &insta
     templates[file_name]          = file_template;
 }
 
+const QString Component_configuration::get_installation_path(
+        const QString &file_name) const
+{
+    return installation_paths[file_name];
+}
+
 void Component::install()
 {
     const QString& mst_user_home = "/home/" + config.get_system_mst_user();

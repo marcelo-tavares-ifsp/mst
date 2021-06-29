@@ -37,7 +37,8 @@ void PAM::configure()
 
 void PAM::install()
 {
-    QString path = component_configuration.get_installation_paths()[PAM_ENV_CONF];
+    const QString& path
+            = component_configuration.get_installation_path(PAM_ENV_CONF);
     QFile output_file(path);
     output_file.open(QIODevice::WriteOnly | QIODevice::Append);
     QTextStream stream(&output_file);

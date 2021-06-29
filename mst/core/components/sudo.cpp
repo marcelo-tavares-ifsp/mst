@@ -55,7 +55,7 @@ void Sudo::install()
 
     struct passwd* pwd = Platform::getpwnam("root");
     QString file_path
-            = component_configuration.get_installation_paths()[SUDOERS_FILE];
+            = component_configuration.get_installation_path(SUDOERS_FILE);
     Platform::chown(file_path,  pwd->pw_uid, pwd->pw_gid);
 }
 
