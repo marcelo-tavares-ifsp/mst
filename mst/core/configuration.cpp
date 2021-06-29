@@ -59,7 +59,7 @@ void Configuration::load(QString system_config_file, QString seats_config_file)
             qInfo(configuration_category())
                     << "  Parsing line:" << line;
             QStringList params = line.split(" ");
-            shared_ptr<Seat> seat = make_shared<Seat>(params[0].toInt());
+            shared_ptr<Seat> seat = make_shared<Seat>(params[0].toInt() - 1);
             QVector<Resolution> resolutions;
             try {
                 resolutions.push_back(params[2]);
