@@ -61,14 +61,7 @@ void MST::load_seats()
                 const Resolution& current_resolution
                         = monitor.get_current_resolution();
                 monitor.add_resolutions(xrandr_monitor.resolutions);
-                int res_idx = 0;
-                for (auto res : monitor.get_available_resolutions()) {
-                    if (res == current_resolution) {
-                        monitor.set_resolution(res_idx);
-                        break;
-                    }
-                    res_idx++;
-                }
+                monitor.set_resolution(current_resolution);
                 qInfo(mst_category())
                         << "  Updating seat" << interface << "... done";
             }

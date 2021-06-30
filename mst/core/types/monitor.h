@@ -51,6 +51,12 @@ public:
      */
     void set_resolution(int index);
 
+    /**
+     * @brief set_resolution -- Set the current resolution;
+     * @param resolution -- @a Resolution class instsance.
+     */
+    void set_resolution(const Resolution& resolution);
+
     void add_resolutions(const QVector<QString>& resolutions);
 
 private:

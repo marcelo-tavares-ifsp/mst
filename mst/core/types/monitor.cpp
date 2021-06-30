@@ -55,6 +55,19 @@ void Monitor::set_resolution(int index) {
     this->current_resolution = index;
 }
 
+void Monitor::set_resolution(const Resolution &resolution)
+{
+    int res_idx = 0;
+    for (auto res : this->resolutions) {
+        if (res == resolution) {
+            set_resolution(res_idx);
+            break;
+        }
+        res_idx++;
+    }
+    // TODO: Add error checking.
+}
+
 Resolution Monitor::get_current_resolution() const {
     return this->resolutions[this->current_resolution];
 }
