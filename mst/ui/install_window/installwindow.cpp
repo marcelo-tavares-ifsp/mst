@@ -51,8 +51,8 @@ void InstallWindow::show_page(int number)
 void InstallWindow::configure_seat(int seat_id)
 {
     qInfo(install_window_category()) << seat_id << " was selected";
-    mst->reset_devices(seat_id);
-    current_seat_id = seat_id;
+    mst->reset_devices(seat_id - 1);
+    current_seat_id = seat_id - 1;
     initial_listeners();
 }
 
