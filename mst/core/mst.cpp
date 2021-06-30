@@ -78,7 +78,7 @@ void MST::load_seats()
                     << xrandr_monitor.interface
                     << "...";
             Monitor monitor(xrandr_monitor);
-            shared_ptr<Seat> seat = make_shared<Seat>(idx++);
+            shared_ptr<Seat> seat = make_shared<Seat>(idx);
             seat->add_monitor(monitor);
             qInfo(mst_category())
                     << "  Adding seat"
