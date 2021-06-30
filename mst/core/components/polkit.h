@@ -32,6 +32,7 @@ static const QString POLKIT_FILE = "10-mst.rules";
 
 class Polkit : public Component
 {
+public:
     Polkit(Configuration& config);
     void configure() override;
 };
