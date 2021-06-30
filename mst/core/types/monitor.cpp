@@ -61,11 +61,12 @@ void Monitor::set_resolution(const Resolution &resolution)
     for (auto res : this->resolutions) {
         if (res == resolution) {
             set_resolution(res_idx);
-            break;
+            return;
         }
         res_idx++;
     }
-    // TODO: Add error checking.
+    throw Monitor_error("Resolution is not available: "
+                        + resolution.to_string());
 }
 
 Resolution Monitor::get_current_resolution() const {

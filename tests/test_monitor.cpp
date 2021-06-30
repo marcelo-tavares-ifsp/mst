@@ -63,3 +63,14 @@ void Test_monitor::set_resolution_test()
     QVERIFY2(result == "640x480",
              result.toStdString().c_str());
 }
+
+void Test_monitor::set_resolution_error_test()
+{
+    QVector<Resolution> resolutions = {
+        Resolution("1024x768"),
+        Resolution("640x480")
+    };
+    Monitor monitor("VGA-1", resolutions);
+    QVERIFY_EXCEPTION_THROWN(monitor.set_resolution(Resolution("1280x1024")),
+                             Monitor_error);
+}

@@ -8,6 +8,18 @@
 #include "xrandr_monitor.h"
 
 /**
+ * @brief The Monitor_error class -- describes a Monitor error.
+ */
+class Monitor_error : public std::runtime_error {
+public:
+    Monitor_error(QString what)
+        : std::runtime_error(what.toStdString()) {
+        // Do nothing.
+    }
+};
+
+
+/**
  * @brief The Monitor class -- describes a monitor connected to the system.
  */
 class Monitor
@@ -54,6 +66,7 @@ public:
     /**
      * @brief set_resolution -- Set the current resolution;
      * @param resolution -- @a Resolution class instsance.
+     * @throws Resolution_error when @a resolution is not available.
      */
     void set_resolution(const Resolution& resolution);
 
