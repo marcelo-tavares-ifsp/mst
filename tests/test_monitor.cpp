@@ -37,3 +37,29 @@ void Test_monitor::monitor_from_xrandr_monitor_test()
     QVERIFY2(result == "640x480",
              result.toStdString().c_str());
 }
+
+void Test_monitor::set_resolution_index_test()
+{
+    QVector<Resolution> resolutions = {
+        Resolution("1024x768"),
+        Resolution("640x480")
+    };
+    Monitor monitor("VGA-1", resolutions);
+    monitor.set_resolution(1);
+    QString result = monitor.get_current_resolution().to_string();
+    QVERIFY2(result == "640x480",
+             result.toStdString().c_str());
+}
+
+void Test_monitor::set_resolution_test()
+{
+    QVector<Resolution> resolutions = {
+        Resolution("1024x768"),
+        Resolution("640x480")
+    };
+    Monitor monitor("VGA-1", resolutions);
+    monitor.set_resolution(Resolution("640x480"));
+    QString result = monitor.get_current_resolution().to_string();
+    QVERIFY2(result == "640x480",
+             result.toStdString().c_str());
+}

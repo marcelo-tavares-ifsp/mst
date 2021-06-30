@@ -14,6 +14,8 @@ public:
 private Q_SLOTS:
     void monitor_from_xrandr_monitor_test();
     void monitor_from_qstring_and_resolutions_test();
+    void set_resolution_index_test();
+    void set_resolution_test();
 };
 
 #endif // TEST_MONITOR_H
