@@ -71,7 +71,6 @@ void MST::load_seats()
                 }
                 qInfo(mst_category())
                         << "  Updating seat" << interface << "... done";
-                continue;
             }
         } else {
             qInfo(mst_category())
@@ -87,6 +86,7 @@ void MST::load_seats()
                     << "... done";
             config->add_seat(seat);
         }
+        idx++;
     }
     qInfo(mst_category()) << "Adding" << availableMonitors.size() << "seats ... done";
 }
