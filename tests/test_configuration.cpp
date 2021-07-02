@@ -111,7 +111,7 @@ void Test_configuration::is_valid_one_unconfigured_seat_test()
     }
 
     QVERIFY2(! config.is_valid(),
-             "Valid config with one unconfigured seats.");
+             "Valid config with one unconfigured seat.");
 }
 
 
