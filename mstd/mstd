@@ -197,11 +197,7 @@ Options:
       (log-info "Configuration: ~a" config)
       (log-info "Starting display manager ...")
       (let ((pid (dm-start config)))
-	(let ((sighandler (lambda (arg)
-			    (kill pid SIGTERM)
-			    (exit))))
-	  (sigaction SIGINT sighandler)
-	  (sigaction SIGTERM sighandler)))
+	(log-info "Display manager PID: ~a" pid))
       (log-info "Starting display manager ... done")
       (start-listener config))))
 
