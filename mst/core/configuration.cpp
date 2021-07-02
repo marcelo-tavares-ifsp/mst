@@ -88,12 +88,12 @@ void Configuration::load(QString system_config_file, QString seats_config_file)
 
 QString Configuration::get_system_mst_user() const
 {
-    return QString::fromStdString(system_config->get("user"));
+    return system_config->get("user");
 }
 
 QString Configuration::get_output_directory() const
 {
-    QString mst_user = QString::fromStdString(system_config->get("user"));
+    QString mst_user = system_config->get("user");
     return "/home/" + mst_user + "/.local/share/mst/output";
 }
 

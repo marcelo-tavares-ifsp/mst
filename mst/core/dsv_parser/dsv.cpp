@@ -40,9 +40,9 @@ DSV::DSV(string file_name)
  * @param name -- a parameter name to search for.
  * @return the parameter value.
  */
-const string DSV::get(const string name) const
+const QString DSV::get(const QString& name) const
 {
-    return data.at(name);
+    return QString::fromStdString(data.at(name.toStdString()));
 }
 
 /**
