@@ -1,5 +1,7 @@
 TEMPLATE = aux
 
+CONFIG += nostrip
+
 isEmpty(PREFIX) {
     PREFIX = /usr
 }
