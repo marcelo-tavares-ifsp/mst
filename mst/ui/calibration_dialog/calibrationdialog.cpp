@@ -8,7 +8,7 @@ CalibrationDialog::CalibrationDialog(QWidget *parent, QString instruction) :
     ui(new Ui::CalibrationDialog)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Калибровка устройства");
+    this->setWindowTitle(tr("Seat Device Configuration"));
     ui->lblInstuction->setText(instruction);
 }
 

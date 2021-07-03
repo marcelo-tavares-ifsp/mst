@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Seat configuration</string>
+   <string>Seat Device Configuration</string>
   </property>
   <widget class="QPushButton" name="btnCancel">
    <property name="geometry">

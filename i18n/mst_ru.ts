@@ -4,47 +4,12 @@
 <context>
     <name>About_dialog</name>
     <message>
-        <source>&lt;html&gt;
-&lt;head/&gt;
-&lt;body&gt;
-&lt;h1&gt;MST (Multi-Seat Tool) 0.1.0&lt;/h1&gt;
-
-Copyright &amp;copy; 2018-2020 &lt;a href=&quot;https://www.gkaz.ru&quot;&gt;ООО &quot;ГК АЗЪ&quot;&lt;/a&gt;
-
-&lt;h2&gt;Лицензия&lt;/h2&gt;
-&lt;p&gt;The project was initially written and being developed by &lt;b&gt;&quot;AZ Company
-Group&quot; LLC&lt;/b&gt; (&lt;a href=&quot;https://www.gkaz.ru/&quot;&gt;https://www.gkaz.ru/&lt;/a&gt;)  You can find the list of
-contributors in &lt;code&gt;AUTHORS&lt;code&gt; file.&lt;/p&gt;
-
-&lt;p&gt;MST is free software: you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free
-Software Foundation, either version 3 of the License, or (at your
-option) any later version.  Please see &lt;code&gt;COPYING&lt;/code&gt; file for the terms of
-GNU General Public License.&lt;/p&gt;
-
-&lt;p&gt;The logo is distributed under
-terms of &lt;a href=&quot;https://creativecommons.org/licenses/by-sa/4.0/&quot;&gt;Creative Commons Attribution-ShareAlike 4.0
-International&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2&gt;MST основан на следующем свободном и открытом программном обеспечении:&lt;/h2&gt;
-
-&lt;ul&gt;
-    &lt;li&gt;Awesome&lt;/li&gt;
-    &lt;li&gt;unclutter&lt;/li&gt;
-    &lt;li&gt;Xephyr&lt;/li&gt;
-    &lt;li&gt;lightdm&lt;/li&gt;
-    &lt;li&gt;bash&lt;/li&gt;
-    &lt;li&gt;libqt5-core&lt;/li&gt;
-    &lt;li&gt;libudev-devel&lt;/li&gt;
-    &lt;li&gt;virtualgl&lt;/li&gt;
-    &lt;li&gt;Xdialog&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>About MST</source>
         <translation>О программе</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:xx-large; font-weight:600;&quot;&gt;MST (Multi-Seat Tool) 1.0.0&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Copyright © 2018-2021 &lt;a href=&quot;https://www.gkaz.ru&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;ООО &amp;quot;ГК АЗЪ&amp;quot;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:x-large; font-weight:600;&quot;&gt;Лицензия&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The project was initially written and being developed by &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;AZ Company Group&amp;quot; LLC&lt;/span&gt; (&lt;a href=&quot;https://www.gkaz.ru/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://www.gkaz.ru/&lt;/span&gt;&lt;/a&gt;) You can find the list of contributors in &lt;span style=&quot; font-family:&apos;monospace&apos;;&quot;&gt;AUTHORS file.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;MST is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. Please see &lt;span style=&quot; font-family:&apos;monospace&apos;;&quot;&gt;COPYING&lt;/span&gt; file for the terms of GNU General Public License. &lt;/p&gt;&lt;p&gt;The logo is distributed under terms of &lt;a href=&quot;https://creativecommons.org/licenses/by-sa/4.0/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Creative Commons Attribution-ShareAlike 4.0 International&lt;/span&gt;&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:x-large; font-weight:600;&quot;&gt;MST основан на следующем свободном и открытом программном обеспечении:&lt;/span&gt;&lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Awesome &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;unclutter &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Xephyr &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;lightdm &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;bash &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;libqt5-core &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;libudev-devel &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;virtualgl&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Xdialog&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;GNU Guile&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Guile-UDEV&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -52,6 +17,10 @@ International&lt;/a&gt;.&lt;/p&gt;
     <message>
         <source>Cancel</source>
         <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>Seat Device Configuration</source>
+        <translation>Настройка устройств рабочего места</translation>
     </message>
     <message>
         <source>Seat configuration</source>
@@ -112,16 +81,17 @@ International&lt;/a&gt;.&lt;/p&gt;
         <source>Multiseat configuration prepared.</source>
         <translation>Мультисит-конфигурация подготовлена.</translation>
     </message>
-</context>
-<context>
-    <name>Seat_widget</name>
     <message>
-        <source>Enable</source>
-        <translation>Включить</translation>
+        <source>Start multiseat</source>
+        <translation type="unfinished"></translation>
     </message>
-        <message>
-        <source>Configure</source>
-        <translation>Настроить</translation>
+    <message>
+        <source>Multiseat is stopping ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiseat is starting ...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -148,6 +118,17 @@ International&lt;/a&gt;.&lt;/p&gt;
     <message>
         <source>Reboot</source>
         <translation>Перезагрузка компьютера</translation>
+    </message>
+</context>
+<context>
+    <name>Seat_widget</name>
+    <message>
+        <source>Enable</source>
+        <translation>Включить</translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation>Настроить</translation>
     </message>
 </context>
 <context>
@@ -183,6 +164,30 @@ International&lt;/a&gt;.&lt;/p&gt;
     <message>
         <source>Each seat must have configured unique keyboard and mouse.</source>
         <translation>Каждое рабочее место должно иметь настроенную индивидуальную мышь и клавиатуру.</translation>
+    </message>
+    <message>
+        <source>Show the list of system backups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start mstd.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop mstd.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show MST status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to make a backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aborting installation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
