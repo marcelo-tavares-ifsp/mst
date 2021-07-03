@@ -178,27 +178,27 @@
     </message>
     <message>
         <source>Show the list of system backups</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать список резервных копий</translation>
     </message>
     <message>
         <source>Start mstd.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустить mstd.</translation>
     </message>
     <message>
         <source>Stop mstd.</source>
-        <translation type="unfinished"></translation>
+        <translation>Остановить mstd.</translation>
     </message>
     <message>
         <source>Show MST status</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать статус MST</translation>
     </message>
     <message>
         <source>Unable to make a backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно создать резервную копию</translation>
     </message>
     <message>
         <source>Aborting installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена установки</translation>
     </message>
 </context>
 </TS>
