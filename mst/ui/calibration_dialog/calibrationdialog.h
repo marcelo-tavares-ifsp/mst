@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QLoggingCategory>
+#include "../mst/core/device/device_listener.h"
 
 Q_DECLARE_LOGGING_CATEGORY(calibration_dialog_category)
 
@@ -15,7 +16,7 @@ class CalibrationDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CalibrationDialog(QWidget *parent = nullptr, QString instruction = "");
+    explicit CalibrationDialog(QWidget *parent, QString interface, DEVICE_TYPE type);
     ~CalibrationDialog();
 
 signals:
@@ -27,6 +28,7 @@ private slots:
 
 private:
     Ui::CalibrationDialog *ui;
+    QString interface;
 };
 
 #endif // CALIBRATIONDIALOG_H

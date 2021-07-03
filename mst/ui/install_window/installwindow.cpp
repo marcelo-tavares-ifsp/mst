@@ -199,35 +199,10 @@ void InstallWindow::initial_listeners()
     qDebug(install_window_category(), "initial_listeners: Creating and starting I/O listeners ... done");
 }
 
-
-static QString _get_instruction(Device_listener * device_listener)
-{
-    QString instruction = "";
-
-    switch (device_listener->type) {
-    case DEVICE_TYPE::KEYBOARD:
-        instruction = "Пожалуйста, нажимайте на кнопки той клавиатуры,"
-                      " которую хотите использовать для выбранного рабочего"
-                      " места.";
-        break;
-    case DEVICE_TYPE::MOUSE:
-        instruction = "Пожалуйста, нажимайте на кнопки той мыши,"
-                      " которую хотите использовать для выбранного рабочего"
-                      " места.";
-        break;
-    case DEVICE_TYPE::USB:
-        instruction = "Пожалуйста вставьте USB-устройство в тот USB-разъём,"
-                      " который хотите использовать для выбранного рабочего"
-                      " места.";
-        break;
-    }
-
-    return instruction;
-}
-
 void InstallWindow::initial_calibration_dialog(Device_listener* device_listener)
 {
-    CalibrationDialog* cd = new CalibrationDialog(this, _get_instruction(device_listener));
+    QString interface = mst->get_seats()[current_seat_id]->get_monitor().get_interface();
+    CalibrationDialog* cd = new CalibrationDialog(this, interface, device_listener->type);
 
     attach_signals(device_listener, cd);
 

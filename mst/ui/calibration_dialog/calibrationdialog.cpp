@@ -3,13 +3,35 @@
 
 Q_LOGGING_CATEGORY(calibration_dialog_category, "mst.ui.calibration_dialog")
 
-CalibrationDialog::CalibrationDialog(QWidget *parent, QString instruction) :
+CalibrationDialog::CalibrationDialog(QWidget *parent, QString interface, DEVICE_TYPE type) :
     QDialog(parent),
     ui(new Ui::CalibrationDialog)
 {
     ui->setupUi(this);
-    this->setWindowTitle(tr("Seat Device Configuration"));
-    ui->lblInstuction->setText(instruction);
+    this->setWindowTitle(tr("Seat Device Configuration") + " (" + interface + ")");
+
+    switch (type) {
+    case DEVICE_TYPE::KEYBOARD:
+        ui->lblInstuction->setText(
+                    "Пожалуйста, нажимайте на кнопки той клавиатуры,"
+                    " которую хотите использовать для выбранного рабочего"
+                    " места.");
+        break;
+
+    case DEVICE_TYPE::MOUSE:
+         ui->lblInstuction->setText(
+                     "Пожалуйста, нажимайте на кнопки той мыши,"
+                     " которую хотите использовать для выбранного рабочего"
+                     " места.");
+        break;
+
+    case DEVICE_TYPE::USB:
+        ui->lblInstuction->setText(
+                    "Пожалуйста вставьте USB-устройство в тот USB-разъём,"
+                    " который хотите использовать для выбранного рабочего"
+                    " места.");
+                break;
+            }
 }
 
 CalibrationDialog::~CalibrationDialog()
