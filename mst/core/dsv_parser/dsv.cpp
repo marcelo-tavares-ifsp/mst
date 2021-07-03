@@ -21,12 +21,13 @@ static void _parse_x(ifstream& in, map<string, string>& out)
  * @param file_name
  * @throws DSV_exception
  */
-DSV::DSV(string file_name)
+DSV::DSV(const QString& file_name)
     : file_name(file_name)
 {
-    ifstream in(file_name);
+    ifstream in(file_name.toStdString());
     if (! in.is_open()) {
-        throw DSV_exception("Could not open config file: " + file_name);
+        throw DSV_exception("Could not open config file: "
+                            + file_name.toStdString());
     }
 
     _parse_x(in, data);
@@ -60,7 +61,7 @@ void DSV::put(string name, string value)
  */
 void DSV::save()
 {
-    ofstream out(file_name, ios::trunc);
+    ofstream out(file_name.toStdString(), ios::trunc);
     for (auto const& record : data) {
         out << record.first << ":" << record.second << endl;
     }

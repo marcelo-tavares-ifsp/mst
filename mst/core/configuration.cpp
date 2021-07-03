@@ -44,7 +44,7 @@ void Configuration::load(QString system_config_file, QString seats_config_file)
                     << "'" + system_config_file + "' ... FAIL";
         }
     }
-    this->system_config = make_shared<DSV>(system_config_file.toStdString());
+    this->system_config = make_shared<DSV>(system_config_file);
 
     QFile seats_config(seats_config_file);
 

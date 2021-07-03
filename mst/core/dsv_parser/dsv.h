@@ -18,13 +18,13 @@ public:
 class DSV
 {
 public:
-    DSV(std::string file_name);
+    DSV(const QString &file_name);
     void put(std::string key, std::string value);
     const QString get(const QString& key) const;
     void save();
 
 private:
-    std::string file_name;
+    QString file_name;
     std::map<std::string, std::string> data;
 };
 
