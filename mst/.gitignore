@@ -4,3 +4,4 @@ mst
 version.h
 mst.pro.user*
 *.gcno
+qrc_resources.cpp
