@@ -10,8 +10,7 @@ using namespace std;
 
 static void _parse_x(ifstream& in, map<string, string>& out)
 {
-    for (string line = ""; getline(in, line); )
-    {
+    for (string line = ""; getline(in, line);) {
         vector<string> data = split(line, ':');
         out[data[0]] = data[1];
     }
@@ -26,8 +25,7 @@ DSV::DSV(string file_name)
     : file_name(file_name)
 {
     ifstream in(file_name);
-    if (! in.is_open())
-    {
+    if (! in.is_open()) {
         throw DSV_exception("Could not open config file: " + file_name);
     }
 
@@ -63,8 +61,7 @@ void DSV::put(string name, string value)
 void DSV::save()
 {
     ofstream out(file_name, ios::trunc);
-    for (auto const& record : data)
-    {
+    for (auto const& record : data) {
         out << record.first << ":" << record.second << endl;
     }
 }
