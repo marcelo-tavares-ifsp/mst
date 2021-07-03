@@ -8,7 +8,9 @@ CalibrationDialog::CalibrationDialog(QWidget *parent, QString interface, DEVICE_
     ui(new Ui::CalibrationDialog)
 {
     ui->setupUi(this);
-    this->setWindowTitle(tr("Seat Device Configuration") + " (" + interface + ")");
+    this->setWindowTitle(interface + ": "
+                         + tr("Seat Device Configuration")
+                         + " — " + device::describe(type));
 
     switch (type) {
     case DEVICE_TYPE::KEYBOARD:

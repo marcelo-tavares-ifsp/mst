@@ -132,6 +132,17 @@
     </message>
 </context>
 <context>
+    <name>Device_listener</name>
+    <message>
+        <source>Mouse</source>
+        <translation>Мышь</translation>
+    </message>
+    <message>
+        <source>Keyboard</source>
+        <translation>Клавиатура</translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <source>Rollback changes in the system</source>

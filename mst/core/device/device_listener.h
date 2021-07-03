@@ -60,6 +60,17 @@ private:
     virtual QString poll() = 0;
 };
 
+namespace device {
+
+/**
+ * @brief describe -- Describe a device type.
+ * @param type -- A device type to describe.
+ * @return Device type description as a translated string.
+ */
+const QString describe(DEVICE_TYPE type);
+
+} // namespace device
+
 
 Q_DECLARE_METATYPE(DEVICE_TYPE)
 
