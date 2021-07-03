@@ -4,6 +4,34 @@ TEMPLATE = subdirs
 SUBDIRS = mst tests \
     mstd
 
+## I18N
+
+defineReplace(prependAll) {
+ for(a,$$1):result += $$2$${a}$$3
+ return($$result)
+}
+
+LANGUAGES = ru
+
+TRANSLATIONS = $$prependAll(LANGUAGES, $$PWD/i18n/mst_, .ts)
+
+TRANSLATIONS_FILES =
+
+qtPrepareTool(LRELEASE, lrelease)
+for(tsfile, TRANSLATIONS) {
+    qmfile = $$shadowed($$tsfile)
+    qmfile ~= s,.ts$,.qm,
+    qmdir = $$dirname(qmfile)
+    !exists($$qmdir) {
+        mkpath($$qmdir)|error("Aborting.")
+    }
+    command = $$LRELEASE -removeidentical $$tsfile -qm $$qmfile
+    system($$command) | error("Failed to run: $$command")
+    TRANSLATIONS_FILES += $$qmfile
+}
+
+##
+
 isEmpty(PREFIX) {
     PREFIX = /usr
 }
@@ -133,5 +161,3 @@ install_vgl.commands += bash ./install_vgl.sh 2.6.4
 
 QMAKE_EXTRA_TARGETS += rpm rpm_dist dist guile_udev_build guile_udev_install
 QMAKE_EXTRA_TARGETS += build_deps install_deps install_vgl
-
-TRANSLATIONS = i18n/mst_ru.ts
