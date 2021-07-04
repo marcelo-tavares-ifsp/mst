@@ -83,15 +83,15 @@
     </message>
     <message>
         <source>Start multiseat</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустить мультисит</translation>
     </message>
     <message>
         <source>Multiseat is stopping ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Мультисит останавливается ...</translation>
     </message>
     <message>
         <source>Multiseat is starting ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Мультисит запускается ...</translation>
     </message>
 </context>
 <context>
