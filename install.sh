@@ -127,6 +127,7 @@ install_deps_alt_p9() {
             libqt5-core \
 	    libtool \
             qt5-base-devel \
+	    qt5-tools \
             libudev-devel \
             virtualgl \
             Xdialog \
