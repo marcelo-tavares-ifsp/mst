@@ -1,9 +1,18 @@
 ![MST Logo](doc/logo.png)
 
 # MST
-Multi-Seat Tool
+
+MST (Multi-Seat Toolkit) is a graphical [multi-seat configurator](https://en.wikipedia.org/wiki/Multiseat_configuration)
+and a set of tools that enables easy configuration of multi-seat setups.
 
 [![pipeline status](https://gitlab.com/gkaz/mst/badges/master/pipeline.svg)](https://gitlab.com/gkaz/mst/-/commits/master)
+
+## Features
+- Graphical configurator that allows to bind mice, keyboards and USB
+  sockets (to connect USB drives) to seats.
+- Several outputs of one GPU can be used to configure separate seats.
+- `mstd` daemon auto-mounts USB drives by means of UDev to specific
+  seats and users.
 
 ## License
 The project was initially written and being developed by "AZ Company
