@@ -16,10 +16,7 @@ CalibrationDialog::CalibrationDialog(QWidget *parent, QString interface) :
     interface(interface)
 {
     ui->setupUi(this);
-    this->setWindowTitle(interface + ": "
-                         + tr("Seat Device Configuration")
-                         + " — " + device::describe(DEVICE_TYPE::MOUSE));
-    this->ui->device_configration->setCurrentIndex(0);
+    set_view(DEVICE_TYPE::MOUSE);
     MST::get_instance()->get_devices(mice, keyboards);
     listener = new Input_device_listener(DEVICE_TYPE::MOUSE, mice);
     attach_signals(listener);
@@ -55,6 +52,19 @@ CalibrationDialog::~CalibrationDialog()
     delete ui;
 }
 
+void CalibrationDialog::set_title(DEVICE_TYPE type)
+{
+    setWindowTitle(interface + ": "
+                   + tr("Seat Device Configuration")
+                   + " — " + device::describe(type));
+}
+
+void CalibrationDialog::set_view(DEVICE_TYPE type)
+{
+    set_title(type);
+    ui->device_configration->setCurrentIndex(type);
+}
+
 void CalibrationDialog::on_btnCancel_clicked()
 {
     this->close();
@@ -73,25 +83,20 @@ void CalibrationDialog::device_found(QString name, DEVICE_TYPE type)
 
     switch (type) {
     case DEVICE_TYPE::MOUSE:
-        ui->device_configration->setCurrentIndex(1);
+        set_view(DEVICE_TYPE::KEYBOARD);
         listener = new Input_device_listener(DEVICE_TYPE::KEYBOARD,
                                              keyboards);
         attach_signals(listener);
         QThreadPool::globalInstance()->start(listener);
-        this->setWindowTitle(interface + ": "
-                             + tr("Seat Device Configuration")
-                             + " — " + device::describe(DEVICE_TYPE::KEYBOARD));
         qInfo(calibration_dialog_category()) << "Keyboard input listener was started";
         break;
 
     case DEVICE_TYPE::KEYBOARD:
+        set_view(DEVICE_TYPE::USB);
         ui->device_configration->setCurrentIndex(2);
         listener = new USB_device_listener(DEVICE_TYPE::USB);
         attach_signals(listener);
         QThreadPool::globalInstance()->start(listener);
-        this->setWindowTitle(interface + ": "
-                             + tr("Seat Device Configuration")
-                             + " — " + device::describe(DEVICE_TYPE::USB));
         qInfo(calibration_dialog_category()) << "USB listener was started";
         break;
 

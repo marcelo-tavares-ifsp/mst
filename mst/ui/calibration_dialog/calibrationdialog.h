@@ -36,6 +36,8 @@ private:
     QVector<QString> keyboards;
 
     void attach_signals(Device_listener* listener);
+    void set_title(DEVICE_TYPE type);
+    void set_view(DEVICE_TYPE type);
 };
 
 #endif // CALIBRATIONDIALOG_H
