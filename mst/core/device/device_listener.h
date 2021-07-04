@@ -15,8 +15,8 @@
 Q_DECLARE_LOGGING_CATEGORY(input_device_listener_category)
 
 enum DEVICE_TYPE {
-    KEYBOARD,
     MOUSE,
+    KEYBOARD,
     USB
 };
 
