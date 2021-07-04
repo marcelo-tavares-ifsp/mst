@@ -4,6 +4,8 @@ TEMPLATE = subdirs
 SUBDIRS = mst tests \
     mstd
 
+QMAKE_PROJECT_DEPTH = 0
+
 ## I18N
 
 defineReplace(prependAll) {
