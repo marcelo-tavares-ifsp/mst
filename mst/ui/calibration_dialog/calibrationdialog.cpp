@@ -12,7 +12,8 @@ Q_LOGGING_CATEGORY(calibration_dialog_category, "mst.ui.calibration_dialog")
 
 CalibrationDialog::CalibrationDialog(QWidget *parent, QString interface) :
     QDialog(parent),
-    ui(new Ui::CalibrationDialog)
+    ui(new Ui::CalibrationDialog),
+    interface(interface)
 {
     ui->setupUi(this);
     this->setWindowTitle(interface + ": "
