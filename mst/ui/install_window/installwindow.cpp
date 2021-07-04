@@ -53,7 +53,15 @@ void InstallWindow::configure_seat(int seat_id)
     qInfo(install_window_category()) << seat_id << " was selected";
     mst->reset_devices(seat_id - 1);
     current_seat_id = seat_id - 1;
-    initial_listeners();
+
+    QString interface = mst->get_seats()[current_seat_id]->get_monitor().get_interface();
+    CalibrationDialog* cd = new CalibrationDialog(this, interface);
+
+    connect(cd, SIGNAL(device_configured(DEVICE_TYPE, QString)),
+            this, SLOT(device_configured(DEVICE_TYPE, QString)));
+
+    cd->setModal(true);
+    cd->exec();
 }
 
 void InstallWindow::load_seat_configuration_page()
@@ -175,58 +183,11 @@ void InstallWindow::on_button_restore_backup_clicked()
 
 // private methods ///////////////////////////////////////////////////////////////
 
-void InstallWindow::initial_listeners()
+void InstallWindow::device_configured(DEVICE_TYPE type, QString name)
 {
-    qDebug(install_window_category(), "initial_listeners: Creating and starting I/O listeners ...");
-    Device_listener* mouse_listener
-            = new Input_device_listener(DEVICE_TYPE::MOUSE, mice);
-    Device_listener* keyboard_listener
-            = new Input_device_listener(DEVICE_TYPE::KEYBOARD, keyboards);
-    Device_listener* usb_listener
-            = new USB_device_listener(DEVICE_TYPE::USB);
-
-    QThreadPool::globalInstance()->start(mouse_listener);
-    qInfo(install_window_category()) << "Mouse input listener was started";
-    initial_calibration_dialog(mouse_listener);
-
-    QThreadPool::globalInstance()->start(keyboard_listener);
-    qInfo(install_window_category()) << "Keyboard input listener was started";
-    initial_calibration_dialog(keyboard_listener);
-
-    QThreadPool::globalInstance()->start(usb_listener);
-    qInfo(install_window_category()) << "USB listener was started";
-    initial_calibration_dialog(usb_listener);
-    qDebug(install_window_category(), "initial_listeners: Creating and starting I/O listeners ... done");
-}
-
-void InstallWindow::initial_calibration_dialog(Device_listener* device_listener)
-{
-    QString interface = mst->get_seats()[current_seat_id]->get_monitor().get_interface();
-    CalibrationDialog* cd = new CalibrationDialog(this, interface, device_listener->type);
-
-    attach_signals(device_listener, cd);
-
-    cd->setModal(true);
-    cd->exec();
-}
-
-void InstallWindow::set_seat_device(QString device, DEVICE_TYPE type)
-{
-    mst->set_device(current_seat_id, device, type);
+    mst->set_device(current_seat_id, name, type);
     ui->hbox_seats->update();
 }
-
-void InstallWindow::attach_signals(Device_listener* listener, CalibrationDialog* cd)
-{
-    qDebug(install_window_category(), "Attaching signals from listeners to slots ...");
-    connect(listener, SIGNAL(device_found(QString, DEVICE_TYPE)),
-        this, SLOT(set_seat_device(QString, DEVICE_TYPE)));
-
-    connect(listener, SIGNAL(work_done()), cd, SLOT(work_done()));
-    connect(cd, SIGNAL(cancel()), listener, SLOT(cancel()));
-    qDebug(install_window_category(), "Attaching signals from listeners to slots ... done");
-}
-
 
 void InstallWindow::on_about_triggered()
 {

@@ -39,7 +39,7 @@ public:
 public slots:
     void on_about_triggered();
     void configure_seat(int seat_id);
-    void set_seat_device(QString, DEVICE_TYPE);
+    void device_configured(DEVICE_TYPE type, QString name);
 
 private slots:
     void on_button_begin_configuration_clicked();
@@ -62,9 +62,6 @@ private:
     int32_t current_seat_id;
 
     void load_seat_configuration_page();
-    void initial_listeners();
-    void initial_calibration_dialog(Device_listener* device_listener);
-    void attach_signals(Device_listener* listener, CalibrationDialog* cd);
     void show_page(int number);
 };
 

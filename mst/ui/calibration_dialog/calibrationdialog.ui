@@ -48,6 +48,73 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QStackedWidget" name="device_configration">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>491</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="mouse_page">
+    <widget class="QLabel" name="label_1">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>451</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Please point the coursor of a mouse you want to bind to the current seat on this label and click left button several times.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="keyboard_page">
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>911</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Please press SPACE button on your keyboard that you want to bind to the current seat, several times.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="usb_page">
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>911</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Please press inseart a USB device to a USB socket you want to bind to current seat.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>

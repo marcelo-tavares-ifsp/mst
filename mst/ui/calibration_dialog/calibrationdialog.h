@@ -16,19 +16,26 @@ class CalibrationDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CalibrationDialog(QWidget *parent, QString interface, DEVICE_TYPE type);
+    explicit CalibrationDialog(QWidget *parent, QString interface);
     ~CalibrationDialog();
 
 signals:
     void cancel();
+    void device_configured(DEVICE_TYPE type, QString name);
 
 private slots:
     void on_btnCancel_clicked();
+    void device_found(QString name, DEVICE_TYPE type);
     void work_done();
 
 private:
     Ui::CalibrationDialog *ui;
     QString interface;
+    Device_listener* listener = nullptr;
+    QVector<QString> mice;
+    QVector<QString> keyboards;
+
+    void attach_signals(Device_listener* listener);
 };
 
 #endif // CALIBRATIONDIALOG_H
