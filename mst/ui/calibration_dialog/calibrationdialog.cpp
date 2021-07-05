@@ -71,12 +71,6 @@ void CalibrationDialog::on_btnCancel_clicked()
     emit cancel();
 }
 
-void CalibrationDialog::work_done()
-{
-    qInfo(calibration_dialog_category()) << "work_done";
-    this->close();
-}
-
 void CalibrationDialog::device_found(QString name, DEVICE_TYPE type)
 {
     emit device_configured(type, name);

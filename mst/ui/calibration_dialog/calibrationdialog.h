@@ -26,7 +26,6 @@ signals:
 private slots:
     void on_btnCancel_clicked();
     void device_found(QString name, DEVICE_TYPE type);
-    void work_done();
 
 private:
     Ui::CalibrationDialog *ui;
