@@ -45,7 +45,7 @@
        <item>
         <widget class="QLabel" name="label_1">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Please point the coursor of a mouse you want to bind to the current seat on this label and click left button several times.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>Please point the coursor of a mouse you want to bind to the current seat on this label and click left button several times.</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -59,7 +59,7 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Please press SPACE button on your keyboard that you want to bind to the current seat, several times.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>Please press SPACE button on your keyboard that you want to bind to the current seat, several times.</string>
          </property>
          <property name="scaledContents">
           <bool>false</bool>
@@ -76,7 +76,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Please press inseart a USB device to a USB socket you want to bind to current seat.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>Please press inseart a USB device to a USB socket you want to bind to current seat.</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>

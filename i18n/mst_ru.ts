@@ -19,6 +19,22 @@
         <translation>Отмена</translation>
     </message>
     <message>
+        <source>Skip</source>
+        <translation>Пропустить</translation>
+    </message>
+    <message>
+      <source>Please point the coursor of a mouse you want to bind to the current seat on this label and click left button several times.</source>
+      <translation>Пожалуйста поместите курсор мыши на эту надпись и нажмите несколько раз левую кнопку той мыши, которую вы хотите привязать к выбранному рабочему месту.</translation>
+    </message>
+    <message>
+      <source>Please press SPACE button on your keyboard that you want to bind to the current seat, several times.</source>
+      <translation>Пожалуйста, нажмите несколько раз клавишу ПРОБЕЛ на той клавиатуре, которую вы хотите привезать к выбранному рабочему месту</translation>
+    </message>
+    <message>
+      <source>Please press inseart a USB device to a USB socket you want to bind to current seat.</source>
+      <translation>Пожалуйста, вставьте любое USB-устройство в тот разъём, который вы хотите привязать к данному рабочему месту.</translation>
+    </message>
+    <message>
         <source>Seat Device Configuration</source>
         <translation>Настройка устройств рабочего места</translation>
     </message>
