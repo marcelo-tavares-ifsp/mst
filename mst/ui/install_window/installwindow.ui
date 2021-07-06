@@ -245,6 +245,12 @@ Seat_widget QLabel {
        <layout class="QHBoxLayout" name="version_layout" stretch="0,0">
         <item>
          <widget class="QLabel" name="lbl_Version">
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <pointsize>10</pointsize>
