@@ -16,9 +16,11 @@ CalibrationDialog::CalibrationDialog(QWidget *parent, QString interface) :
     interface(interface)
 {
     ui->setupUi(this);
-    set_view(DEVICE_TYPE::MOUSE);
+
+    current_type = DEVICE_TYPE::MOUSE;
+    set_view(current_type);
     MST::get_instance()->get_devices(mice, keyboards);
-    listener = new Input_device_listener(DEVICE_TYPE::MOUSE, mice);
+    listener = new Input_device_listener(current_type, mice);
     attach_signals(listener);
     QThreadPool::globalInstance()->start(listener);
     qInfo(calibration_dialog_category()) << "Mouse input listener was started";
@@ -71,24 +73,50 @@ void CalibrationDialog::on_btnCancel_clicked()
     emit cancel();
 }
 
+void CalibrationDialog::on_button_skip_clicked()
+{
+    switch (current_type) {
+    case DEVICE_TYPE::MOUSE:
+        current_type = DEVICE_TYPE::KEYBOARD;
+        listener->cancel();
+        listener = new Input_device_listener(current_type, keyboards);
+        attach_signals(listener);
+        QThreadPool::globalInstance()->start(listener);
+        set_view(current_type);
+        break;
+    case DEVICE_TYPE::KEYBOARD:
+        current_type = DEVICE_TYPE::USB;
+        listener->cancel();
+        listener = new USB_device_listener(current_type);
+        attach_signals(listener);
+        QThreadPool::globalInstance()->start(listener);
+        set_view(current_type);
+        break;
+    case DEVICE_TYPE::USB:
+        this->close();
+        emit cancel();
+    }
+}
+
 void CalibrationDialog::device_found(QString name, DEVICE_TYPE type)
 {
     emit device_configured(type, name);
 
     switch (type) {
     case DEVICE_TYPE::MOUSE:
-        set_view(DEVICE_TYPE::KEYBOARD);
-        listener = new Input_device_listener(DEVICE_TYPE::KEYBOARD,
-                                             keyboards);
+        current_type = DEVICE_TYPE::KEYBOARD;
+        set_view(current_type);
+        listener = new Input_device_listener(current_type, keyboards);
         attach_signals(listener);
         QThreadPool::globalInstance()->start(listener);
         qInfo(calibration_dialog_category()) << "Keyboard input listener was started";
         break;
 
     case DEVICE_TYPE::KEYBOARD:
-        set_view(DEVICE_TYPE::USB);
+        current_type = DEVICE_TYPE::USB;
+        set_view(current_type);
         ui->device_configration->setCurrentIndex(2);
-        listener = new USB_device_listener(DEVICE_TYPE::USB);
+        listener = new USB_device_listener(current_type);
         attach_signals(listener);
         QThreadPool::globalInstance()->start(listener);
         qInfo(calibration_dialog_category()) << "USB listener was started";

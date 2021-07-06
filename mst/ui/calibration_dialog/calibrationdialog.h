@@ -25,6 +25,7 @@ signals:
 
 private slots:
     void on_btnCancel_clicked();
+    void on_button_skip_clicked();
     void device_found(QString name, DEVICE_TYPE type);
 
 private:
@@ -33,6 +34,7 @@ private:
     Device_listener* listener = nullptr;
     QVector<QString> mice;
     QVector<QString> keyboards;
+    DEVICE_TYPE current_type;
 
     void attach_signals(Device_listener* listener);
     void set_title(DEVICE_TYPE type);
