@@ -66,12 +66,12 @@
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>451</width>
-       <height>101</height>
+       <width>450</width>
+       <height>100</height>
       </rect>
      </property>
      <property name="text">
-      <string>Please point the coursor of a mouse you want to bind to the current seat on this label and click left button several times.</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Please point the coursor of a mouse you want to bind to the current seat on this label and click left button several times.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -84,12 +84,15 @@
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>911</width>
-       <height>101</height>
+       <width>450</width>
+       <height>100</height>
       </rect>
      </property>
      <property name="text">
-      <string>Please press SPACE button on your keyboard that you want to bind to the current seat, several times.</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Please press SPACE button on your keyboard that you want to bind to the current seat, several times.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -102,12 +105,12 @@
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>911</width>
-       <height>101</height>
+       <width>450</width>
+       <height>100</height>
       </rect>
      </property>
      <property name="text">
-      <string>Please press inseart a USB device to a USB socket you want to bind to current seat.</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Please press inseart a USB device to a USB socket you want to bind to current seat.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -123,6 +126,9 @@
      <width>231</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
    </property>
    <property name="text">
     <string>Skip</string>
