@@ -55,16 +55,36 @@ void MST::load_seats()
         if (s != nullptr) {
             Monitor& monitor = s->get_monitor();
             QString interface = xrandr_monitor.interface;
+            qInfo(mst_category())
+                    << "  Updating seat" << interface << "...";
             if (monitor.get_interface() == interface) {
                 qInfo(mst_category())
-                        << "  Updating seat" << interface << "...";
+                        << "    Updating a monitor "
+                        << interface << " ... ";
                 const Resolution& current_resolution
                         = monitor.get_current_resolution();
                 monitor.add_resolutions(xrandr_monitor.resolutions);
                 monitor.set_resolution(current_resolution);
                 qInfo(mst_category())
-                        << "  Updating seat" << interface << "... done";
+                        << "    Updating a monitor "
+                        << interface << " ... done";
+            } else {
+                qInfo(mst_category())
+                        << "    Replacing a monitor "
+                        << monitor.get_interface()
+                        << " with "
+                        << interface << " ... ";
+                s->remove_monitor(monitor);
+                Monitor new_monitor(xrandr_monitor);
+                s->add_monitor(new_monitor);
+                qInfo(mst_category())
+                        << "    Replacing a monitor "
+                        << monitor.get_interface()
+                        << " with "
+                        << interface << " ... done";
             }
+            qInfo(mst_category())
+                    << "  Updating seat" << interface << "... done";
         } else {
             qInfo(mst_category())
                     << "  Adding seat"
