@@ -62,6 +62,11 @@ void Seat::add_monitor(Monitor &monitor)
     this->monitors.push_back(monitor);
 }
 
+void Seat::remove_monitor(Monitor &monitor)
+{
+    monitors.removeOne(monitor);
+}
+
 // TODO: Needed only for compatibility.
 Monitor &Seat::get_monitor()
 {

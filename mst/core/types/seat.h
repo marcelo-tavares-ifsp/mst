@@ -31,6 +31,12 @@ public:
     void add_monitor(Monitor& monitor);
 
     /**
+     * @brief remove_monitor -- Remove @a monitor from the seat.
+     * @param monitor -- A monitor to remove.
+     */
+    void remove_monitor(Monitor& monitor);
+
+    /**
      * @brief set_mouse -- Attach a mouse to this seat.
      * @param mouse -- A mouse to attach.
      */
