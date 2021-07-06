@@ -89,6 +89,8 @@ private:
      * @brief resolutions -- available monitor resolutions.
      */
     QVector<Resolution> resolutions;
+
+    friend bool operator==(const Monitor& lhs, const Monitor& rhs);
 };
 
 #endif // MONITOR_H

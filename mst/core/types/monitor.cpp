@@ -10,6 +10,11 @@ Monitor::Monitor()
 
 }
 
+bool operator==(const Monitor& lhs, const Monitor& rhs) {
+    return (lhs.get_interface() == rhs.get_interface())
+            && (lhs.get_available_resolutions() == rhs.get_available_resolutions());
+}
+
 static void _sort_resolutions(QVector<Resolution>& resolutions)
 {
     auto rcomp = [] (const Resolution& left, const Resolution& right) -> int {
