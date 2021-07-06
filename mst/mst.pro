@@ -15,6 +15,7 @@ MST_VERSION = $$system("[ ! -e '../.git' ] || git describe --abbrev=0")
 MST_HASH    = $$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")
 versiontarget.target = version.h
 versiontarget.commands = \
+    @echo "  GEN      version.h"; \
     [ ! -e ../.git ] || echo \'const string VERSION = \"\
 $${MST_VERSION}-$${MST_HASH}\";\' \
    > version.h;
