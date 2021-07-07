@@ -4,6 +4,7 @@
 #include <vector>
 #include <QString>
 #include <QLoggingCategory>
+#include <QProcess>
 #include "types/xrandr_monitor.h"
 
 Q_DECLARE_LOGGING_CATEGORY(platform_category)
@@ -89,11 +90,15 @@ namespace platform {
 extern const QString& INPUT_DEVICES_PATH;
 
 /**
- * @brief platform::popen_read -- execute a command and read output from it.
- * @param command -- a command to execute.
+ * @brief platform::popen_read -- execute a program and read output from it.
+ * @param program -- a program to execute.
+ * @param arguments -- arguments of a program.
+ * @param channel -- ProcessChannel to read (StandardOutput by default.)
  * @return QVector of output lines.
  */
-QVector<QString> popen_read(QString command);
+QVector<QString> popen_read(const QString& program,
+                            const QStringList& arguments,
+                            QProcess::ProcessChannel channel = QProcess::StandardOutput);
 
 /**
  * @brief run_xrandr -- Return the output of 'xrandr' command.

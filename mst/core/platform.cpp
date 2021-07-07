@@ -10,6 +10,7 @@
 #include <QRegularExpressionMatch>
 #include <QFileInfo>
 #include <QDir>
+#include <QProcess>
 
 #include "platform.h"
 #include "core/types/xrandr_monitor.h"
@@ -29,34 +30,43 @@ Platform::Platform()
 
 //// Helper procedures.
 
-QVector<QString> platform::popen_read(QString command)
+QVector<QString> platform::popen_read(const QString& program,
+                                      const QStringList& arguments,
+                                      QProcess::ProcessChannel channel)
 {
-    const int BUF_SZ = 255;
-    char buf[BUF_SZ];
-    FILE* file;
-    QVector<QString> result;
-    string std_command = command.toStdString();
-    if ((file = ::popen(std_command.c_str(), "r")) != NULL) {
-        while (fgets(buf, BUF_SZ, file) != NULL) {
-            result.push_back(QString::fromStdString(trim(buf)));
-        }
-        pclose(file);
-        return result;
-    } else {
-        QString msg = "Could not open command pipe: " + command;
-        qCritical(platform_category) << msg;
-        throw Platform_exception(msg);
+    QProcess process;
+    process.start(program, arguments, QIODevice::ReadWrite);
+    process.setReadChannel(channel);
+
+    if (! process.waitForStarted()) {
+        throw new Platform_exception(process.errorString());
     }
+
+    if (! process.waitForFinished()) {
+        throw new Platform_exception(process.errorString());
+    }
+
+    QVector<QString> result;
+    QString line;
+
+    while ((line = process.readLine()) != nullptr) {
+        result.push_back(line.simplified());
+    }
+
+    process.close();
+
+    return result;
 }
 
 QVector<QString> platform::run_xrandr()
 {
-    return platform::popen_read("xrandr");
+    return platform::popen_read("xrandr", QStringList());
 }
 
 QVector<QString> platform::run_ls_devices()
 {
-    return platform::popen_read("ls /dev/input/by-path/");
+    return platform::popen_read("ls",
+                                QStringList() << "/dev/input/by-path/");
 }
 
 //// Methods.
