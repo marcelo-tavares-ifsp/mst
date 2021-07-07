@@ -14,10 +14,12 @@ xserver-share=true
 xserver-display-number = 1
 xserver-command = /etc/X11/xinit/xserverrc
 session-wrapper = /etc/X11/Xsession
-greeter-hide-users=true
-allow-guest=false
 
 [Seat:1]
 type=xremote
 xserver-share=true
 xserver-display-number = 2
+
+[SeatDefaults]
+greeter-hide-users=true
+allow-guest=false

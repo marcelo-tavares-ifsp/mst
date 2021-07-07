@@ -38,14 +38,35 @@ Display_manager::Display_manager(Configuration& config) : Component(config)
 
 void Display_manager::configure()
 {
-    component_configuration.add(LIGHTDM_FILE, "/etc/lightdm/",
-                                prepare_lightdm_template());
-}
+    QString target_file = "/etc/lightdm/" + LIGHTDM_FILE;
+    QString version = get_version();
+    qInfo(display_manager_category())
+            << "LightDM version:" << version;
+    // lightdm 1.30.0
+    QRegExp re("lightdm ([0-9]+)\\.([0-9]+)\\.([0-9]+)");
+    re.exactMatch(version);
+    int major = re.cap(1).toInt();
+    int minor = re.cap(2).toInt();
+    int patch = re.cap(3).toInt();
 
-Template display_manager::prepare_lightdm_template()
-{
-    Template tpl = Template_manager::get_instance()->get_template(LIGHTDM_FILE);
-    return tpl;
+    qDebug(display_manager_category())
+            << "  Major:" << major
+            << "  Minor:" << minor
+            << "  Patch:" << patch;
+
+    Template tpl;
+
+    if ((major >= 1) && (minor >= 15)) {
+        // [SeatDefaults] deprecated in favour of [Seat:*]
+        // See <https://github.com/canonical/lightdm/blob/master/NEWS>
+        tpl = Template_manager::get_instance()->get_template(LIGHTDM_FILE);
+    } else {
+        qInfo(display_manager_category())
+                << "Using old configuration file template";
+        tpl = Template_manager::get_instance()->get_template(LIGHTDM_OLD_FILE);
+    }
+
+    component_configuration.add(LIGHTDM_FILE, target_file, tpl);
 }
 
 void Display_manager::enable() {
@@ -54,6 +75,8 @@ void Display_manager::enable() {
 
 QString Display_manager::get_version()
 {
-    QVector<QString> result = platform::popen_read("lightdm --version");
+    QVector<QString> result = platform::popen_read("lightdm",
+                                                   QStringList() << "--version",
+                                                   QProcess::StandardError);
     return result[0];
 }

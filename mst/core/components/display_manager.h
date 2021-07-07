@@ -37,6 +37,7 @@ namespace display_manager {
 //// Constants.
 
 const QString LIGHTDM_FILE = "lightdm-mst.conf";
+const QString LIGHTDM_OLD_FILE = "lightdm-mst.conf.old";
 
 class Display_manager : public Component
 {
@@ -47,10 +48,6 @@ public:
     void enable() override;
     QString get_version() override;
 };
-
-
-//// Helper procedures.
-Template prepare_lightdm_template();
 
 }
 
