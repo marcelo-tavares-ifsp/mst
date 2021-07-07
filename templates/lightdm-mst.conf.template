@@ -9,6 +9,7 @@ cache-directory = /var/cache/lightdm
 sessions-directory = /etc/lightdm/sessions:/usr/share/lightdm/sessions:/usr/share/xsessions:/usr/share/wayland-sessions
 
 [Seat:*]
+greeter-session = {{greeter-session}}
 type=xremote
 xserver-share=true
 xserver-display-number = 1

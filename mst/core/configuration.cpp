@@ -16,7 +16,8 @@ static bool create_config_file(QFile& file) {
         return false;
     }
     QTextStream out(&file);
-    out << "user:multiseat" << endl;
+    out << "user:multiseat" << endl
+        << "lightdm-greeter:gtk" << endl;
     file.close();
     return true;
 }
@@ -89,6 +90,11 @@ void Configuration::load(QString system_config_file, QString seats_config_file)
 QString Configuration::get_system_mst_user() const
 {
     return system_config->get("user");
+}
+
+QString Configuration::get_lightdm_greeter() const
+{
+    return system_config->get("lightdm-greeter");
 }
 
 QString Configuration::get_output_directory() const

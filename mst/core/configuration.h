@@ -93,6 +93,12 @@ public:
     QString get_system_mst_user() const;
 
     /**
+     * @brief get_lightdm_greeter -- Get LightDM greeter name.
+     * @return a greeter name as a QString.
+     */
+    QString get_lightdm_greeter() const;
+
+    /**
      * @brief get_output_directory -- Get the MST configuration
      *      output directory.
      * @return The directory path as a QString.

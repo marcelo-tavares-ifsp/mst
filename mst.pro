@@ -53,6 +53,7 @@ templates.files += \
     templates/rc.lua.4.template  \
     templates/sudoers.template   \
     templates/xinitrc.template   \
+    templates/lightdm-mst.conf.old.template \
     templates/lightdm-mst.conf.template \
     templates/getty@.service.template \
     templates/systemd-udevd.service.template \
