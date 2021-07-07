@@ -46,6 +46,7 @@ public:
     void disable() override;
     void start() override;
     void stop() override;
+    QString get_version() override;
 
     /**
      * @brief prepare_seat_configuration_template -- Prepare seats configuration

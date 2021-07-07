@@ -117,3 +117,8 @@ Template sys::prepare_bashrc_template()
     bashrc_template.set("tty", "1");
     return bashrc_template;
 }
+
+QString System::get_version()
+{
+    return Platform::system_release();
+}
