@@ -31,6 +31,8 @@ public:
 
     void configure() override;
     void install() override;
+
+    bool installed_p(const QString& path);
 };
 
 #endif // PAM_H

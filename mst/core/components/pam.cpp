@@ -22,6 +22,9 @@
 #include "pam.h"
 
 const QString PAM_ENV_CONF = "pam_env.conf";
+const QString BEGIN_MARK = "BEGIN: Added by MST";
+const QString END_MARK   = "END: Added by MST";
+const QString COMMENT_MARK = "#";
 
 PAM::PAM(Configuration& config) : Component(config)
 {
@@ -35,16 +38,36 @@ void PAM::configure()
                                 "XDG_VTNR=1\n");
 }
 
+bool PAM::installed_p(const QString &path)
+{
+    QFile input_file(path);
+    input_file.open(QIODevice::ReadOnly);
+    bool result = false;
+    QString line;
+    while ((line = input_file.readLine()) != nullptr) {
+        if (line.contains(COMMENT_MARK + " " + BEGIN_MARK)) {
+            result = true;
+            break;
+        }
+    }
+    input_file.close();
+    return result;
+}
+
 void PAM::install()
 {
     const QString& path
             = component_configuration.get_installation_path(PAM_ENV_CONF);
-    QFile output_file(path);
-    output_file.open(QIODevice::WriteOnly | QIODevice::Append);
-    QTextStream stream(&output_file);
-    stream << endl
-           << "# BEGIN: Added by MST" << endl
-           << component_configuration.get_template(PAM_ENV_CONF).substitute()
-           << "# END: Added by MST" << endl;
-    output_file.close();
+    if (! installed_p(path)) {
+        QFile output_file(path);
+        output_file.open(QIODevice::WriteOnly | QIODevice::Append);
+        QTextStream stream(&output_file);
+        stream << endl
+               << COMMENT_MARK << " " << BEGIN_MARK << endl
+               << component_configuration.get_template(PAM_ENV_CONF).substitute()
+               << COMMENT_MARK << " " << END_MARK << endl;
+        output_file.close();
+    } else {
+        // TODO: Add logging.
+    }
 }
