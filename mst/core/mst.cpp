@@ -15,7 +15,8 @@ Q_LOGGING_CATEGORY(mst_category, "mst.core.mst")
 
 MST::MST()
 {
-
+    qInfo(mst_category())
+            << "Running on:" << Platform::system_release() << endl;
 }
 
 // public methods ///////////////////////////////////////////////////////////////
