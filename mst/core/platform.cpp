@@ -296,6 +296,33 @@ int Platform::exec(const QString &command)
     return system(command.toStdString().c_str());
 }
 
+QString Platform::system_release()
+{
+    QFile lsb_release_file("/etc/lsb-release");
+    if (lsb_release_file.exists()) {
+        // DISTRIB_DESCRIPTION="Ubuntu 20.04.2 LTS"
+        QRegExp re("DISTRIB_DESCRIPTION=\"(.*)\"\n");
+        lsb_release_file.open(QIODevice::ReadOnly);
+        QString line;
+        while ((line = lsb_release_file.readLine()) != nullptr) {
+            if (re.exactMatch(line)) {
+                return re.cap(1);
+            }
+        }
+        return nullptr;
+    }
+
+    QFile system_release_file("/etc/system-release");
+    if (system_release_file.exists()) {
+        // ALT Linux 9 w/o installed 'lsb_release' command.
+        system_release_file.open(QIODevice::ReadOnly);
+        QString result = system_release_file.readLine();
+        return result.simplified();
+    }
+
+    return nullptr;
+}
+
 /**
  * @brief Platform::system_reboot -- Reboot the system.
  */

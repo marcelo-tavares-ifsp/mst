@@ -57,6 +57,13 @@ public:
     static void system_disable_service(const QString& service_name);
 
     /**
+     * @brief system_release -- Get the OS release string.
+     * @return the system release string or nullptr if the system release
+     *     cannot be properly detected.
+     */
+    static QString system_release();
+
+    /**
      * @brief system_stop_service -- Stop a service.
      * @param service_name
      */
