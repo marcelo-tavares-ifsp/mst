@@ -56,17 +56,24 @@ bool PAM::installed_p(const QString &path)
 
 void PAM::install()
 {
-    const QString& path
-            = component_configuration.get_installation_path(PAM_ENV_CONF);
-    if (! installed_p(path)) {
-        QFile output_file(path);
-        output_file.open(QIODevice::WriteOnly | QIODevice::Append);
-        QTextStream stream(&output_file);
-        stream << endl
-               << COMMENT_MARK << " " << BEGIN_MARK << endl
-               << component_configuration.get_template(PAM_ENV_CONF).substitute()
-               << COMMENT_MARK << " " << END_MARK << endl;
-        output_file.close();
+    QString system_release = Platform::system_release();
+    // ALT Education 9.1 (FalcoRusticolus)
+    QRegExp alt_re("ALT.*9.*");
+    if (alt_re.exactMatch(system_release)) {
+        const QString& path
+                = component_configuration.get_installation_path(PAM_ENV_CONF);
+        if (! installed_p(path)) {
+            QFile output_file(path);
+            output_file.open(QIODevice::WriteOnly | QIODevice::Append);
+            QTextStream stream(&output_file);
+            stream << endl
+                   << COMMENT_MARK << " " << BEGIN_MARK << endl
+                   << component_configuration.get_template(PAM_ENV_CONF).substitute()
+                   << COMMENT_MARK << " " << END_MARK << endl;
+            output_file.close();
+        } else {
+            // TODO: Add logging.
+        }
     } else {
         // TODO: Add logging.
     }
