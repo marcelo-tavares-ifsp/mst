@@ -31,7 +31,8 @@ Q_LOGGING_CATEGORY(display_manager_category, "mst.core.component.dm")
 
 using namespace display_manager;
 
-Display_manager::Display_manager(Configuration& config) : Component(config)
+Display_manager::Display_manager(Configuration& config)
+    : Component("LightDM (https://github.com/canonical/lightdm)", config)
 {
 
 }

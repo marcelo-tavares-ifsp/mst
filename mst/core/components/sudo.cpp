@@ -33,7 +33,7 @@
 
 using namespace sudo;
 
-Sudo::Sudo(Configuration& config) : Component(config)
+Sudo::Sudo(Configuration& config) : Component("sudo", config)
 {
     /* Do nothing. */
 }

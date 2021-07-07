@@ -3,8 +3,9 @@
 
 Q_LOGGING_CATEGORY(component_category, "mst.core.component")
 
-Component::Component(Configuration& config)
+Component::Component(const QString& name, Configuration& config)
     : config(config),
+      name(name),
       component_configuration(Component_configuration(config))
 {
     /* Do nothing */
@@ -63,6 +64,11 @@ const QString Component_configuration::get_installation_path(
         const QString &file_name) const
 {
     return installation_paths[file_name];
+}
+
+const QString& Component::get_name() const
+{
+    return name;
 }
 
 void Component::install()

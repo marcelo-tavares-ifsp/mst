@@ -27,7 +27,7 @@
 
 using namespace polkit;
 
-Polkit::Polkit(Configuration& config) : Component(config)
+Polkit::Polkit(Configuration& config) : Component("pokit", config)
 {
     /* Do nothing. */
 }

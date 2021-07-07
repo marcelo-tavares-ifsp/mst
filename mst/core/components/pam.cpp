@@ -28,7 +28,7 @@ const QString BEGIN_MARK = "BEGIN: Added by MST";
 const QString END_MARK   = "END: Added by MST";
 const QString COMMENT_MARK = "#";
 
-PAM::PAM(Configuration& config) : Component(config)
+PAM::PAM(Configuration& config) : Component("PAM", config)
 {
 
 }

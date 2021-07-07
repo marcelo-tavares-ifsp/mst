@@ -29,7 +29,7 @@
 
 using namespace udev;
 
-Udev::Udev(Configuration& config) : Component(config)
+Udev::Udev(Configuration& config) : Component("udev", config)
 {
     /* Do nothing. */
 }

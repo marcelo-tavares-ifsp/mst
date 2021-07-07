@@ -26,7 +26,8 @@
 
 using namespace xorg;
 
-Xorg::Xorg(Configuration& config) : Component(config)
+Xorg::Xorg(Configuration& config)
+    : Component("Xorg (https://www.x.org)", config)
 {
     /* Do nothing. */
 }

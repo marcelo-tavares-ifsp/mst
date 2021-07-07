@@ -35,7 +35,7 @@ using namespace awesome;
 Q_LOGGING_CATEGORY(component_awesome_category, "mst.core.component.awesome")
 
 Awesome::Awesome(Configuration& config)
-    : Component(config)
+    : Component("Awesome TWM (https://awesomewm.org/)", config)
 {
     /* Do nothing. */
 }

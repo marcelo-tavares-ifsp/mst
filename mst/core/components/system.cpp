@@ -32,7 +32,7 @@ Q_LOGGING_CATEGORY(component_system_category, "mst.core.component.system")
 
 using namespace sys;
 
-System::System(Configuration& config) : Component(config)
+System::System(Configuration& config) : Component("OS", config)
 {
     /* Do nothing. */
 }

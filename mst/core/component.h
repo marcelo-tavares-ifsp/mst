@@ -116,7 +116,10 @@ private:
 class Component
 {
 public:
-    Component(Configuration& config);
+    Component(const QString& name, Configuration& config);
+
+    const QString& get_name() const;
+
     /**
      * @brief configure -- Configure the comonent.
      */
@@ -183,6 +186,8 @@ protected:
     Component_configuration component_configuration;
 
 private:
+    QString name = nullptr;
+
     /**
      * @brief install -- Install a file to the specified destination.
      * @param src -- Source file.

@@ -26,6 +26,15 @@ Component_manager::Component_manager(Configuration& config)
     components.push_back(new vgl::VGL(config));
     components.push_back(new xorg::Xorg(config));
     components.push_back(new PAM(config));
+
+    qInfo(component_manager_category()) << "Component versions:";
+    for (auto component : components) {
+        QString version = component->get_version();
+        if (version != nullptr) {
+            qInfo(component_manager_category())
+                    << "  " + component->get_name() + ": " + version;
+        }
+    }
 }
 
 /**

@@ -32,7 +32,7 @@ Q_LOGGING_CATEGORY(vgl_category, "mst.core.vgl")
 
 
 VGL::VGL(Configuration& config)
-    : Component(config)
+    : Component("VirtualGL (https://virtualgl.org/)", config)
 {
     /* Do nothing. */
 }
