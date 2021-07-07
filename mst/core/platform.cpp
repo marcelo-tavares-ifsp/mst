@@ -357,22 +357,22 @@ void Platform::chown(const QString& path, uid_t uid, gid_t gid,
                      bool is_recursive)
 {
     qInfo(platform_category) << "Changing owner of "
-			     << path
-			     << " ...";
+                 << path
+                 << " ...";
      if (::chown(path.toStdString().c_str(), uid, gid) != 0) {
           throw Platform_exception("Could not apply 'chown' on " + path);
      }
 
      QFileInfo file_info(path);
      if (file_info.isDir() && is_recursive) {
-	 QDir root(path);
-	 root.setFilter(QDir::Files
-			| QDir::AllDirs
-			| QDir::Hidden
-			| QDir::NoDotAndDotDot);
-	 QFileInfoList list = root.entryInfoList();
-	 for(QFileInfo finfo : list) {
-	     chown(finfo.absoluteFilePath(), uid, gid, true);
-	 }
+     QDir root(path);
+     root.setFilter(QDir::Files
+            | QDir::AllDirs
+            | QDir::Hidden
+            | QDir::NoDotAndDotDot);
+     QFileInfoList list = root.entryInfoList();
+     for(QFileInfo finfo : list) {
+         chown(finfo.absoluteFilePath(), uid, gid, true);
+     }
      }
 }
