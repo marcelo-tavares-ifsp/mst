@@ -41,6 +41,7 @@ class Xorg : public Component
 public:
     Xorg(Configuration& config);
     void configure() override;
+    QString get_version() override;
 };
 
 

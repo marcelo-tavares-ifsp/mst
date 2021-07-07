@@ -49,6 +49,7 @@ public:
     void configure() override;
     void enable() override;
     void disable() override;
+    QString get_version() override;
 
     void prepare_vgl_sh_template(Template& tpl);
 };

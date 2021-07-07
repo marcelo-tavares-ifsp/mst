@@ -120,3 +120,11 @@ Template xorg::prepare_xinitrc_template()
 {
     return Template_manager::get_instance()->get_template(XINIT_RC_FILE);
 }
+
+QString Xorg::get_version()
+{
+    QVector<QString> result = platform::popen_read("vglclient",
+                                                   QStringList() << "-v",
+                                                   QProcess::StandardError);
+    return result[1];
+}

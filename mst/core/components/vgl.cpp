@@ -76,6 +76,14 @@ void VGL::prepare_vgl_sh_template(Template& tpl)
     tpl.set("user", user);
 }
 
+QString VGL::get_version()
+{
+    QVector<QString> result = platform::popen_read("vglclient",
+                                                   QStringList() << "-v",
+                                                   QProcess::StandardError);
+    return result[1];
+}
+
 
 //// Helper procedures.
 
