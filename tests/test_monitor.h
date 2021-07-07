@@ -17,6 +17,9 @@ private Q_SLOTS:
     void set_resolution_index_test();
     void set_resolution_test();
     void set_resolution_error_test();
+    void equality_test();
+    void inequality_in_resolutions_test();
+    void inequality_in_interfaces_test();
 };
 
 #endif // TEST_MONITOR_H

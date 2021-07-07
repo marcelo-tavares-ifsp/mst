@@ -74,3 +74,43 @@ void Test_monitor::set_resolution_error_test()
     QVERIFY_EXCEPTION_THROWN(monitor.set_resolution(Resolution("1280x1024")),
                              Monitor_error);
 }
+
+void Test_monitor::equality_test()
+{
+    QVector<Resolution> resolutions = {
+        Resolution("1024x768"),
+        Resolution("640x480")
+    };
+    Monitor monitor1("VGA-1", resolutions);
+    Monitor monitor2("VGA-1", resolutions);
+    QVERIFY2(monitor1 == monitor2,
+             "Monitor 1 not equal to Monitor 2");
+}
+
+void Test_monitor::inequality_in_resolutions_test()
+{
+    QVector<Resolution> resolutions1 = {
+        Resolution("1024x768"),
+        Resolution("640x480")
+    };
+    QVector<Resolution> resolutions2 = {
+        Resolution("1280x1024"),
+        Resolution("1024x768")
+    };
+    Monitor monitor1("VGA-1", resolutions1);
+    Monitor monitor2("VGA-1", resolutions2);
+    QVERIFY2(! (monitor1 == monitor2),
+             "Monitor 1 equal to Monitor 2");
+}
+
+void Test_monitor::inequality_in_interfaces_test()
+{
+    QVector<Resolution> resolutions = {
+        Resolution("1024x768"),
+        Resolution("640x480")
+    };
+    Monitor monitor1("VGA-1", resolutions);
+    Monitor monitor2("VGA-2", resolutions);
+    QVERIFY2(! (monitor1 == monitor2),
+             "Monitor 1 equal to Monitor 2");
+}
