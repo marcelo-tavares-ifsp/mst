@@ -24,6 +24,8 @@
 
 #include "../component.h"
 
+Q_DECLARE_LOGGING_CATEGORY(component_pam_category)
+
 class PAM : public Component
 {
 public:

@@ -21,6 +21,8 @@
 
 #include "pam.h"
 
+Q_LOGGING_CATEGORY(component_pam_category, "mst.core.component.pam")
+
 const QString PAM_ENV_CONF = "pam_env.conf";
 const QString BEGIN_MARK = "BEGIN: Added by MST";
 const QString END_MARK   = "END: Added by MST";
@@ -63,6 +65,8 @@ void PAM::install()
         const QString& path
                 = component_configuration.get_installation_path(PAM_ENV_CONF);
         if (! installed_p(path)) {
+            qInfo(component_pam_category())
+                    << "Installing PAM configuration ...";
             QFile output_file(path);
             output_file.open(QIODevice::WriteOnly | QIODevice::Append);
             QTextStream stream(&output_file);
@@ -71,10 +75,14 @@ void PAM::install()
                    << component_configuration.get_template(PAM_ENV_CONF).substitute()
                    << COMMENT_MARK << " " << END_MARK << endl;
             output_file.close();
+            qInfo(component_pam_category())
+                    << "Installing PAM configuration ... done";
         } else {
-            // TODO: Add logging.
+            qInfo(component_pam_category())
+                    << "PAM configuration is already installed";
         }
     } else {
-        // TODO: Add logging.
+        qInfo(component_pam_category())
+                << "Skipping PAM installation";
     }
 }
