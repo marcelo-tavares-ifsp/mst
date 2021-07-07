@@ -45,6 +45,7 @@ public:
 
     void configure() override;
     void enable() override;
+    QString get_version() override;
 };
 
 

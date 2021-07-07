@@ -51,3 +51,9 @@ Template display_manager::prepare_lightdm_template()
 void Display_manager::enable() {
      // Do nothing.
 }
+
+QString Display_manager::get_version()
+{
+    QVector<QString> result = platform::popen_read("lightdm --version");
+    return result[0];
+}
