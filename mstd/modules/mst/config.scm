@@ -67,11 +67,11 @@ configuration as an alist."
        (list-ref seat 2)))
 
 (define (seat:keyboard seat)
-  (and (> (length seat-config) 3)
+  (and (> (length seat) 3)
        (list-ref seat 3)))
 
 (define (seat:mouse seat)
-  (and (list-ref seat-config 4)
+  (and (> (length seat) 4)
        (list-ref seat 4)))
 
 ;;; config.scm ends here.
