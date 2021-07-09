@@ -315,14 +315,14 @@
   (hash-for-each
    (lambda (key value)
      (log-info "Stopping container ~a for seat: ~a ..."
-               key value)
+               value key)
      (system* %docker-binary "stop" value)
      (log-info "Stopping container ~a for seat: ~a ... done"
                key value)
 
      (log-info "Removing container ~a for seat: ~a ..."
-               key value)
+               value key)
      (system* %docker-binary "container" "rm" value)
      (log-info "Removing container ~a for seat: ~a ... done"
-               key value))
+               value key))
    *xephyrs*))
