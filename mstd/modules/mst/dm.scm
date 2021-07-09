@@ -103,6 +103,7 @@
     (if (and mouse-dev keyboard-dev)
         (string-join (list %docker-binary
                            "run"
+			   "--rm"
                            "-it"
                            "-d"
                            "--device" mouse-dev
