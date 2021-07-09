@@ -30,6 +30,7 @@
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 threads)
+  #:use-module (mst config)
   #:use-module (mst system)
   #:use-module (mst log)
   #:export (add-seat
