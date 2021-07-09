@@ -295,27 +295,28 @@
           (while #t
                  (let ((running-seats-number (get-running-seats)))
                    (if (< running-seats-number seat-count)
-		       (hash-for-each
-			(lambda (key value)
-			  (unless (docker-container-running? value)
-			    (let* ((seat (config-get-seat config key))
-				   (seat-display    (seat:display seat))
-				   (seat-resolution (seat:resolution seat))
-				   (seat-mouse      (seat:mouse seat))
-				   (seat-keyboard   (seat:keyboard seat))
-				   (id   (start-xephyr/docker
-					  seat-display
-					  seat-resolution
-					  seat-mouse
-					  seat-keyboard)))
-			      (if id
-				  (hash-set! *xephyrs* seat-display id)
-				  (log-error
-				   "Could not start a Docker container for seat: ~a"
-				   seat-display)))))
-			       
-			*xephyrs*)
-                       (start-seats seat-count)))
+		       (begin
+			 (hash-for-each
+			  (lambda (key value)
+			    (unless (docker-container-running? value)
+			      (let* ((seat (config-get-seat config key))
+				     (seat-display    (seat:display seat))
+				     (seat-resolution (seat:resolution seat))
+				     (seat-mouse      (seat:mouse seat))
+				     (seat-keyboard   (seat:keyboard seat))
+				     (id   (start-xephyr/docker
+					    seat-display
+					    seat-resolution
+					    seat-mouse
+					    seat-keyboard)))
+				(if id
+				    (hash-set! *xephyrs* seat-display id)
+				    (log-error
+				     "Could not start a Docker container for seat: ~a"
+				     seat-display)))))
+			  
+			  *xephyrs*)
+			 (start-seats seat-count))))
                  (sleep 1)))
         (begin
           (log-info "Graphics is not available.  Waiting...")
