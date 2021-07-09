@@ -103,7 +103,7 @@
     (if (and mouse-dev keyboard-dev)
         (string-join (list %docker-binary
                            "run"
-			   "--rm"
+                           "--rm"
                            "-it"
                            "-d"
                            "--device" mouse-dev
@@ -208,8 +208,8 @@
                (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
     (waitpid -1 WNOHANG)
     (if (eof-object? data)
-	0
-	(string->number data))))
+        0
+        (string->number data))))
 
 (define (start-seats seat-number)
   (log-info "Starting seats: ~a" seat-number)
@@ -250,7 +250,7 @@
                       (let ((seat-display    (and
                                               (> (length seat-config) 0)
                                               (list-ref seat-config 0)))
-			    (seat-interface  (and
+                            (seat-interface  (and
                                               (> (length seat-config) 1)
                                               (list-ref seat-config 1)))
                             (seat-resolution (and
