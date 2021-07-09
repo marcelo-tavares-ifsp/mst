@@ -14,6 +14,5 @@
 using namespace std;
 
 extern vector<string> split(string input, char separator);
-extern string trim(char *s);
 
 #endif // UTILITES_H

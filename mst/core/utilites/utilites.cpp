@@ -29,15 +29,4 @@ static inline void rtrim_x(string &s) {
     }).base(), s.end());
 }
 
-/**
- * @brief trim -- trim an input C string STR on both sides.
- * @param str -- an input string.
- * @return a new C++ string.
- */
-string trim(char* str) {
-    string result(str);
-    ltrim_x(result);
-    rtrim_x(result);
-    return result;
-}
 
