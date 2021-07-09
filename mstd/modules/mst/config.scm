@@ -27,7 +27,9 @@
 
 (define-module (mst config)
   #:use-module (ice-9 rdelim)
-  #:export (read-seats-configuration))
+  #:use-module (srfi srfi-1)
+  #:export (read-seats-configuration
+	    config-get-seat))
 
 (define (read-seats-configuration config-file)
   "Read seats configuration from a CONFIG-FILE.  Return the
@@ -39,6 +41,10 @@ configuration as an alist."
 	  (reverse data)
 	  (read (read-line port)
 		(cons (string-split line #\space) data))))))
+
+(define (config-get-seat config seat-display)
+  (find (lambda (seat) (equal? (car seat) seat-display))
+	config))
 
 ;;; config.scm ends here.
 
