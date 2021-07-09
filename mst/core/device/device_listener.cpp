@@ -25,7 +25,6 @@ void Device_listener::run()
         device = poll();
         if (device != nullptr) {
             emit device_found(device, type);
-            emit work_done();
             is_running = false;
         }
     }

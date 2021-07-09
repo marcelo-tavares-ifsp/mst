@@ -50,7 +50,6 @@ public:
 
 signals:
     void device_found(QString, DEVICE_TYPE);
-    void work_done();
 
 public slots:
     void cancel();
