@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <linux/input.h>
+#include <linux/input-event-codes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -18,6 +19,11 @@ Input_device_listener::~Input_device_listener()
 {
     delete(this->devices);
 }
+
+enum {
+    VALUE_RELEASED = 0,
+    VALUE_PRESSED  = 1,
+};
 
 bool Input_device_listener::loop_answer_device(QString device)
 {
@@ -38,12 +44,24 @@ bool Input_device_listener::loop_answer_device(QString device)
 
     bytes = device::try_read(fd, &ie);
 
-    if (bytes > 0)
+    if (bytes >= 4)
     {
         bool is_pressed;
         if (this->type == DEVICE_TYPE::MOUSE) {
-            unsigned char* data = (unsigned char*) &ie;
-            is_pressed = (data[0] & 0x1) || (data[0] & 0x2) || (data[0] & 0x4);
+            switch (ie.type) {
+            case EV_KEY:
+                is_pressed = ((ie.code >= BTN_LEFT)
+                              && (ie.code <= BTN_JOYSTICK));
+                break;
+
+            case EV_MSC:
+                is_pressed = ((ie.code >= KEY_1) && (ie.code <= KEY_9));
+                break;
+
+            default:
+                close(fd);
+                return false;
+            }
         } else {
             is_pressed = device::is_button_pressed(ie);
         }
