@@ -55,19 +55,24 @@ configuration as an alist."
 ;;; Seat accessors.
 
 (define (seat:display seat)
-  (list-ref seat 0))
+  (and (> (length seat) 0)
+       (list-ref seat 0)))
 
 (define (seat:interface seat)
-  (list-ref seat 1))
+  (and (> (length seat) 1)
+       (list-ref seat 1)))
 
 (define (seat:resolution seat)
-  (list-ref seat 2))
+  (and (> (length seat) 2)
+       (list-ref seat 2)))
 
 (define (seat:keyboard seat)
-  (list-ref seat 3))
+  (and (> (length seat-config) 3)
+       (list-ref seat 3)))
 
 (define (seat:mouse seat)
-  (list-ref seat 4))
+  (and (list-ref seat-config 4)
+       (list-ref seat 4)))
 
 ;;; config.scm ends here.
 
