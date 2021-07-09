@@ -28,7 +28,7 @@ ssize_t device::try_read(int fd, struct input_event* ie)
     ssize_t bytes = -1;
     for (uint32_t count = 0; count < MAX_COUNT; ++count) {
         bytes = read(fd, (void *) ie, sizeof(struct input_event));
-        if (bytes > 0)
+        if (bytes >= (ssize_t) sizeof(struct input_event))
             break;
         usleep(100);
     }
