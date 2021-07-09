@@ -8,11 +8,7 @@ USB_device_listener::USB_device_listener(DEVICE_TYPE type)
 
 QString USB_device_listener::poll()
 {
-    QString devpath = scanner.scan();
-    if (devpath != nullptr) {
-        return devpath;
-    }
-    return nullptr;
+    return scanner.scan();
 }
 
 
