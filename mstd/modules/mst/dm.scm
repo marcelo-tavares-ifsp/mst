@@ -202,6 +202,23 @@
     (waitpid -1 WNOHANG)
     (not (eof-object? result))))
 
+(define (docker-container-running? id)
+  "Check if a Docker container with the given ID is running."
+  (let ((command (format #f "docker container inspect -f '{{.State.Running}}' ~a"
+                         id)))
+    (let ((port (open-input-pipe command)))
+      (catch #t
+             (lambda ()
+               (waitpid -1 WNOHANG))
+             (lambda args
+               #t))
+      (if port
+          (let ((result (read-line port)))
+            (string=? result "true"))
+          (begin
+            (log-error "Could not run command: ~a" command)
+            #f)))))
+
 (define (get-running-seats)
   "Get the number of running seats."
   (let ((data (read-line
@@ -287,6 +304,26 @@
           (while #t
                  (let ((running-seats-number (get-running-seats)))
                    (if (< running-seats-number seat-count)
+		       (hash-for-each
+			(lambda (key value)
+			  (unless (docker-container-running? value)
+			    (let* ((seat (config-get-seat key))
+				   (seat-display    (seat:display seat))
+				   (seat-resolution (seat:resolution seat))
+				   (seat-mouse      (seat:mouse seat))
+				   (seat-keyboard   (seat:keyboard seat))
+				   (id   (start-xephyr/docker
+					  seat-display
+					  seat-resolution
+					  seat-mouse
+					  seat-keyboard)))
+			      (if id
+				  (hash-set! *xephyrs* seat-display id)
+				  (log-error
+				   "Could not start a Docker container for seat: ~a"
+				   seat-display)))))
+			       
+			*xephyrs*)
                        (start-seats seat-count)))
                  (sleep 1)))
         (begin
