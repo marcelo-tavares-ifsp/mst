@@ -29,27 +29,27 @@
   #:use-module (ice-9 rdelim)
   #:use-module (srfi srfi-1)
   #:export (read-seats-configuration
-	    config-get-seat
-	    seat:display
-	    seat:interface
-	    seat:resolution
-	    seat:keyboard
-	    seat:mouse))
+            config-get-seat
+            seat:display
+            seat:interface
+            seat:resolution
+            seat:keyboard
+            seat:mouse))
 
 (define (read-seats-configuration config-file)
   "Read seats configuration from a CONFIG-FILE.  Return the
 configuration as an alist."
   (let ((port (open-input-file config-file)))
     (let read ((line (read-line port))
-	       (data '()))
+               (data '()))
       (if (eof-object? line)
-	  (reverse data)
-	  (read (read-line port)
-		(cons (string-split line #\space) data))))))
+          (reverse data)
+          (read (read-line port)
+                (cons (string-split line #\space) data))))))
 
 (define (config-get-seat config seat-display)
   (find (lambda (seat) (equal? (car seat) seat-display))
-	config))
+        config))
 
 
 ;;; Seat accessors.
