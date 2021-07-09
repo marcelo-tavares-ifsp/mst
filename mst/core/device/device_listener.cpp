@@ -20,7 +20,7 @@ void Device_listener::run()
     QString device = nullptr;
     is_running = true;
     //_debug_print_devices(type, devices);
-    sleep(5);
+    sleep(1);
     while (is_running) {
         device = poll();
         if (device != nullptr) {
