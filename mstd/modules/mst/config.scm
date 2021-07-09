@@ -29,7 +29,12 @@
   #:use-module (ice-9 rdelim)
   #:use-module (srfi srfi-1)
   #:export (read-seats-configuration
-	    config-get-seat))
+	    config-get-seat
+	    seat:display
+	    seat:interface
+	    seat:resolution
+	    seat:keyboard
+	    seat:mouse))
 
 (define (read-seats-configuration config-file)
   "Read seats configuration from a CONFIG-FILE.  Return the
@@ -45,6 +50,24 @@ configuration as an alist."
 (define (config-get-seat config seat-display)
   (find (lambda (seat) (equal? (car seat) seat-display))
 	config))
+
+
+;;; Seat accessors.
+
+(define (seat:display seat)
+  (list-ref seat 0))
+
+(define (seat:interface seat)
+  (list-ref seat 1))
+
+(define (seat:resolution seat)
+  (list-ref seat 2))
+
+(define (seat:keyboard seat)
+  (list-ref seat 3))
+
+(define (seat:mouse seat)
+  (list-ref seat 4))
 
 ;;; config.scm ends here.
 
