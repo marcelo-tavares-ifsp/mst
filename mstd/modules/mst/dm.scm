@@ -298,7 +298,7 @@
 		       (hash-for-each
 			(lambda (key value)
 			  (unless (docker-container-running? value)
-			    (let* ((seat (config-get-seat key))
+			    (let* ((seat (config-get-seat config key))
 				   (seat-display    (seat:display seat))
 				   (seat-resolution (seat:resolution seat))
 				   (seat-mouse      (seat:mouse seat))
