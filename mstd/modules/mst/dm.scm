@@ -123,7 +123,7 @@
 
           (log-info "Starting main loop")
           (while #t
-                 (let ((running-seats-number (get-running-seats)))
+                 (let ((running-seats-number (lightdm-running-seats)))
                    (if (< running-seats-number seat-count)
 		       (begin
 			 (hash-for-each

@@ -30,8 +30,8 @@
   #:use-module (mst core log)
   #:export (lightdm-start
             lightdm-add-seat
-            is-seat-running?
-            get-running-seats
+            lightdm-seat-running?
+            lightdm-running-seats
 
             %make-command:add-seat))
 
@@ -68,7 +68,7 @@
       (error "Could not start the display manager")))))
 
 
-(define (is-seat-running? id)
+(define (lightdm-seat-running? id)
   "Check if a seat with ID is running."
   (let* ((port (open-input-pipe
                 (format #f "/usr/bin/dm-tool list-seats | grep 'Seat~a'"
@@ -78,7 +78,7 @@
     (not (eof-object? result))))
 
 
-(define (get-running-seats)
+(define (lightdm-running-seats)
   "Get the number of running seats."
   (let ((data (read-line
                (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
