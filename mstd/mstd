@@ -65,7 +65,7 @@ DEVICE-PATH belongs to, using a CONFIG."
   "Broadcast a notify with a MESSAGE across all seats that are listed
 in a CONFIG."
   (for-each (lambda (rec)
-              (notify-send (list-ref rec 0) message))
+              (notify-send (seat:display rec) message))
             config))
 
 (define (error-handler monitor error-message)
