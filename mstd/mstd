@@ -54,9 +54,9 @@
   "Try to determine a display number that device specified by its
 DEVICE-PATH belongs to, using a CONFIG."
   (let* ((record       (car config))
-         (base-devpath (seat:usb record))
+         (base-devpath (seat:usb record)))
     (if (string-contains device-path base-devpath)
-        (cadr record)
+        (car record)
         (if (null? (cdr config))
             #f
             (device-path->display-number (cdr config) device-path)))))
