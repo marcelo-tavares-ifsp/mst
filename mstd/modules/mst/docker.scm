@@ -30,6 +30,8 @@
   #:use-module (mst log)
   #:export (docker-container-running?
 	    start-xephyr/docker
+	    docker-stop
+	    docker-container-rm
 
 	    %make-command:xephyr/docker))
 
@@ -132,5 +134,13 @@
         (begin
           (log-error "Could not make a Xephyr command")
           #f))))
+
+(define (docker-stop id)
+  "Stop a Docker container specified by an @var{id}."
+  (system* %docker-binary "stop" id))
+
+(define (docker-container-rm id)
+  "Remove a Docker container specified by an @var{id}."
+  (system* %docker-binary "container" "rm" id))
 
 ;;; docker.scm ends here.

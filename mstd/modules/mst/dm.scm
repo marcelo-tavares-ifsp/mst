@@ -253,13 +253,13 @@
    (lambda (key value)
      (log-info "Stopping container ~a for seat: ~a ..."
                value key)
-     (system* %docker-binary "stop" value)
+     (docker-stop value)
      (log-info "Stopping container ~a for seat: ~a ... done"
                key value)
 
      (log-info "Removing container ~a for seat: ~a ..."
                value key)
-     (system* %docker-binary "container" "rm" value)
+     (docker-container-rm value)
      (log-info "Removing container ~a for seat: ~a ... done"
                value key))
    *xephyrs*))
