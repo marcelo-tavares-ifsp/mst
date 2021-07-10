@@ -27,9 +27,12 @@
 (define-module (mst docker)
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
+  #:use-module (oop goops)
   #:use-module (mst core log)
+  #:use-module (mst core seat)
   #:use-module (mst system)
   #:export (docker-container-running?
+            docker-start-xephyr
 	    start-xephyr/docker
 	    docker-stop
 	    docker-container-rm
@@ -94,6 +97,12 @@
                            "-screen" (format #f "~a" resolution)
                            (format #f ":~a" display-number)))
         #f)))
+
+(define-method (docker-start-xephyr (seat <seat>))
+  (start-xephyr/docker (seat-display   seat)
+                       (seat-interface seat)
+                       (seat-mouse     seat)
+                       (seat-keyboard  seat)))
 
 (define (start-xephyr/docker display-number resolution mouse keyboard)
   (log-info "Starting Xephyr (~a) for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
