@@ -18,7 +18,8 @@ guile_modules_mst.files = \
 guile_modules_mst.path = $${PREFIX}/share/guile/site/mst/
 
 guile_modules_mst_core.files = \
-     modules/mst/core/log.scm
+     modules/mst/core/log.scm   \
+     modules/mst/core/seat.scm
 
 guile_modules_mst_core.path = $${PREFIX}/share/guile/site/mst/core/
 

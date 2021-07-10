@@ -28,14 +28,9 @@
 (define-module (mst config)
   #:use-module (ice-9 rdelim)
   #:use-module (srfi srfi-1)
+  #:use-module (mst core seat)
   #:export (read-seats-configuration
-            config-get-seat
-            seat:display
-            seat:interface
-            seat:resolution
-            seat:keyboard
-            seat:mouse
-            seat:usb))
+            config-get-seat))
 
 (define (read-seats-configuration config-file)
   "Read seats configuration from a CONFIG-FILE.  Return the
@@ -46,38 +41,12 @@ configuration as an alist."
       (if (eof-object? line)
           (reverse data)
           (read (read-line port)
-                (cons (string-split line #\space) data))))))
+                (cons (list->seat (string-split line #\space))
+		      data))))))
 
-(define (config-get-seat config seat-display)
-  (find (lambda (seat) (equal? (car seat) seat-display))
+(define (config-get-seat config display)
+  (find (lambda (seat) (equal? (seat-display seat) display))
         config))
-
-
-;;; Seat accessors.
-
-(define (seat:display seat)
-  (and (> (length seat) 0)
-       (list-ref seat 0)))
-
-(define (seat:interface seat)
-  (and (> (length seat) 1)
-       (list-ref seat 1)))
-
-(define (seat:resolution seat)
-  (and (> (length seat) 2)
-       (list-ref seat 2)))
-
-(define (seat:keyboard seat)
-  (and (> (length seat) 3)
-       (list-ref seat 3)))
-
-(define (seat:mouse seat)
-  (and (> (length seat) 4)
-       (list-ref seat 4)))
-
-(define (seat:usb seat)
-  (and (> (length seat) 5)
-       (list-ref seat 5)))
 
 ;;; config.scm ends here.
 

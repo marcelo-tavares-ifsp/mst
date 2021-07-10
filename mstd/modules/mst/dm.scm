@@ -34,6 +34,7 @@
   #:use-module (mst docker)
   #:use-module (mst system)
   #:use-module (mst core log)
+  #:use-module (mst core seat)
   #:export (add-seat
             dm-start
             dm-stop-xephyrs
@@ -157,11 +158,11 @@
 
           (log-info "  starting Xephyrs ... ")
           (for-each (lambda (seat-config)
-                      (let ((seat-display    (seat:display seat-config))
-                            (seat-interface  (seat:interface seat-config))
-                            (seat-resolution (seat:resolution seat-config))
-                            (seat-keyboard   (seat:keyboard seat-config))
-                            (seat-mouse      (seat:mouse seat-config)))
+                      (let ((seat-display    (seat-display seat-config))
+                            (seat-interface  (seat-interface seat-config))
+                            (seat-resolution (seat-resolution seat-config))
+                            (seat-keyboard   (seat-keyboard seat-config))
+                            (seat-mouse      (seat-mouse seat-config)))
                         (when (and seat-display
                                    seat-resolution
                                    seat-mouse
@@ -192,10 +193,10 @@
 			  (lambda (key value)
 			    (unless (docker-container-running? value)
 			      (let* ((seat (config-get-seat config key))
-				     (seat-display    (seat:display seat))
-				     (seat-resolution (seat:resolution seat))
-				     (seat-mouse      (seat:mouse seat))
-				     (seat-keyboard   (seat:keyboard seat))
+				     (seat-display    (seat-display seat))
+				     (seat-resolution (seat-resolution seat))
+				     (seat-mouse      (seat-mouse seat))
+				     (seat-keyboard   (seat-keyboard seat))
 				     (id   (start-xephyr/docker
 					    seat-display
 					    seat-resolution
