@@ -38,7 +38,7 @@
              (ice-9 getopt-long)
              (mst config)
              (mst system)
-             (mst log)
+             (mst core log)
              (mst dm))
 
 

@@ -30,7 +30,7 @@
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 regex)
   #:use-module (ice-9 ftw)
-  #:use-module (mst log)
+  #:use-module (mst core log)
   #:export (notify-send
             display-number->user
             graphics-available?

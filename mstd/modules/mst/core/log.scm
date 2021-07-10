@@ -24,7 +24,7 @@
 
 ;;; Code:
 
-(define-module (mst log)
+(define-module (mst core log)
   #:use-module (ice-9 rdelim)
   #:export (log
             log-error

@@ -27,7 +27,7 @@
 (define-module (mst docker)
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
-  #:use-module (mst log)
+  #:use-module (mst core log)
   #:use-module (mst system)
   #:export (docker-container-running?
 	    start-xephyr/docker

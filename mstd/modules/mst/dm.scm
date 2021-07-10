@@ -33,7 +33,7 @@
   #:use-module (mst config)
   #:use-module (mst docker)
   #:use-module (mst system)
-  #:use-module (mst log)
+  #:use-module (mst core log)
   #:export (add-seat
             dm-start
             dm-stop-xephyrs
