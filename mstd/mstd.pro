@@ -11,6 +11,7 @@ executable.path  = $${PREFIX}/bin/
 
 guile_modules_mst.files = \
     modules/mst/config.scm  \
+    modules/mst/docker.scm  \
     modules/mst/system.scm  \
     modules/mst/log.scm     \
     modules/mst/dm.scm
@@ -20,6 +21,7 @@ guile_modules_mst.path = $${PREFIX}/share/guile/site/mst/
 DISTFILES = \
     mstd        \
     modules/mst/config.scm \
+    modules/mst/docker.scm \
     modules/mst/system.scm \
     modules/mst/dm.scm
 

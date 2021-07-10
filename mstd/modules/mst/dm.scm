@@ -31,6 +31,7 @@
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 threads)
   #:use-module (mst config)
+  #:use-module (mst docker)
   #:use-module (mst system)
   #:use-module (mst log)
   #:export (add-seat
@@ -202,23 +203,6 @@
          (result (read-line port)))
     (waitpid -1 WNOHANG)
     (not (eof-object? result))))
-
-(define (docker-container-running? id)
-  "Check if a Docker container with the given ID is running."
-  (let ((command (format #f "docker container inspect -f '{{.State.Running}}' ~a"
-                         id)))
-    (let ((port (open-input-pipe command)))
-      (catch #t
-             (lambda ()
-               (waitpid -1 WNOHANG))
-             (lambda args
-               #t))
-      (if port
-          (let ((result (read-line port)))
-            (string=? result "true"))
-          (begin
-            (log-error "Could not run command: ~a" command)
-            #f)))))
 
 (define (get-running-seats)
   "Get the number of running seats."
