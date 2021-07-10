@@ -34,7 +34,8 @@
             seat:interface
             seat:resolution
             seat:keyboard
-            seat:mouse))
+            seat:mouse
+            seat:usb))
 
 (define (read-seats-configuration config-file)
   "Read seats configuration from a CONFIG-FILE.  Return the
@@ -73,6 +74,10 @@ configuration as an alist."
 (define (seat:mouse seat)
   (and (> (length seat) 4)
        (list-ref seat 4)))
+
+(define (seat:usb seat)
+  (and (> (length seat) 5)
+       (list-ref seat 5)))
 
 ;;; config.scm ends here.
 
