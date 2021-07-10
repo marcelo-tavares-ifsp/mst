@@ -52,8 +52,6 @@
 (define %lightdm-binary "/usr/sbin/lightdm")
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
 (define %xephyr-binary "/usr/bin/Xephyr")
-(define %xephyr-docker-image "gkaz/xephyr")
-(define %docker-binary "/usr/bin/docker")
 
 
 (define (%make-command:add-seat number)
@@ -79,81 +77,7 @@
       (error "Could not start the display manager")))))
 
 
-
-(define (device-name->path name)
-  (catch
-   #t
-   (lambda ()
-     (let ((event (readlink (string-append "/dev/input/by-path/"
-                                           name))))
-       (string-append "/dev/input/"
-                      (basename event))))
-   (lambda (key . args)
-     (log-error "Could not find a device with specified name: '~a'" name)
-     #f)))
-
-(define (%make-command:xephyr/docker display-number resolution mouse keyboard)
-  (let ((mouse-dev    (device-name->path mouse))
-        (keyboard-dev (device-name->path keyboard)))
-
-    (unless mouse-dev
-      (log-error "Cannot find the specified mouse device: '~a'" mouse))
-
-    (unless keyboard-dev
-      (log-error "Cannot find the specified keyboard device: '~a'" keyboard))
-
-    (if (and mouse-dev keyboard-dev)
-        (string-join (list %docker-binary
-                           "run"
-                           "--rm"
-                           "-it"
-                           "-d"
-                           "--device" mouse-dev
-                           "--device" keyboard-dev
-                           "-e" "DISPLAY=:0"
-                           "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
-                           %xephyr-docker-image
-                           %xephyr-binary
-                           "-softCursor"
-                           "-ac"
-                           "-br"
-                           "-resizeable"
-                           "-mouse" (format #f "evdev,5,device=~a" mouse-dev)
-                           "-keybd" (format #f "evdev,,device=~a" keyboard-dev)
-                           "-screen" (format #f "~a" resolution)
-                           (format #f ":~a" display-number)))
-        #f)))
-
 (define *xephyrs* (make-hash-table 2))
-
-(define (start-xephyr/docker display-number resolution mouse keyboard)
-  (log-info "Starting Xephyr (~a) for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
-            %xephyr-docker-image
-            display-number resolution mouse keyboard)
-  (let ((command (%make-command:xephyr/docker display-number
-                                              resolution
-                                              mouse
-                                              keyboard)))
-    (if command
-
-        (let ((port (open-input-pipe command)))
-          (unless port
-            (log-error "Could not start a Xephyr instance")
-            (error "Could not start a Xephyr instance"))
-
-          (let ((output (read-line port)))
-
-            (when (eof-object? output)
-              (log-error "Could not start a Xephyr instance")
-              (error "Could not start a Xephyr instance"))
-
-            (log-info "Xephyr is started.  Container ID: ~a" output)
-
-            output))
-
-        (begin
-          (log-error "Could not make a Xephyr command")
-          #f))))
 
 (define (start-xephyr display-number resolution mouse keyboard)
   (log-info "Starting Xephyr for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
