@@ -29,6 +29,7 @@
   #:use-module (ice-9 rdelim)
   #:use-module (mst core log)
   #:export (lightdm-start
+            lightdm-started?
             lightdm-add-seat
             lightdm-seat-running?
             lightdm-running-seats
@@ -86,6 +87,13 @@
     (if (eof-object? data)
         0
         (string->number data))))
+
+
+(define (lightdm-started?)
+  (let* ((port   (open-input-pipe "ps aux | grep lightdm | grep -v grep"))
+         (result (read-line port)))
+    (waitpid -1 WNOHANG)
+    (not (eof-object? result))))
 
 ;;; lightdm.scm ends here.
 
