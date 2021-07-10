@@ -41,6 +41,7 @@
             mount
             set-system-debug!
 	    device-name->path
+	    is-seat-used?
 
             %make-command:mount
             %make-command:notify-send
@@ -157,3 +158,20 @@ process is not available."
    (lambda (key . args)
      (log-error "Could not find a device with specified name: '~a'" name)
      #f)))
+
+
+(define (is-seat-used? id)
+  "Check if a seat with @var{id} is used."
+  (define regexp (format #f ".* (:~a)$" id))
+  (let loop ((p (open-input-pipe "who")))
+    (let ((line (read-line p)))
+      (catch #t
+             (lambda ()
+               (waitpid -1 WNOHANG))
+             (lambda args
+               #t))
+      (if (eof-object? line)
+          #f
+          (if (string-match regexp line)
+              #t
+              (loop p))))))
