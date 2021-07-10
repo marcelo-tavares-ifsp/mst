@@ -33,16 +33,13 @@
   #:use-module (mst config)
   #:use-module (mst docker)
   #:use-module (mst system)
+  #:use-module (mst component lightdm)
   #:use-module (mst core log)
   #:use-module (mst core seat)
-  #:export (add-seat
-            dm-start
+  #:export (dm-start
             dm-stop-xephyrs
             is-seat-used?
-            get-running-seats
-            start-lightdm
 
-            %make-command:add-seat
             %make-command:xephyr/docker))
 
 (define *debug?* #f)
@@ -50,32 +47,8 @@
 (define (set-dm-debug! value)
   (set! *debug?* value))
 
-(define %lightdm-binary "/usr/sbin/lightdm")
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
 (define %xephyr-binary "/usr/bin/Xephyr")
-
-
-(define (%make-command:add-seat number)
-  (format #f "/usr/bin/dm-tool add-local-x-seat ~a" number))
-
-(define (add-seat number)
-  (log-info "Adding seat number ~a" number)
-  (system (%make-command:add-seat number)))
-
-(define (start-lightdm config-file)
-  (log-info "Starting lightdm with the config: ~a" config-file)
-  (let ((pid (primitive-fork)))
-    (log-info "LightDM PID: ~a" pid)
-    (cond
-     ((zero? pid)
-      (execle %lightdm-binary (environ)
-              %lightdm-binary "--config" config-file))
-     ((> pid 0)
-      (log-info "Lightdm started.  PID: ~a" pid)
-      pid)
-     (else
-      (log-error "Could not start the display manager")
-      (error "Could not start the display manager")))))
 
 
 (define *xephyrs* (make-hash-table 2))
@@ -102,25 +75,6 @@
      (else
       (log-error "Could not start a Xephyr instance")
       (error "Could not start a Xephyr instance")))))
-
-
-(define (is-seat-running? id)
-  "Check if a seat with ID is running."
-  (let* ((port (open-input-pipe
-                (format #f "/usr/bin/dm-tool list-seats | grep 'Seat~a'"
-                        (- id 1))))
-         (result (read-line port)))
-    (waitpid -1 WNOHANG)
-    (not (eof-object? result))))
-
-(define (get-running-seats)
-  "Get the number of running seats."
-  (let ((data (read-line
-               (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
-    (waitpid -1 WNOHANG)
-    (if (eof-object? data)
-        0
-        (string->number data))))
 
 (define (start-seats seat-number)
   (log-info "Starting seats: ~a" seat-number)
