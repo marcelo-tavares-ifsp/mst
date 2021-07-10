@@ -33,7 +33,6 @@
   #:use-module (mst system)
   #:export (docker-container-running?
             docker-start-xephyr
-	    start-xephyr/docker
 	    docker-stop
 	    docker-container-rm
 
@@ -98,13 +97,10 @@
                            (format #f ":~a" display-number)))
         #f)))
 
-(define-method (docker-start-xephyr (seat <seat>))
-  (start-xephyr/docker (seat-display   seat)
-                       (seat-interface seat)
-                       (seat-mouse     seat)
-                       (seat-keyboard  seat)))
+
+(define-generic docker-start-xephyr)
 
-(define (start-xephyr/docker display-number resolution mouse keyboard)
+(define-method (docker-start-xephyr display-number resolution mouse keyboard)
   (log-info "Starting Xephyr (~a) for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
             %xephyr-docker-image
             display-number resolution mouse keyboard)
@@ -133,6 +129,13 @@
           (log-error "Could not make a Xephyr command")
           #f))))
 
+(define-method (docker-start-xephyr (seat <seat>))
+  (docker-start-xephyr (seat-display   seat)
+                       (seat-interface seat)
+                       (seat-mouse     seat)
+                       (seat-keyboard  seat)))
+
+
 (define (docker-stop id)
   "Stop a Docker container specified by an @var{id}."
   (system* %docker-binary "stop" id))
