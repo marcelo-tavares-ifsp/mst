@@ -28,6 +28,7 @@
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
   #:use-module (mst log)
+  #:use-module (mst system)
   #:export (docker-container-running?
 	    start-xephyr/docker
 	    docker-stop
@@ -44,18 +45,6 @@
 
 
 ;;;
-
-(define (device-name->path name)
-  (catch
-   #t
-   (lambda ()
-     (let ((event (readlink (string-append "/dev/input/by-path/"
-                                           name))))
-       (string-append "/dev/input/"
-                      (basename event))))
-   (lambda (key . args)
-     (log-error "Could not find a device with specified name: '~a'" name)
-     #f)))
 
 (define (docker-container-running? id)
   "Check if a Docker container with the given ID is running."

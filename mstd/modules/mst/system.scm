@@ -40,6 +40,7 @@
             proc-environ
             mount
             set-system-debug!
+	    device-name->path
 
             %make-command:mount
             %make-command:notify-send
@@ -144,3 +145,15 @@ process is not available."
                       (string-split (string-drop-right env 1) #\nul)))))
          (lambda args
            #f)))
+
+(define (device-name->path name)
+  (catch
+   #t
+   (lambda ()
+     (let ((event (readlink (string-append "/dev/input/by-path/"
+                                           name))))
+       (string-append "/dev/input/"
+                      (basename event))))
+   (lambda (key . args)
+     (log-error "Could not find a device with specified name: '~a'" name)
+     #f)))
