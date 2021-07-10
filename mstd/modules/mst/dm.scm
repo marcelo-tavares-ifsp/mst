@@ -90,7 +90,7 @@
           (log-info "Graphics available")
           (unless (lightdm-started?)
             (log-info "  starting lightdm ...")
-            (start-lightdm %lightdm-config)
+            (lightdm-start %lightdm-config)
             (log-info "  starting lightdm ... done"))
 
           (log-info "  starting Xephyrs ... ")

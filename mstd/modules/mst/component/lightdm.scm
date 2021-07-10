@@ -28,7 +28,7 @@
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
   #:use-module (mst core log)
-  #:export (start-lightdm
+  #:export (lightdm-start
             lightdm-add-seat
             is-seat-running?
             get-running-seats
@@ -52,7 +52,7 @@
   (system (%make-command:add-seat number)))
 
 
-(define (start-lightdm config-file)
+(define (lightdm-start config-file)
   (log-info "Starting lightdm with the config: ~a" config-file)
   (let ((pid (primitive-fork)))
     (log-info "LightDM PID: ~a" pid)
