@@ -29,7 +29,7 @@
   #:use-module (ice-9 rdelim)
   #:use-module (mst core log)
   #:export (start-lightdm
-            add-seat
+            lightdm-add-seat
             is-seat-running?
             get-running-seats
 
@@ -47,7 +47,7 @@
 (define (%make-command:add-seat number)
   (format #f "/usr/bin/dm-tool add-local-x-seat ~a" number))
 
-(define (add-seat number)
+(define (lightdm-add-seat number)
   (log-info "Adding seat number ~a" number)
   (system (%make-command:add-seat number)))
 

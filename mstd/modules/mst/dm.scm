@@ -79,7 +79,7 @@
 (define (start-seats seat-number)
   (log-info "Starting seats: ~a" seat-number)
   (let loop ((idx 1))
-    (add-seat idx)
+    (lightdm-add-seat idx)
     (when (< idx seat-number)
       (loop (+ idx 1)))))
 
