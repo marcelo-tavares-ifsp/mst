@@ -23,6 +23,15 @@ guile_modules_mst_core.files = \
 
 guile_modules_mst_core.path = $${PREFIX}/share/guile/site/mst/core/
 
+### (mst component) module
+
+guile_modules_mst_component.files = \
+    modules/mst/component/lightdm.scm
+
+guile_modules_mst_component.path = $${PREFIX}/share/guile/site/mst/component/
+
+###
+
 DISTFILES = \
     mstd        \
     modules/mst/config.scm \
@@ -33,4 +42,5 @@ DISTFILES = \
 INSTALLS += \
     executable  \
     guile_modules_mst \
-    guile_modules_mst_core
+    guile_modules_mst_core \
+    guile_modules_mst_component
