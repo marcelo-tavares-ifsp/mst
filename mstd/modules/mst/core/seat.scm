@@ -34,6 +34,7 @@
             seat-keyboard
             seat-mouse
             seat-usb
+            seat-configured?
 
             list->seat
             seat->list))
@@ -142,5 +143,16 @@
         (seat-keyboard   seat)
         (seat-mouse      seat)
         (seat-usb        seat)))
+
+
+;; Check if a @var{seat} has properly configured parameters.
+(define-method (seat-configured? seat)
+  (and (seat-display    seat)
+       (seat-interface  seat)
+       (seat-resolution seat)
+       (seat-keyboard   seat)
+       (seat-mouse      seat)
+       (seat-mouse      seat)
+       (seat-usb        seat)))
 
 ;;; seat.scm ends here.
