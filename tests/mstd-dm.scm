@@ -1,5 +1,5 @@
 (use-modules (srfi srfi-64)
-             (mst dm))
+             (mst component lightdm))
 
 
 (test-begin "mstd-dm")
