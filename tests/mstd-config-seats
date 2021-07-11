@@ -1,2 +1,2 @@
-/device/path/1 1
-/device/path/2 2
+1 LVDS-1 1280x720 pci-0000:00:1d.2-usb-0:2:1.0-event-kbd pci-0000:00:1d.1-usb-0:2:1.0-event-mouse /devices/pci0000:00/0000:00:1d.7/usb7/7-1
+2 LVDS-2 1024x768 pci-0000:00:1d.2-usb-0:2:1.1-event-kbd pci-0000:00:1d.1-usb-0:2:1.1-event-mouse /devices/pci0000:00/0000:00:1d.7/usb7/7-2
