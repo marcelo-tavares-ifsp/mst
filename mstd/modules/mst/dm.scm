@@ -99,7 +99,9 @@
                         (let ((id (docker-start-xephyr seat-config)))
                           (log-info "    Docker ID: ~a" id)
                           (when id
-                            (hash-set! *xephyrs* seat-display id)))))
+                            (hash-set! *xephyrs*
+				       (seat-display seat-config)
+				       id)))))
 
                     config)
           (log-info "  starting Xephyrs ... done")
@@ -121,10 +123,10 @@
 			      (let* ((seat (config-get-seat config key))
 				     (id   (docker-start-xephyr seat)))
 				(if id
-				    (hash-set! *xephyrs* seat-display id)
+				    (hash-set! *xephyrs* (seat-display seat) id)
 				    (log-error
 				     "Could not start a Docker container for seat: ~a"
-				     seat-display)))))
+				     (seat-display seat))))))
 			  
 			  *xephyrs*)
 			 (start-seats seat-count))))
