@@ -61,6 +61,13 @@
     (write (getpid) p)
     (close p)))
 
+(define (read-pid pid-file)
+  (let* ((p   (open-input-file pid-file))
+	 (pid (string->number (read-line p))))
+    (close p)
+    pid))
+
+
 (define (print-help-and-exit)
   "Print the help message and exit."
   (display (string-append "\
@@ -96,6 +103,15 @@ Options:
 
     (set! *debug?* debug-wanted?)
     (set-system-debug! debug-wanted?)
+
+    (when (file-exists? pid-file)
+      (log-info "PID file exists: ~a" pid-file)
+      (let ((pid (read-pid pid-file)))
+	(if (proc-running? pid)
+	    (begin
+	      (log-error "mstd is already running: ~a" pid)
+	      (exit 1))
+	    (delete-file pid-file))))
 
     (when detach-wanted
           (let ((pid (primitive-fork)))
