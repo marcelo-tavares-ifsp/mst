@@ -37,6 +37,7 @@
             xephyr-started?
             proc-get-pids
             proc-environ
+            proc-running?
             mount
             set-system-debug!
 	    device-name->path
@@ -140,6 +141,11 @@ process is not available."
          (lambda args
            #f)))
 
+(define (proc-running? pid)
+  "Check if a process with the given @var{pid} is running."
+  (file-exists? (format #f "/proc/~a" pid)))
+
+
 (define (device-name->path name)
   (catch
    #t
