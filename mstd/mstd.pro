@@ -13,6 +13,7 @@ guile_modules_mst.files = \
     modules/mst/config.scm  \
     modules/mst/docker.scm  \
     modules/mst/system.scm  \
+    modules/mst/device-listener.scm \
     modules/mst/dm.scm
 
 guile_modules_mst.path = $${PREFIX}/share/guile/site/mst/
