@@ -36,7 +36,7 @@
              (mst config)
              (mst system)
              (mst core log)
-	     (mst device-listener)
+             (mst device-listener)
              (mst dm))
 
 
@@ -63,7 +63,7 @@
 
 (define (read-pid pid-file)
   (let* ((p   (open-input-file pid-file))
-	 (pid (string->number (read-line p))))
+         (pid (string->number (read-line p))))
     (close p)
     pid))
 
@@ -77,8 +77,8 @@ Options:
   --detach                      Detach mode.
   --debug                       Debug mode.
   --pid-file=<file-name>        File to store PID after the server starts to
-				listen to the socket.
-				Default: " %default-pid-file "
+                                listen to the socket.
+                                Default: " %default-pid-file "
   --stderr                      Print the logs to stderr as well as to
                                 the system log.
   --help, -h                    Print this message and exit.
@@ -107,20 +107,20 @@ Options:
     (when (file-exists? pid-file)
       (log-info "PID file exists: ~a" pid-file)
       (let ((pid (read-pid pid-file)))
-	(if (proc-running? pid)
-	    (begin
-	      (log-error "mstd is already running: ~a" pid)
-	      (exit 1))
-	    (delete-file pid-file))))
+        (if (proc-running? pid)
+            (begin
+              (log-error "mstd is already running: ~a" pid)
+              (exit 1))
+            (delete-file pid-file))))
 
     (when detach-wanted
           (let ((pid (primitive-fork)))
             (cond
              ((zero? pid)
-	      (log-info "mstd started")
+              (log-info "mstd started")
               (setsid))
              ((> pid 0)
-	      (log-info "mstd PID: ~a" pid)
+              (log-info "mstd PID: ~a" pid)
               (exit))
              (#t
               (log-error "Could not fork the process.")
@@ -132,7 +132,7 @@ Options:
       (log-info "Configuration: ~a" config)
       (log-info "Starting display manager ...")
       (let ((pid (dm-start config)))
-	(log-info "Display manager PID: ~a" pid))
+        (log-info "Display manager PID: ~a" pid))
       (log-info "Starting display manager ... done")
       (device-listener-start config))))
 
