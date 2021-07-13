@@ -50,17 +50,6 @@
 (define *debug?* #f)
 
 
-(define (device-path->display-number config device-path)
-  "Try to determine a display number that device specified by its
-DEVICE-PATH belongs to, using a CONFIG."
-  (let* ((record       (car config))
-         (base-devpath (seat-usb record)))
-    (if (string-contains device-path base-devpath)
-        (car record)
-        (if (null? (cdr config))
-            #f
-            (device-path->display-number (cdr config) device-path)))))
-
 (define (notify-broadcast config message)
   "Broadcast a notify with a MESSAGE across all seats that are listed
 in a CONFIG."

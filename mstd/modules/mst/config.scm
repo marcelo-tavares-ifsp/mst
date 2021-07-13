@@ -30,7 +30,8 @@
   #:use-module (srfi srfi-1)
   #:use-module (mst core seat)
   #:export (read-seats-configuration
-            config-get-seat))
+            config-get-seat
+            device-path->display-number))
 
 (define (read-seats-configuration config-file)
   "Read seats configuration from a CONFIG-FILE.  Return the
@@ -42,11 +43,22 @@ configuration as an alist."
           (reverse data)
           (read (read-line port)
                 (cons (list->seat (string-split line #\space))
-		      data))))))
+                      data))))))
 
 (define (config-get-seat config display)
   (find (lambda (seat) (equal? (seat-display seat) display))
         config))
+
+(define (device-path->display-number config device-path)
+  "Try to determine a display number that device specified by its
+DEVICE-PATH belongs to, using a CONFIG."
+  (let* ((record       (car config))
+         (base-devpath (seat-usb record)))
+    (if (string-contains device-path base-devpath)
+        (car record)
+        (if (null? (cdr config))
+            #f
+            (device-path->display-number (cdr config) device-path)))))
 
 ;;; config.scm ends here.
 
