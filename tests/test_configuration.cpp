@@ -50,7 +50,7 @@ void Test_configuration::load_seats_config_test()
     QVERIFY2(config.get_seat_count() == 1,
              QString(config.get_seat_count()).toStdString().c_str());
 
-    std::shared_ptr<Seat> seat = config.get_seat(0);
+    std::shared_ptr<Seat> seat = config.get_seat(1);
     QVERIFY2(seat->get_id() == 1,
              QString(seat->get_id()).toStdString().c_str());
     QVERIFY2(seat->get_monitor().get_interface() == "LVDS-1",
@@ -75,7 +75,7 @@ void Test_configuration::get_seat_nullptr()
         config.load(file_name, seats_config.fileName());
     }
 
-    QVERIFY2(config.get_seat(0) == nullptr,
+    QVERIFY2(config.get_seat(1) == nullptr,
              "The method returned unexpected value");
 }
 
