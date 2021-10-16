@@ -67,7 +67,8 @@ void Display_manager::configure()
         tpl = Template_manager::get_instance()->get_template(LIGHTDM_OLD_FILE);
     }
 
-    tpl.set("greeter-session", config.get_lightdm_greeter() + "-greeter");
+    tpl.set("greeter-session",
+            "lightdm-" + config.get_lightdm_greeter() + "-greeter");
 
     component_configuration.add(LIGHTDM_FILE, target_file, tpl);
 }
