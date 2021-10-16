@@ -34,19 +34,19 @@ Xorg::Xorg(Configuration& config)
 
 /* Config printers. */
 
-static QString _make_monitors_section(const Configuration& config)
+static QString _make_monitors_section(Configuration& config)
 {
     Template_manager* template_manager = Template_manager::get_instance();
     Template monitor_tpl = template_manager->get_template("xorg/Monitor");
     Template option_tpl  = template_manager->get_template("xorg/Option");
     QString result = "";
     option_tpl.set("name", "RightOf");
-    for (int32_t idx = 0; idx < config.get_seat_count(); idx++) {
-        monitor_tpl.set("index", QString::number(idx));
-        if (idx > 0) {
+    for (auto seat : config.get_seats()) {
+        monitor_tpl.set("index",  QString::number(seat->get_id()));
+        if (seat->get_id() > 1) {
+            QString monitor_id = "monitor" + QString::number(seat->get_id() - 1);
             monitor_tpl.set("options",
-                            option_tpl.set("value",
-                                           "monitor" + QString::number(idx - 1))
+                            option_tpl.set("value", monitor_id)
                             .substitute());
         } else {
             monitor_tpl.set("options", "");
@@ -85,8 +85,9 @@ static QString _make_screen_section(Configuration& config)
             ->get_template("xorg/Screen");
     tpl.set("depth", "24");
     QString result = "";
-    for (int32_t idx = 0; idx < config.get_seat_count(); idx++) {
-        result += tpl.set("index", QString::number(idx)).substitute();
+    for (auto seat : config.get_seats()) {
+        tpl.set("index", QString::number(seat->get_id()));
+        result += tpl.substitute();
     }
 
     return result;
@@ -97,8 +98,9 @@ static QString _make_layout_section(Configuration& config)
     Template tpl = Template_manager::get_instance()
             ->get_template("xorg/ServerLayout");
     QString result = "";
-    for (int32_t idx = 0; idx < config.get_seat_count(); idx++) {
-        result += tpl.set("seat_index", QString::number(idx)).substitute();
+    for (auto seat : config.get_seats()) {
+        tpl.set("seat_index", QString::number(seat->get_id()));
+        result += tpl.substitute();
     }
     return result;
 }
