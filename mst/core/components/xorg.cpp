@@ -63,14 +63,16 @@ static QString _make_device_section(Configuration& config)
     Template option_tpl = Template_manager::get_instance()
             ->get_template("xorg/Option");
     QString monitors = "";
-    for (int32_t idx = 0; idx < config.get_seat_count(); idx++)
+    for (int32_t seat_number = 1;
+         seat_number <= config.get_seat_count();
+         seat_number++)
     {
-        QString interface = config.get_seat(idx)->get_monitor().get_interface();
+        QString interface = config.get_seat(seat_number)->get_monitor().get_interface();
         option_tpl.set("name",  "Monitor-" + interface);
-        option_tpl.set("value", "monitor" + QString::number(idx));
+        option_tpl.set("value", "monitor" + QString::number(seat_number));
         monitors += "    " + option_tpl
           .set("name",  "Monitor-" + interface)
-          .set("value", "monitor" + QString::number(idx))
+          .set("value", "monitor" + QString::number(seat_number))
           .substitute() + "\n";
     }
     tpl.set("monitors", monitors);

@@ -113,11 +113,12 @@ int32_t Configuration::get_seat_count() const
     return seats.size();
 }
 
-shared_ptr<Seat> Configuration::get_seat(int32_t idx)
+shared_ptr<Seat> Configuration::get_seat(int32_t seat_number)
 {
     int32_t count = seats.size();
-    if ((count > 0) && (idx >= 0) && (idx < count))
-        return seats[idx];
+    assert(seat_number > 0);
+    if ((count > 0) && (seat_number <= count))
+        return seats[seat_number - 1];
     else
         return nullptr;
 }

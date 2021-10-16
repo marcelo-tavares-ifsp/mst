@@ -54,7 +54,7 @@ void InstallWindow::configure_seat(int seat_id)
     mst->reset_devices(seat_id);
     current_seat_id = seat_id;
 
-    QString interface = mst->get_seats()[current_seat_id]->get_monitor().get_interface();
+    QString interface = mst->get_seats()[current_seat_id - 1]->get_monitor().get_interface();
     CalibrationDialog* cd = new CalibrationDialog(this, interface);
 
     connect(cd, SIGNAL(device_configured(DEVICE_TYPE, QString)),

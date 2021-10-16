@@ -75,10 +75,11 @@ public:
 
     /**
      * @brief get_seat -- Get a seat.
-     * @param idx -- A seat index.
+     * @param seat_number -- A seat number.  Seat numbering starts from one.
      * @return A shared pointer to a seat.
+     * @pre seat_number is greater than zero.
      */
-    std::shared_ptr<Seat> get_seat(int32_t idx);
+    std::shared_ptr<Seat> get_seat(int32_t seat_number);
 
     /**
      * @brief get_seats -- Get a vector of seats.
