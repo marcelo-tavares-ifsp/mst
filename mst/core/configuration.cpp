@@ -1,5 +1,6 @@
 #include "configuration.h"
 
+#include <assert.h>
 #include <QFile>
 
 using namespace std;
