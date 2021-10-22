@@ -112,6 +112,8 @@
           (start-seats seat-count)
           (log-info "Starting seats: ~a ... done" seat-count)
 
+	  (system "chvt 2")
+
           (log-info "Starting main loop")
           (while #t
                  (let ((running-seats-number (lightdm-running-seats)))
