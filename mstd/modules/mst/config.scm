@@ -55,7 +55,7 @@ DEVICE-PATH belongs to, using a CONFIG."
   (let* ((record       (car config))
          (base-devpath (seat-usb record)))
     (if (string-contains device-path base-devpath)
-        (car record)
+	(seat-display record)
         (if (null? (cdr config))
             #f
             (device-path->display-number (cdr config) device-path)))))
