@@ -82,7 +82,7 @@ CONFIG += silent
 etc.files += \
     etc/mst
 
-etc.path = /etc/
+etc.path = $${PREFIX}/etc/
 
 systemd_services.files += \
     etc/mstd.service
