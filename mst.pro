@@ -86,7 +86,7 @@ etc.path = $${PREFIX}/etc/
 
 systemd_services.files += \
     etc/mstd.service
-systemd_services.path = /lib/systemd/system
+    systemd_services.path = $${PREFIX}/lib/systemd/system
 
 INSTALLS += scripts templates templates_awesome templates_xorg \
     etc systemd_services
