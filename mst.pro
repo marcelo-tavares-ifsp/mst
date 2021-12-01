@@ -61,9 +61,9 @@ templates.files += \
     templates/99-mst.rules.template \
     templates/10-mst.polkit.rules.template
 
-templates.path = $$(PREIFX)/var/lib/mst
+templates.path = $$(PREFIX)/var/lib/mst
 
-templates_awesome.path = $$(PREIFX)/var/lib/mst/awesome
+templates_awesome.path = $$(PREFIX)/var/lib/mst/awesome
 templates_awesome.files += \
     templates/awesome/xephyr_rules.lua.template \
     templates/awesome/mst_autostart.lua.template
