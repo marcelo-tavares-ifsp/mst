@@ -49,17 +49,14 @@ QScopedPointer<QFile>   m_logFile;
 /**
  * @brief MST_CONFIG_FILE -- The default MST configuration file.
  */
-const QString MST_CONFIG_FILE =
-  INSTALLATION_PREFIX "/etc/mst";
+const QString MST_CONFIG_FILE = "/etc/mst";
 
-const QString MST_SEATS_CONFIG_FILE =
-  INSTALLATION_PREFIX "/etc/mst-seats";
+const QString MST_SEATS_CONFIG_FILE = "/etc/mst-seats";
 
 /**
  * @brief MST_LOG_FILE -- The default MST logging file.
  */
-const QString MST_LOG_FILE   =
-  INSTALLATION_PREFIX "/var/log/mst.log";
+const QString MST_LOG_FILE   = "/var/log/mst.log";
 
 /**
  * @brief messageHandler -- The MST default logging handler.
