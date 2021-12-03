@@ -9,6 +9,7 @@ QT       += testlib core
 QT       -= gui
 
 TARGET = unit_tests
+CONFIG   += no_testcase_installs
 CONFIG   += console
 CONFIG   += testcase
 CONFIG   += silent
