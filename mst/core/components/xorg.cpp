@@ -128,8 +128,9 @@ Template xorg::prepare_xinitrc_template()
 
 QString Xorg::get_version()
 {
-    QVector<QString> result = platform::popen_read("vglclient",
-                                                   QStringList() << "-v",
-                                                   QProcess::StandardError);
-    return result[1];
+  QVector<QString> result = platform::popen_read("xdpyinfo",
+                                                 QStringList(),
+                                                 QProcess::StandardOutput);
+
+  return result[4];
 }
