@@ -38,6 +38,7 @@
 #include <QTranslator>
 
 #include "core/template_manager.h"
+#include "core/platform.h"
 
 using namespace std;
 
@@ -91,16 +92,6 @@ void create_config_file(QFile& file) {
 }
 
 /**
- * @brief is_graphics_available -- check if the program is run in the graphic
- *     mode.
- * @return true if it is, false otherwise.
- */
-bool is_graphics_available()
-{
-    return system("xset -q > /dev/null 2>&1") == 0;
-}
-
-/**
  * @brief main -- The application entry point.
  * @param argc -- Count of program arguments.
  * @param argv -- Array of program arguments.
@@ -114,7 +105,7 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
 
     QSharedPointer<QCoreApplication> a;
-    bool is_graphic_mode = is_graphics_available();
+    bool is_graphic_mode = platform::is_graphics_available();
 
     if (is_graphic_mode) {
         a.reset(new QApplication(argc, argv));

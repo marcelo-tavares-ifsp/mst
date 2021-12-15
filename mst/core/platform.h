@@ -115,6 +115,13 @@ QVector<QString> run_xrandr();
  */
 QVector<QString> run_ls_devices();
 
+/**
+ * @brief is_graphics_available -- check if the program is run in the graphic
+ *     mode.
+ * @return true if it is, false otherwise.
+ */
+bool is_graphics_available();
+
 }
 
 #endif // PLATFORM_H

@@ -386,3 +386,9 @@ void Platform::chown(const QString& path, uid_t uid, gid_t gid,
      }
      }
 }
+
+bool platform::is_graphics_available()
+{
+    return system("xset -q > /dev/null 2>&1") == 0;
+}
+
