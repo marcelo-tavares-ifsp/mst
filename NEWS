@@ -1,6 +1,38 @@
 #+TITLE: MST News -- history of user-visible changes.
 #+STARTUP: content hidestars
 
+* Unreleased
+** General changes
+*** Require Guile-UDev 2.0
+    https://github.com/artyom-poptsov/guile-udev
+*** MST now officially supports Ubuntu GNU/Linux 20.04
+*** MST now officially supports ALT GNU/Linux 9
+*** Display manager and Xephyr instances now start from 'mstd'
+*** Xephyr instances now start in Docker containers
+*** Seat resolutions now stored in the configuration
+*** Improve internationalization
+*** Remove backup scripts
+    - scripts/mk_backup.sh
+    - scripts/apl_backup.sh
+** Bugfixes
+*** Fix backups; perform backups in 'mst'
+*** Don't install test cases
+** mst
+*** New option: '--list-backups'
+    The option shows the list of backups.
+*** New option: '--status'
+    The option shows the status of 'mstd' daemon.
+*** New option: '--start'
+*** New option: '--stop'
+    The option stops running 'mstd' daemon.
+*** Improve logging
+** mstd
+*** Improve logging   
+*** 'mstd' now has '--stderr' option
+*** Implement unit tests
+** Building/installation
+*** Make compilation less verbose
+*** 'install.sh': New building/installation script
 * Changes in version 1.0.0 (2021-02-24)
 ** Release of the first stable version of MST
 ** New USB auto-mount implementation
