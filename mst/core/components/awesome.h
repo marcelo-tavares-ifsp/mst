@@ -60,7 +60,7 @@ public:
 extern QString make_xephyr_autostart();
 extern QString make_xephyr_rules(uint32_t sSize);
 
-extern std::string get_awesome_raw_version();
+extern QString get_awesome_raw_version();
 extern std::vector<int> get_awesome_version();
 
 }

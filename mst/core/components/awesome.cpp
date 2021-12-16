@@ -74,7 +74,7 @@ void Awesome::install()
 
 QString Awesome::get_version()
 {
-    return QString::fromStdString(get_awesome_raw_version());
+    return get_awesome_raw_version();
 }
 
 void Awesome::prepare_rclua_template(Template& rclua_template)
@@ -127,7 +127,7 @@ QString awesome::make_xephyr_rules(uint32_t sSize)
  * @throws an error message on error.
  * @return awesome version as a string.
  */
-string awesome::get_awesome_raw_version()
+QString awesome::get_awesome_raw_version()
 {
     const int BUF_SZ = 255;
     char buf[BUF_SZ];
@@ -136,7 +136,7 @@ string awesome::get_awesome_raw_version()
     {
         if (fgets(buf, BUF_SZ, f) != NULL)
         {
-            return string(buf);
+            return QString::fromLocal8Bit(buf);
         }
     }
     else
@@ -145,7 +145,7 @@ string awesome::get_awesome_raw_version()
         qCritical(component_awesome_category) << msg.c_str();
         throw msg;
     }
-    return NULL;
+    return nullptr;
 }
 
 /**
@@ -155,7 +155,8 @@ string awesome::get_awesome_raw_version()
  */
 vector<int> awesome::get_awesome_version()
 {
-    const string raw_version = get_awesome_raw_version();
+    const QString version = get_awesome_raw_version();
+    string raw_version = version.toStdString();
     regex r1("awesome v([0-9]+).([0-9]+)*");
     smatch sm;
     if (regex_search(raw_version, sm, r1))
