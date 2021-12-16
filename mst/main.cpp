@@ -92,6 +92,24 @@ void create_config_file(QFile& file) {
 }
 
 /**
+ * @brief list_backups -- Print the list of backups to the stdout.
+ * @param mst -- A MST instance to use.
+ */
+static void list_backups(const MST* mst) {
+    cout << "Backup directory: "
+         << mst->get_backup_directory().toStdString()
+         << endl;
+    for (QString s : mst->list_backups()) {
+        if (mst->list_backups().first() == s) {
+            cout << "* ";
+        } else {
+            cout << "  ";
+        }
+        cout << s.toStdString() << endl;
+    }
+}
+
+/**
  * @brief main -- The application entry point.
  * @param argc -- Count of program arguments.
  * @param argv -- Array of program arguments.
@@ -214,17 +232,7 @@ int main(int argc, char *argv[])
     }
 
     if (parser.isSet(list_backups_option)) {
-        cout << "Backup directory: "
-             << mst->get_backup_directory().toStdString()
-             << endl;
-        for (QString s : mst->list_backups()) {
-            if (mst->list_backups().first() == s) {
-                cout << "* ";
-            } else {
-                cout << "  ";
-            }
-            cout << s.toStdString() << endl;
-        }
+        list_backups(mst);
         return 0;
     }
 
