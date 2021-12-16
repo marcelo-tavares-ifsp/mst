@@ -3,6 +3,8 @@
 # Project created by QtCreator 2018-12-16T10:50:20
 #
 #-------------------------------------------------
+include(../mst-vars.pri)
+
 QT       += core gui
 LIBS += -ludev
 
@@ -11,20 +13,21 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = mst
 TEMPLATE = app
 
-MST_VERSION = $$system("[ ! -e '../.git' ] || git describe --abbrev=0")
+MST_VERSION = $${VERSION}
 MST_HASH    = $$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")
-versiontarget.target = version.h
+!isEmpty(MST_HASH) {
+    MST_HASH = "-$${MST_HASH}"
+}
+versiontarget.target = ./version.h
 versiontarget.commands = \
     @echo "  GEN      version.h"; \
-    [ ! -e ../.git ] || echo \'const string VERSION = \"\
-$${MST_VERSION}-$${MST_HASH}\";\' \
-   > version.h;
+    echo \'const string VERSION = \"$${MST_VERSION}$${MST_HASH}\";\' > version.h
 versiontarget.depends = FORCE
 dist.depends = version.h
 
-PRE_TARGETDEPS += version.h
-
 QMAKE_EXTRA_TARGETS += versiontarget
+
+PRE_TARGETDEPS += version.h
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
