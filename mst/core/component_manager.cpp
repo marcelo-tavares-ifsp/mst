@@ -31,7 +31,7 @@ Component_manager::Component_manager(Configuration& config)
     for (auto component : components) {
         QString version = component->get_version();
         if (version != nullptr) {
-            qInfo(component_manager_category())
+            qInfo(component_manager_category()).noquote()
                     << "  " + component->get_name() + ": " + version;
         }
     }
