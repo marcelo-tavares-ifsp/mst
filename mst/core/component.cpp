@@ -95,12 +95,12 @@ void Component::install()
 
 void Component::install(const QString &src, const QString &dst)
 {
-    qInfo(component_category())
+    qInfo(component_category()).noquote()
             << "Installing '" + src + "' to '" + dst + "' ...";
     const QString& output_dir = config.get_output_directory();
     try {
         Platform::fs_mkdir(dst.mid(0, dst.lastIndexOf('/')));
-        qInfo(component_category())
+        qInfo(component_category()).noquote()
                 << "Installing '" + src + "' to '" + dst + "' ... done";
     } catch (Platform_exception& e) {
         qWarning(component_category()) << e.what();
