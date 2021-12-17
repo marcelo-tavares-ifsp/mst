@@ -62,7 +62,7 @@ const QString MST_LOG_FILE   = "/var/log/mst.log";
 /**
  * @brief MST_TEMPLTE_DIR -- Template directory path.
  */
-const QString MST_TEMPLTE_DIR = "/var/lib/mst/";
+const QString MST_TEMPLATE_DIR = "/var/lib/mst/";
 
 /**
  * @brief messageHandler -- The MST default logging handler.
@@ -188,7 +188,7 @@ int main(int argc, char *argv[])
 
     Configuration config;
     config.load(MST_CONFIG_FILE, MST_SEATS_CONFIG_FILE);
-    Template_manager::get_instance()->set_template_dir(MST_TEMPLTE_DIR);
+    Template_manager::get_instance()->set_template_dir(MST_TEMPLATE_DIR);
 
     if (geteuid() != 0)
     {
