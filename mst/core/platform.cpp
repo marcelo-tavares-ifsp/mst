@@ -39,11 +39,11 @@ QVector<QString> platform::popen_read(const QString& program,
     process.setReadChannel(channel);
 
     if (! process.waitForStarted()) {
-        throw new Platform_exception(process.errorString());
+        throw Platform_exception(process.errorString());
     }
 
     if (! process.waitForFinished()) {
-        throw new Platform_exception(process.errorString());
+        throw Platform_exception(process.errorString());
     }
 
     QVector<QString> result;
