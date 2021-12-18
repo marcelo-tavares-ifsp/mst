@@ -19,12 +19,3 @@ void Test_utils::split_test()
     QVERIFY2((result[0] == "2") && (result[1] == "4"),
             errmsg.c_str());
 }
-
-//void Test_utils::replace_all_test()
-//{
-//    string input = "abc{{d}}";
-//    string result = replace_all(input, "{{d}}", "e");
-//    string errmsg = "'replace_all' fails to replace a string: "
-//            + input + " -> " + result;
-//    QVERIFY2((result == "abce"), errmsg.c_str());
-//}
