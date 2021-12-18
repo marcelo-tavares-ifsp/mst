@@ -74,7 +74,10 @@ void Awesome::install()
 
 QString Awesome::get_version()
 {
-    return get_awesome_raw_version();
+    QVector<QString> result = platform::popen_read("awesome",
+                                                   QStringList() << "--version",
+                                                   QProcess::StandardError);
+    return result[0];
 }
 
 void Awesome::prepare_rclua_template(Template& rclua_template)
@@ -123,53 +126,31 @@ QString awesome::make_xephyr_rules(uint32_t sSize)
 }
 
 /**
- * @brief get_awesome_version -- get Awesome version.
- * @throws an error message on error.
- * @return awesome version as a string.
- */
-QString awesome::get_awesome_raw_version()
-{
-    const int BUF_SZ = 255;
-    char buf[BUF_SZ];
-    FILE* f = popen("awesome --version", "r");
-    if (f != NULL)
-    {
-        if (fgets(buf, BUF_SZ, f) != NULL)
-        {
-            return QString::fromLocal8Bit(buf);
-        }
-    }
-    else
-    {
-        const string msg = "Could not get Awesome version.";
-        qCritical(component_awesome_category) << msg.c_str();
-        throw msg;
-    }
-    return nullptr;
-}
-
-/**
  * @brief awesome::get_awesome_version -- get Awesome version as a vector of
  *     strings.
  * @return awesome version as a vector of two values.
  */
-vector<int> awesome::get_awesome_version()
+vector<int> Awesome::get_awesome_version()
 {
-    const QString version = get_awesome_raw_version();
-    string raw_version = version.toStdString();
-    regex r1("awesome v([0-9]+).([0-9]+)*");
-    smatch sm;
-    if (regex_search(raw_version, sm, r1))
-    {
-        vector<int> result(2);
-        result[0] = atoi(string(sm[1]).c_str());
-        result[1] = atoi(string(sm[2]).c_str());
-        return result;
-    }
-    else
-    {
-        const string msg = "Could not parse Awesome version: " + raw_version;
-        qCritical(component_awesome_category) << msg.c_str();
-        throw msg;
+    const QString version = get_version();
+    if (version != nullptr) {
+        string raw_version = version.toStdString();
+        regex r1("awesome v([0-9]+).([0-9]+)*");
+        smatch sm;
+        if (regex_search(raw_version, sm, r1))
+        {
+            vector<int> result(2);
+            result[0] = atoi(string(sm[1]).c_str());
+            result[1] = atoi(string(sm[2]).c_str());
+            return result;
+        }
+        else
+        {
+            const string msg = "Could not parse Awesome version: " + raw_version;
+            qCritical(component_awesome_category) << msg.c_str();
+            throw msg;
+        }
+    } else {
+        throw Component_error("Awesome TWM not found");
     }
 }

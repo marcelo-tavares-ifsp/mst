@@ -53,15 +53,13 @@ public:
     void install() override;
 
     void prepare_rclua_template(Template& rclua_template);
+    std::vector<int> get_awesome_version();
 };
 
 //// Helper procedures.
 
 extern QString make_xephyr_autostart();
 extern QString make_xephyr_rules(uint32_t sSize);
-
-extern QString get_awesome_raw_version();
-extern std::vector<int> get_awesome_version();
 
 }
 
