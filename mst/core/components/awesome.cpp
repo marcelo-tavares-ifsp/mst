@@ -25,6 +25,7 @@
 #include "../component.h"
 #include "../utilites/utilites.h"
 #include "../types/monitor.h"
+#include "core/platform.h"
 
 #include "../types/template.h"
 #include "core/template_manager.h"
