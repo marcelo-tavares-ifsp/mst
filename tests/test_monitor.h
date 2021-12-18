@@ -20,6 +20,7 @@ private Q_SLOTS:
     void equality_test();
     void inequality_in_resolutions_test();
     void inequality_in_interfaces_test();
+    void monitor_output_format_test();
 };
 
 #endif // TEST_MONITOR_H

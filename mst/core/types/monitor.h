@@ -91,6 +91,7 @@ private:
     QVector<Resolution> resolutions;
 
     friend bool operator==(const Monitor& lhs, const Monitor& rhs);
+    friend std::ostream& operator<< (std::ostream& os, const Monitor& monitor);
 };
 
 #endif // MONITOR_H

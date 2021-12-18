@@ -15,6 +15,12 @@ bool operator==(const Monitor& lhs, const Monitor& rhs) {
             && (lhs.get_available_resolutions() == rhs.get_available_resolutions());
 }
 
+std::ostream& operator<< (std::ostream& os, const Monitor& monitor) {
+    os << "#<Monitor " << monitor.interface.toStdString()
+       << ">";
+    return os;
+}
+
 static void _sort_resolutions(QVector<Resolution>& resolutions)
 {
     auto rcomp = [] (const Resolution& left, const Resolution& right) -> int {

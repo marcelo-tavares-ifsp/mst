@@ -1,4 +1,5 @@
 #include <QtTest>
+#include <sstream>
 
 #include "test_monitor.h"
 
@@ -113,4 +114,17 @@ void Test_monitor::inequality_in_interfaces_test()
     Monitor monitor2("VGA-2", resolutions);
     QVERIFY2(! (monitor1 == monitor2),
              "Monitor 1 equal to Monitor 2");
+}
+
+void Test_monitor::monitor_output_format_test()
+{
+    QVector<Resolution> resolutions = {
+        Resolution("1024x768"),
+        Resolution("640x480")
+    };
+    Monitor monitor("VGA-1", resolutions);
+    std::stringstream os;
+    os << monitor;
+    QVERIFY2(os.str() == "#<Monitor VGA-1>",
+             os.str().c_str());
 }
