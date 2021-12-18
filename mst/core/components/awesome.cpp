@@ -77,7 +77,7 @@ QString Awesome::get_version()
 {
     QVector<QString> result = platform::popen_read("awesome",
                                                    QStringList() << "--version",
-                                                   QProcess::StandardError);
+                                                   QProcess::StandardOutput);
     return result[0];
 }
 
