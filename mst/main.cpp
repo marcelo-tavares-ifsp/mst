@@ -211,7 +211,13 @@ int main(int argc, char *argv[])
     }
 
     MST* mst = MST::get_instance();
-    mst->set_configuration(config);
+
+    try {
+        mst->set_configuration(config);
+    } catch (Platform_exception* e) {
+        cerr << "ERROR: " << e->what() << endl;
+        exit(1);
+    }
 
     if (parser.isSet(status_option)) {
         cout << "mstd: " << (mst->running_p() ? "running" : "stopped")
