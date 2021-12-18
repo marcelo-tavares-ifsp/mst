@@ -17,15 +17,49 @@ class Seat
 {
 public:
     Seat(int id);
+
+    /**
+     * @brief get_id -- Get the seat ID.
+     * @return Seat ID.
+     */
     int get_id() const;
+
+    /**
+     * @brief get_mouse -- Get a mouce device linked to
+     *     this seat.
+     * @return  A mouce device as a QString.
+     */
     QString get_mouse() const;
+
+    /**
+     * @brief get_keyboard -- Get a keyboard device linked
+     *     to this seat.
+     * @return A keyboard device as a QString.
+     */
     QString get_keyboard() const;
+
+    /**
+     * @brief get_usb -- Get a USB port linked to this seat.
+     * @return Path to a USB device.
+     */
     QString get_usb() const;
+
+    /**
+     * @brief get_monitors -- Get all monitor instances linked
+     *     to this seat.
+     * @return A QVector of monitors.
+     */
     QVector<Monitor> get_monitors() const;
+
+    /**
+     * @brief get_monitor -- Get @a monitor instance that linked
+     *     to this seat.
+     * @return A reference to @a monitor.
+     */
     Monitor& get_monitor();
 
     /**
-     * @brief add_monitor -- Add a monitor to this seat.
+     * @brief add_monitor -- Add @a monitor to this seat.
      * @param monitor -- A monitor to add.
      */
     void add_monitor(Monitor& monitor);
