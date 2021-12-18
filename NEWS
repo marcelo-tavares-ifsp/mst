@@ -5,6 +5,7 @@
 ** General changes
 *** Require Guile-UDev 2.0
     https://github.com/artyom-poptsov/guile-udev
+*** Require Docker
 *** MST now officially supports Ubuntu GNU/Linux 20.04
 *** MST now officially supports ALT GNU/Linux 9
 *** Display manager and Xephyr instances now start from 'mstd'
@@ -33,6 +34,7 @@
 ** Building/installation
 *** Make compilation less verbose
 *** 'install.sh': New building/installation script
+
 * Changes in version 1.0.0 (2021-02-24)
 ** Release of the first stable version of MST
 ** New USB auto-mount implementation
