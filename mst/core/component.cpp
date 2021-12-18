@@ -5,8 +5,8 @@ Q_LOGGING_CATEGORY(component_category, "mst.core.component")
 
 Component::Component(const QString& name, Configuration& config)
     : config(config),
-      name(name),
-      component_configuration(Component_configuration(config))
+      component_configuration(Component_configuration(config)),
+      name(name)
 {
     /* Do nothing */
 }
