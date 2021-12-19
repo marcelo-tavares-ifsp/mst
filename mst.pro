@@ -35,7 +35,7 @@ for(tsfile, TRANSLATIONS) {
 ##
 
 isEmpty(PREFIX) {
-    PREFIX = /usr
+    PREFIX = /
 }
 
 scripts.files += \
