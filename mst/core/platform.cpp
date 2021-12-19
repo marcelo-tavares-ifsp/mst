@@ -321,7 +321,6 @@ QString Platform::system_release()
                 return re.cap(1);
             }
         }
-        return nullptr;
     }
 
     QFile system_release_file("/etc/system-release");
