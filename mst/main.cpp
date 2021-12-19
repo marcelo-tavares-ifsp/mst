@@ -62,7 +62,7 @@ const QString MST_LOG_FILE   = "/var/log/mst.log";
 /**
  * @brief MST_TEMPLTE_DIR -- Template directory path.
  */
-const QString MST_TEMPLATE_DIR = "/var/lib/mst/";
+const QString MST_TEMPLATE_DIR = INSTALLATION_PREFIX "/var/lib/mst/";
 
 /**
  * @brief messageHandler -- The MST default logging handler.
