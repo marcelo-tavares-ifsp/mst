@@ -19,6 +19,7 @@
 #include "test_seat.h"
 #include "test_resolution.h"
 #include "test_mstd.h"
+#include "test_platform.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ int main(int argc, char** argv)
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     Template_manager::get_instance()->set_template_dir(SRCDIR "/../templates/");
     QVector<shared_ptr<Test>> tests;
+    tests.push_back(make_shared<Test_platform>());
     tests.push_back(make_shared<Test_utils>());
     tests.push_back(make_shared<Test_awesome>());
     tests.push_back(make_shared<Test_template>());

@@ -48,6 +48,7 @@ SOURCES += \
     ../mst/core/dsv_parser/dsv.cpp \
     test.cpp \
     test_configuration.cpp \
+    test_platform.cpp \
     unit_tests.cpp \
     test_utils.cpp \
     test_template.cpp \
@@ -66,6 +67,7 @@ HEADERS += \
     test.h \
     test_awesome.h \
     test_configuration.h \
+    test_platform.h \
     test_utils.h \
     test_template.h \
     test_component.h \

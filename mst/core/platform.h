@@ -116,6 +116,16 @@ QVector<QString> run_xrandr();
 QVector<QString> run_ls_devices();
 
 /**
+ * @brief parse_devices -- Parse input devices list.
+ * @param[in]  devices -- Input devices to parse.
+ * @param[out] mice -- QVector to store mice.
+ * @param[out] keyboards -- QVector to store keyboards.
+ */
+void parse_devices(QVector<QString> devices,
+                   QVector<QString>& mice,
+                   QVector<QString>& keyboards);
+
+/**
  * @brief is_graphics_available -- check if the program is run in the graphic
  *     mode.
  * @return true if it is, false otherwise.

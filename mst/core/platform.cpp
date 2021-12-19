@@ -155,6 +155,28 @@ vector<XRandr_monitor> Platform::xrandr_get_monitors()
     return result;
 }
 
+void platform::parse_devices(QVector<QString> devices,
+                             QVector<QString>& mice,
+                             QVector<QString>& keyboards)
+{
+    QRegularExpression r1("^(.*-event-kbd)$");
+    QRegularExpression r2("^(.*-event-mouse)$");
+    QRegularExpressionMatch match;
+
+    for (QString line : devices) {
+        if (line.length() == 0)
+            continue;
+        match = r1.match(line);
+        if(match.hasMatch()) {
+            keyboards.push_back(match.captured(1));
+        }
+        match = r2.match(line);
+        if(match.hasMatch()) {
+            mice.push_back(match.captured(1));
+        }
+    }
+}
+
 /**
  * @brief Platform::get_input_devices -- divide a list of devices
  *          by categories.
@@ -165,22 +187,7 @@ void Platform::get_input_devices(QVector<QString>& mice,
                                  QVector<QString>& keybds)
 {
     QVector<QString> data = run_ls_devices();
-    QRegularExpression r1("^(.*-event-kbd)$");
-    QRegularExpression r2("^(.*-event-mouse)$");
-    QRegularExpressionMatch match;
-
-    for (QString line : data) {
-        if (line.length() == 0)
-            continue;
-        match = r1.match(line);
-        if(match.hasMatch()) {
-            keybds.push_back(match.captured(1));
-        }
-        match = r2.match(line);
-        if(match.hasMatch()) {
-            mice.push_back(match.captured(1));
-        }
-    }
+    parse_devices(data, mice, keybds);
 }
 
 /**
