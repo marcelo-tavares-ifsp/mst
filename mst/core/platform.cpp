@@ -68,7 +68,7 @@ QVector<QString> platform::run_xrandr()
 QVector<QString> platform::run_ls_devices()
 {
     return platform::popen_read("ls",
-                                QStringList() << "/dev/input/by-path/");
+                                QStringList() << INPUT_DEVICES_PATH);
 }
 
 //// Methods.
