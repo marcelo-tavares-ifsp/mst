@@ -48,18 +48,18 @@ scripts.files += \
 scripts.path = $${PREFIX}/bin
 
 templates.files += \
+    templates/10-mst.polkit.rules.template \
+    templates/99-mst.rules.template \
     templates/bashrc.template    \
-    templates/rc.lua.template    \
-    templates/rc.lua.4.template  \
-    templates/sudoers.template   \
-    templates/xinitrc.template   \
+    templates/getty@.service.template \
     templates/lightdm-mst.conf.old.template \
     templates/lightdm-mst.conf.template \
-    templates/getty@.service.template \
+    templates/rc.lua.4.template  \
+    templates/rc.lua.template    \
+    templates/sudoers.template   \
     templates/systemd-udevd.service.template \
     templates/vgl.sh.template \
-    templates/99-mst.rules.template \
-    templates/10-mst.polkit.rules.template
+    templates/xinitrc.template
 
 templates.path = $${PREFIX}/var/lib/mst
 
@@ -92,24 +92,24 @@ INSTALLS += scripts templates templates_awesome templates_xorg \
     etc systemd_services
 
 DISTFILES += \
+    templates/10-mst.polkit.rules.template \
+    templates/99-mst.rules.template \
+    templates/awesome/mst_autostart.lua.template \
+    templates/awesome/xephyr_rules.lua.template \
     templates/bashrc.template    \
-    templates/rc.lua.template    \
-    templates/rc.lua.4.template  \
-    templates/sudoers.template   \
-    templates/xinitrc.template   \
-    templates/lightdm-mst.conf.template \
     templates/getty@.service.template \
+    templates/lightdm-mst.conf.template \
+    templates/rc.lua.4.template  \
+    templates/rc.lua.template    \
+    templates/sudoers.template   \
     templates/systemd-udevd.service.template \
     templates/vgl.sh.template \
-    templates/awesome/xephyr_rules.lua.template \
+    templates/xinitrc.template   \
     templates/xorg/Device.template \
     templates/xorg/Monitor.template \
     templates/xorg/Option.template \
     templates/xorg/Screen.template \
     templates/xorg/ServerLayout.template \
-    templates/awesome/mst_autostart.lua.template \
-    templates/99-mst.rules.template \
-    templates/10-mst.polkit.rules.template \
     etc/mst \
     doc/logo.png \
     i18n/mst_ru.qm

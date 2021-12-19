@@ -44,72 +44,72 @@ CONFIG += c++11 strip lrelease
 CONFIG += silent
 
 SOURCES += \
-    core/components/pam.cpp \
-    core/mst.cpp \
-    main.cpp \
-    ui/install_window/installwindow.cpp \
-    ui/calibration_dialog/calibrationdialog.cpp \
-    core/configuration.cpp \
-    core/utilites/utilites.cpp \
-    core/dsv_parser/dsv.cpp \
     core/component.cpp \
-    core/components/vgl.cpp \
-    core/components/display_manager.cpp \
+    core/component_manager.cpp \
     core/components/awesome.cpp \
-    core/template_manager.cpp \
-    core/types/template.cpp \
-    ui/about_dialog/about_dialog.cpp \
-    core/components/xorg.cpp \
-    core/components/udev.cpp \
+    core/components/display_manager.cpp \
+    core/components/pam.cpp \
+    core/components/polkit.cpp \
     core/components/sudo.cpp \
     core/components/system.cpp \
-    core/platform.cpp \
-    core/component_manager.cpp \
-    core/types/resolution.cpp \
-    core/types/xrandr_monitor.cpp \
-    core/types/monitor.cpp \
-    core/types/seat.cpp \
-    ui/seat_widget/seat_widget.cpp \
+    core/components/udev.cpp \
+    core/components/vgl.cpp \
+    core/components/xorg.cpp \
+    core/configuration.cpp \
     core/device/device.cpp \
     core/device/device_listener.cpp \
-    core/device/usb_device_listener.cpp \
     core/device/input_device_listener.cpp \
+    core/device/usb_device_listener.cpp \
+    core/dsv_parser/dsv.cpp \
+    core/mst.cpp \
+    core/platform.cpp \
+    core/template_manager.cpp \
+    core/types/monitor.cpp \
+    core/types/resolution.cpp \
+    core/types/seat.cpp \
+    core/types/template.cpp \
+    core/types/xrandr_monitor.cpp \
+    core/utilites/utilites.cpp \
+    main.cpp \
+    ui/about_dialog/about_dialog.cpp \
+    ui/calibration_dialog/calibrationdialog.cpp \
+    ui/install_window/installwindow.cpp \
     ui/reboot_dialog/reboot_dialog.cpp \
-    core/components/polkit.cpp
+    ui/seat_widget/seat_widget.cpp
 
 HEADERS += \
-    core/components/pam.h \
-    core/mst.h \
-    ui/install_window/installwindow.h \
-    ui/calibration_dialog/calibrationdialog.h \
-    core/configuration.h \
-    core/utilites/utilites.h \
     core/component.h \
-    core/dsv_parser/dsv.h \
-    core/components/vgl.h \
-    core/components/display_manager.h \
+    core/component_manager.h \
     core/components/awesome.h \
-    core/template_manager.h \
-    core/types/template.h \
-    ui/about_dialog/about_dialog.h \
-    core/components/xorg.h \
-    core/components/udev.h \
+    core/components/display_manager.h \
+    core/components/pam.h \
+    core/components/polkit.h \
     core/components/sudo.h \
     core/components/system.h \
-    core/platform.h \
-    core/component_manager.h \
-    version.h \
-    core/types/resolution.h \
-    core/types/xrandr_monitor.h \
-    core/types/monitor.h \
-    core/types/seat.h \
-    ui/seat_widget/seat_widget.h \
+    core/components/udev.h \
+    core/components/vgl.h \
+    core/components/xorg.h \
+    core/configuration.h \
     core/device/device.h \
     core/device/device_listener.h \
-    core/device/usb_device_listener.h \
     core/device/input_device_listener.h \
+    core/device/usb_device_listener.h \
+    core/dsv_parser/dsv.h \
+    core/mst.h \
+    core/platform.h \
+    core/template_manager.h \
+    core/types/monitor.h \
+    core/types/resolution.h \
+    core/types/seat.h \
+    core/types/template.h \
+    core/types/xrandr_monitor.h \
+    core/utilites/utilites.h \
+    ui/about_dialog/about_dialog.h \
+    ui/calibration_dialog/calibrationdialog.h \
+    ui/install_window/installwindow.h \
     ui/reboot_dialog/reboot_dialog.h \
-    core/components/polkit.h
+    ui/seat_widget/seat_widget.h \
+    version.h
 
 FORMS += \
     ui/install_window/installwindow.ui \
