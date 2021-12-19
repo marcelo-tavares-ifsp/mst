@@ -59,9 +59,13 @@ bool PAM::installed_p(const QString &path)
 void PAM::install()
 {
     QString system_release = Platform::system_release();
+    qInfo(component_pam_category()).noquote()
+            << "System release: " << system_release;
     // ALT Education 9.1 (FalcoRusticolus)
     QRegExp alt_re("ALT.*9.*");
     if (alt_re.exactMatch(system_release)) {
+        qInfo(component_pam_category())
+                << "ALT 9 is found";
         const QString& path
                 = component_configuration.get_installation_path(PAM_ENV_CONF);
         if (! installed_p(path)) {
