@@ -118,13 +118,13 @@ FORMS += \
     ui/about_dialog/about_dialog.ui
 
 isEmpty(PREFIX) {
-    PREFIX = /usr/
+    PREFIX = /
 }
 DEFINES += INSTALLATION_PREFIX=\\\"$${PREFIX}\\\"
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = $${PREFIX}/bin
+else: unix:!android: target.path = $${PREFIX}/usr/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES +=
