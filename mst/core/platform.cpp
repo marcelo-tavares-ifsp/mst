@@ -214,10 +214,10 @@ bool Platform::pam_is_mkhomedir_used()
  */
 void Platform::fs_mkdir(const QString& path)
 {
-    if (Platform::exec("mkdir -p '" + path + "'") != 0) {
+    if (! QDir().mkpath(path)) {
         qCritical(platform_category)
-             << "Could not create a directory: "
-             << path.toStdString().c_str();
+                << "Could not create a directory: "
+                << path;
         throw Platform_exception("Could not create a directory: '"
                                  + path + "'");
     }
