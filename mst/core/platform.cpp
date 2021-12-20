@@ -240,9 +240,9 @@ void Platform::fs_mkdir(const string& path)
  */
 void Platform::fs_rm(const QString& file)
 {
-    if (Platform::exec("rm '" + file + "'") != 0) {
+    if (! QFile::remove(file)) {
         QString message = "Could not delete '" + file + "'";
-        qCritical(platform_category) << message.toStdString().c_str();
+        qCritical(platform_category) << message;
         throw Platform_exception(message);
     }
 }
