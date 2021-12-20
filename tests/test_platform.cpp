@@ -32,3 +32,20 @@ void Test_platform::parse_devices_test()
     QVERIFY( mice[0]      == "pci-0000:00:1d.1-usb-0:2:1.0-event-mouse" );
     QVERIFY( keyboards[0] == "pci-0000:00:1d.2-usb-0:2:1.0-event-kbd" );
 }
+
+void Test_platform::fs_rm_test()
+{
+    QTemporaryFile tmp_file;
+    tmp_file.open();
+    Platform::fs_rm(tmp_file.fileName());
+    QVERIFY(tmp_file.exists() == false);
+}
+
+void Test_platform::fs_rm_fail_test()
+{
+    QTemporaryFile tmp_file;
+    tmp_file.open();
+    tmp_file.remove();
+    QVERIFY_EXCEPTION_THROWN(Platform::fs_rm(tmp_file.fileName()),
+                             Platform_exception);
+}
