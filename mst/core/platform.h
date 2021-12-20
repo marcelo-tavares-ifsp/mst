@@ -108,12 +108,11 @@ QVector<QString> popen_read(const QString& program,
 QVector<QString> run_xrandr();
 
 /**
- * @brief run_ls_devices -- get a list of input
+ * @brief get_input_devices -- get a list of input
  *      devices.
  * @return a list of devices.
- * @throws Platform_exception
  */
-QVector<QString> run_ls_devices();
+QVector<QString> get_input_devices();
 
 /**
  * @brief parse_devices -- Parse input devices list.

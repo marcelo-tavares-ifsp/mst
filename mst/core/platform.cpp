@@ -65,7 +65,7 @@ QVector<QString> platform::run_xrandr()
     return platform::popen_read("xrandr", QStringList());
 }
 
-QVector<QString> platform::run_ls_devices()
+QVector<QString> platform::get_input_devices()
 {
     QDir dir(INPUT_DEVICES_PATH);
     QFileInfoList list = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::Dirs);
@@ -191,7 +191,7 @@ void platform::parse_devices(QVector<QString> devices,
 void Platform::get_input_devices(QVector<QString>& mice,
                                  QVector<QString>& keybds)
 {
-    QVector<QString> data = run_ls_devices();
+    QVector<QString> data = platform::get_input_devices();
     parse_devices(data, mice, keybds);
 }
 

@@ -192,7 +192,7 @@ int main(int argc, char *argv[])
     parser.process(*a);
 
     if (parser.isSet(list_input_devices)) {
-        for (QString dev : platform::run_ls_devices()) {
+        for (QString dev : platform::get_input_devices()) {
             cout << dev.toStdString() << endl;
         }
         return 0;
