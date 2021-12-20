@@ -176,8 +176,13 @@ int main(int argc, char *argv[])
                 QStringList() << "debug-allow-device-collisions",
                 QCoreApplication::translate("main",
                                             "Allow device collisions"));
+    QCommandLineOption list_input_devices(
+                QStringList() << "list-input-devices",
+                QCoreApplication::translate("main",
+                                            "Print a list input devices."));
 
     parser.addOption(list_backups_option);
+    parser.addOption(list_input_devices);
     parser.addOption(rollback_option);
     parser.addOption(start_option);
     parser.addOption(stop_option);
@@ -185,6 +190,13 @@ int main(int argc, char *argv[])
     parser.addOption(debug_allow_empty_devices);
     parser.addOption(debug_allow_device_collisions);
     parser.process(*a);
+
+    if (parser.isSet(list_input_devices)) {
+        for (QString dev : platform::run_ls_devices()) {
+            cout << dev.toStdString() << endl;
+        }
+        return 0;
+    }
 
     Configuration config;
     config.load(MST_CONFIG_FILE, MST_SEATS_CONFIG_FILE);
