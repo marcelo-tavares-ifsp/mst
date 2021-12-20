@@ -67,8 +67,13 @@ QVector<QString> platform::run_xrandr()
 
 QVector<QString> platform::run_ls_devices()
 {
-    return platform::popen_read("ls",
-                                QStringList() << INPUT_DEVICES_PATH);
+    QDir dir(INPUT_DEVICES_PATH);
+    QFileInfoList list = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::Dirs);
+    QVector<QString> result;
+    foreach (QFileInfo entry_info, list) {
+        result.append(entry_info.fileName());
+    }
+    return result;
 }
 
 //// Methods.
