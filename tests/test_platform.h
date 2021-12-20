@@ -15,6 +15,8 @@ private Q_SLOTS:
     void parse_devices_test();
     void fs_rm_test();
     void fs_rm_fail_test();
+    void fs_mkdir_test();
+    void fs_mkdir_fail_test();
 };
 
 #endif // TEST_PLATFORM_H

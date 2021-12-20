@@ -1,4 +1,6 @@
 #include <QtTest>
+#include <sys/stat.h>
+#include <iostream>
 
 #include "test_platform.h"
 #include "../mst/core/platform.h"
@@ -47,5 +49,25 @@ void Test_platform::fs_rm_fail_test()
     tmp_file.open();
     tmp_file.remove();
     QVERIFY_EXCEPTION_THROWN(Platform::fs_rm(tmp_file.fileName()),
+                             Platform_exception);
+}
+
+void Test_platform::fs_mkdir_test()
+{
+    QTemporaryDir tmp_dir;
+    QString test_path = tmp_dir.path() + "/test";
+    Platform::fs_mkdir(test_path);
+    QDir test_dir(test_path);
+
+    QVERIFY(test_dir.exists() == true);
+
+    test_dir.removeRecursively();
+    tmp_dir.remove();
+}
+
+void Test_platform::fs_mkdir_fail_test()
+{
+    QString test_path = "";
+    QVERIFY_EXCEPTION_THROWN(Platform::fs_mkdir(test_path),
                              Platform_exception);
 }
