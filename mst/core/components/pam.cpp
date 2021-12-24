@@ -37,7 +37,7 @@ void PAM::configure()
 {
     component_configuration.add(PAM_ENV_CONF, "/etc/security/pam_env.conf",
                                 "XDG_SEAT=seat0\n"
-                                "XDG_VTNR=1\n");
+                                "XDG_VTNR=2\n");
 }
 
 bool PAM::installed_p(const QString &path)
