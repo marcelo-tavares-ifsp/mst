@@ -130,10 +130,10 @@ QString Xorg::get_version()
 {
     try {
         QVector<QString> result = platform::popen_read(
-                    "xdpyinfo",
-                    QStringList(),
-                    QProcess::StandardOutput);
-        return (result.length() > 4) ? result[4] : nullptr;
+                    "X",
+                    QStringList() << "-version",
+                    QProcess::StandardError);
+	return (result.length() > 2) ? result[1] : nullptr;
     }  catch (Platform_exception& e) {
         return nullptr;
     }
