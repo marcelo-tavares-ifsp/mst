@@ -176,6 +176,10 @@ int main(int argc, char *argv[])
                 QStringList() << "debug-allow-device-collisions",
                 QCoreApplication::translate("main",
                                             "Allow device collisions"));
+    QCommandLineOption debug_allow_missing_components(
+                QStringList() << "debug-allow-missing-components",
+                QCoreApplication::translate("main",
+                                            "Allow missing components."));
     QCommandLineOption list_input_devices(
                 QStringList() << "list-input-devices",
                 QCoreApplication::translate("main",
@@ -189,6 +193,7 @@ int main(int argc, char *argv[])
     parser.addOption(status_option);
     parser.addOption(debug_allow_empty_devices);
     parser.addOption(debug_allow_device_collisions);
+     parser.addOption(debug_allow_missing_components);
     parser.process(*a);
 
     if (parser.isSet(list_input_devices)) {
@@ -201,6 +206,10 @@ int main(int argc, char *argv[])
     Configuration config;
     config.load(MST_CONFIG_FILE, MST_SEATS_CONFIG_FILE);
     Template_manager::get_instance()->set_template_dir(MST_TEMPLATE_DIR);
+
+    if (parser.isSet(debug_allow_missing_components)) {
+        config.allow_missing_components(true);
+    }
 
     if (geteuid() != 0)
     {

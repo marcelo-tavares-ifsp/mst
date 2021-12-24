@@ -139,6 +139,16 @@ void Configuration::allow_empty_devices(bool value)
     empty_devices_allowed_p = value;
 }
 
+void Configuration::allow_missing_components(bool value)
+{
+    missing_components_allowed = value;
+}
+
+bool Configuration::debug_missing_components_allowed_p() const
+{
+    return missing_components_allowed;
+}
+
 bool Configuration::is_valid()
 {
     size_t count_seats = seats.size();

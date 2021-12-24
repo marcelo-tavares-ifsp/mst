@@ -44,7 +44,7 @@ Component_manager::Component_manager(Configuration& config)
         }
     }
 
-    if (error_found) {
+    if (error_found && (! config.debug_missing_components_allowed_p())) {
         throw runtime_error("Some required components are missing");
     }
 }

@@ -56,6 +56,23 @@ public:
     void allow_empty_devices(bool value);
 
     /**
+     * @brief allow_missing_components -- Set whether missing MST components
+     *     (e.g. Awesome TWM) are allowed or not.
+     *
+     * Useful for debugging purposes.
+     *
+     * @param value -- 'true' or 'false'.
+     */
+    void allow_missing_components(bool value);
+
+    /**
+     * @brief debug_missing_components_allowed_p -- return 'true' if missing
+     *     components are allowed.
+     * @return a boolean value;
+     */
+    bool debug_missing_components_allowed_p() const;
+
+    /**
      * @brief is_valid -- Predicate.  Check if the configuration is valid.
      * @return true if it is, false otherwise.
      */
@@ -128,6 +145,13 @@ private:
      * the controller allows empty device configurations.
      */
     bool empty_devices_allowed_p = false;
+
+    /**
+     * @brief missing_components_allowed -- if this option is set to 'true',
+     * then the controller will not issue an error if any component is missing
+     * from the system.
+     */
+    bool missing_components_allowed = false;
 };
 
 #endif // CONFIGURATION_H
