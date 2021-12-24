@@ -39,9 +39,9 @@ System::System(Configuration& config) : Component("OS", config)
 
 void System::configure()
 {
-    component_configuration.add(BASHRC_FILE,
-                                "{{home}}/.bashrc",
-                                prepare_bashrc_template());
+    component_configuration.add(BASH_LOGIN_FILE,
+                                "{{home}}/.bash_login",
+                                prepare_bash_login_template());
 
     component_configuration.add(GETTY_FILE,
                                 "/lib/systemd/system/getty@.service",
@@ -110,10 +110,10 @@ Template System::prepare_getty_template()
  * @brief ConfigManager::make_bashrc -- Generate ".bashrc" file for multiseat
  *     user.
  */
-Template sys::prepare_bashrc_template()
+Template sys::prepare_bash_login_template()
 {
     Template bashrc_template = Template_manager::get_instance()->get_template(
-                BASHRC_FILE);
+                BASH_LOGIN_FILE);
     bashrc_template.set("tty", "1");
     return bashrc_template;
 }

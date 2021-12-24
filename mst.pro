@@ -50,7 +50,7 @@ scripts.path = $${PREFIX}/bin
 templates.files += \
     templates/10-mst.polkit.rules.template \
     templates/99-mst.rules.template \
-    templates/bashrc.template    \
+    templates/bash_login.template    \
     templates/getty@.service.template \
     templates/lightdm-mst.conf.old.template \
     templates/lightdm-mst.conf.template \
@@ -96,7 +96,7 @@ DISTFILES += \
     templates/99-mst.rules.template \
     templates/awesome/mst_autostart.lua.template \
     templates/awesome/xephyr_rules.lua.template \
-    templates/bashrc.template    \
+    templates/bash_login.template \
     templates/getty@.service.template \
     templates/lightdm-mst.conf.template \
     templates/rc.lua.4.template  \

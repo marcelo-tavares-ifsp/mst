@@ -33,7 +33,7 @@ Q_DECLARE_LOGGING_CATEGORY(component_system_category)
 namespace sys {
 
 //// Constants.
-const QString BASHRC_FILE = "bashrc";
+const QString BASH_LOGIN_FILE = "bash_login";
 const QString GETTY_FILE  = "getty@.service";
 const QString SEATS_CONFIG = "mst-seats";
 
@@ -58,7 +58,7 @@ public:
     Template prepare_getty_template();
 };
 
-Template prepare_bashrc_template();
+Template prepare_bash_login_template();
 
 }
 
