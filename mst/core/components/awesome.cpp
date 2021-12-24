@@ -75,10 +75,17 @@ void Awesome::install()
 
 QString Awesome::get_version()
 {
-    QVector<QString> result = platform::popen_read("awesome",
-                                                   QStringList() << "--version",
-                                                   QProcess::StandardOutput);
-    return result[0];
+    try {
+        QVector<QString> result = platform::popen_read(
+                    "awesome",
+                    QStringList() << "--version",
+                    QProcess::StandardOutput);
+        return (result.length() > 0) ? result[0] : nullptr;
+    }  catch (Platform_exception& e) {
+        qCCritical(component_awesome_category).noquote()
+                << e.what();
+        return nullptr;
+    }
 }
 
 void Awesome::prepare_rclua_template(Template& rclua_template)

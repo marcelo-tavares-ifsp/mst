@@ -78,10 +78,14 @@ void VGL::prepare_vgl_sh_template(Template& tpl)
 
 QString VGL::get_version()
 {
-    QVector<QString> result = platform::popen_read("vglclient",
-                                                   QStringList() << "-v",
-                                                   QProcess::StandardError);
-    return result[1];
+    try {
+        QVector<QString> result = platform::popen_read("vglclient",
+                                                       QStringList() << "-v",
+                                                       QProcess::StandardError);
+        return (result.length() > 1) ? result[1] : nullptr;
+    }  catch (Platform_exception& e) {
+        return nullptr;
+    }
 }
 
 

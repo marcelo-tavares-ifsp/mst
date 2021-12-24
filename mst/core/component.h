@@ -129,7 +129,7 @@ public:
      * @return A version string.
      */
     virtual QString get_version() {
-        return nullptr;
+        return "(version is unknown)";
     }
 
     /**

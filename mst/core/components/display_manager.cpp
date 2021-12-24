@@ -79,8 +79,16 @@ void Display_manager::enable() {
 
 QString Display_manager::get_version()
 {
-    QVector<QString> result = platform::popen_read("lightdm",
-                                                   QStringList() << "--version",
-                                                   QProcess::StandardError);
-    return result[0];
+    try {
+        QVector<QString> result = platform::popen_read(
+                    "lightdm",
+                    QStringList() << "--version",
+                    QProcess::StandardError);
+        return (result.length() > 0) ? result[0] : nullptr;
+    }  catch (Platform_exception& e) {
+        qCCritical(display_manager_category).noquote()
+                << e.what();
+        return nullptr;
+    }
+
 }

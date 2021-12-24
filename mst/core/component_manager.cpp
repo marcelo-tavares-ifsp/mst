@@ -28,12 +28,24 @@ Component_manager::Component_manager(Configuration& config)
     components.push_back(new PAM(config));
 
     qInfo(component_manager_category()) << "Component versions:";
+    bool error_found = false;
     for (auto component : components) {
         QString version = component->get_version();
         if (version != nullptr) {
             qInfo(component_manager_category()).noquote()
                     << "  " + component->get_name() + ": " + version;
+        } else {
+            qCritical(component_manager_category()).noquote()
+                    << "  " + component->get_name() + ": NOT FOUND";
+            std::cerr << component->get_name().toStdString()
+                      << ": NOT FOUND"
+                      << std::endl;
+            error_found = true;
         }
+    }
+
+    if (error_found) {
+        throw runtime_error("Some required components are missing");
     }
 }
 

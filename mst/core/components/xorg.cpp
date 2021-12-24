@@ -128,9 +128,13 @@ Template xorg::prepare_xinitrc_template()
 
 QString Xorg::get_version()
 {
-  QVector<QString> result = platform::popen_read("xdpyinfo",
-                                                 QStringList(),
-                                                 QProcess::StandardOutput);
-
-  return result[4];
+    try {
+        QVector<QString> result = platform::popen_read(
+                    "xdpyinfo",
+                    QStringList(),
+                    QProcess::StandardOutput);
+        return (result.length() > 4) ? result[4] : nullptr;
+    }  catch (Platform_exception& e) {
+        return nullptr;
+    }
 }
