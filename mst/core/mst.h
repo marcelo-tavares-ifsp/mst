@@ -18,8 +18,8 @@ Q_DECLARE_LOGGING_CATEGORY(mst_category)
  */
 class MST_exception: public std::runtime_error {
 public:
-    MST_exception(std::string what)
-        : std::runtime_error(what) {
+    MST_exception(QString what)
+        : std::runtime_error(what.toStdString()) {
         // Do nothing.
     }
 };
