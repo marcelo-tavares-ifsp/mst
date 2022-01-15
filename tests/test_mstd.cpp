@@ -9,7 +9,8 @@ Test_mstd::Test_mstd() : Test()
 bool Test_mstd::run_guile_test(QString file_name)
 {
     QString command
-            = "guile -L modules --no-auto-compile -s '" + file_name + "'";
+            = "guile -L "  + QString(SRCDIR) + "/modules"
+            + " --no-auto-compile -s '" + file_name + "'";
     return system(command.toStdString().c_str()) == 0;
 }
 
