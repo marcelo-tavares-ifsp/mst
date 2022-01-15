@@ -77,7 +77,7 @@
       (error "Could not start a Xephyr instance")))))
 
 (define (start-seats seat-number)
-  (log-info "Starting seats: ~a" seat-number)
+  (log-info "start-seats: Starting seats: ~a" seat-number)
   (let loop ((idx 1))
     (lightdm-add-seat idx)
     (when (< idx seat-number)

@@ -49,23 +49,23 @@
   (format #f "/usr/bin/dm-tool add-local-x-seat ~a" number))
 
 (define (lightdm-add-seat number)
-  (log-info "Adding seat number ~a" number)
+  (log-info "lightdm-add-seat: Adding seat number ~a" number)
   (system (%make-command:add-seat number)))
 
 
 (define (lightdm-start config-file)
-  (log-info "Starting lightdm with the config: ~a" config-file)
+  (log-info "lightdm-start: Starting lightdm with the config: ~a" config-file)
   (let ((pid (primitive-fork)))
-    (log-info "LightDM PID: ~a" pid)
+    (log-info "lightdm-start: LightDM PID: ~a" pid)
     (cond
      ((zero? pid)
       (execle %lightdm-binary (environ)
               %lightdm-binary "--config" config-file))
      ((> pid 0)
-      (log-info "Lightdm started.  PID: ~a" pid)
+      (log-info "lightdm-start: Lightdm started.  PID: ~a" pid)
       pid)
      (else
-      (log-error "Could not start the display manager")
+      (log-error "lightdm-start: Could not start the display manager")
       (error "Could not start the display manager")))))
 
 
