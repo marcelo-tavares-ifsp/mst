@@ -100,8 +100,8 @@
                           (log-info "    Docker ID: ~a" id)
                           (when id
                             (hash-set! *xephyrs*
-				       (seat-display seat-config)
-				       id)))))
+                                       (seat-display seat-config)
+                                       id)))))
 
                     config)
           (log-info "  starting Xephyrs ... done")
@@ -112,27 +112,27 @@
           (start-seats seat-count)
           (log-info "Starting seats: ~a ... done" seat-count)
 
-	  (system "chvt 2")
+          (system "chvt 2")
 
           (log-info "Starting main loop")
           (while #t
-                 (let ((running-seats-number (lightdm-running-seats)))
-                   (if (< running-seats-number seat-count)
-		       (begin
-			 (hash-for-each
-			  (lambda (key value)
-			    (unless (docker-container-running? value)
-			      (let* ((seat (config-get-seat config key))
-				     (id   (docker-start-xephyr seat)))
-				(if id
-				    (hash-set! *xephyrs* (seat-display seat) id)
-				    (log-error
-				     "Could not start a Docker container for seat: ~a"
-				     (seat-display seat))))))
-			  
-			  *xephyrs*)
-			 (start-seats seat-count))))
-                 (sleep 1)))
+            (let ((running-seats-number (lightdm-running-seats)))
+              (if (< running-seats-number seat-count)
+                  (begin
+                    (hash-for-each
+                     (lambda (key value)
+                       (unless (docker-container-running? value)
+                         (let* ((seat (config-get-seat config key))
+                                (id   (docker-start-xephyr seat)))
+                           (if id
+                               (hash-set! *xephyrs* (seat-display seat) id)
+                               (log-error
+                                "Could not start a Docker container for seat: ~a"
+                                (seat-display seat))))))
+
+                     *xephyrs*)
+                    (start-seats seat-count))))
+            (sleep 1)))
         (begin
           (log-info "Graphics is not available.  Waiting...")
           (sleep 1)
