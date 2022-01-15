@@ -1,7 +1,7 @@
 /* vgl.cpp -- VirtualGL configuration generator.
  *
- * Copyright (C) 2018-2021 "AZ Company Group" LLC <https://gkaz.ru/>
- * Copyright (C) 2018-2021 Artyom V. Poptsov <a@gkaz.ru>
+ * Copyright (C) 2018-2022 "AZ Company Group" LLC <https://gkaz.ru/>
+ * Copyright (C) 2018-2022 Artyom V. Poptsov <a@gkaz.ru>
  *
  * This file is part of MST.
  *
@@ -42,8 +42,6 @@ void VGL::configure()
     Template tpl = Template_manager::get_instance()->get_template(VGL_SH_FILE);
     prepare_vgl_sh_template(tpl);
     component_configuration.add(VGL_SH_FILE, "/etc/bashrc.d/", tpl);
-//    QString output_file = output_dir + "/" + VGL_SH_FILE;
-//    tpl.substitute(output_file.toStdString());
 }
 
 /**
@@ -87,8 +85,3 @@ QString VGL::get_version()
         return nullptr;
     }
 }
-
-
-//// Helper procedures.
-
-
