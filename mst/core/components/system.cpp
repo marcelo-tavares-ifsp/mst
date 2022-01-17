@@ -44,7 +44,7 @@ void System::configure()
                                 prepare_bash_login_template());
 
     component_configuration.add(GETTY_FILE,
-                                "/lib/systemd/system/getty@.service",
+                                "/lib/systemd/system/getty@tty1.service.d/override.conf",
                                 prepare_getty_template());
 
     component_configuration.add(SEATS_CONFIG,
@@ -56,12 +56,14 @@ void System::enable()
 {
     Platform::system_set_default_runlevel("multi-user");
     Platform::system_enable_service("mstd");
+    Platform::system_enable_service("getty@tty1");
 }
 
 void System::disable()
 {
     Platform::system_set_default_runlevel("graphical");
     Platform::system_disable_service("mstd");
+    Platform::system_disable_service("getty@tty1");
 }
 
 void System::start()

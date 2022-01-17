@@ -34,7 +34,7 @@ namespace sys {
 
 //// Constants.
 const QString BASH_LOGIN_FILE = "bash_login";
-const QString GETTY_FILE  = "getty@.service";
+const QString GETTY_FILE  = "getty.override.conf";
 const QString SEATS_CONFIG = "mst-seats";
 
 class System : public Component

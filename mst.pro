@@ -51,7 +51,7 @@ templates.files += \
     templates/10-mst.polkit.rules.template \
     templates/99-mst.rules.template \
     templates/bash_login.template    \
-    templates/getty@.service.template \
+    templates/getty.override.conf.template \
     templates/lightdm-mst.conf.old.template \
     templates/lightdm-mst.conf.template \
     templates/rc.lua.4.template  \
