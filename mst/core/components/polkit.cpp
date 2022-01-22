@@ -34,7 +34,8 @@ Polkit::Polkit(Configuration& config) : Component("pokit", config)
 
 void Polkit::configure()
 {
-    component_configuration.add(POLKIT_TEMPLATE_FILE, "/etc/polkit-1/rules.d/",
+    component_configuration.add(POLKIT_TEMPLATE_FILE,
+                                "/etc/polkit-1/rules.d/" + POLKIT_TEMPLATE_FILE,
                                 prepare_polkit_template());
 }
 
