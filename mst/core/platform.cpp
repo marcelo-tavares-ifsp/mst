@@ -255,14 +255,15 @@ void Platform::fs_rm(const QString& file)
  */
 void Platform::fs_cp(const QString &src, const QString &dst)
 {
-    qInfo(platform_category)
+    qInfo(platform_category).noquote()
             << "Copying '" << src << "' -> '" << dst << "' ...";
     if (Platform::exec("cp -p '" + src + "' '" + dst + "'") != 0)
     {
         QString message = "Could not copy: '" + src + "' -> '" + dst + "'";
+        qCritical().noquote() << message;
         throw Platform_exception(message);
     }
-    qInfo(platform_category)
+    qInfo(platform_category).noquote()
             << "Copying '" << src << "' -> '" << dst << "' ... done";
 }
 
