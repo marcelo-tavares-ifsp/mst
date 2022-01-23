@@ -33,6 +33,7 @@
             lightdm-add-seat
             lightdm-seat-running?
             lightdm-running-seats
+            lightdm-running-greeters
 
             %make-command:add-seat))
 
@@ -83,6 +84,14 @@
   "Get the number of running seats."
   (let ((data (read-line
                (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
+    (waitpid -1 WNOHANG)
+    (if (eof-object? data)
+        0
+        (string->number data))))
+
+(define (lightdm-running-greeters)
+  (let ((data (read-line
+               (open-input-pipe "ps aux | grep 'lightdm-.*-greeter' | grep -c -v grep"))))
     (waitpid -1 WNOHANG)
     (if (eof-object? data)
         0
