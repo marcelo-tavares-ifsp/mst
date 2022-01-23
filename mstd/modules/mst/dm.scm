@@ -88,12 +88,14 @@
     (if (graphics-available?)
         (begin
           (log-info "Graphics available")
+
           (unless (lightdm-started?)
             (log-info "  starting lightdm ...")
             (lightdm-start %lightdm-config)
             (log-info "  starting lightdm ... done"))
 
           (log-info "  starting Xephyrs ... ")
+
           (for-each (lambda (seat-config)
                       (when (seat-configured? seat-config)
                         (let ((id (docker-start-xephyr seat-config)))
@@ -106,13 +108,16 @@
                     config)
           (log-info "  starting Xephyrs ... done")
 
-          (sleep 2)
+	  (sleep 2)
 
           (log-info "Starting seats: ~a ..." seat-count)
           (start-seats seat-count)
           (log-info "Starting seats: ~a ... done" seat-count)
 
-          (system "chvt 2")
+	  (while (< (lightdm-running-greeters) seat-count)
+		 (sleep 1))
+
+	  (system "chvt 2")
 
           (log-info "Starting main loop")
           (while #t
@@ -131,7 +136,10 @@
                                 (seat-display seat))))))
 
                      *xephyrs*)
-                    (start-seats seat-count))))
+                    (start-seats seat-count)
+		    (while (< (lightdm-running-greeters) seat-count)
+			   (sleep 1))
+		    (system "chvt 2"))))
             (sleep 1)))
         (begin
           (log-info "Graphics is not available.  Waiting...")
