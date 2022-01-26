@@ -109,7 +109,7 @@
 
 
 (define-method (%display (seat <seat>) (port <port>))
-  (format port "#<seat ~a ~a ~a ~a ~a ~a>"
+  (format port "#<seat ~a ~a ~a ~a ~a ~a ~a>"
           (seat-display    seat)
           (seat-interface  seat)
           (seat-resolution seat)
