@@ -216,8 +216,6 @@ main() {
             ;;
         *)
             print_help_and_exit
-            build
-            install_mst
             ;;
     esac
     systemctl enable docker
