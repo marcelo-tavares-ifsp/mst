@@ -161,10 +161,11 @@ alt_version_supported_p() {
 
 install_deps_alt() {
     local version=$1
-    apt-get update
     if [ "$version" -eq 8 ]; then
+	apt-get update
 	install_deps_alt_p8
     elif [ "$version" -eq 9 ]; then
+	apt-get update
 	install_deps_alt_p9
     else
 	echo "ERROR: Unsupported ALT Linux release"
