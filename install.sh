@@ -177,16 +177,16 @@ main() {
     local distro="$1"
     local version
 
-    add_multiseat_user
-
     case $distro in
         "alt")
+	    add_multiseat_user
             install_deps_alt
 	    add_multiseat_user_to_wheel_group
             build
             install_mst
             ;;
         "ubuntu")
+	    add_multiseat_user
             install_deps_ubuntu
             ubuntu_add_user_to_groups
             build_ubuntu
