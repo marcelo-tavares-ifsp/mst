@@ -139,7 +139,7 @@ alt_get_version() {
     local version
     if $(command -V lsb_release &> /dev/null); then
 	version=$(lsb_release -r \
-		      | sed -e 's/Release:.*\([0-9]\).[0-9]/\1/g')
+		      | sed -e 's/Release:.*\([0-9]+\).[0-9]+/\1/g')
     else
 	version=$(cat /etc/system-release \
 		      | sed -e 's/.* \([0-9]\).[0-9].*/\1/g')
