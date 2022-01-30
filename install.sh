@@ -135,7 +135,7 @@ install_deps_alt_p9() {
     echo ">>> Installing required packages ... done"
 }
 
-install_deps_alt() {
+alt_get_version() {
     local version
     if $(command -V lsb_release &> /dev/null); then
 	version=$(lsb_release -r \
@@ -144,7 +144,23 @@ install_deps_alt() {
 	version=$(cat /etc/system-release \
 		      | sed -e 's/.* \([0-9]\).[0-9].*/\1/g')
     fi
+    echo $version
+}
 
+alt_version_supported_p() {
+    local version=$1
+    case $version in
+	8 | 9)
+	    echo true
+	    ;;
+	*)
+	    echo false
+	    ;;
+    esac
+}
+
+install_deps_alt() {
+    local version=$1
     apt-get update
     if [ "$version" -eq 8 ]; then
 	install_deps_alt_p8
@@ -179,12 +195,17 @@ main() {
 
     case $distro in
         "alt")
+	    version=$(alt_get_version)
+	    if [ $(alt_version_supported_p $version) == false ]; then
+		echo "ERROR: Unsupported ALT Linux release:" $version
+		exit 1
+	    fi
 	    add_multiseat_user
-            install_deps_alt
+	    install_deps_alt $version
 	    add_multiseat_user_to_wheel_group
-            build
-            install_mst
-            ;;
+	    build
+	    install_mst
+	    ;;
         "ubuntu")
 	    add_multiseat_user
             install_deps_ubuntu
