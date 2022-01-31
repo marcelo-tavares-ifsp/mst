@@ -214,6 +214,12 @@ main() {
 	    install_mst
 	    ;;
         "ubuntu")
+	    echo "MST for Ubuntu is going to be installed."
+	    read -p "Continue? (y/n) "
+	    if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
+		echo "Exiting..."
+		exit 0
+	    fi
 	    add_multiseat_user
             install_deps_ubuntu
             ubuntu_add_user_to_groups
