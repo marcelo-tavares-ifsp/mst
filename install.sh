@@ -178,7 +178,7 @@ cat <<EOF
 Usage: ./install.sh <distribution-name>
 
 Supported distributions:
-  - alt    -- ALT Linux P8/P9
+  - alt    -- ALT Linux P8/P9/P10
   - ubuntu -- Ubuntu 20.04
 
 Invocation example:
