@@ -139,7 +139,7 @@ alt_get_version() {
     local version
     if $(command -V lsb_release &> /dev/null); then
 	version=$(lsb_release -r \
-		      | sed -e 's/Release:.*\([0-9]+\).[0-9]+/\1/g')
+		      | sed -e 's/Release:.\([0-9]\+\).[0-9]\+.*$/\1/g')
     else
 	version=$(cat /etc/system-release \
 		      | sed -e 's/.* \([0-9]\).[0-9].*/\1/g')
@@ -150,7 +150,7 @@ alt_get_version() {
 alt_version_supported_p() {
     local version=$1
     case $version in
-	8 | 9)
+	8 | 9 | 10)
 	    echo true
 	    ;;
 	*)
@@ -160,11 +160,11 @@ alt_version_supported_p() {
 }
 
 install_deps_alt() {
-    local version=$1
+    local version="$1"
     if [ "$version" -eq 8 ]; then
 	apt-get update
 	install_deps_alt_p8
-    elif [ "$version" -eq 9 ]; then
+    elif [ "$version" -eq 9 ] || [ "$version" -eq 10 ]; then
 	apt-get update
 	install_deps_alt_p9
     else
@@ -200,6 +200,12 @@ main() {
 	    if [ $(alt_version_supported_p $version) == false ]; then
 		echo "ERROR: Unsupported ALT Linux release:" $version
 		exit 1
+	    fi
+	    echo "MST for ALT Linux P${version} is going to be installed."
+	    read -p "Continue? (y/n) "
+	    if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
+		echo "Exiting..."
+		exit 0
 	    fi
 	    add_multiseat_user
 	    install_deps_alt $version
