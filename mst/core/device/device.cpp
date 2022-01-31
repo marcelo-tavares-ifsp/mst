@@ -94,18 +94,18 @@ USB_device_scanner::~USB_device_scanner()
 
 QString USB_device_scanner::scan()
 {
-    fd_set fd_set;
+    fd_set fdd_set;
     struct timeval timeout;
 
     timeout.tv_sec = 10;
     timeout.tv_usec = 0;
 
-    FD_ZERO(&fd_set);
-    FD_SET(monitor_fd, &fd_set);
+    FD_ZERO(&fdd_set);
+    FD_SET(monitor_fd, &fdd_set);
 
     qDebug(device_category()) << ">>> SELECT <<<";
 
-    int selectRetVal = select(monitor_fd + 1, &fd_set, NULL, NULL, &timeout);
+    int selectRetVal = select(monitor_fd + 1, &fdd_set, NULL, NULL, &timeout);
 
     if (selectRetVal == -1)
     {
@@ -115,7 +115,7 @@ QString USB_device_scanner::scan()
 
     }
     QString devpath = nullptr;
-    if (FD_ISSET(monitor_fd, &fd_set))
+    if (FD_ISSET(monitor_fd, &fdd_set))
     {
         struct udev_device *dev = udev_monitor_receive_device(udev_monitor);
 
