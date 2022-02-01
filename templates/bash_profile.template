@@ -1,6 +1,4 @@
-#!/bin/bash
 
 if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty{{tty}} ]; then
     startx
 fi
-
