@@ -94,7 +94,7 @@ QString Bash::get_version() {
     try {
         QVector<QString> result = platform::popen_read(
                     "bash",
-                    QStringList() << "-version",
+                    QStringList() << "--version",
                     QProcess::StandardError);
     return (result.length() > 2) ? result[0] : nullptr;
     }  catch (Platform_exception& e) {
