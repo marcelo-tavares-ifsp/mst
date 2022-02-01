@@ -50,7 +50,7 @@ scripts.path = $${PREFIX}/bin
 templates.files += \
     templates/10-mst.polkit.rules.template \
     templates/99-mst.rules.template \
-    templates/bash_login.template    \
+    templates/bash_profile.template    \
     templates/getty.override.conf.template \
     templates/lightdm-mst.conf.old.template \
     templates/lightdm-mst.conf.template \
