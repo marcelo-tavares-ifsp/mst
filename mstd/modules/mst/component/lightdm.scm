@@ -76,22 +76,25 @@
                 (format #f "/usr/bin/dm-tool list-seats | grep 'Seat~a'"
                         (- id 1))))
          (result (read-line port)))
+    (close port)
     (waitpid -1 WNOHANG)
     (not (eof-object? result))))
 
 
 (define (lightdm-running-seats)
   "Get the number of running seats."
-  (let ((data (read-line
-               (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))))
+  (let* ((port (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))
+	 (data (read-line port)))
+    (close port)
     (waitpid -1 WNOHANG)
     (if (eof-object? data)
         0
         (string->number data))))
 
 (define (lightdm-running-greeters)
-  (let ((data (read-line
-               (open-input-pipe "ps aux | grep 'lightdm-.*-greeter' | grep -c -v grep"))))
+  (let* ((port (open-input-pipe "ps aux | grep 'lightdm-.*-greeter' | grep -c -v grep"))
+	 (data (read-line port)))
+    (close port)
     (waitpid -1 WNOHANG)
     (if (eof-object? data)
         0
@@ -101,6 +104,7 @@
 (define (lightdm-started?)
   (let* ((port   (open-input-pipe "ps aux | grep lightdm | grep -v grep"))
          (result (read-line port)))
+    (close port)
     (waitpid -1 WNOHANG)
     (not (eof-object? result))))
 
