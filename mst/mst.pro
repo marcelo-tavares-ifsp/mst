@@ -47,6 +47,7 @@ SOURCES += \
     core/component.cpp \
     core/component_manager.cpp \
     core/components/awesome.cpp \
+    core/components/bash.cpp \
     core/components/display_manager.cpp \
     core/components/pam.cpp \
     core/components/polkit.cpp \
@@ -81,6 +82,7 @@ HEADERS += \
     core/component.h \
     core/component_manager.h \
     core/components/awesome.h \
+    core/components/bash.h \
     core/components/display_manager.h \
     core/components/pam.h \
     core/components/polkit.h \

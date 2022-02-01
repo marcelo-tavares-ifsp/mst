@@ -96,7 +96,7 @@ DISTFILES += \
     templates/99-mst.rules.template \
     templates/awesome/mst_autostart.lua.template \
     templates/awesome/xephyr_rules.lua.template \
-    templates/bash_login.template \
+    templates/bash_profile.template \
     templates/getty@.service.template \
     templates/lightdm-mst.conf.template \
     templates/rc.lua.4.template  \

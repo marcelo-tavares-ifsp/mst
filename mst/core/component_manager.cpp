@@ -7,6 +7,7 @@
 #include "core/components/udev.h"
 #include "core/components/sudo.h"
 #include "core/components/display_manager.h"
+#include "core/components/bash.h"
 #include "core/components/system.h"
 #include "core/components/awesome.h"
 #include "core/components/xorg.h"
@@ -18,6 +19,7 @@ Q_LOGGING_CATEGORY(component_manager_category, "mst.core.component_manager")
 Component_manager::Component_manager(Configuration& config)
 {
     components.push_back(new awesome::Awesome(config));
+    components.push_back(new bash::Bash(config));
     components.push_back(new sys::System(config));
     components.push_back(new sudo::Sudo(config));
     components.push_back(new display_manager::Display_manager(config));
