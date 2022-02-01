@@ -55,8 +55,11 @@ bool Bash::installed_p(const QString &path)
 
 void Bash::install()
 {
+    const QString& mst_user_home = "/home/" + config.get_system_mst_user();
     const QString& path
-            = component_configuration.get_installation_path(BASH_PROFILE_FILE);
+            = Template(component_configuration.get_installation_path(BASH_PROFILE_FILE))
+            .set("home", mst_user_home)
+            .substitute();
     if (! installed_p(path)) {
         qInfo(component_bash_category())
                 << "Installing Bash configuration ...";
