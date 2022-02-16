@@ -11,6 +11,7 @@
 *** Display manager and Xephyr instances now start from 'mstd'
 *** Xephyr instances now start in Docker containers
 *** Seat resolutions now stored in the configuration
+*** LightDM now does not hide the user list
 *** Improve internationalization
 *** Remove backup scripts
     - scripts/mk_backup.sh
