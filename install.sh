@@ -2,8 +2,8 @@
 
 ### install.sh -- MST installation helper script
 
-# Copyright (C) 2021 "AZ Company Group" LLC <https://gkaz.ru/>
-# Copyright (C) 2021 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+# Copyright (C) 2021-2022 "AZ Company Group" LLC <https://gkaz.ru/>
+# Copyright (C) 2021-2022 Artyom V. Poptsov <poptsov.artyom@gmail.com>
 #
 # This file is part of MST.
 #
@@ -125,9 +125,9 @@ install_deps_alt_p9() {
             unclutter \
             lightdm \
             libqt5-core \
-	    libtool \
+            libtool \
             qt5-base-devel \
-	    qt5-tools \
+            qt5-tools \
             libudev-devel \
             virtualgl \
             Xdialog \
@@ -138,11 +138,11 @@ install_deps_alt_p9() {
 alt_get_version() {
     local version
     if $(command -V lsb_release &> /dev/null); then
-	version=$(lsb_release -r \
-		      | sed -e 's/Release:.\([0-9]\+\).[0-9]\+.*$/\1/g')
+  version=$(lsb_release -r \
+                | sed -e 's/Release:.\([0-9]\+\).[0-9]\+.*$/\1/g')
     else
-	version=$(cat /etc/system-release \
-		      | sed -e 's/.* \([0-9]\).[0-9].*/\1/g')
+  version=$(cat /etc/system-release \
+                | sed -e 's/.* \([0-9]\).[0-9].*/\1/g')
     fi
     echo $version
 }
@@ -150,26 +150,26 @@ alt_get_version() {
 alt_version_supported_p() {
     local version=$1
     case $version in
-	8 | 9 | 10)
-	    echo true
-	    ;;
-	*)
-	    echo false
-	    ;;
+  8 | 9 | 10)
+      echo true
+      ;;
+  *)
+      echo false
+      ;;
     esac
 }
 
 install_deps_alt() {
     local version="$1"
     if [ "$version" -eq 8 ]; then
-	apt-get update
-	install_deps_alt_p8
+  apt-get update
+  install_deps_alt_p8
     elif [ "$version" -eq 9 ] || [ "$version" -eq 10 ]; then
-	apt-get update
-	install_deps_alt_p9
+  apt-get update
+  install_deps_alt_p9
     else
-	echo "ERROR: Unsupported ALT Linux release"
-	exit 1
+  echo "ERROR: Unsupported ALT Linux release"
+  exit 1
     fi
 }
 
@@ -196,31 +196,31 @@ main() {
 
     case $distro in
         "alt")
-	    version=$(alt_get_version)
-	    if [ $(alt_version_supported_p $version) == false ]; then
-		echo "ERROR: Unsupported ALT Linux release:" $version
-		exit 1
-	    fi
-	    echo "MST for ALT Linux P${version} is going to be installed."
-	    read -p "Continue? (y/n) "
-	    if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
-		echo "Exiting..."
-		exit 0
-	    fi
-	    add_multiseat_user
-	    install_deps_alt $version
-	    add_multiseat_user_to_wheel_group
-	    build
-	    install_mst
-	    ;;
+      version=$(alt_get_version)
+      if [ $(alt_version_supported_p $version) == false ]; then
+    echo "ERROR: Unsupported ALT Linux release:" $version
+    exit 1
+      fi
+      echo "MST for ALT Linux P${version} is going to be installed."
+      read -p "Continue? (y/n) "
+      if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
+    echo "Exiting..."
+    exit 0
+      fi
+      add_multiseat_user
+      install_deps_alt $version
+      add_multiseat_user_to_wheel_group
+      build
+      install_mst
+      ;;
         "ubuntu")
-	    echo "MST for Ubuntu is going to be installed."
-	    read -p "Continue? (y/n) "
-	    if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
-		echo "Exiting..."
-		exit 0
-	    fi
-	    add_multiseat_user
+      echo "MST for Ubuntu is going to be installed."
+      read -p "Continue? (y/n) "
+      if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
+    echo "Exiting..."
+    exit 0
+      fi
+      add_multiseat_user
             install_deps_ubuntu
             ubuntu_add_user_to_groups
             build_ubuntu
