@@ -1,7 +1,7 @@
 #+TITLE: MST News -- history of user-visible changes.
 #+STARTUP: content hidestars
 
-* Unreleased
+* Changes in version 2.0.0 (2022-02-16)
 ** General changes
 *** Require Guile-UDev 2.0
     https://github.com/artyom-poptsov/guile-udev
