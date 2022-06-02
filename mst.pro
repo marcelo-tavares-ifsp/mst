@@ -125,7 +125,7 @@ rpm.commands += \
 
 rpm.depends += rpm_dist
 
-rpm_dist.commands += cd mst && make version.h && cd .. && make -j4 dist;
+rpm_dist.commands += make -j4 dist;
 rpm_dist.commands += \
     cd ..;                      \
     mkdir $$DIST_NAME;    \
