@@ -1,6 +1,7 @@
 #include "installwindow.h"
 #include "ui_installwindow.h"
 
+#include "config.h"
 #include "../about_dialog/about_dialog.h"
 
 #include <ui/seat_widget/seat_widget.h>
@@ -28,7 +29,7 @@ InstallWindow::InstallWindow(QWidget *parent) :
         qInfo(install_window_category()) << "MST is running";
     }
 
-    ui->Version->setText(QString::fromStdString(VERSION));
+    ui->Version->setText(QString::fromStdString(MST_VERSION_FULL));
 
     show_page(Ui::Page::START_PAGE);
 }

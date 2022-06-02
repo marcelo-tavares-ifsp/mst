@@ -1,0 +1,8 @@
+#ifndef __CONFIG_H__
+#define __CONFIG_H__
+
+#define MST_VERSION      '"$$MST_VERSION"'
+#define MST_HASH         '"$$MST_HASH"'
+#define MST_VERSION_FULL '"$$MST_VERSION_FULL"'
+
+#endif // __CONFIG_H__

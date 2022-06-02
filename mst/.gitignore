@@ -1,7 +1,7 @@
 moc_*
 ui_*
 mst
-version.h
+config.h
 mst.pro.user*
 *.gcno
 qrc_resources.cpp

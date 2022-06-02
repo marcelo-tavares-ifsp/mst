@@ -18,16 +18,11 @@ MST_HASH    = $$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")
 !isEmpty(MST_HASH) {
     MST_HASH = "-$${MST_HASH}"
 }
-versiontarget.target = ./version.h
-versiontarget.commands = \
-    @echo "  GEN      version.h"; \
-    echo \'const string VERSION = \"$${MST_VERSION}$${MST_HASH}\";\' > version.h
-versiontarget.depends = FORCE
-dist.depends = version.h
 
-QMAKE_EXTRA_TARGETS += versiontarget
+MST_VERSION_FULL = $${MST_VERSION}$${MST_HASH}
 
-PRE_TARGETDEPS += version.h
+QMAKE_SUBSTITUTES = config.h.in
+DISTFILES += config.h.in
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
