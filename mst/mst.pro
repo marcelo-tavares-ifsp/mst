@@ -21,6 +21,31 @@ MST_HASH    = $$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")
 
 MST_VERSION_FULL = $${MST_VERSION}$${MST_HASH}
 
+PATH_TO_XRANDR = $$system(which xrandr)
+isEmpty(PATH_TO_XRANDR) {
+    message("xrandr not found")
+}
+
+PATH_TO_PGREP = $$system(which pgrep)
+isEmpty(PATH_TO_PGREP) {
+    message("pgrep not found")
+}
+
+PATH_TO_PKILL = $$system(which pkill)
+isEmpty(PATH_TO_PKILL) {
+    message("pkill not found")
+}
+
+PATH_TO_XSET = $$system(which xset)
+isEmpty(PATH_TO_XSET) {
+    message("xset not found")
+}
+
+PATH_TO_SYSTEMCTL = $$system(which systemctl)
+isEmpty(PATH_TO_SYSTEMCTL) {
+    message("systemctl not found")
+}
+
 QMAKE_SUBSTITUTES = config.h.in
 DISTFILES += config.h.in
 
@@ -106,7 +131,7 @@ HEADERS += \
     ui/install_window/installwindow.h \
     ui/reboot_dialog/reboot_dialog.h \
     ui/seat_widget/seat_widget.h \
-    version.h
+    config.h
 
 FORMS += \
     ui/install_window/installwindow.ui \

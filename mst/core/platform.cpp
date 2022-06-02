@@ -12,6 +12,7 @@
 #include <QDir>
 #include <QProcess>
 
+#include "config.h"
 #include "platform.h"
 #include "core/types/xrandr_monitor.h"
 #include "core/utilites/utilites.h"
@@ -62,7 +63,8 @@ QVector<QString> platform::popen_read(const QString& program,
 
 QVector<QString> platform::run_xrandr()
 {
-    return platform::popen_read("xrandr", QStringList());
+    return platform::popen_read(QString(PATH_TO_XRANDR),
+                                QStringList());
 }
 
 QVector<QString> platform::get_input_devices()
@@ -80,26 +82,26 @@ QVector<QString> platform::get_input_devices()
 
 bool Platform::process_is_running(const QString& process_name)
 {
-    QString command = "pgrep -c " + process_name;
+    QString command = QString(PATH_TO_PGREP) + " -c " + process_name;
     return (system(command.toStdString().c_str()) == 0);
 }
 
 bool Platform::process_kill(const QString& process_name)
 {
-    QString command = "pkill " + process_name;
+    QString command = QString(PATH_TO_PKILL) + " " + process_name;
     return system(command.toStdString().c_str());
 }
 
 int Platform::xset_dpms()
 {
-    char cmd[100] = "xset -dpms";
-    return system(cmd);
+    QString command = QString(PATH_TO_XSET) + " -dpms";
+    return system(command.toStdString().c_str());
 }
 
 int Platform::xset_soff()
 {
-    char cmd[100] = "xset s off";
-    return system(cmd);
+    QString command = QString(PATH_TO_XSET) + " s off";
+    return system(command.toStdString().c_str());
 }
 
 /**
@@ -283,7 +285,8 @@ void Platform::fs_cp(const QString &src, const QString &dst)
  */
 void Platform::system_set_default_runlevel(const QString& target)
 {
-    if (Platform::exec("systemctl set-default " + target + ".target") != 0) {
+    if (Platform::exec(QString(PATH_TO_SYSTEMCTL)
+                       + " set-default " + target + ".target") != 0) {
         QString msg = "Could not set default target: " + target;
         qCritical(platform_category) << msg.toStdString().c_str();
         throw Platform_exception(msg);
@@ -296,12 +299,12 @@ void Platform::system_set_default_runlevel(const QString& target)
  */
 void Platform::system_enable_service(const QString& service_name)
 {
-    Platform::exec("systemctl enable " + service_name);
+    Platform::exec(QString(PATH_TO_SYSTEMCTL) + " enable " + service_name);
 }
 
 bool Platform::system_service_active_p(const QString& service_name)
 {
-    return Platform::exec("systemctl is-active --quiet " + service_name) == 0;
+    return Platform::exec(QString(PATH_TO_SYSTEMCTL) + " is-active --quiet " + service_name) == 0;
 }
 
 /**
@@ -310,17 +313,17 @@ bool Platform::system_service_active_p(const QString& service_name)
  */
 void Platform::system_disable_service(const QString& service_name)
 {
-    Platform::exec("systemctl disable " + service_name);
+    Platform::exec(QString(PATH_TO_SYSTEMCTL) + " disable " + service_name);
 }
 
 void Platform::system_stop_service(const QString& service_name)
 {
-    Platform::exec("systemctl stop " + service_name);
+    Platform::exec(QString(PATH_TO_SYSTEMCTL) + " stop " + service_name);
 }
 
 void Platform::system_start_service(const QString& service_name)
 {
-    Platform::exec("systemctl start " + service_name);
+    Platform::exec(QString(PATH_TO_SYSTEMCTL) + " start " + service_name);
 }
 
 /**
@@ -413,6 +416,7 @@ void Platform::chown(const QString& path, uid_t uid, gid_t gid,
 
 bool platform::is_graphics_available()
 {
-    return system("xset -q > /dev/null 2>&1") == 0;
+    QString command = QString(PATH_TO_XSET) + " -q > /dev/null 2>&1";
+    return system(command.toStdString().c_str()) == 0;
 }
 

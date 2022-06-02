@@ -5,4 +5,12 @@
 #define MST_HASH         '"$$MST_HASH"'
 #define MST_VERSION_FULL '"$$MST_VERSION_FULL"'
 
+/* Paths to the required programs. */
+#define PATH_TO_XRANDR        '"$$PATH_TO_XRANDR"'
+#define PATH_TO_PGREP         '"$$PATH_TO_PGREP"'
+#define PATH_TO_PKILL         '"$$PATH_TO_PKILL"'
+#define PATH_TO_XSET          '"$$PATH_TO_XSET"'
+#define PATH_TO_SYSTEMCTL     '"$$PATH_TO_SYSTEMCTL"'
+
+
 #endif // __CONFIG_H__
