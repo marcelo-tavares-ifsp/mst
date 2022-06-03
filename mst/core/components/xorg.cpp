@@ -19,6 +19,7 @@
  * along with MST.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
 #include "xorg.h"
 #include "../configuration.h"
 #include "../types/template.h"
@@ -130,7 +131,7 @@ QString Xorg::get_version()
 {
     try {
         QVector<QString> result = platform::popen_read(
-                    "X",
+                    QString(PATH_TO_X),
                     QStringList() << "-version",
                     QProcess::StandardError);
 	return (result.length() > 2) ? result[1] : nullptr;

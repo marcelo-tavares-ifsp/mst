@@ -15,5 +15,6 @@
 #define PATH_TO_LIGHTDM       '"$$PATH_TO_LIGHTDM"'
 #define PATH_TO_VGLCLIENT     '"$$PATH_TO_VGLCLIENT"'
 #define PATH_TO_VGLSERVER_CONFIG '"$$PATH_TO_VGLSERVER_CONFIG"'
+#define PATH_TO_X                '"$$PATH_TO_X"'
 
 #endif // __CONFIG_H__
