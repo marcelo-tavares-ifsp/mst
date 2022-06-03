@@ -53,7 +53,9 @@ void VGL::configure()
  */
 void VGL::enable()
 {
-    if (Platform::exec("echo -e '1\nn\nn\nn\nx\n' | vglserver_config") != 0) {
+    QString command = "echo -e '1\nn\nn\nn\nx\n' | "
+            + QString(PATH_TO_VGLSERVER_CONFIG);
+    if (Platform::exec(command) != 0) {
         throw Component_error("Could not configure VirtualGL server");
     }
 }
@@ -64,7 +66,9 @@ void VGL::enable()
  */
 void VGL::disable()
 {
-    if (Platform::exec("echo -e '2\nx\n' | vglserver_config") != 0) {
+    QString command = "echo -e '2\nx\n' | "
+            + QString(PATH_TO_VGLSERVER_CONFIG);
+    if (Platform::exec(command) != 0) {
         throw Component_error("Could not un-configure VirtualGL server");
     }
     // TODO: This must be in a 'remove' method.

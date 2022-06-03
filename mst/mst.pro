@@ -63,6 +63,11 @@ isEmpty(PATH_TO_VGLCLIENT) {
     message("vglclient not found")
 }
 
+PATH_TO_VGLSERVER_CONFIG = $$system(which vglserver_config)
+isEmpty(PATH_TO_VGLSERVER_CONFIG) {
+    message("vglserver_config not found")
+}
+
 QMAKE_SUBSTITUTES = config.h.in
 DISTFILES += config.h.in
 
