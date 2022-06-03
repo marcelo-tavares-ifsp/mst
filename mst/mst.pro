@@ -48,6 +48,11 @@ isEmpty(PATH_TO_SYSTEMCTL) {
     message("systemctl not found")
 }
 
+PATH_TO_AWESOME = $$system(which awesome)
+isEmpty(PATH_TO_AWESOME) {
+    message("awesome not found")
+}
+
 QMAKE_SUBSTITUTES = config.h.in
 DISTFILES += config.h.in
 

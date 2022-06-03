@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "config.h"
 #include "awesome.h"
 #include "../component.h"
 #include "../utilites/utilites.h"
@@ -58,7 +59,6 @@ void Awesome::configure()
                 << "Using rc.lua.template for Awesome 4";
         template_name = RC_LUA4_TPL_FILE;
     }
-
     Template rclua_template
             = Template_manager::get_instance()->get_template(template_name);
     prepare_rclua_template(rclua_template);
@@ -77,7 +77,7 @@ QString Awesome::get_version()
 {
     try {
         QVector<QString> result = platform::popen_read(
-                    "awesome",
+                    QString(PATH_TO_AWESOME),
                     QStringList() << "--version",
                     QProcess::StandardOutput);
         return (result.length() > 0) ? result[0] : nullptr;

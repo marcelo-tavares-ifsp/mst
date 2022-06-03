@@ -11,6 +11,7 @@
 #define PATH_TO_PKILL         '"$$PATH_TO_PKILL"'
 #define PATH_TO_XSET          '"$$PATH_TO_XSET"'
 #define PATH_TO_SYSTEMCTL     '"$$PATH_TO_SYSTEMCTL"'
+#define PATH_TO_AWESOME       '"$$PATH_TO_AWESOME"'
 
 
 #endif // __CONFIG_H__
