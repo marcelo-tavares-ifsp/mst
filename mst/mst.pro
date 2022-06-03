@@ -16,10 +16,12 @@ TEMPLATE = app
 MST_VERSION = $${VERSION}
 MST_HASH    = $$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")
 !isEmpty(MST_HASH) {
-    MST_HASH = "-$${MST_HASH}"
+    MST_VERSION_FULL = $${MST_VERSION}-$${MST_HASH}
+} else {
+    MST_VERSION_FULL = $${MST_VERSION}-$${MST_HASH}
 }
 
-MST_VERSION_FULL = $${MST_VERSION}$${MST_HASH}
+
 
 PATH_TO_XRANDR = $$system(which xrandr)
 isEmpty(PATH_TO_XRANDR) {
