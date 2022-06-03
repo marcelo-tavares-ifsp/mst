@@ -53,6 +53,11 @@ isEmpty(PATH_TO_AWESOME) {
     message("awesome not found")
 }
 
+PATH_TO_LIGHTDM = $$system(which lightdm)
+isEmpty(PATH_TO_LIGHTDM) {
+    message("lightdm not found")
+}
+
 QMAKE_SUBSTITUTES = config.h.in
 DISTFILES += config.h.in
 

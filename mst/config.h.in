@@ -12,6 +12,6 @@
 #define PATH_TO_XSET          '"$$PATH_TO_XSET"'
 #define PATH_TO_SYSTEMCTL     '"$$PATH_TO_SYSTEMCTL"'
 #define PATH_TO_AWESOME       '"$$PATH_TO_AWESOME"'
-
+#define PATH_TO_LIGHTDM       '"$$PATH_TO_LIGHTDM"'
 
 #endif // __CONFIG_H__

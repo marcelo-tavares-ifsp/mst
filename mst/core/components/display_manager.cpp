@@ -19,6 +19,7 @@
  * along with MST.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
 #include "display_manager.h"
 
 #include "../component.h"
@@ -81,7 +82,7 @@ QString Display_manager::get_version()
 {
     try {
         QVector<QString> result = platform::popen_read(
-                    "lightdm",
+                    QString(PATH_TO_LIGHTDM),
                     QStringList() << "--version",
                     QProcess::StandardError);
         return (result.length() > 0) ? result[0] : nullptr;
