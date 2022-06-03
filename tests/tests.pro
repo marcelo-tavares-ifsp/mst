@@ -90,8 +90,12 @@ DISTFILES += \
 
 DEFINES += INSTALLATION_PREFIX=\\\"\\\"
 
-copydata.commands = cd $$PWD; \
-    $(COPY) $$DISTFILES $$OUT_PWD || :
+# Copy required data to the build directory.
+!equals(PWD, $$OUT_PWD) {
+    copydata.commands = \
+        cd $$PWD; \
+        $(COPY) $$DISTFILES $$OUT_PWD || :
+}
 
 copy_guile_modules.commands = \
     $(COPY) -r ../mstd/modules $$OUT_PWD/ || :
