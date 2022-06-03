@@ -19,6 +19,7 @@
  * along with MST.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
 #include "vgl.h"
 
 #include "../types/template.h"
@@ -79,7 +80,7 @@ void VGL::prepare_vgl_sh_template(Template& tpl)
 QString VGL::get_version()
 {
     try {
-        QVector<QString> result = platform::popen_read("vglclient",
+        QVector<QString> result = platform::popen_read(QString(PATH_TO_VGLCLIENT),
                                                        QStringList() << "-v",
                                                        QProcess::StandardError);
         return (result.length() > 1) ? result[1] : nullptr;

@@ -58,6 +58,11 @@ isEmpty(PATH_TO_LIGHTDM) {
     message("lightdm not found")
 }
 
+PATH_TO_VGLCLIENT = $$system(which vglclient)
+isEmpty(PATH_TO_VGLCLIENT) {
+    message("vglclient not found")
+}
+
 QMAKE_SUBSTITUTES = config.h.in
 DISTFILES += config.h.in
 
