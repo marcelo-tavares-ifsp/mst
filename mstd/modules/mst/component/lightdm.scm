@@ -1,7 +1,7 @@
 ;;; lightdm.scm -- LightDM procedures.
 
-;; Copyright (C) 2021 "AZ Company Group" LLC <https://gkaz.ru/>
-;; Copyright (C) 2021 Artyom V. Poptsov <a@gkaz.ru>
+;; Copyright (C) 2021-2022 "AZ Company Group" LLC <https://gkaz.ru/>
+;; Copyright (C) 2021-2022 Artyom V. Poptsov <a@gkaz.ru>
 ;;
 ;; This program is free software: you can redistribute it and/or modify it under
 ;; the terms of the GNU General Public License as published by the Free Software
@@ -34,6 +34,7 @@
             lightdm-seat-running?
             lightdm-running-seats
             lightdm-running-greeters
+	    lightdm-delete-pid-file!
 
             %make-command:add-seat))
 
@@ -114,6 +115,11 @@ otherwise."
 	 (close port)
 	 (and (not (eof-object? result))
 	      (file-exists? (format #f "/proc/~a" result))))))
+
+(define (lightdm-delete-pid-file!)
+  "Delete the LightDM PID file if it exists."
+  (when (file-exists? %lightdm-pid-file)
+    (delete-file %lightdm-pid-file)))
 
 ;;; lightdm.scm ends here.
 
