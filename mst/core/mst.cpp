@@ -169,12 +169,56 @@ void MST::configure()
     component_manager->store_configurations(out_dir);
 }
 
+void MST::create_multiseat_user()
+{
+    const QString mst_user = config->get_system_mst_user();
+    struct passwd* pwd = Platform::getpwnam(mst_user);
+    if (pwd) {
+        QString message = "User '" + mst_user + "' already exists";
+        qInfo(mst_category()).noquote() << message;
+        return;
+    }
+
+    qInfo(mst_category()).noquote()
+            << "Creating user '" + mst_user + "' ...";
+    int rc = Platform::exec("useradd -m -s /bin/bash '" + mst_user + "'");
+    if (rc != 0) {
+        QString message = "Could not create a user '" + mst_user + "'";
+        qCritical(mst_category()).noquote() << message;
+        throw MST_exception(message);
+    }
+    qInfo(mst_category()).noquote()
+            << "Creating user '" + mst_user + "' ... done";
+
+    QVector<QString> groups = {
+        "wheel", "docker", "video", "render", "sudo"
+    };
+
+    qInfo(mst_category()).noquote()
+            << "Adding '" + mst_user + "' to groups ...";
+
+    for (auto group : groups) {
+        qInfo(mst_category()).noquote()
+                << "  Adding '" + mst_user + "' to '" + group + "'";
+        rc = Platform::exec("usermod -a -G " + group + " '" + mst_user + "'");
+        if (rc != 0) {
+            QString message = "Could add user '" + mst_user + "' to group '" + group + "'";
+            qWarning(mst_category()).noquote() << message;
+        }
+    }
+
+    qInfo(mst_category()).noquote()
+            << "Adding '" + mst_user + "' to groups ... done";
+}
+
 /**
  * @brief MST::install_files -- Install al configuration files.
  * @throws MST_exception on errors.
  */
 void MST::install()
 {
+    create_multiseat_user();
+
     const QString mst_user = config->get_system_mst_user();
     struct passwd* pwd = Platform::getpwnam(mst_user);
     if (! pwd) {

@@ -187,6 +187,14 @@ private:
     Component_manager* component_manager;
 
     QString backup_dir;
+
+    /**
+     * @brief create_multiseat_user -- Create the multiseat user.
+     *
+     * The username of the multiseat user must be specified in the
+     * configuration file.
+     */
+    void create_multiseat_user();
 };
 
 #endif // INSTALLCONTROLLER_H
