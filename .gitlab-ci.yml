@@ -3,7 +3,15 @@ test-alt-p8:
   script:
   - apt-get update -yqq
   - apt-get install git -yqq
-  - apt-get install -yqq libudev-devel awesome unclutter xorg-xephyr qt5-base-common qt5-base-devel make guile20 qt5-tools
+  - apt-get install -yqq
+    libudev-devel
+    awesome
+    unclutter
+    xorg-xephyr
+    qt5-base-common
+    qt5-base-devel
+    make guile20
+    qt5-tools
   - qmake-qt5
   - make -j2
   - make -j2 check
