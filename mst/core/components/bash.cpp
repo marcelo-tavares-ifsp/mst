@@ -66,11 +66,11 @@ void Bash::install()
         QFile output_file(path);
         output_file.open(QIODevice::WriteOnly | QIODevice::Append);
         QTextStream stream(&output_file);
-        stream << endl
-               << COMMENT_MARK << " " << BEGIN_MARK << endl
+        stream << Qt::endl
+               << COMMENT_MARK << " " << BEGIN_MARK << Qt::endl
                << component_configuration.get_template(BASH_PROFILE_FILE)
                   .substitute()
-               << COMMENT_MARK << " " << END_MARK << endl;
+               << COMMENT_MARK << " " << END_MARK << Qt::endl;
         output_file.close();
         qInfo(component_bash_category())
                 << "Installing Bash configuration ... done";

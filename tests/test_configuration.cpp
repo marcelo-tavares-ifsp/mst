@@ -43,7 +43,7 @@ void Test_configuration::load_seats_config_test()
         system_config.remove();
         QTextStream stream(&seats_config);
         stream << "1 LVDS-1 1280x800 pci-0000:00:1d.2-usb-0:2:1.0-event-kbd platform-i8042-serio-4-event-mouse /devices/pci0000:00/0000:00:1d.7/usb4/4-4"
-               << endl;
+               << Qt::endl;
         config.load(file_name, seats_config.fileName());
     }
 
@@ -106,7 +106,7 @@ void Test_configuration::is_valid_one_unconfigured_seat_test()
         system_config.remove();
         QTextStream stream(&seats_config);
         stream << "1 LVDS-1 1280x800 pci-0000:00:1d.2-usb-0:2:1.0-event-kbd platform-i8042-serio-4-event-mouse"
-               << endl;
+               << Qt::endl;
         config.load(file_name, seats_config.fileName());
     }
 
@@ -126,7 +126,7 @@ void Test_configuration::is_valid_one_configured_seat_test()
         system_config.remove();
         QTextStream stream(&seats_config);
         stream << "1 LVDS-1 1280x800 pci-0000:00:1d.2-usb-0:2:1.0-event-kbd platform-i8042-serio-4-event-mouse /devices/pci0000:00/0000:00:1d.7/usb4/4-4"
-               << endl;
+               << Qt::endl;
         config.load(file_name, seats_config.fileName());
     }
 

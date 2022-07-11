@@ -74,10 +74,10 @@ void PAM::install()
             QFile output_file(path);
             output_file.open(QIODevice::WriteOnly | QIODevice::Append);
             QTextStream stream(&output_file);
-            stream << endl
-                   << COMMENT_MARK << " " << BEGIN_MARK << endl
+            stream << Qt::endl
+                   << COMMENT_MARK << " " << BEGIN_MARK << Qt::endl
                    << component_configuration.get_template(PAM_ENV_CONF).substitute()
-                   << COMMENT_MARK << " " << END_MARK << endl;
+                   << COMMENT_MARK << " " << END_MARK << Qt::endl;
             output_file.close();
             qInfo(component_pam_category())
                     << "Installing PAM configuration ... done";

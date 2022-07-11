@@ -85,7 +85,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context,
     case QtFatalMsg:    out << "FTL "; break;
     }
 
-    out << context.category << ": " << msg << endl;
+    out << context.category << ": " << msg << Qt::endl;
     out.flush();
 }
 
