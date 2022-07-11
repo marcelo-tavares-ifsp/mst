@@ -176,17 +176,18 @@ void MST::configure()
 void MST::install()
 {
     const QString mst_user = config->get_system_mst_user();
-    const QString mst_user_home = "/home/" + mst_user + "/";
-    Platform::fs_mkdir(mst_user_home + ".local/share/mst/output/");
-
-    component_manager->install_components();
-
     struct passwd* pwd = Platform::getpwnam(mst_user);
     if (! pwd) {
         QString message = "User '" + mst_user + "' is not found";
         qCritical(mst_category()).noquote() << message;
         throw MST_exception(message);
     }
+
+    const QString mst_user_home = "/home/" + mst_user + "/";
+    Platform::fs_mkdir(mst_user_home + ".local/share/mst/output/");
+
+    component_manager->install_components();
+
     Platform::chown(mst_user_home, pwd->pw_uid, pwd->pw_gid, true);
 }
 
