@@ -26,6 +26,7 @@
 #include <memory>
 #include <pwd.h> // getpwnam
 
+#include "config.h"
 #include "core/platform.h"
 #include "core/types/xrandr_monitor.h"
 
@@ -37,7 +38,7 @@ Q_LOGGING_CATEGORY(mst_category, "mst.core.mst")
 MST::MST()
 {
     qInfo(mst_category())
-            << "Running on:" << Platform::system_release() << Qt::endl;
+            << "Running on:" << Platform::system_release() << ENDL;
 }
 
 // public methods ///////////////////////////////////////////////////////////////

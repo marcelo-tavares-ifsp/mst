@@ -19,6 +19,7 @@
  * along with MST.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
 #include "configuration.h"
 
 #include <assert.h>
@@ -38,8 +39,8 @@ static bool create_config_file(QFile& file) {
         return false;
     }
     QTextStream out(&file);
-    out << "user:multiseat" << Qt::endl
-        << "lightdm-greeter:gtk" << Qt::endl;
+    out << "user:multiseat" << ENDL
+        << "lightdm-greeter:gtk" << ENDL;
     file.close();
     return true;
 }

@@ -19,6 +19,7 @@
  * along with MST.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
 #include "pam.h"
 
 Q_LOGGING_CATEGORY(component_pam_category, "mst.core.component.pam")
@@ -74,10 +75,10 @@ void PAM::install()
             QFile output_file(path);
             output_file.open(QIODevice::WriteOnly | QIODevice::Append);
             QTextStream stream(&output_file);
-            stream << Qt::endl
-                   << COMMENT_MARK << " " << BEGIN_MARK << Qt::endl
+            stream << ENDL
+                   << COMMENT_MARK << " " << BEGIN_MARK << ENDL
                    << component_configuration.get_template(PAM_ENV_CONF).substitute()
-                   << COMMENT_MARK << " " << END_MARK << Qt::endl;
+                   << COMMENT_MARK << " " << END_MARK << ENDL;
             output_file.close();
             qInfo(component_pam_category())
                     << "Installing PAM configuration ... done";

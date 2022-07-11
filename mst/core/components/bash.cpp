@@ -19,6 +19,7 @@
  * along with MST.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
 #include "bash.h"
 
 Q_LOGGING_CATEGORY(component_bash_category, "mst.core.component.bash")
@@ -66,11 +67,11 @@ void Bash::install()
         QFile output_file(path);
         output_file.open(QIODevice::WriteOnly | QIODevice::Append);
         QTextStream stream(&output_file);
-        stream << Qt::endl
-               << COMMENT_MARK << " " << BEGIN_MARK << Qt::endl
+        stream << ENDL
+               << COMMENT_MARK << " " << BEGIN_MARK << ENDL
                << component_configuration.get_template(BASH_PROFILE_FILE)
                   .substitute()
-               << COMMENT_MARK << " " << END_MARK << Qt::endl;
+               << COMMENT_MARK << " " << END_MARK << ENDL;
         output_file.close();
         qInfo(component_bash_category())
                 << "Installing Bash configuration ... done";
