@@ -127,8 +127,6 @@
 	  (while (< (lightdm-running-greeters) seat-count)
 		 (sleep 1))
 
-	  (system "chvt 2")
-
           (log-info "Starting main loop")
           (while #t
             (let ((running-seats-number (lightdm-running-seats)))
