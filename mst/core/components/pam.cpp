@@ -62,7 +62,7 @@ void PAM::install()
     qInfo(component_pam_category()).noquote()
             << "System release: " << system_release;
     // ALT Education 9.1 (FalcoRusticolus)
-    QRegExp alt_re("ALT.*9.*");
+    QRegExp alt_re("ALT.*[9,10].*");
     if (alt_re.exactMatch(system_release)) {
         qInfo(component_pam_category())
                 << "ALT 9 is found";
