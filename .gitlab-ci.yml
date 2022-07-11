@@ -1,19 +1,38 @@
-image: alt:p8
-
-# Select what we should cache
-# cache:
-#   paths:
-#   - vendor/
-
-before_script:
-# Install git, the php image doesn't have installed
-- apt-get update -yqq
-- apt-get install git -yqq
-- apt-get install -yqq libudev-devel awesome unclutter xorg-xephyr qt5-base-common qt5-base-devel make guile20 qt5-tools
-
-test:app:
+test-alt-p8:
+  image: alt:p8
   script:
+  - apt-get update -yqq
+  - apt-get install git -yqq
+  - apt-get install -yqq libudev-devel awesome unclutter xorg-xephyr qt5-base-common qt5-base-devel make guile20 qt5-tools
   - qmake-qt5
   - make -j2
   - make -j2 check
 
+test-alt-p10:
+  image: alt:p10
+  script:
+  - apt-get update -yqq
+  - apt-get install -yqq
+    git
+    guile22-devel
+    texinfo
+    autoconf_2.60
+    automake
+    make
+    gettext
+    gettext-tools
+    awesome
+    docker-ce
+    unclutter
+    lightdm
+    libqt5-core
+    libtool
+    qt5-base-devel
+    qt5-tools
+    libudev-devel
+    virtualgl
+    Xdialog
+    guile22
+  - qmake-qt5
+  - make -j2
+  - make -j2 check
