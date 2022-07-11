@@ -533,6 +533,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 os.execute("sudo /usr/bin/xset -dpms")
+os.execute("sudo /usr/bin/xset s noblank")
 os.execute("sudo /usr/bin/xset s off")
 
 {{mst_autostart}}
