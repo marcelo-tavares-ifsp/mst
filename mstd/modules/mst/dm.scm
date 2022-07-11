@@ -1,7 +1,7 @@
 ;;; dm.scm -- Display manager procedures.
 
-;; Copyright (C) 2021 "AZ Company Group" LLC <https://gkaz.ru/>
-;; Copyright (C) 2021 Artyom V. Poptsov <a@gkaz.ru>
+;; Copyright (C) 2021-2022 "AZ Company Group" LLC <https://gkaz.ru/>
+;; Copyright (C) 2021-2022 Artyom V. Poptsov <a@gkaz.ru>
 ;;
 ;; This program is free software: you can redistribute it and/or modify it under
 ;; the terms of the GNU General Public License as published by the Free Software
@@ -42,15 +42,23 @@
 
             %make-command:xephyr/docker))
 
+
 (define *debug?* #f)
 
 (define (set-dm-debug! value)
   (set! *debug?* value))
 
+
+;; The path to the LightDM configuration file.
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
+
+;; The path to the Xephyr binary.
+;;
+;; TODO: configure the path on the MST build.
 (define %xephyr-binary "/usr/bin/Xephyr")
 
 
+;; Hash table that stores the running Xephyr instances.
 (define *xephyrs* (make-hash-table 2))
 
 (define (start-xephyr display-number resolution mouse keyboard)
@@ -77,6 +85,7 @@
       (error "Could not start a Xephyr instance")))))
 
 (define (start-seats seat-number)
+  "Start SEAT-NUMBER of LightDM seats.  Return value is undefined."
   (log-info "start-seats: Starting seats: ~a" seat-number)
   (let loop ((idx 1))
     (lightdm-add-seat idx)
@@ -84,6 +93,7 @@
       (loop (+ idx 1)))))
 
 (define (main-loop config)
+  "Display manager main loop."
   (let ((seat-count (length config)))
     (if (graphics-available?)
         (begin
