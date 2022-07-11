@@ -45,21 +45,6 @@ install_mst() {
     make install
 }
 
-add_multiseat_user() {
-    useradd -m -s /bin/bash $MST_USER
-}
-
-add_multiseat_user_to_wheel_group() {
-    usermod -a -G wheel $MST_USER
-}
-
-ubuntu_add_user_to_groups() {
-    usermod -a -G docker $MST_USER
-    usermod -a -G video $MST_USER
-    usermod -a -G render $MST_USER
-    usermod -a -G sudo $MST_USER
-}
-
 install_deps_ubuntu() {
     apt update
     echo ">>> Installing VirtualGL ... "
@@ -207,9 +192,7 @@ main() {
     echo "Exiting..."
     exit 0
       fi
-      add_multiseat_user
       install_deps_alt $version
-      add_multiseat_user_to_wheel_group
       build
       install_mst
       ;;
@@ -220,9 +203,7 @@ main() {
     echo "Exiting..."
     exit 0
       fi
-      add_multiseat_user
             install_deps_ubuntu
-            ubuntu_add_user_to_groups
             build_ubuntu
             install_mst
             ;;
