@@ -39,8 +39,8 @@ static bool create_config_file(QFile& file) {
         return false;
     }
     QTextStream out(&file);
-    out << "user:multiseat" << ENDL
-        << "lightdm-greeter:gtk" << ENDL;
+    out << "user:multiseat" << Qt::endl
+        << "lightdm-greeter:gtk" << Qt::endl;
     file.close();
     return true;
 }

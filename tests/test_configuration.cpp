@@ -1,5 +1,6 @@
 #include <QTest>
 
+#include "config.h"
 #include "test.h"
 #include "test_configuration.h"
 
