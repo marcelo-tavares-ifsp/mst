@@ -41,6 +41,7 @@
 ;;; Constants.
 
 (define %lightdm-binary "/usr/sbin/lightdm")
+(define %lightdm-pid-file "/var/run/mstd-lightdm.pid")
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
 
 
@@ -60,8 +61,11 @@
     (log-info "lightdm-start: LightDM PID: ~a" pid)
     (cond
      ((zero? pid)
-      (execle %lightdm-binary (environ)
-              %lightdm-binary "--config" config-file))
+      (execle %lightdm-binary
+	      (environ)
+              %lightdm-binary
+	      "--config" config-file
+	      "--pid-file" %lightdm-pid-file))
      ((> pid 0)
       (log-info "lightdm-start: Lightdm started.  PID: ~a" pid)
       pid)
@@ -102,11 +106,14 @@
 
 
 (define (lightdm-started?)
-  (let* ((port   (open-input-pipe "ps aux | grep lightdm | grep -v grep"))
-         (result (read-line port)))
-    (close port)
-    (waitpid -1 WNOHANG)
-    (not (eof-object? result))))
+  "Check if the LigthDM process is started.  Return #t if it is, #f
+otherwise."
+  (and (file-exists? %lightdm-pid-file)
+       (let* ((port   (open-input-file %lightdm-pid-file))
+	      (result (read-line port 'trim)))
+	 (close port)
+	 (and (not (eof-object? result))
+	      (file-exists? (format #f "/proc/~a" result))))))
 
 ;;; lightdm.scm ends here.
 
