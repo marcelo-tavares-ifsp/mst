@@ -13,8 +13,8 @@ test-alt-p8:
     make guile20
     qt5-tools
   - qmake-qt5
-  - make -j2
-  - make -j2 check
+  - make -j$(nproc)
+  - make -j$(nproc) check
 
 test-alt-p10:
   image: alt:p10
@@ -42,5 +42,5 @@ test-alt-p10:
     Xdialog
     guile22
   - qmake-qt5
-  - make -j2
-  - make -j2 check
+  - make -j$(nproc)
+  - make -j$(nproc) check
