@@ -6,7 +6,6 @@ test-alt-p8:
   - apt-get install -yqq
     libudev-devel
     awesome
-    unclutter
     xorg-xephyr
     qt5-base-common
     qt5-base-devel
@@ -31,7 +30,6 @@ test-alt-p10:
     gettext-tools
     awesome
     docker-ce
-    unclutter
     lightdm
     libqt5-core
     libtool
