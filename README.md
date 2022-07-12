@@ -35,7 +35,6 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 
 * Awesome
 * Docker
-* unclutter
 * lightdm
 * bash
 * libqt5-core
@@ -101,7 +100,6 @@ $ sudo apt-get install \
     docker.io \
     libudev-dev \
     awesome \
-    unclutter \
     build-essential \
     qt5-default \
     qtbase5-dev \

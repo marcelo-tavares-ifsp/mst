@@ -59,7 +59,6 @@ install_deps_ubuntu() {
         libudev-dev \
         lightdm \
         awesome \
-        unclutter \
         build-essential \
         qt5-default \
         qtbase5-dev \
@@ -84,7 +83,6 @@ install_deps_alt_p8() {
             gettext \
             awesome \
             docker-ce \
-            unclutter \
             lightdm \
             libqt5-core \
             libudev-devel \
@@ -107,7 +105,6 @@ install_deps_alt_p9() {
             gettext-tools \
             awesome \
             docker-ce \
-            unclutter \
             lightdm \
             libqt5-core \
             libtool \
