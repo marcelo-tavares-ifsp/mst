@@ -36,6 +36,9 @@
 	    docker-stop
 	    docker-container-rm
 
+	    mouse->xephyr-device
+	    keyboard->xephyr-device
+
 	    %make-command:xephyr/docker))
 
 
@@ -65,6 +68,16 @@
             (log-error "Could not run command: ~a" command)
             #f)))))
 
+(define (mouse->xephyr-device mouse-device)
+  "Convert a MOUSE-DEVICE to a format suitable for passing to '-mouse'
+Xephyr option."
+  (format #f "evdev,5,device=~a" mouse-device))
+
+(define (keyboard->xephyr-device keyboard-device)
+  "Convert a KEYBOARD-DEVICE to a format suitable for passing to
+'-keybd' Xephyr option."
+  (format #f "evdev,,device=~a" keyboard-device))
+
 (define (%make-command:xephyr/docker display-number resolution mouse keyboard)
   (let ((mouse-dev    (device-name->path mouse))
         (keyboard-dev (device-name->path keyboard)))
@@ -91,8 +104,8 @@
                            "-ac"
                            "-br"
                            "-resizeable"
-                           "-mouse" (format #f "evdev,5,device=~a" mouse-dev)
-                           "-keybd" (format #f "evdev,,device=~a" keyboard-dev)
+                           "-mouse" (mouse->xephyr-device mouse-dev)
+                           "-keybd" (keyboard->xephyr-device keyboard-dev)
                            "-screen" (format #f "~a" resolution)
                            (format #f ":~a" display-number)))
         #f)))
