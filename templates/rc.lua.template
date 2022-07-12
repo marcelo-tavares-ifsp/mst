@@ -305,4 +305,3 @@ os.execute("sudo /usr/bin/xset -dpms")
 os.execute("sudo /usr/bin/xset s noblank")
 os.execute("sudo /usr/bin/xset s off")
 
-{{mst_autostart}}

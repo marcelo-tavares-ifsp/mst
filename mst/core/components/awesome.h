@@ -58,7 +58,6 @@ public:
 
 //// Helper procedures.
 
-extern QString make_xephyr_autostart();
 extern QString make_xephyr_rules(uint32_t sSize);
 
 }

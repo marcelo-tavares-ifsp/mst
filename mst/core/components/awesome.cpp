@@ -1,4 +1,4 @@
-/* awesome.cpp -- Awesome configuration.
+y/* awesome.cpp -- Awesome configuration.
  *
  * Copyright (C) 2020-2021 "AZ Company Group" LLC <https://gkaz.ru/>
  * Copyright (C) 2020-2021 Artyom V. Poptsov <a@gkaz.ru>b
@@ -91,27 +91,10 @@ QString Awesome::get_version()
 void Awesome::prepare_rclua_template(Template& rclua_template)
 {
     rclua_template
-        .set("mst_autostart",   make_xephyr_autostart())
         .set("mst_awful_rules", make_xephyr_rules(config.get_seat_count()));
 }
 
 //// Helper procedures.
-
-/**
- * @brief make_xephyr_autostart -- Generate Xephyr autostart commands for
- *     "rc.lua".
- *
- * Generate Lua code that starts Xephyr instances from Awesome "rc.lua" file.
- *
- * @return Generated Lua code as a string.
- */
-QString awesome::make_xephyr_autostart()
-{
-    Template tpl = Template_manager::get_instance()
-            ->get_template("awesome/mst_autostart.lua");
-    tpl.set("prefix", QString::fromLocal8Bit(INSTALLATION_PREFIX));
-    return tpl.substitute();
-}
 
 /**
  * @brief make_xephyr_rules -- Generate Awesome rules to arrange Xephyr
