@@ -161,6 +161,7 @@
      ((zero? pid)
       (let ((sighandler (lambda (arg)
                           (dm-stop-xephyrs)
+                          (lightdm-delete-pid-file!)
                           (exit))))
         (sigaction SIGINT sighandler)
         (sigaction SIGTERM sighandler))
