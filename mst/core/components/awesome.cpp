@@ -1,4 +1,4 @@
-y/* awesome.cpp -- Awesome configuration.
+/* awesome.cpp -- Awesome configuration.
  *
  * Copyright (C) 2020-2021 "AZ Company Group" LLC <https://gkaz.ru/>
  * Copyright (C) 2020-2021 Artyom V. Poptsov <a@gkaz.ru>b
