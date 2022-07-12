@@ -5,8 +5,8 @@
 
 ;;; mstd -- MST daemon.
 
-;; Copyright (C) 2020-2021 "AZ Company Group" LLC <https://gkaz.ru/>
-;; Copyright (C) 2020-2021 Artyom V. Poptsov <a@gkaz.ru>
+;; Copyright (C) 2020-2022 "AZ Company Group" LLC <https://gkaz.ru/>
+;; Copyright (C) 2020-2022 Artyom V. Poptsov <a@gkaz.ru>
 ;;
 ;; This program is free software: you can redistribute it and/or modify it under
 ;; the terms of the GNU General Public License as published by the Free Software
@@ -96,10 +96,10 @@ Options:
          (help-wanted?  (option-ref options 'help     #f)))
 
     (when help-wanted?
-          (print-help-and-exit))
+      (print-help-and-exit))
 
     (when stderr-wanted?
-          (log-use-stderr! #t))
+      (log-use-stderr! #t))
 
     (set! *debug?* debug-wanted?)
     (set-system-debug! debug-wanted?)
@@ -114,17 +114,17 @@ Options:
             (delete-file pid-file))))
 
     (when detach-wanted
-          (let ((pid (primitive-fork)))
-            (cond
-             ((zero? pid)
-              (log-info "mstd started")
-              (setsid))
-             ((> pid 0)
-              (log-info "mstd PID: ~a" pid)
-              (exit))
-             (#t
-              (log-error "Could not fork the process.")
-              (error "Could not fork the process.")))))
+      (let ((pid (primitive-fork)))
+	(cond
+	 ((zero? pid)
+	  (log-info "mstd started")
+	  (setsid))
+	 ((> pid 0)
+	  (log-info "mstd PID: ~a" pid)
+	  (exit))
+	 (#t
+	  (log-error "Could not fork the process.")
+	  (error "Could not fork the process.")))))
 
     (write-pid pid-file)
 
