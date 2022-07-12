@@ -62,37 +62,6 @@
              (("\\$\\$\\[QT_INSTALL_BINS\\]/lrelease")
               (string-append (assoc-ref inputs "qttools")
                              "/bin/lrelease")))
-           (substitute* "mst/core/components/awesome.cpp"
-             (("awesome --version")
-              (format #f
-                      "~a/bin/awesome --version"
-                      (assoc-ref inputs "awesome"))))
-           (substitute* "mst/core/components/display_manager.cpp"
-             (("platform::popen_read\\(\"lightdm\",")
-              (format #f
-                      "platform::popen_read(\"~a/sbin/lightdm\","
-                      (assoc-ref inputs "lightdm"))))
-           (substitute* "mst/core/components/xorg.cpp"
-             (("xdpyinfo")
-              (format #f
-                      "~a/bin/xdpyinfo"
-                      (assoc-ref inputs "xdpyinfo"))))
-           (substitute* "mst/core/components/vgl.cpp"
-             (("vglclient")
-              (format #f
-                      "~a/bin/vglclient"
-                      (assoc-ref inputs "virtualgl")))
-             (("vglserver_config")
-              (format #f
-                      "~a/bin/vglserver_config"
-                      (assoc-ref inputs "virtualgl"))))
-           (substitute* "mst/main.cpp"
-             (("set_template_dir\\(\"/var/lib/mst/\"\\)")
-              (format #f
-                      "set_template_dir(\"~a/var/lib/mst/\")"
-                      (assoc-ref outputs "out")))
-             (("xset")
-              (format #f "~a/usr/bin/xset" (assoc-ref inputs "xset"))))
            (substitute* "templates/vgl.sh.template"
              (("/var/lib/vgl/vgl_xauth_key")
               (format #f
