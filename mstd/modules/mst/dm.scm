@@ -36,6 +36,7 @@
   #:use-module (mst component lightdm)
   #:use-module (mst core log)
   #:use-module (mst core seat)
+  #:use-module (mst unmouser)
   #:export (dm-start
             dm-stop-xephyrs
             is-seat-used?
@@ -92,7 +93,7 @@
     (when (< idx seat-number)
       (loop (+ idx 1)))))
 
-(define (main-loop config)
+(define (main-loop config unmouser)
   "Display manager main loop."
   (let ((seat-count (length config)))
     (if (graphics-available?)
@@ -117,6 +118,8 @@
 
                     config)
           (log-info "  starting Xephyrs ... done")
+
+          (unmouser-toggle unmouser)
 
 	  (sleep 2)
 
@@ -159,13 +162,16 @@
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
-      (let ((sighandler (lambda (arg)
+      (let* ((unmouser (make <unmouser>))
+             (sighandler (lambda (arg)
                           (dm-stop-xephyrs)
+                          (unmouser-toggle unmouser)
+                          (unmouser-free unmouser)
                           (lightdm-delete-pid-file!)
                           (exit))))
         (sigaction SIGINT sighandler)
         (sigaction SIGTERM sighandler))
-      (main-loop config))
+      (main-loop config unmouser))
      ((> pid 0)
       (log-info "Display manager started; PID: ~a" pid)
       pid)
