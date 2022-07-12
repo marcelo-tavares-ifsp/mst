@@ -18,18 +18,6 @@ Test_awesome::Test_awesome()
 {
 }
 
-void Test_awesome::make_xephyr_autostart()
-{
-    QString result = awesome::make_xephyr_autostart();
-
-    QFile expected_output_file("./test_awesome_mst_autostart.lua");
-    expected_output_file.open(QIODevice::ReadOnly);
-    QString expected_output;
-    QTextStream s1(&expected_output_file);
-    expected_output.append(s1.readAll());
-    QVERIFY2(result == expected_output, result.toStdString().c_str());
-}
-
 void Test_awesome::make_xephyr_rules() {
     QString result = awesome::make_xephyr_rules(1);
     QFile expected_output_file("./test_awesome_xephyr_rules.lua");
