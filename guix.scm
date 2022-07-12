@@ -166,7 +166,6 @@
   (inputs
    (list awesome
          docker
-         unclutter
          lightdm
          bash-minimal
          guile-udev
