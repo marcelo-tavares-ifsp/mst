@@ -27,15 +27,37 @@
 
 (define-module (mst unmouser)
   #:use-module (oop goops)
-  #:use-module (system foreign-library)
+  ;; #:use-module (system foreign-library)
   #:use-module (system foreign)
   #:export (<unmouser>
             unmouser-toggle
             unmouser-free))
 
 
-;; Low-level procedures.
+;; XXX: ALT Linux 8, 9, 10 does not have (system foreign-library) so we have
+;; to use this dirty hack to provide 'foreign-library-function'.
 
+(define *libs* (make-hash-table))
+
+(define* (foreign-library-function lib
+                                   name
+                                   #:key
+                                   (return-type void)
+                                   (arg-types '())
+                                   (return-errno? #f))
+  (let* ((handle (if (hash-ref *libs* lib)
+                     (hash-ref *libs* lib)
+                     (let ((handle (dynamic-link lib)))
+                       (hash-set! *libs* lib handle)
+                       handle)))
+         (pointer (dynamic-func name handle)))
+    (pointer->procedure return-type
+                        pointer
+                        arg-types
+                        #:return-errno? return-errno?)))
+
+
+;; Low-level procedures.
 (define x-open-display
   (foreign-library-function "libX11"
                             "XOpenDisplay"
