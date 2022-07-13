@@ -156,7 +156,7 @@
         (begin
           (log-info "Graphics is not available.  Waiting...")
           (sleep 1)
-          (main-loop config)))))
+          (main-loop config unmouser)))))
 
 (define (dm-start config)
   "Returns a new thread."
