@@ -35,6 +35,7 @@
             lightdm-running-seats
             lightdm-running-greeters
 	    lightdm-delete-pid-file!
+            lightdm-pid
 
             %make-command:add-seat))
 
@@ -44,6 +45,19 @@
 (define %lightdm-binary "/usr/sbin/lightdm")
 (define %lightdm-pid-file "/var/run/mstd-lightdm.pid")
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
+
+
+(define (lightdm-pid)
+  "Get the LigthDM PID.  Return #f on error."
+  (let ((port (open-input-file %lightdm-pid-file)))
+    (if port
+        (let ((pid (read-line port)))
+          (close port)
+          pid)
+        (begin
+          (log-error "Could not open LightDM PID file: ~a"
+                     %lightdm-pid-file)
+          #f))))
 
 
 ;;;
