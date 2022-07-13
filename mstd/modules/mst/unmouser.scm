@@ -108,6 +108,12 @@
    #:init-keyword #:display-number
    #:getter       unmouser-display-number)
 
+  ;; <string>
+  (xauthority-file
+   #:init-value   #f
+   #:init-keyword #:xauthority-file
+   #:getter       unmouser-xauthority-file)
+
   ;; <pointer>
   (display
    #:init-value   #f
@@ -125,6 +131,7 @@
   "The class constructor."
   (next-method)
   (setenv "DISPLAY" (format #f ":~a" (unmouser-display-number unmouser)))
+  (setenv "XAUTHORITY" (unmouser-xauthority-file unmouser))
   (let* ((display (x-open-display %null-pointer))
          (screen  (x-default-screen display)))
     (unmouser-display-set! unmouser display)
