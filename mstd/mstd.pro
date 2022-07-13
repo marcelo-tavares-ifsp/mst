@@ -9,6 +9,18 @@ isEmpty(PREFIX) {
 executable.files = mstd
 executable.path  = $${PREFIX}/bin/
 
+# XXX: ALT Linux 8, 9, 10 does not have (system foreign-library) module
+# in GNU Guile, even in Guile 3.0, so we need to install the module
+# on such systems.
+DISTRIBUTION = $$system(lsb_release -i | cut -f2)
+contains(DISTRIBUTION, "ALT") {
+    guile_modules_system.files = \
+        modules/system/foreign-library.scm
+    guile_modules_system.path = \
+        $${PREFIX}/share/guile/site/system/
+    INSTALLS += guile_modules_system
+}
+
 guile_modules_mst.files = \
     modules/mst/config.scm  \
     modules/mst/docker.scm  \
