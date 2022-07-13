@@ -102,6 +102,12 @@
 
 
 (define-class <unmouser> ()
+  ;; <number>
+  (display-number
+   #:init-value   0
+   #:init-keyword #:display-number
+   #:getter       unmouser-display-number)
+
   ;; <pointer>
   (display
    #:init-value   #f
@@ -118,6 +124,7 @@
 (define-method (initialize (unmouser <unmouser>) initargs)
   "The class constructor."
   (next-method)
+  (setenv "DISPLAY" (format #f ":~a" (unmouser-display-number unmouser)))
   (let* ((display (x-open-display %null-pointer))
          (screen  (x-default-screen display)))
     (unmouser-display-set! unmouser display)
