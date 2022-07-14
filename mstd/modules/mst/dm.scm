@@ -94,14 +94,25 @@
     (when (< idx seat-number)
       (loop (+ idx 1)))))
 
-(define (main-loop config unmouser)
+(define (main-loop config)
   "Display manager main loop."
-  (let ((seat-count (length config)))
 
-    (unless (lightdm-started?)
-      (log-info "  starting lightdm ...")
-      (lightdm-start %lightdm-config)
-      (log-info "  starting lightdm ... done"))
+  (unless (lightdm-started?)
+    (log-info "  starting lightdm ...")
+    (lightdm-start %lightdm-config)
+    (log-info "  starting lightdm ... done"))
+
+  (let* ((seat-count (length config))
+         (unmouser (make <unmouser>))
+         (sighandler (lambda (arg)
+                       (dm-stop-xephyrs)
+                       (unmouser-toggle unmouser)
+                       (unmouser-free unmouser)
+                       (lightdm-delete-pid-file!)
+                       (exit))))
+
+    (sigaction SIGINT sighandler)
+    (sigaction SIGTERM sighandler)
 
     (log-info "  starting Xephyrs ... ")
 
@@ -168,16 +179,7 @@ Return value is the same as for PROC."
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
-      (let* ((unmouser (make <unmouser>))
-             (sighandler (lambda (arg)
-                          (dm-stop-xephyrs)
-                          (unmouser-toggle unmouser)
-                          (unmouser-free unmouser)
-                          (lightdm-delete-pid-file!)
-                          (exit))))
-        (sigaction SIGINT sighandler)
-        (sigaction SIGTERM sighandler)
-        (with-graphics main-loop config unmouser)))
+      (with-graphics main-loop config))
      ((> pid 0)
       (log-info "Display manager started; PID: ~a" pid)
       pid)
