@@ -98,6 +98,8 @@
 (define (main-loop config)
   "Display manager main loop."
 
+  (awesome-wait)
+
   (let* ((seat-count (length config))
          (awesome-environ (awesome-proc-environ))
          (unmouser (make <unmouser>
