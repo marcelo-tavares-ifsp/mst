@@ -191,6 +191,23 @@ void MST::create_multiseat_user()
     qInfo(mst_category()).noquote()
             << "Creating user '" + mst_user + "' ... done";
 
+    qInfo(mst_category()).noquote()
+        << "Changing the owner of '/home/" << mst_user << "'"
+        << " to '" << mst_user << ":" << mst_user << "' ...";
+
+    rc = Platform::exec("chown -R " + mst_user + ":" + mst_user
+                        + " '/home/" + mst_user + "'");
+    if (rc != 0) {
+        QString message = "Could not change the ownership of '"
+            + mst_user + "' home directory";
+        qCritical(mst_category()).noquote() << message;
+        throw MST_exception(message);
+    }
+
+    qInfo(mst_category()).noquote()
+        << "Changing the owner of '/home/" << mst_user << "'"
+        << " to '" << mst_user << ":" << mst_user << "' ... done";
+
     QVector<QString> groups = {
         "wheel", "docker", "video", "render", "sudo"
     };
