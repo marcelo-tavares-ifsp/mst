@@ -29,6 +29,7 @@
   #:use-module (oop goops)
   ;; #:use-module (system foreign-library)
   #:use-module (system foreign)
+  #:use-module (mst core log)
   #:export (<unmouser>
             unmouser-toggle
             unmouser-free))
@@ -131,7 +132,9 @@
   "The class constructor."
   (next-method)
   (setenv "DISPLAY" (format #f ":~a" (unmouser-display-number unmouser)))
-  (setenv "XAUTHORITY" (unmouser-xauthority-file unmouser))
+  (when (unmouser-xauthority-file unmouser)
+    (setenv "XAUTHORITY" (unmouser-xauthority-file unmouser))
+    (log-info "initialize: XAUTHORITY: ~a" (unmouser-xauthority-file unmouser)))
   (let* ((display (x-open-display %null-pointer))
          (screen  (x-default-screen display)))
     (unmouser-display-set! unmouser display)
