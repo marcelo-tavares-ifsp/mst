@@ -35,6 +35,7 @@
   #:use-module (mst docker)
   #:use-module (mst system)
   #:use-module (mst component lightdm)
+  #:use-module (mst component awesome)
   #:use-module (mst core log)
   #:use-module (mst core seat)
   #:use-module (mst unmouser)
@@ -97,13 +98,12 @@
 (define (main-loop config)
   "Display manager main loop."
 
-  (unless (lightdm-started?)
-    (log-info "  starting lightdm ...")
-    (lightdm-start %lightdm-config)
-    (log-info "  starting lightdm ... done"))
-
   (let* ((seat-count (length config))
-         (unmouser (make <unmouser>))
+         (awesome-environ (awesome-proc-environ))
+         (unmouser (make <unmouser>
+                     #:display-number 0
+                     #:xauthority-file (assoc-ref awesome-environ
+                                                  "XAUTHORITY")))
          (sighandler (lambda (arg)
                        (dm-stop-xephyrs)
                        (unmouser-toggle unmouser)
@@ -113,6 +113,15 @@
 
     (sigaction SIGINT sighandler)
     (sigaction SIGTERM sighandler)
+
+    (unmouser-toggle unmouser)
+
+    (sleep 5)
+
+    (unless (lightdm-started?)
+      (log-info "  starting lightdm ...")
+      (lightdm-start %lightdm-config)
+      (log-info "  starting lightdm ... done"))
 
     (log-info "  starting Xephyrs ... ")
 
@@ -127,8 +136,6 @@
 
               config)
     (log-info "  starting Xephyrs ... done")
-
-    (unmouser-toggle unmouser)
 
     (sleep 2)
 
