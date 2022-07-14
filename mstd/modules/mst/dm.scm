@@ -97,66 +97,71 @@
 (define (main-loop config unmouser)
   "Display manager main loop."
   (let ((seat-count (length config)))
-    (if (graphics-available?)
-        (begin
-          (log-info "Graphics available")
 
-          (unless (lightdm-started?)
-            (log-info "  starting lightdm ...")
-            (lightdm-start %lightdm-config)
-            (log-info "  starting lightdm ... done"))
+    (unless (lightdm-started?)
+      (log-info "  starting lightdm ...")
+      (lightdm-start %lightdm-config)
+      (log-info "  starting lightdm ... done"))
 
-          (log-info "  starting Xephyrs ... ")
+    (log-info "  starting Xephyrs ... ")
 
-          (for-each (lambda (seat-config)
-                      (when (seat-configured? seat-config)
-                        (let ((id (docker-start-xephyr seat-config)))
-                          (log-info "    Docker ID: ~a" id)
-                          (when id
-                            (hash-set! *xephyrs*
-                                       (seat-display seat-config)
-                                       id)))))
+    (for-each (lambda (seat-config)
+                (when (seat-configured? seat-config)
+                  (let ((id (docker-start-xephyr seat-config)))
+                    (log-info "    Docker ID: ~a" id)
+                    (when id
+                      (hash-set! *xephyrs*
+                                 (seat-display seat-config)
+                                 id)))))
 
-                    config)
-          (log-info "  starting Xephyrs ... done")
+              config)
+    (log-info "  starting Xephyrs ... done")
 
-          (unmouser-toggle unmouser)
+    (unmouser-toggle unmouser)
 
-	  (sleep 2)
+    (sleep 2)
 
-          (log-info "Starting seats: ~a ..." seat-count)
-          (start-seats seat-count)
-          (log-info "Starting seats: ~a ... done" seat-count)
+    (log-info "Starting seats: ~a ..." seat-count)
+    (start-seats seat-count)
+    (log-info "Starting seats: ~a ... done" seat-count)
 
-	  (while (< (lightdm-running-greeters) seat-count)
-		 (sleep 1))
+    (while (< (lightdm-running-greeters) seat-count)
+           (sleep 1))
 
-          (log-info "Starting main loop")
-          (while #t
-            (let ((running-seats-number (lightdm-running-seats)))
-              (if (< running-seats-number seat-count)
-                  (begin
-                    (hash-for-each
-                     (lambda (key value)
-                       (unless (docker-container-running? value)
-                         (let* ((seat (config-get-seat config key))
-                                (id   (docker-start-xephyr seat)))
-                           (if id
-                               (hash-set! *xephyrs* (seat-display seat) id)
-                               (log-error
-                                "Could not start a Docker container for seat: ~a"
-                                (seat-display seat))))))
+    (log-info "Starting main loop")
+    (while #t
+           (let ((running-seats-number (lightdm-running-seats)))
+             (if (< running-seats-number seat-count)
+                 (begin
+                   (hash-for-each
+                    (lambda (key value)
+                      (unless (docker-container-running? value)
+                        (let* ((seat (config-get-seat config key))
+                               (id   (docker-start-xephyr seat)))
+                          (if id
+                              (hash-set! *xephyrs* (seat-display seat) id)
+                              (log-error
+                               "Could not start a Docker container for seat: ~a"
+                               (seat-display seat))))))
 
-                     *xephyrs*)
-                    (start-seats seat-count)
-		    (while (< (lightdm-running-greeters) seat-count)
-			   (sleep 1))
-		    (system "chvt 2"))))
-            (sleep 1)))
-        (begin
-          (log-info "Graphics is not available.  Waiting...")
-          (sleep 1)
-          (main-loop config unmouser)))))
+                    *xephyrs*)
+                   (start-seats seat-count)
+                   (while (< (lightdm-running-greeters) seat-count)
+                          (sleep 1))
+                   (system "chvt 2"))))
+           (sleep 1))))
+
+(define (with-graphics proc . rest)
+  "Call a procedure PROC with the parameters REST when graphics is available.
+Return value is the same as for PROC."
+  (if (graphics-available?)
+      (begin
+        (log-info "Graphics available")
+        (apply proc rest))
+      (begin
+        (log-info "Graphics is not available.  Waiting...")
+        (sleep 1)
+        (apply with-graphics proc rest))))
 
 (define (dm-start config)
   "Returns a new thread."
@@ -172,7 +177,7 @@
                           (exit))))
         (sigaction SIGINT sighandler)
         (sigaction SIGTERM sighandler)
-        (main-loop config unmouser)))
+        (with-graphics main-loop config unmouser)))
      ((> pid 0)
       (log-info "Display manager started; PID: ~a" pid)
       pid)
