@@ -28,6 +28,7 @@
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 popen)
   #:export (awesome-pid
+            awesome-wait
             awesome-proc-environ))
 
 (define (awesome-pid)
@@ -37,6 +38,12 @@
          (let ((pid (read-line port)))
            (close port)
            pid))))
+
+(define (awesome-wait)
+  (let ((pid (awesome-pid)))
+    (when (eof-object? pid)
+      (sleep 1)
+      (awesome-wait))))
 
 (define (pid->proc-environ-path pid)
   (format #f "/proc/~a/environ" pid))
