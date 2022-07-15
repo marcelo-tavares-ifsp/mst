@@ -153,11 +153,15 @@
            (let ((running-seats-number (lightdm-running-seats)))
              (if (< running-seats-number seat-count)
                  (begin
+                   (log-info "The number of running seats < ~a" seat-count)
+                   (log-info "Restarting seats")
                    (hash-for-each
                     (lambda (key value)
                       (unless (docker-container-running? value)
+                        (log-info "Docker container ~a is not running" value)
                         (let* ((seat (config-get-seat config key))
                                (id   (docker-start-xephyr seat)))
+                          (log-info "  seat: ~a, id: ~a" seat id)
                           (if id
                               (hash-set! *xephyrs* (seat-display seat) id)
                               (log-error
