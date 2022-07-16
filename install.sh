@@ -24,6 +24,23 @@
 
 MST_USER="multiseat"
 
+STEP_MARKER=">>>"
+
+log_step() {
+    local message="$*"
+    echo -e "\e[32m${STEP_MARKER}\e[0m $message"
+}
+
+log_error() {
+    local message="$*"
+    echo -e "\e[31m${STEP_MARKER} ERROR: $message \e[0m"
+}
+
+log_info() {
+    local message="$*"
+    echo -e "░░░ $message"
+}
+
 build() {
     git submodule init
     git submodule update --remote
@@ -47,11 +64,11 @@ install_mst() {
 
 install_deps_ubuntu() {
     apt update
-    echo ">>> Installing VirtualGL ... "
+    log_step "Installing VirtualGL ... "
     ./install_vgl.sh 2.6.3
-    echo ">>> Installing VirtualGL ... done"
+    log_step "Installing VirtualGL ... done"
 
-    echo ">>> Installing required packages ..."
+    log_step "Installing required packages ..."
     apt install -y \
         autoconf \
         automake \
@@ -69,16 +86,16 @@ install_deps_ubuntu() {
         gettext \
         make
 
-    echo ">>> Installing required packages ... done"
+    log_step "Installing required packages ... done"
 }
 
 install_deps_ubuntu_22_04() {
     apt update
-    echo ">>> Installing VirtualGL ... "
+    log_step "Installing VirtualGL ... "
     ./install_vgl.sh 2.6.3
-    echo ">>> Installing VirtualGL ... done"
+    log_step "Installing VirtualGL ... done"
 
-    echo ">>> Installing required packages ..."
+    log_step "Installing required packages ..."
     apt install -y \
         autoconf \
         automake \
@@ -97,11 +114,11 @@ install_deps_ubuntu_22_04() {
         gettext \
         make
 
-    echo ">>> Installing required packages ... done"
+    log_step "Installing required packages ... done"
 }
 
 install_deps_alt_p8() {
-    echo ">>> Installing required packages ..."
+    log_step "Installing required packages ..."
     apt-get install -y \
             guile20-devel \
             libguile20-devel \
@@ -119,11 +136,11 @@ install_deps_alt_p8() {
             Xdialog \
             guile20 \
             libguile20
-    echo ">>> Installing required packages ... done"
+    log_step "Installing required packages ... done"
 }
 
 install_deps_alt_p9() {
-    echo ">>> Installing required packages ..."
+    log_step "Installing required packages ..."
     apt-get install -y \
             guile22-devel \
             texinfo \
@@ -143,7 +160,7 @@ install_deps_alt_p9() {
             virtualgl \
             Xdialog \
             guile22
-    echo ">>> Installing required packages ... done"
+    log_step "Installing required packages ... done"
 }
 
 alt_get_version() {
@@ -179,7 +196,7 @@ install_deps_alt() {
         apt-get update
         install_deps_alt_p9
     else
-        echo "ERROR: Unsupported ALT Linux release"
+        log_error "Unsupported ALT Linux release"
         exit 1
     fi
 }
@@ -209,10 +226,10 @@ main() {
         "alt")
             version=$(alt_get_version)
             if [ $(alt_version_supported_p $version) == false ]; then
-                echo "ERROR: Unsupported ALT Linux release:" $version
+                log_error "Unsupported ALT Linux release:" $version
                 exit 1
             fi
-            echo "MST for ALT Linux P${version} is going to be installed."
+            log_info "MST for ALT Linux P${version} is going to be installed."
             read -p "Continue? (y/n) "
             if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
                 echo "Exiting..."
@@ -224,7 +241,7 @@ main() {
             ;;
         "ubuntu")
             version=$(alt_get_version)
-            echo "MST for Ubuntu ${version} is going to be installed."
+            log_info "MST for Ubuntu ${version} is going to be installed."
             read -p "Continue? (y/n) "
             if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
                 echo "Exiting..."
