@@ -191,6 +191,20 @@ void MST::create_multiseat_user()
     qInfo(mst_category()).noquote()
             << "Creating user '" + mst_user + "' ... done";
 
+    QString xauthority_file = "/home/" + mst_user + "/.Xauthority";
+    qInfo(mst_category()).noquote()
+        << "Creating '" << xauthority_file << "' file ...";
+
+    rc = Platform::exec("touch '" + xauthority_file + "'");
+    if (rc != 0) {
+        QString message = "Could not create '" + xauthority_file + "'";
+        qCritical(mst_category()).noquote() << message;
+        throw MST_exception(message);
+    }
+
+    qInfo(mst_category()).noquote()
+        << "Creating '" << xauthority_file << "' file ... done";
+
     qInfo(mst_category()).noquote()
         << "Changing the owner of '/home/" << mst_user << "'"
         << " to '" << mst_user << ":" << mst_user << "' ...";
