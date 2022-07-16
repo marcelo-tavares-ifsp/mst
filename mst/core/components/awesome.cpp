@@ -69,7 +69,7 @@ void Awesome::configure()
 void Awesome::install()
 {
     Platform::fs_mkdir("/home/" + config.get_system_mst_user()
-                       + ".config/awesome/");
+                       + "/.config/awesome/");
     Component::install();
 }
 
