@@ -259,6 +259,9 @@ void MST::install()
         throw MST_exception(message);
     }
 
+    uid_t uid = pwd->pw_uid;
+    gid_t gid = pwd->pw_gid;
+
     const QString mst_user_home = "/home/" + mst_user + "/";
     Platform::fs_mkdir(mst_user_home + ".local/share/mst/output/");
 
@@ -266,11 +269,13 @@ void MST::install()
 
     qInfo(mst_category()).noquote()
 	 << "Changing the owner of '" << mst_user_home << "'"
-	 << " to " << pwd->pw_uid << ":" << pwd->pw_gid << " ...";
-    Platform::chown(mst_user_home, pwd->pw_uid, pwd->pw_gid, true);
+	 << " to " << uid << ":" << gid
+	 << "(" << mst_user << ") ...";
+    Platform::chown(mst_user_home, uid, gid, true);
     qInfo(mst_category()).noquote()
 	 << "Changing the owner of '" << mst_user_home << "'"
-	 << " to " << pwd->pw_uid << ":" << pwd->pw_gid << " ... done";
+	 << " to " << uid << ":" << gid
+	 << "(" << mst_user << ") ... done";
 }
 
 void MST::enable()
