@@ -120,11 +120,11 @@ install_deps_alt_p9() {
 alt_get_version() {
     local version
     if $(command -V lsb_release &> /dev/null); then
-  version=$(lsb_release -r \
-                | sed -e 's/Release:.\([0-9]\+\).[0-9]\+.*$/\1/g')
+        version=$(lsb_release -r \
+                      | sed -e 's/Release:.\([0-9]\+\).[0-9]\+.*$/\1/g')
     else
-  version=$(cat /etc/system-release \
-                | sed -e 's/.* \([0-9]\).[0-9].*/\1/g')
+        version=$(cat /etc/system-release \
+                      | sed -e 's/.* \([0-9]\).[0-9].*/\1/g')
     fi
     echo $version
 }
@@ -132,31 +132,31 @@ alt_get_version() {
 alt_version_supported_p() {
     local version=$1
     case $version in
-  8 | 9 | 10)
-      echo true
-      ;;
-  *)
-      echo false
-      ;;
+        8 | 9 | 10)
+            echo true
+            ;;
+        *)
+            echo false
+            ;;
     esac
 }
 
 install_deps_alt() {
     local version="$1"
     if [ "$version" -eq 8 ]; then
-  apt-get update
-  install_deps_alt_p8
+        apt-get update
+        install_deps_alt_p8
     elif [ "$version" -eq 9 ] || [ "$version" -eq 10 ]; then
-  apt-get update
-  install_deps_alt_p9
+        apt-get update
+        install_deps_alt_p9
     else
-  echo "ERROR: Unsupported ALT Linux release"
-  exit 1
+        echo "ERROR: Unsupported ALT Linux release"
+        exit 1
     fi
 }
 
 print_help_and_exit() {
-cat <<EOF
+    cat <<EOF
 Usage: ./install.sh <distribution-name>
 
 Supported distributions:
@@ -168,7 +168,7 @@ Invocation example:
 
 EOF
 
-  exit 0
+    exit 0
 }
 
 # Entry point
@@ -178,28 +178,28 @@ main() {
 
     case $distro in
         "alt")
-      version=$(alt_get_version)
-      if [ $(alt_version_supported_p $version) == false ]; then
-    echo "ERROR: Unsupported ALT Linux release:" $version
-    exit 1
-      fi
-      echo "MST for ALT Linux P${version} is going to be installed."
-      read -p "Continue? (y/n) "
-      if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
-    echo "Exiting..."
-    exit 0
-      fi
-      install_deps_alt $version
-      build
-      install_mst
-      ;;
+            version=$(alt_get_version)
+            if [ $(alt_version_supported_p $version) == false ]; then
+                echo "ERROR: Unsupported ALT Linux release:" $version
+                exit 1
+            fi
+            echo "MST for ALT Linux P${version} is going to be installed."
+            read -p "Continue? (y/n) "
+            if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
+                echo "Exiting..."
+                exit 0
+            fi
+            install_deps_alt $version
+            build
+            install_mst
+            ;;
         "ubuntu")
-      echo "MST for Ubuntu is going to be installed."
-      read -p "Continue? (y/n) "
-      if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
-    echo "Exiting..."
-    exit 0
-      fi
+            echo "MST for Ubuntu is going to be installed."
+            read -p "Continue? (y/n) "
+            if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
+                echo "Exiting..."
+                exit 0
+            fi
             install_deps_ubuntu
             build_ubuntu
             install_mst
