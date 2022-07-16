@@ -57,6 +57,7 @@ install_deps_ubuntu() {
         automake \
         docker.io \
         libudev-dev \
+        libxfixes-dev \
         lightdm \
         awesome \
         build-essential \
@@ -83,6 +84,7 @@ install_deps_ubuntu_22_04() {
         automake \
         docker.io \
         libudev-dev \
+        libxfixes-dev \
         lightdm \
         awesome \
         build-essential \
