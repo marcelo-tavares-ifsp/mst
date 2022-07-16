@@ -264,7 +264,13 @@ void MST::install()
 
     component_manager->install_components();
 
+    qInfo(mst_category()).noquote()
+	 << "Changing the owner of '" << mst_user_home << "'"
+	 << " to " << pwd->pw_uid << ":" << pwd->pw_gid << " ...";
     Platform::chown(mst_user_home, pwd->pw_uid, pwd->pw_gid, true);
+    qInfo(mst_category()).noquote()
+	 << "Changing the owner of '" << mst_user_home << "'"
+	 << " to " << pwd->pw_uid << ":" << pwd->pw_gid << " ... done";
 }
 
 void MST::enable()
