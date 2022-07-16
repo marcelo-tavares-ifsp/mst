@@ -71,6 +71,33 @@ install_deps_ubuntu() {
     echo ">>> Installing required packages ... done"
 }
 
+install_deps_ubuntu_22_04() {
+    apt update
+    echo ">>> Installing VirtualGL ... "
+    ./install_vgl.sh 2.6.3
+    echo ">>> Installing VirtualGL ... done"
+
+    echo ">>> Installing required packages ..."
+    apt install -y \
+        autoconf \
+        automake \
+        docker.io \
+        libudev-dev \
+        lightdm \
+        awesome \
+        build-essential \
+        qtbase5-dev \
+        qttools5-dev \
+        guile-2.2 \
+        guile-2.2-dev \
+        xserver-xorg \
+        texinfo \
+        gettext \
+        make
+
+    echo ">>> Installing required packages ... done"
+}
+
 install_deps_alt_p8() {
     echo ">>> Installing required packages ..."
     apt-get install -y \
@@ -194,13 +221,22 @@ main() {
             install_mst
             ;;
         "ubuntu")
-            echo "MST for Ubuntu is going to be installed."
+            version=$(alt_get_version)
+            echo "MST for Ubuntu ${version} is going to be installed."
             read -p "Continue? (y/n) "
             if [ ! "$REPLY" == "y" ] && [ ! "$REPLY" == "Y" ]; then
                 echo "Exiting..."
                 exit 0
             fi
-            install_deps_ubuntu
+
+            case $version in
+                22)
+                    install_deps_ubuntu_22_04
+                   ;; 
+                *)
+                    install_deps_ubuntu
+                    ;;
+            esac
             build_ubuntu
             install_mst
             ;;
