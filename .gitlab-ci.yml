@@ -65,6 +65,6 @@ test-ubuntu-20.04:
     texinfo
     gettext
     make
-  - qmake-qt5
+  - qmake
   - make -j$(nproc)
   - make -j$(nproc) check
