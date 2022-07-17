@@ -124,7 +124,8 @@ void Xorg::configure()
 
 Template xorg::prepare_xinitrc_template()
 {
-    return Template_manager::get_instance()->get_template(XINIT_RC_FILE);
+    return Template_manager::get_instance()->get_template(XINIT_RC_FILE)
+        .set("awesome-binary", QString(PATH_TO_AWESOME));
 }
 
 QString Xorg::get_version()

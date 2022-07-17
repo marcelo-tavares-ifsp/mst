@@ -1,2 +1,2 @@
 xhost +
-exec awesome
+exec {{awesome-binary}}

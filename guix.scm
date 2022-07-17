@@ -71,9 +71,6 @@
               (format #f
                       "~a/usr/lib/vglrun.vars"
                       (assoc-ref inputs "virtualgl"))))
-           (substitute* "templates/xinitrc.template"
-             (("awesome")
-              (format #f "~a/bin/awesome" (assoc-ref inputs "awesome"))))
            (substitute* (list "templates/rc.lua.template"
                               "templates/rc.lua.4.template")
              (("/usr/share/awesome")
