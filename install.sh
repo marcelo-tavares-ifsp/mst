@@ -76,6 +76,7 @@ install_deps_ubuntu() {
         libudev-dev \
         libxfixes-dev \
         lightdm \
+	lightdm-gtk-greeter \
         awesome \
         build-essential \
         qt5-default \
@@ -104,6 +105,7 @@ install_deps_ubuntu_22_04() {
         libudev-dev \
         libxfixes-dev \
         lightdm \
+	lightdm-gtk-greeter \
         awesome \
         build-essential \
         qtbase5-dev \
