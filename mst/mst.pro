@@ -73,6 +73,11 @@ isEmpty(PATH_TO_X) {
     message("X not found")
 }
 
+PATH_TO_BASH = $$system(which bash)
+isEmpty(PATH_TO_BASH) {
+    message("Bash not found")
+}
+
 QMAKE_SUBSTITUTES = config.h.in
 DISTFILES += config.h.in
 
