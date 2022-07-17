@@ -80,6 +80,7 @@ install_deps_ubuntu() {
         build-essential \
         qt5-default \
         qtbase5-dev \
+	qttools5-dev-tools \
         guile-2.2 \
         guile-2.2-dev \
         texinfo \
