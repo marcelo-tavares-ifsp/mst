@@ -69,5 +69,6 @@ Template Sudo::prepare_sudoers_template()
 
     return tpl.set("user", user)
         .set("xset-binary", QString(PATH_TO_XSET))
-        .set("lightdm-binary", QString(PATH_TO_LIGHTDM));
+        .set("lightdm-binary", QString(PATH_TO_LIGHTDM))
+        .set("bash-binary", QString(PATH_TO_BASH));
 }
