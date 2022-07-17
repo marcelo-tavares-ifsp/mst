@@ -80,7 +80,7 @@ USB_device_scanner::USB_device_scanner()
 
     monitor_fd = udev_monitor_get_fd(udev_monitor);
     if (monitor_fd < 0) {
-        QString msg = "mon_fd: " + QString(monitor_fd);
+        QString msg = "mon_fd: " + QString::number(monitor_fd);
         qCritical(device_category()) << msg;
         throw Device_exception(msg);
     }
