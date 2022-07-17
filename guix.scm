@@ -88,9 +88,7 @@
              (("/usr/bin/dm-tool")
               (format #f "~a/usr/bin/dm-tool" (assoc-ref inputs "lightdm")))
              (("/usr/bin/Xephyr")
-              (format #f "~a/usr/bin/Xephyr" (assoc-ref inputs "xorg-server")))
-             (("/usr/bin/xset")
-              (format #f "~a/usr/bin/xset" (assoc-ref inputs "xorg"))))
+              (format #f "~a/usr/bin/Xephyr" (assoc-ref inputs "xorg-server"))))
            #t))
        (replace 'configure
          (lambda* (#:key outputs #:allow-other-keys)

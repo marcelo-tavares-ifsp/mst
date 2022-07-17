@@ -66,5 +66,6 @@ Template Sudo::prepare_sudoers_template()
     const QString user = config.get_system_mst_user();
     Template tpl = Template_manager::get_instance()->get_template("sudoers");
 
-    return tpl.set("user", user);
+    return tpl.set("user", user)
+        .set("xset-binary", QString(PATH_TO_XSET));
 }
