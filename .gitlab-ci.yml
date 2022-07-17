@@ -42,3 +42,29 @@ test-alt-p10:
   - qmake-qt5
   - make -j$(nproc)
   - make -j$(nproc) check
+
+test-ubuntu-20.04:
+  image: ubuntu:20.04
+  script:
+  - apt update -yqq
+  - apt install -yqq
+    autoconf
+    automake
+    docker.io
+    libudev-dev
+    libxfixes-dev
+    lightdm
+    lightdm-gtk-greeter
+    awesome
+    build-essential
+    qt5-default
+    qtbase5-dev
+    qttools5-dev-tools
+    guile-2.2
+    guile-2.2-dev
+    texinfo
+    gettext
+    make
+  - qmake-qt5
+  - make -j$(nproc)
+  - make -j$(nproc) check
