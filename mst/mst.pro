@@ -58,6 +58,11 @@ isEmpty(PATH_TO_LIGHTDM) {
     message("lightdm not found")
 }
 
+PATH_TO_DM_TOOL = $$system(which dm-tool)
+isEmpty(PATH_TO_DM_TOOL) {
+    message("dm-tool not found")
+}
+
 PATH_TO_VGLCLIENT = $$system(which vglclient)
 isEmpty(PATH_TO_VGLCLIENT) {
     message("vglclient not found")
