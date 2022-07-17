@@ -25,6 +25,7 @@
 
 #include <core/platform.h>
 
+#include "config.h"
 #include "sudo.h"
 
 #include "../configuration.h"
