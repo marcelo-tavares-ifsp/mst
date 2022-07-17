@@ -91,7 +91,8 @@ QString Awesome::get_version()
 void Awesome::prepare_rclua_template(Template& rclua_template)
 {
     rclua_template
-        .set("mst_awful_rules", make_xephyr_rules(config.get_seat_count()));
+        .set("mst_awful_rules", make_xephyr_rules(config.get_seat_count()))
+        .set("xset-binary", QString(PATH_TO_XSET));
 }
 
 //// Helper procedures.

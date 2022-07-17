@@ -79,9 +79,7 @@
              (("/usr/share/awesome")
               (format #f
                       "~a/usr/share/awesome"
-                      (assoc-ref inputs "awesome")))
-             (("/usr/bin/xset")
-              (format #f "~a/usr/bin/xset" (assoc-ref inputs "xset"))))
+                      (assoc-ref inputs "awesome"))))
            (substitute* "templates/sudoers.template"
              (("/usr/bin/bash")
               (format #f "~a/usr/bin/bash" (assoc-ref inputs "bash")))
