@@ -78,8 +78,6 @@
                       "~a/usr/share/awesome"
                       (assoc-ref inputs "awesome"))))
            (substitute* "templates/sudoers.template"
-             (("/usr/bin/dm-tool")
-              (format #f "~a/usr/bin/dm-tool" (assoc-ref inputs "lightdm")))
              (("/usr/bin/Xephyr")
               (format #f "~a/usr/bin/Xephyr" (assoc-ref inputs "xorg-server"))))
            #t))

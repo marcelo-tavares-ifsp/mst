@@ -1,2 +1,2 @@
-{{user}} ALL=(ALL) NOPASSWD: {{bash-binary}}, /bin/su, {{lightdm-binary}}, /usr/bin/dm-tool, /usr/bin/Xephyr, {{xset-binary}}
+{{user}} ALL=(ALL) NOPASSWD: {{bash-binary}}, /bin/su, {{lightdm-binary}}, {{dm-tool-binary}}, /usr/bin/Xephyr, {{xset-binary}}
 root     ALL=(ALL) NOPASSWD: ALL
