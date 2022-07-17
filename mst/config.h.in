@@ -26,6 +26,7 @@ namespace Qt {
 #define PATH_TO_VGLCLIENT     '"$$PATH_TO_VGLCLIENT"'
 #define PATH_TO_VGLSERVER_CONFIG '"$$PATH_TO_VGLSERVER_CONFIG"'
 #define PATH_TO_X                '"$$PATH_TO_X"'
+#define PATH_TO_XEPHYR                '"$$PATH_TO_XEPHYR"'
 #define PATH_TO_BASH          '"$$PATH_TO_BASH"'
 
 #endif // __CONFIG_H__

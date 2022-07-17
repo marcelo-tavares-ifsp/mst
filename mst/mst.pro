@@ -100,6 +100,13 @@ isEmpty(PATH_TO_X) {
     message("X server binary: " $${PATH_TO_X})
 }
 
+PATH_TO_X = $$system(which Xephyr)
+isEmpty(PATH_TO_XEPHYR) {
+    warning("Xephyr not found")
+} else {
+    message("Xephyr binary: " $${PATH_TO_XEPHYR})
+}
+
 PATH_TO_BASH = $$system(which bash)
 isEmpty(PATH_TO_BASH) {
     warning("Bash not found")
