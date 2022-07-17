@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <QPair>
+#include <QRegExp>
 #include <string>
 
 using namespace std;
