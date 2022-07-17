@@ -97,14 +97,6 @@
              (("/usr/bin/xset")
               (format #f "~a/usr/bin/xset" (assoc-ref inputs "xorg"))))
            #t))
-       (add-after 'configure 'generate-version-file
-         (lambda* (#:key outputs #:allow-other-keys)
-           (with-output-to-file "mst/version.h"
-             (lambda ()
-               (format #t
-                       "const string VERSION = \"~a\";~%"
-                       version)))
-           #t))
        (replace 'configure
          (lambda* (#:key outputs #:allow-other-keys)
            (let* ((out (assoc-ref outputs "out"))
