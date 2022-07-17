@@ -25,62 +25,86 @@ MST_HASH    = $$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")
 
 PATH_TO_XRANDR = $$system(which xrandr)
 isEmpty(PATH_TO_XRANDR) {
-    message("xrandr not found")
+    warning("xrandr not found")
+} else {
+    message("xrandr binary: " $${PATH_TO_XRANDR})
 }
 
 PATH_TO_PGREP = $$system(which pgrep)
 isEmpty(PATH_TO_PGREP) {
-    message("pgrep not found")
+    warning("pgrep not found")
+} else {
+    message("pgrep binary: " $${PATH_TO_PGREP})
 }
 
 PATH_TO_PKILL = $$system(which pkill)
 isEmpty(PATH_TO_PKILL) {
-    message("pkill not found")
+    warning("pkill not found")
+} else {
+    message("pkill binary: " $${PATH_TO_PKILL})
 }
 
 PATH_TO_XSET = $$system(which xset)
 isEmpty(PATH_TO_XSET) {
-    message("xset not found")
+    warning("xset not found")
+} else {
+    message("xset binary: " $${PATH_TO_XSET})
 }
 
 PATH_TO_SYSTEMCTL = $$system(which systemctl)
 isEmpty(PATH_TO_SYSTEMCTL) {
-    message("systemctl not found")
+    warning("systemctl not found")
+} else {
+    message("systemctl binary: " $${PATH_TO_SYSTEMCTL})
 }
 
 PATH_TO_AWESOME = $$system(which awesome)
 isEmpty(PATH_TO_AWESOME) {
-    message("awesome not found")
+    warning("awesome not found")
+} else {
+    message("awesome binary: " $${PATH_TO_AWESOME})
 }
 
 PATH_TO_LIGHTDM = $$system(which lightdm)
 isEmpty(PATH_TO_LIGHTDM) {
-    message("lightdm not found")
+    warning("lightdm not found")
+} else {
+    message("lightdm binary: " $${PATH_TO_LIGHTDM})
 }
 
 PATH_TO_DM_TOOL = $$system(which dm-tool)
 isEmpty(PATH_TO_DM_TOOL) {
-    message("dm-tool not found")
+    warning("dm-tool not found")
+} else {
+    message("dm-tool binary: " $${PATH_TO_DM_TOOL})
 }
 
 PATH_TO_VGLCLIENT = $$system(which vglclient)
 isEmpty(PATH_TO_VGLCLIENT) {
-    message("vglclient not found")
+    warning("vglclient not found")
+} else {
+    message("vglclient binary: " $${PATH_TO_VGLCLIENT})
 }
 
 PATH_TO_VGLSERVER_CONFIG = $$system(which vglserver_config)
 isEmpty(PATH_TO_VGLSERVER_CONFIG) {
-    message("vglserver_config not found")
+    warning("vglserver_config not found")
+} else {
+    message("vglserver_config binary: " $${PATH_TO_VGLSERVER_CONFIG})
 }
 
 PATH_TO_X = $$system(which X)
 isEmpty(PATH_TO_X) {
-    message("X not found")
+    warning("X server not found")
+} else {
+    message("X server binary: " $${PATH_TO_X})
 }
 
 PATH_TO_BASH = $$system(which bash)
 isEmpty(PATH_TO_BASH) {
-    message("Bash not found")
+    warning("Bash not found")
+} else {
+    message("Bash binary: " $${PATH_TO_BASH})
 }
 
 QMAKE_SUBSTITUTES = config.h.in
