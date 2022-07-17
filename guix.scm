@@ -59,7 +59,7 @@
        (add-after 'unpack 'patch
          (lambda* (#:key inputs outputs #:allow-other-keys)
            (substitute* "mst.pro"
-             (("\\$\\$\\[QT_INSTALL_BINS\\]/lrelease")
+             (("\\$\\$LRELEASE")
               (string-append (assoc-ref inputs "qttools")
                              "/bin/lrelease")))
            (substitute* "templates/vgl.sh.template"
