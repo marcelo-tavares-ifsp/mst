@@ -80,11 +80,6 @@
            (substitute* "templates/sudoers.template"
              (("/usr/bin/bash")
               (format #f "~a/usr/bin/bash" (assoc-ref inputs "bash")))
-             ;; TODO:
-             ;; (("/bin/su")
-             ;;  (format #f "~a/usr/bin/su" (assoc-ref inputs "")))
-             (("/usr/sbin/lightdm")
-              (format #f "~a/usr/sbin/lightdm" (assoc-ref inputs "lightdm")))
              (("/usr/bin/dm-tool")
               (format #f "~a/usr/bin/dm-tool" (assoc-ref inputs "lightdm")))
              (("/usr/bin/Xephyr")

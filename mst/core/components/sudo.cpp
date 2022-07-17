@@ -67,5 +67,6 @@ Template Sudo::prepare_sudoers_template()
     Template tpl = Template_manager::get_instance()->get_template("sudoers");
 
     return tpl.set("user", user)
-        .set("xset-binary", QString(PATH_TO_XSET));
+        .set("xset-binary", QString(PATH_TO_XSET))
+        .set("lightdm-binary", QString(PATH_TO_LIGHTDM));
 }
