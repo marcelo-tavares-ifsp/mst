@@ -45,21 +45,21 @@ build() {
     git submodule init
     git submodule update --remote
     qmake-qt5
-    make -j2 build_deps
-    make -j2
+    make -j$(nproc) build_deps
+    make -j$(nproc)
 }
 
 build_ubuntu() {
     git submodule init
     git submodule update --remote
     qmake
-    make -j2 build_deps
-    make -j2
+    make -j$(nproc) build_deps
+    make -j$(nproc)
 }
 
 install_mst() {
-    make install_deps
-    make install
+    make -j$(nproc) install_deps
+    make -j$(nproc) install
 }
 
 install_deps_ubuntu() {
