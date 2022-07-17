@@ -120,6 +120,7 @@
          qtbase-5
          xorg-server
          xdpyinfo
+         xrandr
          qttools))
   (home-page "https://gitlab.com/gkaz/mst")
   (synopsis
