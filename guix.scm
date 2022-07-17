@@ -121,6 +121,7 @@
          xorg-server
          xdpyinfo
          xrandr
+         procps
          qttools))
   (home-page "https://gitlab.com/gkaz/mst")
   (synopsis
