@@ -136,7 +136,7 @@
                                  '())
                            ,@(fold (lambda (dev prev)
                                      (append prev
-                                             (list "-d" dev)))
+                                             (list "--device" dev)))
                                    '()
                                    devices)
                            ,@(fold (lambda (env prev)
