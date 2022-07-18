@@ -84,6 +84,11 @@ Options:
   --stderr                      Print the logs to stderr as well as to
                                 the system log.
   --display-server-backend, -b  Set the display server backend.
+                                When \"xephyr-docker\" backend is used then
+                                Xephyr starts inside a Docker container.
+                                This  backend can be helpful if you have 
+                                a system that has Xephyr built without
+                                evdev support.
                                 Allowed values:
                                     xephyr, xephyr-docker
                                 Default value:
