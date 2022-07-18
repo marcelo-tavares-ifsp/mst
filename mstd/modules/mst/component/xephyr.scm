@@ -29,6 +29,9 @@
             mouse->xephyr-device
             keyboard->xephyr-device))
 
+;; The path to the Xephyr binary.
+;;
+;; TODO: configure the path on the MST build.
 (define %xephyr-binary "/usr/bin/Xephyr")
 
 (define (mouse->xephyr-device mouse-device)
