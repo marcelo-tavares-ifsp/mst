@@ -30,17 +30,10 @@
   #:use-module (oop goops)
   #:use-module (mst core log)
   #:use-module (mst core seat)
+  #:use-module (mst core docker-container)
   #:use-module (mst system)
   #:use-module (mst component xephyr)
-  #:export (docker-container-running?
-            docker-start-xephyr
-	    docker-stop
-	    docker-container-rm
-
-	    mouse->xephyr-device
-	    keyboard->xephyr-device
-
-	    %make-command:xephyr/docker))
+  #:export (docker-start-xephyr))
 
 
 ;;; Constants.
@@ -50,96 +43,29 @@
 
 
 ;;;
-
-(define (docker-container-running? id)
-  "Check if a Docker container with the given ID is running."
-  (let ((command (format #f "docker container inspect -f '{{.State.Running}}' ~a"
-                         id)))
-    (let ((port (open-input-pipe command)))
-      (catch #t
-             (lambda ()
-               (waitpid -1 WNOHANG))
-             (lambda args
-               #t))
-      (if port
-          (let ((result (read-line port)))
-            (string=? result "true"))
-          (begin
-            (log-error "Could not run command: ~a" command)
-            #f)))))
-
-(define (%make-command:xephyr/docker display-number resolution mouse keyboard)
-  (let ((mouse-dev    (device-name->path mouse))
-        (keyboard-dev (device-name->path keyboard)))
-
-    (unless mouse-dev
-      (log-error "Cannot find the specified mouse device: '~a'" mouse))
-
-    (unless keyboard-dev
-      (log-error "Cannot find the specified keyboard device: '~a'" keyboard))
-
-    (if (and mouse-dev keyboard-dev)
-        (string-join `(,%docker-binary
-                       "run"
-                       "--rm"
-                       "-it"
-                       "-d"
-                       "--device" ,mouse-dev
-                       "--device" ,keyboard-dev
-                       "-e" "DISPLAY=:0"
-                       "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
-                       ,%xephyr-docker-image
-                       ,@(make-xephyr-command #:mouse-dev mouse-dev
-                                              #:keyboard-dev keyboard-dev
-                                              #:resolution resolution
-                                              #:display-number display-number)))
-        #f)))
-
-
 (define-generic docker-start-xephyr)
 
 (define-method (docker-start-xephyr display-number resolution mouse keyboard)
+  "Start a new Xephyr instance inside a Docker container.  Return the new
+<docker-container> instance."
   (log-info "Starting Xephyr (~a) for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
             %xephyr-docker-image
             display-number resolution mouse keyboard)
-  (let ((command (%make-command:xephyr/docker display-number
-                                              resolution
-                                              mouse
-                                              keyboard)))
-    (if command
-
-        (let ((port (open-input-pipe command)))
-          (unless port
-            (log-error "Could not start a Xephyr instance")
-            (error "Could not start a Xephyr instance"))
-
-          (let ((output (read-line port)))
-
-            (when (eof-object? output)
-              (log-error "Could not start a Xephyr instance")
-              (error "Could not start a Xephyr instance"))
-
-            (log-info "Xephyr is started.  Container ID: ~a" output)
-
-            output))
-
-        (begin
-          (log-error "Could not make a Xephyr command")
-          #f))))
+  (let ((mouse-dev    (device-name->path mouse))
+        (keyboard-dev (device-name->path keyboard)))
+    (make-docker-container %xephyr-docker-image
+                           (make-xephyr-command #:mouse-dev mouse-dev
+                                                #:keyboard-dev keyboard-dev
+                                                #:resolution resolution
+                                                #:display-number display-number)
+                           #:devices (list mouse-dev keyboard-dev)
+                           #:environ (list "DISPLAY=:0")
+                           #:volumes (list "/tmp/.X11-unix:/tmp/.X11-unix:rw"))))
 
 (define-method (docker-start-xephyr (seat <seat>))
   (docker-start-xephyr (seat-display    seat)
                        (seat-resolution seat)
                        (seat-mouse      seat)
                        (seat-keyboard   seat)))
-
-
-(define (docker-stop id)
-  "Stop a Docker container specified by an @var{id}."
-  (system* %docker-binary "stop" id))
-
-(define (docker-container-rm id)
-  "Remove a Docker container specified by an @var{id}."
-  (system* %docker-binary "container" "rm" id))
 
 ;;; docker.scm ends here.

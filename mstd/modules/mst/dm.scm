@@ -39,6 +39,7 @@
   #:use-module (mst component xephyr) 
   #:use-module (mst core log)
   #:use-module (mst core seat)
+  #:use-module (mst core docker-container)
   #:use-module (mst unmouser)
   #:export (dm-start
             dm-stop-xephyrs
@@ -177,13 +178,13 @@ Return value is the same as for PROC."
    (lambda (key value)
      (log-info "Stopping container ~a for seat: ~a ..."
                value key)
-     (docker-stop value)
+     (docker-container-stop! value)
      (log-info "Stopping container ~a for seat: ~a ... done"
                key value)
 
      (log-info "Removing container ~a for seat: ~a ..."
                value key)
-     (docker-container-rm value)
+     (docker-container-rm! value)
      (log-info "Removing container ~a for seat: ~a ... done"
                value key))
    *xephyrs*))
