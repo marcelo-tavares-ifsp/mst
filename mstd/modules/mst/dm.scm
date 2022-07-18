@@ -60,26 +60,6 @@
 ;; Hash table that stores the running Xephyr instances.
 (define *xephyrs* (make-hash-table 2))
 
-(define (start-xephyr display-number resolution mouse keyboard)
-  (log-info "Starting Xephyr for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
-            display-number resolution mouse keyboard)
-  (let ((pid (primitive-fork)))
-    (cond
-     ((zero? pid)
-      (apply execle
-             `(,%xephyr-binary
-               ,(cons "DISPLAY=:0" (environ))
-               ,@(make-xephyr-command #:mouse-dev mouse
-                                      #:keyboard-dev keyboard
-                                      #:resolution resolution
-                                      #:display-number display-number))))
-     ((> pid 0)
-      (log-info "Xephyr is started.  PID: ~a" pid)
-      pid)
-     (else
-      (log-error "Could not start a Xephyr instance")
-      (error "Could not start a Xephyr instance")))))
-
 (define (start-seats seat-number)
   "Start SEAT-NUMBER of LightDM seats.  Return value is undefined."
   (log-info "start-seats: Starting seats: ~a" seat-number)

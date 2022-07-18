@@ -25,7 +25,8 @@
 ;;; Code:
 
 (define-module (mst component xephyr)
-  #:export (make-xephyr-command
+  #:export (start-xephyr
+            make-xephyr-command
             mouse->xephyr-device
             keyboard->xephyr-device))
 
@@ -59,5 +60,25 @@ Xephyr option."
         "-keybd" (keyboard->xephyr-device keyboard-dev)
         "-screen" (format #f "~a" resolution)
         (format #f ":~a" display-number)))
+
+(define (start-xephyr display-number resolution mouse keyboard)
+  (log-info "Starting Xephyr for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
+            display-number resolution mouse keyboard)
+  (let ((pid (primitive-fork)))
+    (cond
+     ((zero? pid)
+      (apply execle
+             `(,%xephyr-binary
+               ,(cons "DISPLAY=:0" (environ))
+               ,@(make-xephyr-command #:mouse-dev mouse
+                                      #:keyboard-dev keyboard
+                                      #:resolution resolution
+                                      #:display-number display-number))))
+     ((> pid 0)
+      (log-info "Xephyr is started.  PID: ~a" pid)
+      pid)
+     (else
+      (log-error "Could not start a Xephyr instance")
+      (error "Could not start a Xephyr instance")))))
 
 ;;; xephyr.scm ends here.
