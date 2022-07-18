@@ -61,7 +61,7 @@ Xephyr option."
         "-screen" (format #f "~a" resolution)
         (format #f ":~a" display-number)))
 
-(define (start-xephyr display-number resolution mouse keyboard)
+(define (%start-xephyr display-number resolution mouse keyboard)
   (log-info "Starting Xephyr for display ~a; resolution: ~a; mouse: ~a; keyboard: ~a"
             display-number resolution mouse keyboard)
   (let ((pid (primitive-fork)))
@@ -80,5 +80,11 @@ Xephyr option."
      (else
       (log-error "Could not start a Xephyr instance")
       (error "Could not start a Xephyr instance")))))
+
+(define-method (start-xephyr seat)
+  (%start-xephyr (seat-display    seat)
+                 (seat-resolution seat)
+                 (seat-mouse      seat)
+                 (seat-keyboard   seat)))
 
 ;;; xephyr.scm ends here.
