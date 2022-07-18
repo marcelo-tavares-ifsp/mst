@@ -95,7 +95,6 @@
 ;; Throw an error on failure.
 (define* (make-docker-container image
                                 command
-                                arguments
                                 #:key
                                 (environ '())
                                 (volumes '())
@@ -133,8 +132,7 @@
                                   '()
                                   volumes)
                           ,image
-                          ,command
-                          ,@arguments)))
+                          ,@command)))
     (let ((pipe (append open-pipe* OPEN_READ docker-command)))
       (unless pipe
         (container-error docker-command))
