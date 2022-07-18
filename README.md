@@ -80,7 +80,6 @@ Installation from the RPM package:
 ```
 $ apt-get install \
     awesome \
-    unclutter \
     libqt5-core \
     libudev-devel \
     virtualgl \
