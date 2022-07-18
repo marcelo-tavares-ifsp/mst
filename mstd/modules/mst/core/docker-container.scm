@@ -53,6 +53,19 @@
    #:init-keyword #:id
    #:getter       docker-container-id))
 
+
+(define-method (%display (docker-container <docker-container>) (port <port>))
+  (format port "#<docker-container ~a ~a>"
+          (docker-container-id docker-container)
+          (number->string (object-address docker-container) 16)))
+
+(define-method (display (docker-container <docker-container>) (port <port>))
+  (%display docker-container port))
+
+(define-method (write (docker-container <docker-container>) (port <port>))
+  (%display docker-container port))
+
+
 (define-method (docker-container? x)
   "Check if X is a <docker-container> instance."
   (is-a? x <docker-container>))
