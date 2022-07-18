@@ -54,68 +54,33 @@ International](https://creativecommons.org/licenses/by-sa/4.0/).
 * gettext
 
 ## Building and installation
+### Using installation script
+ALT GNU/Linux:
+```shell
+./install.sh alt
 ```
+
+Ubuntu GNU/Linux:
+```shell
+./install.sh ubuntu
+```
+
+### Manual
+On ALT GNU/Linux 8/9/10 MST can be built and installed as follows:
+```shell
 $ git clone https://gitlab.com/gkaz/mst.git
 $ cd mst
 $ git submodule init
 $ git submodule update --remote
 $ qmake-qt5
 $ make build_deps
-$ make
+$ make -j$(nproc)
 $ sudo make install_deps
 $ sudo make install
 ```
 
-### Building an RPM package on ALT Linux
-
-An RPM package for the project can be built as follows:
-```
-$ make -j4 rpm
-```
-(You should specify apropriate `-j` option according to the number 
-of available CPU cores to speed up the building process.)
-
-Installation from the RPM package:
-
-```
-$ apt-get install \
-    awesome \
-    libqt5-core \
-    libudev-devel \
-    virtualgl \
-    qt5-base-devel \
-    rpmdevtools
-$ useradd multiseat
-$ rpm -i mst-1.0.0-1.x86_64.rpm
-```
-
-## Ubuntu GNU/Linux (experimental)
-Install the needed components:
-```
-$ sudo apt-get install \
-    autoconf \
-    automake \
-    make \
-    docker.io \
-    libudev-dev \
-    awesome \
-    build-essential \
-    qt5-default \
-    qtbase5-dev \
-    guile-2.2 \
-    guile-2.2-dev \
-    texinfo \
-    gettext
-```
-
-Build and install MST:
-```
-$ qmake
-$ make build_deps
-$ make
-$ make install_deps
-$ make install
-```
+#### Ubuntu GNU/Linux
+On Ubuntu GNU/Linux you should use `qmake` instead of `qmake-qt5`.
 
 Ubuntu GNU/Linux doesn't have VirtualGL in the official repository, so
 you should download `.deb` packages for your system manually from here:
@@ -124,7 +89,7 @@ https://sourceforge.net/projects/virtualgl/files/2.6.3/
 There's a convenient script that allows to download and install
 VirtualGL automatically for your distribution:
 ```
-$ sudo ./install_vgl.sh 2.6.3
+sudo ./install_vgl.sh 2.6.3
 ```
 
 ## Usage
@@ -155,15 +120,24 @@ stopped too.
 
 ## Disabling and enabling mst configuration
 To disable mst manually, you must issue the following commands:
-```
+```shell
 $ sudo systemctl stop mstd
 $ sudo systemctl disable mstd
 $ sudo systemctl set-default graphical
 ```
 
 You can restore the multiseat configuration as follows:
-```
+```shell
 $ sudo systemctl enable mstd
 $ sudo systemctl start mstd
 $ sudo systemctl set-default multi-user
 ```
+
+# Known Bugs
+## Mouse/keyboard freezes after period of idle time on XFCE4
+The reason for this is `xfce4-screensaver` -- when it runs, mouse clicks and
+keyboard input "freezes".
+
+The solution is to disable `xfce4-screensaver`.  Optionally you can replace it
+with `xscreensaver`.
+
