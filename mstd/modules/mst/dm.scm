@@ -69,8 +69,21 @@
     (when (< idx seat-number)
       (loop (+ idx 1)))))
 
-(define (main-loop config)
+(define (main-loop config display-server-backend)
   "Display manager main loop."
+  (define (display-backend-start seat)
+    (case display-server-backend
+      ((xephyr)
+       (start-xephyr seat))
+      ((xephyr-docker)
+       (docker-start-xephyr seat))))
+
+  (define (display-backend-running? id)
+    (case display-server-backend
+      ((xephyr)
+       (proc-running? id))
+      ((xephyr-docker)
+       (docker-container-running? id))))
 
   (awesome-wait)
 
@@ -103,7 +116,7 @@
 
     (for-each (lambda (seat-config)
                 (when (seat-configured? seat-config)
-                  (let ((id (docker-start-xephyr seat-config)))
+                  (let ((id (display-backend-start seat-config)))
                     (log-info "    Docker ID: ~a" id)
                     (when id
                       (hash-set! *xephyrs*
@@ -131,10 +144,10 @@
                    (log-info "Restarting seats")
                    (hash-for-each
                     (lambda (key value)
-                      (unless (docker-container-running? value)
+                      (unless (display-backend-running? value)
                         (log-info "Docker container ~a is not running" value)
                         (let* ((seat (config-get-seat config key))
-                               (id   (docker-start-xephyr seat)))
+                               (id   (display-backend-start seat)))
                           (log-info "  seat: ~a, id: ~a" seat id)
                           (if id
                               (hash-set! *xephyrs* (seat-display seat) id)
@@ -161,12 +174,12 @@ Return value is the same as for PROC."
         (sleep 1)
         (apply with-graphics proc rest))))
 
-(define (dm-start config)
+(define (dm-start config display-server-backend)
   "Returns a new thread."
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
-      (with-graphics main-loop config))
+      (with-graphics main-loop config display-server-backend))
      ((> pid 0)
       (log-info "Display manager started; PID: ~a" pid)
       pid)
@@ -176,15 +189,20 @@ Return value is the same as for PROC."
 (define (dm-stop-xephyrs)
   (hash-for-each
    (lambda (key value)
-     (log-info "Stopping container ~a for seat: ~a ..."
-               value key)
-     (docker-container-stop! value)
-     (log-info "Stopping container ~a for seat: ~a ... done"
-               key value)
+     (if (docker-container? value)
+         (begin
+           (log-info "Stopping container ~a for seat: ~a ..."
+                     value key)
+           (docker-container-stop! value)
+           (log-info "Stopping container ~a for seat: ~a ... done"
+                     key value)
 
-     (log-info "Removing container ~a for seat: ~a ..."
-               value key)
-     (docker-container-rm! value)
-     (log-info "Removing container ~a for seat: ~a ... done"
-               value key))
+           (log-info "Removing container ~a for seat: ~a ..."
+                     value key)
+           (docker-container-rm! value)
+           (log-info "Removing container ~a for seat: ~a ... done"
+                     value key))
+         (begin
+           (kill value SIGTERM)
+           (waitpid value))))
    *xephyrs*))
