@@ -110,38 +110,38 @@
     (error "Could not start a Docker container"
            docker-command))
 
-  (let ((docker-command `(,%docker-binary
-                          "run"
-                          ,@(if interactive?
-                                '("-i")
-                                '())
-                          ,@(if tty?
-                                '("-t")
-                                '())
-                          ,@(if detach?
-                                '("-d")
-                                '())
-                          ,@(fold (lambda (env prev)
-                                    (append prev
-                                            (cons "-e" env)))
-                                  '()
-                                  environ)
-                          ,@(fold (lambda (v prev)
-                                    (append prev
-                                            (cons "-v" v)))
-                                  '()
-                                  volumes)
-                          ,image
-                          ,@command)))
-    (let ((pipe (append open-pipe* OPEN_READ docker-command)))
-      (unless pipe
+  (let* ((docker-command `(,%docker-binary
+                           "run"
+                           ,@(if interactive?
+                                 '("-i")
+                                 '())
+                           ,@(if tty?
+                                 '("-t")
+                                 '())
+                           ,@(if detach?
+                                 '("-d")
+                                 '())
+                           ,@(fold (lambda (env prev)
+                                     (append prev
+                                             (list "-e" env)))
+                                   '()
+                                   environ)
+                           ,@(fold (lambda (v prev)
+                                     (append prev
+                                             (list "-v" v)))
+                                   '()
+                                   volumes)
+                           ,image
+                           ,@command))
+         (pipe (append open-pipe* OPEN_READ docker-command)))
+    (unless pipe
+      (container-error docker-command))
+    (let ((id (read-line pipe)))
+      (close-pipe pipe)
+      (when (eof-object? id)
         (container-error docker-command))
-      (let ((id (read-line pipe)))
-        (close-pipe pipe)
-        (when (eof-object? id)
-          (container-error docker-command))
-        (log-info "Docker container started: ~a"
-                  id)
-        (make <docker-container> #:id id)))))
+      (log-info "Docker container started: ~a"
+                id)
+      (make <docker-container> #:id id)))) 
 
 ;;; docker-container.scm ends here.
