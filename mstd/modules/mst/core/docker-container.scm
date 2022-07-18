@@ -134,6 +134,11 @@
                            ,@(if detach?
                                  '("-d")
                                  '())
+                           ,@(fold (lambda (dev prev)
+                                     (append prev
+                                             (list "-d" dev)))
+                                   '()
+                                   devices)
                            ,@(fold (lambda (env prev)
                                      (append prev
                                              (list "-e" env)))
