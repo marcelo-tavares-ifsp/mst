@@ -1,7 +1,7 @@
 ;;; docker.scm -- MST docker procedures.
 
-;; Copyright (C) 2021 "AZ Company Group" LLC <https://gkaz.ru/>
-;; Copyright (C) 2021 Artyom V. Poptsov <a@gkaz.ru>
+;; Copyright (C) 2021-2022 "AZ Company Group" LLC <https://gkaz.ru/>
+;; Copyright (C) 2021-2022 Artyom V. Poptsov <a@gkaz.ru>
 ;;
 ;; This program is free software: you can redistribute it and/or modify it under
 ;; the terms of the GNU General Public License as published by the Free Software
@@ -31,6 +31,7 @@
   #:use-module (mst core log)
   #:use-module (mst core seat)
   #:use-module (mst system)
+  #:use-module (mst component xephyr)
   #:export (docker-container-running?
             docker-start-xephyr
 	    docker-stop
@@ -46,7 +47,6 @@
 
 (define %docker-binary "/usr/bin/docker")
 (define %xephyr-docker-image "gkaz/xephyr")
-(define %xephyr-binary "/usr/bin/Xephyr")
 
 
 ;;;
@@ -68,16 +68,6 @@
             (log-error "Could not run command: ~a" command)
             #f)))))
 
-(define (mouse->xephyr-device mouse-device)
-  "Convert a MOUSE-DEVICE to a format suitable for passing to '-mouse'
-Xephyr option."
-  (format #f "evdev,5,device=~a" mouse-device))
-
-(define (keyboard->xephyr-device keyboard-device)
-  "Convert a KEYBOARD-DEVICE to a format suitable for passing to
-'-keybd' Xephyr option."
-  (format #f "evdev,,device=~a" keyboard-device))
-
 (define (%make-command:xephyr/docker display-number resolution mouse keyboard)
   (let ((mouse-dev    (device-name->path mouse))
         (keyboard-dev (device-name->path keyboard)))
@@ -89,25 +79,20 @@ Xephyr option."
       (log-error "Cannot find the specified keyboard device: '~a'" keyboard))
 
     (if (and mouse-dev keyboard-dev)
-        (string-join (list %docker-binary
-                           "run"
-                           "--rm"
-                           "-it"
-                           "-d"
-                           "--device" mouse-dev
-                           "--device" keyboard-dev
-                           "-e" "DISPLAY=:0"
-                           "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
-                           %xephyr-docker-image
-                           %xephyr-binary
-                           "-softCursor"
-                           "-ac"
-                           "-br"
-                           "-resizeable"
-                           "-mouse" (mouse->xephyr-device mouse-dev)
-                           "-keybd" (keyboard->xephyr-device keyboard-dev)
-                           "-screen" (format #f "~a" resolution)
-                           (format #f ":~a" display-number)))
+        (string-join `(,%docker-binary
+                       "run"
+                       "--rm"
+                       "-it"
+                       "-d"
+                       "--device" ,mouse-dev
+                       "--device" ,keyboard-dev
+                       "-e" "DISPLAY=:0"
+                       "-v" "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+                       ,%xephyr-docker-image
+                       ,@(make-xephyr-command #:mouse-dev mouse-dev
+                                              #:keyboard-dev keyboard-dev
+                                              #:resolution resolution
+                                              #:display-number display-number)))
         #f)))
 
 
