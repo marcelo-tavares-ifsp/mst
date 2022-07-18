@@ -43,7 +43,7 @@
 ;;; Global constants and variables:
 
 (define %default-pid-file      "/var/run/mstd.pid")
-(define %default-display-server-backend 'xephyr-docker)
+(define %default-display-server-backend "xephyr-docker")
 (define %seat-configuration-file "/etc/mst-seats")
 
 (define *debug?* #f)
@@ -87,7 +87,7 @@ Options:
                                 Allowed values:
                                     xephyr, xephyr-docker
                                 Default value:
-                                    " (symbol->string %default-display-server-backend) "
+                                    " %default-display-server-backend "
   --help, -h                    Print this message and exit.
 "))
   (exit))
@@ -98,9 +98,10 @@ Options:
   (let* ((options       (getopt-long args *option-spec*))
          (detach-wanted (option-ref options 'detach   #f))
          (pid-file      (option-ref options 'pid-file %default-pid-file))
-         (display-server-backend (option-ref options
-                                             'display-server-backend
-                                             %default-display-server-backend))
+         (display-server-backend (string->symbol
+                                  (option-ref options
+                                              'display-server-backend
+                                              %default-display-server-backend)))
          (debug-wanted? (option-ref options 'debug    #f))
          (stderr-wanted? (option-ref options 'stderr  #f))
          (help-wanted?  (option-ref options 'help     #f)))
