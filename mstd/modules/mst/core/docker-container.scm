@@ -133,7 +133,7 @@
                                    volumes)
                            ,image
                            ,@command))
-         (pipe (append open-pipe* OPEN_READ docker-command)))
+         (pipe (apply open-pipe* OPEN_READ docker-command)))
     (unless pipe
       (container-error docker-command))
     (let ((id (read-line pipe)))
