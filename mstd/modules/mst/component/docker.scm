@@ -24,7 +24,7 @@
 
 ;;; Code:
 
-(define-module (mst docker)
+(define-module (mst component docker)
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
   #:use-module (oop goops)

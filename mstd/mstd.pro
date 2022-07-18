@@ -43,6 +43,7 @@ guile_modules_mst_component.files = \
      modules/mst/component/lightdm.scm \
      modules/mst/component/awesome.scm \
      modules/mst/component/xephyr.scm
+     modules/mst/component/docker.scm
 
 guile_modules_mst_component.path = $${PREFIX}/share/guile/site/mst/component/
 
@@ -51,7 +52,6 @@ guile_modules_mst_component.path = $${PREFIX}/share/guile/site/mst/component/
 DISTFILES = \
     mstd        \
     modules/mst/config.scm \
-    modules/mst/docker.scm \
     modules/mst/system.scm \
     modules/mst/dm.scm
 
