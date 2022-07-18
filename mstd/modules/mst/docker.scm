@@ -128,10 +128,10 @@
           #f))))
 
 (define-method (docker-start-xephyr (seat <seat>))
-  (docker-start-xephyr (seat-display   seat)
-                       (seat-interface seat)
-                       (seat-mouse     seat)
-                       (seat-keyboard  seat)))
+  (docker-start-xephyr (seat-display    seat)
+                       (seat-resolution seat)
+                       (seat-mouse      seat)
+                       (seat-keyboard   seat)))
 
 
 (define (docker-stop id)
