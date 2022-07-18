@@ -36,6 +36,7 @@
   #:use-module (mst system)
   #:use-module (mst component lightdm)
   #:use-module (mst component awesome)
+  #:use-module (mst component xephyr) 
   #:use-module (mst core log)
   #:use-module (mst core seat)
   #:use-module (mst unmouser)
@@ -55,11 +56,6 @@
 ;; The path to the LightDM configuration file.
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
 
-;; The path to the Xephyr binary.
-;;
-;; TODO: configure the path on the MST build.
-(define %xephyr-binary "/usr/bin/Xephyr")
-
 
 ;; Hash table that stores the running Xephyr instances.
 (define *xephyrs* (make-hash-table 2))
@@ -70,16 +66,13 @@
   (let ((pid (primitive-fork)))
     (cond
      ((zero? pid)
-      (execle %xephyr-binary (cons "DISPLAY=:0" (environ))
-              %xephyr-binary
-              "-softCursor"
-              "-ac"
-              "-br"
-              "-resizeable"
-              "-mouse" (format #f "evdev,5,device=/dev/input/by-path/~a" mouse)
-              "-keybd" (format #f "evdev,,device=/dev/input/by-path/~a" keyboard)
-              "-screen" (format #f "~a" resolution)
-              (format #f ":~a" display-number)))
+      (apply execle
+             `(,%xephyr-binary
+               ,(cons "DISPLAY=:0" (environ))
+               ,@(make-xephyr-command #:mouse-dev mouse
+                                      #:keyboard-dev keyboard
+                                      #:resolution resolution
+                                      #:display-number display-number))))
      ((> pid 0)
       (log-info "Xephyr is started.  PID: ~a" pid)
       pid)
