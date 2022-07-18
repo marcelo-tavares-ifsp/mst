@@ -25,6 +25,9 @@
 ;;; Code:
 
 (define-module (mst component xephyr)
+  #:use-module (oop goops)
+  #:use-module (mst core log)
+  #:use-module (mst core seat)
   #:export (start-xephyr
             make-xephyr-command
             mouse->xephyr-device
