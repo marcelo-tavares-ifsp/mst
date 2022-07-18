@@ -144,6 +144,6 @@
           (container-error docker-command))
         (log-info "Docker container started: ~a"
                   id)
-        id))))
+        (make <docker-container> #:id id)))))
 
 ;;; docker-container.scm ends here.
