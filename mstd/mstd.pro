@@ -111,7 +111,6 @@ DISTFILES = \
     mstd        \
     mstd.in \
     modules/mst/config.scm.in  \
-    modules/mst/config.scm  \
     modules/mst/core/config.scm \
     modules/mst/system.scm \
     modules/mst/dm.scm
