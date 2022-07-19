@@ -29,6 +29,7 @@
 
 (define-public %docker-binary "@PATH_TO_DOCKER@")
 (define-public %notify-send-binary "@PATH_TO_NOTIFY_SEND@")
+(define-public %lightdm-binary "@PATH_TO_LIGHTDM@")
 
 ;;; config.scm ends here.
 

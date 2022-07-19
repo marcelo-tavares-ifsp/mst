@@ -28,6 +28,7 @@
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
   #:use-module (mst core log)
+  #:use-module (mst config)
   #:export (lightdm-start
             lightdm-started?
             lightdm-add-seat
@@ -42,7 +43,6 @@
 
 ;;; Constants.
 
-(define %lightdm-binary "/usr/sbin/lightdm")
 (define %lightdm-pid-file "/var/run/mstd-lightdm.pid")
 (define %lightdm-config "/etc/lightdm/lightdm-mst.conf")
 
