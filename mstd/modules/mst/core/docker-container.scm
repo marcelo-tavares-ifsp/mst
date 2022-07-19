@@ -32,6 +32,7 @@
   #:use-module (ice-9 rdelim)
   #:use-module (srfi srfi-1)
   #:use-module (mst core log)
+  #:use-module (mst config)
   #:export (<docker-container>
             make-docker-container
             docker-container?
@@ -39,11 +40,6 @@
             docker-container-stop!
             docker-container-rm!
             docker-container-running?))
-
-
-;; TODO: Set the actual path to the Docker binary
-;; during the build.
-(define %docker-binary "/usr/bin/docker")
 
 
 (define-class <docker-container> ()

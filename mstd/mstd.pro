@@ -24,6 +24,7 @@ executable.path  = $${PREFIX}/bin/
 guile_modules_mst.files = \
     modules/mst/docker.scm  \
     modules/mst/system.scm  \
+    modules/mst/config.scm \
     modules/mst/device-listener.scm \
     modules/mst/unmouser.scm \
     modules/mst/dm.scm
@@ -55,20 +56,37 @@ isEmpty(PATH_TO_GUILE) {
     message("Guile binary: " $${PATH_TO_GUILE})
 }
 
+PATH_TO_DOCKER = $$system(which docker)
+isEmpty(PATH_TO_DOCKER) {
+    warning("Docker not found")
+} else {
+    message("Docker binary: " $${PATH_TO_DOCKER})
+}
+
 generate_mstd.target = mstd
 generate_mstd.commands = \
     sed -e 's,[@]GUILE[@],$$PATH_TO_GUILE,g' mstd.in > mstd
     
-executable.depends = generate_mstd
-QMAKE_EXTRA_TARGETS += generate_mstd
+generate_config_scm.target = modules/mst/config.scm
+generate_config_scm.commands = \
+    sed -e 's,[@]PATH_TO_DOCKER[@],$$PATH_TO_DOCKER,g' \
+        modules/mst/config.scm.in > modules/mst/config.scm
 
-QMAKE_CLEAN += mstd
+generate_mstd.depends = generate_config_scm
+executable.depends = generate_mstd
+QMAKE_EXTRA_TARGETS += generate_mstd generate_config_scm
+
+PRE_TARGETDEPS += modules/mst/config.scm
+
+QMAKE_CLEAN += mstd modules/mst/config.scm
 
 ###
 
 DISTFILES = \
     mstd        \
     mstd.in \
+    modules/mst/config.scm.in  \
+    modules/mst/config.scm  \
     modules/mst/core/config.scm \
     modules/mst/system.scm \
     modules/mst/dm.scm
