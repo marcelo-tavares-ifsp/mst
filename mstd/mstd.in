@@ -1,4 +1,4 @@
-#!/usr/bin/guile \
+#!@GUILE@ \
 -e main -s
 # aside from this initial boilerplate, this is actually -*- scheme -*- code
 !#

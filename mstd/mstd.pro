@@ -48,10 +48,27 @@ guile_modules_mst_component.files = \
 
 guile_modules_mst_component.path = $${PREFIX}/share/guile/site/mst/component/
 
+PATH_TO_GUILE = $$system(which guile)
+isEmpty(PATH_TO_GUILE) {
+    warning("Guile not found")
+} else {
+    message("Guile binary: " $${PATH_TO_GUILE})
+}
+
+generate_mstd.target = mstd
+generate_mstd.commands = \
+    sed -e 's,[@]GUILE[@],$$PATH_TO_GUILE,g' mstd.in > mstd
+    
+executable.depends = generate_mstd
+QMAKE_EXTRA_TARGETS += generate_mstd
+
+QMAKE_CLEAN += mstd
+
 ###
 
 DISTFILES = \
     mstd        \
+    mstd.in \
     modules/mst/config.scm \
     modules/mst/system.scm \
     modules/mst/dm.scm
