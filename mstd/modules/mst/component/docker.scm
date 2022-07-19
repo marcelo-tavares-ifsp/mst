@@ -38,7 +38,6 @@
 
 ;;; Constants.
 
-(define %docker-binary "/usr/bin/docker")
 (define %xephyr-docker-image "gkaz/xephyr")
 
 
