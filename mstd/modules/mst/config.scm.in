@@ -28,6 +28,7 @@
 (define-module (mst config))
 
 (define-public %docker-binary "@PATH_TO_DOCKER@")
+(define-public %notify-send-binary "@PATH_TO_NOTIFY_SEND@")
 
 ;;; config.scm ends here.
 

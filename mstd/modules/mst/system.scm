@@ -31,6 +31,7 @@
   #:use-module (ice-9 regex)
   #:use-module (ice-9 ftw)
   #:use-module (mst core log)
+  #:use-module (mst config)
   #:export (notify-send
             display-number->user
             graphics-available?
@@ -58,7 +59,7 @@
 (define (%make-command:notify-send display-number message)
   (string-append
    (format #f "DISPLAY=:~a" display-number)
-   " /usr/bin/notify-send"
+   " " %notify-send-binary
    " --urgency=critical"
    " --icon=error"
    (string-append " '" message "'")))

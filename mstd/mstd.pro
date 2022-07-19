@@ -63,6 +63,13 @@ isEmpty(PATH_TO_DOCKER) {
     message("Docker binary: " $${PATH_TO_DOCKER})
 }
 
+PATH_TO_NOTIFY_SEND = $$system(which notify-send)
+isEmpty(PATH_TO_NOTIFY_SEND) {
+    warning("notify-send not found")
+} else {
+    message("notify-send binary: " $${PATH_TO_NOTIFY_SEND})
+}
+
 generate_mstd.target = mstd
 generate_mstd.commands = \
     sed -e 's,[@]GUILE[@],$$PATH_TO_GUILE,g' mstd.in > mstd
@@ -70,6 +77,7 @@ generate_mstd.commands = \
 generate_config_scm.target = modules/mst/config.scm
 generate_config_scm.commands = \
     sed -e 's,[@]PATH_TO_DOCKER[@],$$PATH_TO_DOCKER,g' \
+        -e 's,[@]PATH_TO_NOTIFY_SEND[@],$$PATH_TO_NOTIFY_SEND,g' \
         modules/mst/config.scm.in > modules/mst/config.scm
 
 generate_mstd.depends = generate_config_scm
