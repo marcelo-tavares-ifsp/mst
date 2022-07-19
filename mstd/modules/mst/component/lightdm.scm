@@ -92,7 +92,8 @@
 (define (lightdm-seat-running? id)
   "Check if a seat with ID is running."
   (let* ((port (open-input-pipe
-                (format #f "/usr/bin/dm-tool list-seats | grep 'Seat~a'"
+                (format #f "~a list-seats | grep 'Seat~a'"
+                        %dm-tool-binary
                         (- id 1))))
          (result (read-line port)))
     (close port)
@@ -102,7 +103,8 @@
 
 (define (lightdm-running-seats)
   "Get the number of running seats."
-  (let* ((port (open-input-pipe "/usr/bin/dm-tool list-seats | grep -c 'Seat'"))
+  (let* ((port (open-input-pipe (string-append %dm-tool-binary
+                                               " list-seats | grep -c 'Seat'")))
 	 (data (read-line port)))
     (close port)
     (waitpid -1 WNOHANG)
