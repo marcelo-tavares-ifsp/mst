@@ -31,6 +31,7 @@
 (define-public %notify-send-binary "@PATH_TO_NOTIFY_SEND@")
 (define-public %lightdm-binary "@PATH_TO_LIGHTDM@")
 (define-public %dm-tool-binary "@PATH_TO_DM_TOOL@")
+(define-public %xephyr-binary "@PATH_TO_XEPHYR@")
 
 ;;; config.scm ends here.
 

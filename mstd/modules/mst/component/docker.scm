@@ -53,7 +53,8 @@
   (let ((mouse-dev    (device-name->path mouse))
         (keyboard-dev (device-name->path keyboard)))
     (make-docker-container %xephyr-docker-image
-                           (make-xephyr-command #:mouse-dev mouse-dev
+                           (make-xephyr-command "/usr/bin/Xephyr"
+                                                #:mouse-dev mouse-dev
                                                 #:keyboard-dev keyboard-dev
                                                 #:resolution resolution
                                                 #:display-number display-number)

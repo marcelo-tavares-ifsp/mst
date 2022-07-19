@@ -84,6 +84,13 @@ isEmpty(PATH_TO_DM_TOOL) {
     message("dm-tool binary: " $${PATH_TO_DM_TOOL})
 }
 
+PATH_TO_XEPHYR = $$system(which Xephyr)
+isEmpty(PATH_TO_XEPHYR) {
+    warning("Xephyr not found")
+} else {
+    message("Xephyr binary: " $${PATH_TO_XEPHYR})
+}
+
 
 generate_mstd.target = mstd
 generate_mstd.commands = \
@@ -95,6 +102,7 @@ generate_config_scm.commands = \
         -e 's,[@]PATH_TO_NOTIFY_SEND[@],$$PATH_TO_NOTIFY_SEND,g' \
         -e 's,[@]PATH_TO_LIGHTDM[@],$$PATH_TO_LIGHTDM,g' \
         -e 's,[@]PATH_TO_DM_TOOL[@],$$PATH_TO_DM_TOOL,g' \
+        -e 's,[@]PATH_TO_XEPHYR[@],$$PATH_TO_XEPHYR,g' \
         modules/mst/config.scm.in > modules/mst/config.scm
 
 generate_mstd.depends = generate_config_scm

@@ -28,15 +28,11 @@
   #:use-module (oop goops)
   #:use-module (mst core log)
   #:use-module (mst core seat)
+  #:use-module (mst config)
   #:export (start-xephyr
             make-xephyr-command
             mouse->xephyr-device
             keyboard->xephyr-device))
-
-;; The path to the Xephyr binary.
-;;
-;; TODO: configure the path on the MST build.
-(define %xephyr-binary "/usr/bin/Xephyr")
 
 (define (mouse->xephyr-device mouse-device)
   "Convert a MOUSE-DEVICE to a format suitable for passing to '-mouse'
@@ -49,12 +45,13 @@ Xephyr option."
   (format #f "evdev,,device=~a" keyboard-device))
 
 
-(define* (make-xephyr-command #:key
+(define* (make-xephyr-command xephyr-binary
+                              #:key
                               mouse-dev
                               keyboard-dev
                               resolution
                               display-number)
-  (list %xephyr-binary
+  (list xephyr-binary
         "-softCursor"
         "-ac"
         "-br"
@@ -73,7 +70,8 @@ Xephyr option."
       (apply execle
              `(,%xephyr-binary
                ,(cons "DISPLAY=:0" (environ))
-               ,@(make-xephyr-command #:mouse-dev mouse
+               ,@(make-xephyr-command %xephyr-binary
+                                      #:mouse-dev mouse
                                       #:keyboard-dev keyboard
                                       #:resolution resolution
                                       #:display-number display-number))))
