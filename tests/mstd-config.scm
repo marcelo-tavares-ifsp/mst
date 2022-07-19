@@ -1,6 +1,6 @@
 (use-modules (srfi srfi-64)
              (mst core seat)
-	     (mst config))
+	     (mst core config))
 
 
 (test-begin "mstd-config")
