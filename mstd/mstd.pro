@@ -102,7 +102,6 @@ generate_mstd.target = mstd
 generate_mstd.commands = \
     sed -e 's,[@]GUILE[@],$$PATH_TO_GUILE,g' mstd.in > mstd
     
-generate_config_scm.target = modules/mst/config.scm
 generate_config_scm.commands = \
     sed -e 's,[@]PATH_TO_DOCKER[@],$$PATH_TO_DOCKER,g' \
         -e 's,[@]PATH_TO_NOTIFY_SEND[@],$$PATH_TO_NOTIFY_SEND,g' \
