@@ -26,13 +26,13 @@
 
 (define-module (mst core log)
   #:use-module (ice-9 rdelim)
+  #:use-module (mst config)
   #:export (log
             log-error
             log-warning
             log-info
             log-use-stderr!))
 
-(define %logger "/usr/bin/logger")
 (define %tag    "mstd")
 
 (define *use-stderr?* #f)
@@ -43,7 +43,7 @@
 (define (log level fmt . args)
   (let* ((message (apply format #f fmt args))
          (command (format #f "~a ~a --priority=daemon.~a --tag='~a' '~a'"
-                          %logger
+                          %logger-binary
                           (if *use-stderr?*
                               "--stderr"
                               "")

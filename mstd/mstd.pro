@@ -91,6 +91,12 @@ isEmpty(PATH_TO_XEPHYR) {
     message("Xephyr binary: " $${PATH_TO_XEPHYR})
 }
 
+PATH_TO_LOGGER = $$system(which logger)
+isEmpty(PATH_TO_LOGGER) {
+    warning("logger not found")
+} else {
+    message("logger binary: " $${PATH_TO_LOGGER})
+}
 
 generate_mstd.target = mstd
 generate_mstd.commands = \
@@ -103,6 +109,7 @@ generate_config_scm.commands = \
         -e 's,[@]PATH_TO_LIGHTDM[@],$$PATH_TO_LIGHTDM,g' \
         -e 's,[@]PATH_TO_DM_TOOL[@],$$PATH_TO_DM_TOOL,g' \
         -e 's,[@]PATH_TO_XEPHYR[@],$$PATH_TO_XEPHYR,g' \
+        -e 's,[@]PATH_TO_LOGGER[@],$$PATH_TO_LOGGER,g' \
         modules/mst/config.scm.in > modules/mst/config.scm
 
 generate_mstd.depends = generate_config_scm

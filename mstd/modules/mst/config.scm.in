@@ -32,6 +32,7 @@
 (define-public %lightdm-binary "@PATH_TO_LIGHTDM@")
 (define-public %dm-tool-binary "@PATH_TO_DM_TOOL@")
 (define-public %xephyr-binary "@PATH_TO_XEPHYR@")
+(define-public %logger-binary "@PATH_TO_LOGGER@")
 
 ;;; config.scm ends here.
 
