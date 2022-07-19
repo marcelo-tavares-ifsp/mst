@@ -77,6 +77,13 @@ isEmpty(PATH_TO_LIGHTDM) {
     message("lightdm binary: " $${PATH_TO_LIGHTDM})
 }
 
+PATH_TO_DM_TOOL = $$system(which dm-tool)
+isEmpty(PATH_TO_DM_TOOL) {
+    warning("dm-tool not found")
+} else {
+    message("dm-tool binary: " $${PATH_TO_DM_TOOL})
+}
+
 
 generate_mstd.target = mstd
 generate_mstd.commands = \
@@ -87,6 +94,7 @@ generate_config_scm.commands = \
     sed -e 's,[@]PATH_TO_DOCKER[@],$$PATH_TO_DOCKER,g' \
         -e 's,[@]PATH_TO_NOTIFY_SEND[@],$$PATH_TO_NOTIFY_SEND,g' \
         -e 's,[@]PATH_TO_LIGHTDM[@],$$PATH_TO_LIGHTDM,g' \
+        -e 's,[@]PATH_TO_DM_TOOL[@],$$PATH_TO_DM_TOOL,g' \
         modules/mst/config.scm.in > modules/mst/config.scm
 
 generate_mstd.depends = generate_config_scm

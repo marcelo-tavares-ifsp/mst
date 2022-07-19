@@ -63,7 +63,7 @@
 ;;;
 
 (define (%make-command:add-seat number)
-  (format #f "/usr/bin/dm-tool add-local-x-seat ~a" number))
+  (format #f "~a add-local-x-seat ~a" %dm-tool-binary number))
 
 (define (lightdm-add-seat number)
   (log-info "lightdm-add-seat: Adding seat number ~a" number)
