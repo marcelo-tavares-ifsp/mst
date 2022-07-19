@@ -22,7 +22,6 @@ executable.path  = $${PREFIX}/bin/
 #}
 
 guile_modules_mst.files = \
-    modules/mst/config.scm  \
     modules/mst/docker.scm  \
     modules/mst/system.scm  \
     modules/mst/device-listener.scm \
@@ -32,6 +31,7 @@ guile_modules_mst.files = \
 guile_modules_mst.path = $${PREFIX}/share/guile/site/mst/
 
 guile_modules_mst_core.files = \
+     modules/mst/core/config.scm  \
      modules/mst/core/log.scm   \
      modules/mst/core/seat.scm \
      modules/mst/core/docker-container.scm
@@ -69,7 +69,7 @@ QMAKE_CLEAN += mstd
 DISTFILES = \
     mstd        \
     mstd.in \
-    modules/mst/config.scm \
+    modules/mst/core/config.scm \
     modules/mst/system.scm \
     modules/mst/dm.scm
 

@@ -25,7 +25,7 @@
 
 ;;; Code:
 
-(define-module (mst config)
+(define-module (mst core config)
   #:use-module (ice-9 rdelim)
   #:use-module (srfi srfi-1)
   #:use-module (mst core seat)

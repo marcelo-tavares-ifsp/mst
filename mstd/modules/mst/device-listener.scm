@@ -29,8 +29,8 @@
   #:use-module (udev udev)
   #:use-module (udev monitor)
   #:use-module (udev device)
-  #:use-module (mst config)
   #:use-module (mst system)
+  #:use-module (mst core config)
   #:use-module (mst core log)
   #:export (device-listener-start))
 
