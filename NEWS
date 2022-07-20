@@ -1,6 +1,48 @@
 #+TITLE: MST News -- history of user-visible changes.
 #+STARTUP: content hidestars
 
+* Unreleased
+** General changes
+*** Remove the dependency on "unclutter"
+    "mstd" now hides the mouse cursor.
+*** mst: The configurator now creates the multiseat system user
+    The multiseat user specified in the configuration file is created when MST
+    installs the prepared configuration to the system.
+*** mstd: Now it allows to choose the display server backend
+    There's now "--display-server-backend" option for that.
+
+    Supported backends are: "xephyr" and "xephyr-docker" (default)
+
+    "xephyr-docker" allows to start a Xephyr instance inside a Docker
+    container (build from "gkaz/xephyr" Docker image.)  The advantage is that
+    not all systems have Xephyr built with "evdev" support required for MST to
+    work properly; the Xephyr version inside the Docker image has "evdev"
+    support.
+
+    When "xephyr" backend is used then Xephyr starts from the host system
+    directly.
+*** mstd: Now the executable generated from the source 
+    Now the executable is generated from the source with the actual "guile"
+    full binary path.
+*** guix: Add GNU Guix build script.
+** Bugfixes
+*** LightDM: Presence check is now more reliable
+*** ALT Linux P10: Generate missing PAM configuration
+*** mst: Now performs "chown" on the multiseat home properly
+    The configurator has a bug that lead to chown'ing the multiseat home
+    directory to the "root" user.  Now it is fixed.
+*** mst: Now creates ".Xauthority" file for the multiseat user
+*** mst, awesome: Fix the user ".config" installation
+    "mst" would try to install the ".config" directory to
+    "/home/<mst-user>.config" instead of "/home/<mst-user>/.config" (note the
+    missing "/".)  Now it is fixed.
+** Building/installation
+*** Check the presence of required programs on the host
+    MST now checks if all the required programs are present on the host during
+    the build.  Actual paths to the programs are substituted in the sources.
+** Testing/CI
+*** GitLab CI now run tests on ALT P8, P10 and Ubuntu 20.04
+
 * Changes in version 2.0.0 (2022-02-16)
 ** General changes
 *** Require Guile-UDev 2.0
