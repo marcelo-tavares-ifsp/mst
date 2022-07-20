@@ -154,7 +154,6 @@
 (define-method (unmouser-free (unmouser <unmouser>))
   "Free all the resources acquired by a UNMOUSER instance.  After calling this
 procedure, the instance cannot be used.  Return value is undefined."
-  (x-destroy-window (unmouser-window unmouser))
   (unmouser-window-set! unmouser #f)
   (x-close-display (unmouser-display unmouser))
   (unmouser-display-set! unmouser #f))
