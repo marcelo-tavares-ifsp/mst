@@ -22,9 +22,9 @@ executable.path  = $${PREFIX}/bin/
 #}
 
 guile_modules_mst.files = \
+    modules/mst/config.scm  \
     modules/mst/docker.scm  \
     modules/mst/system.scm  \
-    modules/mst/config.scm \
     modules/mst/device-listener.scm \
     modules/mst/unmouser.scm \
     modules/mst/dm.scm
