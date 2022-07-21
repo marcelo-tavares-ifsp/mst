@@ -100,7 +100,7 @@ isEmpty(PATH_TO_X) {
     message("X server binary: " $${PATH_TO_X})
 }
 
-PATH_TO_X = $$system(which Xephyr)
+PATH_TO_XEPHYR = $$system(which Xephyr)
 isEmpty(PATH_TO_XEPHYR) {
     warning("Xephyr not found")
 } else {
@@ -116,6 +116,8 @@ isEmpty(PATH_TO_BASH) {
 
 QMAKE_SUBSTITUTES = config.h.in
 DISTFILES += config.h.in
+
+PRE_TARGETDEPS += config.h
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
