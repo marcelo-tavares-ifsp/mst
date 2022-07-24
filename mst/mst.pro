@@ -57,6 +57,8 @@ isEmpty(PATH_TO_XSET) {
 PATH_TO_SYSTEMCTL = $$system(which systemctl)
 isEmpty(PATH_TO_SYSTEMCTL) {
     warning("systemctl not found")
+    PATH_TO_SYSTEMCTL = "/usr/bin/systemctl"
+    warning("assuming default systemctl path: " $${PATH_TO_SYSTEMCTL})
 } else {
     message("systemctl binary: " $${PATH_TO_SYSTEMCTL})
 }
