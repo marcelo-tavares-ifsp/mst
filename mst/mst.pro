@@ -13,6 +13,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = mst
 TEMPLATE = app
 
+executable.files = mst
+executable.path = $${PREFIX}/bin/
+
 MST_VERSION = $${VERSION}
 MST_HASH    = $$system("[ ! -e '../.git' ] || git rev-parse --short HEAD")
 !isEmpty(MST_HASH) {
@@ -214,10 +217,8 @@ isEmpty(PREFIX) {
 }
 DEFINES += INSTALLATION_PREFIX=\\\"$${PREFIX}\\\"
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = $${PREFIX}/usr/bin
-!isEmpty(target.path): INSTALLS += target
+INSTALLS += \
+    executable
 
 DISTFILES +=
 
