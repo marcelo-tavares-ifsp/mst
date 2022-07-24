@@ -37,6 +37,7 @@
 #include <QCommandLineParser>
 #include <QTranslator>
 
+#include "config.h"
 #include "core/template_manager.h"
 #include "core/platform.h"
 
@@ -184,9 +185,14 @@ int main(int argc, char *argv[])
                 QStringList() << "list-input-devices",
                 QCoreApplication::translate("main",
                                             "Print a list input devices."));
+    QCommandLineOption list_components(
+                QStringList() << "list-components",
+                QCoreApplication::translate("main",
+                                            "Print the list of components."));
 
     parser.addOption(list_backups_option);
     parser.addOption(list_input_devices);
+    parser.addOption(list_components);
     parser.addOption(rollback_option);
     parser.addOption(start_option);
     parser.addOption(stop_option);
@@ -262,6 +268,22 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    if (parser.isSet(list_components)) {
+	cout << "xrandr:           " << PATH_TO_XRANDR << endl
+	     << "pgrep:            " << PATH_TO_PGREP << endl
+	     << "pkill:            " << PATH_TO_PKILL << endl
+	     << "xset:             " << PATH_TO_XSET << endl
+	     << "systemctl:        " << PATH_TO_SYSTEMCTL << endl
+	     << "awesome:          " << PATH_TO_AWESOME << endl
+	     << "lightdm:          " << PATH_TO_LIGHTDM << endl
+	     << "dm-tool:          " << PATH_TO_DM_TOOL << endl
+	     << "vgclient:         " << PATH_TO_VGLCLIENT << endl
+	     << "vglserver_config: " << PATH_TO_VGLSERVER_CONFIG << endl
+	     << "X:                " << PATH_TO_X << endl
+	     << "Xephyr:           " << PATH_TO_XEPHYR << endl
+	     << "bash:             " << PATH_TO_BASH << endl;
+	return 0;
+    }
 
     if (parser.isSet(debug_allow_device_collisions)) {
         config.allow_device_collisions(true);
