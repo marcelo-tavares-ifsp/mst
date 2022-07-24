@@ -39,10 +39,6 @@ isEmpty(PREFIX) {
 }
 
 scripts.files += \
-    scripts/mk_backup.sh \
-    scripts/apl_backup.sh \
-    scripts/mst-mount	\
-    scripts/mst-umount \
     scripts/mst-umount
 
 scripts.path = $${PREFIX}/bin
