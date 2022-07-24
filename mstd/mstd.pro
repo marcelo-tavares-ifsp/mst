@@ -115,7 +115,7 @@ generate_mstd.depends = generate_config_scm
 executable.depends = generate_mstd
 QMAKE_EXTRA_TARGETS += generate_mstd generate_config_scm
 
-PRE_TARGETDEPS += modules/mst/config.scm
+PRE_TARGETDEPS += generate_config_scm
 
 QMAKE_CLEAN += mstd modules/mst/config.scm
 
