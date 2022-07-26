@@ -24,6 +24,9 @@
 *** mstd: Now the executable generated from the source 
     Now the executable is generated from the source with the actual "guile"
     full binary path.
+*** mstd: Set the seat display resolution with xrandr
+    mstd now sets the display resolution for each seat; this allows for better
+    support of configurations that use monitors with different aspect ratio.
 *** guix: Add GNU Guix build script.
 ** Bugfixes
 *** LightDM: Presence check is now more reliable
