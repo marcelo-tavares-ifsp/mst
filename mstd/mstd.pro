@@ -117,6 +117,7 @@ generate_config_scm.commands = \
         -e 's,[@]PATH_TO_DM_TOOL[@],$$PATH_TO_DM_TOOL,g' \
         -e 's,[@]PATH_TO_XEPHYR[@],$$PATH_TO_XEPHYR,g' \
         -e 's,[@]PATH_TO_LOGGER[@],$$PATH_TO_LOGGER,g' \
+        -e 's,[@]PATH_TO_XRANDR[@],$$PATH_TO_XRANDR,g' \
         modules/mst/config.scm.in > modules/mst/config.scm
 
 generate_mstd.depends = generate_config_scm
