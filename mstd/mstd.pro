@@ -98,6 +98,14 @@ isEmpty(PATH_TO_LOGGER) {
     message("logger binary: " $${PATH_TO_LOGGER})
 }
 
+PATH_TO_XRANDR = $$system(which xrandr)
+isEmpty(PATH_TO_XRANDR) {
+    warning("xrandr not found")
+} else {
+    message("xrandr binary: " $${PATH_TO_XRANDR})
+}
+
+
 generate_mstd.target = mstd
 generate_mstd.commands = \
     sed -e 's,[@]GUILE[@],$$PATH_TO_GUILE,g' mstd.in > mstd

@@ -33,6 +33,7 @@
 (define-public %dm-tool-binary "@PATH_TO_DM_TOOL@")
 (define-public %xephyr-binary "@PATH_TO_XEPHYR@")
 (define-public %logger-binary "@PATH_TO_LOGGER@")
+(define-public %xrandr-binary "@PATH_TO_XRANDR@")
 
 ;;; config.scm ends here.
 

@@ -32,6 +32,7 @@
   #:use-module (ice-9 threads)
   #:use-module (oop goops)
   #:use-module (mst system)
+  #:use-module (mst config)
   #:use-module (mst component docker)
   #:use-module (mst component lightdm)
   #:use-module (mst component awesome)
@@ -105,7 +106,7 @@
 
     (for-each (lambda (seat)
                 (setenv "DISPLAY" ":0")
-                (system* "xrandr"
+                (system* %xrandr-binary
                          "--auto"
                          "--output" (seat-interface seat)
                          "--mode"   (seat-resolution seat)))
