@@ -156,4 +156,9 @@ Options:
       (log-info "Starting display manager ... done")
       (device-listener-start config))))
 
+
+;;; Local Variables:
+;;; mode: scheme
+;;; End:
+
 ;;; mstd ends here.
