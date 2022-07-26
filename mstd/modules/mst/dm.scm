@@ -103,6 +103,14 @@
     (sigaction SIGINT sighandler)
     (sigaction SIGTERM sighandler)
 
+    (for-each (lambda (seat)
+                (setenv "DISPLAY" ":0")
+                (system* "xrandr"
+                         "--auto"
+                         "--output" (seat-interface seat)
+                         "--mode"   (seat-resolution seat)))
+              config)
+
     (unmouser-toggle unmouser)
 
     (sleep 5)
