@@ -134,10 +134,31 @@ $ sudo systemctl set-default multi-user
 ```
 
 # Known Bugs
-## Mouse/keyboard freezes after period of idle time on XFCE4
+## XFCE4: Mouse/keyboard freezes after period of idle time on XFCE4
 The reason for this is `xfce4-screensaver` -- when it runs, mouse clicks and
 keyboard input "freezes".
 
 The solution is to disable `xfce4-screensaver`.  Optionally you can replace it
 with `xscreensaver`.
 
+## XFCE4: A seat has wrong resolution
+
+The most likely scenario is that you have wrong parameters in your
+`~/.config/monitors.xml` file.
+
+You need to manually set `width` and `height` parameters to the required
+resolution:
+
+```xml
+<monitors version="1">
+  <configuration>
+      <clone>no</clone>
+      <output name="default">
+          ...
+          <width>1366</width>
+          <height>768</height>
+          ...
+      </output>
+  </configuration>
+</monitors>
+```
