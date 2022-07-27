@@ -1,6 +1,6 @@
 TEMPLATE = aux
 
-CONFIG += nostrip
+CONFIG += nostrip silent
 
 isEmpty(PREFIX) {
     PREFIX = /usr
@@ -96,10 +96,12 @@ isEmpty(PATH_TO_XRANDR) {
 
 generate_mstd.target = mstd
 generate_mstd.commands = \
-    sed -e 's,[@]GUILE[@],$$PATH_TO_GUILE,g' mstd.in > mstd
+    @echo "GEN mstd" \
+    && sed -e 's,[@]GUILE[@],$$PATH_TO_GUILE,g' mstd.in > mstd
     
 generate_config_scm.commands = \
-    sed -e 's,[@]PATH_TO_DOCKER[@],$$PATH_TO_DOCKER,g' \
+    @echo "GEN config.scm" \
+    && sed -e 's,[@]PATH_TO_DOCKER[@],$$PATH_TO_DOCKER,g' \
         -e 's,[@]PATH_TO_NOTIFY_SEND[@],$$PATH_TO_NOTIFY_SEND,g' \
         -e 's,[@]PATH_TO_LIGHTDM[@],$$PATH_TO_LIGHTDM,g' \
         -e 's,[@]PATH_TO_DM_TOOL[@],$$PATH_TO_DM_TOOL,g' \
