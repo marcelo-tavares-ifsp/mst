@@ -1,7 +1,7 @@
 ;;; device-listener.scm -- Listen to and handle device events.
 
-;; Copyright (C) 2021 "AZ Company Group" LLC <https://gkaz.ru/>
-;; Copyright (C) 2021 Artyom V. Poptsov <a@gkaz.ru>
+;; Copyright (C) 2021-2022 "AZ Company Group" LLC <https://gkaz.ru/>
+;; Copyright (C) 2021-2022 Artyom V. Poptsov <a@gkaz.ru>
 ;;
 ;; This program is free software: you can redistribute it and/or modify it under
 ;; the terms of the GNU General Public License as published by the Free Software
@@ -32,6 +32,7 @@
   #:use-module (mst system)
   #:use-module (mst core config)
   #:use-module (mst core log)
+  #:use-module (mst core seat)
   #:export (device-listener-start))
 
 
