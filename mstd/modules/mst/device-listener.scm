@@ -80,21 +80,24 @@ in a CONFIG."
 
     (let ((callback
            (lambda (device)
-             (let ((action  (udev-device-get-property-value device "ACTION"))
+             (let ((action  (udev-device-get-property-value device "ACTION")) 
+                   (id-path (udev-device-get-property-value device "ID_PATH"))
                    (devname (udev-device-get-property-value device
                                                             "DEVNAME"))
                    (devpath (udev-device-get-devpath device)))
                (cond
                 ((string=? action "remove")
                  (log-info "Device ~a was removed.~%" devname)
-                 (unless (device-path->display-number config devpath)
-                         (notify-broadcast config
-                                           (format #f
-                                                   (string-append
-                                                    "Seat input device ~a was removed.~%"
-                                                    "Please re-connect the device and"
-                                                    " reboot the computer.")
-                                                   devname))))
+                 (log-info "ID_PATH: ~a" id-path)
+                 (let ((seat (config-seat-lookup-by-device config id-path)))
+                   (when seat
+                     (let ((message (format #f
+                                            (string-append
+                                             "Seat input device ~a was removed.~%"
+                                             "Please re-connect the device and"
+                                             " reboot the computer.")
+                                            devname)))
+                       (notify-broadcast config message)))))
                 ((string=? action "add")
                  (log-info "Device ~a was added.~%" devname)))))))
 

@@ -29,9 +29,12 @@
   #:use-module (ice-9 rdelim)
   #:use-module (srfi srfi-1)
   #:use-module (mst core seat)
+  #:use-module (mst core log)
+  #:use-module (mst system)
   #:export (read-seats-configuration
             config-get-seat
-            device-path->display-number))
+            device-path->display-number
+            config-seat-lookup-by-device))
 
 (define (read-seats-configuration config-file)
   "Read seats configuration from a CONFIG-FILE.  Return the
@@ -48,6 +51,24 @@ configuration as an alist."
 (define (config-get-seat config display)
   (find (lambda (seat) (equal? (seat-display seat) display))
         config))
+
+(define (config-seat-lookup-by-device seats device-id-path)
+  "Lookup a seat from a SEATS list by a DEVICE-ID-PATH.  Return a seat
+instance that uses the device or #f if no owning seat found."
+  (log-info "config-seat-lookup-by-device: ~a" device-id-path)
+  (if (null? seats)
+      #f
+      (let* ((seat     (car seats))
+             (keyboard (seat-keyboard seat))
+             (mouse    (seat-mouse seat)))
+        (log-info "config-seat-lookup-by-device: keyboard: ~a" keyboard)
+        (log-info "config-seat-lookup-by-device: mouse:    ~a" mouse)
+        (if (or (string-contains keyboard device-id-path)
+                (string-contains mouse device-id-path))
+            seat
+            (config-seat-lookup-by-device (cdr seats)
+                                          device-id-path)))))
+        
 
 (define (device-path->display-number config device-path)
   "Try to determine a display number that device specified by its
