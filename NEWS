@@ -1,7 +1,7 @@
 #+TITLE: MST News -- history of user-visible changes.
 #+STARTUP: content hidestars
 
-* Unreleased
+* Changes in version 3.0.0 (2022-07-30)
 ** General changes
 *** Remove the dependency on "unclutter"
     "mstd" now hides the mouse cursor.
