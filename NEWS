@@ -8,6 +8,9 @@
 *** mst: The configurator now creates the multiseat system user
     The multiseat user specified in the configuration file is created when MST
     installs the prepared configuration to the system.
+*** mst: Add "--list-components" option
+    The option allows to list all the components that are used by MST with
+    their full paths; this is useful during debugging.
 *** mstd: Now it allows to choose the display server backend
     There's now "--display-server-backend" option for that.
 
